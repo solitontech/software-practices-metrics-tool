@@ -1,0 +1,99 @@
+@import "../../../../index.scss";
+
+.noDataMessage {
+  @include no-data-message;
+}
+
+.text {
+  @include text;
+}
+
+.branchName {
+  @include text;
+  max-width: 450px;
+  display: block;
+}
+
+.tableHeader {
+  @include table-header;
+  height: 55px;
+}
+
+.totalCount {
+  @include total-count;
+}
+
+.header {
+  @include table-header;
+  margin-top: $minimum-margin;
+}
+
+.title {
+  width: 250px;
+  display: block;
+  @include ellipsis;
+}
+
+.linkIcon {
+  @include link-icon;
+}
+
+.pullRequestURL {
+  @include pull-request-url;
+}
+
+.date {
+  @include text;
+}
+
+.paper {
+  @include paper;
+  min-height: 440px;
+  height: 100%;
+  width: calc(100% - 300px);
+}
+
+.rowEven {
+  @include row-even;
+}
+
+.rowOdd {
+  @include row-odd;
+}
+
+.branchName {
+  color: $primary-color;
+  @include url;
+  @include flex-center;
+  gap: 4px;
+}
+
+.tiles {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 270px;
+}
+
+.active {
+  @include capitalize;
+  background-color: $active-color;
+}
+
+.completed {
+  @include capitalize;
+  background-color: $completed-color;
+}
+
+.abandoned {
+  @include capitalize;
+  background-color: $abandoned-color;
+}
+
+.tileContent {
+  @include tile-content;
+}
+
+.tableView {
+  @include table-view;
+}

@@ -1,0 +1,14 @@
+@import "../../../../index.scss";
+
+.chipKey {
+  margin: $minimum-margin;
+  cursor: pointer;
+}
+
+.selectedChip {
+  background-color: $secondary-color;
+  color: $primary-background-color;
+  &:hover {
+    background-color: lighten($secondary-color, 10%);
+  }
+}

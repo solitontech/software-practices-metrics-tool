@@ -1,0 +1,74 @@
+@import "../../../index.scss";
+
+.filterIcon {
+  font-size: $ternary-icon-size;
+}
+
+.clientFilterContainer {
+  @include filter-icon-container;
+}
+
+.filterContainer {
+  @include filter-container;
+  width: 400px;
+  background-color: $primary-background-color;
+  padding: $primary-padding;
+  padding-top: $ternary-padding;
+  margin-top: $secondary-minimum-margin;
+}
+
+.noFiltersHeading {
+  padding: $secondary-padding;
+  text-align: center;
+  font-size: $secondary-font-size;
+  font-weight: $primary-font-weight;
+}
+
+.noFiltersContent {
+  font-size: $medium-font-size;
+  text-align: center;
+}
+
+.squadContainer {
+  padding: $secondary-padding;
+}
+
+.squadMargin {
+  border-bottom: 1px solid $border-color;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+.squadName {
+  @include ellipsis;
+  width: 100%;
+  text-align: center;
+  font-size: $secondary-font-size;
+  font-weight: $primary-font-weight;
+  padding-bottom: $large-padding;
+}
+
+.userFiltersContainer {
+  display: flex;
+}
+
+.userFilterContainer {
+  width: 50%;
+}
+
+.squadCategory {
+  @include ellipsis;
+  width: 100%;
+  font-size: $medium-font-size;
+  font-weight: $secondary-font-weight;
+}
+
+.userContainer {
+  padding: $ternary-padding $primary-padding;
+}
+
+.userLabel {
+  @include ellipsis;
+  width: 100%;
+  font-size: $small-font-size;
+}

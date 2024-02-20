@@ -1,0 +1,44 @@
+@import "../../../../index.scss";
+
+.noDataMessage {
+  @include no-data-message;
+}
+
+.text {
+  @include text;
+  text-align: left;
+}
+
+.paper {
+  @include paper;
+}
+
+.rowEven {
+  @include row-even;
+}
+
+.rowOdd {
+  @include row-odd;
+}
+
+.tableContainer {
+  max-height: 440px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  @include table;
+}
+
+.tableHead {
+  @include table-head;
+}
+
+.tableBody {
+  @include table-body;
+}
+
+.tableCell {
+  @include table-cell;
+}

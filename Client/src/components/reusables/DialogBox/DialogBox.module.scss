@@ -1,0 +1,24 @@
+@import "../../../index.scss";
+
+.closeButton {
+  cursor: pointer;
+  padding-top: $minimum-padding;
+}
+
+.dialogTitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialogActions {
+  padding-right: $primary-padding;
+}
+
+.title {
+  color: #757d83;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 90%;
+}

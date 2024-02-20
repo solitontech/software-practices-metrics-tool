@@ -1,0 +1,30 @@
+@import "../../../../../../index.scss";
+
+.dropdownContainers {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.dropdownContainer {
+  display: flex;
+  width: 200px;
+  align-items: center;
+}
+
+.selectHeading {
+  width: 160px;
+  font-size: $secondary-font-size;
+  font-weight: $secondary-font-weight;
+}
+
+.selectBox {
+  font-size: $medium-font-size;
+  height: $large-font-size;
+  width: 80px;
+}
+
+.menuItem {
+  font-size: $medium-font-size;
+  height: 22px;
+}

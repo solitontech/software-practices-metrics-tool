@@ -1,0 +1,9 @@
+@import "../../../index.scss";
+
+.toolTip {
+  @include tool-tip;
+}
+
+.infoIcon {
+  @include info-icon;
+}

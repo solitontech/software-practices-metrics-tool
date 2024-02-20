@@ -1,0 +1,11 @@
+@import "../../../index.scss";
+
+.errorMessage {
+  margin: 50px 0px;
+  border: 2px solid $border-color;
+  padding: $minimum-padding;
+  color: $primary-color;
+  text-align: center;
+  font-weight: 500;
+  width: 100%;
+}

@@ -1,0 +1,14 @@
+@import "../../../../../../index.scss";
+
+.barChartContainer {
+  position: relative;
+}
+
+.graphButtonContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 33px;
+  left: 75%;
+  z-index: 1;
+}
