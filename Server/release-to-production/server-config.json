@@ -1,0 +1,8 @@
+{
+  "targetBranch": "main",
+  "organization": "Soliton",
+  "projectName": "my_project",
+  "repositoryId": "my_repository",
+  "authToken": "my_auth_token",
+  "squads": []
+}

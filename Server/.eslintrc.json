@@ -1,0 +1,25 @@
+{
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:json/recommended", "plugin:prettier/recommended", "prettier"],
+  "plugins": ["json", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "import",
+        "next": ["const", "let", "var", "class"]
+      },
+      { "blankLine": "any", "prev": "import", "next": "import" }
+    ]
+  }
+}

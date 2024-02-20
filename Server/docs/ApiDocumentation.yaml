@@ -1,0 +1,549 @@
+openapi: 3.1.0
+info:
+  title: Software Practices Metrics Tool
+  description: API for software practices metrics tool. Please use https://editor-next.swagger.io/ for editing.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+paths:
+  /metrics/trunk-based-development/commits/:
+    get:
+      summary: Get trunk branch commits
+      description: Retrieve trunk branch commits for trunk-based development within a specific date range
+      operationId: getCommitMetrics
+      parameters:
+        - $ref: '#/components/parameters/StartDateParam'
+        - $ref: '#/components/parameters/EndDateParam'
+        - $ref: '#/components/parameters/PaginationSizeParam'
+        - $ref: '#/components/parameters/PaginationCursorParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of commits
+                  commits:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Commit ID
+                        comment:
+                          type: string
+                          description: Commit message
+                        author:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Name of the author
+                            email:
+                              type: string
+                              format: email
+                              description: Email of the author
+                            date:
+                              type: string
+                              format: date-time
+                              description: Date and time of the commit
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '203':
+          $ref: '#/components/responses/NonAuthoritativeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerResponse'
+      tags:
+        - Trunk Based Metrics
+  /metrics/trunk-based-development/pullRequests/:
+    get:
+      summary: Get trunk branch pull requests
+      description: Retrieve trunk branch pull requests for trunk-based development within a specific date range
+      operationId: getPullRequestMetrics
+      parameters:
+        - $ref: '#/components/parameters/StartDateParam'
+        - $ref: '#/components/parameters/EndDateParam'
+        - $ref: '#/components/parameters/PaginationSizeParam'
+        - $ref: '#/components/parameters/PaginationCursorParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of pull requests
+                  pullRequests:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the pull request
+                        title:
+                          type: string
+                          description: Title of the pull request
+                        status:
+                          type: string
+                          description: Status of the pull request
+                        creationDate:
+                          type: string
+                          format: date-time
+                          description: Date and time when the pull request was created
+                        closedDate:
+                          type: string
+                          format: date-time
+                          description: Date and time when the pull request was closed
+                        pullRequestURL:
+                          type: string
+                          format: uri
+                          description: URL of the pull request
+                        branchURL:
+                          type: string
+                          format: uri
+                          description: URL of the branch associated with the pull request
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '203':
+          $ref: '#/components/responses/NonAuthoritativeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerResponse'
+      tags:
+        - Trunk Based Metrics
+  /metrics/trunk-based-development/branches/:
+    get:
+      summary: Get branches
+      description: Retrieve branches for trunk-based development
+      operationId: getBranchMetrics
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  branchesURL:
+                    type: string
+                    format: uri
+                    description: URL to view all branches
+                  totalNumberOfBranches:
+                    type: integer
+                    description: Total number of branches
+                  percentageOfBranchesFollowingStandard:
+                    type: string
+                    description: Percentage of branches following naming standard
+                  branchesFollowingNamingStandard:
+                    type: object
+                    properties:
+                      count:
+                        type: integer
+                        description: Total number of branches following naming standard
+                      branches:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Branch ID
+                            name:
+                              type: string
+                              description: Name of the branch
+                            url:
+                              type: string
+                              format: uri
+                              description: URL of the branch
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '203':
+          $ref: '#/components/responses/NonAuthoritativeResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerResponse'
+      tags:
+        - Trunk Based Metrics
+  /metrics/trunk-based-development/activeBranches/:
+    get:
+      summary: Get trunk branch active branches
+      description: Retrieve trunk branch active branches for trunk-based development
+      operationId: getActiveBranchMetrics
+      parameters:
+        - $ref: '#/components/parameters/PaginationSizeParam'
+        - $ref: '#/components/parameters/PaginationCursorParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of active branches
+                  branches:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the branch
+                        title:
+                          type: string
+                          description: Title of the branch
+                        createdBy:
+                          type: string
+                          description: Creator of the branch
+                        creationDate:
+                          type: string
+                          format: date-time
+                          description: Date and time when the branch was created
+                        pullRequestURL:
+                          type: string
+                          format: uri
+                          description: URL of the associated pull request
+                        branchURL:
+                          type: string
+                          format: uri
+                          description: URL of the branch
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '203':
+          $ref: '#/components/responses/NonAuthoritativeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerResponse'
+      tags:
+        - Trunk Based Metrics
+  /metrics/code-review/:
+    get:
+      summary: Get code review metrics
+      description: Retrieve code review metrics
+        based on specified criteria such as start date, end date, pagination cursor, and pagination size.
+      operationId: getCodeReviewMetrics
+      parameters:
+        - $ref: '#/components/parameters/StartDateParam'
+        - $ref: '#/components/parameters/EndDateParam'
+        - $ref: '#/components/parameters/PaginationSizeParam'
+        - $ref: '#/components/parameters/PaginationCursorParam'
+      responses:
+        '200':
+          description: Successful response with code review metrics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of code review records
+                  pullRequests:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The unique identifier of the pull request
+                        title:
+                          type: string
+                          description: Title of the pull request
+                        status:
+                          type: string
+                          description: Status of the pull request
+                        createdBy:
+                          type: string
+                          description: Name of the user who created the pull request
+                        authorId:
+                          type: string
+                          description: Unique identifier of the author
+                        isRequiredReviewers:
+                          type: boolean
+                          description: Indicates if required reviewers are assigned for the pull request
+                        creationDate:
+                          type: string
+                          format: date-time
+                          description: Date and time when the pull request was created
+                        closedDate:
+                          type: string
+                          format: date-time
+                          description: Date and time when the pull request was closed
+                        votes:
+                          type: object
+                          properties:
+                            approved:
+                              type: integer
+                              description: Total number of approved votes
+                            approvedWithSuggestions:
+                              type: integer
+                              description: Total number of approved votes with suggestions
+                            noVote:
+                              type: integer
+                              description: Total number of votes with no decision
+                            waitForAuthor:
+                              type: integer
+                              description: Total number of votes waiting for author
+                            rejected:
+                              type: integer
+                              description: Total number of rejected votes
+                        votesTimeline:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                description: The unique identifier of the author
+                              author:
+                                type: string
+                                description: Name of the author
+                              timeOfVote:
+                                type: string
+                                format: date-time
+                                description: Date and time of the vote
+                              vote:
+                                type: string
+                                description: The vote given by the author
+                        votesHistory:
+                          type: object
+                          properties:
+                            approved:
+                              type: integer
+                              description: Total number of approved votes
+                            approvedWithSuggestions:
+                              type: integer
+                              description: Total number of approved votes with suggestions
+                            waitForAuthor:
+                              type: integer
+                              description: Total number of votes waiting for author
+                            rejected:
+                              type: integer
+                              description: Total number of rejected votes
+                        votesHistoryTimeline:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                description: The unique identifier of the author
+                              author:
+                                type: string
+                                description: Name of the author
+                              timeOfVote:
+                                type: string
+                                format: date-time
+                                description: Date and time of the vote
+                              vote:
+                                type: string
+                                description: The vote given by the author
+                        comments:
+                          type: object
+                          properties:
+                            totalComments:
+                              type: integer
+                              description: Total number of comments
+                            numberOfNitComments:
+                              type: integer
+                              description: Total number of nit comments
+                            numberOfMajorComments:
+                              type: integer
+                              description: Total number of major comments
+                        reviewerComments:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              reviewer:
+                                type: string
+                                description: Name of the reviewer
+                              comments:
+                                type: integer
+                                description: Total number of comments given by the reviewer
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                            description: Tags associated with the pull request
+                        firstReviewResponseTimeInSeconds:
+                          type: integer
+                          description: Time taken for the first review response in seconds
+                        approvalTimeInSeconds:
+                          type: integer
+                          description: Time taken for the pull request approval in seconds
+                        mergeTimeInSeconds:
+                          type: integer
+                          description: Time taken for the pull request merge in seconds
+                        url:
+                          type: string
+                          format: url
+                          description: URL of the pull request
+                  errorCount:
+                    type: integer
+                    description: Total number of pull requests failed.
+                  filteredCount:
+                    type: integer
+                    description: Total number of filtered pull requests.
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '203':
+          $ref: '#/components/responses/NonAuthoritativeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerResponse'
+      tags:
+        - Code Review Metrics    
+  /metrics/client-filters:
+    get:
+      summary: Get client filters
+      description: Retrieve client filters,
+        providing information about squads, developers, and reviewers.
+      operationId: getClientFilters
+      responses:
+        '200':
+          description: Successful response with client filters metrics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  squads:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        squadName:
+                          type: string
+                          description: The name of the squad
+                        developers:
+                          type: object
+                          description: Object containing developer IDs and names
+                          additionalProperties:
+                            type: string
+                          examples:
+                            - "3e1413a9-2z7c-6556-b441-e1edbfed5d43": "Developer_name"
+                        reviewers:
+                          type: object
+                          description: Object containing reviewer IDs and names
+                          additionalProperties:
+                            type: string
+                          examples:
+                            - "6c56f2d9-f139-65fd-af3d-0650s183e580": "Reviewer_name"
+        '500':
+          $ref: '#/components/responses/InternalServerResponse'
+      tags:
+        - Client Filters
+components:
+  parameters:
+    StartDateParam:
+      name: startDate
+      in: query
+      description: Start date for the query (YYYY-MM-DD)
+      required: true
+      schema:
+        type: string
+        format: date
+    EndDateParam:
+      name: endDate
+      in: query
+      description: End date for the query (YYYY-MM-DD)
+      required: true
+      schema:
+        type: string
+        format: date
+    PaginationSizeParam:
+      name: paginationSize
+      in: query
+      description: Number of commits to retrieve per page
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        default: 100
+    PaginationCursorParam:
+      name: paginationCursor
+      in: query
+      description: Cursor for paginating through results
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+
+  responses:
+    NotFoundResponse:
+      description: No data found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating no data found
+    NonAuthoritativeResponse:
+      description: Non-authoritative information
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating invalid token
+    BadRequestResponse:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating invalid date or pagination
+    UnauthorizedResponse:
+      description: Unauthorized access
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating invalid organization or token
+    InternalServerResponse:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating server error
