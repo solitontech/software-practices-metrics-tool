@@ -1,0 +1,19 @@
+@import "../../../index.scss";
+
+.container {
+  overflow-x: scroll;
+  height: 100%;
+  width: 100%;
+  background-color: $secondary-background-color;
+  padding-left: $padding-small;
+}
+
+header {
+  @include flex-center;
+  height: 75px;
+}
+
+main {
+  height: calc(100% - 75px);
+  overflow-x: hidden;
+}

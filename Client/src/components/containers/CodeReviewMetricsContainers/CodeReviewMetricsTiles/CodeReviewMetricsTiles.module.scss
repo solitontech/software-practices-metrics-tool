@@ -1,0 +1,17 @@
+@import "../../../../index.scss";
+
+.green {
+  color: $completed-color;
+}
+
+.red {
+  color: $abandoned-color;
+}
+
+.yellow {
+  color: $active-color;
+}
+
+.tileContent {
+  @include tile-content;
+}

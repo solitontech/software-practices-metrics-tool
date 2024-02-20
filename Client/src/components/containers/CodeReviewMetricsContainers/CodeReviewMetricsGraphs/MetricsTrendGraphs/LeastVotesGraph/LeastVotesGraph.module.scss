@@ -1,0 +1,23 @@
+@import "../../../../../../index.scss";
+
+.barChartContainer {
+  position: relative;
+}
+
+.infoIconContainer {
+  @include graph-info-container;
+  left: 54.6%;
+}
+
+.graphButtonContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 33px;
+  left: 74.5%;
+  z-index: 1;
+}
+
+.infoIcon {
+  @include graph-info-icon;
+}

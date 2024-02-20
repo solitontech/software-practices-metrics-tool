@@ -1,0 +1,22 @@
+@import "../../../index.scss";
+
+.searchBox {
+  text-align: left;
+}
+
+.background {
+  background-color: $primary-background-color;
+}
+
+.searchBox input {
+  height: 10px !important;
+  padding: $primary-padding $ternary-padding !important;
+  &::placeholder {
+    font-size: 12px !important;
+  }
+}
+
+.label {
+  font-weight: $primary-font-weight;
+  color: $primary-color;
+}

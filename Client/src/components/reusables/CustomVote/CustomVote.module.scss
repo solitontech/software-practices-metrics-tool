@@ -1,0 +1,12 @@
+@import "../../../index.scss";
+
+.vote {
+  @include flex-column-center;
+  color: $primary-color;
+  width: fit-content !important;
+}
+
+.image {
+  width: 20px;
+  height: 20px;
+}

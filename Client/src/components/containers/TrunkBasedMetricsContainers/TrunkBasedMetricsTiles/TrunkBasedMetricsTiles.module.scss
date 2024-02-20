@@ -1,0 +1,30 @@
+@import "../../../../index.scss";
+
+.tileContent {
+  @include tile-content;
+}
+
+.tileInfo {
+  @include flex-row;
+  align-items: center;
+  gap: 8px;
+}
+
+.navIcon {
+  font-size: $medium-icon-size;
+  cursor: pointer;
+  color: $secondary-color;
+}
+
+.dialogIcon {
+  height: 20px;
+  cursor: pointer;
+}
+
+.icon {
+  align-self: flex-start;
+}
+
+.navLink {
+  height: 22px;
+}

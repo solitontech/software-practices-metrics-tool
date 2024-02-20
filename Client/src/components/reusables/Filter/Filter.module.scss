@@ -1,0 +1,14 @@
+@import "../../../index.scss";
+
+.filterIconContainer {
+  position: relative;
+}
+
+.filterIcon {
+  cursor: pointer;
+  color: $primary-color;
+}
+
+.filterIconSelected {
+  color: $secondary-color;
+}
