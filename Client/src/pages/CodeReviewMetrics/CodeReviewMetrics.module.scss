@@ -1,0 +1,38 @@
+@import "../../index.scss";
+
+.codeReviewTable {
+  @include metrics-table;
+  margin-top: $secondary-margin;
+}
+
+.codeReview {
+  @include metrics;
+}
+
+.tableDetails {
+  @include table-details;
+}
+
+.header {
+  @include header;
+}
+
+.tiles {
+  @include tiles;
+}
+
+.underDevelopment {
+  @include under-development;
+}
+
+.dropDown {
+  padding: $large-padding;
+  position: absolute;
+  top: 49px;
+  left: 0;
+  background-color: $primary-background-color;
+  border: 1px solid $table-border;
+  border-radius: 4px;
+  z-index: 999;
+  width: 100%;
+}

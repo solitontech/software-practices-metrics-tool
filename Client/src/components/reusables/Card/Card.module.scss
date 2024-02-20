@@ -1,0 +1,20 @@
+@import "../../../index.scss";
+
+.cardStyle {
+  @include flex-column-center;
+
+  width: 250px;
+  height: 150px;
+  cursor: pointer;
+  background: $primary-background-color;
+  box-shadow: 3px 3px 7px $primary-box-shadow;
+  transition: all 10ms;
+  &:hover {
+    transform: scale(1.03);
+  }
+  color: $primary-color;
+  text-align: center;
+  font-weight: $secondary-font-weight;
+  font-size: $secondary-font-size;
+  line-height: $primary-line-height;
+}

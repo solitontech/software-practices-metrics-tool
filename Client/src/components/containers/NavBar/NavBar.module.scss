@@ -1,0 +1,143 @@
+@import "../../../index.scss";
+
+@mixin pageName {
+  font-weight: $ternary-font-weight;
+  line-height: $ternary-line-height;
+  color: $ternary-color;
+  font-size: $medium-font-size;
+}
+
+@mixin page {
+  border-radius: 4px;
+  height: 50px !important;
+  margin: $medium-margin auto !important;
+  padding: $ternary-padding !important;
+  width: 150px !important;
+
+  &:hover {
+    background-color: $light-blue;
+  }
+
+  &.selectedPage {
+    color: $highlight-color;
+    background-color: $dark-blue;
+    &:hover {
+      background-color: $light-blue;
+    }
+  }
+}
+
+.drawerToolbar {
+  @include flex-center;
+
+  height: 81px;
+  justify-content: space-around;
+}
+
+@mixin commonLink {
+  @include flex-center;
+  @include page;
+  @include pageName;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.link {
+  @include commonLink;
+}
+
+.smallLink {
+  @include commonLink;
+  width: 40px !important;
+  height: 30px !important;
+}
+
+.utilizeAvailableSpace {
+  flex-grow: 1;
+}
+
+@mixin commonPageIconCtr {
+  margin: auto $small-margin !important;
+  min-width: 12px !important;
+  color: $highlight-color;
+
+  .pageIcon {
+    height: auto;
+    width: 12px;
+  }
+}
+
+.pageIconCtr {
+  @include commonPageIconCtr;
+  width: 15%;
+}
+
+.smallPageIconCtr {
+  @include commonPageIconCtr;
+}
+
+.menuIcon {
+  padding: $ternary-padding $secondary-padding $ternary-padding $primary-padding;
+}
+
+.navBar {
+  width: 180px;
+}
+
+.drawerPaper {
+  background: $secondary-color;
+  color: $ternary-color;
+  width: 180px;
+  position: relative;
+  height: 100%;
+}
+
+.smallDrawerPaper {
+  background: $secondary-color;
+  color: $ternary-color;
+  width: 48px;
+  position: relative;
+  height: 100%;
+}
+
+.iconButton {
+  padding: $ternary-padding;
+  color: $primary-color;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.techForce {
+  height: 75px;
+  align-self: center;
+  width: 75px;
+}
+
+.logoText {
+  color: $ternary-color;
+  font-size: $medium-font-size;
+  text-align: center;
+  font-weight: 600;
+  margin-top: $minimum-margin;
+}
+
+.smallDrawerContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: $ternary-margin $base-margin;
+  gap: 8px;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.icon {
+  color: $primary-text-color;
+  font-size: 24px;
+}

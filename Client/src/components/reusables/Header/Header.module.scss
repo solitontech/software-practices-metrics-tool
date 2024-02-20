@@ -1,0 +1,26 @@
+@import "../../../index.scss";
+
+.labelHeader {
+  font-weight: $secondary-font-weight;
+  font-size: $primary-font-size;
+  letter-spacing: $no-letter-spacing;
+  line-height: $primary-line-height;
+  color: $primary-color;
+}
+
+.heading {
+  width: 98%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchBox {
+  position: relative;
+}

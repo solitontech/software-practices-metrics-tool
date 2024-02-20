@@ -1,0 +1,9 @@
+@import "../../../../index.scss";
+
+.graph {
+  @include graphs-container;
+}
+
+:export {
+  GRAPH_COLOR: $secondary-color;
+}

@@ -1,0 +1,14 @@
+@import "../../../../../../index.scss";
+
+.pieChartContainer {
+  position: relative;
+}
+
+.infoIconContainer {
+  @include graph-info-container;
+  left: 580px;
+}
+
+.infoIcon {
+  @include graph-info-icon;
+}

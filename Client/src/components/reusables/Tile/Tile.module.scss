@@ -1,0 +1,24 @@
+@import "../../../index.scss";
+
+.tile {
+  color: $tile-text-color;
+  width: fit-content;
+  height: fit-content;
+  background-color: $primary-background-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: $medium-padding $secondary-padding;
+  gap: 5px;
+  border: 1px solid $border-color;
+}
+
+.title {
+  font-size: $medium-font-size;
+}
+
+.value {
+  font-size: $secondary-font-size;
+  font-weight: 900;
+}

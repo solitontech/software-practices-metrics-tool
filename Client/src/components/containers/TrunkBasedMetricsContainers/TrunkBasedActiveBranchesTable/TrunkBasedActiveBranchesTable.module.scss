@@ -1,0 +1,63 @@
+@import "../../../../index.scss";
+
+.noDataMessage {
+  @include no-data-message;
+}
+
+.text {
+  @include text;
+}
+
+.branchName {
+  @include text;
+  max-width: 355px;
+  display: flex;
+  align-items: center;
+}
+
+.header {
+  @include table-header;
+}
+
+.totalCount {
+  @include total-count;
+}
+
+.title {
+  width: 200px;
+  display: block;
+  @include ellipsis;
+}
+
+.linkIcon {
+  color: $secondary-color;
+  vertical-align: middle;
+  margin-left: 4px;
+  font-size: $small-icon-size;
+}
+
+.pullRequestURL {
+  @include pull-request-url;
+}
+
+.date {
+  @include text;
+}
+
+.paper {
+  @include paper;
+  min-height: 440px;
+}
+
+.rowEven {
+  @include row-even;
+}
+
+.rowOdd {
+  @include row-odd;
+}
+
+.branchName {
+  color: $primary-color;
+  @include url;
+}

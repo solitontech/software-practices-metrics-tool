@@ -1,0 +1,7 @@
+.github/
+.vscode/
+dist
+node_modules
+.git
+.gitignore
+**/*.md
