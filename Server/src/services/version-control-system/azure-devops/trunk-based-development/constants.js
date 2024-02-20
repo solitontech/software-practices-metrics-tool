@@ -1,0 +1,10 @@
+export const BRANCH_SUFFIX = 'refs/heads/';
+export const EMPTY_STRING = '';
+export const USERS = 'users';
+export const PERCENTAGE = '%';
+export const COMPLETED = 'completed';
+export const SEPARATOR = '/';
+export const INVALID_PULL_REQUEST_DATA = 'Invalid pullRequests data';
+export const MIN_ARRAY_LENGTH = 0;
+export const MAX_PERCENTAGE = 100;
+export const REQUIRED_BRANCH_PARTS = 3;

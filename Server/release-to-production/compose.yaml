@@ -1,0 +1,13 @@
+services:
+  server:
+    container_name: software-practices-metrics-tool
+    image: software-practices-metrics-tool:2.1.0
+    ports:
+      - 3000:3000
+
+    # Maps host port : docker container post
+    # In case your host's port 3000 is occupied, you can specify a different port here.
+    # For instance, 4200:3000 - access the application at http://localhost:4200
+
+    volumes:
+      - ./server-config.json:/user/app/server/src/configs/server-config.json
