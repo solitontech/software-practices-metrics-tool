@@ -15,8 +15,6 @@ const {
   authToken: TOKEN,
 } = ServerConfiguration.versionControl;
 
-const { squads } = ServerConfiguration.clientFilters;
-
 const { OK, NON_AUTHORITATIVE_INFORMATION, NOT_FOUND, UNAUTHORIZED_ACCESS } = STATUS_CODE;
 
 export class AzureDevopsApi {
@@ -93,24 +91,6 @@ export class AzureDevopsApi {
     url.searchParams.append('$top', paginationSize);
     url.searchParams.append('$skip', skip);
     url.searchParams.append('api-version', this.#apiVersion);
-
-    if (this.hasOneItem(squads.length)) {
-      const [squad] = squads;
-      const developers = Object.keys(squad.developers);
-      const reviewers = Object.keys(squad.reviewers);
-
-      if (this.hasOneItem(developers.length)) {
-        const [developerId] = developers;
-
-        url.searchParams.append('searchCriteria.creatorId', developerId);
-      }
-
-      if (this.hasOneItem(reviewers.length)) {
-        const [reviewerId] = reviewers;
-
-        url.searchParams.append('searchCriteria.reviewerId', reviewerId);
-      }
-    }
 
     const response = await this.#fetchApi(url.href);
     this.#validateResponse(response);
