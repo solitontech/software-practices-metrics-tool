@@ -6,7 +6,7 @@
   "scripts": {
     "start:prod": "NODE_ENVIRONMENT=production node src/index.js",
     "start:dev": "set NODE_ENVIRONMENT=development&& nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "format": "prettier --write \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "lint": "eslint \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "prepare": "cd ../../.. && husky install Tools/SoftwarePracticesMetricsTool/Server/",
@@ -19,6 +19,9 @@
       "eslint --fix",
       "prettier --write --ignore-unknown"
     ]
+  },
+  "jest": {
+    "transform": {}
   },
   "type": "module",
   "keywords": [],
@@ -43,10 +46,12 @@
     "eslint-plugin-prettier": "^5.0.1",
     "fs-extra": "^11.2.0",
     "husky": "^8.0.0",
+    "jest": "^29.7.0",
     "lint-staged": "^15.2.0",
     "markdownlint-cli": "^0.38.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.2",
-    "prettier": "^3.1.1"
+    "prettier": "^3.1.1",
+    "supertest": "^6.3.4"
   }
 }
