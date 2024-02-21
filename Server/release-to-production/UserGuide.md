@@ -166,13 +166,30 @@ format.
 
 2. Squads are optional configuration.
 
-3. When you enter squads, Azure API's
- filter the PRs based on it.
+3. In a squad, reviewers are not required fields, while at least one developer
+ is mandatory. Refer below format.
 
-4. Ensure you enter same name for developers & reviewers section in the
+    ```JSON
+   squads:[
+      {
+         "squadName": "Squad_name",
+         "developers": {
+            "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+         }
+      }
+   ] 
+   ```
+
+4. If you set reviewers for squads and select them in the application,
+ only pull requests containing those reviewers will be filtered.
+
+5. A reviewer is recognized as such for a pull request only if they've given
+ any vote on it.
+
+6. Ensure you enter same name for developers & reviewers section in the
  `server-config.json` which will be displayed in the dashboard to avoid confusion.
 
-5. Refer the overview video [here](https://solitontech.sharepoint.com/:f:/r/sites/SolitonTechnologies/Shared%20Documents/%F0%9F%9A%80%20Utkarsh%20-%20Tech%20Force/TechOps/Tools/SoftwarePracticesMetricsTool?csf=1&web=1&e=amyPFk)
+7. Refer the overview video [here](https://solitontech.sharepoint.com/:f:/r/sites/SolitonTechnologies/Shared%20Documents/%F0%9F%9A%80%20Utkarsh%20-%20Tech%20Force/TechOps/Tools/SoftwarePracticesMetricsTool?csf=1&web=1&e=amyPFk)
 
 ## Optional Docker commands reference
 
