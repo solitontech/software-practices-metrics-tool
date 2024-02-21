@@ -4,6 +4,7 @@ import { produce } from "immer";
 
 import { USERS, USER_TYPE } from "./clientFilterConstants";
 import styles from "./ClientFilters.module.scss";
+import { isValidUsers } from "./clientFilterUtils";
 import { ClientFiltersContext } from "../../../contexts/clientFiltersContext/clientFiltersContext";
 import {
   ISquad,
@@ -27,7 +28,7 @@ export const ClientFilterContainer = () => {
       for (const developer in users) {
         users[developer].isSelected = value;
       }
-    }) as ISquad[];
+    });
 
     setFilters(updatedFilters);
   };
@@ -44,7 +45,7 @@ export const ClientFilterContainer = () => {
       ] as Record<string, IUser>;
 
       users[userId].isSelected = value;
-    }) as ISquad[];
+    });
 
     setFilters(updatedFilters);
   };
@@ -96,37 +97,39 @@ export const ClientFilterContainer = () => {
                 const userKey = userType as keyof typeof USERS;
 
                 return (
-                  <div className={styles.userFilterContainer} key={userKey}>
-                    <Checkbox
-                      isChecked={userSelected[userKey]}
-                      onChange={(value) => {
-                        onSquadChange(userKey, squadIndex, value);
-                      }}
-                      title={USER_TYPE[userKey]}
-                      labelStyle={styles.squadCategory}
-                    />
+                  isValidUsers(userKeyValues[userKey]) && (
+                    <div className={styles.userFilterContainer} key={userKey}>
+                      <Checkbox
+                        isChecked={userSelected[userKey]}
+                        onChange={(value) => {
+                          onSquadChange(userKey, squadIndex, value);
+                        }}
+                        title={USER_TYPE[userKey]}
+                        labelStyle={styles.squadCategory}
+                      />
 
-                    <div className={styles.userContainer}>
-                      {userKeyValues[userKey].map(
-                        ([developerKey, developerValues]) => (
-                          <Checkbox
-                            key={developerKey}
-                            isChecked={developerValues.isSelected}
-                            onChange={(value) => {
-                              onUserChange(
-                                userKey,
-                                squadIndex,
-                                developerKey,
-                                value,
-                              );
-                            }}
-                            title={developerValues.name}
-                            labelStyle={styles.userLabel}
-                          />
-                        ),
-                      )}
+                      <div className={styles.userContainer}>
+                        {userKeyValues[userKey].map(
+                          ([developerKey, developerValues]) => (
+                            <Checkbox
+                              key={developerKey}
+                              isChecked={developerValues.isSelected}
+                              onChange={(value) => {
+                                onUserChange(
+                                  userKey,
+                                  squadIndex,
+                                  developerKey,
+                                  value,
+                                );
+                              }}
+                              title={developerValues.name}
+                              labelStyle={styles.userLabel}
+                            />
+                          ),
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )
                 );
               })}
             </div>
