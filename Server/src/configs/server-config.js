@@ -56,8 +56,8 @@ export class ServerConfiguration {
           .items(
             joi.object({
               squadName: joi.string().required(),
-              developers: joi.object().pattern(joi.string().guid(), joi.string()).required(),
-              reviewers: joi.object().pattern(joi.string().guid(), joi.string()).required(),
+              developers: joi.object().pattern(joi.string().guid(), joi.string()).min(1).required(),
+              reviewers: joi.object().pattern(joi.string().guid(), joi.string()).min(1),
             })
           )
           .required(),
