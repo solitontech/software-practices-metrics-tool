@@ -1,4 +1,4 @@
-import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import { jest, describe, it, expect, beforeEach, afterEach } from '@jest/globals';
 import request from 'supertest';
 import router from '../trunk-based-development.js'; // Adjust the path according to your project structure
 import express from 'express';
@@ -14,6 +14,10 @@ app.use(router);
 describe('GET /branches', () => {
   beforeEach(() => {
     AzureDevopsApi.fetchAllBranches = jest.fn().mockResolvedValue(AZURE_ALL_BRANCHES);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should return the correct data', async () => {
