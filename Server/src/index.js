@@ -60,7 +60,7 @@ app.use((error, req, res, next) => {
   });
 });
 
-if (!NODE_ENVIRONMENT === TEST) {
+if (NODE_ENVIRONMENT !== TEST) {
   app.listen(SERVER_RUN_IN_PORT, () => {
     console.log('Server is running on Port:', SERVER_RUN_IN_PORT);
   });
