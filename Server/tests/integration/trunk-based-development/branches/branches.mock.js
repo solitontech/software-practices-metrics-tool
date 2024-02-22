@@ -150,6 +150,6 @@ export const SERVER_BRANCHES_RESPONSE = {
     count: 5,
   },
   branchesURL: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/branches?a=all&_a=all`,
-  percentageOfBranchesFollowingStandard: '25.00%',
+  percentageOfBranchesFollowingStandard: '28.57%',
   totalNumberOfBranches: 7,
 };
