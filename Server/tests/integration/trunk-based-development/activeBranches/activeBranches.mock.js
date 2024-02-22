@@ -1,3 +1,11 @@
+import { ServerConfiguration } from '../../../../src/configs/server-config.js';
+
+const {
+  organization: ORGANIZATION,
+  projectName: PROJECT,
+  repositoryId: REPOSITORY_ID,
+} = ServerConfiguration.versionControl;
+
 export const AZURE_ACTIVE_BRANCHES_RESPONSE = {
   value: [
     {
@@ -445,17 +453,15 @@ export const SERVER_ACTIVE_BRANCHES_RESPONSE = {
       title: '2749 - Fix Lint errors in Client',
       createdBy: 'Roshana Ananthkumar',
       creationDate: '2024-02-20T09:22:13.8071555Z',
-      pullRequestURL: 'https://dev.azure.com/Soliton/SolitonCentral/_git/SolitonCentral/pullrequest/2749',
-      branchURL:
-        'https://dev.azure.com/Soliton/SolitonCentral/_git/SolitonCentral?version=GBusers%2Froshana-ananthkumar%2Ffix-lint-errors',
+      pullRequestURL: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2749`,
+      branchURL: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBusers%2Froshana-ananthkumar%2Ffix-lint-errors`,
     },
     {
-      branchURL:
-        'https://dev.azure.com/Soliton/SolitonCentral/_git/SolitonCentral?version=GBusers%2Fvidhyaprabha%2Fversion-control-overview-doc',
+      branchURL: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBusers%2Fvidhyaprabha%2Fversion-control-overview-doc`,
       createdBy: 'Vidhyaprabha Vasudevan',
       creationDate: '2024-02-19T18:39:24.3535603Z',
       name: 'users/vidhyaprabha/version-control-overview-doc',
-      pullRequestURL: 'https://dev.azure.com/Soliton/SolitonCentral/_git/SolitonCentral/pullrequest/2740',
+      pullRequestURL: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2740`,
       title: '2740 - Move version control guidelines to separate folder',
     },
   ],
