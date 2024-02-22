@@ -30,6 +30,18 @@ export class AzureDevopsApi {
   static #invalidRepositoryDetails =
     'No data found. You either do not have permission for the provided token or verify the organization, project, repository & trunk branch in the configuration.';
 
+  static get invalidAzureToken() {
+    return this.#invalidAzureToken;
+  }
+
+  static get invalidRepositoryDetails() {
+    return this.#invalidRepositoryDetails;
+  }
+
+  static get dataNotFound() {
+    return this.#dataNotFound;
+  }
+
   static async #fetchApi(url) {
     let apiResponse;
 

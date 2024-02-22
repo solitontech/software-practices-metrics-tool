@@ -11,7 +11,7 @@ import { ERROR_MESSAGE, NODE_ENVIRONMENT_MODE, STATUS_CODE } from './constants/c
 
 ServerConfiguration.load();
 
-const { DEVELOPMENT } = NODE_ENVIRONMENT_MODE;
+const { DEVELOPMENT, TEST } = NODE_ENVIRONMENT_MODE;
 const {
   nodeEnvironment: NODE_ENVIRONMENT,
   port: SERVER_RUN_IN_PORT,
@@ -60,6 +60,10 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(SERVER_RUN_IN_PORT, () => {
-  console.log('Server is running on Port:', SERVER_RUN_IN_PORT);
-});
+if (NODE_ENVIRONMENT !== TEST) {
+  app.listen(SERVER_RUN_IN_PORT, () => {
+    console.log('Server is running on Port:', SERVER_RUN_IN_PORT);
+  });
+}
+
+export default app;

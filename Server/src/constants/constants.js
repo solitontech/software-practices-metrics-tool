@@ -1,6 +1,7 @@
 export const NODE_ENVIRONMENT_MODE = {
   DEVELOPMENT: 'development',
   PRODUCTION: 'production',
+  TEST: 'test',
 };
 
 export const DEFAULT_TARGET_BRANCH = 'main';
