@@ -24,7 +24,7 @@ describe('Trunk based metrics - get all branches in the repository', () => {
     expect(response.body).toEqual(SERVER_BRANCHES_RESPONSE);
   });
 
-  it('should handle internal server error when fetching branches from Azure API with response status 500', async () => {
+  it('should handle internal server error with response status 500', async () => {
     AzureDevopsApi.fetchAllBranches = jest.fn().mockRejectedValue(new Error(ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 
     const response = await request(app).get(apiEndPoint);
@@ -33,7 +33,7 @@ describe('Trunk based metrics - get all branches in the repository', () => {
     expect(response.body).toEqual({ error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
   });
 
-  it('should handle no data found error due to invalid server configurations Azure response status 404', async () => {
+  it('should handle no data found error due to invalid server configurations with response status 404', async () => {
     AzureDevopsApi.fetchAllBranches = jest
       .fn()
       .mockRejectedValue(new AppError(invalidRepositoryDetails, STATUS_CODE.NOT_FOUND));
@@ -46,7 +46,7 @@ describe('Trunk based metrics - get all branches in the repository', () => {
     });
   });
 
-  it('should handle unauthorized access when fetching branches from Azure API with response status 401', async () => {
+  it('should handle unauthorized access with response status 401', async () => {
     AzureDevopsApi.fetchAllBranches = jest
       .fn()
       .mockRejectedValue(new AppError(invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS));
