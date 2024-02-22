@@ -1,13 +1,13 @@
 import request from 'supertest';
 import { jest, describe, it, expect } from '@jest/globals';
 
-import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
-import { AZURE_ACTIVE_BRANCHES_RESPONSE, SERVER_ACTIVE_BRANCHES_RESPONSE } from './activeBranches.mock.js';
-import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
 import app from '../../../../src/index.js';
 import { AppError } from '../../../../src/utils/app-error.js';
+import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
 
-const { OK, INTERNAL_SERVER_ERROR, NOT_FOUND, UNAUTHORIZED_ACCESS, BAD_REQUEST } = STATUS_CODE;
+import { AZURE_ACTIVE_BRANCHES_RESPONSE, SERVER_ACTIVE_BRANCHES_RESPONSE } from './activeBranches.mock.js';
+import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
+
 const { invalidRepositoryDetails, invalidAzureToken } = AzureDevopsApi;
 
 const PAGINATION_SIZE_MUST_BE_NUMBER = "'paginationSize' must be a number";
@@ -26,7 +26,7 @@ const PAGINATION_CURSOR_MUST_BE_GREATER_THAN_ZERO = "'paginationCursor' must be 
 jest.mock('../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js');
 
 describe('Trunk based metrics - get active branches in the repository', () => {
-  const api = '/api/v1/metrics/trunk-based-development/activeBranches';
+  const apiEndPoint = '/api/v1/metrics/trunk-based-development/activeBranches';
 
   it('should return active branches for the repository with response status code 200', async () => {
     AzureDevopsApi.fetchActivePullRequests = jest.fn().mockResolvedValue(AZURE_ACTIVE_BRANCHES_RESPONSE);
@@ -35,10 +35,10 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     const paginationCursor = 1;
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(OK);
+    expect(response.statusCode).toBe(STATUS_CODE.OK);
     expect(response.body).toEqual(SERVER_ACTIVE_BRANCHES_RESPONSE);
   });
 
@@ -51,10 +51,10 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     const paginationCursor = 1;
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(INTERNAL_SERVER_ERROR);
+    expect(response.statusCode).toBe(STATUS_CODE.INTERNAL_SERVER_ERROR);
     expect(response.body).toEqual({ error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
   });
 
@@ -63,10 +63,10 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     const paginationCursor = 'invalid';
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_CURSOR_SIZE_MUST_BE_NUMBER,
     });
@@ -77,10 +77,10 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     const paginationCursor = 1;
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_SIZE_MUST_BE_NUMBER,
     });
@@ -91,10 +91,10 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     const paginationCursor = 'invalid';
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_CURSOR_MUST_BE_NUMBER,
     });
@@ -103,9 +103,9 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   it('should return a 400 status code when no pagination cursor is provided', async () => {
     const paginationSize = 100;
 
-    const response = await request(app).get(`${api}?paginationSize=${paginationSize}`);
+    const response = await request(app).get(`${apiEndPoint}?paginationSize=${paginationSize}`);
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_CURSOR_REQUIRED,
     });
@@ -114,18 +114,18 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   it('should return a 400 status code when no pagination size is provided', async () => {
     const paginationCursor = 1;
 
-    const response = await request(app).get(`${api}?paginationCursor=${paginationCursor}`);
+    const response = await request(app).get(`${apiEndPoint}?paginationCursor=${paginationCursor}`);
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_SIZE_REQUIRED,
     });
   });
 
   it('should return a 400 status code when no pagination parameters are provided', async () => {
-    const response = await request(app).get(`${api}`);
+    const response = await request(app).get(`${apiEndPoint}`);
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_CURSOR_SIZE_REQUIRED,
     });
@@ -136,10 +136,10 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     const paginationCursor = 0;
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_CURSOR_SIZE_MUST_BE_GREATER_THAN_ZERO,
     });
@@ -150,10 +150,10 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     const paginationCursor = 1;
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_SIZE_MUST_BE_GREATER_THAN_ZERO,
     });
@@ -164,10 +164,10 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     const paginationCursor = 0;
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(BAD_REQUEST);
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
       error: PAGINATION_CURSOR_MUST_BE_GREATER_THAN_ZERO,
     });
@@ -176,16 +176,16 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   it('should handle no data found error due to invalid server configurations when fetching active branches from Azure API', async () => {
     AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
-      .mockRejectedValue(new AppError(invalidRepositoryDetails, NOT_FOUND));
+      .mockRejectedValue(new AppError(invalidRepositoryDetails, STATUS_CODE.NOT_FOUND));
 
     const paginationSize = 10;
     const paginationCursor = 1;
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(NOT_FOUND);
+    expect(response.statusCode).toBe(STATUS_CODE.NOT_FOUND);
     expect(response.body).toEqual({
       error: invalidRepositoryDetails,
     });
@@ -194,16 +194,16 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   it('should handle unauthorized access when fetching active branches from Azure API', async () => {
     AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
-      .mockRejectedValue(new AppError(invalidAzureToken, UNAUTHORIZED_ACCESS));
+      .mockRejectedValue(new AppError(invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS));
 
     const paginationSize = 10;
     const paginationCursor = 1;
 
     const response = await request(app).get(
-      `${api}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
     );
 
-    expect(response.statusCode).toBe(UNAUTHORIZED_ACCESS);
+    expect(response.statusCode).toBe(STATUS_CODE.UNAUTHORIZED_ACCESS);
     expect(response.body).toEqual({
       error: invalidAzureToken,
     });
