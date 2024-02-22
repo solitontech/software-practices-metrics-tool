@@ -42,7 +42,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     expect(response.body).toEqual(SERVER_ACTIVE_BRANCHES_RESPONSE);
   });
 
-  it('should handle internal server error when fetching active branches from Azure API', async () => {
+  it('should handle internal server error with response status 500', async () => {
     AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
       .mockRejectedValue(new Error(ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
@@ -58,7 +58,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     expect(response.body).toEqual({ error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
   });
 
-  it('should return a 400 status code when invalid pagination parameters are provided', async () => {
+  it('should handle invalid pagination parameters are provided with response status 400', async () => {
     const paginationSize = 'invalid';
     const paginationCursor = 'invalid';
 
@@ -72,7 +72,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should return a 400 status code when invalid pagination size is provided', async () => {
+  it('should handle invalid pagination size is provided with response status 400', async () => {
     const paginationSize = 'invalid';
     const paginationCursor = 1;
 
@@ -86,7 +86,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should return a 400 status code when invalid pagination cursor is provided', async () => {
+  it('should handle invalid pagination cursor is provided with response status 400', async () => {
     const paginationSize = 100;
     const paginationCursor = 'invalid';
 
@@ -100,7 +100,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should return a 400 status code when no pagination cursor is provided', async () => {
+  it('should handle when no pagination cursor is provided with response status 400', async () => {
     const paginationSize = 100;
 
     const response = await request(app).get(`${apiEndPoint}?paginationSize=${paginationSize}`);
@@ -111,7 +111,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should return a 400 status code when no pagination size is provided', async () => {
+  it('should handle when no pagination size is provided with response status 400', async () => {
     const paginationCursor = 1;
 
     const response = await request(app).get(`${apiEndPoint}?paginationCursor=${paginationCursor}`);
@@ -122,7 +122,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should return a 400 status code when no pagination parameters are provided', async () => {
+  it('should handle when no pagination parameters are provided with response status 400', async () => {
     const response = await request(app).get(`${apiEndPoint}`);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
@@ -131,7 +131,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should return a 400 status code when negative pagination parameters or 0 are provided as values', async () => {
+  it('should handle negative pagination parameters or 0 are provided as values with response status 400', async () => {
     const paginationSize = -3;
     const paginationCursor = 0;
 
@@ -145,7 +145,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should return a 400 status code when negative pagination size or 0 is provided as value', async () => {
+  it('should handle negative pagination size or 0 is provided as value with response status 400', async () => {
     const paginationSize = 0;
     const paginationCursor = 1;
 
@@ -159,7 +159,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should return a 400 status code when negative pagination cursor or 0 is provided as value', async () => {
+  it('should handle negative pagination cursor or 0 is provided as value with response status 400', async () => {
     const paginationSize = 100;
     const paginationCursor = 0;
 
@@ -173,7 +173,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should handle no data found error due to invalid server configurations when fetching active branches from Azure API', async () => {
+  it('should handle no data found error due to invalid server configurations with response status 404', async () => {
     AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
       .mockRejectedValue(new AppError(invalidRepositoryDetails, STATUS_CODE.NOT_FOUND));
@@ -191,7 +191,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should handle unauthorized access when fetching active branches from Azure API', async () => {
+  it('should handle unauthorized access with response status 401', async () => {
     AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
       .mockRejectedValue(new AppError(invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS));
