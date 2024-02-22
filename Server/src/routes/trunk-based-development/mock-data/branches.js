@@ -22,7 +22,7 @@ export const BRANCHES_RESPONSE = {
       {
         id: '1',
         name: 'users/name/feature',
-        url: 'https://dev.azure.com/Soliton/SolitonCentral/_git/SolitonCentral?version=GBusers%2Fname%2Ffeature',
+        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GBusers%2Fname%2Ffeature',
       },
     ],
     count: 1,
@@ -32,12 +32,12 @@ export const BRANCHES_RESPONSE = {
       {
         id: '2',
         name: 'feature/dummy',
-        url: 'https://dev.azure.com/Soliton/SolitonCentral/_git/SolitonCentral?version=GBfeature%2Fdummy',
+        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GBfeature%2Fdummy',
       },
     ],
     count: 1,
   },
-  branchesURL: 'https://dev.azure.com/Soliton/SolitonCentral/_git/SolitonCentral/branches?a=all&_a=all',
+  branchesURL: 'https://dev.azure.com/Soliton/my_project/_git/my_repository/branches?a=all&_a=all',
   percentageOfBranchesFollowingStandard: '50.00%',
   totalNumberOfBranches: 2,
 };

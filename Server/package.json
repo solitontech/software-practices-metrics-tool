@@ -6,7 +6,7 @@
   "scripts": {
     "start:prod": "NODE_ENVIRONMENT=production node src/index.js",
     "start:dev": "set NODE_ENVIRONMENT=development&& nodemon src/index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "test": "set NODE_ENVIRONMENT=test&& node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "format": "prettier --write \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "lint": "eslint \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "prepare": "cd ../../.. && husky install Tools/SoftwarePracticesMetricsTool/Server/",
