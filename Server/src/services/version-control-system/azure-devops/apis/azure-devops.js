@@ -24,11 +24,23 @@ export class AzureDevopsApi {
   static #authorizationHeader = `Basic ${btoa(this.#header)}`;
   static #apiVersion = '7.1-preview.1';
   static #promiseFulfilled = 'fulfilled';
-  static invalidAzureToken =
+  static #invalidAzureToken =
     'Unauthorized access. Either invalid Azure DevOps token or invalid organization found in the configuration.';
-  static dataNotFound = 'No data found.';
-  static invalidRepositoryDetails =
+  static #dataNotFound = 'No data found.';
+  static #invalidRepositoryDetails =
     'No data found. You either do not have permission for the provided token or verify the organization, project, repository & trunk branch in the configuration.';
+
+  static get invalidAzureToken() {
+    return this.#invalidAzureToken;
+  }
+
+  static get invalidRepositoryDetails() {
+    return this.#invalidRepositoryDetails;
+  }
+
+  static get dataNotFound() {
+    return this.#dataNotFound;
+  }
 
   static async #fetchApi(url) {
     let apiResponse;
@@ -55,23 +67,23 @@ export class AzureDevopsApi {
 
   static #throwErrorMessages(response) {
     if (response.status === NON_AUTHORITATIVE_INFORMATION) {
-      AppError.throwAppError(this.invalidAzureToken, UNAUTHORIZED_ACCESS);
+      AppError.throwAppError(this.#invalidAzureToken, UNAUTHORIZED_ACCESS);
     }
   }
 
   static #validateResponse(response) {
     if (!response.count) {
-      AppError.throwAppError(this.dataNotFound, NOT_FOUND);
+      AppError.throwAppError(this.#dataNotFound, NOT_FOUND);
     }
   }
 
   static #throwAxiosErrorMessages(error) {
     if (error.response.status === NOT_FOUND) {
-      AppError.throwAppError(this.invalidRepositoryDetails, NOT_FOUND);
+      AppError.throwAppError(this.#invalidRepositoryDetails, NOT_FOUND);
     }
 
     if (error.response.status === UNAUTHORIZED_ACCESS) {
-      AppError.throwAppError(this.invalidAzureToken, UNAUTHORIZED_ACCESS);
+      AppError.throwAppError(this.#invalidAzureToken, UNAUTHORIZED_ACCESS);
     }
   }
 
