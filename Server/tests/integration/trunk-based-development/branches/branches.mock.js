@@ -109,12 +109,12 @@ export const SERVER_BRANCHES_RESPONSE = {
       {
         id: 'd60f2173617cebfe1a8161ba09cbfb8f48a37d53',
         name: 'users/dev7/21_V_Don_MA-S_Implementation',
-        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GBusers%2Fdev7%2F21_V_Don_MA-S_Implementation',
+        url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBusers%2Fdev7%2F21_V_Don_MA-S_Implementation`,
       },
       {
         id: '4c4195893fea95d63236ae3874ba7614d4dbf025',
         name: 'users/dev8/Add_Project-OverviewDocument',
-        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GBusers%2Fdev8%2FAdd_Project-OverviewDocument',
+        url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBusers%2Fdev8%2FAdd_Project-OverviewDocument`,
       },
     ],
     count: 2,
@@ -124,27 +124,27 @@ export const SERVER_BRANCHES_RESPONSE = {
       {
         id: 'a30a4b19037819eed3ded296ae074f7443f803f2',
         name: '25Automation',
-        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GB25Automation',
+        url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GB25Automation`,
       },
       {
         id: '736f4f3ec1fc3159534cedc7bc3272dd2f1f7f93',
         name: 'react/starter/code',
-        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GBreact%2Fstarter%2Fcode',
+        url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBreact%2Fstarter%2Fcode`,
       },
       {
         id: '09e9845ca7ad93abe9c0d5d69fb08d9c1153c1b4',
         name: 'dev5-code_review_updates',
-        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GBdev5-code_review_updates',
+        url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBdev5-code_review_updates`,
       },
       {
         id: 'bf18e47q108e0ebd8319560690c02f9c4424afea',
         name: 'user/LV/LabVIEW_VI-Analyzer',
-        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GBuser%2FLV%2FLabVIEW_VI-Analyzer',
+        url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBuser%2FLV%2FLabVIEW_VI-Analyzer`,
       },
       {
         id: '4b2b9a9fb5ce64024bdf455e675143a29ab4ec32',
         name: 'users/dev1/clean-code/cheat_sheet',
-        url: 'https://dev.azure.com/Soliton/my_project/_git/my_repository?version=GBusers%2Fdev1%2Fclean-code%2Fcheat_sheet',
+        url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBusers%2Fdev1%2Fclean-code%2Fcheat_sheet`,
       },
     ],
     count: 5,
