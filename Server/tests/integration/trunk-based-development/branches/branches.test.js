@@ -33,7 +33,7 @@ describe('Trunk based metrics - get all branches in the repository', () => {
     expect(response.body).toEqual({ error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
   });
 
-  it('should handle no data found error due to invalid server configurations when fetching branches from Azure API with response status 404', async () => {
+  it('should handle no data found error due to invalid server configurations Azure response status 404', async () => {
     AzureDevopsApi.fetchAllBranches = jest
       .fn()
       .mockRejectedValue(new AppError(invalidRepositoryDetails, STATUS_CODE.NOT_FOUND));
