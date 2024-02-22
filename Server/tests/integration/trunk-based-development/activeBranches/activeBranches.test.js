@@ -191,7 +191,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should handle unauthorized access when fetching branches from Azure API', async () => {
+  it('should handle unauthorized access when fetching active branches from Azure API', async () => {
     AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
       .mockRejectedValue(new AppError(invalidAzureToken, UNAUTHORIZED_ACCESS));
