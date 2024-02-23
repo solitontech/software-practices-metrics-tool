@@ -32,7 +32,7 @@ jest.mock('../../../src/services/version-control-system/azure-devops/apis/azure-
 describe('Code review metrics - get all pull requests raised to trunk branch in the repository', () => {
   const apiEndPoint = '/api/v1/metrics/code-review';
 
-  it('should return all pull requests for the repository with response status code 200', async () => {
+  it('should return all pull requests within selected range for the repository with response status code 200', async () => {
     AzureDevopsApi.fetchPullRequests = jest.fn().mockResolvedValue(AZURE_PULL_REQUESTS_RESPONSE);
 
     const startDate = '2021-01-01';
@@ -47,14 +47,14 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual(SERVER_PULL_REQUESTS_RESPONSE);
   });
 
-  it('should handle when all query parameters are missing with response status 400', async () => {
+  it('should return error when all query parameters are missing with response status 400', async () => {
     const response = await request(app).get(apiEndPoint);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({ error: START_END_DATE_REQUIRED });
   });
 
-  it('should handle when startDate & endDate is missing with response status 400', async () => {
+  it('should return error when startDate & endDate is missing with response status 400', async () => {
     const paginationCursor = '1';
     const paginationSize = '100';
     const queryParams = `?paginationCursor=${paginationCursor}&paginationSize=${paginationSize}`;
@@ -65,7 +65,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: START_END_DATE_REQUIRED });
   });
 
-  it('should handle when paginationSize & paginationCursor is missing with response status 400', async () => {
+  it('should return error when paginationSize & paginationCursor is missing with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const queryParams = `?startDate=${startDate}&endDate=${endDate}`;
@@ -76,7 +76,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: PAGINATION_CURSOR_SIZE_REQUIRED });
   });
 
-  it('should handle when startDate is missing with response status 400', async () => {
+  it('should return error when startDate is missing with response status 400', async () => {
     const endDate = '2021-12-31';
     const paginationCursor = '1';
     const paginationSize = '100';
@@ -88,7 +88,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: START_DATE_REQUIRED });
   });
 
-  it('should handle when endDate is missing with response status 400', async () => {
+  it('should return error when endDate is missing with response status 400', async () => {
     const startDate = '2021-01-01';
     const paginationCursor = '1';
     const paginationSize = '100';
@@ -102,7 +102,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     });
   });
 
-  it('should handle when endDate is in the future with response status 400', async () => {
+  it('should return error when endDate is in the future with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '9999-12-31'; // future date
     const paginationCursor = '1';
@@ -114,7 +114,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
   });
 
-  it('should handle when startDate is greater than endDate with response status 400', async () => {
+  it('should return error when startDate is greater than endDate with response status 400', async () => {
     const startDate = '2021-12-31';
     const endDate = '2021-01-01';
     const paginationCursor = '1';
@@ -127,7 +127,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: START_DATE_LESS_THAN_END_DATE });
   });
 
-  it('should handle when paginationCursor is missing with response status 400', async () => {
+  it('should return error when paginationCursor is missing with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const paginationSize = '100';
@@ -139,7 +139,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: PAGINATION_CURSOR_REQUIRED });
   });
 
-  it('should handle when paginationSize is missing with response status 400', async () => {
+  it('should return error when paginationSize is missing with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const paginationCursor = '1';
@@ -151,7 +151,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: PAGINATION_SIZE_REQUIRED });
   });
 
-  it('should handle when paginationCursor & paginationSize is missing with response status 400', async () => {
+  it('should return error when paginationCursor & paginationSize is missing with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const queryParams = `?startDate=${startDate}&endDate=${endDate}`;
@@ -162,7 +162,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: PAGINATION_CURSOR_SIZE_REQUIRED });
   });
 
-  it('should handle when paginationSize is less than 1 with response status 400', async () => {
+  it('should return error when paginationSize is less than 1 with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const paginationCursor = '1';
@@ -175,7 +175,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: PAGINATION_SIZE_MUST_BE_GREATER_THAN_ZERO });
   });
 
-  it('should handle when paginationCursor is less than 1 with response status 400', async () => {
+  it('should return error when paginationCursor is less than 1 with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const paginationCursor = '0';
@@ -188,7 +188,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: PAGINATION_CURSOR_MUST_BE_GREATER_THAN_ZERO });
   });
 
-  it('should handle when paginationSize & paginationCursor is less than 1 with response status 400', async () => {
+  it('should return error when paginationSize & paginationCursor is less than 1 with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const paginationCursor = '0';
@@ -203,7 +203,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     });
   });
 
-  it('should handle when startDate is not in valid date format with response status 400', async () => {
+  it('should return error when startDate is not in valid date format with response status 400', async () => {
     const startDate = '2021-01-32'; // invalid date
     const endDate = '2021-12-31';
     const paginationCursor = '1';
@@ -218,7 +218,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     });
   });
 
-  it('should handle when endDate is not in valid date format with response status 400', async () => {
+  it('should return error when endDate is not in valid date format with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-32'; // invalid date
     const paginationCursor = '1';
@@ -233,7 +233,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     });
   });
 
-  it('should handle when startDate & endDate is not in valid date format with response status 400', async () => {
+  it('should return error when startDate & endDate is not in valid date format with response status 400', async () => {
     const startDate = '2021-01-32'; // invalid date
     const endDate = '2021-12-32'; // invalid date
     const paginationCursor = '1';
@@ -248,7 +248,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     });
   });
 
-  it('should handle when paginationCursor is not a number with response status 400', async () => {
+  it('should return error when paginationCursor is not a number with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const paginationCursor = 'one'; // invalid number
@@ -261,7 +261,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: PAGINATION_CURSOR_MUST_BE_NUMBER });
   });
 
-  it('should handle when paginationSize is not a number with response status 400', async () => {
+  it('should return error when paginationSize is not a number with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const paginationCursor = '1';
@@ -274,7 +274,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     expect(response.body).toEqual({ error: PAGINATION_SIZE_MUST_BE_NUMBER });
   });
 
-  it('should handle when paginationCursor & paginationSize is not a number with response status 400', async () => {
+  it('should return error when paginationCursor & paginationSize is not a number with response status 400', async () => {
     const startDate = '2021-01-01';
     const endDate = '2021-12-31';
     const paginationCursor = 'one'; // invalid number
