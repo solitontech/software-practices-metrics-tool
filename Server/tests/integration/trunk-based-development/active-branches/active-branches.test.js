@@ -7,21 +7,19 @@ import { AzureDevopsApi } from '../../../../src/services/version-control-system/
 
 import { AZURE_ACTIVE_BRANCHES_RESPONSE, SERVER_ACTIVE_BRANCHES_RESPONSE } from './active-branches.mock.js';
 import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
+import {
+  PAGINATION_SIZE_MUST_BE_NUMBER,
+  PAGINATION_CURSOR_SIZE_MUST_BE_NUMBER,
+  PAGINATION_CURSOR_MUST_BE_NUMBER,
+  PAGINATION_CURSOR_REQUIRED,
+  PAGINATION_SIZE_REQUIRED,
+  PAGINATION_CURSOR_SIZE_REQUIRED,
+  PAGINATION_SIZE_MUST_BE_GREATER_THAN_ZERO,
+  PAGINATION_CURSOR_SIZE_MUST_BE_GREATER_THAN_ZERO,
+  PAGINATION_CURSOR_MUST_BE_GREATER_THAN_ZERO,
+} from '../../constants/common-constants.js';
 
-const { invalidRepositoryDetails, invalidAzureToken } = AzureDevopsApi;
-
-const PAGINATION_SIZE_MUST_BE_NUMBER = "'paginationSize' must be a number";
-const PAGINATION_CURSOR_SIZE_MUST_BE_NUMBER = "'paginationCursor' must be a number | 'paginationSize' must be a number";
-const PAGINATION_CURSOR_MUST_BE_NUMBER = "'paginationCursor' must be a number";
-
-const PAGINATION_CURSOR_REQUIRED = "'paginationCursor' is required";
-const PAGINATION_SIZE_REQUIRED = "'paginationSize' is required";
-const PAGINATION_CURSOR_SIZE_REQUIRED = "'paginationCursor' is required | 'paginationSize' is required";
-
-const PAGINATION_SIZE_MUST_BE_GREATER_THAN_ZERO = "'paginationSize' must be greater than or equal to 1";
-const PAGINATION_CURSOR_SIZE_MUST_BE_GREATER_THAN_ZERO =
-  "'paginationCursor' must be greater than or equal to 1 | 'paginationSize' must be greater than or equal to 1";
-const PAGINATION_CURSOR_MUST_BE_GREATER_THAN_ZERO = "'paginationCursor' must be greater than or equal to 1";
+const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
 jest.mock('../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js');
 
@@ -206,6 +204,24 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     expect(response.statusCode).toBe(STATUS_CODE.UNAUTHORIZED_ACCESS);
     expect(response.body).toEqual({
       error: invalidAzureToken,
+    });
+  });
+
+  it('should handle no data found error with response status 404', async () => {
+    AzureDevopsApi.fetchActivePullRequests = jest
+      .fn()
+      .mockRejectedValue(new AppError(dataNotFound, STATUS_CODE.NOT_FOUND));
+
+    const paginationSize = 10;
+    const paginationCursor = 1;
+
+    const response = await request(app).get(
+      `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
+    );
+
+    expect(response.statusCode).toBe(STATUS_CODE.NOT_FOUND);
+    expect(response.body).toEqual({
+      error: dataNotFound,
     });
   });
 });

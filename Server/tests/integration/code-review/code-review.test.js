@@ -6,6 +6,24 @@ import { AZURE_PULL_REQUESTS_RESPONSE, SERVER_PULL_REQUESTS_RESPONSE } from './c
 import { ERROR_MESSAGE, STATUS_CODE } from '../../../src/constants/constants.js';
 import app from '../../../src/index.js';
 import { AppError } from '../../../src/utils/app-error.js';
+import {
+  PAGINATION_SIZE_MUST_BE_NUMBER,
+  PAGINATION_CURSOR_SIZE_MUST_BE_NUMBER,
+  PAGINATION_CURSOR_MUST_BE_NUMBER,
+  PAGINATION_CURSOR_REQUIRED,
+  PAGINATION_SIZE_REQUIRED,
+  PAGINATION_CURSOR_SIZE_REQUIRED,
+  PAGINATION_SIZE_MUST_BE_GREATER_THAN_ZERO,
+  PAGINATION_CURSOR_SIZE_MUST_BE_GREATER_THAN_ZERO,
+  PAGINATION_CURSOR_MUST_BE_GREATER_THAN_ZERO,
+  INVALID_START_DATE_FORMAT,
+  INVALID_END_DATE_FORMAT,
+  INVALID_START_END_DATE_FORMAT,
+  START_DATE_REQUIRED,
+  END_DATE_REQUIRED,
+  START_END_DATE_REQUIRED,
+  START_DATE_LESS_THAN_END_DATE,
+} from '../constants/common-constants.js';
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
@@ -33,7 +51,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'endDate' is required | 'startDate' is required" });
+    expect(response.body).toEqual({ error: START_END_DATE_REQUIRED });
   });
 
   it('should handle when startDate & endDate is missing with response status 400', async () => {
@@ -44,7 +62,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'endDate' is required | 'startDate' is required" });
+    expect(response.body).toEqual({ error: START_END_DATE_REQUIRED });
   });
 
   it('should handle when paginationSize & paginationCursor is missing with response status 400', async () => {
@@ -55,7 +73,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'paginationCursor' is required | 'paginationSize' is required" });
+    expect(response.body).toEqual({ error: PAGINATION_CURSOR_SIZE_REQUIRED });
   });
 
   it('should handle when startDate is missing with response status 400', async () => {
@@ -67,7 +85,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'startDate' is required" });
+    expect(response.body).toEqual({ error: START_DATE_REQUIRED });
   });
 
   it('should handle when endDate is missing with response status 400', async () => {
@@ -80,7 +98,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
-      error: "'endDate' is required | 'startDate' date references 'ref:endDate' which must have a valid date format",
+      error: END_DATE_REQUIRED,
     });
   });
 
@@ -106,7 +124,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'startDate' must be less than or equal to 'ref:endDate'" });
+    expect(response.body).toEqual({ error: START_DATE_LESS_THAN_END_DATE });
   });
 
   it('should handle when paginationCursor is missing with response status 400', async () => {
@@ -118,7 +136,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'paginationCursor' is required" });
+    expect(response.body).toEqual({ error: PAGINATION_CURSOR_REQUIRED });
   });
 
   it('should handle when paginationSize is missing with response status 400', async () => {
@@ -130,7 +148,18 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'paginationSize' is required" });
+    expect(response.body).toEqual({ error: PAGINATION_SIZE_REQUIRED });
+  });
+
+  it('should handle when paginationCursor & paginationSize is missing with response status 400', async () => {
+    const startDate = '2021-01-01';
+    const endDate = '2021-12-31';
+    const queryParams = `?startDate=${startDate}&endDate=${endDate}`;
+
+    const response = await request(app).get(apiEndPoint + queryParams);
+
+    expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
+    expect(response.body).toEqual({ error: PAGINATION_CURSOR_SIZE_REQUIRED });
   });
 
   it('should handle when paginationSize is less than 1 with response status 400', async () => {
@@ -143,7 +172,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'paginationSize' must be greater than or equal to 1" });
+    expect(response.body).toEqual({ error: PAGINATION_SIZE_MUST_BE_GREATER_THAN_ZERO });
   });
 
   it('should handle when paginationCursor is less than 1 with response status 400', async () => {
@@ -156,7 +185,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'paginationCursor' must be greater than or equal to 1" });
+    expect(response.body).toEqual({ error: PAGINATION_CURSOR_MUST_BE_GREATER_THAN_ZERO });
   });
 
   it('should handle when paginationSize & paginationCursor is less than 1 with response status 400', async () => {
@@ -170,8 +199,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
-      error:
-        "'paginationCursor' must be greater than or equal to 1 | 'paginationSize' must be greater than or equal to 1",
+      error: PAGINATION_CURSOR_SIZE_MUST_BE_GREATER_THAN_ZERO,
     });
   });
 
@@ -186,7 +214,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
-      error: "'startDate' must be in YYYY-MM-DD format",
+      error: INVALID_START_DATE_FORMAT,
     });
   });
 
@@ -201,8 +229,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
-      error:
-        "'endDate' must be in YYYY-MM-DD format | 'startDate' date references 'ref:endDate' which must have a valid date format",
+      error: INVALID_END_DATE_FORMAT,
     });
   });
 
@@ -217,7 +244,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
-      error: "'endDate' must be in YYYY-MM-DD format | 'startDate' must be in YYYY-MM-DD format",
+      error: INVALID_START_END_DATE_FORMAT,
     });
   });
 
@@ -231,7 +258,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'paginationCursor' must be a number" });
+    expect(response.body).toEqual({ error: PAGINATION_CURSOR_MUST_BE_NUMBER });
   });
 
   it('should handle when paginationSize is not a number with response status 400', async () => {
@@ -244,7 +271,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
-    expect(response.body).toEqual({ error: "'paginationSize' must be a number" });
+    expect(response.body).toEqual({ error: PAGINATION_SIZE_MUST_BE_NUMBER });
   });
 
   it('should handle when paginationCursor & paginationSize is not a number with response status 400', async () => {
@@ -258,7 +285,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
 
     expect(response.statusCode).toBe(STATUS_CODE.BAD_REQUEST);
     expect(response.body).toEqual({
-      error: "'paginationCursor' must be a number | 'paginationSize' must be a number",
+      error: PAGINATION_CURSOR_SIZE_MUST_BE_NUMBER,
     });
   });
 
