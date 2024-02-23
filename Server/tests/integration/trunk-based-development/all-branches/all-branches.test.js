@@ -5,7 +5,7 @@ import app from '../../../../src/index.js';
 import { AppError } from '../../../../src/utils/app-error.js';
 import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
 
-import { AZURE_ALL_BRANCHES_RESPONSE, SERVER_BRANCHES_RESPONSE } from './branches.mock.js';
+import { AZURE_ALL_BRANCHES_RESPONSE, SERVER_BRANCHES_RESPONSE } from './all-branches.mock.js';
 import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
 
 const { invalidRepositoryDetails, invalidAzureToken } = AzureDevopsApi;
