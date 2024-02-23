@@ -5,7 +5,7 @@ import app from '../../../../src/index.js';
 import { AppError } from '../../../../src/utils/app-error.js';
 import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
 
-import { AZURE_ACTIVE_BRANCHES_RESPONSE, SERVER_ACTIVE_BRANCHES_RESPONSE } from './activeBranches.mock.js';
+import { AZURE_ACTIVE_BRANCHES_RESPONSE, SERVER_ACTIVE_BRANCHES_RESPONSE } from './active-branches.mock.js';
 import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
 
 const { invalidRepositoryDetails, invalidAzureToken } = AzureDevopsApi;
@@ -131,9 +131,9 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should handle negative pagination parameters or 0 are provided as values with response status 400', async () => {
+  it('should handle negative pagination parameters are provided as values with response status 400', async () => {
     const paginationSize = -3;
-    const paginationCursor = 0;
+    const paginationCursor = -1;
 
     const response = await request(app).get(
       `${apiEndPoint}?paginationSize=${paginationSize}&paginationCursor=${paginationCursor}`
@@ -145,7 +145,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should handle negative pagination size or 0 is provided as value with response status 400', async () => {
+  it('should handle pagination size as 0 is provided as value with response status 400', async () => {
     const paginationSize = 0;
     const paginationCursor = 1;
 
@@ -159,7 +159,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     });
   });
 
-  it('should handle negative pagination cursor or 0 is provided as value with response status 400', async () => {
+  it('should handle pagination cursor as 0 is provided as value with response status 400', async () => {
     const paginationSize = 100;
     const paginationCursor = 0;
 
