@@ -10,7 +10,7 @@ on:
 
 jobs:
   server-test:
-    runs-on: ubuntu-
+    runs-on: ubuntu-latest
 
     env:
       working-directory: Server
