@@ -10,7 +10,7 @@
     "test-ci": "NODE_ENVIRONMENT=test node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "format": "prettier --write \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "lint": "eslint \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
-    "prepare": "cd ../../.. && husky install Tools/SoftwarePracticesMetricsTool/Server/",
+    "prepare": "cd .. && husky install Server/.husky",
     "lint-staged": "lint-staged",
     "build:client": "node ./src/scripts/build-client.js",
     "build:docker": "node ./src/scripts/build-docker.js"
@@ -46,7 +46,7 @@
     "eslint-plugin-json": "^3.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "fs-extra": "^11.2.0",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.0",
     "markdownlint-cli": "^0.38.0",
