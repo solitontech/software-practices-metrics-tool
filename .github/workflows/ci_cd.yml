@@ -9,7 +9,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  server-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,8 +21,11 @@ jobs:
         with:
           node-version: "20.11.0"
 
+      - name: Set working directory
+        run: cd Server
+
       - name: Install dependencies
-        run: cd Server && npm ci
+        run: npm ci
 
       - name: Run tests
-        run: cd Server && npm run test-ci
+        run: npm run test-ci
