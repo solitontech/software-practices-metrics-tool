@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "test-e2e": "set SERVER_URL=http://localhost:5173&& npx playwright test"
+    "test-e2e": "set CLIENT_DEV_URL=http://localhost:5173&& npx playwright test"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
