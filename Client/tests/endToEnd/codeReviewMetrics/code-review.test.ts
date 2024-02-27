@@ -53,6 +53,12 @@ test.describe("Code Review Metrics page", () => {
     }
   });
 
+  test("should display table in code review metrics", async () => {
+    const table = await page.$("table");
+
+    expect(table).toBeTruthy();
+  });
+
   test("should display column headers in the code review table", async () => {
     const selectors = [
       "startDate",
