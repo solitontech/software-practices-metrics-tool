@@ -10,7 +10,8 @@
     "lint-fix": "eslint . --ext ts,tsx --fix",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "test-e2e": "npx playwright test"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",

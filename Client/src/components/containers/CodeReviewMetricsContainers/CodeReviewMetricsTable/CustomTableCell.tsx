@@ -35,7 +35,7 @@ export const CustomTableCell = ({
 
   return (
     <th
-      className={styles.tableCell}
+      className={`${styles.tableCell} ${column.id}-table-header`}
       key={column.id}
       style={{ minWidth: column.minWidth, textAlign: column.align ?? "left" }}
     >
