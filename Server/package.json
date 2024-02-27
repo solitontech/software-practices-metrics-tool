@@ -16,9 +16,12 @@
     "build:docker": "node ./src/scripts/build-docker.js"
   },
   "lint-staged": {
-    "*.{js, json, md}": [
+    "*.{js,json}": [
       "eslint --fix",
       "prettier --write --ignore-unknown"
+    ],
+    "*.md": [
+      "npx markdownlint \"**/*.md\""
     ]
   },
   "jest": {
