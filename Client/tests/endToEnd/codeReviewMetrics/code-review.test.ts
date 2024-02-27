@@ -1,8 +1,12 @@
+import "dotenv/config";
+
 import { test, expect } from "@playwright/test";
 
-const codeReviewEndPoint = "http://localhost:5173/metrics/code-review-metrics";
+import { pathToCodeReviewMetrics } from "../../../src/constants/routeConstants";
 
-test.describe("Code Review Metrics", () => {
+const codeReviewEndPoint = `${process.env.SERVER_URL}${pathToCodeReviewMetrics}`;
+
+test.describe("Code Review Metrics page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(codeReviewEndPoint);
     await page.waitForSelector("table");
@@ -14,7 +18,7 @@ test.describe("Code Review Metrics", () => {
     expect(element).toBeDefined();
   });
 
-  test("should display required tiles with test for code review metrics", async ({
+  test("should display required tiles with text for code review metrics", async ({
     page,
   }) => {
     const selectors = [
@@ -30,11 +34,13 @@ test.describe("Code Review Metrics", () => {
     }
   });
 
-  test("should display time with hours in the tiles", async ({ page }) => {
+  test("should display time with hours in the code review tiles", async ({
+    page,
+  }) => {
     const selectors = [
-      ".firstReviewResponseTime",
-      ".approvalTime",
-      ".mergeTime",
+      "[data-testid='first-review-response-time']",
+      "[data-testid='approval-time']",
+      "[data-testid='merge-time']",
     ];
 
     const regex = /^[0-9]+(\.[0-9]+)?\s?(hour|hours)?$/;
@@ -44,12 +50,6 @@ test.describe("Code Review Metrics", () => {
 
       expect(textContent).toMatch(regex);
     }
-  });
-
-  test("should display table", async ({ page }) => {
-    const table = await page.$("table");
-
-    expect(table).toBeTruthy();
   });
 
   test("should display column headers in the code review table", async ({
@@ -72,7 +72,7 @@ test.describe("Code Review Metrics", () => {
 
     for (const selector of selectors) {
       const element = await page
-        .locator(`.${selector}-table-header`)
+        .locator(`[data-testid="${selector}-table-header"]`)
         .innerHTML();
 
       expect(element).toBeDefined();
@@ -80,7 +80,7 @@ test.describe("Code Review Metrics", () => {
   });
 
   test("should display rows in the code review table", async ({ page }) => {
-    const rows = await page.$$(".code-review-metrics-table-row");
+    const rows = await page.$$("[data-testid='code-review-metrics-table-row']");
 
     expect(rows.length).toBeGreaterThan(0);
   });
