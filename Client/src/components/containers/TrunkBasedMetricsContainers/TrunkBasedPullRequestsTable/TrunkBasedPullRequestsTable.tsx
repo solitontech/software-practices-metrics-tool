@@ -88,6 +88,7 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
                   {columns.map((column) => (
                     <TableCell
                       key={column.id}
+                      data-testid={`${column.id}-table-header`}
                       align={column.align}
                       style={{ width: column.width }}
                     >
@@ -112,6 +113,7 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
 
                     return (
                       <TableRow
+                        data-testid="trunk-based-metrics-table-row"
                         role="checkbox"
                         tabIndex={-1}
                         className={isEvenRow ? styles.rowEven : styles.rowOdd}
@@ -184,7 +186,9 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
                 size="16px"
               />
               <div>
-                <span>{searchedActiveBranches.length}</span>
+                <span data-testid="total-pull-requests">
+                  {searchedActiveBranches.length}
+                </span>
               </div>
             </div>
           </Tile>
@@ -197,7 +201,7 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
                 size="16px"
               />
               <div>
-                <span>
+                <span data-testid="merged-branches-percentage">
                   {getMergedPullRequest(searchedActiveBranches).percentage}
                 </span>
               </div>

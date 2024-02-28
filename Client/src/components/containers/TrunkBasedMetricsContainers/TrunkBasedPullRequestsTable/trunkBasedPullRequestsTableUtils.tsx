@@ -55,7 +55,7 @@ export function getMergedPullRequest(
       ? `${(
           (mergedPRsCount / pullRequests.length) *
           BASE_PERCENTAGE
-        ).toFixed()} %`
-      : "0 %",
+        ).toFixed()}%`
+      : "0%",
   };
 }
