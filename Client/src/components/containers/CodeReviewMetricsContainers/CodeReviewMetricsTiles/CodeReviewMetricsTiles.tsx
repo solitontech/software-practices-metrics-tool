@@ -72,7 +72,10 @@ export const CodeReviewMetricsTiles = ({
               size="16px"
             />
             <div>
-              <span className={styles[firstReviewResponseTimeTextColor]}>
+              <span
+                data-testid="first-review-response-time"
+                className={styles[firstReviewResponseTimeTextColor]}
+              >
                 {appendHoursToNumber(averageFirstReviewResponseTime)}
               </span>
             </div>
@@ -94,7 +97,10 @@ export const CodeReviewMetricsTiles = ({
               size="16px"
             />
             <div>
-              <span className={styles[approvalTimeTextColor]}>
+              <span
+                data-testid="approval-time"
+                className={styles[approvalTimeTextColor]}
+              >
                 {appendHoursToNumber(averageApprovalTime)}
               </span>
             </div>
@@ -116,7 +122,10 @@ export const CodeReviewMetricsTiles = ({
               size="16px"
             />
             <div>
-              <span className={styles[mergeTimeTextColor]}>
+              <span
+                data-testid="merge-time"
+                className={`${styles[mergeTimeTextColor]} mergeTime`}
+              >
                 {appendHoursToNumber(averageMergeTime)}
               </span>
             </div>

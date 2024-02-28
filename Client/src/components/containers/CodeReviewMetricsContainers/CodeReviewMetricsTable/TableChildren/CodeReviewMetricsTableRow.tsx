@@ -35,6 +35,7 @@ export const CodeReviewMetricsTableRow = memo(({ index, row }: Props) => {
       tabIndex={-1}
       key={row.id}
       className={isEvenRow ? styles.rowEven : styles.rowOdd}
+      data-testid="code-review-metrics-table-row"
     >
       <td className={`${styles.text} ${styles.date}`}>
         <time className={styles.startDate} title={formatDate(row.creationDate)}>
