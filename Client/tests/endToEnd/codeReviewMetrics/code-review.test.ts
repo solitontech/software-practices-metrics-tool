@@ -2,6 +2,7 @@ import "dotenv/config";
 import { test, expect, Page } from "@playwright/test";
 
 import { pathToCodeReviewMetrics } from "../../../src/constants/routeConstants";
+import { TIMEOUT_PERIOD, WAIT_UNTIL } from "../constants/commonConstants";
 
 const codeReviewEndPoint = `${process.env.CLIENT_DEV_URL}${pathToCodeReviewMetrics}`;
 
@@ -13,7 +14,11 @@ test.describe("Code Review Metrics page", () => {
 
     page = await context.newPage();
 
-    await page.goto(codeReviewEndPoint);
+    await page.goto(codeReviewEndPoint, {
+      waitUntil: WAIT_UNTIL,
+      timeout: TIMEOUT_PERIOD,
+    });
+
     await page.waitForSelector("table");
   });
 

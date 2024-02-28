@@ -57,7 +57,7 @@ export const TrunkBasedMetricsTiles = () => {
             size="16px"
           />
           <div className={styles.tileInfo}>
-            <div>
+            <div data-testid="total-branches">
               {totalNumberOfBranches ? totalNumberOfBranches : NOT_AVAILABLE}
             </div>
             <NavLink to={branchesURL} target="blank" className={styles.navLink}>
@@ -74,7 +74,7 @@ export const TrunkBasedMetricsTiles = () => {
             size="16px"
           />
           <div className={styles.tileInfo}>
-            <div>
+            <div data-testid="active-branches">
               {activeBranchesList.length
                 ? activeBranchesList.length
                 : NOT_AVAILABLE}
@@ -103,7 +103,9 @@ export const TrunkBasedMetricsTiles = () => {
             size="16px"
           />
           <div className={styles.tileInfo}>
-            <div>{percentageOfBranchesFollowingStandard}</div>
+            <div data-testid="branches-following-naming-standard">
+              {percentageOfBranchesFollowingStandard}
+            </div>
             <div
               className={styles.icon}
               onClick={() => setIsBranchesNamingConventionDialogOpen(true)}
