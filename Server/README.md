@@ -1,31 +1,24 @@
 # Software Practices Metrics Tool
 
-This repository contains the backend code for API's related to Software
-Practices Metrics tool.
+This repository contains the backend code for API's related to Software Practices Metrics tool.
 
 ## Dependencies Used
 
 The server contains the following dependencies:
 
-1. **@ptkdev/logger**: The best alternative to prettify the console.log
-statement -
-    [npm link](https://www.npmjs.com/package/@ptkdev/)
-2. **axios**: A popular HTTP client for making HTTP requests. It can be
-used to send HTTP requests and handle
-    responses - [npm link](https://www.npmjs.com/package/axios)
-3. **btoa**: Stands for "binary to ASCII," and it is typically used to
-encode binary data as a base64-encoded ASCII
-    string - [npm link](https://www.npmjs.com/package/btoa)
-4. **dotenv**: A zero-dependency module that loads environment variables
-from a .env file into process.env -
-    [npm link](https://www.npmjs.com/package/dotenv)
+1. **@ptkdev/logger**: The best alternative to prettify the console.log statement -
+   [npm link](https://www.npmjs.com/package/@ptkdev/)
+2. **axios**: A popular HTTP client for making HTTP requests. It can be used to send HTTP requests and handle
+   responses - [npm link](https://www.npmjs.com/package/axios)
+3. **btoa**: Stands for "binary to ASCII," and it is typically used to encode binary data as a base64-encoded ASCII
+   string - [npm link](https://www.npmjs.com/package/btoa)
+4. **dotenv**: A zero-dependency module that loads environment variables from a .env file into process.env -
+   [npm link](https://www.npmjs.com/package/dotenv)
 5. **express**: A fast, minimalist web framework for Node.js - [npm link](https://www.npmjs.com/package/express)
-6. **joi**: A powerful schema description language and data validator for
-JavaScript -
-    [npm link](https://www.npmjs.com/package/joi)
-7. **@joi/date**: A package that extends the functionality of the popular
-validation library Joi to include additional
-    date-related validation features - [npm link](https://www.npmjs.com/package/@joi/date)
+6. **joi**: A powerful schema description language and data validator for JavaScript -
+   [npm link](https://www.npmjs.com/package/joi)
+7. **@joi/date**: A package that extends the functionality of the popular validation library Joi to include additional
+   date-related validation features - [npm link](https://www.npmjs.com/package/@joi/date)
 
 ## Getting Started
 
@@ -43,20 +36,17 @@ Make sure you have the following dependencies installed on your machine:
 
 ### 1. Copy the contents of this repository
 
-1. Copy all the contents of this Backend code into the preferred directory
-within your project's repository.
+1. Copy all the contents of this Backend code into the preferred directory within your project's repository.
 
 ### 2. Install Dependencies
 
-1. Once inside the Backend code's base directory, run the following command
-to install the required dependencies.
+1. Once inside the Backend code's base directory, run the following command to install the required dependencies.
 
    ```bash
    npm install
    ```
 
-2. The above command reads the `package.json` file and installs all the
-necessary dependencies listed.
+2. The above command reads the `package.json` file and installs all the necessary dependencies listed.
 
 ### 3. Set up env file
 
@@ -80,20 +70,17 @@ necessary dependencies listed.
         8. Choose the organization where you want to use the token.
         9. Set the expiration, scopes, and any other relevant settings.
         10. Click on `Create`.
-        11. Make sure to copy and save the token value because it won't be
-        visible again.
+        11. Make sure to copy and save the token value because it won't be visible again.
 
 ### 4. Start the application
 
-1. Once the dependencies are installed, you can start the application by
-running the following command in terminal:
+1. Once the dependencies are installed, you can start the application by running the following command in terminal:
 
    ```bash
    npm run start:dev
    ```
 
-2. The above command will execute the specified script in the `scripts`
-section of the `package.json` file, typically
+2. The above command will execute the specified script in the `scripts` section of the `package.json` file, typically
    used for starting the development server.
 
 ### 5. Access the Application
@@ -124,4 +111,4 @@ section of the `package.json` file, typically
 
 4. Swagger Open API specification
 
-   1. <http://localhost:3000/swagger-open-api/>
+   1. <http://localhost:3000/open-api-spec-doc/>

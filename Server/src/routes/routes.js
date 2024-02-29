@@ -13,6 +13,6 @@ appRouter.use('/api/v1/metrics/code-review', codeReviewRouter);
 
 appRouter.use('/api/v1/metrics/client-filters', clientFiltersRouter);
 
-appRouter.use('/swagger-open-api', swaggerRouter);
+appRouter.use('/open-api-spec-doc', swaggerRouter);
 
 export const router = appRouter;
