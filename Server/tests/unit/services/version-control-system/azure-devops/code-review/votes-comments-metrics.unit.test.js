@@ -98,7 +98,20 @@ describe('VotesCommentsMetrics - contains methods to get pull request votes, vot
 
       const result = VotesCommentsMetrics.getPullRequestVotesTimeline(reviewers, votesHistoryTimeline);
 
-      expect(result).toEqual([]);
+      expect(result).toEqual([
+        {
+          author: 'Author1',
+          id: '1',
+          timeOfVote: null,
+          vote: 'noVote',
+        },
+        {
+          author: 'Author2',
+          id: '2',
+          timeOfVote: null,
+          vote: 'noVote',
+        },
+      ]);
     });
   });
 
