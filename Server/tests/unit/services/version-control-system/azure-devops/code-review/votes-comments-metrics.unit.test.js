@@ -2,8 +2,8 @@ import { describe, it, expect } from '@jest/globals';
 
 import { VotesCommentsMetrics } from '../../../../../../src/services/version-control-system/azure-devops/code-review/votes-comments-metrics.js';
 
-describe('VotesCommentsMetrics', () => {
-  describe('getPullRequestVotes', () => {
+describe('VotesCommentsMetrics - contains methods to get pull request votes, votes timeline, votes history, comments, reviewer comments', () => {
+  describe('getPullRequestVotes - method to get pull request votes from reviewers', () => {
     it('should return pull request votes for pull request reviewers', () => {
       const reviewers = [
         { author: 'Author1', isRequired: true, vote: 'approved' },
@@ -40,8 +40,8 @@ describe('VotesCommentsMetrics', () => {
     });
   });
 
-  describe('getPullRequestVotesTimeline', () => {
-    it('should return the timeline of pull request votes', () => {
+  describe('getPullRequestVotesTimeline - method to get pull request votes timeline from reviewers, votes history timeline.', () => {
+    it('should return the timeline of pull request votes from reviewers, votes history timeline.', () => {
       const reviewers = {
         1: { author: 'Author1', isRequired: true, vote: 'approved' },
         2: { author: 'Author2', isRequired: true, vote: 'rejected' },
@@ -87,10 +87,23 @@ describe('VotesCommentsMetrics', () => {
 
       expect(result).toEqual([]);
     });
+
+    it('should return an empty array if there are no votes in the timeline', () => {
+      const reviewers = {
+        1: { author: 'Author1', isRequired: true, vote: 'noVote' },
+        2: { author: 'Author2', isRequired: true, vote: 'noVote' },
+      };
+
+      const votesHistoryTimeline = [];
+
+      const result = VotesCommentsMetrics.getPullRequestVotesTimeline(reviewers, votesHistoryTimeline);
+
+      expect(result).toEqual([]);
+    });
   });
 
-  describe('getPullRequestVotesHistory', () => {
-    it('should correctly count the history of votes', () => {
+  describe('getPullRequestVotesHistory - method to get pull request votes history from votes history timeline.', () => {
+    it('should return the history of pull request votes from votes history timeline.', () => {
       const votesCycle = [
         {
           id: '1',
@@ -99,28 +112,28 @@ describe('VotesCommentsMetrics', () => {
           vote: 'approved',
         },
         {
-          id: '1',
-          author: 'Author1',
+          id: '2',
+          author: 'Author2',
           timeOfVote: '2022-01-01T00:00:00Z',
           vote: 'approvedWithSuggestions',
         },
         {
-          id: '1',
-          author: 'Author1',
+          id: '3',
+          author: 'Author3',
           timeOfVote: '2022-01-01T00:00:00Z',
           vote: 'rejected',
         },
         {
-          id: '1',
-          author: 'Author1',
-          timeOfVote: '2022-01-01T00:00:00Z',
-          vote: 'approved',
-        },
-        {
-          id: '1',
-          author: 'Author1',
+          id: '4',
+          author: 'Author4',
           timeOfVote: '2022-01-01T00:00:00Z',
           vote: 'waitForAuthor',
+        },
+        {
+          id: '3',
+          author: 'Author3',
+          timeOfVote: '2022-01-01T00:00:00Z',
+          vote: 'approved',
         },
       ];
 
@@ -148,7 +161,7 @@ describe('VotesCommentsMetrics', () => {
     });
   });
 
-  describe('getPullRequestComments', () => {
+  describe('getPullRequestComments - method to get the count for nit, major and total comments for a pull request from threads.', () => {
     it('should correctly count comments', () => {
       const threads = [
         {
@@ -185,7 +198,7 @@ describe('VotesCommentsMetrics', () => {
     });
   });
 
-  describe('getPullRequestReviewerComments', () => {
+  describe('getPullRequestReviewerComments method to get the count of reviewers comments for a pull request from threads', () => {
     it('should correctly count comments per reviewer', () => {
       const threads = [
         {
