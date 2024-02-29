@@ -3,7 +3,7 @@ import express from 'express';
 import codeReviewRouter from './code-review/code-review.js';
 import trunkBasedDevelopmentRouter from './trunk-based-development/trunk-based-development.js';
 import clientFiltersRouter from './client-filters/client-filters.js';
-import swaggerRouter from './swagger-open-api/swagger-open-api.js';
+import swaggerRouter from './open-api-spec-doc/open-api-spec-doc.js';
 
 const appRouter = express.Router();
 
