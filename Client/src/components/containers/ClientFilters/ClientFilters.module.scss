@@ -10,6 +10,8 @@
 
 .filterContainer {
   @include filter-container;
+  max-height: 85vh;
+  overflow-y: scroll;
   width: 400px;
   background-color: $primary-background-color;
   padding: $primary-padding;
@@ -35,8 +37,6 @@
 
 .squadMargin {
   border-bottom: 1px solid $border-color;
-  max-height: 600px;
-  overflow-y: scroll;
 }
 
 .squadName {
