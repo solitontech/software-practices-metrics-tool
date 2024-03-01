@@ -1,4 +1,4 @@
-name: run CI
+name: Run CI
 
 on:
   push:
