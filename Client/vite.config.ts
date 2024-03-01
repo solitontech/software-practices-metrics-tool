@@ -2,14 +2,14 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   test: {
+    include: ["**/*.unit.test.tsx"],
     globals: true,
-    environment: "happy-dom",
+    environment: "jsdom",
     css: true,
-    setupFiles: "./src/test/setup.ts",
+    setupFiles: "./tests/setup.ts",
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],

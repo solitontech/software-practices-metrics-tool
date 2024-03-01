@@ -1,6 +1,4 @@
-# .github/workflows/test.yml
-
-name: Run Server Tests
+name: Run CI
 
 on:
   push:
@@ -9,6 +7,29 @@ on:
     branches: [main]
 
 jobs:
+  client-test:
+    runs-on: ubuntu-latest
+
+    env:
+      working-directory: Client
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.11.0"
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ${{ env.working-directory }}
+
+      - name: Run tests
+        run: npm run test
+        working-directory: ${{ env.working-directory }}
+
   server-test:
     runs-on: ubuntu-latest
 
