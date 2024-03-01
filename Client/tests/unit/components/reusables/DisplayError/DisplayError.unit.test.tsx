@@ -11,7 +11,7 @@ describe("DisplayError component", () => {
     expect(errorMessage).toBeInTheDocument();
   });
 
-  it("should not render the error message if error is undefined", () => {
+  it("should not render the error message if error is not defined", () => {
     render(<DisplayError error={undefined} />);
 
     const errorMessage = screen.queryByText(/test error/i);

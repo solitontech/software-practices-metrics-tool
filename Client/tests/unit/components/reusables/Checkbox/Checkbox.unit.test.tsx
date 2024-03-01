@@ -8,7 +8,13 @@ describe("Checkbox component", () => {
 
   beforeEach(() => {
     onChange = vi.fn();
+  });
 
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("should render the checkbox with the correct initial state", () => {
     render(
       <Checkbox
         isChecked={false}
@@ -17,19 +23,24 @@ describe("Checkbox component", () => {
         labelStyle="test-style"
       />,
     );
-  });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("should render the checkbox with the correct initial state", () => {
     const checkbox = screen.getByRole("checkbox");
 
     expect(checkbox).not.toBeChecked();
   });
 
   it("should calls onChange method when the checkbox is clicked", () => {
+    render(
+      <Checkbox
+        isChecked={false}
+        onChange={onChange}
+        title="Test Title"
+        labelStyle="test-style"
+      />,
+    );
+
+    expect(onChange).not.toHaveBeenCalled();
+
     const checkbox = screen.getByRole("checkbox");
 
     fireEvent.click(checkbox);
@@ -38,18 +49,32 @@ describe("Checkbox component", () => {
   });
 
   it("should render the title of the checkbox", () => {
+    render(
+      <Checkbox
+        isChecked={false}
+        onChange={onChange}
+        title="Test Title"
+        labelStyle="test-style"
+      />,
+    );
+
     const titleElement = screen.getByText(/test title/i);
 
     expect(titleElement).toBeInTheDocument();
   });
 
   it("should render the checkbox title with the correct style", () => {
+    render(
+      <Checkbox
+        isChecked={false}
+        onChange={onChange}
+        title="Test Title"
+        labelStyle="test-style"
+      />,
+    );
+
     const label = screen.getByText(/test title/i);
 
     expect(label).toHaveClass("test-style");
-  });
-
-  it("should not calls the onChange method when the checkbox is not clicked", () => {
-    expect(onChange).not.toHaveBeenCalled();
   });
 });
