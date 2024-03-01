@@ -12,10 +12,10 @@ describe("Tile component - render tile with title & children", () => {
       </Tile>,
     );
 
-    const titleElement = screen.getByText(/Test Title/i);
+    const titleElement = screen.getByText(/test title/i);
     expect(titleElement).toBeInTheDocument();
 
-    const childrenElement = screen.getByText(/Test Children/i);
+    const childrenElement = screen.getByText(/test children/i);
     expect(childrenElement).toBeInTheDocument();
   });
 });
