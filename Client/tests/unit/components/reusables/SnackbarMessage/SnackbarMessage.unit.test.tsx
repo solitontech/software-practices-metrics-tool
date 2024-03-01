@@ -8,8 +8,10 @@ vi.useFakeTimers();
 
 describe("SnackbarMessage component", () => {
   it("should render with message when open", () => {
+    const onClose = vi.fn();
+
     render(
-      <SnackbarMessage open={true} onClose={() => {}} message="Test message" />,
+      <SnackbarMessage open={true} onClose={onClose} message="Test message" />,
     );
 
     const snackbarElement = screen.getByRole("alert");
@@ -18,13 +20,11 @@ describe("SnackbarMessage component", () => {
     expect(snackbarElement).toHaveTextContent(/test message/i);
   });
 
-  it("should not render when not open", () => {
+  it("should not render when the toast is not open", () => {
+    const onClose = vi.fn();
+
     render(
-      <SnackbarMessage
-        open={false}
-        onClose={() => {}}
-        message="Test message"
-      />,
+      <SnackbarMessage open={false} onClose={onClose} message="Test message" />,
     );
 
     const snackbarElement = screen.queryByRole("alert");
@@ -32,7 +32,7 @@ describe("SnackbarMessage component", () => {
     expect(snackbarElement).not.toBeInTheDocument();
   });
 
-  it("should call onClose when close button is clicked", () => {
+  it("should call onClose method when close button is clicked", () => {
     const onClose = vi.fn();
 
     render(
@@ -45,67 +45,84 @@ describe("SnackbarMessage component", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it("should call onClose when autoHideDuration is reached", () => {
+  it("should call onClose method when autoHideDuration is reached", () => {
     const onClose = vi.fn();
+    const duration = 100;
 
     render(
       <SnackbarMessage
         open={true}
         onClose={onClose}
         message="Test message"
-        duration={100}
+        duration={duration}
       />,
     );
 
     act(() => {
-      vi.advanceTimersByTime(100);
+      vi.advanceTimersByTime(duration);
     });
 
-    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledOnce();
   });
 
   it("should take default duration when duration is not provided", () => {
     const onClose = vi.fn();
+    const interval = 2000;
 
     render(
       <SnackbarMessage open={true} onClose={onClose} message="Test message" />,
     );
 
     act(() => {
-      vi.advanceTimersByTime(6000);
+      vi.advanceTimersByTime(interval);
     });
 
-    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(onClose).not.toHaveBeenCalled();
+
+    act(() => {
+      vi.advanceTimersByTime(interval);
+    });
+
+    expect(onClose).not.toHaveBeenCalled();
+
+    act(() => {
+      vi.advanceTimersByTime(interval);
+    });
+
+    expect(onClose).toHaveBeenCalledOnce();
   });
 
-  it("should not call onClose when autoHideDuration is not reached", () => {
+  it("should not call onClose method when autoHideDuration is not reached", () => {
     const onClose = vi.fn();
+    const duration = 100;
+    const timeToAdvance = duration - 1;
 
     render(
       <SnackbarMessage
         open={true}
         onClose={onClose}
         message="Test message"
-        duration={100}
+        duration={duration}
       />,
     );
 
     act(() => {
-      vi.advanceTimersByTime(99);
+      vi.advanceTimersByTime(timeToAdvance);
     });
 
     expect(onClose).not.toHaveBeenCalled();
   });
 
-  it("should not call onClose when default is not reached", () => {
+  it("Should not call onClose method when the default duration is not reached", () => {
     const onClose = vi.fn();
+    const timeLessThanDefault = 99;
 
     render(
       <SnackbarMessage open={true} onClose={onClose} message="Test message" />,
     );
 
     act(() => {
-      vi.advanceTimersByTime(99);
+      vi.advanceTimersByTime(timeLessThanDefault);
     });
 
     expect(onClose).not.toHaveBeenCalled();

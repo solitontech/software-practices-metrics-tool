@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
 import { MetricsToggleTab } from "../../../../../src/components/reusables/MetricsToggleTab/MetricsToggleTab";
@@ -11,7 +11,7 @@ describe("MetricsToggleTab component", () => {
       { value: "view2", displayName: "View 2", icon: null },
     ];
 
-    const { getByText } = render(
+    render(
       <MetricsToggleTab
         metricsViews={metricsViews}
         selectedView="view1"
@@ -19,21 +19,21 @@ describe("MetricsToggleTab component", () => {
       />,
     );
 
-    const view1Element = getByText(/view 1/i);
+    const view1Element = screen.getByText(/view 1/i);
     expect(view1Element).toBeInTheDocument();
 
-    const view2Element = getByText(/view 2/i);
+    const view2Element = screen.getByText(/view 2/i);
     expect(view2Element).toBeInTheDocument();
   });
 
-  it("should calls onViewChange when a view is selected", () => {
+  it("should calls onViewChange method when a view is selected", () => {
     const onViewChange = vi.fn();
     const metricsViews = [
       { value: "view1", displayName: "View 1", icon: null },
       { value: "view2", displayName: "View 2", icon: null },
     ];
 
-    const { getByText } = render(
+    render(
       <MetricsToggleTab
         metricsViews={metricsViews}
         selectedView="view1"
@@ -41,20 +41,20 @@ describe("MetricsToggleTab component", () => {
       />,
     );
 
-    const view2Element = getByText(/view 2/i);
+    const view2Element = screen.getByText(/view 2/i);
     fireEvent.click(view2Element);
 
     expect(onViewChange).toHaveBeenCalledWith("view2");
   });
 
-  it("should not call onViewChange when the selected view is clicked", () => {
+  it("should not call onViewChange method when the selected view is clicked", () => {
     const onViewChange = vi.fn();
     const metricsViews = [
       { value: "view1", displayName: "View 1", icon: null },
       { value: "view2", displayName: "View 2", icon: null },
     ];
 
-    const { getByText } = render(
+    render(
       <MetricsToggleTab
         metricsViews={metricsViews}
         selectedView="view1"
@@ -62,7 +62,7 @@ describe("MetricsToggleTab component", () => {
       />,
     );
 
-    const view1Element = getByText(/view 1/i);
+    const view1Element = screen.getByText(/view 1/i);
     fireEvent.click(view1Element);
 
     expect(onViewChange).not.toHaveBeenCalled();
@@ -74,7 +74,7 @@ describe("MetricsToggleTab component", () => {
       { value: "view1", displayName: "View 1", icon: <div>Icon</div> },
     ];
 
-    const { getByText } = render(
+    render(
       <MetricsToggleTab
         metricsViews={metricsViews}
         selectedView="view1"
@@ -82,7 +82,7 @@ describe("MetricsToggleTab component", () => {
       />,
     );
 
-    const iconElement = getByText(/icon/i);
+    const iconElement = screen.getByText(/icon/i);
     expect(iconElement).toBeInTheDocument();
   });
 });
