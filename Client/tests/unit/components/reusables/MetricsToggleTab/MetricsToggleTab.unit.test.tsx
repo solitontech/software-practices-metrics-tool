@@ -4,13 +4,22 @@ import { describe, it, expect, vi } from "vitest";
 import { MetricsToggleTab } from "../../../../../src/components/reusables/MetricsToggleTab/MetricsToggleTab";
 
 describe("MetricsToggleTab component", () => {
-  it("should render toggle tabs", () => {
-    const onViewChange = vi.fn();
-    const metricsViews = [
-      { value: "view1", displayName: "View 1", icon: null },
-      { value: "view2", displayName: "View 2", icon: null },
-    ];
+  const metricsViews = [
+    { value: "view1", displayName: "View 1", icon: null },
+    { value: "view2", displayName: "View 2", icon: null },
+  ];
 
+  let onViewChange: (view: string) => void;
+
+  beforeEach(() => {
+    onViewChange = vi.fn();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("should render toggle tabs", () => {
     render(
       <MetricsToggleTab
         metricsViews={metricsViews}
@@ -27,12 +36,6 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should calls onViewChange method when a view is selected", () => {
-    const onViewChange = vi.fn();
-    const metricsViews = [
-      { value: "view1", displayName: "View 1", icon: null },
-      { value: "view2", displayName: "View 2", icon: null },
-    ];
-
     render(
       <MetricsToggleTab
         metricsViews={metricsViews}
@@ -48,12 +51,6 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should not call onViewChange method when the selected view is clicked", () => {
-    const onViewChange = vi.fn();
-    const metricsViews = [
-      { value: "view1", displayName: "View 1", icon: null },
-      { value: "view2", displayName: "View 2", icon: null },
-    ];
-
     render(
       <MetricsToggleTab
         metricsViews={metricsViews}
@@ -69,7 +66,6 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should render icon when provided", () => {
-    const onViewChange = vi.fn();
     const metricsViews = [
       { value: "view1", displayName: "View 1", icon: <div>Icon</div> },
     ];
