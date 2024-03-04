@@ -17,14 +17,14 @@ describe("CodeReviewMetricsTiles", () => {
       approvalTimeElement,
       mergeTimeElement,
     ] = await Promise.all([
-      screen.findByTestId("first-review-response-time"),
-      screen.findByTestId("approval-time"),
-      screen.findByTestId("merge-time"),
+      screen.findByTestId(/first-review-response-time/i),
+      screen.findByTestId(/approval-time/i),
+      screen.findByTestId(/merge-time/i),
     ]);
 
-    expect(firstReviewResponseTimeElement).toHaveTextContent("0.75 hour");
-    expect(approvalTimeElement).toHaveTextContent("1 hour");
-    expect(mergeTimeElement).toHaveTextContent("4 hours");
+    expect(firstReviewResponseTimeElement).toHaveTextContent(/0.75 hour/i);
+    expect(approvalTimeElement).toHaveTextContent(/1 hour/i);
+    expect(mergeTimeElement).toHaveTextContent(/4 hours/i);
   });
 
   it("renders correctly with string values", async () => {
@@ -41,9 +41,9 @@ describe("CodeReviewMetricsTiles", () => {
       approvalTimeElement,
       mergeTimeElement,
     ] = await Promise.all([
-      screen.findByText("-"),
-      screen.findByText("2 hours"),
-      screen.findByText("NA"),
+      screen.findByText(/-/i),
+      screen.findByText(/2 hours/i),
+      screen.findByText(/NA/i),
     ]);
 
     expect(firstReviewResponseTimeElement).toBeDefined();

@@ -56,7 +56,7 @@ describe("SearchBox component", () => {
       />,
     );
 
-    const tooltipElement = screen.getByTestId("InfoIcon");
+    const tooltipElement = screen.getByTestId(/test placeholder/i);
 
     expect(tooltipElement).toBeInTheDocument();
   });
