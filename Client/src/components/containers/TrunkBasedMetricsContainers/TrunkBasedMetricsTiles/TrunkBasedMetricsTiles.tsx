@@ -81,6 +81,7 @@ export const TrunkBasedMetricsTiles = () => {
             </div>
             <div
               className={styles.icon}
+              data-testid="active-branches-button"
               onClick={() => setIsActiveBranchDialogOpen(true)}
             >
               <img
@@ -108,6 +109,7 @@ export const TrunkBasedMetricsTiles = () => {
             </div>
             <div
               className={styles.icon}
+              data-testid="branches-naming-convention-button"
               onClick={() => setIsBranchesNamingConventionDialogOpen(true)}
             >
               <img
