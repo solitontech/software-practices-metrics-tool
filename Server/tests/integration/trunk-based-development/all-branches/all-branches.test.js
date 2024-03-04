@@ -6,7 +6,7 @@ import { AppError } from '../../../../src/utils/app-error.js';
 import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
 
 import { AZURE_ALL_BRANCHES_RESPONSE, SERVER_BRANCHES_RESPONSE } from './all-branches.mock.js';
-import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
 
 const { invalidRepositoryDetails, invalidAzureToken } = AzureDevopsApi;
 
@@ -25,12 +25,14 @@ describe('Trunk based metrics - get all branches in the repository', () => {
   });
 
   it('should handle internal server error with response status 500', async () => {
-    AzureDevopsApi.fetchAllBranches = jest.fn().mockRejectedValue(new Error(ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
+    AzureDevopsApi.fetchAllBranches = jest
+      .fn()
+      .mockRejectedValue(new Error(SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 
     const response = await request(app).get(apiEndPoint);
 
     expect(response.statusCode).toBe(STATUS_CODE.INTERNAL_SERVER_ERROR);
-    expect(response.body).toEqual({ error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
+    expect(response.body).toEqual({ error: SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
   });
 
   it('should handle no data found error due to invalid server configurations with response status 404', async () => {

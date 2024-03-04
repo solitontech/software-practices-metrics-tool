@@ -6,7 +6,7 @@ import { AppError } from '../../../../src/utils/app-error.js';
 import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
 
 import { AZURE_ACTIVE_BRANCHES_RESPONSE, SERVER_ACTIVE_BRANCHES_RESPONSE } from './active-branches.mock.js';
-import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
 import {
   PAGINATION_SIZE_MUST_BE_NUMBER,
   PAGINATION_CURSOR_SIZE_MUST_BE_NUMBER,
@@ -43,7 +43,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   it('should handle internal server error with response status 500', async () => {
     AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
-      .mockRejectedValue(new Error(ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
+      .mockRejectedValue(new Error(SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 
     const paginationSize = 10;
     const paginationCursor = 1;
@@ -53,7 +53,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
     );
 
     expect(response.statusCode).toBe(STATUS_CODE.INTERNAL_SERVER_ERROR);
-    expect(response.body).toEqual({ error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
+    expect(response.body).toEqual({ error: SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
   });
 
   it('should handle invalid pagination parameters are provided with response status 400', async () => {

@@ -6,7 +6,7 @@ import { AppError } from '../../../../src/utils/app-error.js';
 import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
 
 import { AZURE_PULL_REQUESTS_RESPONSE, SERVER_PULL_REQUESTS_RESPONSE } from './pull-requests.mock.js';
-import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
 import { runDatePaginationValidationTests } from '../../common-tests/date-pagination-tests.js';
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
@@ -70,12 +70,14 @@ describe('Trunk based metrics - get all the pull requests raised to the trunk br
   });
 
   it('should handle internal server error with response status 500', async () => {
-    AzureDevopsApi.fetchPullRequestsList = jest.fn().mockRejectedValue(new Error(ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
+    AzureDevopsApi.fetchPullRequestsList = jest
+      .fn()
+      .mockRejectedValue(new Error(SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.INTERNAL_SERVER_ERROR);
-    expect(response.body).toEqual({ error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
+    expect(response.body).toEqual({ error: SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
   });
 
   runDatePaginationValidationTests(app, apiEndPoint);

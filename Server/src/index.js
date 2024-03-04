@@ -7,7 +7,7 @@ import { AppError } from './utils/app-error.js';
 import { logDevError } from './utils/dev-logger.js';
 import { ServerConfiguration } from './configs/server-config.js';
 
-import { ERROR_MESSAGE, NODE_ENVIRONMENT_MODE, STATUS_CODE } from './constants/constants.js';
+import { SERVER_ERROR_MESSAGE, NODE_ENVIRONMENT_MODE, STATUS_CODE } from './constants/constants.js';
 
 ServerConfiguration.load();
 
@@ -56,7 +56,7 @@ app.use((error, req, res, next) => {
   }
 
   return res.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
-    error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR,
+    error: SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR,
   });
 });
 

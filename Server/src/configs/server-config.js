@@ -9,10 +9,12 @@ import { logError } from '../utils/logger.js';
 import { NODE_ENVIRONMENT_MODE } from '../constants/constants.js';
 
 export class ServerConfiguration {
-  static dirName = path.dirname(fileURLToPath(import.meta.url));
   static #clientFilters;
   static #versionControl;
   static #environmentVariables;
+
+  static #dirName = path.dirname(fileURLToPath(import.meta.url));
+  static #envFilePath = path.join(this.#dirName, './.env');
 
   static get clientFilters() {
     this.#loadConfigs();
@@ -76,7 +78,7 @@ export class ServerConfiguration {
       return;
     }
 
-    const filePath = path.join(this.dirName, './server-config.json');
+    const filePath = path.join(this.#dirName, './server-config.json');
 
     try {
       const configs = JSON.parse(readFileSync(filePath, 'utf8'));
@@ -120,9 +122,7 @@ export class ServerConfiguration {
   }
 
   static #loadEnvironmentVariables() {
-    const envPath = path.join(this.dirName, './.env');
-
-    dotenv.config({ path: envPath });
+    dotenv.config({ path: this.#envFilePath });
 
     this.#environmentVariables = {
       port: process.env.SERVER_RUNNING_PORT,
