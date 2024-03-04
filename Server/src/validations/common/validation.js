@@ -9,8 +9,8 @@ export class Validation {
     this.#validationSchema = validationSchema;
   }
 
-  #validate(data) {
-    return this.#validationSchema.validate(data);
+  #validate(dataToValidate) {
+    return this.#validationSchema.validate(dataToValidate);
   }
 
   #logValidationError(error) {
@@ -19,12 +19,12 @@ export class Validation {
     });
   }
 
-  getValidationResult(data) {
-    return this.#validate(data);
+  getValidationResult(dataToValidate) {
+    return this.#validate(dataToValidate);
   }
 
-  terminateOnError(data) {
-    const { error } = this.#validate(data);
+  terminateOnError(dataToValidate) {
+    const { error } = this.#validate(dataToValidate);
 
     if (error) {
       this.#logValidationError(error);

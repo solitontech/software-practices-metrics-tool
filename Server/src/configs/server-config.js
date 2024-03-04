@@ -22,17 +22,17 @@ export class ServerConfiguration {
   static #loadServerConfigs() {
     const configs = JSON.parse(readFileSync(this.#serverConfigPath, 'utf8'));
 
-    this.#clientFilters = {
+    this.#clientFilters = Object.freeze({
       squads: configs.squads,
-    };
+    });
 
-    this.#versionControl = {
+    this.#versionControl = Object.freeze({
       targetBranch: configs.targetBranch,
       organization: configs.organization,
       projectName: configs.projectName,
       repositoryId: configs.repositoryId,
       authToken: configs.authToken,
-    };
+    });
 
     ServerConfigValidation.terminateOnValidationError(configs);
   }
@@ -40,14 +40,14 @@ export class ServerConfiguration {
   static #loadEnvironmentVariables() {
     dotenv.config({ path: this.#envFilePath });
 
-    this.#environmentVariables = {
+    this.#environmentVariables = Object.freeze({
       port: process.env.SERVER_RUNNING_PORT,
       nodeEnvironment: process.env.NODE_ENVIRONMENT ?? NODE_ENVIRONMENT_MODE.DEVELOPMENT,
       versionControlSystem: process.env.VERSION_CONTROL_SYSTEM,
       clientDevelopmentUrlOrigin: process.env.CLIENT_DEVELOPMENT_URL_ORIGIN,
       swaggerEditorUrlOrigin: process.env.SWAGGER_EDITOR_URL_ORIGIN,
       productionDockerImageVersion: process.env.PRODUCTION_DOCKER_IMAGE_VERSION,
-    };
+    });
 
     EnvValidation.terminateOnValidationError(this.#environmentVariables);
   }
@@ -77,7 +77,5 @@ export class ServerConfiguration {
 
     this.#loadEnvironmentVariables();
     this.#loadServerConfigs();
-
-    Object.freeze(this);
   }
 }
