@@ -3,7 +3,7 @@ import express from 'express';
 import { VersionControlSystem } from '../../services/version-control-system/version-control-system.js';
 import { Validator } from '../validations/validators.js';
 import { catchAsync } from '../../utils/catch-async.js';
-import { STATUS_CODE } from '../../constants/constants.js';
+import { STATUS_CODE } from '../../constants/index.js';
 
 const router = express.Router();
 

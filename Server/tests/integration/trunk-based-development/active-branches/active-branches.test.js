@@ -6,7 +6,7 @@ import { AppError } from '../../../../src/utils/app-error.js';
 import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
 
 import { AZURE_ACTIVE_BRANCHES_RESPONSE, SERVER_ACTIVE_BRANCHES_RESPONSE } from './active-branches.mock.js';
-import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/index.js';
 import {
   PAGINATION_SIZE_MUST_BE_NUMBER,
   PAGINATION_CURSOR_SIZE_MUST_BE_NUMBER,

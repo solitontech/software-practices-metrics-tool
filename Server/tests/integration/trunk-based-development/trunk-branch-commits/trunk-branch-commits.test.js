@@ -9,7 +9,7 @@ import {
   AZURE_TRUNK_BRANCH_COMMITS_RESPONSE,
   SERVER_TRUNK_BRANCH_COMMITS_RESPONSE,
 } from './trunk-branch-commits.mock.js';
-import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/index.js';
 import { runDatePaginationValidationTests } from '../../common-tests/date-pagination-tests.js';
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;

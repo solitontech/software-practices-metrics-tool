@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { catchAsync } from '../../utils/catch-async.js';
-import { STATUS_CODE } from '../../constants/constants.js';
+import { STATUS_CODE } from '../../constants/index.js';
 import { ClientFilters } from '../../services/client-filters/client-filters.js';
 
 const router = express.Router();
