@@ -1,9 +1,9 @@
 import express from 'express';
 
-import codeReviewRouter from './code-review/code-review.js';
-import trunkBasedDevelopmentRouter from './trunk-based-development/trunk-based-development.js';
-import clientFiltersRouter from './client-filters/client-filters.js';
-import swaggerRouter from './open-api-spec-doc/open-api-spec-doc.js';
+import codeReviewRouter from './code-review/code-review.route.js';
+import trunkBasedDevelopmentRouter from './trunk-based-development/trunk-based-development.route.js';
+import clientFiltersRouter from './client-filters/client-filters.route.js';
+import swaggerRouter from './open-api-spec/open-api-spec.route.js';
 
 const appRouter = express.Router();
 
