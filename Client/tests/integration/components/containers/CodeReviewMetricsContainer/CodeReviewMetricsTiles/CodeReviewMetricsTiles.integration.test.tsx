@@ -12,18 +12,15 @@ describe("CodeReviewMetricsTiles", () => {
 
     render(<CodeReviewMetricsTiles {...props} />);
 
-    const [
-      firstReviewResponseTimeElement,
-      approvalTimeElement,
-      mergeTimeElement,
-    ] = await Promise.all([
-      screen.findByTestId(/first-review-response-time/i),
-      screen.findByTestId(/approval-time/i),
-      screen.findByTestId(/merge-time/i),
-    ]);
-
+    const firstReviewResponseTimeElement = await screen.findByTestId(
+      /first-review-response-time/i,
+    );
     expect(firstReviewResponseTimeElement).toHaveTextContent(/0.75 hour/i);
+
+    const approvalTimeElement = await screen.findByTestId(/approval-time/i);
     expect(approvalTimeElement).toHaveTextContent(/1 hour/i);
+
+    const mergeTimeElement = await screen.findByTestId(/merge-time/i);
     expect(mergeTimeElement).toHaveTextContent(/4 hours/i);
   });
 
@@ -36,18 +33,13 @@ describe("CodeReviewMetricsTiles", () => {
 
     render(<CodeReviewMetricsTiles {...props} />);
 
-    const [
-      firstReviewResponseTimeElement,
-      approvalTimeElement,
-      mergeTimeElement,
-    ] = await Promise.all([
-      screen.findByText(/-/i),
-      screen.findByText(/2 hours/i),
-      screen.findByText(/NA/i),
-    ]);
-
+    const firstReviewResponseTimeElement = await screen.findByText(/-/i);
     expect(firstReviewResponseTimeElement).toBeDefined();
+
+    const approvalTimeElement = await screen.findByText(/2 hours/i);
     expect(approvalTimeElement).toBeDefined();
+
+    const mergeTimeElement = await screen.findByText(/NA/i);
     expect(mergeTimeElement).toBeDefined();
   });
 
