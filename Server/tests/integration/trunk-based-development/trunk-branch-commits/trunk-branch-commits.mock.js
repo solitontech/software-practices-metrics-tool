@@ -74,6 +74,7 @@ export const AZURE_TRUNK_BRANCH_COMMITS_RESPONSE = {
 };
 
 export const SERVER_TRUNK_BRANCH_COMMITS_RESPONSE = {
+  count: 3,
   commits: [
     {
       author: {
@@ -103,5 +104,4 @@ export const SERVER_TRUNK_BRANCH_COMMITS_RESPONSE = {
       id: '1fc4e66cc22a1661136895ebdc7e340ee8bfdc6b',
     },
   ],
-  count: 3,
 };

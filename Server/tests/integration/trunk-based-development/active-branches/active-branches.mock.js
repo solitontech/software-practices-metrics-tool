@@ -7,6 +7,7 @@ const {
 } = ServerConfiguration.versionControl;
 
 export const AZURE_ACTIVE_BRANCHES_RESPONSE = {
+  count: 2,
   value: [
     {
       repository: {
@@ -83,7 +84,6 @@ export const AZURE_ACTIVE_BRANCHES_RESPONSE = {
       url: 'https://dev.azure.com/Soliton/66c2016w-9f00-4861-bdd8-81ae4d509a2f/_apis/git/repositories/fe7b3b04-e75f-48d5-97be-19759b2b020a/pullRequests/2740',
     },
   ],
-  count: 2,
 };
 
 export const SERVER_ACTIVE_BRANCHES_RESPONSE = {
