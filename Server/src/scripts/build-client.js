@@ -7,12 +7,13 @@ import { fileURLToPath } from 'url';
 class BuildClient {
   static #clientDirectory;
   static #serverDirectory;
+
+  static #dirName = dirname(fileURLToPath(import.meta.url));
   static #clientTrunkBranch = 'main';
-  static #currentDirectory = dirname(fileURLToPath(import.meta.url));
 
   static {
-    this.#clientDirectory = path.join(this.#currentDirectory, '..', '..', '..', 'Client');
-    this.#serverDirectory = path.join(this.#currentDirectory, '..', '..', '..', 'Server');
+    this.#clientDirectory = path.join(this.#dirName, '../../../Client');
+    this.#serverDirectory = path.join(this.#dirName, '../../../Server');
   }
 
   static #changeToClientDirectory() {
