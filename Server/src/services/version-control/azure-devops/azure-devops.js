@@ -1,4 +1,4 @@
-import { AzureDevopsApi } from './apis/azure-devops.js';
+import { AzureDevopsApi } from './apis/azure-devops.api.js';
 import { CodeReview } from './code-review/code-review.js';
 import { TrunkBasedDevelopment } from './trunk-based-development/trunk-based-development.js';
 
@@ -8,45 +8,17 @@ export class AzureDevops {
   static async getBranchMetrics() {
     const allBranches = await AzureDevopsApi.fetchAllBranches();
 
-    const branchData = TrunkBasedDevelopment.getBranchMetrics(allBranches);
+    const branchMetrics = TrunkBasedDevelopment.getBranchMetrics(allBranches);
 
-    return { data: branchData };
+    return { data: branchMetrics };
   }
 
   static async getActiveBranchMetrics(paginationCursor, paginationSize) {
     const activePullRequests = await AzureDevopsApi.fetchActivePullRequests(paginationCursor, paginationSize);
 
-    const activeBranches = TrunkBasedDevelopment.getActiveBranchMetrics(activePullRequests);
+    const activeBranchMetrics = TrunkBasedDevelopment.getActiveBranchMetrics(activePullRequests);
 
-    return { data: activeBranches };
-  }
-
-  static async getPullRequestMetrics(startDate, endDate, paginationCursor, paginationSize) {
-    const pullRequestsForARange = await AzureDevopsApi.fetchPullRequestsList(
-      getGmtISOString(startDate),
-      getNextDayGmtISOString(endDate),
-      paginationCursor,
-      paginationSize
-    );
-
-    const pullRequestsPercentage = TrunkBasedDevelopment.getPullRequestMetrics(pullRequestsForARange);
-
-    return { data: pullRequestsPercentage };
-  }
-
-  static async getCodeReviewMetrics(startDate, endDate, paginationCursor, paginationSize) {
-    const pullRequests = await AzureDevopsApi.fetchPullRequests(
-      getGmtISOString(startDate),
-      getNextDayGmtISOString(endDate),
-      paginationCursor,
-      paginationSize
-    );
-
-    const codeReviewMetrics = CodeReview.getCodeReviewMetrics(pullRequests.pullRequests);
-
-    return {
-      data: { ...codeReviewMetrics, errorCount: pullRequests.errorCount, filteredCount: pullRequests.filteredCount },
-    };
+    return { data: activeBranchMetrics };
   }
 
   static async getTrunkBranchCommits(startDate, endDate, paginationCursor, paginationSize) {
@@ -57,8 +29,36 @@ export class AzureDevops {
       paginationSize
     );
 
-    const codeFreezeMetrics = TrunkBasedDevelopment.getCodeFreezeMetrics(commits);
+    const commitMetrics = TrunkBasedDevelopment.getTrunkBranchCommits(commits);
 
-    return { data: codeFreezeMetrics };
+    return { data: commitMetrics };
+  }
+
+  static async getPullRequestMetrics(startDate, endDate, paginationCursor, paginationSize) {
+    const pullRequests = await AzureDevopsApi.fetchPullRequestsList(
+      getGmtISOString(startDate),
+      getNextDayGmtISOString(endDate),
+      paginationCursor,
+      paginationSize
+    );
+
+    const pullRequestMetrics = TrunkBasedDevelopment.getPullRequestMetrics(pullRequests);
+
+    return { data: pullRequestMetrics };
+  }
+
+  static async getCodeReviewMetrics(startDate, endDate, paginationCursor, paginationSize) {
+    const { pullRequests, errorCount, filteredCount } = await AzureDevopsApi.fetchPullRequests(
+      getGmtISOString(startDate),
+      getNextDayGmtISOString(endDate),
+      paginationCursor,
+      paginationSize
+    );
+
+    const codeReviewMetrics = CodeReview.getCodeReviewMetrics(pullRequests);
+
+    return {
+      data: { ...codeReviewMetrics, errorCount, filteredCount },
+    };
   }
 }
