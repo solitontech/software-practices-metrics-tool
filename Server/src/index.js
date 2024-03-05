@@ -6,10 +6,9 @@ import { router } from './routes/routes.js';
 import { AppError } from './utils/app-error.js';
 import { logDevError } from './utils/dev-logger.js';
 import { ServerConfiguration } from './configs/server.config.js';
-
 import { SERVER_ERROR_MESSAGE, NODE_ENVIRONMENT_MODE, STATUS_CODE } from './constants/index.js';
 
-ServerConfiguration.load();
+const dirName = path.dirname(fileURLToPath(import.meta.url));
 
 const { DEVELOPMENT, TEST } = NODE_ENVIRONMENT_MODE;
 const {
@@ -18,8 +17,6 @@ const {
   clientDevelopmentUrlOrigin: CLIENT_DEVELOPMENT_URL_ORIGIN,
   swaggerEditorUrlOrigin: SWAGGER_EDITOR_URL_ORIGIN,
 } = ServerConfiguration.environmentVariables;
-
-const dirName = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 

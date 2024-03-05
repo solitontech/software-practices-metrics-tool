@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 
-import { NODE_ENVIRONMENT_MODE } from '../constants/index.js';
 import { EnvValidation, ServerConfigValidation } from '../validations/index.js';
+import { NODE_ENVIRONMENT_MODE } from '../constants/index.js';
 
 export class ServerConfiguration {
   static #clientFilters;
@@ -14,6 +14,11 @@ export class ServerConfiguration {
   static #dirName = path.dirname(fileURLToPath(import.meta.url));
   static #envFilePath = path.join(this.#dirName, './.env');
   static #serverConfigPath = path.join(this.#dirName, './server-config.json');
+
+  static {
+    this.#loadServerConfigs();
+    this.#loadEnvironmentVariables();
+  }
 
   static #loadServerConfigs() {
     const configs = JSON.parse(readFileSync(this.#serverConfigPath, 'utf8'));
@@ -48,34 +53,19 @@ export class ServerConfiguration {
     EnvValidation.terminateOnValidationError(this.#environmentVariables);
   }
 
-  static get #allConfigsLoaded() {
-    return this.#clientFilters && this.#versionControl && this.#environmentVariables;
-  }
-
   static get clientFilters() {
-    this.load();
-
     return this.#clientFilters;
   }
 
-  static get versionControl() {
-    this.load();
+  static get clientFiltersSquads() {
+    return this.#clientFilters.squads;
+  }
 
+  static get versionControl() {
     return this.#versionControl;
   }
 
   static get environmentVariables() {
-    this.load();
-
     return this.#environmentVariables;
-  }
-
-  static load() {
-    if (this.#allConfigsLoaded) {
-      return;
-    }
-
-    this.#loadEnvironmentVariables();
-    this.#loadServerConfigs();
   }
 }

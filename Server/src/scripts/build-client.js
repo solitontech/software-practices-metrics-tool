@@ -5,36 +5,36 @@ import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 class BuildClient {
-  static clientDirectory;
-  static serverDirectory;
-  static clientTrunkBranch = 'main';
-  static currentDirectory = dirname(fileURLToPath(import.meta.url));
+  static #clientDirectory;
+  static #serverDirectory;
+  static #clientTrunkBranch = 'main';
+  static #currentDirectory = dirname(fileURLToPath(import.meta.url));
 
   static {
-    this.clientDirectory = path.join(this.currentDirectory, '..', '..', '..', 'Client');
-    this.serverDirectory = path.join(this.currentDirectory, '..', '..', '..', 'Server');
+    this.#clientDirectory = path.join(this.#currentDirectory, '..', '..', '..', 'Client');
+    this.#serverDirectory = path.join(this.#currentDirectory, '..', '..', '..', 'Server');
   }
 
-  static changeToClientDirectory() {
+  static #changeToClientDirectory() {
     console.log(chalk.grey('\nSwitching to Client directory'));
 
-    process.chdir(this.clientDirectory);
+    process.chdir(this.#clientDirectory);
   }
 
-  static switchClientBranchToMain() {
-    console.log(chalk.grey(`\nSwitching to ${this.clientTrunkBranch} branch in Client directory\n`));
+  static #switchClientBranchToMain() {
+    console.log(chalk.grey(`\nSwitching to ${this.#clientTrunkBranch} branch in Client directory\n`));
 
-    execSync(`git checkout ${this.clientTrunkBranch}`, { stdio: 'inherit' });
+    execSync(`git checkout ${this.#clientTrunkBranch}`, { stdio: 'inherit' });
   }
 
-  static pullLatestClientChanges() {
-    console.log(chalk.grey(`\nPulling ${this.clientTrunkBranch} branch latest changes in Client directory\n`));
+  static #pullLatestClientChanges() {
+    console.log(chalk.grey(`\nPulling ${this.#clientTrunkBranch} branch latest changes in Client directory\n`));
 
-    execSync(`git pull origin ${this.clientTrunkBranch}`, { stdio: 'inherit' });
+    execSync(`git pull origin ${this.#clientTrunkBranch}`, { stdio: 'inherit' });
   }
 
-  static installClientNodeModules() {
-    const nodeModulesPath = path.join(this.clientDirectory, 'node_modules');
+  static #installClientNodeModules() {
+    const nodeModulesPath = path.join(this.#clientDirectory, 'node_modules');
 
     if (fs.existsSync(nodeModulesPath)) {
       return console.log(
@@ -47,15 +47,15 @@ class BuildClient {
     execSync(`npm install`, { stdio: 'inherit' });
   }
 
-  static copyClientBuildToServerDirectory() {
+  static #copyClientBuildToServerDirectory() {
     console.log(chalk.grey('\nCopying dist folder from Client directory to Server directory...'));
 
-    fs.copySync(path.join(this.clientDirectory, 'dist'), path.join(this.serverDirectory, 'dist'));
+    fs.copySync(path.join(this.#clientDirectory, 'dist'), path.join(this.#serverDirectory, 'dist'));
 
     console.log(chalk.green('\nCopied dist folder from Client directory to Server directory successfully'));
   }
 
-  static startClientBuild() {
+  static #startClientBuild() {
     console.log(chalk.grey('\nRunning npm run build...'));
 
     execSync('npm run build', { stdio: 'inherit' });
@@ -64,12 +64,12 @@ class BuildClient {
   }
 
   static startBuild() {
-    this.changeToClientDirectory();
-    this.switchClientBranchToMain();
-    this.pullLatestClientChanges();
-    this.installClientNodeModules();
-    this.startClientBuild();
-    this.copyClientBuildToServerDirectory();
+    this.#changeToClientDirectory();
+    this.#switchClientBranchToMain();
+    this.#pullLatestClientChanges();
+    this.#installClientNodeModules();
+    this.#startClientBuild();
+    this.#copyClientBuildToServerDirectory();
   }
 }
 

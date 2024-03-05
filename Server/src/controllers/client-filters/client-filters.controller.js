@@ -1,10 +1,12 @@
-import { ClientFilters } from '../../services/client-filters/client-filters.js';
+import { ServerConfiguration } from '../../configs/server.config.js';
 import { STATUS_CODE } from '../../constants/index.js';
 
 export class ClientFiltersController {
   static async getClientFilters(req, res) {
-    const clientFilters = ClientFilters.getClientFilters();
+    const squads = ServerConfiguration.clientFiltersSquads;
 
-    return res.status(STATUS_CODE.OK).json(clientFilters);
+    return res.status(STATUS_CODE.OK).json({
+      squads,
+    });
   }
 }
