@@ -1,11 +1,15 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { HttpResponse, delay, http } from "msw";
 import { SetupServerApi, setupServer } from "msw/node";
 import { act } from "react-dom/test-utils";
 
-import { ACTIVE_BRANCHES, BRANCHES } from "./constants";
-import { loadTrunkBasedComponent } from "./utils";
+import { ACTIVE_BRANCHES, BRANCHES } from "./TrunkBasedMetricsTiles.mock";
+import { LoadTrunkBasedComponent } from "./utils";
 import { queryClient } from "../../../../../../src/setup/queryClient";
+import {
+  getActiveBranchesHandler,
+  getBranchesHandler,
+  getServerErrorHandler,
+} from "../TrunkBasedMetricsTiles.msw-handlers";
 
 describe("TrunkBasedMetricsTiles component", () => {
   let server: SetupServerApi;
@@ -20,76 +24,107 @@ describe("TrunkBasedMetricsTiles component", () => {
     server.resetHandlers();
   });
 
-  afterAll(() => server.close());
+  afterAll(() => {
+    server.close();
+  });
 
   it("should render trunk based tiles with repository data", async () => {
     server.use(
-      http.get("/api/v1/metrics/trunk-based-development/branches", async () => {
-        await delay(500);
-
-        return HttpResponse.json(BRANCHES);
-      }),
-      http.get(
-        "/api/v1/metrics/trunk-based-development/activeBranches",
-        async () => {
-          await delay(500);
-
-          return HttpResponse.json(ACTIVE_BRANCHES);
-        },
-      ),
+      getBranchesHandler(BRANCHES, 100),
+      getActiveBranchesHandler(ACTIVE_BRANCHES, 100),
     );
 
-    render(loadTrunkBasedComponent());
+    render(LoadTrunkBasedComponent());
 
     // user would see the '-' until the api call is successful
     await waitFor(async () => {
       expect(await screen.findByTestId("total-branches")).toHaveTextContent(
         "-",
       );
+    });
+
+    await waitFor(async () => {
       expect(await screen.findByTestId("active-branches")).toHaveTextContent(
         "-",
       );
+    });
+
+    await waitFor(async () => {
       expect(
         await screen.findByTestId("branches-following-naming-standard"),
       ).toHaveTextContent("-");
     });
 
     // user would see the data once the api call is successful
-    await waitFor(
-      async () => {
-        expect(await screen.findByTestId("total-branches")).toHaveTextContent(
-          "10",
-        );
-        expect(await screen.findByTestId("active-branches")).toHaveTextContent(
-          "2",
-        );
-        expect(
-          await screen.findByTestId("branches-following-naming-standard"),
-        ).toHaveTextContent("50%");
-      },
-      { timeout: 550 },
-    );
+    await waitFor(async () => {
+      expect(await screen.findByTestId("total-branches")).toHaveTextContent(
+        "10",
+      );
+    });
+
+    await waitFor(async () => {
+      expect(await screen.findByTestId("active-branches")).toHaveTextContent(
+        "2",
+      );
+    });
+
+    await waitFor(async () => {
+      expect(
+        await screen.findByTestId("branches-following-naming-standard"),
+      ).toHaveTextContent("50%");
+    });
   });
 
   it("should render '-' when data is failed to fetch", async () => {
     server.use(
-      http.get("/api/v1/metrics/trunk-based-development/branches", () => {
-        return new HttpResponse("Server Error", { status: 500 });
-      }),
-      http.get("/api/v1/metrics/trunk-based-development/activeBranches", () => {
-        return new HttpResponse("Server Error", { status: 500 });
-      }),
+      getServerErrorHandler(
+        "/api/v1/metrics/trunk-based-development/branches",
+        500,
+      ),
+      getServerErrorHandler(
+        "/api/v1/metrics/trunk-based-development/activeBranches",
+        500,
+      ),
     );
 
-    render(loadTrunkBasedComponent());
+    render(LoadTrunkBasedComponent());
 
+    // First check for "-"
     await waitFor(async () => {
       expect(await screen.findByTestId("total-branches")).toHaveTextContent(
         "-",
       );
+    });
+
+    await waitFor(async () => {
       expect(await screen.findByTestId("active-branches")).toHaveTextContent(
         "-",
       );
+    });
+
+    await waitFor(async () => {
+      expect(
+        await screen.findByTestId("branches-following-naming-standard"),
+      ).toHaveTextContent("-");
+    });
+
+    // Simulate the passage of time until the network call fails
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // Second check for "-"
+    await waitFor(async () => {
+      expect(await screen.findByTestId("total-branches")).toHaveTextContent(
+        "-",
+      );
+    });
+
+    await waitFor(async () => {
+      expect(await screen.findByTestId("active-branches")).toHaveTextContent(
+        "-",
+      );
+    });
+
+    await waitFor(async () => {
       expect(
         await screen.findByTestId("branches-following-naming-standard"),
       ).toHaveTextContent("-");
@@ -98,15 +133,11 @@ describe("TrunkBasedMetricsTiles component", () => {
 
   it("should open active branches dialog upon clicking on active PR's button", async () => {
     server.use(
-      http.get("/api/v1/metrics/trunk-based-development/branches", () => {
-        return HttpResponse.json(BRANCHES);
-      }),
-      http.get("/api/v1/metrics/trunk-based-development/activeBranches", () => {
-        return HttpResponse.json(ACTIVE_BRANCHES);
-      }),
+      getBranchesHandler(BRANCHES),
+      getActiveBranchesHandler(ACTIVE_BRANCHES),
     );
 
-    render(loadTrunkBasedComponent());
+    render(LoadTrunkBasedComponent());
 
     const activeBranchesButton = await screen.findByTestId(
       "active-branches-button",
@@ -125,15 +156,11 @@ describe("TrunkBasedMetricsTiles component", () => {
 
   it("should render table with active pull requests to the trunk branch in the dialog box", async () => {
     server.use(
-      http.get("/api/v1/metrics/trunk-based-development/branches", () => {
-        return HttpResponse.json(BRANCHES);
-      }),
-      http.get("/api/v1/metrics/trunk-based-development/activeBranches", () => {
-        return HttpResponse.json(ACTIVE_BRANCHES);
-      }),
+      getBranchesHandler(BRANCHES),
+      getActiveBranchesHandler(ACTIVE_BRANCHES),
     );
 
-    render(loadTrunkBasedComponent());
+    render(LoadTrunkBasedComponent());
 
     const activeBranchesButton = await screen.findByTestId(
       "active-branches-button",
@@ -160,15 +187,11 @@ describe("TrunkBasedMetricsTiles component", () => {
 
   it("should open branches naming convention dialog", async () => {
     server.use(
-      http.get("/api/v1/metrics/trunk-based-development/branches", () => {
-        return HttpResponse.json(BRANCHES);
-      }),
-      http.get("/api/v1/metrics/trunk-based-development/activeBranches", () => {
-        return HttpResponse.json(ACTIVE_BRANCHES);
-      }),
+      getBranchesHandler(BRANCHES),
+      getActiveBranchesHandler(ACTIVE_BRANCHES),
     );
 
-    render(loadTrunkBasedComponent());
+    render(LoadTrunkBasedComponent());
 
     const branchesNamingConventionButton = await screen.findByTestId(
       "branches-naming-convention-button",
@@ -191,15 +214,11 @@ describe("TrunkBasedMetricsTiles component", () => {
 
   it("should render table with branches not following naming standard in dialog box", async () => {
     server.use(
-      http.get("/api/v1/metrics/trunk-based-development/branches", () => {
-        return HttpResponse.json(BRANCHES);
-      }),
-      http.get("/api/v1/metrics/trunk-based-development/activeBranches", () => {
-        return HttpResponse.json(ACTIVE_BRANCHES);
-      }),
+      getBranchesHandler(BRANCHES),
+      getActiveBranchesHandler(ACTIVE_BRANCHES),
     );
 
-    render(loadTrunkBasedComponent());
+    render(LoadTrunkBasedComponent());
 
     const branchesNamingConventionButton = await screen.findByTestId(
       "branches-naming-convention-button",
