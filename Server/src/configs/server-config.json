@@ -1,19 +1,8 @@
 {
   "targetBranch": "main",
   "organization": "Soliton",
-  "projectName": "SolitonCentral",
-  "repositoryId": "SolitonCentral",
-  "authToken": "ki7duqt4h4zrw6sd2eacq57coeebrvsvlqw6dz627cliiwv3ibgq",
-  "squads": [
-    {
-      "squadName": "SPMT",
-      "developers": {
-        "9e1313a9-2b7c-6556-b441-d1eabfed5d43": "Ganesh Nithin",
-        "9ecbea21-0105-6b6f-875c-019c63e6cead": "Ashritha d"
-      },
-      "reviewers": {
-        "3c66f2d9-f079-65fd-af3d-0650c193e580": "Sathish Thangavel"
-      }
-    }
-  ]
+  "projectName": "my_project",
+  "repositoryId": "my_repository",
+  "authToken": "my_auth_token",
+  "squads": []
 }
