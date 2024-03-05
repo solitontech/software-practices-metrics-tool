@@ -1,29 +1,24 @@
 import { ACTIVE_VERSION_CONTROL_SERVICE } from './service-map.js';
 
 export class VersionControlSystem {
-  static service = ACTIVE_VERSION_CONTROL_SERVICE;
+  static #service = ACTIVE_VERSION_CONTROL_SERVICE;
 
   static async getCodeReviewMetrics(startDate, endDate, paginationCursor, paginationSize) {
-    return VersionControlSystem.service.getCodeReviewMetrics(startDate, endDate, paginationCursor, paginationSize);
+    return this.#service.getCodeReviewMetrics(startDate, endDate, paginationCursor, paginationSize);
   }
-  static async getTrunkBasedMetricsForBranches() {
-    return VersionControlSystem.service.getBranchMetrics();
-  }
-
-  static async getTrunkBasedMetricsForActiveBranches(paginationCursor, paginationSize) {
-    return VersionControlSystem.service.getActiveBranchMetrics(paginationCursor, paginationSize);
+  static async getBranchMetrics() {
+    return this.#service.getBranchMetrics();
   }
 
-  static async getTrunkBasedMetricsForPullRequests(startDate, endDate, paginationCursor, paginationSize) {
-    return VersionControlSystem.service.getPullRequestMetrics(startDate, endDate, paginationCursor, paginationSize);
+  static async getActiveBranchMetrics(paginationCursor, paginationSize) {
+    return this.#service.getActiveBranchMetrics(paginationCursor, paginationSize);
   }
 
-  static async getTrunkBasedMetricsForCodeFreeze(startDate, endDate, paginationCursor, paginationSize) {
-    return VersionControlSystem.service.getCodeFreezePeriodMetrics(
-      startDate,
-      endDate,
-      paginationCursor,
-      paginationSize
-    );
+  static async getPullRequestMetrics(startDate, endDate, paginationCursor, paginationSize) {
+    return this.#service.getPullRequestMetrics(startDate, endDate, paginationCursor, paginationSize);
+  }
+
+  static async getTrunkBranchCommits(startDate, endDate, paginationCursor, paginationSize) {
+    return this.#service.getTrunkBranchCommits(startDate, endDate, paginationCursor, paginationSize);
   }
 }

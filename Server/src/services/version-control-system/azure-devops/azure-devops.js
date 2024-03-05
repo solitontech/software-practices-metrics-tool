@@ -49,7 +49,7 @@ export class AzureDevops {
     };
   }
 
-  static async getCodeFreezePeriodMetrics(startDate, endDate, paginationCursor, paginationSize) {
+  static async getTrunkBranchCommits(startDate, endDate, paginationCursor, paginationSize) {
     const commits = await AzureDevopsApi.fetchCommitsList(
       startDate,
       getNextDateWithGMT(endDate),
