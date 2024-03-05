@@ -3,7 +3,7 @@ import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../constants/index.js';
 
 // express global error handler (https://expressjs.com/en/guide/error-handling.html)
 // eslint-disable-next-line no-unused-vars
-export const globalErrorMiddleware = (error, req, res, next) => {
+export const globalErrorHandlerMiddleware = (error, req, res, next) => {
   logDevError(error);
 
   if (error instanceof AppError) {

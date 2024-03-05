@@ -23,20 +23,6 @@ export class Validation {
     return message.replace(/"/g, "'");
   }
 
-  getValidationResult(dataToValidate) {
-    return this.#validate(dataToValidate);
-  }
-
-  terminateOnError(dataToValidate) {
-    const { error } = this.#validate(dataToValidate);
-
-    if (error) {
-      this.#logError(error);
-
-      return process.exit(1);
-    }
-  }
-
   getUserErrorMessage(error) {
     if (!error) {
       return null;
@@ -49,5 +35,19 @@ export class Validation {
       .join(' | ');
 
     return errorMessage;
+  }
+
+  getValidationResult(dataToValidate) {
+    return this.#validate(dataToValidate);
+  }
+
+  terminateOnError(dataToValidate) {
+    const { error } = this.#validate(dataToValidate);
+
+    if (error) {
+      this.#logError(error);
+
+      return process.exit(1);
+    }
   }
 }

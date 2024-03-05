@@ -6,10 +6,9 @@ import { ServerConfiguration } from '../configs/server.config.js';
 const logger = new Logger();
 
 const { DEVELOPMENT } = NODE_ENVIRONMENT_MODE;
-const { environmentVariables } = ServerConfiguration;
 
 export const logDevError = (...args) => {
-  if (environmentVariables.nodeEnvironment === DEVELOPMENT) {
+  if (ServerConfiguration.environmentVariables.nodeEnvironment === DEVELOPMENT) {
     logger.error(...args);
     console.error(...args);
   }
