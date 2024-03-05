@@ -1,7 +1,7 @@
 import { TimeMetrics } from './time-metrics.js';
 import { VotesCommentsMetrics } from './votes-comments-metrics.js';
 
-import { getAzureDevOpsPullRequestURL } from '../utils/get-url.js';
+import { getAzureDevOpsPullRequestURL } from '../helpers/index.js';
 
 import { CODE_TO_VOTE, COMMENT_TYPE } from './constants.js';
 

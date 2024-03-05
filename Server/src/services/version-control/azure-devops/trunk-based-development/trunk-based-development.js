@@ -1,4 +1,4 @@
-import { getAzureDevOpsPullRequestURL, getAzureDevopsBranchesURL, getAzureDevOpsBranchURL } from '../utils/get-url.js';
+import { getAzureDevOpsPullRequestURL, getAzureDevopsBranchesURL, getAzureDevOpsBranchURL } from '../helpers/index.js';
 import {
   BRANCH_SUFFIX,
   EMPTY_STRING,

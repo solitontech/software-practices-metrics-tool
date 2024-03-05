@@ -2,7 +2,7 @@ import { AzureDevopsApi } from './apis/azure-devops.js';
 import { CodeReview } from './code-review/code-review.js';
 import { TrunkBasedDevelopment } from './trunk-based-development/trunk-based-development.js';
 
-import { getNextDateWithGMT, getGMTDate } from './utils/utils.js';
+import { getNextDateWithGMT, getGMTDate } from './helpers/index.js';
 
 export class AzureDevops {
   static async getBranchMetrics() {

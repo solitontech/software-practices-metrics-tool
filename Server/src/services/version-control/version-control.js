@@ -18,7 +18,6 @@ export class VersionControl {
     if (!this.#currentVersionControl) {
       logError(`Version control system not found. Valid values are ${Object.keys(this.#currentVersionControl)}`);
 
-      // version control is invalid don't boot server
       process.exit(1);
     }
   }
