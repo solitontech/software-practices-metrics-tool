@@ -1,5 +1,5 @@
 import { DateValidation, PaginationValidation } from '../../validations/index.js';
-import { VersionControlSystem } from '../../services/version-control-system/version-control-system.js';
+import { VersionControl } from '../../services/version-control/version-control.js';
 import { STATUS_CODE } from '../../constants/index.js';
 
 export class CodeReviewController {
@@ -15,12 +15,7 @@ export class CodeReviewController {
       });
     }
 
-    const { data } = await VersionControlSystem.getCodeReviewMetrics(
-      startDate,
-      endDate,
-      paginationCursor,
-      paginationSize
-    );
+    const { data } = await VersionControl.getCodeReviewMetrics(startDate, endDate, paginationCursor, paginationSize);
 
     return res.status(STATUS_CODE.OK).json(data);
   }

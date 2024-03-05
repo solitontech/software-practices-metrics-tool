@@ -41,7 +41,7 @@ app.use(express.static(path.join(dirName, '../dist')));
 
 app.use(router);
 
-// unhandled routes send client app
+// unhandled routes send client app for good user experience
 app.get('*', (req, res) => {
   res.sendFile(path.join(dirName, '../dist/index.html'));
 });

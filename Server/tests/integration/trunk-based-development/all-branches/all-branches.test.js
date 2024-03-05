@@ -3,14 +3,14 @@ import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '../../../../src/app.js';
 import { AppError } from '../../../../src/utils/index.js';
-import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
+import { AzureDevopsApi } from '../../../../src/services/version-control/azure-devops/apis/azure-devops.js';
 
 import { AZURE_ALL_BRANCHES_RESPONSE, SERVER_BRANCHES_RESPONSE } from './all-branches.mock.js';
 import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/index.js';
 
 const { invalidRepositoryDetails, invalidAzureToken } = AzureDevopsApi;
 
-jest.mock('../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js');
+jest.mock('../../../../src/services/version-control/azure-devops/apis/azure-devops.js');
 
 describe('Trunk based metrics - get all branches in the repository', () => {
   const apiEndPoint = '/api/v1/metrics/trunk-based-development/branches';

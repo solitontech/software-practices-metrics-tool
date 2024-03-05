@@ -3,7 +3,7 @@ import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '../../../../src/app.js';
 import { AppError } from '../../../../src/utils/index.js';
-import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
+import { AzureDevopsApi } from '../../../../src/services/version-control/azure-devops/apis/azure-devops.js';
 
 import { AZURE_PULL_REQUESTS_RESPONSE, SERVER_PULL_REQUESTS_RESPONSE } from './pull-requests.mock.js';
 import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/index.js';
@@ -11,7 +11,7 @@ import { runDatePaginationValidationTests } from '../../common-tests/date-pagina
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
-jest.mock('../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js');
+jest.mock('../../../../src/services/version-control/azure-devops/apis/azure-devops.js');
 
 describe('Trunk based metrics - get all the pull requests raised to the trunk branch within selected range in the repository', () => {
   const apiEndPoint = '/api/v1/metrics/trunk-based-development/pullRequests';

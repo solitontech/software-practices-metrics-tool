@@ -1,10 +1,10 @@
 import { DateValidation, PaginationValidation } from '../../validations/index.js';
-import { VersionControlSystem } from '../../services/version-control-system/version-control-system.js';
+import { VersionControl } from '../../services/version-control/version-control.js';
 import { STATUS_CODE } from '../../constants/index.js';
 
 export class TrunkBasedDevelopmentController {
   static async getBranches(req, res) {
-    const { data } = await VersionControlSystem.getBranchMetrics();
+    const { data } = await VersionControl.getBranchMetrics();
 
     return res.status(STATUS_CODE.OK).json(data);
   }
@@ -20,7 +20,7 @@ export class TrunkBasedDevelopmentController {
       });
     }
 
-    const { data } = await VersionControlSystem.getActiveBranchMetrics(paginationCursor, paginationSize);
+    const { data } = await VersionControl.getActiveBranchMetrics(paginationCursor, paginationSize);
 
     return res.status(STATUS_CODE.OK).json(data);
   }
@@ -37,12 +37,7 @@ export class TrunkBasedDevelopmentController {
       });
     }
 
-    const { data } = await VersionControlSystem.getPullRequestMetrics(
-      startDate,
-      endDate,
-      paginationCursor,
-      paginationSize
-    );
+    const { data } = await VersionControl.getPullRequestMetrics(startDate, endDate, paginationCursor, paginationSize);
 
     return res.status(STATUS_CODE.OK).json(data);
   }
@@ -59,12 +54,7 @@ export class TrunkBasedDevelopmentController {
       });
     }
 
-    const { data } = await VersionControlSystem.getTrunkBranchCommits(
-      startDate,
-      endDate,
-      paginationCursor,
-      paginationSize
-    );
+    const { data } = await VersionControl.getTrunkBranchCommits(startDate, endDate, paginationCursor, paginationSize);
 
     return res.status(STATUS_CODE.OK).json(data);
   }
