@@ -2,7 +2,7 @@ import { AzureDevopsApi } from './apis/azure-devops.js';
 import { CodeReview } from './code-review/code-review.js';
 import { TrunkBasedDevelopment } from './trunk-based-development/trunk-based-development.js';
 
-import { getNextDateWithGMT, getGMTDate } from './helpers/index.js';
+import { getGmtISOString, getNextDayGmtISOString } from './helpers/index.js';
 
 export class AzureDevops {
   static async getBranchMetrics() {
@@ -23,8 +23,8 @@ export class AzureDevops {
 
   static async getPullRequestMetrics(startDate, endDate, paginationCursor, paginationSize) {
     const pullRequestsForARange = await AzureDevopsApi.fetchPullRequestsList(
-      getGMTDate(startDate),
-      getNextDateWithGMT(endDate),
+      getGmtISOString(startDate),
+      getNextDayGmtISOString(endDate),
       paginationCursor,
       paginationSize
     );
@@ -36,8 +36,8 @@ export class AzureDevops {
 
   static async getCodeReviewMetrics(startDate, endDate, paginationCursor, paginationSize) {
     const pullRequests = await AzureDevopsApi.fetchPullRequests(
-      getGMTDate(startDate),
-      getNextDateWithGMT(endDate),
+      getGmtISOString(startDate),
+      getNextDayGmtISOString(endDate),
       paginationCursor,
       paginationSize
     );
@@ -52,7 +52,7 @@ export class AzureDevops {
   static async getTrunkBranchCommits(startDate, endDate, paginationCursor, paginationSize) {
     const commits = await AzureDevopsApi.fetchCommitsList(
       startDate,
-      getNextDateWithGMT(endDate),
+      getNextDayGmtISOString(endDate),
       paginationCursor,
       paginationSize
     );

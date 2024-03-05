@@ -10,21 +10,24 @@ import {
 } from './constants.js';
 
 export class TrunkBasedDevelopment {
+  static #isBranchFollowingNamingStandard(branchName) {
+    const parts = branchName.split(SEPARATOR);
+    const [firstPart] = parts;
+
+    const isStartsWithUsers = firstPart === USERS;
+    const hasRequiredParts = parts.length === REQUIRED_BRANCH_PARTS;
+
+    return isStartsWithUsers && hasRequiredParts;
+  }
+
   static getBranchMetrics({ value: allBranches, count: totalNumberOfBranches }) {
     const { branchesFollowingNamingStandard, branchesNotFollowingNamingStandard } = allBranches.reduce(
       (acc, { name: branchName, objectId: id }) => {
         const formattedBranchName = branchName.replace(BRANCH_SUFFIX, EMPTY_STRING);
 
-        const isBranchFollowingNamingStandard = () => {
-          const hasRequiredParts = formattedBranchName.split(SEPARATOR).length === REQUIRED_BRANCH_PARTS;
-          const isStartsWithUsers = formattedBranchName.split(SEPARATOR)[0] === USERS;
-
-          return hasRequiredParts && isStartsWithUsers;
-        };
-
         const branchURL = getAzureDevOpsBranchURL(formattedBranchName);
 
-        const targetArray = isBranchFollowingNamingStandard()
+        const targetArray = this.#isBranchFollowingNamingStandard(formattedBranchName)
           ? acc.branchesFollowingNamingStandard
           : acc.branchesNotFollowingNamingStandard;
 

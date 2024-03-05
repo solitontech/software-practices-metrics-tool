@@ -1,21 +1,18 @@
 import { ServerConfiguration } from '../../../../configs/server.config.js';
 
-const {
-  organization: ORGANIZATION,
-  projectName: PROJECT,
-  repositoryId: REPOSITORY_ID,
-} = ServerConfiguration.versionControl;
+const { organization, projectName, repositoryId } = ServerConfiguration.versionControl;
 
-export const getAzureDevOpsRepositoryBaseURL = () => {
-  const baseUrl = new URL(`https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}`);
+const getAzureDevOpsRepositoryBaseURL = () => {
+  const baseUrl = new URL(`https://dev.azure.com/${organization}/${projectName}/_git/${repositoryId}`);
 
   return baseUrl.href;
 };
 
 export const getAzureDevOpsPullRequestURL = (pullRequestId) => {
   const baseUrl = getAzureDevOpsRepositoryBaseURL();
+  const url = new URL(baseUrl + '/pullrequest/' + pullRequestId);
 
-  return `${baseUrl}/pullrequest/${pullRequestId}`;
+  return url.href;
 };
 
 export const getAzureDevopsBranchesURL = () => {
