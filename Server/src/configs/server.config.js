@@ -15,10 +15,6 @@ export class ServerConfiguration {
   static #envFilePath = path.join(this.#dirName, './.env');
   static #serverConfigPath = path.join(this.#dirName, './server-config.json');
 
-  static get #allConfigsLoaded() {
-    return this.#clientFilters && this.#versionControl && this.#environmentVariables;
-  }
-
   static #loadServerConfigs() {
     const configs = JSON.parse(readFileSync(this.#serverConfigPath, 'utf8'));
 
@@ -50,6 +46,10 @@ export class ServerConfiguration {
     });
 
     EnvValidation.terminateOnValidationError(this.#environmentVariables);
+  }
+
+  static get #allConfigsLoaded() {
+    return this.#clientFilters && this.#versionControl && this.#environmentVariables;
   }
 
   static get clientFilters() {

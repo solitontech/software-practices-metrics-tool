@@ -1,4 +1,4 @@
-import { ServerConfiguration } from '../../../../configs/server-config.js';
+import { ServerConfiguration } from '../../../../configs/server.config.js';
 
 export const getFilteredPullRequests = (pullRequests) => {
   const developerIds = getSquadsDevelopersIds();

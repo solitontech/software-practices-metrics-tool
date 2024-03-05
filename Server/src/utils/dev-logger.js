@@ -1,7 +1,7 @@
 import Logger from '@ptkdev/logger';
 
 import { NODE_ENVIRONMENT_MODE } from '../constants/index.js';
-import { ServerConfiguration } from '../configs/server-config.js';
+import { ServerConfiguration } from '../configs/server.config.js';
 
 const { DEVELOPMENT } = NODE_ENVIRONMENT_MODE;
 

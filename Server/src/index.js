@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { router } from './routes/routes.js';
 import { AppError } from './utils/app-error.js';
 import { logDevError } from './utils/dev-logger.js';
-import { ServerConfiguration } from './configs/server-config.js';
+import { ServerConfiguration } from './configs/server.config.js';
 
 import { SERVER_ERROR_MESSAGE, NODE_ENVIRONMENT_MODE, STATUS_CODE } from './constants/index.js';
 

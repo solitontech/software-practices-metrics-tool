@@ -13,10 +13,14 @@ export class Validation {
     return this.#validationSchema.validate(dataToValidate);
   }
 
-  #logValidationError(error) {
+  #logError(error) {
     error.details.forEach(({ message }) => {
       logError(this.#errorMessage + message);
     });
+  }
+
+  #replaceWithSingleQuotes(message) {
+    return message.replace(/"/g, "'");
   }
 
   getValidationResult(dataToValidate) {
@@ -27,9 +31,23 @@ export class Validation {
     const { error } = this.#validate(dataToValidate);
 
     if (error) {
-      this.#logValidationError(error);
+      this.#logError(error);
 
       return process.exit(1);
     }
+  }
+
+  getUserErrorMessage(error) {
+    if (!error) {
+      return null;
+    }
+
+    const errorMessage = error.details
+      .map(({ message }) => {
+        return this.#replaceWithSingleQuotes(message);
+      })
+      .join(' | ');
+
+    return errorMessage;
   }
 }

@@ -4,7 +4,7 @@ import { URL } from 'node:url';
 
 import { STATUS_CODE } from '../../../../constants/index.js';
 import { AppError } from '../../../../utils/app-error.js';
-import { ServerConfiguration } from '../../../../configs/server-config.js';
+import { ServerConfiguration } from '../../../../configs/server.config.js';
 import { getFilteredPullRequests } from './api-utils.js';
 
 const {
