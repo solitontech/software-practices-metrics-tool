@@ -1,6 +1,6 @@
 import { AzureDevops } from './azure-devops/azure-devops.js';
 
-import { logError } from '../../utils/logger.js';
+import { logError } from '../../utils/index.js';
 import { ServerConfiguration } from '../../configs/server.config.js';
 
 const { versionControlSystem: VERSION_CONTROL_SYSTEM } = ServerConfiguration.environmentVariables;

@@ -5,7 +5,7 @@ import { AzureDevopsApi } from '../../../src/services/version-control-system/azu
 import { AZURE_PULL_REQUESTS_RESPONSE, SERVER_PULL_REQUESTS_RESPONSE } from './code-review.mock.js';
 import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../src/constants/index.js';
 import app from '../../../src/index.js';
-import { AppError } from '../../../src/utils/app-error.js';
+import { AppError } from '../../../src/utils/index.js';
 import { runDatePaginationValidationTests } from '../common-tests/date-pagination-tests.js';
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;

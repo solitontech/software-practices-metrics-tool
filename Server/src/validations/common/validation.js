@@ -1,4 +1,4 @@
-import { logError } from '../../utils/logger.js';
+import { logError } from '../../utils/index.js';
 
 export class Validation {
   #errorMessage;
