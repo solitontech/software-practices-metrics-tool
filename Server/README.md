@@ -94,21 +94,6 @@ Make sure you have the following dependencies installed on your machine:
 
 ## API End Points
 
-1. Trunk Based Metrics APIs:
-
-   1. <http://localhost:3000/api/v1/metrics/trunk-based-development/pullRequests/?startDate=2023-12-14&endDate=2023-12-19&paginationCursor=1&paginationSize=100>
-   2. <http://localhost:3000/api/v1/metrics/trunk-based-development/branches/>
-   3. <http://localhost:3000/api/v1/metrics/trunk-based-development/activeBranches/?paginationCursor=1&paginationSize=100>
-   4. <http://localhost:3000/api/v1/metrics/trunk-based-development/commits/?startDate=2024-02-06&endDate=2024-02-07&paginationCursor=1&paginationSize=100>
-
-2. Code Review Metrics APIs:
-
-   1. <http://localhost:3000/api/v1/metrics/code-review/?startDate=2023-12-16&endDate=2023-12-20&paginationCursor=1&paginationSize=300>
-
-3. Client Filters APIs:
-
-   1. <http://localhost:3000/api/v1/metrics/client-filters>
-
-4. Swagger Open API specification
+1. Swagger Open API specification document can be accessed at the following URL:
 
    1. <http://localhost:3000/open-api-spec-doc/>

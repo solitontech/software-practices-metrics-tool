@@ -15,7 +15,7 @@ export const getFilteredPullRequests = (pullRequests) => {
 };
 
 const getSquadsDevelopersIds = () => {
-  const squads = ServerConfiguration.clientFilters.squads;
+  const squads = ServerConfiguration.clientFiltersSquads;
 
   return squads.reduce((ids, squad) => {
     const developerIds = Object.keys(squad.developers);
