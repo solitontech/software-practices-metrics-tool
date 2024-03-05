@@ -1,4 +1,4 @@
-import { ServerConfiguration } from '../../../../src/configs/server-config.js';
+import { ServerConfiguration } from '../../../../src/configs/server.config.js';
 
 const {
   organization: ORGANIZATION,
