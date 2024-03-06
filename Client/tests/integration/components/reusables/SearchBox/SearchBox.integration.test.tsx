@@ -18,6 +18,7 @@ describe("SearchBox component", () => {
 
   it("should render search box with place holder, search icon & tooltip", () => {
     const onChange = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}
@@ -41,6 +42,7 @@ describe("SearchBox component", () => {
 
   it("should call onChange when input of search box changes", () => {
     const onChange = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}
@@ -54,11 +56,20 @@ describe("SearchBox component", () => {
     // when user is typing in the input field, onChange method should be called
     fireEvent.change(inputElement, { target: { value: "Test" } });
     expect(onChange).toHaveBeenCalledOnce();
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({
+          value: "Test",
+        }) as HTMLInputElement,
+        type: "change",
+      }),
+    );
   });
 
   it("should debounces input changes with given delay", () => {
     const delay = 500;
     const onChange = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}
@@ -77,13 +88,21 @@ describe("SearchBox component", () => {
 
     // after given delay, onChange method should be called
     advanceTimersByTime(delay);
-
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledOnce();
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({
+          value: "Test",
+        }) as HTMLInputElement,
+        type: "change",
+      }),
+    );
   });
 
   it("should cancel previous debounce timer when input changes", () => {
     const delay = 500;
     const onChange = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}
@@ -104,7 +123,7 @@ describe("SearchBox component", () => {
     // after given delay, onChange method should be called only once with latest value
     advanceTimersByTime(delay);
 
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledOnce();
     expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({
         target: expect.objectContaining({
@@ -117,6 +136,7 @@ describe("SearchBox component", () => {
 
   it("should debounces input changes with custom delay", () => {
     const onChange = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}
@@ -135,12 +155,20 @@ describe("SearchBox component", () => {
 
     // after default delay, onChange method should be called
     advanceTimersByTime(defaultDelay);
-
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledOnce();
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({
+          value: "Test",
+        }) as HTMLInputElement,
+        type: "change",
+      }),
+    );
   });
 
   it('should not debounce input changes when "isDebounced" is false', () => {
     const onChange = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}
@@ -154,12 +182,20 @@ describe("SearchBox component", () => {
 
     // when user is typing in the input field, onChange method should be called
     fireEvent.change(inputElement, { target: { value: "Test" } });
-
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledOnce();
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({
+          value: "Test",
+        }) as HTMLInputElement,
+        type: "change",
+      }),
+    );
   });
 
   it("should not debounce input changes when input event is not fired", () => {
     const onChange = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}
@@ -181,6 +217,7 @@ describe("SearchBox component", () => {
   it("should calls onClick when input is clicked", () => {
     const onChange = vi.fn();
     const onClick = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}
@@ -201,6 +238,7 @@ describe("SearchBox component", () => {
   it("should not call onClick when input not clicked", () => {
     const onChange = vi.fn();
     const onClick = vi.fn();
+
     render(
       <SearchBox
         onChange={onChange}

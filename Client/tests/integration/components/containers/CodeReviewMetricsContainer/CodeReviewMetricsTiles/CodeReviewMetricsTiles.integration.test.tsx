@@ -4,7 +4,7 @@ import { userEvent } from "@testing-library/user-event";
 import { CodeReviewMetricsTiles } from "../../../../../../src/components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTiles/CodeReviewMetricsTiles";
 
 describe("CodeReviewMetricsTiles", () => {
-  it("should render firstReviewResponse time , approval time & merge time correctly", async () => {
+  it("should render firstReviewResponse time, approval time & merge time correctly", async () => {
     render(
       <CodeReviewMetricsTiles
         averageFirstReviewResponseTime={0.75}
