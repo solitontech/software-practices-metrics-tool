@@ -1,11 +1,10 @@
 import { TimeMetrics } from './time-metrics/time-metrics.js';
-import { VotesCommentsMetrics } from './votes-comments-metrics.js';
+import { VoteMetrics } from './vote-metrics/vote-metrics.js';
+import { CommentMetrics } from './comment-metrics/comment-metrics.js';
 
 import { AzureDevopsURL } from '../helpers/index.js';
 
 import { CODE_TO_VOTE, COMMENT_TYPE } from './constants/index.js';
-
-const { STRING } = COMMENT_TYPE;
 
 export class CodeReview {
   static voteResult = 'CodeReviewVoteResult';
@@ -31,15 +30,12 @@ export class CodeReview {
         isRequiredReviewers: isRequiredReviewers,
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate ?? null,
-        votes: VotesCommentsMetrics.getPullRequestVotes(reviewers),
-        votesTimeline: VotesCommentsMetrics.getPullRequestVotesTimeline(
-          pullRequest.reviewers,
-          pullRequest.votesHistoryTimeline
-        ),
-        votesHistory: VotesCommentsMetrics.getPullRequestVotesHistory(pullRequest.votesHistoryTimeline),
+        votes: VoteMetrics.getPullRequestVotes(reviewers),
+        votesTimeline: VoteMetrics.getPullRequestVotesTimeline(pullRequest.reviewers, pullRequest.votesHistoryTimeline),
+        votesHistory: VoteMetrics.getPullRequestVotesHistory(pullRequest.votesHistoryTimeline),
         votesHistoryTimeline: pullRequest.votesHistoryTimeline,
-        comments: VotesCommentsMetrics.getPullRequestComments(pullRequest.threads),
-        reviewerComments: VotesCommentsMetrics.getPullRequestReviewerComments(pullRequest.threads),
+        comments: CommentMetrics.getPullRequestComments(pullRequest.threads),
+        reviewerComments: CommentMetrics.getPullRequestReviewerComments(pullRequest.threads),
         tags: pullRequest.tags,
         firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(pullRequest),
         approvalTimeInSeconds: isRequiredReviewers ? TimeMetrics.getPullRequestApprovalTime(pullRequest) : null,
@@ -115,7 +111,7 @@ export class CodeReview {
 
     pullRequestThreads.forEach((thread) => {
       const [firstComment] = thread.comments;
-      const isValidThread = thread.pullRequestThreadContext ?? firstComment?.commentType === STRING;
+      const isValidThread = thread.pullRequestThreadContext ?? firstComment?.commentType === COMMENT_TYPE.STRING;
 
       if (thread.isDeleted || !isValidThread) {
         return;
