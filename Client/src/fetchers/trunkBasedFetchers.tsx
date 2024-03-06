@@ -6,8 +6,8 @@ import {
   fetchDataForCommits,
   fetchDataForActiveBranches,
   formatDate,
-  getBaseURL,
   fetchDataForPullRequestsMergedToMain,
+  trunkBasedMetricsAPI,
 } from "./fetchersUtils";
 import {
   ICommit,
@@ -22,9 +22,6 @@ import {
   IPullRequestsMergedToMain,
   IPullRequestsMergedToMainSuccessInfo,
 } from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/interfaces";
-
-const baseURL = getBaseURL();
-const trunkBasedMetricsAPI = `${baseURL}/api/v1/metrics/trunk-based-development`;
 
 export const fetchTotalBranches = async (): Promise<ITotalBranches> => {
   const api = new URL(`${trunkBasedMetricsAPI}/branches`);

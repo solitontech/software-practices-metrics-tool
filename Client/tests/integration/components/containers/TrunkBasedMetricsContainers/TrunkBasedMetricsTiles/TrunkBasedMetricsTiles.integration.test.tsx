@@ -79,17 +79,17 @@ describe("TrunkBasedMetricsTiles component", () => {
     server.use(
       getServerErrorHandler(
         "/api/v1/metrics/trunk-based-development/branches",
-        500,
+        250,
       ),
       getServerErrorHandler(
         "/api/v1/metrics/trunk-based-development/activeBranches",
-        500,
+        250,
       ),
     );
 
     render(LoadTrunkBasedComponent());
 
-    // First check for "-"
+    // user should see "-" before the network call
     await waitFor(async () => {
       expect(await screen.findByTestId("total-branches")).toHaveTextContent(
         "-",
@@ -109,9 +109,9 @@ describe("TrunkBasedMetricsTiles component", () => {
     });
 
     // Simulate the passage of time until the network call fails
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // Second check for "-"
+    // user should still see "-" after the network call fails
     await waitFor(async () => {
       expect(await screen.findByTestId("total-branches")).toHaveTextContent(
         "-",
@@ -175,14 +175,14 @@ describe("TrunkBasedMetricsTiles component", () => {
     });
 
     // user expects dialog to be open after clicking on the button
-    expect(await screen.findAllByText(/branch1/i)).toBeDefined();
-    expect(await screen.findAllByText(/branch2/i)).toBeDefined();
+    expect(await screen.findByText(/branch1/i)).toBeDefined();
+    expect(await screen.findByText(/branch2/i)).toBeDefined();
 
-    expect(await screen.findAllByText(/pull request 1/i)).toBeDefined();
-    expect(await screen.findAllByText(/pull request 2/i)).toBeDefined();
+    expect(await screen.findByText(/pull request 1/i)).toBeDefined();
+    expect(await screen.findByText(/pull request 2/i)).toBeDefined();
 
-    expect(await screen.findAllByText(/user1/i)).toBeDefined();
-    expect(await screen.findAllByText(/user2/i)).toBeDefined();
+    expect(await screen.findByText(/user1/i)).toBeDefined();
+    expect(await screen.findByText(/user2/i)).toBeDefined();
   });
 
   it("should open branches naming convention dialog", async () => {
@@ -232,7 +232,7 @@ describe("TrunkBasedMetricsTiles component", () => {
     expect(screen.queryByText(/users\/Kaya\/20_Pokmon_FY2_CW/i)).toBeNull();
 
     // user expects table should contain the branches not following naming standard
-    expect(await screen.findAllByText(/20Bis2Automation/i)).toBeDefined();
-    expect(await screen.findAllByText(/development/i)).toBeDefined();
+    expect(await screen.findByText(/20Bis2Automation/i)).toBeDefined();
+    expect(await screen.findByText(/development/i)).toBeDefined();
   });
 });

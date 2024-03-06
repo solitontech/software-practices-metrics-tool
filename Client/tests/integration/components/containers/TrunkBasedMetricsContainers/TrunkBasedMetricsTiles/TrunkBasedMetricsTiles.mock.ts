@@ -45,6 +45,7 @@ export const BRANCHES: ITotalBranches = {
 };
 
 export const ACTIVE_BRANCHES: IActiveBranches = {
+  count: 2,
   branches: [
     {
       name: "branch1",
@@ -63,5 +64,4 @@ export const ACTIVE_BRANCHES: IActiveBranches = {
       branchURL: "mockURL",
     },
   ],
-  count: 2,
 };
