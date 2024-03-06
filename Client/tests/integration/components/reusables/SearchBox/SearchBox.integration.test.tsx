@@ -26,12 +26,15 @@ describe("SearchBox component", () => {
       />,
     );
 
+    // user should see input field with placeholder
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
     expect(inputElement).toBeInTheDocument();
 
+    // user should see search icon
     const searchIconElement = screen.getByTestId(/SearchIcon/i);
     expect(searchIconElement).toBeInTheDocument();
 
+    // user should see tooltip
     const tooltipElement = screen.getByTestId(/test placeholder/i);
     expect(tooltipElement).toBeInTheDocument();
   });
