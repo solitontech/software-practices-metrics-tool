@@ -3,7 +3,7 @@ import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '../../../../src/app.js';
 import { AppError } from '../../../../src/utils/index.js';
-import { AzureDevopsApi } from '../../../../src/services/version-control/azure-devops/apis/azure-devops.js';
+import { AzureDevopsApi } from '../../../../src/services/version-control/azure-devops/apis/azure-devops.api.js';
 
 import {
   AZURE_TRUNK_BRANCH_COMMITS_RESPONSE,
@@ -14,7 +14,7 @@ import { runDatePaginationValidationTests } from '../../common-tests/date-pagina
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
-jest.mock('../../../../src/services/version-control/azure-devops/apis/azure-devops.js');
+jest.mock('../../../../src/services/version-control/azure-devops/apis/azure-devops.api.js');
 
 describe('Trunk based metrics - get all the commits in the trunk branch within selected range in the repository', () => {
   const apiEndPoint = '/api/v1/metrics/trunk-based-development/commits';

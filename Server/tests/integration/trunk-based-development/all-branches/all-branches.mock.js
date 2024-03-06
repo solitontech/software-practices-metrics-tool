@@ -7,6 +7,7 @@ const {
 } = ServerConfiguration.versionControl;
 
 export const AZURE_ALL_BRANCHES_RESPONSE = {
+  count: 7,
   value: [
     {
       name: 'refs/heads/25Automation',
@@ -100,11 +101,14 @@ export const AZURE_ALL_BRANCHES_RESPONSE = {
       url: `https://dev.azure.com/${ORGANIZATION}/66c3016e-9f23-4861-bdd8-81be4d509c2e/_apis/git/repositories/fe7b3b03-e25f-48d5-97be-19759b2f010b/refs?filter=heads%users/dev1/clean-code/cheat_sheet`,
     },
   ],
-  count: 7,
 };
 
 export const SERVER_BRANCHES_RESPONSE = {
+  totalNumberOfBranches: 7,
+  percentageOfBranchesFollowingStandard: '28.57%',
+  branchesURL: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/branches?a=all&_a=all`,
   branchesFollowingNamingStandard: {
+    count: 2,
     branches: [
       {
         id: 'd60f2173617cebfe1a8161ba09cbfb8f48a37d53',
@@ -117,9 +121,9 @@ export const SERVER_BRANCHES_RESPONSE = {
         url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBusers%2Fdev8%2FAdd_Project-OverviewDocument`,
       },
     ],
-    count: 2,
   },
   branchesNotFollowingNamingStandard: {
+    count: 5,
     branches: [
       {
         id: 'a30a4b19037819eed3ded296ae074f7443f803f2',
@@ -147,9 +151,5 @@ export const SERVER_BRANCHES_RESPONSE = {
         url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}?version=GBusers%2Fdev1%2Fclean-code%2Fcheat_sheet`,
       },
     ],
-    count: 5,
   },
-  branchesURL: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/branches?a=all&_a=all`,
-  percentageOfBranchesFollowingStandard: '28.57%',
-  totalNumberOfBranches: 7,
 };

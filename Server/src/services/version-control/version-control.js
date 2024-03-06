@@ -3,8 +3,6 @@ import { AzureDevops } from './azure-devops/azure-devops.js';
 import { logError } from '../../utils/index.js';
 import { ServerConfiguration } from '../../configs/server.config.js';
 
-const { versionControlSystem } = ServerConfiguration.environmentVariables;
-
 export class VersionControl {
   static #versionControl;
 
@@ -13,10 +11,11 @@ export class VersionControl {
   };
 
   static {
+    const { versionControlSystem } = ServerConfiguration.environmentVariables;
     this.#versionControl = this.#versionControlMap[versionControlSystem];
 
     if (!this.#versionControl) {
-      logError(`Version control system not found. Valid values are ${Object.keys(this.#versionControl)}`);
+      logError(`Version control system not found. Valid values are ${Object.keys(this.#versionControlMap)}`);
 
       process.exit(1);
     }

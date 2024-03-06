@@ -5,7 +5,6 @@ import { URL } from 'node:url';
 import { STATUS_CODE } from '../../../../constants/index.js';
 import { AppError } from '../../../../utils/index.js';
 import { ServerConfiguration } from '../../../../configs/server.config.js';
-import { getFilteredPullRequests } from './api-utils.js';
 
 const {
   organization: ORGANIZATION,
@@ -30,16 +29,37 @@ export class AzureDevopsApi {
   static #invalidRepositoryDetails =
     'No data found. You either do not have permission for the provided token or verify the organization, project, repository & trunk branch in the configuration.';
 
-  static get invalidAzureToken() {
-    return this.#invalidAzureToken;
+  static #getFilteredPullRequests = (pullRequests) => {
+    const squads = ServerConfiguration.clientFiltersSquads;
+    const developerIds = squads.flatMap((squad) => Object.keys(squad.developers));
+
+    if (!developerIds.length) {
+      return pullRequests;
+    }
+
+    return pullRequests.filter(({ createdBy }) => developerIds.includes(createdBy.id));
+  };
+
+  static #throwErrorMessages(response) {
+    if (response.status === NON_AUTHORITATIVE_INFORMATION) {
+      AppError.throwAppError(this.#invalidAzureToken, UNAUTHORIZED_ACCESS);
+    }
   }
 
-  static get invalidRepositoryDetails() {
-    return this.#invalidRepositoryDetails;
+  static #throwAxiosErrorMessages(error) {
+    if (error.response.status === NOT_FOUND) {
+      AppError.throwAppError(this.#invalidRepositoryDetails, NOT_FOUND);
+    }
+
+    if (error.response.status === UNAUTHORIZED_ACCESS) {
+      AppError.throwAppError(this.#invalidAzureToken, UNAUTHORIZED_ACCESS);
+    }
   }
 
-  static get dataNotFound() {
-    return this.#dataNotFound;
+  static #validateResponse(response) {
+    if (!response.count) {
+      AppError.throwAppError(this.#dataNotFound, NOT_FOUND);
+    }
   }
 
   static async #fetchApi(url) {
@@ -65,30 +85,33 @@ export class AzureDevopsApi {
     this.#throwErrorMessages(apiResponse);
   }
 
-  static #throwErrorMessages(response) {
-    if (response.status === NON_AUTHORITATIVE_INFORMATION) {
-      AppError.throwAppError(this.#invalidAzureToken, UNAUTHORIZED_ACCESS);
-    }
+  static async #fetchPullRequestsThreads(pullRequests) {
+    const pullRequestData = await Promise.allSettled(
+      pullRequests.map(async ({ pullRequestId }) => {
+        const url = new URL(this.#baseUrl + `/pullRequests/${pullRequestId}/threads`);
+
+        url.searchParams.append('api-version', this.#apiVersion);
+
+        const response = await this.#fetchApi(url.href);
+        this.#validateResponse(response);
+
+        return response;
+      })
+    );
+
+    return pullRequestData;
   }
 
-  static #validateResponse(response) {
-    if (!response.count) {
-      AppError.throwAppError(this.#dataNotFound, NOT_FOUND);
-    }
+  static get invalidAzureToken() {
+    return this.#invalidAzureToken;
   }
 
-  static #throwAxiosErrorMessages(error) {
-    if (error.response.status === NOT_FOUND) {
-      AppError.throwAppError(this.#invalidRepositoryDetails, NOT_FOUND);
-    }
-
-    if (error.response.status === UNAUTHORIZED_ACCESS) {
-      AppError.throwAppError(this.#invalidAzureToken, UNAUTHORIZED_ACCESS);
-    }
+  static get invalidRepositoryDetails() {
+    return this.#invalidRepositoryDetails;
   }
 
-  static hasOneItem(length) {
-    return length === 1;
+  static get dataNotFound() {
+    return this.#dataNotFound;
   }
 
   static async fetchPullRequestsList(startDate, endDate, paginationCursor, paginationSize) {
@@ -110,23 +133,6 @@ export class AzureDevopsApi {
     return response;
   }
 
-  static async #fetchPullRequestsThreads(pullRequests) {
-    const pullRequestData = await Promise.allSettled(
-      pullRequests.map(async ({ pullRequestId }) => {
-        const url = new URL(this.#baseUrl + `/pullRequests/${pullRequestId}/threads`);
-
-        url.searchParams.append('api-version', this.#apiVersion);
-
-        const response = await this.#fetchApi(url.href);
-        this.#validateResponse(response);
-
-        return response;
-      })
-    );
-
-    return pullRequestData;
-  }
-
   static async fetchPullRequests(startDate, endDate, paginationCursor, paginationSize) {
     const { value: pullRequests } = await this.fetchPullRequestsList(
       startDate,
@@ -135,7 +141,7 @@ export class AzureDevopsApi {
       paginationSize
     );
 
-    const filteredPullRequests = getFilteredPullRequests(pullRequests);
+    const filteredPullRequests = this.#getFilteredPullRequests(pullRequests);
 
     const pullRequestsThreads = await this.#fetchPullRequestsThreads(filteredPullRequests);
 

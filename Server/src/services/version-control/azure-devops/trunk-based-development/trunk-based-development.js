@@ -14,24 +14,23 @@ export class TrunkBasedDevelopment {
     const parts = branchName.split(SEPARATOR);
     const [firstPart] = parts;
 
-    const isStartsWithUsers = firstPart === USERS;
+    const isBranchNameStartsWithUsers = firstPart === USERS;
     const hasRequiredParts = parts.length === REQUIRED_BRANCH_PARTS;
 
-    return isStartsWithUsers && hasRequiredParts;
+    return isBranchNameStartsWithUsers && hasRequiredParts;
   }
 
   static getBranchMetrics({ value: allBranches, count: totalNumberOfBranches }) {
     const { branchesFollowingNamingStandard, branchesNotFollowingNamingStandard } = allBranches.reduce(
-      (acc, { name: branchName, objectId: id }) => {
-        const formattedBranchName = branchName.replace(BRANCH_SUFFIX, EMPTY_STRING);
+      (acc, { name, objectId: id }) => {
+        const branchName = name.replace(BRANCH_SUFFIX, EMPTY_STRING);
+        const branchURL = getAzureDevOpsBranchURL(branchName);
 
-        const branchURL = getAzureDevOpsBranchURL(formattedBranchName);
-
-        const targetArray = this.#isBranchFollowingNamingStandard(formattedBranchName)
+        const targetArray = this.#isBranchFollowingNamingStandard(branchName)
           ? acc.branchesFollowingNamingStandard
           : acc.branchesNotFollowingNamingStandard;
 
-        targetArray.push({ id: id, name: formattedBranchName, url: branchURL });
+        targetArray.push({ id: id, name: branchName, url: branchURL });
 
         return acc;
       },
@@ -56,47 +55,67 @@ export class TrunkBasedDevelopment {
     };
   }
 
-  static getActiveBranchMetrics(pullRequests) {
-    return {
-      count: pullRequests.count,
-      branches: pullRequests.value.map(({ pullRequestId, title, sourceRefName, creationDate, createdBy }) => ({
-        name: sourceRefName.replace(BRANCH_SUFFIX, EMPTY_STRING),
-        title: pullRequestId + ' - ' + title,
+  static getActiveBranchMetrics({ count, value }) {
+    const branches = value.map(({ pullRequestId, title, sourceRefName, creationDate, createdBy }) => {
+      const name = sourceRefName.replace(BRANCH_SUFFIX, EMPTY_STRING);
+      const branchURL = getAzureDevOpsBranchURL(name);
+      const titleWithId = pullRequestId + ' - ' + title;
+      const pullRequestURL = getAzureDevOpsPullRequestURL(pullRequestId);
+
+      return {
+        name,
+        title: titleWithId,
         createdBy: createdBy.displayName,
         creationDate,
-        pullRequestURL: getAzureDevOpsPullRequestURL(pullRequestId),
-        branchURL: getAzureDevOpsBranchURL(sourceRefName.replace(BRANCH_SUFFIX, EMPTY_STRING)),
-      })),
+        pullRequestURL,
+        branchURL,
+      };
+    });
+
+    return {
+      count,
+      branches,
     };
   }
 
-  static getPullRequestMetrics(pullRequests) {
-    const totalPrs = pullRequests.value;
+  static getPullRequestMetrics({ count, value }) {
+    const pullRequests = value.map(
+      ({ pullRequestId, title, sourceRefName, creationDate, status, closedDate = null }) => {
+        const name = sourceRefName.replace(BRANCH_SUFFIX, EMPTY_STRING);
+        const branchURL = getAzureDevOpsBranchURL(name);
+        const titleWithId = pullRequestId + ' - ' + title;
+        const pullRequestURL = getAzureDevOpsPullRequestURL(pullRequestId);
+
+        return {
+          name,
+          title: titleWithId,
+          status,
+          creationDate,
+          closedDate,
+          pullRequestURL,
+          branchURL,
+        };
+      }
+    );
 
     return {
-      count: pullRequests.count,
-      pullRequests: totalPrs.map(({ pullRequestId, title, sourceRefName, creationDate, status, closedDate }) => ({
-        name: sourceRefName.replace(BRANCH_SUFFIX, EMPTY_STRING),
-        title: pullRequestId + ' - ' + title,
-        status,
-        creationDate,
-        closedDate: closedDate ?? null,
-        pullRequestURL: getAzureDevOpsPullRequestURL(pullRequestId),
-        branchURL: getAzureDevOpsBranchURL(sourceRefName.replace(BRANCH_SUFFIX, EMPTY_STRING)),
-      })),
+      count,
+      pullRequests,
     };
   }
 
-  static getCodeFreezeMetrics(commits) {
-    const commitsList = commits.value;
-
-    return {
-      count: commits.count,
-      commits: commitsList.map(({ commitId, comment, author }) => ({
+  static getTrunkBranchCommits({ count, value }) {
+    const commits = value.map(({ commitId, comment, author }) => {
+      return {
         id: commitId,
-        comment: comment,
-        author: author,
-      })),
+        comment,
+        author,
+      };
+    });
+
+    return {
+      count,
+      commits,
     };
   }
 }
