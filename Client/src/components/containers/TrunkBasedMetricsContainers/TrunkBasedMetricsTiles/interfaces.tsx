@@ -1,5 +1,5 @@
 export interface IBranchInfo {
-  id: number;
+  id: string;
   name: string;
   url: string;
 }

@@ -34,6 +34,8 @@ export const getBaseURL = () => {
     : window.location.origin;
 };
 
+export const trunkBasedMetricsAPI = `${getBaseURL()}/api/v1/metrics/trunk-based-development`;
+
 export const formatDate = (date: Date) => {
   return DateTime.fromJSDate(date).toFormat(dateFormat);
 };

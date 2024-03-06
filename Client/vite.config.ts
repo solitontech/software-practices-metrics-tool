@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react()],
   test: {
-    include: ["**/*.unit.test.tsx"],
+    include: ["**/*.unit.test.tsx", "**/*.integration.test.tsx"],
     globals: true,
     environment: "jsdom",
     css: true,
