@@ -16,7 +16,7 @@ function advanceTimersByTime(time: number) {
 describe("SearchBox component", () => {
   const defaultDelay = 400;
 
-  it("should render with place holder", () => {
+  it("should render search box with place holder, search icon & tooltip", () => {
     const onChange = vi.fn();
     render(
       <SearchBox
@@ -27,41 +27,16 @@ describe("SearchBox component", () => {
     );
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
-
     expect(inputElement).toBeInTheDocument();
-  });
 
-  it("should render search icon ", () => {
-    const onChange = vi.fn();
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-      />,
-    );
-
-    const searchIconElement = screen.getByTestId("SearchIcon");
-
+    const searchIconElement = screen.getByTestId(/SearchIcon/i);
     expect(searchIconElement).toBeInTheDocument();
-  });
-
-  it("render tooltip icon", () => {
-    const onChange = vi.fn();
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-      />,
-    );
 
     const tooltipElement = screen.getByTestId(/test placeholder/i);
-
     expect(tooltipElement).toBeInTheDocument();
   });
 
-  it("should call onChange when input changes", () => {
+  it("should call onChange when input of search box changes", () => {
     const onChange = vi.fn();
     render(
       <SearchBox
@@ -72,9 +47,10 @@ describe("SearchBox component", () => {
     );
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
-    fireEvent.change(inputElement, { target: { value: "Test" } });
 
-    expect(onChange).toHaveBeenCalledTimes(1);
+    // when user is typing in the input field, onChange method should be called
+    fireEvent.change(inputElement, { target: { value: "Test" } });
+    expect(onChange).toHaveBeenCalledOnce();
   });
 
   it("should debounces input changes with given delay", () => {
@@ -91,10 +67,12 @@ describe("SearchBox component", () => {
     );
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
-    fireEvent.change(inputElement, { target: { value: "Test" } });
 
+    // when user is typing in the input field, onChange method should not be called
+    fireEvent.change(inputElement, { target: { value: "Test" } });
     expect(onChange).not.toHaveBeenCalled();
 
+    // after given delay, onChange method should be called
     advanceTimersByTime(delay);
 
     expect(onChange).toHaveBeenCalledTimes(1);
@@ -114,9 +92,13 @@ describe("SearchBox component", () => {
     );
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
+
+    // when user is typing in the input field, onChange method should not be called
     fireEvent.change(inputElement, { target: { value: "Test 1" } });
+
     fireEvent.change(inputElement, { target: { value: "Test 2" } });
 
+    // after given delay, onChange method should be called only once with latest value
     advanceTimersByTime(delay);
 
     expect(onChange).toHaveBeenCalledTimes(1);
@@ -142,10 +124,13 @@ describe("SearchBox component", () => {
     );
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
+
+    // when user is typing in the input field, onChange method should not be called
     fireEvent.change(inputElement, { target: { value: "Test" } });
 
     expect(onChange).not.toHaveBeenCalled();
 
+    // after default delay, onChange method should be called
     advanceTimersByTime(defaultDelay);
 
     expect(onChange).toHaveBeenCalledTimes(1);
@@ -163,6 +148,8 @@ describe("SearchBox component", () => {
     );
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
+
+    // when user is typing in the input field, onChange method should be called
     fireEvent.change(inputElement, { target: { value: "Test" } });
 
     expect(onChange).toHaveBeenCalledTimes(1);
@@ -179,8 +166,10 @@ describe("SearchBox component", () => {
       />,
     );
 
+    // when use is not typing in the input field, onChange method should not be called
     expect(onChange).not.toHaveBeenCalled();
 
+    // even after default delay, onChange method should not be called
     advanceTimersByTime(defaultDelay);
 
     expect(onChange).not.toHaveBeenCalled();
@@ -199,6 +188,8 @@ describe("SearchBox component", () => {
     );
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
+
+    // when user clicks on the input field, onClick method should be called
     fireEvent.click(inputElement);
 
     expect(onClick).toHaveBeenCalledOnce();
@@ -216,6 +207,7 @@ describe("SearchBox component", () => {
       />,
     );
 
+    // when user does not click on the input field, onClick method should not be called
     expect(onClick).not.toHaveBeenCalled();
   });
 });
