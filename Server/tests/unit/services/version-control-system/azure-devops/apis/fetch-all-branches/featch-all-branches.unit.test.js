@@ -42,8 +42,8 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = await AzureDevopsApi.fetchAllBranches();
 
-    expect(response).toEqual(ALL_BRANCHES_AZURE_RESPONSE);
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+    expect(response).toEqual(ALL_BRANCHES_AZURE_RESPONSE);
   });
 
   it('should throw AppError with status 404 when no branches are found in azure repository', async () => {
@@ -54,9 +54,9 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = AzureDevopsApi.fetchAllBranches();
 
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
   });
 
   it('should throw AppError with status 404 when request to azure api fails due to 404', async () => {
@@ -65,9 +65,9 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = AzureDevopsApi.fetchAllBranches();
 
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
   });
 
   it('should throw AppError with status 401 when request to azure fails due to 401', async () => {
@@ -76,12 +76,12 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = AzureDevopsApi.fetchAllBranches();
 
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
     );
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
   });
 
   it('should throw AppError with status 401 when request to azure fails due to 203', async () => {
@@ -90,11 +90,11 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = AzureDevopsApi.fetchAllBranches();
 
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
     );
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
   });
 });

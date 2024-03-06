@@ -1,4 +1,5 @@
 export const ALL_BRANCHES_AZURE_RESPONSE = {
+  count: 2,
   value: [
     {
       name: 'refs/heads/25Automation',
@@ -29,5 +30,4 @@ export const ALL_BRANCHES_AZURE_RESPONSE = {
       url: 'https://dev.azure.com/${ORGANIZATION}/66c3016e-9f23-4861-bdd8-81be4d509c2e/_apis/git/repositories/fe7b3b03-e25f-48d5-97be-19759b2f010b/refs?filter=heads%react/starter/code',
     },
   ],
-  count: 2,
 };
