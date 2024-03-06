@@ -1,9 +1,9 @@
-import { TimeMetrics } from './time-metrics.js';
+import { TimeMetrics } from './time-metrics/time-metrics.js';
 import { VotesCommentsMetrics } from './votes-comments-metrics.js';
 
 import { AzureDevopsURL } from '../helpers/index.js';
 
-import { CODE_TO_VOTE, COMMENT_TYPE } from './constants.js';
+import { CODE_TO_VOTE, COMMENT_TYPE } from './constants/index.js';
 
 const { STRING } = COMMENT_TYPE;
 
@@ -41,9 +41,9 @@ export class CodeReview {
         comments: VotesCommentsMetrics.getPullRequestComments(pullRequest.threads),
         reviewerComments: VotesCommentsMetrics.getPullRequestReviewerComments(pullRequest.threads),
         tags: pullRequest.tags,
-        firstReviewResponseTimeInSeconds: TimeMetrics.calculateAndGetFirstReviewResponseTime(pullRequest),
-        approvalTimeInSeconds: TimeMetrics.calculateAndGetPullRequestApprovalTime(isRequiredReviewers, pullRequest),
-        mergeTimeInSeconds: TimeMetrics.calculateAndGetPullRequestMergeTime(pullRequest),
+        firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(pullRequest),
+        approvalTimeInSeconds: isRequiredReviewers ? TimeMetrics.getPullRequestApprovalTime(pullRequest) : null,
+        mergeTimeInSeconds: TimeMetrics.getPullRequestMergeTime(pullRequest),
         url: AzureDevopsURL.getPullRequestURL(pullRequest.id),
       };
     });
