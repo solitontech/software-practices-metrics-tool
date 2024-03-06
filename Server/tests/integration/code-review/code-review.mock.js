@@ -1,4 +1,4 @@
-import { ServerConfiguration } from '../../../src/configs/server-config.js';
+import { ServerConfiguration } from '../../../src/configs/server.config.js';
 
 const {
   organization: ORGANIZATION,
@@ -7,6 +7,8 @@ const {
 } = ServerConfiguration.versionControl;
 
 export const AZURE_PULL_REQUESTS_RESPONSE = {
+  filteredCount: 15,
+  errorCount: 10,
   pullRequests: [
     {
       pullRequestId: 2620,
@@ -1310,8 +1312,6 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       ],
     },
   ],
-  filteredCount: 15,
-  errorCount: 10,
 };
 
 export const SERVER_PULL_REQUESTS_RESPONSE = {

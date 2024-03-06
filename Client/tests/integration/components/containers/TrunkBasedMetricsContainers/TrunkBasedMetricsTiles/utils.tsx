@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { TrunkBasedMetricsTiles } from "../../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/TrunkBasedMetricsTiles";
 import { queryClient } from "../../../../../../src/setup/queryClient";
 
-export function loadTrunkBasedComponent() {
+export function LoadTrunkBasedComponent() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>

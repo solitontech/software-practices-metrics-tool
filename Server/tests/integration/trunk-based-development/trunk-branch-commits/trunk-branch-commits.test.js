@@ -1,20 +1,20 @@
 import request from 'supertest';
 import { jest, describe, it, expect } from '@jest/globals';
 
-import app from '../../../../src/index.js';
-import { AppError } from '../../../../src/utils/app-error.js';
-import { AzureDevopsApi } from '../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js';
+import app from '../../../../src/app.js';
+import { AppError } from '../../../../src/utils/index.js';
+import { AzureDevopsApi } from '../../../../src/services/version-control/azure-devops/apis/azure-devops.api.js';
 
 import {
   AZURE_TRUNK_BRANCH_COMMITS_RESPONSE,
   SERVER_TRUNK_BRANCH_COMMITS_RESPONSE,
 } from './trunk-branch-commits.mock.js';
-import { ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/constants.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../../src/constants/index.js';
 import { runDatePaginationValidationTests } from '../../common-tests/date-pagination-tests.js';
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
-jest.mock('../../../../src/services/version-control-system/azure-devops/apis/azure-devops.js');
+jest.mock('../../../../src/services/version-control/azure-devops/apis/azure-devops.api.js');
 
 describe('Trunk based metrics - get all the commits in the trunk branch within selected range in the repository', () => {
   const apiEndPoint = '/api/v1/metrics/trunk-based-development/commits';
@@ -71,12 +71,14 @@ describe('Trunk based metrics - get all the commits in the trunk branch within s
   });
 
   it('should handle internal server error with response status 500', async () => {
-    AzureDevopsApi.fetchCommitsList = jest.fn().mockRejectedValue(new Error(ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
+    AzureDevopsApi.fetchCommitsList = jest
+      .fn()
+      .mockRejectedValue(new Error(SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 
     const response = await request(app).get(apiEndPoint + queryParams);
 
     expect(response.statusCode).toBe(STATUS_CODE.INTERNAL_SERVER_ERROR);
-    expect(response.body).toEqual({ error: ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
+    expect(response.body).toEqual({ error: SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR });
   });
 
   runDatePaginationValidationTests(app, apiEndPoint);
