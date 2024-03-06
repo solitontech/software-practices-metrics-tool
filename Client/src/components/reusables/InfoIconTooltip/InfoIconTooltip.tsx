@@ -12,6 +12,7 @@ export const InfoIconTooltip = ({ content, size }: Props) => {
   return (
     <div className={styles.infoIcon}>
       <Tooltip
+        data-testid={content}
         title={<Typography className={styles.toolTip}>{content}</Typography>}
         arrow
       >
