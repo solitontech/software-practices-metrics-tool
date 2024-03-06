@@ -4,11 +4,10 @@ import { CommentMetrics } from './comment-metrics/comment-metrics.js';
 
 import { AzureDevopsURL } from '../helpers/index.js';
 
-import { CODE_TO_VOTE, COMMENT_TYPE } from './constants/index.js';
+import { CODE_TO_VOTE } from './constants/index.js';
 
 export class CodeReview {
   static #parseReviewers(rawReviewers) {
-    // TODO: convert to map if ot needed
     const reviewers = {};
 
     rawReviewers.forEach(({ id, displayName, vote, isRequired }) => {
@@ -23,8 +22,8 @@ export class CodeReview {
   }
 
   static #parseVotesTimeline(pullRequestThreads) {
-    const votes = [];
     const voteResult = 'CodeReviewVoteResult';
+    const votes = [];
 
     pullRequestThreads.forEach((thread) => {
       if (!thread.properties) {
@@ -33,16 +32,14 @@ export class CodeReview {
 
       const vote = thread.properties[voteResult];
       const [firstComment] = thread.comments;
-      const isNoVote = (vote) => {
-        return !parseInt(vote.$value);
-      };
+      const voteValue = parseInt(vote?.$value);
 
-      if (vote && !isNoVote(vote)) {
+      if (vote && voteValue) {
         votes.push({
           author: firstComment.author.displayName,
           id: firstComment.author.id,
           timeOfVote: thread.publishedDate,
-          vote: CODE_TO_VOTE.get(parseInt(vote.$value)),
+          vote: CODE_TO_VOTE.get(voteValue),
         });
       }
     });
@@ -51,11 +48,12 @@ export class CodeReview {
   }
 
   static #parseThreads(pullRequestThreads) {
+    const COMMENT_TYPE = 'text';
     const threads = [];
 
     pullRequestThreads.forEach((thread) => {
       const [firstComment] = thread.comments;
-      const isValidThread = thread.pullRequestThreadContext ?? firstComment?.commentType === COMMENT_TYPE.STRING;
+      const isValidThread = thread.pullRequestThreadContext ?? firstComment?.commentType === COMMENT_TYPE;
 
       if (thread.isDeleted || !isValidThread) {
         return;
@@ -76,9 +74,7 @@ export class CodeReview {
       return [];
     }
 
-    return pullRequest.labels.map((label) => {
-      return label.name;
-    });
+    return pullRequest.labels.map(({ name }) => name);
   }
 
   static #parsePullRequests(pullRequests) {
@@ -114,7 +110,7 @@ export class CodeReview {
         status: pullRequest.status,
         createdBy: pullRequest.createdBy,
         authorId: pullRequest.authorId,
-        isRequiredReviewers: isRequiredReviewers,
+        isRequiredReviewers,
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate ?? null,
         votes: VoteMetrics.getPullRequestVotes(reviewers),
