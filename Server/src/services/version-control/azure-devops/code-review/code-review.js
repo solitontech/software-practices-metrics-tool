@@ -1,7 +1,7 @@
 import { TimeMetrics } from './time-metrics.js';
 import { VotesCommentsMetrics } from './votes-comments-metrics.js';
 
-import { getAzureDevOpsPullRequestURL } from '../helpers/index.js';
+import { AzureDevopsURL } from '../helpers/index.js';
 
 import { CODE_TO_VOTE, COMMENT_TYPE } from './constants.js';
 
@@ -44,7 +44,7 @@ export class CodeReview {
         firstReviewResponseTimeInSeconds: TimeMetrics.calculateAndGetFirstReviewResponseTime(pullRequest),
         approvalTimeInSeconds: TimeMetrics.calculateAndGetPullRequestApprovalTime(isRequiredReviewers, pullRequest),
         mergeTimeInSeconds: TimeMetrics.calculateAndGetPullRequestMergeTime(pullRequest),
-        url: getAzureDevOpsPullRequestURL(pullRequest.id),
+        url: AzureDevopsURL.getPullRequestURL(pullRequest.id),
       };
     });
 
