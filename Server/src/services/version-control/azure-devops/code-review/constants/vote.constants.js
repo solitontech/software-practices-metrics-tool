@@ -1,10 +1,10 @@
-export const VOTE = {
+export const VOTE = Object.freeze({
   APPROVED: 'approved',
   APPROVED_WITH_SUGGESTIONS: 'approvedWithSuggestions',
   NO_VOTE: 'noVote',
   WAIT_FOR_AUTHOR: 'waitForAuthor',
   REJECTED: 'rejected',
-};
+});
 
 export const CODE_TO_VOTE = new Map([
   [10, VOTE.APPROVED],
@@ -14,14 +14,4 @@ export const CODE_TO_VOTE = new Map([
   [-10, VOTE.REJECTED],
 ]);
 
-export const PULL_REQUEST_STATUS = {
-  ACTIVE: 'active',
-  ABANDONED: 'abandoned',
-  COMPLETED: 'completed',
-};
-
-export const COMMENT_TYPE = {
-  STRING: 'text',
-};
-
-Object.freeze(VOTE, CODE_TO_VOTE, PULL_REQUEST_STATUS, COMMENT_TYPE);
+Object.freeze(CODE_TO_VOTE);
