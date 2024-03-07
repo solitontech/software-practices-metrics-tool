@@ -1,89 +1,28 @@
-import { TimeMetrics } from './time-metrics.js';
-import { VotesCommentsMetrics } from './votes-comments-metrics.js';
+import { TimeMetrics } from './time-metrics/time-metrics.js';
+import { VoteMetrics } from './vote-metrics/vote-metrics.js';
+import { CommentMetrics } from './comment-metrics/comment-metrics.js';
 
-import { getAzureDevOpsPullRequestURL } from '../helpers/index.js';
+import { AzureDevopsURL } from '../helpers/index.js';
 
-import { CODE_TO_VOTE, COMMENT_TYPE } from './constants.js';
-
-const { STRING } = COMMENT_TYPE;
+import { CODE_TO_VOTE } from './constants/index.js';
 
 export class CodeReview {
-  static voteResult = 'CodeReviewVoteResult';
-
-  static getCodeReviewMetrics(rawPullRequests) {
-    const codeReviewMetrics = {
-      count: rawPullRequests.length,
-      pullRequests: [],
-    };
-
-    const pullRequests = this.parsePullRequests(rawPullRequests);
-
-    codeReviewMetrics.pullRequests = pullRequests.map((pullRequest) => {
-      const reviewers = Object.values(pullRequest.reviewers);
-      const isRequiredReviewers = this.isRequiredReviewersAssigned(reviewers);
-
-      return {
-        id: pullRequest.id,
-        title: `${pullRequest.id} - ${pullRequest.title}`,
-        status: pullRequest.status,
-        createdBy: pullRequest.createdBy,
-        authorId: pullRequest.authorId,
-        isRequiredReviewers: isRequiredReviewers,
-        creationDate: pullRequest.creationDate,
-        closedDate: pullRequest.closedDate ?? null,
-        votes: VotesCommentsMetrics.getPullRequestVotes(reviewers),
-        votesTimeline: VotesCommentsMetrics.getPullRequestVotesTimeline(
-          pullRequest.reviewers,
-          pullRequest.votesHistoryTimeline
-        ),
-        votesHistory: VotesCommentsMetrics.getPullRequestVotesHistory(pullRequest.votesHistoryTimeline),
-        votesHistoryTimeline: pullRequest.votesHistoryTimeline,
-        comments: VotesCommentsMetrics.getPullRequestComments(pullRequest.threads),
-        reviewerComments: VotesCommentsMetrics.getPullRequestReviewerComments(pullRequest.threads),
-        tags: pullRequest.tags,
-        firstReviewResponseTimeInSeconds: TimeMetrics.calculateAndGetFirstReviewResponseTime(pullRequest),
-        approvalTimeInSeconds: TimeMetrics.calculateAndGetPullRequestApprovalTime(isRequiredReviewers, pullRequest),
-        mergeTimeInSeconds: TimeMetrics.calculateAndGetPullRequestMergeTime(pullRequest),
-        url: getAzureDevOpsPullRequestURL(pullRequest.id),
-      };
-    });
-
-    return codeReviewMetrics;
-  }
-
-  static parsePullRequests(pullRequests) {
-    return pullRequests.map((pullRequest) => {
-      return {
-        id: pullRequest.pullRequestId,
-        title: pullRequest.title,
-        status: pullRequest.status,
-        createdBy: pullRequest.createdBy.displayName,
-        authorId: pullRequest.createdBy.id,
-        creationDate: pullRequest.creationDate,
-        closedDate: pullRequest.closedDate,
-        reviewers: this.parseReviewers(pullRequest.reviewers),
-        votesHistoryTimeline: this.parseVotesTimeline(pullRequest.threads),
-        threads: this.parseThreads(pullRequest.threads),
-        tags: this.parseTags(pullRequest),
-      };
-    });
-  }
-
-  static parseReviewers(rawReviewers) {
+  static #parseReviewers(rawReviewers) {
     const reviewers = {};
 
-    rawReviewers.forEach((reviewer) => {
-      reviewers[reviewer.id] = {
-        author: reviewer.displayName,
-        vote: CODE_TO_VOTE.get(reviewer.vote),
-        isRequired: reviewer.isRequired ?? false,
+    rawReviewers.forEach(({ id, displayName, vote, isRequired }) => {
+      reviewers[id] = {
+        author: displayName,
+        vote: CODE_TO_VOTE.get(vote),
+        isRequired: isRequired ?? false,
       };
     });
 
     return reviewers;
   }
 
-  static parseVotesTimeline(pullRequestThreads) {
+  static #parseVotesTimeline(pullRequestThreads) {
+    const voteResult = 'CodeReviewVoteResult';
     const votes = [];
 
     pullRequestThreads.forEach((thread) => {
@@ -91,18 +30,16 @@ export class CodeReview {
         return;
       }
 
-      const vote = thread.properties[this.voteResult];
+      const vote = thread.properties[voteResult];
       const [firstComment] = thread.comments;
-      const isNoVote = (vote) => {
-        return !parseInt(vote.$value);
-      };
+      const voteValue = parseInt(vote?.$value);
 
-      if (vote && !isNoVote(vote)) {
+      if (vote && voteValue) {
         votes.push({
           author: firstComment.author.displayName,
           id: firstComment.author.id,
           timeOfVote: thread.publishedDate,
-          vote: CODE_TO_VOTE.get(parseInt(vote.$value)),
+          vote: CODE_TO_VOTE.get(voteValue),
         });
       }
     });
@@ -110,12 +47,13 @@ export class CodeReview {
     return votes;
   }
 
-  static parseThreads(pullRequestThreads) {
+  static #parseThreads(pullRequestThreads) {
+    const COMMENT_TYPE = 'text';
     const threads = [];
 
     pullRequestThreads.forEach((thread) => {
       const [firstComment] = thread.comments;
-      const isValidThread = thread.pullRequestThreadContext ?? firstComment?.commentType === STRING;
+      const isValidThread = thread.pullRequestThreadContext ?? firstComment?.commentType === COMMENT_TYPE;
 
       if (thread.isDeleted || !isValidThread) {
         return;
@@ -131,17 +69,67 @@ export class CodeReview {
     return threads;
   }
 
-  static isRequiredReviewersAssigned(reviewers) {
-    return reviewers.some((reviewer) => reviewer.isRequired);
-  }
-
-  static parseTags(pullRequest) {
+  static #parseTags(pullRequest) {
     if (!pullRequest.labels) {
       return [];
     }
 
-    return pullRequest.labels.map((label) => {
-      return label.name;
+    return pullRequest.labels.map(({ name }) => name);
+  }
+
+  static #parsePullRequests(pullRequests) {
+    return pullRequests.map((pullRequest) => {
+      return {
+        id: pullRequest.pullRequestId,
+        title: pullRequest.title,
+        status: pullRequest.status,
+        createdBy: pullRequest.createdBy.displayName,
+        authorId: pullRequest.createdBy.id,
+        creationDate: pullRequest.creationDate,
+        closedDate: pullRequest.closedDate,
+        reviewers: this.#parseReviewers(pullRequest.reviewers),
+        votesHistoryTimeline: this.#parseVotesTimeline(pullRequest.threads),
+        threads: this.#parseThreads(pullRequest.threads),
+        tags: this.#parseTags(pullRequest),
+      };
     });
+  }
+
+  static #isRequiredReviewersAssigned(reviewers) {
+    return reviewers.some((reviewer) => reviewer.isRequired);
+  }
+
+  static getCodeReviewMetrics(rawPullRequests) {
+    const pullRequests = this.#parsePullRequests(rawPullRequests).map((pullRequest) => {
+      const reviewers = Object.values(pullRequest.reviewers);
+      const isRequiredReviewers = this.#isRequiredReviewersAssigned(reviewers);
+
+      return {
+        id: pullRequest.id,
+        title: `${pullRequest.id} - ${pullRequest.title}`,
+        status: pullRequest.status,
+        createdBy: pullRequest.createdBy,
+        authorId: pullRequest.authorId,
+        isRequiredReviewers,
+        creationDate: pullRequest.creationDate,
+        closedDate: pullRequest.closedDate ?? null,
+        votes: VoteMetrics.getPullRequestVotes(reviewers),
+        votesTimeline: VoteMetrics.getPullRequestVotesTimeline(pullRequest.reviewers, pullRequest.votesHistoryTimeline),
+        votesHistory: VoteMetrics.getPullRequestVotesHistory(pullRequest.votesHistoryTimeline),
+        votesHistoryTimeline: pullRequest.votesHistoryTimeline,
+        comments: CommentMetrics.getPullRequestComments(pullRequest.threads),
+        reviewerComments: CommentMetrics.getPullRequestReviewerComments(pullRequest.threads),
+        tags: pullRequest.tags,
+        firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(pullRequest),
+        approvalTimeInSeconds: isRequiredReviewers ? TimeMetrics.getPullRequestApprovalTime(pullRequest) : null,
+        mergeTimeInSeconds: TimeMetrics.getPullRequestMergeTime(pullRequest),
+        url: AzureDevopsURL.getPullRequestURL(pullRequest.id),
+      };
+    });
+
+    return {
+      count: rawPullRequests.length,
+      pullRequests,
+    };
   }
 }
