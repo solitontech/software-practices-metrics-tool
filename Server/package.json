@@ -2,10 +2,10 @@
   "name": "software-practices-metrics-tool",
   "version": "1.0.0",
   "description": "This tool will be useful to measure the metrics for different software practices",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start:prod": "NODE_ENVIRONMENT=production node src/app.js",
-    "start:dev": "set NODE_ENVIRONMENT=development&& nodemon src/app.js",
+    "start:prod": "NODE_ENVIRONMENT=production node src/index.js",
+    "start:dev": "set NODE_ENVIRONMENT=development&& nodemon src/index.js",
     "test": "set NODE_ENVIRONMENT=test&& node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test-ci": "NODE_ENVIRONMENT=test node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "format": "prettier --write \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",

@@ -11,7 +11,7 @@ import { NODE_ENVIRONMENT_MODE, STATUS_CODE } from './constants/index.js';
 const dirName = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
-const { nodeEnvironment, port, clientDevelopmentUrlOrigin, swaggerEditorUrlOrigin } =
+const { nodeEnvironment, clientDevelopmentUrlOrigin, swaggerEditorUrlOrigin } =
   ServerConfiguration.environmentVariables;
 
 if (nodeEnvironment === NODE_ENVIRONMENT_MODE.DEVELOPMENT) {
@@ -48,11 +48,5 @@ app.get('*', (req, res) => {
 
 // express global error handler for api routes
 app.use(globalErrorHandlerMiddleware);
-
-if (nodeEnvironment !== NODE_ENVIRONMENT_MODE.TEST) {
-  app.listen(port, () => {
-    console.log('Server is running on port:', port);
-  });
-}
 
 export default app;
