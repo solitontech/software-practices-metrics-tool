@@ -6,7 +6,7 @@ import { AppError } from '../../../../../../../src/utils/app-error.js';
 import { ServerConfiguration } from '../../../../../../../src/configs/server.config.js';
 
 import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
-import { AZURE_PULL_REQUESTS_RESPONSE } from '../common/common.mock.js';
+import { AZURE_PULL_REQUESTS_RESPONSE } from '../common-mock/azure-pull-request.mock.js';
 
 jest.mock('axios');
 
