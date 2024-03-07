@@ -1,4 +1,4 @@
-import { getAzureDevOpsPullRequestURL, getAzureDevopsBranchesURL, getAzureDevOpsBranchURL } from '../helpers/index.js';
+import { AzureDevopsURL } from '../helpers/index.js';
 import {
   BRANCH_SUFFIX,
   EMPTY_STRING,
@@ -24,7 +24,7 @@ export class TrunkBasedDevelopment {
     const { branchesFollowingNamingStandard, branchesNotFollowingNamingStandard } = allBranches.reduce(
       (acc, { name, objectId: id }) => {
         const branchName = name.replace(BRANCH_SUFFIX, EMPTY_STRING);
-        const branchURL = getAzureDevOpsBranchURL(branchName);
+        const branchURL = AzureDevopsURL.getBranchURL(branchName);
 
         const targetArray = this.#isBranchFollowingNamingStandard(branchName)
           ? acc.branchesFollowingNamingStandard
@@ -41,7 +41,7 @@ export class TrunkBasedDevelopment {
       ((branchesFollowingNamingStandard.length / totalNumberOfBranches) * MAX_PERCENTAGE).toFixed(2) + PERCENTAGE;
 
     return {
-      branchesURL: getAzureDevopsBranchesURL(),
+      branchesURL: AzureDevopsURL.getBranchesURL(),
       totalNumberOfBranches,
       percentageOfBranchesFollowingStandard,
       branchesFollowingNamingStandard: {
@@ -58,9 +58,9 @@ export class TrunkBasedDevelopment {
   static getActiveBranchMetrics({ count, value }) {
     const branches = value.map(({ pullRequestId, title, sourceRefName, creationDate, createdBy }) => {
       const name = sourceRefName.replace(BRANCH_SUFFIX, EMPTY_STRING);
-      const branchURL = getAzureDevOpsBranchURL(name);
+      const branchURL = AzureDevopsURL.getBranchURL(name);
       const titleWithId = pullRequestId + ' - ' + title;
-      const pullRequestURL = getAzureDevOpsPullRequestURL(pullRequestId);
+      const pullRequestURL = AzureDevopsURL.getPullRequestURL(pullRequestId);
 
       return {
         name,
@@ -82,9 +82,9 @@ export class TrunkBasedDevelopment {
     const pullRequests = value.map(
       ({ pullRequestId, title, sourceRefName, creationDate, status, closedDate = null }) => {
         const name = sourceRefName.replace(BRANCH_SUFFIX, EMPTY_STRING);
-        const branchURL = getAzureDevOpsBranchURL(name);
+        const branchURL = AzureDevopsURL.getBranchURL(name);
         const titleWithId = pullRequestId + ' - ' + title;
-        const pullRequestURL = getAzureDevOpsPullRequestURL(pullRequestId);
+        const pullRequestURL = AzureDevopsURL.getPullRequestURL(pullRequestId);
 
         return {
           name,
