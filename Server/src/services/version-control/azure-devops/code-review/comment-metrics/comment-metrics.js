@@ -48,7 +48,7 @@ export class CommentMetrics {
         const isReviewer = reviewerComments[authorId];
 
         if (!isReviewer) {
-          reviewerComments[authorId] = { reviewer: authorName, comments: 0 };
+          reviewerComments[authorId] = { reviewer: authorName, comments: this.#INITIAL_VALUE };
         }
 
         reviewerComments[authorId].comments++;
