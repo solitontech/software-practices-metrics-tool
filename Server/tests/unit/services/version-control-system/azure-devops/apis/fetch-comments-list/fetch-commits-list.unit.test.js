@@ -49,7 +49,7 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
     expect(response).toEqual(AZURE_TRUNK_BRANCH_COMMITS_RESPONSE);
   });
 
-  it('should throw error when commits count is zero in the repository', async () => {
+  it('should throw AppError with status 404 when no commits found in the repository', async () => {
     const mockResponse = { data: { count: 0, value: [] }, status: STATUS_CODE.OK };
 
     axios.get = jest.fn().mockResolvedValue(mockResponse);
@@ -63,7 +63,7 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw 404 error when request to azure fails due to 404', async () => {
+  it('should throw AppError with status 404 when request to azure api fails due to 404', async () => {
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.NOT_FOUND } });
     jest.spyOn(AppError, 'throwAppError');
 
@@ -74,7 +74,7 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw 401 error when request to azure fails due to 401', async () => {
+  it('should throw AppError with status 401 when request to azure api fails due to 401', async () => {
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.UNAUTHORIZED_ACCESS } });
     jest.spyOn(AppError, 'throwAppError');
 
@@ -88,7 +88,7 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
     );
   });
 
-  it('should throw 203 error when request to azure fails due to 203', async () => {
+  it('should throw AppError with status 203 when request to azure api fails due to 203', async () => {
     axios.get = jest.fn().mockResolvedValue({ status: STATUS_CODE.NON_AUTHORITATIVE_INFORMATION });
     jest.spyOn(AppError, 'throwAppError');
 
