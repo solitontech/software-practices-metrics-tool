@@ -12,6 +12,7 @@ export class VersionControl {
 
   static {
     const { versionControlSystem } = ServerConfiguration.environmentVariables;
+
     this.#versionControl = this.#versionControlMap[versionControlSystem];
 
     if (!this.#versionControl) {
