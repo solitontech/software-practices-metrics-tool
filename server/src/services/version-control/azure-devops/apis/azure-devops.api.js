@@ -14,22 +14,39 @@ const {
   authToken: TOKEN,
 } = ServerConfiguration.versionControl;
 
-const { OK, NON_AUTHORITATIVE_INFORMATION, NOT_FOUND, UNAUTHORIZED_ACCESS } = STATUS_CODE;
-
 export class AzureDevopsApi {
   static #baseUrl = new URL(`https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`);
-  // basic authorization header format - 'username:password'.
-  static #header = ':' + TOKEN;
-  static #authorizationHeader = `Basic ${btoa(this.#header)}`;
   static #apiVersion = '7.1-preview.1';
-  static #promiseFulfilled = 'fulfilled';
+
+  static #dataNotFound = 'No data found.';
   static #invalidAzureToken =
     'Unauthorized access. Either invalid Azure DevOps token or invalid organization found in the configuration.';
-  static #dataNotFound = 'No data found.';
   static #invalidRepositoryDetails =
     'No data found. You either do not have permission for the provided token or verify the organization, project, repository & trunk branch in the configuration.';
 
-  static #getFilteredPullRequests = (pullRequests) => {
+  static #throwErrorMessages(response) {
+    if (response.status === STATUS_CODE.NON_AUTHORITATIVE_INFORMATION) {
+      return AppError.throwAppError(this.#invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS);
+    }
+  }
+
+  static #throwAxiosErrorMessages(response) {
+    if (response.status === STATUS_CODE.NOT_FOUND) {
+      return AppError.throwAppError(this.#invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
+    }
+
+    if (response.status === STATUS_CODE.UNAUTHORIZED_ACCESS) {
+      return AppError.throwAppError(this.#invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS);
+    }
+  }
+
+  static #validateResponse(response) {
+    if (!response.count) {
+      return AppError.throwAppError(this.#dataNotFound, STATUS_CODE.NOT_FOUND);
+    }
+  }
+
+  static #getFilteredPullRequests(pullRequests) {
     const squads = ServerConfiguration.clientFiltersSquads;
     const developerIds = squads.flatMap((squad) => Object.keys(squad.developers));
 
@@ -38,28 +55,6 @@ export class AzureDevopsApi {
     }
 
     return pullRequests.filter(({ createdBy }) => developerIds.includes(createdBy.id));
-  };
-
-  static #throwErrorMessages(response) {
-    if (response.status === NON_AUTHORITATIVE_INFORMATION) {
-      AppError.throwAppError(this.#invalidAzureToken, UNAUTHORIZED_ACCESS);
-    }
-  }
-
-  static #throwAxiosErrorMessages(error) {
-    if (error.response.status === NOT_FOUND) {
-      AppError.throwAppError(this.#invalidRepositoryDetails, NOT_FOUND);
-    }
-
-    if (error.response.status === UNAUTHORIZED_ACCESS) {
-      AppError.throwAppError(this.#invalidAzureToken, UNAUTHORIZED_ACCESS);
-    }
-  }
-
-  static #validateResponse(response) {
-    if (!response.count) {
-      AppError.throwAppError(this.#dataNotFound, NOT_FOUND);
-    }
   }
 
   static async #fetchApi(url) {
@@ -68,38 +63,37 @@ export class AzureDevopsApi {
     try {
       const response = await axios.get(url, {
         headers: {
-          Authorization: this.#authorizationHeader,
+          // authorization format - 'username:password'.
+          Authorization: `Basic ${btoa(':' + TOKEN)}`,
           'Content-Type': 'application/json',
         },
       });
 
-      if (response.status === OK) {
+      if (response.status === STATUS_CODE.OK) {
         return response.data;
       }
 
       apiResponse = response;
     } catch (error) {
-      this.#throwAxiosErrorMessages(error);
+      this.#throwAxiosErrorMessages(error.response);
     }
 
     this.#throwErrorMessages(apiResponse);
   }
 
   static async #fetchPullRequestsThreads(pullRequests) {
-    const pullRequestData = await Promise.allSettled(
-      pullRequests.map(async ({ pullRequestId }) => {
-        const url = new URL(this.#baseUrl + `/pullRequests/${pullRequestId}/threads`);
+    const threads = pullRequests.map(async ({ pullRequestId }) => {
+      const url = new URL(this.#baseUrl + `/pullRequests/${pullRequestId}/threads`);
 
-        url.searchParams.append('api-version', this.#apiVersion);
+      url.searchParams.append('api-version', this.#apiVersion);
 
-        const response = await this.#fetchApi(url.href);
-        this.#validateResponse(response);
+      const response = await this.#fetchApi(url.href);
+      this.#validateResponse(response);
 
-        return response;
-      })
-    );
+      return response;
+    });
 
-    return pullRequestData;
+    return await Promise.allSettled(threads);
   }
 
   static get invalidAzureToken() {
@@ -145,9 +139,9 @@ export class AzureDevopsApi {
 
     const pullRequestsThreads = await this.#fetchPullRequestsThreads(filteredPullRequests);
 
-    const pullRequestsWithThreads = filteredPullRequests.filter((pullRequest, index) => {
-      if (pullRequestsThreads[index].status === this.#promiseFulfilled) {
-        pullRequest.threads = pullRequestsThreads[index].value.value;
+    const pullRequestsWithThreads = filteredPullRequests.filter((pullRequest, idx) => {
+      if (pullRequestsThreads[idx].status === 'fulfilled') {
+        pullRequest.threads = pullRequestsThreads[idx].value.value;
 
         return pullRequest;
       }
@@ -155,8 +149,8 @@ export class AzureDevopsApi {
 
     return {
       pullRequests: pullRequestsWithThreads,
-      errorCount: filteredPullRequests.length - pullRequestsWithThreads.length,
       filteredCount: pullRequests.length - filteredPullRequests.length,
+      errorCount: filteredPullRequests.length - pullRequestsWithThreads.length,
     };
   }
 
