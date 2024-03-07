@@ -6,7 +6,6 @@ import { AppError } from '../../../../../../../src/utils/app-error.js';
 import { ServerConfiguration } from '../../../../../../../src/configs/server.config.js';
 
 import {
-  AZURE_PULL_REQUESTS_RESPONSE,
   PULL_REQUESTS_WITH_THREADS,
   PULL_REQUESTS_WITH_THREADS_ERROR,
   PULL_REQUESTS_WITH_THREADS_ERROR_FILTERED,
@@ -14,6 +13,7 @@ import {
   SQUADS,
   THREADS,
 } from './fetch-pull-requests.mock.js';
+import { AZURE_PULL_REQUESTS_RESPONSE } from '../common/common.mock.js';
 import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 
 jest.mock('axios');
