@@ -12,6 +12,7 @@ import {
   THREADS,
 } from './fetch-pull-requests.mock.js';
 import { ServerConfiguration } from '../../../../../../../src/configs/server.config.js';
+import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 
 jest.mock('axios');
 
@@ -40,12 +41,12 @@ const AXIOS_REQUEST_PARAMETERS = [
   },
 ];
 
-describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with threads in azure repository', () => {
+describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads in azure repository within the selected range', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
 
-  it('should fetch pull requests threads successfully', async () => {
+  it('should fetch pull requests with threads successfully from azure repository for selected range', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
@@ -53,16 +54,16 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
     // when the data is return successfully from all the API calls
     axios.get = jest.fn().mockImplementation((url) => {
       if (url.startsWith(BASE_URL + '/pullRequests/1/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests/2/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests/3/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests?')) {
-        return Promise.resolve({ data: AZURE_PULL_REQUESTS_RESPONSE, status: 200 });
+        return Promise.resolve({ data: AZURE_PULL_REQUESTS_RESPONSE, status: STATUS_CODE.OK });
       }
     });
 
@@ -83,7 +84,7 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
     expect(response).toEqual(PULL_REQUESTS_WITH_THREADS);
   });
 
-  it('should fetch pull requests threads successfully with 1 error', async () => {
+  it('should fetch pull requests threads successfully even any pull request thread request failed', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
@@ -94,13 +95,13 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
         return Promise.reject();
       }
       if (url.startsWith(BASE_URL + '/pullRequests/2/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests/3/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests?')) {
-        return Promise.resolve({ data: AZURE_PULL_REQUESTS_RESPONSE, status: 200 });
+        return Promise.resolve({ data: AZURE_PULL_REQUESTS_RESPONSE, status: STATUS_CODE.OK });
       }
     });
 
@@ -121,7 +122,7 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
     expect(response).toEqual(PULL_REQUESTS_WITH_THREADS_ERROR);
   });
 
-  it('should fetch pull requests threads successfully with filter', async () => {
+  it('should fetch pull requests threads successfully when client filters are configured', async () => {
     // when the user configured the filters
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return SQUADS;
@@ -130,16 +131,16 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
     // when the data is return successfully from all the API calls
     axios.get = jest.fn().mockImplementation((url) => {
       if (url.startsWith(BASE_URL + '/pullRequests/1/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests/2/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests/3/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests?')) {
-        return Promise.resolve({ data: AZURE_PULL_REQUESTS_RESPONSE, status: 200 });
+        return Promise.resolve({ data: AZURE_PULL_REQUESTS_RESPONSE, status: STATUS_CODE.OK });
       }
     });
 
@@ -160,7 +161,7 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
     expect(response).toEqual(PULL_REQUESTS_WITH_THREADS_FILTERED);
   });
 
-  it('should fetch pull requests threads successfully with 1 filter & 1 error', async () => {
+  it('should fetch pull requests threads successfully when client filters are configured and any of the pull request threads request failed', async () => {
     // when the user configured the filters
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return SQUADS;
@@ -172,13 +173,13 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
         return Promise.reject();
       }
       if (url.startsWith(BASE_URL + '/pullRequests/2/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests/3/threads?')) {
-        return Promise.resolve({ data: THREADS, status: 200 });
+        return Promise.resolve({ data: THREADS, status: STATUS_CODE.OK });
       }
       if (url.startsWith(BASE_URL + '/pullRequests?')) {
-        return Promise.resolve({ data: AZURE_PULL_REQUESTS_RESPONSE, status: 200 });
+        return Promise.resolve({ data: AZURE_PULL_REQUESTS_RESPONSE, status: STATUS_CODE.OK });
       }
     });
 
@@ -203,7 +204,7 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
-    const mockResponse = { data: { count: 0, value: [] }, status: 200 };
+    const mockResponse = { data: { count: 0, value: [] }, status: STATUS_CODE.OK };
 
     axios.get = jest.fn().mockResolvedValue(mockResponse);
     jest.spyOn(AppError, 'throwAppError');
@@ -212,14 +213,14 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
-    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, 404);
+    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw error when request fails due to 404', async () => {
+  it('should throw error with status 404  when request to azure fails due to 404', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
-    axios.get = jest.fn().mockRejectedValue({ response: { status: 404 } });
+    axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.NOT_FOUND } });
 
     jest.spyOn(AppError, 'throwAppError');
 
@@ -227,34 +228,40 @@ describe('AzureDevopsApi~fetchPullRequests - return all the pull requests with t
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
-    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, 404);
+    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw error when request fails due to 401', async () => {
+  it('should throw error with status 401 when request to azure fails due to 401', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
-    axios.get = jest.fn().mockRejectedValue({ response: { status: 401 } });
+    axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.UNAUTHORIZED_ACCESS } });
     jest.spyOn(AppError, 'throwAppError');
 
     const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
-    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidAzureToken, 401);
+    expect(AppError.throwAppError).toHaveBeenCalledWith(
+      AzureDevopsApi.invalidAzureToken,
+      STATUS_CODE.UNAUTHORIZED_ACCESS
+    );
   });
 
-  it('should throw error with status 401 when request fails due to 203', async () => {
+  it('should throw error with status 401 when request to azure fails due to 203', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
-    axios.get = jest.fn().mockResolvedValue({ status: 203 });
+    axios.get = jest.fn().mockResolvedValue({ status: STATUS_CODE.NON_AUTHORITATIVE_INFORMATION });
     jest.spyOn(AppError, 'throwAppError');
 
     const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
-    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidAzureToken, 401);
+    expect(AppError.throwAppError).toHaveBeenCalledWith(
+      AzureDevopsApi.invalidAzureToken,
+      STATUS_CODE.UNAUTHORIZED_ACCESS
+    );
   });
 });
