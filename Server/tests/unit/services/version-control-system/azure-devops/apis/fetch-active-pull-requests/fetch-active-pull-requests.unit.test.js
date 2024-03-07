@@ -48,7 +48,7 @@ describe('AzureDevopsApi~fetchActivePullRequests - return active pull requests i
     expect(response).toEqual(mockResponse.data);
   });
 
-  it('should throw error with 404 when no pull requests found in azure repository', async () => {
+  it('should throw AppError with 404 when no pull requests found in azure repository', async () => {
     const mockResponse = { data: { count: 0, value: [] }, status: STATUS_CODE.OK };
     axios.get = jest.fn().mockResolvedValue(mockResponse);
     jest.spyOn(AppError, 'throwAppError');
@@ -60,7 +60,7 @@ describe('AzureDevopsApi~fetchActivePullRequests - return active pull requests i
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw error with 404 when request to azure fails due to 404', async () => {
+  it('should throw AppError with 404 when request to azure api fails due to 404', async () => {
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.NOT_FOUND } });
 
     jest.spyOn(AppError, 'throwAppError');
@@ -72,7 +72,7 @@ describe('AzureDevopsApi~fetchActivePullRequests - return active pull requests i
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw error with 401 when request to azure fails due to 401', async () => {
+  it('should throw AppError with 401 when request to azure api fails due to 401', async () => {
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.UNAUTHORIZED_ACCESS } });
     jest.spyOn(AppError, 'throwAppError');
 
@@ -86,7 +86,7 @@ describe('AzureDevopsApi~fetchActivePullRequests - return active pull requests i
     );
   });
 
-  it('should throw error with 401 when request to azure fails due to 203', async () => {
+  it('should throw AppError with 401 when request to azure api fails due to 203', async () => {
     axios.get = jest.fn().mockResolvedValue({ status: STATUS_CODE.NON_AUTHORITATIVE_INFORMATION });
     jest.spyOn(AppError, 'throwAppError');
 
