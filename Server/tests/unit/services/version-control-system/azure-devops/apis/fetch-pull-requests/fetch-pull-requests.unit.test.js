@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { jest, describe, it, expect, afterEach } from '@jest/globals';
 
-import { AzureDevopsApi } from '../../../../../../../src/services/version-control/azure-devops/apis/azure-devops.api.js';
 import { AppError } from '../../../../../../../src/utils/app-error.js';
 import { ServerConfiguration } from '../../../../../../../src/configs/server.config.js';
+import { AzureDevopsApi } from '../../../../../../../src/services/version-control/azure-devops/apis/azure-devops.api.js';
 
+import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 import {
   AZURE_PULL_REQUESTS_RESPONSE,
   PULL_REQUESTS_WITH_THREADS,
@@ -14,7 +15,6 @@ import {
   SQUADS,
   THREADS,
 } from './fetch-pull-requests.mock.js';
-import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 
 jest.mock('axios');
 
@@ -202,7 +202,7 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
     expect(response).toEqual(PULL_REQUESTS_WITH_THREADS_ERROR_FILTERED);
   });
 
-  it('should throw App error with status 404 when no pull requests are found in repository', async () => {
+  it('should throw AppError with status 404 when no pull requests are found in repository', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
@@ -218,12 +218,11 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw error with status 404  when request to azure fails due to 404', async () => {
+  it('should throw AppError with status 404 when request to azure api fails due to 404', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.NOT_FOUND } });
-
     jest.spyOn(AppError, 'throwAppError');
 
     const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
@@ -233,7 +232,7 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw error with status 401 when request to azure fails due to 401', async () => {
+  it('should throw AppError with status 401 when request to azure api fails due to 401', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
@@ -250,7 +249,7 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
     );
   });
 
-  it('should throw error with status 401 when request to azure fails due to 203', async () => {
+  it('should throw AppError with status 401 when request to azure api fails due to 203', async () => {
     jest.spyOn(ServerConfiguration, 'clientFiltersSquads', 'get').mockImplementation(() => {
       return [];
     });
