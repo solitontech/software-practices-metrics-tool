@@ -7,7 +7,6 @@ import { AzureDevopsApi } from '../../../../../../../src/services/version-contro
 
 import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 import {
-  AZURE_PULL_REQUESTS_RESPONSE,
   PULL_REQUESTS_WITH_THREADS,
   PULL_REQUESTS_WITH_THREADS_ERROR,
   PULL_REQUESTS_WITH_THREADS_ERROR_FILTERED,
@@ -15,6 +14,7 @@ import {
   SQUADS,
   THREADS,
 } from './fetch-pull-requests.mock.js';
+import { AZURE_PULL_REQUESTS_RESPONSE } from '../common-mock/azure-pull-request.mock.js';
 
 jest.mock('axios');
 
