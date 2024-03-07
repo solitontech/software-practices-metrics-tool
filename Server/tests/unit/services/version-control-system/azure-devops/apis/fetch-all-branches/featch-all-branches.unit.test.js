@@ -70,7 +70,7 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
-  it('should throw AppError with status 401 when request to azure fails due to 401', async () => {
+  it('should throw AppError with status 401 when request to azure api fails due to 401', async () => {
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.UNAUTHORIZED_ACCESS } });
     jest.spyOn(AppError, 'throwAppError');
 
@@ -84,7 +84,7 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
     );
   });
 
-  it('should throw AppError with status 401 when request to azure fails due to 203', async () => {
+  it('should throw AppError with status 401 when request to azure api fails due to 203', async () => {
     axios.get = jest.fn().mockResolvedValue({ status: STATUS_CODE.NON_AUTHORITATIVE_INFORMATION });
     jest.spyOn(AppError, 'throwAppError');
 
