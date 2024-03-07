@@ -17,12 +17,12 @@ const {
   authToken: TOKEN,
 } = ServerConfiguration.versionControl;
 
-const HEADER = ':' + TOKEN;
-const BASE_URL = `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`;
 const START_DATE = '2022-01-01';
 const END_DATE = '2022-12-31';
 const PAGE = 1;
 const PAGE_SIZE = 10;
+const HEADER = ':' + TOKEN;
+const BASE_URL = `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`;
 const AXIOS_REQUEST_PARAMETERS = [
   `${BASE_URL}/pullRequests?searchCriteria.status=all&searchCriteria.targetRefName=refs%2Fheads%2Fmain&searchCriteria.queryTimeRangeType=created&searchCriteria.minTime=${START_DATE}&searchCriteria.maxTime=${END_DATE}&%24top=${PAGE_SIZE}&%24skip=${
     PAGE - 1 // this is shortcut to find the skip when page is 1, DO NOT CHANGE VALUE OF 'page', this will break
@@ -57,8 +57,9 @@ describe('AzureDevopsApi~fetchPullRequestsList - return pull requests in azure r
 
     const response = AzureDevopsApi.fetchPullRequestsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
@@ -69,8 +70,9 @@ describe('AzureDevopsApi~fetchPullRequestsList - return pull requests in azure r
 
     const response = AzureDevopsApi.fetchPullRequestsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
@@ -80,8 +82,10 @@ describe('AzureDevopsApi~fetchPullRequestsList - return pull requests in azure r
 
     const response = AzureDevopsApi.fetchPullRequestsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
@@ -94,8 +98,10 @@ describe('AzureDevopsApi~fetchPullRequestsList - return pull requests in azure r
 
     const response = AzureDevopsApi.fetchPullRequestsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS

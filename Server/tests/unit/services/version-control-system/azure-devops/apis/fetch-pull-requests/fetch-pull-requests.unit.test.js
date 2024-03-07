@@ -25,12 +25,12 @@ const {
   authToken: TOKEN,
 } = ServerConfiguration.versionControl;
 
-const HEADER = ':' + TOKEN;
-const BASE_URL = `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`;
 const START_DATE = '2022-01-01';
 const END_DATE = '2022-12-31';
 const PAGE = 1;
 const PAGE_SIZE = 10;
+const HEADER = ':' + TOKEN;
+const BASE_URL = `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`;
 const AXIOS_REQUEST_PARAMETERS = [
   `${BASE_URL}/pullRequests?searchCriteria.status=all&searchCriteria.targetRefName=refs%2Fheads%2Fmain&searchCriteria.queryTimeRangeType=created&searchCriteria.minTime=${START_DATE}&searchCriteria.maxTime=${END_DATE}&%24top=${PAGE_SIZE}&%24skip=${
     PAGE - 1 // this is shortcut to find the skip when page is 1, DO NOT CHANGE VALUE OF 'page', this will break
@@ -71,6 +71,7 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
+    // total 4 API calls are made, 1 for pull requests list and 3 for threads of each pull request
     expect(axios.get).toHaveBeenCalledTimes(4);
 
     // check for the first API call to be the pull requests list
