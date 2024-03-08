@@ -15,13 +15,7 @@ interface Props {
   minWidth: string;
 }
 
-export const DialogBox = ({
-  open,
-  onClose,
-  children,
-  content,
-  minWidth,
-}: Props) => {
+export const DialogBox = ({ open, onClose, children, content, minWidth }: Props) => {
   return (
     <Dialog
       open={open}

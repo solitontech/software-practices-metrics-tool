@@ -1,1 +1,1 @@
-export * from "./useClientFilters.ts";
+export * from "./useClientFilters";

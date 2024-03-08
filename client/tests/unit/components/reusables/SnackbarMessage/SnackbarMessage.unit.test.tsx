@@ -24,9 +24,7 @@ describe("SnackbarMessage component", () => {
   });
 
   it("should render with message when open", () => {
-    render(
-      <SnackbarMessage open={true} onClose={onClose} message="Test message" />,
-    );
+    render(<SnackbarMessage open={true} onClose={onClose} message="Test message" />);
 
     const snackbarElement = screen.getByRole("alert");
 
@@ -36,9 +34,7 @@ describe("SnackbarMessage component", () => {
   });
 
   it("should not render when the toast is not open", () => {
-    render(
-      <SnackbarMessage open={false} onClose={onClose} message="Test message" />,
-    );
+    render(<SnackbarMessage open={false} onClose={onClose} message="Test message" />);
 
     const snackbarElement = screen.queryByRole("alert");
 
@@ -47,9 +43,7 @@ describe("SnackbarMessage component", () => {
   });
 
   it("should call onClose method when close button is clicked", () => {
-    render(
-      <SnackbarMessage open={true} onClose={onClose} message="Test message" />,
-    );
+    render(<SnackbarMessage open={true} onClose={onClose} message="Test message" />);
 
     const closeButton = screen.getByRole("button");
 
@@ -62,14 +56,7 @@ describe("SnackbarMessage component", () => {
   it("should call onClose method when autoHideDuration is reached", () => {
     const duration = 100;
 
-    render(
-      <SnackbarMessage
-        open={true}
-        onClose={onClose}
-        message="Test message"
-        duration={duration}
-      />,
-    );
+    render(<SnackbarMessage open={true} onClose={onClose} message="Test message" duration={duration} />);
 
     advanceTimersByTime(duration);
 
@@ -79,9 +66,7 @@ describe("SnackbarMessage component", () => {
   it("should take default duration when duration is not provided", () => {
     const interval = 2000;
 
-    render(
-      <SnackbarMessage open={true} onClose={onClose} message="Test message" />,
-    );
+    render(<SnackbarMessage open={true} onClose={onClose} message="Test message" />);
 
     // should not call onClose method before the default duration of 6000ms
     advanceTimersByTime(interval);
@@ -100,14 +85,7 @@ describe("SnackbarMessage component", () => {
     const duration = 100;
     const timeToAdvance = duration - 1;
 
-    render(
-      <SnackbarMessage
-        open={true}
-        onClose={onClose}
-        message="Test message"
-        duration={duration}
-      />,
-    );
+    render(<SnackbarMessage open={true} onClose={onClose} message="Test message" duration={duration} />);
 
     advanceTimersByTime(timeToAdvance);
 
@@ -118,9 +96,7 @@ describe("SnackbarMessage component", () => {
   it("Should not call onClose method when the default duration is not reached", () => {
     const timeLessThanDefault = 99;
 
-    render(
-      <SnackbarMessage open={true} onClose={onClose} message="Test message" />,
-    );
+    render(<SnackbarMessage open={true} onClose={onClose} message="Test message" />);
 
     advanceTimersByTime(timeLessThanDefault);
     expect(onClose).not.toHaveBeenCalled();

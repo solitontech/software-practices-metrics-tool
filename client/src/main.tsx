@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./styles/index.scss";
 import { queryClient } from "./fetchers/setup/queryClient.ts";
-import { App } from "./pages/index.pages.tsx";
+import { App } from "./pages/index.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

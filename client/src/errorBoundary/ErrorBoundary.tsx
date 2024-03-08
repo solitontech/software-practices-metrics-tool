@@ -22,11 +22,7 @@ export class ErrorBoundary extends Component<IProps, IState> {
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div className={styles.errorMessage}>
-          Something went wrong. Please refresh the app.
-        </div>
-      );
+      return <div className={styles.errorMessage}>Something went wrong. Please refresh the app.</div>;
     }
 
     return this.props.children;

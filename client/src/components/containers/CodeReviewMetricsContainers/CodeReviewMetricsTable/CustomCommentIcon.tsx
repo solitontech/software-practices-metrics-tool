@@ -11,20 +11,16 @@ interface Props {
   reviewerComments: string;
 }
 
-export const CustomCommentIcon = memo(
-  ({ total, nit, major, reviewerComments }: Props) => {
-    return (
-      <div
-        className={styles.comments}
-        title={`${reviewerComments} NIT - ${nit} | MAJOR - ${major} | GENERAL - ${
-          total - (nit + major)
-        } `}
-      >
-        <QuestionAnswerOutlinedIcon className={styles.icon} />
-        <div>{total}</div>
-      </div>
-    );
-  },
-);
+export const CustomCommentIcon = memo(({ total, nit, major, reviewerComments }: Props) => {
+  return (
+    <div
+      className={styles.comments}
+      title={`${reviewerComments} NIT - ${nit} | MAJOR - ${major} | GENERAL - ${total - (nit + major)} `}
+    >
+      <QuestionAnswerOutlinedIcon className={styles.icon} />
+      <div>{total}</div>
+    </div>
+  );
+});
 
 CustomCommentIcon.displayName = "CustomCommentIcon";

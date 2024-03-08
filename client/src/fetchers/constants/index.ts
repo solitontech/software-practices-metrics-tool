@@ -1,2 +1,2 @@
-export * from "./query.constant.ts";
-export * from "./queryKey.constant.ts";
+export * from "./query.constant";
+export * from "./queryKey.constant";

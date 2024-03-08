@@ -6,10 +6,7 @@ import {
 } from "../../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
 import { trunkBasedMetricsAPI } from "../../../../../../src/fetchers/fetchersUtils";
 
-export const getBranchesHandler = (
-  branches: ITotalBranches,
-  delayTime: number = 0,
-) => {
+export const getBranchesHandler = (branches: ITotalBranches, delayTime: number = 0) => {
   return http.get(trunkBasedMetricsAPI + "/branches", async () => {
     await delay(delayTime);
 
@@ -17,10 +14,7 @@ export const getBranchesHandler = (
   });
 };
 
-export const getActiveBranchesHandler = (
-  activeBranches: IActiveBranches,
-  delayTime: number = 0,
-) => {
+export const getActiveBranchesHandler = (activeBranches: IActiveBranches, delayTime: number = 0) => {
   return http.get(trunkBasedMetricsAPI + "/activeBranches", async () => {
     await delay(delayTime);
 

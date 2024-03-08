@@ -8,12 +8,7 @@ interface Props {
   duration?: number;
 }
 
-export const SnackbarMessage = ({
-  open,
-  onClose,
-  message,
-  duration = 6000,
-}: Props) => {
+export const SnackbarMessage = ({ open, onClose, message, duration = 6000 }: Props) => {
   return (
     <Snackbar
       open={open}

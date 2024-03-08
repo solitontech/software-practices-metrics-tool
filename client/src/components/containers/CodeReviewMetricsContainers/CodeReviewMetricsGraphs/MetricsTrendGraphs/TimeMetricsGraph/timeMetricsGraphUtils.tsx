@@ -65,27 +65,16 @@ export class Graph {
 
     tooltipRows = Math.min(tooltipRows, MAX_ROWS);
 
-    const tooltipRowsToDisplay = Array.from(
-      { length: tooltipRows },
-      (_, index) => {
-        const startOffset = index * maxLine;
-        const endOffset = Math.min(
-          startOffset + maxLine,
-          pullRequestIds.length,
-        );
+    const tooltipRowsToDisplay = Array.from({ length: tooltipRows }, (_, index) => {
+      const startOffset = index * maxLine;
+      const endOffset = Math.min(startOffset + maxLine, pullRequestIds.length);
 
-        const currentRow = pullRequestIds.slice(startOffset, endOffset);
+      const currentRow = pullRequestIds.slice(startOffset, endOffset);
 
-        return currentRow.join(TAB_SPACE);
-      },
-    );
+      return currentRow.join(TAB_SPACE);
+    });
 
-    return (
-      TAB_SPACE +
-      tooltipRowsToDisplay.join(
-        TAB_SPACE + LINE_BREAKER + LINE_BREAKER + TAB_SPACE,
-      )
-    );
+    return TAB_SPACE + tooltipRowsToDisplay.join(TAB_SPACE + LINE_BREAKER + LINE_BREAKER + TAB_SPACE);
   }
 
   private static getTooltipContent(header: string, tooltipBody: string) {
@@ -117,20 +106,13 @@ export class Graph {
     return Number((averageSeconds / SECONDS_IN_ONE_HOUR).toPrecision(2));
   }
 
-  static getTooltipText(
-    pullRequestIds: number[],
-    averageTimeInHours: number,
-    header: string,
-  ): string {
+  static getTooltipText(pullRequestIds: number[], averageTimeInHours: number, header: string): string {
     const formattedTime = formatHoursToDays(averageTimeInHours);
     const tooltipHeader = `${header} ${formattedTime} (Total PR's: ${pullRequestIds.length})`;
 
     const groupPullRequestIds = this.groupPullRequestIds(pullRequestIds);
 
-    const tooltipContent = this.getTooltipContent(
-      tooltipHeader,
-      groupPullRequestIds,
-    );
+    const tooltipContent = this.getTooltipContent(tooltipHeader, groupPullRequestIds);
 
     return tooltipContent;
   }

@@ -10,10 +10,6 @@ interface Props {
 
 export const CodeReviewSearchChips = ({ label, selected, onClick }: Props) => {
   return (
-    <MuiChip
-      label={label}
-      onClick={onClick}
-      className={`${selected ? styles.selectedChip : ""} ${styles.chipKey}`}
-    />
+    <MuiChip label={label} onClick={onClick} className={`${selected ? styles.selectedChip : ""} ${styles.chipKey}`} />
   );
 };

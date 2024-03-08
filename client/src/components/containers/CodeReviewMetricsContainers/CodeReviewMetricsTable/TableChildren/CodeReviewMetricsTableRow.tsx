@@ -6,10 +6,7 @@ import { NavLink } from "react-router-dom";
 
 import { VotesTimeLineView } from "./VotesTimeLineView";
 import { NOT_AVAILABLE } from "../../../../../constants/commonConstants";
-import {
-  formatDate,
-  formatDateWithoutTime,
-} from "../../../../../utils/formatTimeUtils";
+import { formatDate, formatDateWithoutTime } from "../../../../../utils/formatTimeUtils";
 import styles from "../CodeReviewMetricsTable.module.scss";
 import { getFormattedReviewerComments } from "../codeReviewMetricsTableUtils";
 import { ConvertHoursToDays } from "../ConvertHoursToDays";
@@ -23,12 +20,9 @@ interface Props {
 
 export const CodeReviewMetricsTableRow = memo(({ index, row }: Props) => {
   const isEvenRow = index % 2 === 0;
-  const { numberOfNitComments, numberOfMajorComments, totalComments } =
-    row.comments;
+  const { numberOfNitComments, numberOfMajorComments, totalComments } = row.comments;
 
-  const formattedReviewerComments = getFormattedReviewerComments(
-    row.reviewerComments,
-  );
+  const formattedReviewerComments = getFormattedReviewerComments(row.reviewerComments);
 
   return (
     <tr
@@ -60,24 +54,14 @@ export const CodeReviewMetricsTableRow = memo(({ index, row }: Props) => {
         <div className={styles.tagsContainer}>
           {row.tags.length
             ? row.tags.map((tag: string) => {
-                return (
-                  <Chip
-                    key={tag}
-                    title={tag}
-                    className={styles.tag}
-                    label={tag}
-                  />
-                );
+                return <Chip key={tag} title={tag} className={styles.tag} label={tag} />;
               })
             : NOT_AVAILABLE}
         </div>
       </td>
 
       <td className={`${styles.text} ${styles.author}`}>
-        <span
-          title={`${row.createdBy} - ${row.authorId}`}
-          data-uuid={row.authorId}
-        >
+        <span title={`${row.createdBy} - ${row.authorId}`} data-uuid={row.authorId}>
           {row.createdBy}
         </span>
       </td>
@@ -116,9 +100,7 @@ export const CodeReviewMetricsTableRow = memo(({ index, row }: Props) => {
         />
       </td>
       <td className={`${styles.text} ${styles.firstReviewTime}`}>
-        <ConvertHoursToDays
-          timeInSeconds={row.firstReviewResponseTimeInSeconds}
-        />
+        <ConvertHoursToDays timeInSeconds={row.firstReviewResponseTimeInSeconds} />
       </td>
       <td className={`${styles.text} ${styles.approvalTime}`}>
         <ConvertHoursToDays timeInSeconds={row.approvalTimeInSeconds} />

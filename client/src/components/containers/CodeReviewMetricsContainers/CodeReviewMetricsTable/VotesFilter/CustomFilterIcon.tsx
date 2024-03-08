@@ -10,21 +10,11 @@ interface Props {
   handleFilterReset: () => void;
 }
 
-export const CustomFilterIcon = ({
-  handleFilter,
-  showNoVote,
-  filter,
-  handleFilterReset,
-}: Props) => {
-  const isFilterSelected = Object.keys(filter).some(
-    (key) => filter[key as Vote],
-  );
+export const CustomFilterIcon = ({ handleFilter, showNoVote, filter, handleFilterReset }: Props) => {
+  const isFilterSelected = Object.keys(filter).some((key) => filter[key as Vote]);
 
   return (
-    <FilterIcon
-      isFilterSelected={isFilterSelected}
-      style={styles.tableFilterIcon}
-    >
+    <FilterIcon isFilterSelected={isFilterSelected} style={styles.tableFilterIcon}>
       <div className={styles.voteFilterContainer}>
         <VotesFilter
           filter={filter}

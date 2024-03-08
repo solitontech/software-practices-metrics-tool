@@ -16,11 +16,7 @@ export function getToolTipText(value: number, recommendedTime: string): string {
   return formatHoursToDays(value) + " ( " + recommendedTime + " )";
 }
 
-export function getTileColor(
-  minThreshold: number,
-  maxThreshold: number,
-  value: number | string,
-): string {
+export function getTileColor(minThreshold: number, maxThreshold: number, value: number | string): string {
   if (typeof value == "string") return "";
 
   if (value < minThreshold) return GREEN_COLOR;
@@ -35,21 +31,15 @@ export function appendHoursToNumber(hours: number): string {
   return `${hours} hours`;
 }
 
-export const formatHoursToDays = cacheWrapperForUnaryFunction(
-  (hours: number): string => {
-    if (hours >= HOURS_IN_A_DAY) {
-      const durationInMilliseconds =
-        hours *
-        MINUTES_IN_ONE_HOUR *
-        MINUTES_IN_ONE_HOUR *
-        FRACTION_TO_FIND_TIME;
+export const formatHoursToDays = cacheWrapperForUnaryFunction((hours: number): string => {
+  if (hours >= HOURS_IN_A_DAY) {
+    const durationInMilliseconds = hours * MINUTES_IN_ONE_HOUR * MINUTES_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;
 
-      return humanizeDuration(durationInMilliseconds, {
-        units: ["d", "h"],
-        round: true,
-      });
-    }
+    return humanizeDuration(durationInMilliseconds, {
+      units: ["d", "h"],
+      round: true,
+    });
+  }
 
-    return appendHoursToNumber(hours);
-  },
-);
+  return appendHoursToNumber(hours);
+});

@@ -1,14 +1,5 @@
 import axios from "axios";
 
-import { PAGINATION_LIMIT } from "../../constants/query.constant";
-import {
-  continueFetching,
-  fetchDataForCommits,
-  fetchDataForActiveBranches,
-  formatDate,
-  fetchDataForPullRequestsMergedToMain,
-  trunkBasedMetricsAPI,
-} from "../../fetchersUtils";
 import {
   ICommit,
   ICommitSuccessInfo,
@@ -22,6 +13,15 @@ import {
   IPullRequestsMergedToMain,
   IPullRequestsMergedToMainSuccessInfo,
 } from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/interfaces";
+import { PAGINATION_LIMIT } from "../../constants/query.constant";
+import {
+  continueFetching,
+  fetchDataForCommits,
+  fetchDataForActiveBranches,
+  formatDate,
+  fetchDataForPullRequestsMergedToMain,
+  trunkBasedMetricsAPI,
+} from "../../fetchersUtils";
 
 export const fetchTotalBranches = async (): Promise<ITotalBranches> => {
   const api = new URL(`${trunkBasedMetricsAPI}/branches`);

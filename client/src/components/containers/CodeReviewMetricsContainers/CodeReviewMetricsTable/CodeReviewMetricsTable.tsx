@@ -2,19 +2,9 @@ import { useState, memo } from "react";
 
 import styles from "./CodeReviewMetricsTable.module.scss";
 import { columns, sortMap } from "./codeReviewMetricsTableConstants";
-import {
-  getFilteredPullRequests,
-  getTotalComments,
-  sortPullRequests,
-} from "./codeReviewMetricsTableUtils";
+import { getFilteredPullRequests, getTotalComments, sortPullRequests } from "./codeReviewMetricsTableUtils";
 import { CustomTableCell } from "./CustomTableCell";
-import {
-  IPullRequestList,
-  Vote,
-  IColumn,
-  Filters,
-  FilterColumn,
-} from "./interfaces";
+import { IPullRequestList, Vote, IColumn, Filters, FilterColumn } from "./interfaces";
 import { CodeReviewMetricsTableRow } from "./TableChildren/CodeReviewMetricsTableRow";
 import { VOTES_FILTER_DEFAULT_STATE } from "./VotesFilter/votesFilterConstants";
 
@@ -40,10 +30,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: Props) => {
 
   const sortedPullRequests = sortPullRequests(pullRequests, sort);
 
-  const filteredPullRequests = getFilteredPullRequests(
-    sortedPullRequests,
-    filters,
-  );
+  const filteredPullRequests = getFilteredPullRequests(sortedPullRequests, filters);
 
   const totalComments = getTotalComments(filteredPullRequests);
 
@@ -54,11 +41,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: Props) => {
     });
   };
 
-  const handleFilterChange = (
-    columnName: FilterColumn,
-    vote: Vote,
-    value: boolean,
-  ) => {
+  const handleFilterChange = (columnName: FilterColumn, vote: Vote, value: boolean) => {
     setFilter((previousState) => {
       return {
         ...FILTER_DEFAULT_STATE,
@@ -78,8 +61,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: Props) => {
     <>
       <div className={styles.header}>
         <div className={styles.totalPRs}>
-          Total PR&apos;s: {filteredPullRequests.length} | Total Comments:{" "}
-          {totalComments}
+          Total PR&apos;s: {filteredPullRequests.length} | Total Comments: {totalComments}
         </div>
       </div>
       <div className={styles.paper}>
@@ -101,13 +83,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: Props) => {
           <tbody className={styles.tableBody}>
             {filteredPullRequests.length ? (
               filteredPullRequests.map((row, index) => {
-                return (
-                  <CodeReviewMetricsTableRow
-                    key={row.id}
-                    index={index}
-                    row={row}
-                  />
-                );
+                return <CodeReviewMetricsTableRow key={row.id} index={index} row={row} />;
               })
             ) : (
               <tr>

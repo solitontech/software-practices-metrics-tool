@@ -9,24 +9,12 @@ interface Props {
   endDate: Date;
 }
 
-export const MetricsTrendAnalysisGraphs = ({
-  pullRequests,
-  startDate,
-  endDate,
-}: Props) => {
+export const MetricsTrendAnalysisGraphs = ({ pullRequests, startDate, endDate }: Props) => {
   return (
     <div className={styles.graphs}>
-      <LeastVotesAnalysisGraph
-        pullRequests={pullRequests}
-        startDate={startDate}
-        endDate={endDate}
-      />
+      <LeastVotesAnalysisGraph pullRequests={pullRequests} startDate={startDate} endDate={endDate} />
 
-      <TimeMetricsAnalysisGraph
-        pullRequests={pullRequests}
-        startDate={startDate}
-        endDate={endDate}
-      />
+      <TimeMetricsAnalysisGraph pullRequests={pullRequests} startDate={startDate} endDate={endDate} />
     </div>
   );
 };

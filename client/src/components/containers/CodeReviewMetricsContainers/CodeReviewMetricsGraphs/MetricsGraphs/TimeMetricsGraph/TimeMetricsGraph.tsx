@@ -1,8 +1,4 @@
-import {
-  ITimeMetricsGraph,
-  ITimeMetricsGraphOptions,
-  ITimeMetricsPullRequest,
-} from "./timeMetricsGraphInterfaces";
+import { ITimeMetricsGraph, ITimeMetricsGraphOptions, ITimeMetricsPullRequest } from "./timeMetricsGraphInterfaces";
 import { TimeMetricsUtils } from "./timeMetricsGraphUtils";
 import { HistogramChart } from "../../../../../reusables/MetricsGraphs/Histogram/Histogram";
 import { TRACE_COLOR } from "../../metricsConstants";
@@ -27,12 +23,11 @@ export const TimeMetricsGraph = ({
   averageTime,
   graphOptions,
 }: Props) => {
-  const pullRequestList: ITimeMetricsPullRequest[] =
-    TimeMetricsUtils.getPullRequestsRoundedTime(
-      pullRequests,
-      hoursScale,
-      maximumHours,
-    );
+  const pullRequestList: ITimeMetricsPullRequest[] = TimeMetricsUtils.getPullRequestsRoundedTime(
+    pullRequests,
+    hoursScale,
+    maximumHours,
+  );
 
   const metricsRoundedTimes = pullRequestList.map(({ metricsTime }) => {
     return metricsTime;
@@ -50,26 +45,13 @@ export const TimeMetricsGraph = ({
 
   const binText = TimeMetricsUtils.getGraphTracesText(pullRequestGroupedCount);
 
-  const markerColor = TimeMetricsUtils.getTracesColor(
-    traceColor,
-    pullRequestGroupedCount,
-  );
+  const markerColor = TimeMetricsUtils.getTracesColor(traceColor, pullRequestGroupedCount);
 
-  const hoverText = TimeMetricsUtils.getGraphHoverText(
-    pullRequestList,
-    pullRequestGroupedCount,
-    metricsName,
-  );
+  const hoverText = TimeMetricsUtils.getGraphHoverText(pullRequestList, pullRequestGroupedCount, metricsName);
 
-  const graphAnnotationText = TimeMetricsUtils.getGraphAnnotationText(
-    metricsName,
-    averageTime,
-    pullRequests.length,
-  );
+  const graphAnnotationText = TimeMetricsUtils.getGraphAnnotationText(metricsName, averageTime, pullRequests.length);
 
-  const xAxisName = `${TimeMetricsUtils.capitalizeFirstLetter(
-    metricsName,
-  )} time in hours`;
+  const xAxisName = `${TimeMetricsUtils.capitalizeFirstLetter(metricsName)} time in hours`;
   const yAxisName = "Pull Requests count";
   const graphTitle = `Pull Requests ${metricsName} time`;
 

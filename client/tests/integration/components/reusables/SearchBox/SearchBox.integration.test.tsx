@@ -19,13 +19,7 @@ describe("SearchBox component", () => {
   it("should render search box with place holder, search icon & tooltip", () => {
     const onChange = vi.fn();
 
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-      />,
-    );
+    render(<SearchBox onChange={onChange} label="Test Label" placeHolder="Test Placeholder" />);
 
     // user should see input field with placeholder
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
@@ -43,13 +37,7 @@ describe("SearchBox component", () => {
   it("should call onChange when input of search box changes", () => {
     const onChange = vi.fn();
 
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-      />,
-    );
+    render(<SearchBox onChange={onChange} label="Test Label" placeHolder="Test Placeholder" />);
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
 
@@ -143,14 +131,7 @@ describe("SearchBox component", () => {
   it("should debounces input changes with custom delay", () => {
     const onChange = vi.fn();
 
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-        isDebounced={true}
-      />,
-    );
+    render(<SearchBox onChange={onChange} label="Test Label" placeHolder="Test Placeholder" isDebounced={true} />);
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
 
@@ -177,14 +158,7 @@ describe("SearchBox component", () => {
   it('should not debounce input changes when "isDebounced" is false', () => {
     const onChange = vi.fn();
 
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-        isDebounced={false}
-      />,
-    );
+    render(<SearchBox onChange={onChange} label="Test Label" placeHolder="Test Placeholder" isDebounced={false} />);
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
 
@@ -206,14 +180,7 @@ describe("SearchBox component", () => {
   it("should not debounce input changes when input event is not fired", () => {
     const onChange = vi.fn();
 
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-        isDebounced={true}
-      />,
-    );
+    render(<SearchBox onChange={onChange} label="Test Label" placeHolder="Test Placeholder" isDebounced={true} />);
 
     // when user is not typing in the input field, onChange method should not be called
     expect(onChange).not.toHaveBeenCalled();
@@ -228,14 +195,7 @@ describe("SearchBox component", () => {
     const onChange = vi.fn();
     const onClick = vi.fn();
 
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-        onClick={onClick}
-      />,
-    );
+    render(<SearchBox onChange={onChange} label="Test Label" placeHolder="Test Placeholder" onClick={onClick} />);
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
 
@@ -249,14 +209,7 @@ describe("SearchBox component", () => {
     const onChange = vi.fn();
     const onClick = vi.fn();
 
-    render(
-      <SearchBox
-        onChange={onChange}
-        label="Test Label"
-        placeHolder="Test Placeholder"
-        onClick={onClick}
-      />,
-    );
+    render(<SearchBox onChange={onChange} label="Test Label" placeHolder="Test Placeholder" onClick={onClick} />);
 
     // when user does not click on the input field, onClick method should not be called
     expect(onClick).not.toHaveBeenCalled();

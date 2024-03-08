@@ -91,9 +91,7 @@ test.describe("Trunk Based Metrics page", () => {
     const selectors = ["name", "title", "creationDate", "closedDate", "status"];
 
     for (const selector of selectors) {
-      const element = await page
-        .locator(`[data-testid="${selector}-table-header"]`)
-        .isVisible();
+      const element = await page.locator(`[data-testid="${selector}-table-header"]`).isVisible();
 
       expect(element).toBeTruthy();
     }

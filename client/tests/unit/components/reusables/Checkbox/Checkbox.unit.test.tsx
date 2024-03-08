@@ -15,14 +15,7 @@ describe("Checkbox component", () => {
   });
 
   it("should render the checkbox with the correct initial state", () => {
-    render(
-      <Checkbox
-        isChecked={false}
-        onChange={onChange}
-        title="Test Title"
-        labelStyle="test-style"
-      />,
-    );
+    render(<Checkbox isChecked={false} onChange={onChange} title="Test Title" labelStyle="test-style" />);
 
     const checkbox = screen.getByRole("checkbox");
 
@@ -31,14 +24,7 @@ describe("Checkbox component", () => {
   });
 
   it("should calls onChange method when the checkbox is clicked", () => {
-    render(
-      <Checkbox
-        isChecked={false}
-        onChange={onChange}
-        title="Test Title"
-        labelStyle="test-style"
-      />,
-    );
+    render(<Checkbox isChecked={false} onChange={onChange} title="Test Title" labelStyle="test-style" />);
 
     expect(onChange).not.toHaveBeenCalled();
 
@@ -51,14 +37,7 @@ describe("Checkbox component", () => {
   });
 
   it("should render the title of the checkbox", () => {
-    render(
-      <Checkbox
-        isChecked={false}
-        onChange={onChange}
-        title="Test Title"
-        labelStyle="test-style"
-      />,
-    );
+    render(<Checkbox isChecked={false} onChange={onChange} title="Test Title" labelStyle="test-style" />);
 
     const titleElement = screen.getByText(/test title/i);
 
@@ -67,14 +46,7 @@ describe("Checkbox component", () => {
   });
 
   it("should render the checkbox title with the correct style", () => {
-    render(
-      <Checkbox
-        isChecked={false}
-        onChange={onChange}
-        title="Test Title"
-        labelStyle="test-style"
-      />,
-    );
+    render(<Checkbox isChecked={false} onChange={onChange} title="Test Title" labelStyle="test-style" />);
 
     const label = screen.getByText(/test title/i);
 

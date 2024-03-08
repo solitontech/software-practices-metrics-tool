@@ -48,10 +48,7 @@ export class LeastVotesGraphUtils {
     return VOTES.NO_VOTE;
   };
 
-  static appendPullRequestIdAndGetGraphHoverText = (
-    votesValue: number,
-    pullRequestId: number,
-  ) => {
+  static appendPullRequestIdAndGetGraphHoverText = (votesValue: number, pullRequestId: number) => {
     const isEndOfLine = (): boolean => {
       return !(votesValue % this.maxLine);
     };
@@ -64,17 +61,10 @@ export class LeastVotesGraphUtils {
       return "";
     }
 
-    return (
-      TAB_SPACE +
-      (isEndOfLine() ? LINE_BREAKER + LINE_BREAKER + TAB_SPACE : "") +
-      pullRequestId
-    );
+    return TAB_SPACE + (isEndOfLine() ? LINE_BREAKER + LINE_BREAKER + TAB_SPACE : "") + pullRequestId;
   };
 
-  static getformatGraphHoverText = (
-    { hoverText, value }: IPiePlot,
-    title: string,
-  ): string => {
+  static getformatGraphHoverText = ({ hoverText, value }: IPiePlot, title: string): string => {
     return (
       DOUBLE_SPACE +
       `<b>${title} (Total PR's: ${value})</b>` +

@@ -22,9 +22,7 @@ interface Props {
   branchesNotFollowingNamingStandard: IBranchInfo[];
 }
 
-export const TrunkBasedNamingConventionTable = ({
-  branchesNotFollowingNamingStandard,
-}: Props) => {
+export const TrunkBasedNamingConventionTable = ({ branchesNotFollowingNamingStandard }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const searchedBranches = searchTerm
@@ -45,9 +43,7 @@ export const TrunkBasedNamingConventionTable = ({
           placeHolder="Search Branch Name"
           isDebounced={true}
         ></SearchBox>
-        <div className={styles.totalCount}>
-          Total Branches: {searchedBranches.length}
-        </div>
+        <div className={styles.totalCount}>Total Branches: {searchedBranches.length}</div>
       </div>
       <div className={styles.tableView}>
         <Paper className={styles.paper}>
@@ -56,11 +52,7 @@ export const TrunkBasedNamingConventionTable = ({
               <TableHead>
                 <TableRow>
                   {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ width: column.width }}
-                    >
+                    <TableCell key={column.id} align={column.align} style={{ width: column.width }}>
                       {column.label}
                     </TableCell>
                   ))}
@@ -79,11 +71,7 @@ export const TrunkBasedNamingConventionTable = ({
                         key={row.id + row.name}
                       >
                         <TableCell>
-                          <NavLink
-                            to={row.url}
-                            target="_blank"
-                            className={styles.branchName}
-                          >
+                          <NavLink to={row.url} target="_blank" className={styles.branchName}>
                             <Tooltip title={row.name} placement="bottom-start">
                               <span className={styles.title}>{row.name}</span>
                             </Tooltip>
@@ -95,10 +83,7 @@ export const TrunkBasedNamingConventionTable = ({
                   })
                 ) : (
                   <TableRow>
-                    <TableCell
-                      colSpan={columns.length}
-                      className={styles.noDataMessage}
-                    >
+                    <TableCell colSpan={columns.length} className={styles.noDataMessage}>
                       No data available
                     </TableCell>
                   </TableRow>

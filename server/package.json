@@ -10,7 +10,7 @@
     "test-ci": "NODE_ENVIRONMENT=test node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "format": "prettier --write \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "lint": "eslint \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
-    "prepare": "cd .. && husky install Server/.husky",
+    "prepare": "cd .. && husky install server/.husky",
     "lint-staged": "lint-staged",
     "build:client": "node ./src/scripts/build-client.js",
     "build:docker": "node ./src/scripts/build-docker.js"

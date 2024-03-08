@@ -10,14 +10,7 @@ interface Props {
   searchDialogBox?: React.ReactNode;
 }
 
-export const CommonLayout = ({
-  id,
-  pageHeader,
-  children,
-  searchBox,
-  filter,
-  searchDialogBox,
-}: Props) => {
+export const CommonLayout = ({ id, pageHeader, children, searchBox, filter, searchDialogBox }: Props) => {
   return (
     <div className={styles.container}>
       <header>

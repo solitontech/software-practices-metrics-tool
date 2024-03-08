@@ -1,9 +1,5 @@
 import styles from "./CodeReviewMetricsTiles.module.scss";
-import {
-  appendHoursToNumber,
-  getTileColor,
-  getToolTipText,
-} from "./codeReviewMetricsTilesUtils";
+import { appendHoursToNumber, getTileColor, getToolTipText } from "./codeReviewMetricsTilesUtils";
 import { InfoIconTooltip } from "../../../reusables/InfoIconTooltip/InfoIconTooltip";
 import { Tile } from "../../../reusables/Tile/Tile";
 
@@ -28,10 +24,8 @@ const PR_THRESHOLDS = {
 const recommendedTimeForMetrics = {
   firstReviewResponseTime: (value: number) =>
     `Recommended time for first review response should be less than ${value} hours`,
-  approvalTime: (value: number) =>
-    `Recommended time for approval should be less than ${value} hours`,
-  mergeTime: (value: number) =>
-    `Recommended time for merge should be less than ${value} hours`,
+  approvalTime: (value: number) => `Recommended time for approval should be less than ${value} hours`,
+  mergeTime: (value: number) => `Recommended time for merge should be less than ${value} hours`,
 };
 
 export const CodeReviewMetricsTiles = ({
@@ -51,11 +45,7 @@ export const CodeReviewMetricsTiles = ({
     averageApprovalTime,
   );
 
-  const mergeTimeTextColor = getTileColor(
-    PR_THRESHOLDS.MERGE_TIME.MIN,
-    PR_THRESHOLDS.MERGE_TIME.MAX,
-    averageMergeTime,
-  );
+  const mergeTimeTextColor = getTileColor(PR_THRESHOLDS.MERGE_TIME.MIN, PR_THRESHOLDS.MERGE_TIME.MAX, averageMergeTime);
 
   return (
     <>
@@ -65,17 +55,12 @@ export const CodeReviewMetricsTiles = ({
             <InfoIconTooltip
               content={getToolTipText(
                 averageFirstReviewResponseTime,
-                recommendedTimeForMetrics.firstReviewResponseTime(
-                  PR_THRESHOLDS.FIRST_REVIEW_RESPONSE_TIME.MIN,
-                ),
+                recommendedTimeForMetrics.firstReviewResponseTime(PR_THRESHOLDS.FIRST_REVIEW_RESPONSE_TIME.MIN),
               )}
               size="16px"
             />
             <div>
-              <span
-                data-testid="first-review-response-time"
-                className={styles[firstReviewResponseTimeTextColor]}
-              >
+              <span data-testid="first-review-response-time" className={styles[firstReviewResponseTimeTextColor]}>
                 {appendHoursToNumber(averageFirstReviewResponseTime)}
               </span>
             </div>
@@ -90,17 +75,12 @@ export const CodeReviewMetricsTiles = ({
             <InfoIconTooltip
               content={getToolTipText(
                 averageApprovalTime,
-                recommendedTimeForMetrics.approvalTime(
-                  PR_THRESHOLDS.APPROVAL_TIME.MIN,
-                ),
+                recommendedTimeForMetrics.approvalTime(PR_THRESHOLDS.APPROVAL_TIME.MIN),
               )}
               size="16px"
             />
             <div>
-              <span
-                data-testid="approval-time"
-                className={styles[approvalTimeTextColor]}
-              >
+              <span data-testid="approval-time" className={styles[approvalTimeTextColor]}>
                 {appendHoursToNumber(averageApprovalTime)}
               </span>
             </div>
@@ -115,17 +95,12 @@ export const CodeReviewMetricsTiles = ({
             <InfoIconTooltip
               content={getToolTipText(
                 averageMergeTime,
-                recommendedTimeForMetrics.mergeTime(
-                  PR_THRESHOLDS.MERGE_TIME.MIN,
-                ),
+                recommendedTimeForMetrics.mergeTime(PR_THRESHOLDS.MERGE_TIME.MIN),
               )}
               size="16px"
             />
             <div>
-              <span
-                data-testid="merge-time"
-                className={`${styles[mergeTimeTextColor]} mergeTime`}
-              >
+              <span data-testid="merge-time" className={`${styles[mergeTimeTextColor]} mergeTime`}>
                 {appendHoursToNumber(averageMergeTime)}
               </span>
             </div>

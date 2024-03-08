@@ -7,7 +7,7 @@ import { ICustomError } from "../types/types";
 
 export const useTrunkBasedMetricsCodeFreeze = (startDate: Date, endDate: Date) => {
   const { isLoading, data, error } = useQuery<ICommitSuccessInfo, ICustomError>({
-    queryKey: [QUERY_KEY.TRUNK_BASED_CODE_FREEZE_PERIOD, startDate, endDate],
+    queryKey: [QUERY_KEY.TRUNK_BASED_BRANCH_COMMITS, startDate, endDate],
     queryFn: async () => {
       return await fetchCodeFreezeMetrics(startDate, endDate);
     },
