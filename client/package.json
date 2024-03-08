@@ -73,7 +73,7 @@
     "msw": "^2.2.2",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
-    "typescript": "^5.0.2",
+    "typescript": "^5.4.2",
     "vite": "^4.4.5",
     "vitest": "^0.34.6",
     "vitest-dom": "^0.1.1"

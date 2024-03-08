@@ -1,3 +1,3 @@
-export * from "./clientFilters/index.ts";
-export * from "./codeReview/index.ts";
-export * from "./trunkBasedDevelopment/index.ts";
+export * from "./clientFilters/useClientFilters";
+export * from "./codeReview";
+export * from "./trunkBasedDevelopment";

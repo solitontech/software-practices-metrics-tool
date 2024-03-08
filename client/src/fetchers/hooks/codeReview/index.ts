@@ -1,1 +1,1 @@
-export * from "./useCodeReviewMetrics.ts";
+export * from "./useCodeReviewMetrics";

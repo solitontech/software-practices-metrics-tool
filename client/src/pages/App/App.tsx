@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { pathToCodeReviewMetrics, pathToMetrics, pathToTrunkBasedMetrics } from "../../constants/routeConstants";
-import { ClientFiltersProvider } from "../../contexts/clientFiltersContext/clientFiltersContext";
+import { ClientFiltersProvider } from "../../context/clientFilters/context";
 import { ErrorBoundary } from "../../errorBoundary/ErrorBoundary";
 import { CodeReviewMetrics } from "../CodeReviewMetrics/CodeReviewMetrics";
 import { Home } from "../Home/Home";

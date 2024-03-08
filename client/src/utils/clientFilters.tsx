@@ -1,9 +1,9 @@
 import { IPullRequestSuccessInfo } from "../components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTable/interfaces";
-import { ISquad } from "../contexts/clientFiltersContext/clientFiltersContextInterface";
+import { IContextClientFiltersSquad } from "../context";
 
 export const getClientFilteredPullRequests = (
   data: IPullRequestSuccessInfo | undefined,
-  filters: ISquad[],
+  filters: IContextClientFiltersSquad[],
 ): IPullRequestSuccessInfo | undefined => {
   const isValid = data && filters.length !== 0;
 
@@ -26,7 +26,7 @@ export const getClientFilteredPullRequests = (
   return filteredData;
 };
 
-const getSquadsUserIdsMap = (squads: ISquad[]) => {
+const getSquadsUserIdsMap = (squads: IContextClientFiltersSquad[]) => {
   const developerIdsMap: Map<string, boolean> = new Map();
   const reviewerIdsMap: Map<string, boolean> = new Map();
 

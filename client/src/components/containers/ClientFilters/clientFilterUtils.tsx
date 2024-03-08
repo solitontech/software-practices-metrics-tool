@@ -1,5 +1,5 @@
-import { IUser } from "../../../contexts/clientFiltersContext/clientFiltersContextInterface";
+import { IContextClientFiltersSquadUser } from "../../../context";
 
-export const isValidUsers = (users: [string, IUser][]) => {
+export const isValidUsers = (users: [string, IContextClientFiltersSquadUser][]) => {
   return users.length > 0;
 };

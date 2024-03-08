@@ -1,4 +1,4 @@
-export class API {
+export class ApiURL {
   static get #baseURL() {
     const localServerUrl = "http://localhost:3000";
 

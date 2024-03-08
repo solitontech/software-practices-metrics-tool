@@ -5,16 +5,18 @@ import { produce } from "immer";
 import { USERS, USER_TYPE } from "./clientFilterConstants";
 import styles from "./ClientFilters.module.scss";
 import { isValidUsers } from "./clientFilterUtils";
-import { ClientFiltersContext } from "../../../contexts/clientFiltersContext/clientFiltersContext";
-import { ISquad, IUser } from "../../../contexts/clientFiltersContext/clientFiltersContextInterface";
+import { ClientFiltersContext, IContextClientFiltersSquad, IContextClientFiltersSquadUser } from "../../../context";
 import { Checkbox } from "../../reusables/Checkbox/Checkbox";
 
 export const ClientFilterContainer = () => {
   const { filters, setFilters } = useContext(ClientFiltersContext);
 
   const onSquadChange = (userKey: keyof typeof USERS, squadIndex: number, value: boolean) => {
-    const updatedFilters = produce(filters, (draftFilters: ISquad[]) => {
-      const users = draftFilters[squadIndex][USERS[userKey] as keyof ISquad] as Record<string, IUser>;
+    const updatedFilters = produce(filters, (draftFilters: IContextClientFiltersSquad[]) => {
+      const users = draftFilters[squadIndex][USERS[userKey] as keyof IContextClientFiltersSquad] as Record<
+        string,
+        IContextClientFiltersSquadUser
+      >;
 
       for (const developer in users) {
         users[developer].isSelected = value;
@@ -25,8 +27,11 @@ export const ClientFilterContainer = () => {
   };
 
   const onUserChange = (userKey: keyof typeof USERS, squadIndex: number, userId: string, value: boolean) => {
-    const updatedFilters = produce(filters, (draftFilters: ISquad[]) => {
-      const users = draftFilters[squadIndex][USERS[userKey] as keyof ISquad] as Record<string, IUser>;
+    const updatedFilters = produce(filters, (draftFilters: IContextClientFiltersSquad[]) => {
+      const users = draftFilters[squadIndex][USERS[userKey] as keyof IContextClientFiltersSquad] as Record<
+        string,
+        IContextClientFiltersSquadUser
+      >;
 
       users[userId].isSelected = value;
     });
