@@ -30,14 +30,13 @@ import { MetricsToggleTab } from "../../components/reusables/MetricsToggleTab/Me
 import { SearchBox } from "../../components/reusables/SearchBox/SearchBox.tsx";
 import SnackbarMessage from "../../components/reusables/SnackbarMessage/SnackbarMessage.tsx";
 import { ErrorBoundary } from "../../errorBoundary/ErrorBoundary.tsx";
-import { useCodeReviewMetrics } from "../../queries/useCodeReviewMetrics.tsx";
+import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics.ts";
 import { filterPullRequests } from "../../utils/filterPullRequests.tsx";
 
 const today = DateTime.local();
 const sevenDaysAgoFromToday = today.minus({ days: 7 });
 const sixMonthsAgoFromToday = today.minus({ days: 190 });
-const metricsToggleTabs =
-  CODE_REVIEW_METRICS_TABS as IMetricsView<CodeReviewMetricsView>[];
+const metricsToggleTabs = CODE_REVIEW_METRICS_TABS as IMetricsView<CodeReviewMetricsView>[];
 
 const PLACEHOLDER = "Search for date, title, tags, author, reviewer & status";
 const SEARCH_BOX_ID = "search-box";
@@ -47,8 +46,7 @@ type CodeReviewMetricsView = "table" | "graph" | "trend-graph";
 export const CodeReviewMetrics = () => {
   const [selectedChips, setSelectedChips] = useState(ALL_CHIPS);
 
-  const [searchPlaceHolder, setSearchPlaceHolder] =
-    useState<string>(PLACEHOLDER);
+  const [searchPlaceHolder, setSearchPlaceHolder] = useState<string>(PLACEHOLDER);
 
   const [isSearchBoxDropdownOpen, setIsSearchBoxDropdownOpen] = useState(false);
 
@@ -80,15 +78,9 @@ export const CodeReviewMetrics = () => {
     CODE_REVIEW_METRICS.FIRST_REVIEW_RESPONSE,
   );
 
-  const averageApprovalTime = getMetricsAverageTimeInHours(
-    searchedPullRequests,
-    CODE_REVIEW_METRICS.APPROVAL_TIME,
-  );
+  const averageApprovalTime = getMetricsAverageTimeInHours(searchedPullRequests, CODE_REVIEW_METRICS.APPROVAL_TIME);
 
-  const averageMergeTime = getMetricsAverageTimeInHours(
-    searchedPullRequests,
-    CODE_REVIEW_METRICS.MERGE_TIME,
-  );
+  const averageMergeTime = getMetricsAverageTimeInHours(searchedPullRequests, CODE_REVIEW_METRICS.MERGE_TIME);
 
   const handleViewChange = (newView: CodeReviewMetricsView) => {
     setSelectedView(newView);
@@ -103,24 +95,15 @@ export const CodeReviewMetrics = () => {
   };
 
   const isTableView = () => {
-    return (
-      selectedView ===
-      (CODE_REVIEW_METRICS_TAB_VALUE.TABLE as CodeReviewMetricsView)
-    );
+    return selectedView === (CODE_REVIEW_METRICS_TAB_VALUE.TABLE as CodeReviewMetricsView);
   };
 
   const isGraphView = () => {
-    return (
-      selectedView ===
-      (CODE_REVIEW_METRICS_TAB_VALUE.GRAPH as CodeReviewMetricsView)
-    );
+    return selectedView === (CODE_REVIEW_METRICS_TAB_VALUE.GRAPH as CodeReviewMetricsView);
   };
 
   const isTrendAnalysisView = () => {
-    return (
-      selectedView ===
-      (CODE_REVIEW_METRICS_TAB_VALUE.TREND_GRAPH as CodeReviewMetricsView)
-    );
+    return selectedView === (CODE_REVIEW_METRICS_TAB_VALUE.TREND_GRAPH as CodeReviewMetricsView);
   };
 
   useEffect(() => {
@@ -235,9 +218,7 @@ export const CodeReviewMetrics = () => {
                 key={chip.chipKey}
                 label={chip.chipLabel}
                 selected={selectedChips.includes(chip.chipKey)}
-                onClick={() =>
-                  handleChipClick(chip.chipKey as keyof typeof CHIP)
-                }
+                onClick={() => handleChipClick(chip.chipKey as keyof typeof CHIP)}
               />
             ))}
           </div>
@@ -256,12 +237,8 @@ export const CodeReviewMetrics = () => {
           <div className={styles.header}>
             <DateRangePicker
               date={dates}
-              onStartDateChange={(date: Date) =>
-                handleDateChange(date, "startDate")
-              }
-              onEndDateChange={(date: Date) =>
-                handleDateChange(date, "endDate")
-              }
+              onStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
+              onEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
               minDate={sixMonthsAgoFromToday.toJSDate()}
               maxDate={today.toJSDate()}
             />

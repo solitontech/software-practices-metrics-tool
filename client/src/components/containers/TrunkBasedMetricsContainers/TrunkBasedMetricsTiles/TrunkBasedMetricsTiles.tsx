@@ -6,8 +6,8 @@ import { NavLink } from "react-router-dom";
 import styles from "./TrunkBasedMetricsTiles.module.scss";
 import dataInfoAlert from "../../../../assets/images/dataInfoAlert.svg";
 import { NOT_AVAILABLE } from "../../../../constants/commonConstants";
-import { useTrunkBasedMetricsActiveBranches } from "../../../../queries/useTrunkBasedMetricsActiveBranches";
-import { useTrunkBasedMetricsTotalBranches } from "../../../../queries/useTrunkBasedMetricsTotalBranches";
+import { useTrunkBasedMetricsActiveBranches } from "../../../../fetchers/hooks/trunkBasedDevelopment/useTrunkBasedMetricsActiveBranches";
+import { useTrunkBasedMetricsTotalBranches } from "../../../../fetchers/hooks/trunkBasedDevelopment/useTrunkBasedMetricsTotalBranches";
 import { DialogBox } from "../../../reusables/DialogBox/DialogBox";
 import { InfoIconTooltip } from "../../../reusables/InfoIconTooltip/InfoIconTooltip";
 import { Tile } from "../../../reusables/Tile/Tile";
@@ -21,22 +21,16 @@ const TRUNK_BASED_METRICS_TILE_HEADERS = {
 };
 
 export const TrunkBasedMetricsTiles = () => {
-  const [isActiveBranchDialogOpen, setIsActiveBranchDialogOpen] =
-    useState(false);
+  const [isActiveBranchDialogOpen, setIsActiveBranchDialogOpen] = useState(false);
 
-  const [
-    isBranchesNamingConventionDialogOpen,
-    setIsBranchesNamingConventionDialogOpen,
-  ] = useState(false);
+  const [isBranchesNamingConventionDialogOpen, setIsBranchesNamingConventionDialogOpen] = useState(false);
 
   const {
     data: {
       branchesURL = "",
       totalNumberOfBranches = 0,
       percentageOfBranchesFollowingStandard = NOT_AVAILABLE,
-      branchesFollowingNamingStandard: {
-        count: branchesFollowingNamingStandardCount = 0,
-      } = {},
+      branchesFollowingNamingStandard: { count: branchesFollowingNamingStandardCount = 0 } = {},
       branchesNotFollowingNamingStandard: {
         count: branchesNotFollowingNamingStandardCount = 0,
         branches: branchesNotFollowingNamingStandardBranches = [],
@@ -52,14 +46,9 @@ export const TrunkBasedMetricsTiles = () => {
     <>
       <Tile title={TRUNK_BASED_METRICS_TILE_HEADERS.TOTAL_BRANCHES}>
         <div className={styles.tileContent}>
-          <InfoIconTooltip
-            content="Total number of branches in the repository"
-            size="16px"
-          />
+          <InfoIconTooltip content="Total number of branches in the repository" size="16px" />
           <div className={styles.tileInfo}>
-            <div data-testid="total-branches">
-              {totalNumberOfBranches ? totalNumberOfBranches : NOT_AVAILABLE}
-            </div>
+            <div data-testid="total-branches">{totalNumberOfBranches ? totalNumberOfBranches : NOT_AVAILABLE}</div>
             <NavLink to={branchesURL} target="blank" className={styles.navLink}>
               <OpenInNewIcon className={styles.navIcon} />
             </NavLink>
@@ -75,48 +64,32 @@ export const TrunkBasedMetricsTiles = () => {
           />
           <div className={styles.tileInfo}>
             <div data-testid="active-branches">
-              {activeBranchesList.length
-                ? activeBranchesList.length
-                : NOT_AVAILABLE}
+              {activeBranchesList.length ? activeBranchesList.length : NOT_AVAILABLE}
             </div>
             <div
               className={styles.icon}
               data-testid="active-branches-button"
               onClick={() => setIsActiveBranchDialogOpen(true)}
             >
-              <img
-                src={dataInfoAlert}
-                className={styles.dialogIcon}
-                alt="dataAlert"
-              />
+              <img src={dataInfoAlert} className={styles.dialogIcon} alt="dataAlert" />
             </div>
           </div>
         </div>
       </Tile>
-      <Tile
-        title={
-          TRUNK_BASED_METRICS_TILE_HEADERS.BRANCHES_FOLLOWING_NAMING_STANDARD
-        }
-      >
+      <Tile title={TRUNK_BASED_METRICS_TILE_HEADERS.BRANCHES_FOLLOWING_NAMING_STANDARD}>
         <div className={styles.tileContent}>
           <InfoIconTooltip
             content={`${branchesFollowingNamingStandardCount} branches following naming standard ( Recommended naming standard is - users/firstname-lastname/task-name )`}
             size="16px"
           />
           <div className={styles.tileInfo}>
-            <div data-testid="branches-following-naming-standard">
-              {percentageOfBranchesFollowingStandard}
-            </div>
+            <div data-testid="branches-following-naming-standard">{percentageOfBranchesFollowingStandard}</div>
             <div
               className={styles.icon}
               data-testid="branches-naming-convention-button"
               onClick={() => setIsBranchesNamingConventionDialogOpen(true)}
             >
-              <img
-                src={dataInfoAlert}
-                className={styles.dialogIcon}
-                alt="dataAlert"
-              />
+              <img src={dataInfoAlert} className={styles.dialogIcon} alt="dataAlert" />
             </div>
           </div>
         </div>
@@ -125,9 +98,7 @@ export const TrunkBasedMetricsTiles = () => {
       <DialogBox
         open={isActiveBranchDialogOpen}
         onClose={() => setIsActiveBranchDialogOpen(false)}
-        content={
-          <TrunkBasedActiveBranchesTable activeBranches={activeBranchesList} />
-        }
+        content={<TrunkBasedActiveBranchesTable activeBranches={activeBranchesList} />}
         minWidth="800px"
       >
         <div>Active PR&apos;s to trunk branch</div>
@@ -138,9 +109,7 @@ export const TrunkBasedMetricsTiles = () => {
         onClose={() => setIsBranchesNamingConventionDialogOpen(false)}
         content={
           <TrunkBasedNamingConventionTable
-            branchesNotFollowingNamingStandard={
-              branchesNotFollowingNamingStandardBranches
-            }
+            branchesNotFollowingNamingStandard={branchesNotFollowingNamingStandardBranches}
           />
         }
         minWidth="550px"

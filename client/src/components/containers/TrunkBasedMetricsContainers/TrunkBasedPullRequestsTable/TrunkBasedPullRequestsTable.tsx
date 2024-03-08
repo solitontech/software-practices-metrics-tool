@@ -13,16 +13,10 @@ import { NavLink } from "react-router-dom";
 
 import styles from "./TrunkBasedPullRequestsTable.module.scss";
 import { columns } from "./trunkBasedPullRequestsTableConstants";
-import {
-  filterPullRequests,
-  getMergedPullRequest,
-} from "./trunkBasedPullRequestsTableUtils";
+import { filterPullRequests, getMergedPullRequest } from "./trunkBasedPullRequestsTableUtils";
 import { ErrorBoundary } from "../../../../errorBoundary/ErrorBoundary";
-import { useTrunkBasedMetricsPullRequests } from "../../../../queries/useTrunkBasedMetricsPullRequests";
-import {
-  formatDate,
-  formatDateWithoutTime,
-} from "../../../../utils/formatTimeUtils";
+import { useTrunkBasedMetricsPullRequests } from "../../../../fetchers/hooks/trunkBasedDevelopment/useTrunkBasedMetricsPullRequests";
+import { formatDate, formatDateWithoutTime } from "../../../../utils/formatTimeUtils";
 import { DisplayError } from "../../../reusables/DisplayError/DisplayError";
 import { InfoIconTooltip } from "../../../reusables/InfoIconTooltip/InfoIconTooltip";
 import { LoadingSpinner } from "../../../reusables/LoadingSpinner/LoadingSpinner";
@@ -100,15 +94,7 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
               <TableBody>
                 {searchedActiveBranches.length ? (
                   searchedActiveBranches.map((row, index) => {
-                    const {
-                      creationDate,
-                      closedDate,
-                      name,
-                      title,
-                      status,
-                      pullRequestURL,
-                      branchURL,
-                    } = row;
+                    const { creationDate, closedDate, name, title, status, pullRequestURL, branchURL } = row;
                     const isEvenRow = index % 2 === 0;
 
                     return (
@@ -121,24 +107,16 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
                       >
                         <TableCell className={styles.date}>
                           <Tooltip title={formatDate(creationDate)} arrow>
-                            <span className={styles.startDate}>
-                              {formatDateWithoutTime(creationDate)}
-                            </span>
+                            <span className={styles.startDate}>{formatDateWithoutTime(creationDate)}</span>
                           </Tooltip>
                         </TableCell>
                         <TableCell className={styles.date}>
                           <Tooltip title={formatDate(closedDate)} arrow>
-                            <span className={styles.closedDate}>
-                              {formatDateWithoutTime(closedDate)}
-                            </span>
+                            <span className={styles.closedDate}>{formatDateWithoutTime(closedDate)}</span>
                           </Tooltip>
                         </TableCell>
                         <TableCell>
-                          <NavLink
-                            to={branchURL}
-                            target="_blank"
-                            className={styles.branchName}
-                          >
+                          <NavLink to={branchURL} target="_blank" className={styles.branchName}>
                             <Tooltip title={name} placement="bottom-start">
                               <span className={styles.title}>{name}</span>
                             </Tooltip>
@@ -146,11 +124,7 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
                           </NavLink>
                         </TableCell>
                         <TableCell>
-                          <NavLink
-                            to={pullRequestURL}
-                            className={styles.pullRequestURL}
-                            target="_blank"
-                          >
+                          <NavLink to={pullRequestURL} className={styles.pullRequestURL} target="_blank">
                             <Tooltip title={title} placement="bottom-start">
                               <span className={styles.title}>{title}</span>
                             </Tooltip>
@@ -166,10 +140,7 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
                   })
                 ) : (
                   <TableRow>
-                    <TableCell
-                      colSpan={columns.length}
-                      className={styles.noDataMessage}
-                    >
+                    <TableCell colSpan={columns.length} className={styles.noDataMessage}>
                       No data available
                     </TableCell>
                   </TableRow>
@@ -181,25 +152,15 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
         <div className={styles.tiles}>
           <Tile title={TRUNK_BASED_TILE_HEADERS.TOTAL_PULL_REQUESTS}>
             <div className={styles.tileContent}>
-              <InfoIconTooltip
-                content="Total pull requests for the selected start date range"
-                size="16px"
-              />
+              <InfoIconTooltip content="Total pull requests for the selected start date range" size="16px" />
               <div>
-                <span data-testid="total-pull-requests">
-                  {searchedActiveBranches.length}
-                </span>
+                <span data-testid="total-pull-requests">{searchedActiveBranches.length}</span>
               </div>
             </div>
           </Tile>
-          <Tile
-            title={TRUNK_BASED_TILE_HEADERS.PERCENTAGE_OF_PULL_REQUESTS_MERGED}
-          >
+          <Tile title={TRUNK_BASED_TILE_HEADERS.PERCENTAGE_OF_PULL_REQUESTS_MERGED}>
             <div className={styles.tileContent}>
-              <InfoIconTooltip
-                content={getMergedPullRequest(searchedActiveBranches).count}
-                size="16px"
-              />
+              <InfoIconTooltip content={getMergedPullRequest(searchedActiveBranches).count} size="16px" />
               <div>
                 <span data-testid="merged-branches-percentage">
                   {getMergedPullRequest(searchedActiveBranches).percentage}

@@ -1,18 +1,14 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import {
-  pathToCodeReviewMetrics,
-  pathToMetrics,
-  pathToTrunkBasedMetrics,
-} from "./constants/routeConstants";
-import { ClientFiltersProvider } from "./contexts/clientFiltersContext/clientFiltersContext";
-import { ErrorBoundary } from "./errorBoundary/ErrorBoundary";
-import { CodeReviewMetrics } from "./pages/CodeReviewMetrics/CodeReviewMetrics";
-import { Home } from "./pages/Home/Home";
-import { PageNotFound } from "./pages/PageNotFound/PageNotFound";
-import { TrunkBasedMetrics } from "./pages/TrunkBasedMetrics/TrunkBasedMetrics";
+import { pathToCodeReviewMetrics, pathToMetrics, pathToTrunkBasedMetrics } from "../../constants/routeConstants";
+import { ClientFiltersProvider } from "../../contexts/clientFiltersContext/clientFiltersContext";
+import { ErrorBoundary } from "../../errorBoundary/ErrorBoundary";
+import { CodeReviewMetrics } from "../CodeReviewMetrics/CodeReviewMetrics";
+import { Home } from "../Home/Home";
+import { PageNotFound } from "../PageNotFound/PageNotFound";
+import { TrunkBasedMetrics } from "../TrunkBasedMetrics/TrunkBasedMetrics";
 
-export const AppRouter = () => {
+export const App = () => {
   return (
     <ClientFiltersProvider>
       <Routes>
