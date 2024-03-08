@@ -9,8 +9,6 @@ import { ServerConfiguration } from '../../../../../../../src/configs/server.con
 import { ALL_BRANCHES_AZURE_RESPONSE } from './fetch-all-branches.mock.js';
 import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 
-jest.mock('axios');
-
 const {
   organization: ORGANIZATION,
   projectName: PROJECT,
@@ -29,6 +27,8 @@ const AXIOS_REQUEST_PARAMETERS = [
     },
   },
 ];
+
+jest.mock('axios');
 
 describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository', () => {
   afterEach(() => {
@@ -54,8 +54,9 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = AzureDevopsApi.fetchAllBranches();
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
@@ -65,8 +66,9 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = AzureDevopsApi.fetchAllBranches();
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
@@ -76,8 +78,10 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = AzureDevopsApi.fetchAllBranches();
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
@@ -90,8 +94,10 @@ describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository'
 
     const response = AzureDevopsApi.fetchAllBranches();
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS

@@ -8,8 +8,6 @@ import { AZURE_TRUNK_BRANCH_COMMITS_RESPONSE } from './fetch-commits-list.mock.j
 import { ServerConfiguration } from '../../../../../../../src/configs/server.config.js';
 import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 
-jest.mock('axios');
-
 const {
   organization: ORGANIZATION,
   projectName: PROJECT,
@@ -17,11 +15,11 @@ const {
   authToken: TOKEN,
 } = ServerConfiguration.versionControl;
 
-const HEADER = ':' + TOKEN;
 const START_DATE = '2022-01-01';
 const END_DATE = '2022-12-31';
 const PAGE = 1;
 const PAGE_SIZE = 10;
+const HEADER = ':' + TOKEN;
 const AXIOS_REQUEST_PARAMETERS = [
   `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}/commits?searchCriteria.itemVersion.version=main&searchCriteria.fromDate=${START_DATE}&searchCriteria.toDate=${END_DATE}&api-version=7.1-preview.1&%24top=${PAGE_SIZE}&%24skip=${
     PAGE - 1
@@ -33,6 +31,8 @@ const AXIOS_REQUEST_PARAMETERS = [
     },
   },
 ];
+
+jest.mock('axios');
 
 describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk branch in the given range.', () => {
   afterEach(() => {
@@ -58,8 +58,9 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
 
     const response = AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
@@ -69,8 +70,9 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
 
     const response = AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
@@ -80,8 +82,10 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
 
     const response = AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
@@ -94,8 +98,10 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
 
     const response = AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
