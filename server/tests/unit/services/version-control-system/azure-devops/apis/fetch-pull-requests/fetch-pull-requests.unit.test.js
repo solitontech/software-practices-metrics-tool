@@ -71,18 +71,23 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    // total 4 API calls are made, 1 for pull requests list and 3 for threads of each pull request
+    // total 4 API calls are made, 1 API call is for fetching pull requests (count = 3)  and other 3 API calls for threads of each pull request
     expect(axios.get).toHaveBeenCalledTimes(4);
 
     // check for the first API call to be the pull requests list
-    expect(axios.get.mock.calls[0][0]).toEqual(AXIOS_REQUEST_PARAMETERS[0]);
-    expect(axios.get.mock.calls[0][1]).toEqual(AXIOS_REQUEST_PARAMETERS[1]);
+    const [firstApiCallParameters] = axios.get.mock.calls;
+
+    expect(firstApiCallParameters).toEqual(AXIOS_REQUEST_PARAMETERS);
 
     // and next 3 calls to be the threads for each pull request
-    for (let i = 1; i < 4; i++) {
-      expect(axios.get.mock.calls[i][0]).toEqual(BASE_URL + `/pullRequests/${i}/threads?api-version=7.1-preview.1`);
-      expect(axios.get.mock.calls[i][1]).toEqual(AXIOS_REQUEST_PARAMETERS[1]);
-    }
+    axios.get.mock.calls.slice(1, 4).forEach((call, index) => {
+      const [url, config] = call;
+      const expectedUrl = `${BASE_URL}/pullRequests/${index + 1}/threads?api-version=7.1-preview.1`;
+      const [, expectedConfig] = AXIOS_REQUEST_PARAMETERS;
+
+      expect(url).toEqual(expectedUrl);
+      expect(config).toEqual(expectedConfig);
+    });
 
     expect(response).toEqual(PULL_REQUESTS_WITH_THREADS);
   });
@@ -110,17 +115,23 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
+    // total 4 API calls are made, 1 API call is for fetching pull requests (count = 3)  and other 3 API calls for threads of each pull request
     expect(axios.get).toHaveBeenCalledTimes(4);
 
     // check for the first API call to be the pull requests list
-    expect(axios.get.mock.calls[0][0]).toEqual(AXIOS_REQUEST_PARAMETERS[0]);
-    expect(axios.get.mock.calls[0][1]).toEqual(AXIOS_REQUEST_PARAMETERS[1]);
+    const [firstApiCallParameters] = axios.get.mock.calls;
+
+    expect(firstApiCallParameters).toEqual(AXIOS_REQUEST_PARAMETERS);
 
     // and next 3 calls to be the threads for each pull request
-    for (let i = 1; i < 4; i++) {
-      expect(axios.get.mock.calls[i][0]).toEqual(BASE_URL + `/pullRequests/${i}/threads?api-version=7.1-preview.1`);
-      expect(axios.get.mock.calls[i][1]).toEqual(AXIOS_REQUEST_PARAMETERS[1]);
-    }
+    axios.get.mock.calls.slice(1, 4).forEach((call, index) => {
+      const [url, config] = call;
+      const expectedUrl = `${BASE_URL}/pullRequests/${index + 1}/threads?api-version=7.1-preview.1`;
+      const [, expectedConfig] = AXIOS_REQUEST_PARAMETERS;
+
+      expect(url).toEqual(expectedUrl);
+      expect(config).toEqual(expectedConfig);
+    });
 
     expect(response).toEqual(PULL_REQUESTS_WITH_THREADS_ERROR);
   });
@@ -149,17 +160,24 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
+    // total 3 API calls are made, 1 API call is for fetching pull requests (count = 3)  and other 2 API calls for threads of each pull request
+    // as a pull request got filtered using squads
     expect(axios.get).toHaveBeenCalledTimes(3);
 
     // check for the first API call to be the pull requests list
-    expect(axios.get.mock.calls[0][0]).toEqual(AXIOS_REQUEST_PARAMETERS[0]);
-    expect(axios.get.mock.calls[0][1]).toEqual(AXIOS_REQUEST_PARAMETERS[1]);
+    const [firstApiCallParameters] = axios.get.mock.calls;
+
+    expect(firstApiCallParameters).toEqual(AXIOS_REQUEST_PARAMETERS);
 
     // and next 2 calls to be the threads for each pull request as a pull request got filtered using squads
-    for (let i = 1; i < 3; i++) {
-      expect(axios.get.mock.calls[i][0]).toEqual(BASE_URL + `/pullRequests/${i}/threads?api-version=7.1-preview.1`);
-      expect(axios.get.mock.calls[i][1]).toEqual(AXIOS_REQUEST_PARAMETERS[1]);
-    }
+    axios.get.mock.calls.slice(1, 3).forEach((call, index) => {
+      const [url, config] = call;
+      const expectedUrl = `${BASE_URL}/pullRequests/${index + 1}/threads?api-version=7.1-preview.1`;
+      const [, expectedConfig] = AXIOS_REQUEST_PARAMETERS;
+
+      expect(url).toEqual(expectedUrl);
+      expect(config).toEqual(expectedConfig);
+    });
 
     expect(response).toEqual(PULL_REQUESTS_WITH_THREADS_FILTERED);
   });
@@ -188,17 +206,24 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
+    // total 3 API calls are made, 1 API call is for fetching pull requests (count = 3)  and other 2 API calls for threads of each pull request
+    // as a pull request got filtered using squads
     expect(axios.get).toHaveBeenCalledTimes(3);
 
     // check for the first API call to be the pull requests list
-    expect(axios.get.mock.calls[0][0]).toEqual(AXIOS_REQUEST_PARAMETERS[0]);
-    expect(axios.get.mock.calls[0][1]).toEqual(AXIOS_REQUEST_PARAMETERS[1]);
+    const [firstApiCallParameters] = axios.get.mock.calls;
+
+    expect(firstApiCallParameters).toEqual(AXIOS_REQUEST_PARAMETERS);
 
     // and next 2 calls to be the threads for each pull request as a pull request got filtered using squads
-    for (let i = 1; i < 3; i++) {
-      expect(axios.get.mock.calls[i][0]).toEqual(BASE_URL + `/pullRequests/${i}/threads?api-version=7.1-preview.1`);
-      expect(axios.get.mock.calls[i][1]).toEqual(AXIOS_REQUEST_PARAMETERS[1]);
-    }
+    axios.get.mock.calls.slice(1, 4).forEach((call, index) => {
+      const [url, config] = call;
+      const expectedUrl = `${BASE_URL}/pullRequests/${index + 1}/threads?api-version=7.1-preview.1`;
+      const [, expectedConfig] = AXIOS_REQUEST_PARAMETERS;
+
+      expect(url).toEqual(expectedUrl);
+      expect(config).toEqual(expectedConfig);
+    });
 
     expect(response).toEqual(PULL_REQUESTS_WITH_THREADS_ERROR_FILTERED);
   });
@@ -214,8 +239,9 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
@@ -228,8 +254,9 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
@@ -242,8 +269,10 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
@@ -259,8 +288,10 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
 
     const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS

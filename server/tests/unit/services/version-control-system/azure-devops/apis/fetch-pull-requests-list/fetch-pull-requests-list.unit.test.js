@@ -8,8 +8,6 @@ import { ServerConfiguration } from '../../../../../../../src/configs/server.con
 import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 import { AZURE_PULL_REQUESTS_RESPONSE } from '../common-mock/azure-pull-request.mock.js';
 
-jest.mock('axios');
-
 const {
   organization: ORGANIZATION,
   projectName: PROJECT,
@@ -34,6 +32,8 @@ const AXIOS_REQUEST_PARAMETERS = [
     },
   },
 ];
+
+jest.mock('axios');
 
 describe('AzureDevopsApi~fetchPullRequestsList - return pull requests in azure repository within the selected range', () => {
   afterEach(() => {

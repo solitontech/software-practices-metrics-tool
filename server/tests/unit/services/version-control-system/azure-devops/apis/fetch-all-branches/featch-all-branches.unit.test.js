@@ -9,8 +9,6 @@ import { ServerConfiguration } from '../../../../../../../src/configs/server.con
 import { ALL_BRANCHES_AZURE_RESPONSE } from './fetch-all-branches.mock.js';
 import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 
-jest.mock('axios');
-
 const {
   organization: ORGANIZATION,
   projectName: PROJECT,
@@ -29,6 +27,8 @@ const AXIOS_REQUEST_PARAMETERS = [
     },
   },
 ];
+
+jest.mock('axios');
 
 describe('AzureDevopsApi~fetchAllBranches - returns all branches for repository', () => {
   afterEach(() => {
