@@ -55,7 +55,9 @@ describe("SearchBox component", () => {
 
     // when user is typing in the input field, onChange method should be called
     fireEvent.change(inputElement, { target: { value: "Test" } });
+
     expect(onChange).toHaveBeenCalledOnce();
+
     expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({
         target: expect.objectContaining({
@@ -84,11 +86,14 @@ describe("SearchBox component", () => {
 
     // when user is typing in the input field, onChange method should not be called
     fireEvent.change(inputElement, { target: { value: "Test" } });
+
     expect(onChange).not.toHaveBeenCalled();
 
     // after given delay, onChange method should be called
     advanceTimersByTime(delay);
+
     expect(onChange).toHaveBeenCalledOnce();
+
     expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({
         target: expect.objectContaining({
@@ -124,6 +129,7 @@ describe("SearchBox component", () => {
     advanceTimersByTime(delay);
 
     expect(onChange).toHaveBeenCalledOnce();
+
     expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({
         target: expect.objectContaining({
@@ -155,7 +161,9 @@ describe("SearchBox component", () => {
 
     // after default delay, onChange method should be called
     advanceTimersByTime(defaultDelay);
+
     expect(onChange).toHaveBeenCalledOnce();
+
     expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({
         target: expect.objectContaining({
@@ -180,9 +188,11 @@ describe("SearchBox component", () => {
 
     const inputElement = screen.getByPlaceholderText(/test placeholder/i);
 
-    // when user is typing in the input field, onChange method should be called
+    // when user is typing in the input field, onChange method should be called immediately
     fireEvent.change(inputElement, { target: { value: "Test" } });
+
     expect(onChange).toHaveBeenCalledOnce();
+
     expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({
         target: expect.objectContaining({
@@ -205,7 +215,7 @@ describe("SearchBox component", () => {
       />,
     );
 
-    // when use is not typing in the input field, onChange method should not be called
+    // when user is not typing in the input field, onChange method should not be called
     expect(onChange).not.toHaveBeenCalled();
 
     // even after default delay, onChange method should not be called

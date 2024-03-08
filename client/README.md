@@ -38,115 +38,124 @@ Make sure you have the following dependencies installed on your machine:
 
 ## Installation
 
-### 1. Copy the contents of this repository:
+### 1. Copy the contents of this repository
 
 1. Copy all the contents of this starter code into the preferred directory
    within your project's repository.
 
-### 2. Install Dependencies:
+### 2. Install Dependencies
 
 1. Once inside the starter code's base directory, run the following command to
    install the required dependencies.
-   ```bash
-   npm install
-   ```
-2. The above command reads the `package.json` file and installs all the
-   necessary dependencies listed.
 
-### 3. Start the application:
+```bash
+   npm install
+```
+
+The above command reads the `package.json` file and installs all the
+necessary dependencies listed.
+
+### 3. Start the application
 
 1. Once the dependencies are installed, you can start the application by running
    the following command in terminal:
-   ```bash
-   npm run dev
-   ```
-2. The above command will execute the specified script in the `scripts` section
-   of the `package.json` file, typically used for starting the development
-   server.
 
-### 4. Access the Application:
+```bash
+  npm run dev
+```
+
+The above command will execute the specified script in the `scripts` section
+of the `package.json` file, typically used for starting the development
+server.
+
+### 4. Access the Application
 
 1. Once the development server is running, open your web browser and go to the
    address [http://localhost:5173](http://localhost:5173) and access the
    application.
 
-## Test the Application:
+## Test the Application
 
-1.  This starter code comes pre-built with configurations for testing done using
-    `Vitest` and `React Testing Library`.
-2.  Once inside the starter code's base directory, run the following command in
-    terminal to run the test scripts.
-    ```bash
+1. This starter code comes pre-built with configurations for testing done using
+   `Vitest` and `React Testing Library`.
+2. Once inside the starter code's base directory, run the following command in
+   terminal to run the test scripts.
+
+```bash
     npm run test
-    ```
-3.  This Repository contains a few placeholder test files that helps you get
-    started with writing unit tests for your react application.
-4.  This starter code also comes pre-built with configurations and placeholder
-    request handlers for mocking API requests using `Mock Service Worker`.
+```
 
-## Test Coverage:
+1. This Repository contains a few placeholder test files that helps you get
+   started with writing unit tests for your react application.
+2. This starter code also comes pre-built with configurations and placeholder
+   request handlers for mocking API requests using `Mock Service Worker`.
 
-1.  This starter code comes pre-built with configurations for test coverage
-    using `Vitest`.
-2.  Once inside the starter code's base directory, run the following command in
-    terminal to generate test coverage report for the application.
-    ```bash
-    npm run coverage
-    ```
+## Test Coverage
 
-## Build the application:
+1. This starter code comes pre-built with configurations for test coverage
+   using `Vitest`.
+2. Once inside the starter code's base directory, run the following command in
+   terminal to generate test coverage report for the application.
 
-1.  Once inside the starter code's base directory, run the following command in
-    terminal to build the application.
-    ```bash
-    npm run build
-    ```
-2.  The above command will perform tasks such as bundling and minifying
-    Typescript code, processing stylesheets and optimizing assets.
+```bash
+   npm run coverage
+```
 
-## Containerize the application:
+## Build the application
+
+1. Once inside the starter code's base directory, run the following command in
+   terminal to build the application.
+
+```bash
+   npm run build
+```
+
+The above command will perform tasks such as bundling and minifying
+Typescript code, processing stylesheets and optimizing assets.
+
+## Containerize the application
 
 ### 1. Manual Containerization
 
-1.  To convert the application into an docker image, execute the following
-    command in the terminal.
+1. To convert the application into an docker image, execute the following
+   command in the terminal.
 
-    ```docker-compose
-    docker build -t <image_name>:<version> <Dockerfile's directory>
-    ```
+   ```docker-compose
+   docker build -t <image_name>:<version> <Dockerfile's directory>
+   ```
 
-    `image_name` - Unique identifier of an application's image.  
-    `version` - Number that uniquely identifies incremental versions of an
-    application's image. `Dockerfile's directory` - File location of the
-    Dockerfile.
+   `image_name` - Unique identifier of an application's image.
+   `version` - Number that uniquely identifies incremental versions of an
+   application's image. `Dockerfile's directory` - File location of the
+   Dockerfile.
 
-    An example build command can be found below:
+   An example build command can be found below:
 
-    ```docker-compose
-    docker build -t starter-code:0.1 .
-    ```
+   ```docker-compose
+   docker build -t starter-code:0.1 .
+   ```
 
-2.  To run the above built docker image in an isolated container, execute the
-    following command in the terminal.
+2. To run the above built docker image in an isolated container, execute the
+   following command in the terminal.
 
-    ```docker-compose
-    docker run -d -p 80:80 --name <container_name> <image_name>
-    ```
+   ```docker-compose
+   docker run -d -p 80:80 --name <container_name> <image_name>
+   ```
 
-    `container_name` - Name of the container that spins up.  
-    `image_name` - Name of the image that would be run inside the container.
+   `container_name` - Name of the container that spins up.
+   `image_name` - Name of the image that would be run inside the container.
 
-    **Note:** The `image_name` should match the `image_name` from the above
-    step.
+   **Note:** The `image_name` should match the `image_name` from the above
+   step.
 
 ### 2. Using docker compose file
 
-1.  To build as well as run the image in an isolated container using
-    `docker-compose` file, execute the following command in the terminal.
+1. To build as well as run the image in an isolated container using
+   `docker-compose` file, execute the following command in the terminal.
 
-    ```docker-compose
-    docker-compose up
-    ```
+   ```docker-compose
+   docker-compose up
+   ```
 
-    **Note:** Make sure to have `Docker Desktop` open before running the above
-    commands.
+   **Note:** Make sure to have `Docker Desktop` open before running the above
+   commands.

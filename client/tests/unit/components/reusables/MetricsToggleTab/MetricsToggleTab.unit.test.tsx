@@ -28,6 +28,7 @@ describe("MetricsToggleTab component", () => {
       />,
     );
 
+    // user should see the two toggle tabs
     const view1Element = screen.getByText(/view 1/i);
     expect(view1Element).toBeInTheDocument();
 
@@ -45,6 +46,8 @@ describe("MetricsToggleTab component", () => {
     );
 
     const view2Element = screen.getByText(/view 2/i);
+
+    // user clicks the view 2 tab
     fireEvent.click(view2Element);
 
     expect(onViewChange).toHaveBeenCalledWith("view2");
@@ -60,6 +63,8 @@ describe("MetricsToggleTab component", () => {
     );
 
     const view1Element = screen.getByText(/view 1/i);
+
+    // user clicks the view 1 tab which is already active tab
     fireEvent.click(view1Element);
 
     expect(onViewChange).not.toHaveBeenCalled();
@@ -79,6 +84,10 @@ describe("MetricsToggleTab component", () => {
     );
 
     const iconElement = screen.getByText(/icon/i);
+    const view1Element = screen.getByText(/view 1/i);
+
+    // user should see the icon along with the tab name
     expect(iconElement).toBeInTheDocument();
+    expect(view1Element).toBeInTheDocument();
   });
 });

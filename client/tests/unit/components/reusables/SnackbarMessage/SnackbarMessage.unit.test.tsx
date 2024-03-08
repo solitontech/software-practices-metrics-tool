@@ -30,6 +30,7 @@ describe("SnackbarMessage component", () => {
 
     const snackbarElement = screen.getByRole("alert");
 
+    // user should see the snackbar message displayed
     expect(snackbarElement).toBeInTheDocument();
     expect(snackbarElement).toHaveTextContent(/test message/i);
   });
@@ -41,6 +42,7 @@ describe("SnackbarMessage component", () => {
 
     const snackbarElement = screen.queryByRole("alert");
 
+    // user should not see the snackbar message
     expect(snackbarElement).not.toBeInTheDocument();
   });
 
@@ -50,6 +52,8 @@ describe("SnackbarMessage component", () => {
     );
 
     const closeButton = screen.getByRole("button");
+
+    // user clicks the close button
     fireEvent.click(closeButton);
 
     expect(onClose).toHaveBeenCalledTimes(1);
@@ -79,12 +83,15 @@ describe("SnackbarMessage component", () => {
       <SnackbarMessage open={true} onClose={onClose} message="Test message" />,
     );
 
+    // should not call onClose method before the default duration of 6000ms
     advanceTimersByTime(interval);
     expect(onClose).not.toHaveBeenCalled();
 
+    // should not call onClose method before the default duration of 6000ms
     advanceTimersByTime(interval);
     expect(onClose).not.toHaveBeenCalled();
 
+    // should call onClose method after the default duration of 6000ms
     advanceTimersByTime(interval);
     expect(onClose).toHaveBeenCalledOnce();
   });
@@ -103,6 +110,8 @@ describe("SnackbarMessage component", () => {
     );
 
     advanceTimersByTime(timeToAdvance);
+
+    // should not call onClose method before the duration is reached
     expect(onClose).not.toHaveBeenCalled();
   });
 

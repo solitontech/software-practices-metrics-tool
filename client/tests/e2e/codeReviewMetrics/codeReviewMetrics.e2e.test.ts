@@ -2,7 +2,7 @@ import "dotenv/config";
 import { test, expect, Page } from "@playwright/test";
 
 import { pathToCodeReviewMetrics } from "../../../src/constants/routeConstants";
-import { TIMEOUT_PERIOD, WAIT_UNTIL } from "../constants/commonConstants";
+import { TIMEOUT_PERIOD, WAIT_UNTIL } from "../constants/e2e.constants";
 
 const codeReviewEndPoint = `${process.env.CLIENT_DEV_URL}${pathToCodeReviewMetrics}`;
 
