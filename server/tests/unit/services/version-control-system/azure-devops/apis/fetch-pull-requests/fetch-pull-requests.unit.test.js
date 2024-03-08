@@ -16,8 +16,6 @@ import {
 } from './fetch-pull-requests.mock.js';
 import { AZURE_PULL_REQUESTS_RESPONSE } from '../common-mock/azure-pull-request.mock.js';
 
-jest.mock('axios');
-
 const {
   organization: ORGANIZATION,
   projectName: PROJECT,
@@ -42,6 +40,8 @@ const AXIOS_REQUEST_PARAMETERS = [
     },
   },
 ];
+
+jest.mock('axios');
 
 describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads in azure repository within the selected range', () => {
   afterEach(() => {
