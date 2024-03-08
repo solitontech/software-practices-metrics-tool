@@ -1,9 +1,7 @@
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup, {
-  toggleButtonGroupClasses,
-} from "@mui/material/ToggleButtonGroup";
+import ToggleButtonGroup, { toggleButtonGroupClasses } from "@mui/material/ToggleButtonGroup";
 
 import { IMetricsView } from "./interfaces";
 import styles from "./MetricsToggleTab.module.scss";
@@ -21,15 +19,8 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   },
 }));
 
-export const MetricsToggleTab = <T,>({
-  metricsViews,
-  selectedView,
-  onViewChange,
-}: Props<T>) => {
-  const handleViewChange = (
-    _event: React.MouseEvent<HTMLElement>,
-    newValue: T | null,
-  ) => {
+export const MetricsToggleTab = <T,>({ metricsViews, selectedView, onViewChange }: Props<T>) => {
+  const handleViewChange = (_event: React.MouseEvent<HTMLElement>, newValue: T | null) => {
     if (newValue) {
       onViewChange(newValue);
     }
@@ -46,18 +37,11 @@ export const MetricsToggleTab = <T,>({
           width: "fit-content",
         }}
       >
-        <StyledToggleButtonGroup
-          value={selectedView}
-          exclusive
-          onChange={handleViewChange}
-        >
+        <StyledToggleButtonGroup value={selectedView} exclusive onChange={handleViewChange}>
           (
           {metricsViews.map((view) => {
             return (
-              <ToggleButton
-                key={view.value as string}
-                value={view.value as string}
-              >
+              <ToggleButton key={view.value as string} value={view.value as string}>
                 <div className={styles.toggle}>
                   {view.displayName} {view.icon}
                 </div>

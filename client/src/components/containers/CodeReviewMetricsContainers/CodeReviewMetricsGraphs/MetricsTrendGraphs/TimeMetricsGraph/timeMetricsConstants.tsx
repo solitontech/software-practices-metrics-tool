@@ -3,8 +3,7 @@ import { TimeMetrics } from "./timeMetricsGraphInterface";
 import { Weekly } from "./weeklyGraphUtils";
 
 export const GRAPH_TOOLTIP_HEADER: Record<TimeMetrics, string> = {
-  firstReviewResponse:
-    "Average first review response time for a Pull Request is",
+  firstReviewResponse: "Average first review response time for a Pull Request is",
   approval: "Average approval time for a Pull Request is",
   merge: "Average merge time for a Pull Request is",
 };

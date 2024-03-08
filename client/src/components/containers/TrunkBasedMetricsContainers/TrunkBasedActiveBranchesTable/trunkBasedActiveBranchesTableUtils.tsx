@@ -1,10 +1,7 @@
 import { formatDate } from "../../../../utils/formatTimeUtils";
 import { IActiveBranch } from "../TrunkBasedMetricsTiles/interfaces";
 
-export function filterActiveBranches(
-  branches: IActiveBranch[],
-  searchTerm: string,
-): IActiveBranch[] {
+export function filterActiveBranches(branches: IActiveBranch[], searchTerm: string): IActiveBranch[] {
   return branches.filter((row) => {
     const normalizedSearchTerm = searchTerm.toLocaleLowerCase();
 

@@ -11,11 +11,7 @@ interface Props {
 export const InfoIconTooltip = ({ content, size }: Props) => {
   return (
     <div className={styles.infoIcon}>
-      <Tooltip
-        data-testid={content}
-        title={<Typography className={styles.toolTip}>{content}</Typography>}
-        arrow
-      >
+      <Tooltip data-testid={content} title={<Typography className={styles.toolTip}>{content}</Typography>} arrow>
         <InfoIcon style={{ fontSize: size }} />
       </Tooltip>
     </div>

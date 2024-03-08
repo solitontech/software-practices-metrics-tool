@@ -2,16 +2,14 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 
 import { IClientFiltersContext, ISquad } from "./clientFiltersContextInterface";
 import { getFilters } from "./clientFiltersContextUtils";
-import { useClientFilters } from "../../queries/useClientFilters";
+import { useClientFilters } from "../../fetchers/hooks/clientFilters/useClientFilters";
 
 export const ClientFiltersContext = createContext<IClientFiltersContext>({
   filters: [],
   setFilters: () => {},
 });
 
-export const ClientFiltersProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const ClientFiltersProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { data } = useClientFilters();
 
   const [filters, setFilters] = useState<ISquad[]>([]);
@@ -22,9 +20,5 @@ export const ClientFiltersProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [data]);
 
-  return (
-    <ClientFiltersContext.Provider value={{ filters, setFilters }}>
-      {children}
-    </ClientFiltersContext.Provider>
-  );
+  return <ClientFiltersContext.Provider value={{ filters, setFilters }}>{children}</ClientFiltersContext.Provider>;
 };

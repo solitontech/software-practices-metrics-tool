@@ -14,12 +14,7 @@ interface Props {
   handleReset: () => void;
 }
 
-export const VotesFilter = ({
-  showNoVotes,
-  filter,
-  handleChange,
-  handleReset,
-}: Props) => {
+export const VotesFilter = ({ showNoVotes, filter, handleChange, handleReset }: Props) => {
   return (
     <div className={styles.filterContainer}>
       <div className={styles.title}>Filter By</div>
@@ -29,17 +24,11 @@ export const VotesFilter = ({
           className={styles.checkbox}
           type="checkbox"
           checked={filter.approved}
-          onChange={() =>
-            handleChange(VOTES.APPROVED as Vote, !filter.approved)
-          }
+          onChange={() => handleChange(VOTES.APPROVED as Vote, !filter.approved)}
         />
 
         <div className={styles.voteImageLabelContainer}>
-          <img
-            className={styles.checkboxImage}
-            src={approved}
-            alt={"Approved"}
-          />
+          <img className={styles.checkboxImage} src={approved} alt={"Approved"} />
 
           <div title="Approved" className={styles.voteLabel}>
             Approved
@@ -52,20 +41,11 @@ export const VotesFilter = ({
           className={styles.checkbox}
           type="checkbox"
           checked={filter.approvedWithSuggestions}
-          onChange={() =>
-            handleChange(
-              VOTES.APPROVED_WITH_SUGGESTIONS as Vote,
-              !filter.approvedWithSuggestions,
-            )
-          }
+          onChange={() => handleChange(VOTES.APPROVED_WITH_SUGGESTIONS as Vote, !filter.approvedWithSuggestions)}
         />
 
         <div className={styles.voteImageLabelContainer}>
-          <img
-            className={styles.checkboxImage}
-            src={approvedWithSuggestions}
-            alt={"Approved With Suggestions"}
-          />
+          <img className={styles.checkboxImage} src={approvedWithSuggestions} alt={"Approved With Suggestions"} />
 
           <div title="Approved With Suggestions" className={styles.voteLabel}>
             Approved With Suggestions
@@ -78,17 +58,11 @@ export const VotesFilter = ({
           className={styles.checkbox}
           type="checkbox"
           checked={filter.waitForAuthor}
-          onChange={() =>
-            handleChange(VOTES.WAIT_FOR_AUTHOR as Vote, !filter.waitForAuthor)
-          }
+          onChange={() => handleChange(VOTES.WAIT_FOR_AUTHOR as Vote, !filter.waitForAuthor)}
         />
 
         <div className={styles.voteImageLabelContainer}>
-          <img
-            className={styles.checkboxImage}
-            src={waitForAuthor}
-            alt={"Wait For Author"}
-          />
+          <img className={styles.checkboxImage} src={waitForAuthor} alt={"Wait For Author"} />
 
           <div title="Wait For Author" className={styles.voteLabel}>
             Wait For Author
@@ -101,17 +75,11 @@ export const VotesFilter = ({
           className={styles.checkbox}
           type="checkbox"
           checked={filter.rejected}
-          onChange={() =>
-            handleChange(VOTES.REJECTED as Vote, !filter.rejected)
-          }
+          onChange={() => handleChange(VOTES.REJECTED as Vote, !filter.rejected)}
         />
 
         <div className={styles.voteImageLabelContainer}>
-          <img
-            className={styles.checkboxImage}
-            src={rejected}
-            alt={"Rejected"}
-          />
+          <img className={styles.checkboxImage} src={rejected} alt={"Rejected"} />
 
           <div title="Rejected" className={styles.voteLabel}>
             Rejected
@@ -129,11 +97,7 @@ export const VotesFilter = ({
           />
 
           <div className={styles.voteImageLabelContainer}>
-            <img
-              className={styles.checkboxImage}
-              src={noVote}
-              alt={"No Vote"}
-            />
+            <img className={styles.checkboxImage} src={noVote} alt={"No Vote"} />
 
             <div title="No Vote" className={styles.voteLabel}>
               No Vote

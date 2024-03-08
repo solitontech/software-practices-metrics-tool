@@ -26,25 +26,12 @@ export const filterPullRequests = (
   }
 };
 
-const getSearchedPullRequests = (
-  pullRequests: IPullRequestList[],
-  searchTerm: string,
-): IPullRequestList[] => {
+const getSearchedPullRequests = (pullRequests: IPullRequestList[], searchTerm: string): IPullRequestList[] => {
   return pullRequests.filter((row) => {
-    const {
-      title,
-      createdBy,
-      creationDate,
-      closedDate,
-      status,
-      tags,
-      votesHistoryTimeline,
-    } = row;
+    const { title, createdBy, creationDate, closedDate, status, tags, votesHistoryTimeline } = row;
     const formattedCreationDate = formatDateWithoutTime(creationDate);
     const formattedClosedDate = formatDateWithoutTime(closedDate);
-    const reviewerInVotes = votesHistoryTimeline.some((vote) =>
-      vote.author.toLowerCase().includes(searchTerm),
-    );
+    const reviewerInVotes = votesHistoryTimeline.some((vote) => vote.author.toLowerCase().includes(searchTerm));
 
     return (
       title.toLowerCase().includes(searchTerm) ||

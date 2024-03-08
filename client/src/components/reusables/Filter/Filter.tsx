@@ -20,10 +20,7 @@ export const FilterIcon = ({ children, isFilterSelected, style }: Props) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        filterRef.current &&
-        !filterRef.current.contains(event.target as Node)
-      ) {
+      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
         setIsVisible(false);
       }
     };
@@ -39,9 +36,7 @@ export const FilterIcon = ({ children, isFilterSelected, style }: Props) => {
     <div className={styles.filterIconContainer}>
       <FilterListIcon
         onClick={toggleFilterVisibility}
-        className={`${styles.filterIcon} ${
-          isFilterSelected ? styles.filterIconSelected : ""
-        } ${style}`}
+        className={`${styles.filterIcon} ${isFilterSelected ? styles.filterIconSelected : ""} ${style}`}
       />
 
       {isVisible && <div ref={filterRef}>{children}</div>}

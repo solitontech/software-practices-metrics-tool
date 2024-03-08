@@ -1,9 +1,4 @@
-export type Vote =
-  | "approved"
-  | "approvedWithSuggestions"
-  | "noVote"
-  | "waitForAuthor"
-  | "rejected";
+export type Vote = "approved" | "approvedWithSuggestions" | "noVote" | "waitForAuthor" | "rejected";
 
 export type Filter = Record<Vote, boolean>;
 

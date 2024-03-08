@@ -5,8 +5,7 @@ import TableRowsIcon from "@mui/icons-material/TableRows";
 import { IPullRequestList } from "../../components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTable/interfaces";
 
 export const CODE_REVIEW_METRICS = {
-  FIRST_REVIEW_RESPONSE:
-    "firstReviewResponseTimeInSeconds" as keyof IPullRequestList,
+  FIRST_REVIEW_RESPONSE: "firstReviewResponseTimeInSeconds" as keyof IPullRequestList,
   APPROVAL_TIME: "approvalTimeInSeconds" as keyof IPullRequestList,
   MERGE_TIME: "mergeTimeInSeconds" as keyof IPullRequestList,
 };

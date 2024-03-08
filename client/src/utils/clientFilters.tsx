@@ -18,10 +18,7 @@ export const getClientFilteredPullRequests = (
   filteredData.pullRequestList = data.pullRequestList.filter((pullRequest) => {
     const isValidDeveloper = developerIdsMap.has(pullRequest.authorId);
     const hasValidReviewer =
-      !reviewerIdsMap.size ||
-      pullRequest.votesHistoryTimeline.some((vote) =>
-        reviewerIdsMap.get(vote.id),
-      );
+      !reviewerIdsMap.size || pullRequest.votesHistoryTimeline.some((vote) => reviewerIdsMap.get(vote.id));
 
     return isValidDeveloper && hasValidReviewer;
   });

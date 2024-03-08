@@ -1,8 +1,5 @@
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
-import {
-  IPullRequestList,
-  Vote,
-} from "../../../CodeReviewMetricsTable/interfaces";
+import { IPullRequestList, Vote } from "../../../CodeReviewMetricsTable/interfaces";
 import {
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
@@ -33,9 +30,7 @@ export class Graph {
       return intervals;
     }
 
-    const pullRequestLeastVote = LeastVotesGraphUtils.getLeastVote(
-      pullRequest.votesHistory,
-    ) as Vote;
+    const pullRequestLeastVote = LeastVotesGraphUtils.getLeastVote(pullRequest.votesHistory) as Vote;
 
     const interval = intervals[index];
     const votes = interval.pullRequestIds[pullRequestLeastVote];
@@ -55,27 +50,16 @@ export class Graph {
 
     tooltipRows = Math.min(tooltipRows, MAX_ROWS);
 
-    const tooltipRowsToDisplay = Array.from(
-      { length: tooltipRows },
-      (_, index) => {
-        const startOffset = index * maxLine;
-        const endOffset = Math.min(
-          startOffset + maxLine,
-          pullRequestIds.length,
-        );
+    const tooltipRowsToDisplay = Array.from({ length: tooltipRows }, (_, index) => {
+      const startOffset = index * maxLine;
+      const endOffset = Math.min(startOffset + maxLine, pullRequestIds.length);
 
-        const currentRow = pullRequestIds.slice(startOffset, endOffset);
+      const currentRow = pullRequestIds.slice(startOffset, endOffset);
 
-        return currentRow.join(TAB_SPACE);
-      },
-    );
+      return currentRow.join(TAB_SPACE);
+    });
 
-    return (
-      TAB_SPACE +
-      tooltipRowsToDisplay.join(
-        TAB_SPACE + LINE_BREAKER + LINE_BREAKER + TAB_SPACE,
-      )
-    );
+    return TAB_SPACE + tooltipRowsToDisplay.join(TAB_SPACE + LINE_BREAKER + LINE_BREAKER + TAB_SPACE);
   }
 
   private static getTooltipContent(header: string, tooltipBody: string) {
@@ -101,10 +85,7 @@ export class Graph {
 
     const groupPullRequestIds = this.groupPullRequestIds(pullRequestIds);
 
-    const tooltipContent = this.getTooltipContent(
-      tooltipHeader,
-      groupPullRequestIds,
-    );
+    const tooltipContent = this.getTooltipContent(tooltipHeader, groupPullRequestIds);
 
     return tooltipContent;
   }

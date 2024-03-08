@@ -3,10 +3,7 @@ import { Tooltip } from "@mui/material";
 
 import styles from "./LeastVotesGraph.module.scss";
 import { LeastVotesGraphUtils } from "./leastVotesGraphUtils";
-import {
-  VOTE_LABEL,
-  VOTE_COLOR,
-} from "../../../../../../pages/CodeReviewMetrics/votesConstants";
+import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/interfaces";
 import { PieChart } from "../../../../../reusables/MetricsGraphs/PieChart/PieChart";
 import { IPullRequestList } from "../../../CodeReviewMetricsTable/interfaces";
@@ -24,8 +21,7 @@ const GRAPH_HOVER_TEXT_TITLES: Record<string, string> = {
   approvedWithSuggestions: "Pull Requests with approved with suggestions vote",
 };
 const ANNOTATION_Y_POSITION = 1.1;
-const INFO_TEXT =
-  "The least favored vote in PR's history timeline will be considered as least vote";
+const INFO_TEXT = "The least favored vote in PR's history timeline will be considered as least vote";
 
 export const LeastVotesGraph = ({ pullRequests }: Props) => {
   const graphAnnotationText = `Total PR's: ${pullRequests.length}`;
@@ -67,33 +63,23 @@ export const LeastVotesGraph = ({ pullRequests }: Props) => {
   LeastVotesGraphUtils.setMaxLineAndIds(firstPullRequest.id);
 
   pullRequests.forEach((pullRequest) => {
-    const leastVotePlot =
-      plots[LeastVotesGraphUtils.getLeastVote(pullRequest.votesHistory)];
+    const leastVotePlot = plots[LeastVotesGraphUtils.getLeastVote(pullRequest.votesHistory)];
 
-    leastVotePlot.hoverText +=
-      LeastVotesGraphUtils.appendPullRequestIdAndGetGraphHoverText(
-        leastVotePlot.value,
-        pullRequest.id,
-      );
+    leastVotePlot.hoverText += LeastVotesGraphUtils.appendPullRequestIdAndGetGraphHoverText(
+      leastVotePlot.value,
+      pullRequest.id,
+    );
 
     leastVotePlot.value++;
   });
 
   Object.keys(plots).forEach((vote) => {
-    plots[vote].hoverText = LeastVotesGraphUtils.getformatGraphHoverText(
-      plots[vote],
-      GRAPH_HOVER_TEXT_TITLES[vote],
-    );
+    plots[vote].hoverText = LeastVotesGraphUtils.getformatGraphHoverText(plots[vote], GRAPH_HOVER_TEXT_TITLES[vote]);
   });
 
   return (
     <div className={styles.pieChartContainer}>
-      <Tooltip
-        className={styles.infoIconContainer}
-        title={INFO_TEXT}
-        placement="right"
-        arrow
-      >
+      <Tooltip className={styles.infoIconContainer} title={INFO_TEXT} placement="right" arrow>
         <InfoIcon className={styles.infoIcon} />
       </Tooltip>
 

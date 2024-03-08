@@ -8,24 +8,11 @@ import styles from "./LeastVotesGraph.module.scss";
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Monthly } from "./monthlyGraphUtils";
 import { Weekly } from "./weeklyGraphUtils";
-import {
-  VOTE_LABEL,
-  VOTE_COLOR,
-} from "../../../../../../pages/CodeReviewMetrics/votesConstants";
+import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
-import {
-  TREND_VIEW,
-  GRAPH_TYPE,
-} from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
-import {
-  TrendView,
-  BarMode,
-  IBarPlot,
-} from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
-import {
-  IPullRequestList,
-  Vote,
-} from "../../../CodeReviewMetricsTable/interfaces";
+import { TREND_VIEW, GRAPH_TYPE } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
+import { TrendView, BarMode, IBarPlot } from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
+import { IPullRequestList, Vote } from "../../../CodeReviewMetricsTable/interfaces";
 import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
 
@@ -37,8 +24,7 @@ interface Props {
 
 const GRAPH_TITLE = "Pull Requests least votes trend";
 const Y_AXIS_NAME = "Pull Requests count";
-const INFO_TEXT =
-  "The least favored vote in PR's history timeline will be considered as least vote";
+const INFO_TEXT = "The least favored vote in PR's history timeline will be considered as least vote";
 const GRAPH_TOOLTIP_HEADER: Record<Vote, string> = {
   rejected: "Pull Requests with rejected vote",
   approved: "Pull Requests with approved vote",
@@ -47,16 +33,10 @@ const GRAPH_TOOLTIP_HEADER: Record<Vote, string> = {
   approvedWithSuggestions: "Pull Requests with approved with suggestions vote",
 };
 
-export const LeastVotesAnalysisGraph = ({
-  pullRequests,
-  startDate,
-  endDate,
-}: Props) => {
+export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Props) => {
   const isMonthlyDisabled = areDatesInSameMonthAndYear(startDate, endDate);
 
-  const defaultGraphMode = (
-    isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY
-  ) as TrendView;
+  const defaultGraphMode = (isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY) as TrendView;
 
   const [trendView, setTrendView] = useState<TrendView>(defaultGraphMode);
 
@@ -64,10 +44,7 @@ export const LeastVotesAnalysisGraph = ({
 
   const xAxisName = trendView === TREND_VIEW.WEEKLY ? "Weeks" : "Months";
 
-  const selectedClass =
-    trendView === TREND_VIEW.WEEKLY
-      ? LEAST_VOTE_CLASS.Weekly
-      : LEAST_VOTE_CLASS.Monthly;
+  const selectedClass = trendView === TREND_VIEW.WEEKLY ? LEAST_VOTE_CLASS.Weekly : LEAST_VOTE_CLASS.Monthly;
 
   const groupedLeastVoteAnalysis =
     trendView === TREND_VIEW.WEEKLY
@@ -112,16 +89,10 @@ export const LeastVotesAnalysisGraph = ({
     },
   };
 
-  const addPlot = (
-    group: PullRequestsVotesAnalysis,
-    vote: Vote,
-    tooltipHeader: string,
-  ) => {
+  const addPlot = (group: PullRequestsVotesAnalysis, vote: Vote, tooltipHeader: string) => {
     plots[vote].xLabels.push(group.interval);
     plots[vote].yValues.push(group.pullRequestIds[vote].length);
-    plots[vote].hoverText.push(
-      selectedClass.getTooltipText(group.pullRequestIds[vote], tooltipHeader),
-    );
+    plots[vote].hoverText.push(selectedClass.getTooltipText(group.pullRequestIds[vote], tooltipHeader));
   };
 
   groupedLeastVoteAnalysis.forEach((group: PullRequestsVotesAnalysis) => {
@@ -132,12 +103,7 @@ export const LeastVotesAnalysisGraph = ({
 
   return (
     <div className={styles.barChartContainer}>
-      <Tooltip
-        className={styles.infoIconContainer}
-        title={INFO_TEXT}
-        placement="right"
-        arrow
-      >
+      <Tooltip className={styles.infoIconContainer} title={INFO_TEXT} placement="right" arrow>
         <InfoIcon className={styles.infoIcon} />
       </Tooltip>
 

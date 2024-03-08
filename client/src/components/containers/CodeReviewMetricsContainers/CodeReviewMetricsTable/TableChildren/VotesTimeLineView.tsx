@@ -62,11 +62,7 @@ export const VotesTimeLineView = ({
   return (
     <>
       <div className={className}>
-        <CustomVote
-          imgSrc={approvedSvg}
-          tooltipText={`Approved - ${approved}`}
-          count={approved}
-        />
+        <CustomVote imgSrc={approvedSvg} tooltipText={`Approved - ${approved}`} count={approved} />
         <CustomVote
           imgSrc={approvedWithSuggestionsSvg}
           tooltipText={`Approved with Suggestions - ${approvedWithSuggestions}`}
@@ -77,23 +73,10 @@ export const VotesTimeLineView = ({
           tooltipText={`Wait for Author - ${waitForAuthor}`}
           count={waitForAuthor}
         />
-        <CustomVote
-          imgSrc={rejectedSvg}
-          tooltipText={`Rejected - ${rejected}`}
-          count={rejected}
-        />
-        {isNoVotesVisible ? (
-          <CustomVote
-            imgSrc={noVoteSvg}
-            tooltipText={`No Vote - ${noVote}`}
-            count={noVote}
-          />
-        ) : null}
+        <CustomVote imgSrc={rejectedSvg} tooltipText={`Rejected - ${rejected}`} count={rejected} />
+        {isNoVotesVisible ? <CustomVote imgSrc={noVoteSvg} tooltipText={`No Vote - ${noVote}`} count={noVote} /> : null}
         <div className={styles.historyIcon}>
-          <span
-            title="Click to view the votes timeline"
-            onClick={displayTimeLine}
-          >
+          <span title="Click to view the votes timeline" onClick={displayTimeLine}>
             <HistoryTwoToneIcon className={styles.timelineIconColor} />
           </span>
         </div>
@@ -107,11 +90,7 @@ export const VotesTimeLineView = ({
         <div className={styles.dialogHeader}>Votes Timeline -</div>
         <div className={styles.prDetails}>
           <Tooltip title={votesTimeline.title} placement="bottom-start">
-            <NavLink
-              to={votesTimeline.url}
-              target="_blank"
-              className={styles.pullRequestURL}
-            >
+            <NavLink to={votesTimeline.url} target="_blank" className={styles.pullRequestURL}>
               <div className={styles.navLink}>{votesTimeline.title}</div>
               <div className={styles.dialogIcon}>
                 <OpenInNewIcon className={styles.linkIcon} />

@@ -17,13 +17,7 @@ interface Props {
   maxDate: Date;
 }
 
-export const DateRangePicker = ({
-  date,
-  onStartDateChange,
-  onEndDateChange,
-  minDate,
-  maxDate,
-}: Props) => {
+export const DateRangePicker = ({ date, onStartDateChange, onEndDateChange, minDate, maxDate }: Props) => {
   return (
     <div className={styles.dateHeader}>
       <div className={styles.tileContent}>

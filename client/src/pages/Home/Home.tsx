@@ -10,10 +10,7 @@ export const Home = () => {
     <div className={styles.home}>
       <NavBar />
       <Outlet />
-      <NavLink
-        to="https://dev.azure.com/Soliton/SolitonCentral/_workitems/edit/31686"
-        target="_blank"
-      >
+      <NavLink to="https://dev.azure.com/Soliton/SolitonCentral/_workitems/edit/31686" target="_blank">
         <Tooltip title="Report Bug" arrow>
           <div className={styles.bugReport}>
             <BugReportIcon className={styles.icon} />

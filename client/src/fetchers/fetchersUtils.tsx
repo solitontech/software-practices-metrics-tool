@@ -1,7 +1,7 @@
 import axios from "axios";
 import { DateTime } from "luxon";
 
-import { FIRST_PAGE, PAGINATION_LIMIT } from "./fetchersConstants";
+import { FIRST_PAGE, PAGINATION_LIMIT } from "./constants/query.constant";
 import {
   IPullRequestInfo,
   IPullRequestList,
@@ -29,9 +29,7 @@ interface PaginationData<T> {
 }
 
 export const getBaseURL = () => {
-  return import.meta.env.MODE === "development"
-    ? "http://localhost:3000"
-    : window.location.origin;
+  return import.meta.env.MODE === "development" ? "http://localhost:3000" : window.location.origin;
 };
 
 export const trunkBasedMetricsAPI = `${getBaseURL()}/api/v1/metrics/trunk-based-development`;
@@ -51,12 +49,7 @@ export async function continueFetching<T>(
 
   while (continueFetching) {
     try {
-      const {
-        data,
-        count,
-        errorCount = 0,
-        filteredCount = 0,
-      } = await fetchData(api, paginationCursor);
+      const { data, count, errorCount = 0, filteredCount = 0 } = await fetchData(api, paginationCursor);
 
       allData.push(...data);
 
@@ -94,10 +87,7 @@ export async function fetchDataForPullRequests(
   };
 }
 
-export async function fetchDataForCommits(
-  api: URL,
-  paginationCursor: number,
-): Promise<PaginationData<ICommit>> {
+export async function fetchDataForCommits(api: URL, paginationCursor: number): Promise<PaginationData<ICommit>> {
   api.searchParams.set("paginationCursor", paginationCursor.toString());
   const { data } = await axios.get<ICodeFreeze>(api.href);
 

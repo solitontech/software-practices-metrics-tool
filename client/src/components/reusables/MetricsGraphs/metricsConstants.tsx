@@ -1,9 +1,4 @@
-export const GRAPH_MODE_BAR_BUTTONS_TO_REMOVE = [
-  "lasso2d",
-  "select2d",
-  "autoScale2d",
-  "zoom2d",
-];
+export const GRAPH_MODE_BAR_BUTTONS_TO_REMOVE = ["lasso2d", "select2d", "autoScale2d", "zoom2d"];
 
 export enum GRAPH {
   HOVER_INFO = "text",

@@ -6,9 +6,7 @@ export const getGraphObject = (
   key: keyof IPullRequestList,
   metricType: string,
 ): ITimeMetricsGraph => {
-  const filteredPullRequests = pullRequests.filter(
-    (pullRequest) => pullRequest[key],
-  );
+  const filteredPullRequests = pullRequests.filter((pullRequest) => pullRequest[key]);
 
   return {
     pullRequests: filteredPullRequests.map((pullRequest) => ({

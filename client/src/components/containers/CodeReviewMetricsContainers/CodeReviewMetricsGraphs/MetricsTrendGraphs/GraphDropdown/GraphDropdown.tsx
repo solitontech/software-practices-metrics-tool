@@ -8,10 +8,7 @@ import {
   GRAPH_TYPE,
   GRAPH_TYPE_DISPLAY_TEXT,
 } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
-import {
-  BarMode,
-  TrendView,
-} from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
+import { BarMode, TrendView } from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
 
 interface GraphOptions {
   trendView: TrendView;
@@ -47,11 +44,7 @@ export const GraphDropdown = ({
               {TREND_VIEW_DISPLAY_TEXT.WEEKLY}
             </MenuItem>
 
-            <MenuItem
-              disabled={isMonthlyDisabled}
-              className={styles.menuItem}
-              value={TREND_VIEW.MONTHLY}
-            >
+            <MenuItem disabled={isMonthlyDisabled} className={styles.menuItem} value={TREND_VIEW.MONTHLY}>
               {TREND_VIEW_DISPLAY_TEXT.MONTHLY}
             </MenuItem>
           </Select>

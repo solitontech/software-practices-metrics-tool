@@ -21,34 +21,20 @@ export const CodeReviewMetricsGraph = ({
   return (
     <div className={styles.graphs}>
       <TimeMetricsGraph
-        graphObject={getGraphObject(
-          pullRequests,
-          CODE_REVIEW_METRICS.FIRST_REVIEW_RESPONSE,
-          "first review response",
-        )}
+        graphObject={getGraphObject(pullRequests, CODE_REVIEW_METRICS.FIRST_REVIEW_RESPONSE, "first review response")}
         averageTime={averageFirstReviewResponseTime}
       />
 
       <TimeMetricsGraph
-        graphObject={getGraphObject(
-          pullRequests,
-          CODE_REVIEW_METRICS.APPROVAL_TIME,
-          "approval",
-        )}
+        graphObject={getGraphObject(pullRequests, CODE_REVIEW_METRICS.APPROVAL_TIME, "approval")}
         averageTime={averageApprovalTime}
       />
 
       <TimeMetricsGraph
-        graphObject={getGraphObject(
-          pullRequests,
-          CODE_REVIEW_METRICS.MERGE_TIME,
-          "merge",
-        )}
+        graphObject={getGraphObject(pullRequests, CODE_REVIEW_METRICS.MERGE_TIME, "merge")}
         averageTime={averageMergeTime}
       />
-      {pullRequests.length && (
-        <LeastVotesGraph pullRequests={pullRequests}></LeastVotesGraph>
-      )}
+      {pullRequests.length && <LeastVotesGraph pullRequests={pullRequests}></LeastVotesGraph>}
     </div>
   );
 };

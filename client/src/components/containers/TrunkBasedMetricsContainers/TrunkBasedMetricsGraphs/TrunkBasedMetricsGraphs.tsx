@@ -1,7 +1,7 @@
 import { ICommitsForDate } from "./interfaces";
 import styles from "./TrunkBasedMetricsGraphs.module.scss";
 import { getCodeFreezeMetricToPlot } from "./trunkBasedMetricsGraphsUtils";
-import { useTrunkBasedMetricsCodeFreeze } from "../../../../queries/useTrunkBasedMetricsCodeFreeze";
+import { useTrunkBasedMetricsCodeFreeze } from "../../../../fetchers/hooks/trunkBasedDevelopment/useTrunkBasedMetricsCodeFreeze";
 import { BarChart } from "../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { IBarPlot } from "../../../reusables/MetricsGraphs/BarChart/interfaces";
 
@@ -20,11 +20,7 @@ export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: Props) => {
     data: { commitList },
   } = useTrunkBasedMetricsCodeFreeze(startDate, endDate);
 
-  const codeFreezeMetrics: ICommitsForDate = getCodeFreezeMetricToPlot(
-    startDate,
-    endDate,
-    commitList,
-  );
+  const codeFreezeMetrics: ICommitsForDate = getCodeFreezeMetricToPlot(startDate, endDate, commitList);
 
   const codeFreezeKeys = Object.keys(codeFreezeMetrics);
 

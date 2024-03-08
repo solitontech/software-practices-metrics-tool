@@ -10,26 +10,20 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:import/recommended",
     "prettier",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
-    project: [
-      "./tsconfig.json",
-      "./tsconfig.node.json",
-      "./tsconfig.tests.json",
-    ],
+    project: ["./tsconfig.json", "./tsconfig.node.json", "./tsconfig.tests.json"],
     tsconfigRootDir: __dirname,
   },
   plugins: ["react-refresh"],
   rules: {
     "react/prop-types": "off",
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
-    ],
+    "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     "import/order": [
       "error",
       {

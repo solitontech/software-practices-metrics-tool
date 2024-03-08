@@ -6,12 +6,21 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "prepare": "cd .. && husky install client/.husky",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "eslint . --ext ts,tsx --fix",
+    "format": "prettier --write .",
+    "format-check": "prettier . --check",
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "test-e2e": "set CLIENT_DEV_URL=http://localhost:5173&& npx playwright test"
+  },
+  "lint-staged": {
+    "**/*": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -35,6 +44,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
+    "@tanstack/eslint-plugin-query": "^5.20.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@testing-library/user-event": "^14.5.1",
@@ -57,7 +67,9 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "husky": "^9.0.11",
     "jsdom": "^22.1.0",
+    "lint-staged": "^15.2.2",
     "msw": "^2.2.2",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",

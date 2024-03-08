@@ -20,13 +20,7 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should render toggle tabs", () => {
-    render(
-      <MetricsToggleTab
-        metricsViews={metricsViews}
-        selectedView="view1"
-        onViewChange={onViewChange}
-      />,
-    );
+    render(<MetricsToggleTab metricsViews={metricsViews} selectedView="view1" onViewChange={onViewChange} />);
 
     // user should see the two toggle tabs
     const view1Element = screen.getByText(/view 1/i);
@@ -37,13 +31,7 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should calls onViewChange method when a view is selected", () => {
-    render(
-      <MetricsToggleTab
-        metricsViews={metricsViews}
-        selectedView="view1"
-        onViewChange={onViewChange}
-      />,
-    );
+    render(<MetricsToggleTab metricsViews={metricsViews} selectedView="view1" onViewChange={onViewChange} />);
 
     const view2Element = screen.getByText(/view 2/i);
 
@@ -54,13 +42,7 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should not call onViewChange method when the selected view is clicked", () => {
-    render(
-      <MetricsToggleTab
-        metricsViews={metricsViews}
-        selectedView="view1"
-        onViewChange={onViewChange}
-      />,
-    );
+    render(<MetricsToggleTab metricsViews={metricsViews} selectedView="view1" onViewChange={onViewChange} />);
 
     const view1Element = screen.getByText(/view 1/i);
 
@@ -71,17 +53,9 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should render icon when provided", () => {
-    const metricsViews = [
-      { value: "view1", displayName: "View 1", icon: <div>Icon</div> },
-    ];
+    const metricsViews = [{ value: "view1", displayName: "View 1", icon: <div>Icon</div> }];
 
-    render(
-      <MetricsToggleTab
-        metricsViews={metricsViews}
-        selectedView="view1"
-        onViewChange={onViewChange}
-      />,
-    );
+    render(<MetricsToggleTab metricsViews={metricsViews} selectedView="view1" onViewChange={onViewChange} />);
 
     const iconElement = screen.getByText(/icon/i);
     const view1Element = screen.getByText(/view 1/i);

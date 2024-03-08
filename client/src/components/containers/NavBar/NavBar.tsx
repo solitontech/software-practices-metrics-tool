@@ -25,19 +25,13 @@ export const NavBar = () => {
     return routes.map((route) => (
       <NavLink
         className={(navData) =>
-          `${isLabelNeeded ? styles.link : styles.smallLink}  ${
-            navData.isActive ? styles.selectedPage : ""
-          } `
+          `${isLabelNeeded ? styles.link : styles.smallLink}  ${navData.isActive ? styles.selectedPage : ""} `
         }
         to={route.link}
         key={route.label}
         title={isLabelNeeded ? "" : route.label}
       >
-        <div
-          className={
-            isLabelNeeded ? styles.pageIconCtr : styles.smallPageIconCtr
-          }
-        >
+        <div className={isLabelNeeded ? styles.pageIconCtr : styles.smallPageIconCtr}>
           <span>{route.iconPath}</span>
         </div>
         {isLabelNeeded ? <p>{route.label}</p> : ""}
@@ -61,16 +55,11 @@ export const NavBar = () => {
               <NavLink to={pathToMetrics}>
                 <img src={logo} alt="Soliton"></img>
               </NavLink>
-              <div
-                className={styles.cursorPointer}
-                onClick={() => setIsNavBarOpen(!isNavBarOpen)}
-              >
+              <div className={styles.cursorPointer} onClick={() => setIsNavBarOpen(!isNavBarOpen)}>
                 <ArrowCircleLeftOutlinedIcon className={styles.icon} />
               </div>
             </div>
-            <div className={` ${styles.utilizeAvailableSpace}`}>
-              {getListItems(routes, true)}
-            </div>
+            <div className={` ${styles.utilizeAvailableSpace}`}>{getListItems(routes, true)}</div>
             <div className={styles.techForce}>
               <div>
                 <img src={techForceLogo} alt="logo" />
@@ -90,16 +79,11 @@ export const NavBar = () => {
             style={{ height: "100%" }}
           >
             <div className={styles.smallDrawerContent}>
-              <div
-                onClick={() => setIsNavBarOpen(!isNavBarOpen)}
-                className={styles.cursorPointer}
-              >
+              <div onClick={() => setIsNavBarOpen(!isNavBarOpen)} className={styles.cursorPointer}>
                 <ArrowCircleRightOutlinedIcon className={styles.icon} />
               </div>
               <div>
-                <div className={` ${styles.utilizeAvailableSpace}`}>
-                  {getListItems(routes, false)}
-                </div>
+                <div className={` ${styles.utilizeAvailableSpace}`}>{getListItems(routes, false)}</div>
               </div>
             </div>
           </Drawer>

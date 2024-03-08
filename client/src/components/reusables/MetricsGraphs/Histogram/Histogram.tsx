@@ -2,11 +2,7 @@ import { Config, Data, Layout, ModeBarDefaultButtons } from "plotly.js";
 import Plot from "react-plotly.js";
 
 import { IHistogramChart } from "./histogramInterfaces";
-import {
-  ANNOTATIONS,
-  GRAPH,
-  GRAPH_MODE_BAR_BUTTONS_TO_REMOVE,
-} from "../metricsConstants";
+import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsConstants";
 
 interface Props {
   graphObject: IHistogramChart;
@@ -16,15 +12,7 @@ const GRAPH_TYPE = "histogram";
 
 export const HistogramChart = ({
   graphObject: {
-    plot: {
-      xValues,
-      startValue,
-      endValue,
-      binSize,
-      binText,
-      markerColor,
-      hoverText,
-    },
+    plot: { xValues, startValue, endValue, binSize, binText, markerColor, hoverText },
     xAxisName = "",
     yAxisName = "",
     graphTitle = "",
@@ -96,8 +84,7 @@ export const HistogramChart = ({
       filename: fileNameForImage,
     },
     editable: false,
-    modeBarButtonsToRemove:
-      GRAPH_MODE_BAR_BUTTONS_TO_REMOVE as ModeBarDefaultButtons[],
+    modeBarButtonsToRemove: GRAPH_MODE_BAR_BUTTONS_TO_REMOVE as ModeBarDefaultButtons[],
     scrollZoom: true,
   };
 

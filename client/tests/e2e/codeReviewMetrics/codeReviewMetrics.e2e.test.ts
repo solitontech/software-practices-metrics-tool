@@ -29,11 +29,7 @@ test.describe("Code Review Metrics page", () => {
   });
 
   test("should display required tiles with text for code review metrics", async () => {
-    const selectors = [
-      "text=Avg first review response time",
-      "text=Avg approval time",
-      "text=Avg merge time",
-    ];
+    const selectors = ["text=Avg first review response time", "text=Avg approval time", "text=Avg merge time"];
 
     for (const selector of selectors) {
       const element = await page.locator(selector).isVisible();
@@ -81,9 +77,7 @@ test.describe("Code Review Metrics page", () => {
     ];
 
     for (const selector of selectors) {
-      const element = await page
-        .locator(`[data-testid="${selector}-table-header"]`)
-        .isVisible();
+      const element = await page.locator(`[data-testid="${selector}-table-header"]`).isVisible();
 
       expect(element).toBeTruthy();
     }

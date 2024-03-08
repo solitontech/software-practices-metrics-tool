@@ -6,17 +6,11 @@ import { CodeReviewMetricsTiles } from "../../../../../../src/components/contain
 describe("CodeReviewMetricsTiles", () => {
   it("should render firstReviewResponse time, approval time & merge time correctly", async () => {
     render(
-      <CodeReviewMetricsTiles
-        averageFirstReviewResponseTime={0.75}
-        averageApprovalTime={1}
-        averageMergeTime={4}
-      />,
+      <CodeReviewMetricsTiles averageFirstReviewResponseTime={0.75} averageApprovalTime={1} averageMergeTime={4} />,
     );
 
     // user should see the firstReviewResponse time
-    const firstReviewResponseTimeElement = await screen.findByTestId(
-      /first-review-response-time/i,
-    );
+    const firstReviewResponseTimeElement = await screen.findByTestId(/first-review-response-time/i);
 
     expect(firstReviewResponseTimeElement).toHaveTextContent(/0.75 hour/i);
 
@@ -53,41 +47,27 @@ describe("CodeReviewMetricsTiles", () => {
 
   it("shows the correct recommended time for metrics for each tile on hover", async () => {
     render(
-      <CodeReviewMetricsTiles
-        averageFirstReviewResponseTime={25}
-        averageApprovalTime={50}
-        averageMergeTime={75}
-      />,
+      <CodeReviewMetricsTiles averageFirstReviewResponseTime={25} averageApprovalTime={50} averageMergeTime={75} />,
     );
 
     const firstReviewResponseTooltipContent =
       "1 day, 1 hour ( Recommended time for first review response should be less than 24 hours )";
-    const approvalTimeTooltipContent =
-      "2 days, 2 hours ( Recommended time for approval should be less than 48 hours )";
-    const mergeTimeTooltipContent =
-      "3 days, 3 hours ( Recommended time for merge should be less than 72 hours )";
+    const approvalTimeTooltipContent = "2 days, 2 hours ( Recommended time for approval should be less than 48 hours )";
+    const mergeTimeTooltipContent = "3 days, 3 hours ( Recommended time for merge should be less than 72 hours )";
 
     // when user hover over the firstReviewResponse time tooltip, user should see the recommended first review response time
-    await userEvent.hover(
-      screen.getByTestId(firstReviewResponseTooltipContent),
-    );
+    await userEvent.hover(screen.getByTestId(firstReviewResponseTooltipContent));
 
-    expect(
-      await screen.findByText(firstReviewResponseTooltipContent),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(firstReviewResponseTooltipContent)).toBeInTheDocument();
 
     // when user hover over the approval time tooltip, user should see the recommended response time
     await userEvent.hover(screen.getByTestId(approvalTimeTooltipContent));
 
-    expect(
-      await screen.findByText(approvalTimeTooltipContent),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(approvalTimeTooltipContent)).toBeInTheDocument();
 
     // when user hover over the merge time tooltip, user should see the recommended merge time
     await userEvent.hover(screen.getByTestId(mergeTimeTooltipContent));
 
-    expect(
-      await screen.findByText(mergeTimeTooltipContent),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(mergeTimeTooltipContent)).toBeInTheDocument();
   });
 });

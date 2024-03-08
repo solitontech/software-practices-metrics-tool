@@ -1,28 +1,13 @@
 import { useState } from "react";
 
 import { Monthly } from "./monthlyGraphUtils";
-import {
-  GRAPH_COLOR,
-  GRAPH_PLOT_NAME,
-  GRAPH_TOOLTIP_HEADER,
-  TREND_VIEW_CLASS,
-} from "./timeMetricsConstants";
+import { GRAPH_COLOR, GRAPH_PLOT_NAME, GRAPH_TOOLTIP_HEADER, TREND_VIEW_CLASS } from "./timeMetricsConstants";
 import styles from "./TimeMetricsGraph.module.scss";
-import {
-  IPullRequestsTimeMetrics,
-  TimeMetrics,
-} from "./timeMetricsGraphInterface";
+import { IPullRequestsTimeMetrics, TimeMetrics } from "./timeMetricsGraphInterface";
 import { Weekly } from "./weeklyGraphUtils";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
-import {
-  GRAPH_TYPE,
-  TREND_VIEW,
-} from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
-import {
-  BarMode,
-  IBarPlot,
-  TrendView,
-} from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
+import { GRAPH_TYPE, TREND_VIEW } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
+import { BarMode, IBarPlot, TrendView } from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
 import { IPullRequestList } from "../../../CodeReviewMetricsTable/interfaces";
 import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
@@ -38,24 +23,16 @@ const Y_AXIS_NAME = "Average time in hours";
 
 const Y_AXIS_SUFFIX = " hrs";
 
-export const TimeMetricsAnalysisGraph = ({
-  pullRequests,
-  startDate,
-  endDate,
-}: Props) => {
+export const TimeMetricsAnalysisGraph = ({ pullRequests, startDate, endDate }: Props) => {
   const isMonthlyDisabled = areDatesInSameMonthAndYear(startDate, endDate);
 
-  const defaultGraphMode = (
-    isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY
-  ) as TrendView;
+  const defaultGraphMode = (isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY) as TrendView;
 
   const [trendView, setTrendView] = useState<TrendView>(defaultGraphMode);
 
   const xAxisName = trendView === TREND_VIEW.WEEKLY ? "Weeks" : "Months";
 
-  const trendViewClass = TREND_VIEW.WEEKLY
-    ? TREND_VIEW_CLASS.Weekly
-    : TREND_VIEW_CLASS.Monthly;
+  const trendViewClass = TREND_VIEW.WEEKLY ? TREND_VIEW_CLASS.Weekly : TREND_VIEW_CLASS.Monthly;
 
   const timeMetrics =
     trendView === TREND_VIEW.WEEKLY
@@ -86,33 +63,19 @@ export const TimeMetricsAnalysisGraph = ({
     },
   };
 
-  const addPlot = (
-    group: IPullRequestsTimeMetrics,
-    timeMetrics: TimeMetrics,
-    tooltipHeader: string,
-  ) => {
-    const averageTimeInHours = trendViewClass.getAverageTimeInHours(
-      group.timeInSeconds[timeMetrics],
-    );
+  const addPlot = (group: IPullRequestsTimeMetrics, timeMetrics: TimeMetrics, tooltipHeader: string) => {
+    const averageTimeInHours = trendViewClass.getAverageTimeInHours(group.timeInSeconds[timeMetrics]);
 
     plots[timeMetrics].xLabels.push(group.interval);
     plots[timeMetrics].yValues.push(averageTimeInHours);
     plots[timeMetrics].hoverText.push(
-      trendViewClass.getTooltipText(
-        group.pullRequestIds[timeMetrics],
-        averageTimeInHours,
-        tooltipHeader,
-      ),
+      trendViewClass.getTooltipText(group.pullRequestIds[timeMetrics], averageTimeInHours, tooltipHeader),
     );
   };
 
   timeMetrics.forEach((group: IPullRequestsTimeMetrics) => {
     Object.keys(plots).forEach((timeMetrics) => {
-      addPlot(
-        group,
-        timeMetrics as TimeMetrics,
-        GRAPH_TOOLTIP_HEADER[timeMetrics as TimeMetrics],
-      );
+      addPlot(group, timeMetrics as TimeMetrics, GRAPH_TOOLTIP_HEADER[timeMetrics as TimeMetrics]);
     });
   });
 

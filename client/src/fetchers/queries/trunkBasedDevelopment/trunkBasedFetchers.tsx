@@ -1,6 +1,19 @@
 import axios from "axios";
 
-import { PAGINATION_LIMIT } from "./fetchersConstants";
+import {
+  ICommit,
+  ICommitSuccessInfo,
+} from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/interfaces";
+import {
+  ITotalBranches,
+  IActiveBranchSuccessInfo,
+  IActiveBranch,
+} from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
+import {
+  IPullRequestsMergedToMain,
+  IPullRequestsMergedToMainSuccessInfo,
+} from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/interfaces";
+import { PAGINATION_LIMIT } from "../../constants/query.constant";
 import {
   continueFetching,
   fetchDataForCommits,
@@ -8,20 +21,7 @@ import {
   formatDate,
   fetchDataForPullRequestsMergedToMain,
   trunkBasedMetricsAPI,
-} from "./fetchersUtils";
-import {
-  ICommit,
-  ICommitSuccessInfo,
-} from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/interfaces";
-import {
-  ITotalBranches,
-  IActiveBranchSuccessInfo,
-  IActiveBranch,
-} from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
-import {
-  IPullRequestsMergedToMain,
-  IPullRequestsMergedToMainSuccessInfo,
-} from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/interfaces";
+} from "../../fetchersUtils";
 
 export const fetchTotalBranches = async (): Promise<ITotalBranches> => {
   const api = new URL(`${trunkBasedMetricsAPI}/branches`);
@@ -31,10 +31,7 @@ export const fetchTotalBranches = async (): Promise<ITotalBranches> => {
   return data;
 };
 
-export const fetchCodeFreezeMetrics = async (
-  startDate: Date,
-  endDate: Date,
-): Promise<ICommitSuccessInfo> => {
+export const fetchCodeFreezeMetrics = async (startDate: Date, endDate: Date): Promise<ICommitSuccessInfo> => {
   const formattedStartDate: string = formatDate(startDate);
   const formattedEndDate: string = formatDate(endDate);
 
@@ -52,22 +49,18 @@ export const fetchCodeFreezeMetrics = async (
   return { commitList, errorCount };
 };
 
-export const fetchActiveBranches =
-  async (): Promise<IActiveBranchSuccessInfo> => {
-    const api = new URL(`${trunkBasedMetricsAPI}/activeBranches`);
+export const fetchActiveBranches = async (): Promise<IActiveBranchSuccessInfo> => {
+  const api = new URL(`${trunkBasedMetricsAPI}/activeBranches`);
 
-    api.searchParams.append("paginationCursor", "1");
-    api.searchParams.append("paginationSize", `${PAGINATION_LIMIT}`);
+  api.searchParams.append("paginationCursor", "1");
+  api.searchParams.append("paginationSize", `${PAGINATION_LIMIT}`);
 
-    const { list, errorCount } = await continueFetching(
-      fetchDataForActiveBranches,
-      api,
-    );
+  const { list, errorCount } = await continueFetching(fetchDataForActiveBranches, api);
 
-    const activeBranchesList: IActiveBranch[] = list;
+  const activeBranchesList: IActiveBranch[] = list;
 
-    return { activeBranchesList, errorCount };
-  };
+  return { activeBranchesList, errorCount };
+};
 
 export const fetchPullRequestsMergedToMain = async (
   startDate: Date,
@@ -83,10 +76,7 @@ export const fetchPullRequestsMergedToMain = async (
   api.searchParams.append("paginationCursor", "1");
   api.searchParams.append("paginationSize", `${PAGINATION_LIMIT}`);
 
-  const { list, errorCount } = await continueFetching(
-    fetchDataForPullRequestsMergedToMain,
-    api,
-  );
+  const { list, errorCount } = await continueFetching(fetchDataForPullRequestsMergedToMain, api);
 
   const pullRequestsMergedList: IPullRequestsMergedToMain[] = list;
 

@@ -12,13 +12,7 @@ interface Props {
   searchDialogBox?: React.ReactNode;
 }
 
-export const Header = ({
-  id,
-  pageHeader,
-  searchBox,
-  filter,
-  searchDialogBox,
-}: Props) => {
+export const Header = ({ id, pageHeader, searchBox, filter, searchDialogBox }: Props) => {
   return (
     <div className={styles.heading}>
       <Typography className={`${styles.labelHeader} `}>{pageHeader}</Typography>

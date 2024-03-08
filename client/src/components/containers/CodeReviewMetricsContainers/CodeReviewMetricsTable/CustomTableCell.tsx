@@ -1,20 +1,10 @@
 import styles from "./CodeReviewMetricsTable.module.scss";
-import {
-  IColumn,
-  FilterColumn,
-  Filters,
-  Vote,
-  ICustomSortingIconProps,
-} from "./interfaces";
+import { IColumn, FilterColumn, Filters, Vote, ICustomSortingIconProps } from "./interfaces";
 
 interface TableCellProps {
   column: IColumn;
   handleSort: (columnName: string, order: string) => void;
-  handleFilterChange: (
-    columnName: FilterColumn,
-    vote: Vote,
-    value: boolean,
-  ) => void;
+  handleFilterChange: (columnName: FilterColumn, vote: Vote, value: boolean) => void;
   filters: Filters;
   handleFilterReset: () => void;
 }
@@ -30,8 +20,7 @@ export const CustomTableCell = ({
   filters,
   handleFilterReset,
 }: TableCellProps) => {
-  const Action: ((props: ICustomSortingIconProps) => JSX.Element) | undefined =
-    column.action;
+  const Action: ((props: ICustomSortingIconProps) => JSX.Element) | undefined = column.action;
 
   return (
     <th

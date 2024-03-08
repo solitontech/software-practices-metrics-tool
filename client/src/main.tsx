@@ -7,9 +7,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-import "./index.scss";
-import { AppRouter } from "./AppRouter.tsx";
-import { queryClient } from "./setup/queryClient.ts";
+import "./styles/index.scss";
+import { queryClient } from "./fetchers/setup/queryClient.ts";
+import { App } from "./pages/index.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <BrowserRouter>
         <StyledEngineProvider injectFirst>
           <CssBaseline />
-          <AppRouter></AppRouter>
+          <App />
           <ReactQueryDevtools initialIsOpen={false} />
         </StyledEngineProvider>
       </BrowserRouter>

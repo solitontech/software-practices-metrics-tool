@@ -3,11 +3,7 @@ import Plot from "react-plotly.js";
 
 import { EMPTY_STRING, TAB_SPACE } from "./barChartConstants";
 import { IBarChart } from "./interfaces";
-import {
-  ANNOTATIONS,
-  GRAPH,
-  GRAPH_MODE_BAR_BUTTONS_TO_REMOVE,
-} from "../metricsConstants";
+import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsConstants";
 
 interface Props {
   graphObject: IBarChart;
@@ -98,8 +94,7 @@ export const BarChart = ({
     toImageButtonOptions: {
       filename: fileNameForImage,
     },
-    modeBarButtonsToRemove:
-      GRAPH_MODE_BAR_BUTTONS_TO_REMOVE as ModeBarDefaultButtons[],
+    modeBarButtonsToRemove: GRAPH_MODE_BAR_BUTTONS_TO_REMOVE as ModeBarDefaultButtons[],
     scrollZoom: true,
   };
 

@@ -1,3 +1,3 @@
-export interface CustomError {
+export interface ICustomError {
   response: { data: { error: string } };
 }
