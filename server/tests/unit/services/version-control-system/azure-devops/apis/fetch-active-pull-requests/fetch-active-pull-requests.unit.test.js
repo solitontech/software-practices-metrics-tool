@@ -8,8 +8,6 @@ import { ServerConfiguration } from '../../../../../../../src/configs/server.con
 import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 import { AZURE_PULL_REQUESTS_RESPONSE } from '../common-mock/azure-pull-request.mock.js';
 
-jest.mock('axios');
-
 const {
   organization: ORGANIZATION,
   projectName: PROJECT,
@@ -17,10 +15,10 @@ const {
   authToken: TOKEN,
 } = ServerConfiguration.versionControl;
 
-const HEADER = ':' + TOKEN;
-const BASE_URL = `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`;
 const PAGE = 1;
 const PAGE_SIZE = 10;
+const HEADER = ':' + TOKEN;
+const BASE_URL = `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`;
 const AXIOS_REQUEST_PARAMETERS = [
   `${BASE_URL}/pullRequests?searchCriteria.status=active&searchCriteria.targetRefName=refs%2Fheads%2Fmain&%24top=${PAGE_SIZE}&%24skip=${
     PAGE - 1 // this is shortcut to find the skip when page is 1, DO NOT CHANGE VALUE OF 'page', this will break
@@ -32,6 +30,8 @@ const AXIOS_REQUEST_PARAMETERS = [
     },
   },
 ];
+
+jest.mock('axios');
 
 describe('AzureDevopsApi~fetchActivePullRequests - return active pull requests in azure repository within the selected range', () => {
   afterEach(() => {
@@ -50,25 +50,27 @@ describe('AzureDevopsApi~fetchActivePullRequests - return active pull requests i
 
   it('should throw AppError with 404 when no pull requests found in azure repository', async () => {
     const mockResponse = { data: { count: 0, value: [] }, status: STATUS_CODE.OK };
+
     axios.get = jest.fn().mockResolvedValue(mockResponse);
     jest.spyOn(AppError, 'throwAppError');
 
     const response = AzureDevopsApi.fetchActivePullRequests(PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
   it('should throw AppError with 404 when request to azure api fails due to 404', async () => {
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.NOT_FOUND } });
-
     jest.spyOn(AppError, 'throwAppError');
 
     const response = AzureDevopsApi.fetchActivePullRequests(PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
@@ -78,8 +80,10 @@ describe('AzureDevopsApi~fetchActivePullRequests - return active pull requests i
 
     const response = AzureDevopsApi.fetchActivePullRequests(PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
@@ -92,8 +96,10 @@ describe('AzureDevopsApi~fetchActivePullRequests - return active pull requests i
 
     const response = AzureDevopsApi.fetchActivePullRequests(PAGE, PAGE_SIZE);
 
-    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     await expect(response).rejects.toThrow(AppError);
+
+    expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
+
     expect(AppError.throwAppError).toHaveBeenCalledWith(
       AzureDevopsApi.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
