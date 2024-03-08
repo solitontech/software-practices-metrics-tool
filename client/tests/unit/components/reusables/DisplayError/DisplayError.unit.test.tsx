@@ -8,6 +8,7 @@ describe("DisplayError component", () => {
 
     const errorMessage = screen.getByText(/test error/i);
 
+    // user should see the error message displayed
     expect(errorMessage).toBeInTheDocument();
   });
 
@@ -16,6 +17,7 @@ describe("DisplayError component", () => {
 
     const errorMessage = screen.queryByText(/test error/i);
 
+    // user should not see the error message
     expect(errorMessage).not.toBeInTheDocument();
   });
 });

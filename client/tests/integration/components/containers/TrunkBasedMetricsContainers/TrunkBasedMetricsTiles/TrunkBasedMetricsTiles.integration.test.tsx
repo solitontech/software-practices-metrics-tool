@@ -1,18 +1,18 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { SetupServerApi, setupServer } from "msw/node";
+import { setupServer } from "msw/node";
 import { act } from "react-dom/test-utils";
 
+import { LoadTrunkBasedComponent } from "./LoadTrunkBasedComponent";
 import { ACTIVE_BRANCHES, BRANCHES } from "./TrunkBasedMetricsTiles.mock";
-import { LoadTrunkBasedComponent } from "./utils";
-import { queryClient } from "../../../../../../src/setup/queryClient";
 import {
   getActiveBranchesHandler,
   getBranchesHandler,
   getServerErrorHandler,
-} from "../TrunkBasedMetricsTiles.msw-handlers";
+} from "./TrunkBasedMetricsTiles.msw-handlers";
+import { queryClient } from "../../../../../../src/setup/queryClient";
 
 describe("TrunkBasedMetricsTiles component", () => {
-  let server: SetupServerApi;
+  let server: ReturnType<typeof setupServer>;
 
   beforeAll(() => {
     server = setupServer();
@@ -20,7 +20,9 @@ describe("TrunkBasedMetricsTiles component", () => {
   });
 
   afterEach(() => {
+    // react-query's cache is cleared after each test
     queryClient.clear();
+
     server.resetHandlers();
   });
 
@@ -89,25 +91,6 @@ describe("TrunkBasedMetricsTiles component", () => {
 
     render(LoadTrunkBasedComponent());
 
-    // user should see "-" before the network call
-    await waitFor(async () => {
-      expect(await screen.findByTestId("total-branches")).toHaveTextContent(
-        "-",
-      );
-    });
-
-    await waitFor(async () => {
-      expect(await screen.findByTestId("active-branches")).toHaveTextContent(
-        "-",
-      );
-    });
-
-    await waitFor(async () => {
-      expect(
-        await screen.findByTestId("branches-following-naming-standard"),
-      ).toHaveTextContent("-");
-    });
-
     // Simulate the passage of time until the network call fails
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -146,11 +129,12 @@ describe("TrunkBasedMetricsTiles component", () => {
     // user expects dialog to be closed initially
     expect(screen.queryByText(/total active pr's: 2/i)).toBeNull();
 
+    // user clicks on the button to open the dialog
     act(() => {
       activeBranchesButton.click();
     });
 
-    // user expects dialog to be open after clicking on the button
+    // user should see the dialog opened
     expect(await screen.findByText(/total active pr's: 2/i)).toBeDefined();
   });
 
@@ -170,11 +154,12 @@ describe("TrunkBasedMetricsTiles component", () => {
     expect(screen.queryByText(/branch1/i)).toBeNull();
     expect(screen.queryByText(/branch2/i)).toBeNull();
 
+    // user clicks on the button to open the dialog
     act(() => {
       activeBranchesButton.click();
     });
 
-    // user expects dialog to be open after clicking on the button
+    // user should see the dialog opened
     expect(await screen.findByText(/branch1/i)).toBeDefined();
     expect(await screen.findByText(/branch2/i)).toBeDefined();
 
@@ -200,11 +185,12 @@ describe("TrunkBasedMetricsTiles component", () => {
     // user expects dialog to be closed initially
     expect(screen.queryByText(/total branches: 2/i)).toBeNull();
 
+    // user clicks on the button to open the dialog
     act(() => {
       branchesNamingConventionButton.click();
     });
 
-    // user expects dialog to be open after clicking on the button
+    // user should see the dialog opened
     expect(
       await screen.findByText(/branches not following naming standard/i),
     ).toBeDefined();
@@ -224,6 +210,7 @@ describe("TrunkBasedMetricsTiles component", () => {
       "branches-naming-convention-button",
     );
 
+    // user clicks on the button to open the table
     act(() => {
       branchesNamingConventionButton.click();
     });

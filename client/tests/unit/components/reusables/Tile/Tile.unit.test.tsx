@@ -13,9 +13,11 @@ describe("Tile component", () => {
       </Tile>,
     );
 
+    // user should see the tile's title
     const titleElement = screen.getByText(/test title/i);
     expect(titleElement).toBeInTheDocument();
 
+    // user should see the tile's children content
     const childrenElement = screen.getByText(/test children/i);
     expect(childrenElement).toBeInTheDocument();
   });

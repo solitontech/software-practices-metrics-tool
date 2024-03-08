@@ -3,8 +3,8 @@ import { http, HttpResponse, delay } from "msw";
 import {
   IActiveBranches,
   ITotalBranches,
-} from "../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
-import { trunkBasedMetricsAPI } from "../../../../../src/fetchers/fetchersUtils";
+} from "../../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
+import { trunkBasedMetricsAPI } from "../../../../../../src/fetchers/fetchersUtils";
 
 export const getBranchesHandler = (
   branches: ITotalBranches,

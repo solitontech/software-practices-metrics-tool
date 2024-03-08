@@ -26,6 +26,7 @@ describe("Checkbox component", () => {
 
     const checkbox = screen.getByRole("checkbox");
 
+    // user should see the checkbox as not checked
     expect(checkbox).not.toBeChecked();
   });
 
@@ -43,6 +44,7 @@ describe("Checkbox component", () => {
 
     const checkbox = screen.getByRole("checkbox");
 
+    // user clicks the checkbox
     fireEvent.click(checkbox);
 
     expect(onChange).toHaveBeenCalledWith(true);
@@ -60,6 +62,7 @@ describe("Checkbox component", () => {
 
     const titleElement = screen.getByText(/test title/i);
 
+    // user should see the title of the checkbox
     expect(titleElement).toBeInTheDocument();
   });
 

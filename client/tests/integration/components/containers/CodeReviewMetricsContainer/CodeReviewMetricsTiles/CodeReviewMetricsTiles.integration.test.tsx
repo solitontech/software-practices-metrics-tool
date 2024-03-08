@@ -17,6 +17,7 @@ describe("CodeReviewMetricsTiles", () => {
     const firstReviewResponseTimeElement = await screen.findByTestId(
       /first-review-response-time/i,
     );
+
     expect(firstReviewResponseTimeElement).toHaveTextContent(/0.75 hour/i);
 
     // user should see the approval time
@@ -70,18 +71,21 @@ describe("CodeReviewMetricsTiles", () => {
     await userEvent.hover(
       screen.getByTestId(firstReviewResponseTooltipContent),
     );
+
     expect(
       await screen.findByText(firstReviewResponseTooltipContent),
     ).toBeInTheDocument();
 
     // when user hover over the approval time tooltip, user should see the recommended response time
     await userEvent.hover(screen.getByTestId(approvalTimeTooltipContent));
+
     expect(
       await screen.findByText(approvalTimeTooltipContent),
     ).toBeInTheDocument();
 
     // when user hover over the merge time tooltip, user should see the recommended merge time
     await userEvent.hover(screen.getByTestId(mergeTimeTooltipContent));
+
     expect(
       await screen.findByText(mergeTimeTooltipContent),
     ).toBeInTheDocument();
