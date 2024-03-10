@@ -3,24 +3,13 @@ import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { IApiCodeReviewResponse, IFetchersCodeReviewPullRequest } from "./types";
+import { IApiCodeReviewResponse } from "./types";
 import { CodeReviewUtils } from "./utils";
 import { ClientFilterContext } from "../../../context";
 import { ApiEndPoint, ApiUtils } from "../../api";
 import { QUERY_KEY } from "../../constants/queryKey.constant";
-import { ICustomError } from "../types/types";
 
-interface IApiCollectedData<T> {
-  data: T[];
-  count: number;
-  errorCount?: number;
-  filteredCount?: number;
-}
-
-async function fetchCodeReviewMetrics(
-  api: URL,
-  paginationCursor: number,
-): Promise<IApiCollectedData<IFetchersCodeReviewPullRequest>> {
+async function fetchCodeReviewMetrics(api: URL, paginationCursor: number) {
   api.searchParams.set("paginationCursor", paginationCursor.toString());
 
   const { data } = await axios.get<IApiCodeReviewResponse>(api.href);
@@ -33,15 +22,10 @@ async function fetchCodeReviewMetrics(
   };
 }
 
-interface Result {
-  pullRequests: IFetchersCodeReviewPullRequest[];
-  errorCount: number;
-}
-
 export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
   const { filters } = useContext(ClientFilterContext);
 
-  const { isPending, isError, data, error } = useQuery<Result, ICustomError>({
+  const { isPending, isError, data, error } = useQuery({
     queryKey: [QUERY_KEY.CODE_REVIEW, startDate, endDate],
     queryFn: async () => {
       const apiURL = ApiEndPoint.codeReviewMetrics(startDate, endDate);
@@ -52,14 +36,12 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
     },
   });
 
-  console.log("DEBUG: TEST", filters, data);
-
-  const filteredPullRequests = CodeReviewUtils.getClientFilteredPullRequests(data, filters);
+  const pullRequests = CodeReviewUtils.getFilteredPullRequests(data, filters);
 
   return {
     isPending,
     isError,
-    data: filteredPullRequests ? filteredPullRequests : { pullRequests: [], errorCount: 0 },
+    data: pullRequests ? pullRequests : { pullRequests: [], errorCount: 0 },
     error,
   };
 };

@@ -1,15 +1,12 @@
-import { IFetchersCodeReviewPullRequest } from "./types";
+import { IApiCodeReviewResponse } from "./types";
 import { IContextClientFilterSquad } from "../../../context";
 
-interface Result {
-  pullRequests: IFetchersCodeReviewPullRequest[];
-  errorCount: number;
-}
+type IFilteredCodeReviewResponse = Omit<IApiCodeReviewResponse, "filteredCount" | "count">;
 
 export class CodeReviewUtils {
   static #getSquadsUserIdsMap(squads: IContextClientFilterSquad[]) {
-    const developersMap: Map<string, boolean> = new Map();
-    const reviewersMap: Map<string, boolean> = new Map();
+    const developersMap = new Map();
+    const reviewersMap = new Map();
 
     squads.forEach(({ developers, reviewers }) => {
       developers.forEach(({ id, isSelected }) => {
@@ -28,10 +25,10 @@ export class CodeReviewUtils {
     return { developersMap, reviewersMap };
   }
 
-  static getClientFilteredPullRequests = (
-    data: Result | undefined,
+  static getFilteredPullRequests = (
+    data: IFilteredCodeReviewResponse | undefined,
     filters: IContextClientFilterSquad[],
-  ): Result | undefined => {
+  ) => {
     if (!data || !filters.length) {
       return data;
     }
@@ -40,9 +37,9 @@ export class CodeReviewUtils {
 
     const pullRequests = data.pullRequests.filter(({ authorId, votesHistoryTimeline }) => {
       const isAuthorMatch = developersMap.has(authorId);
-      const isReviewerMatch = votesHistoryTimeline.some((vote) => reviewersMap.get(vote.id));
+      const isReviewerMatch = votesHistoryTimeline.some(({ id }) => reviewersMap.has(id));
 
-      return isAuthorMatch && isReviewerMatch;
+      return reviewersMap.size ? isAuthorMatch && isReviewerMatch : isAuthorMatch;
     });
 
     return {
