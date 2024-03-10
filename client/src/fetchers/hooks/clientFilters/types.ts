@@ -1,15 +1,15 @@
-export interface IFetchersClientFilterSquadMember {
-  id: string;
-  name: string;
-  isSelected: boolean;
-}
-
-export interface IApiClientFilterSquadResponse {
+interface IFetchedClientFilterSquad {
   squadName: string;
   developers: Record<string, string>;
   reviewers: Record<string, string>;
 }
 
-export interface IApiClientFilterResponse {
-  squads: IApiClientFilterSquadResponse[];
+export interface IFetchedClientFilterResponse {
+  squads: IFetchedClientFilterSquad[];
+}
+
+export interface IFetchedClientFilterSquadMember {
+  id: string;
+  name: string;
+  isSelected: boolean;
 }

@@ -1,7 +1,7 @@
-import { IApiClientFilterResponse, IFetchersClientFilterSquadMember } from "./types";
+import { IFetchedClientFilterResponse, IFetchedClientFilterSquadMember } from "./types";
 
 export class ClientFiltersUtils {
-  static #getUsers(usersRecord: Record<string, string>, isSelected: boolean): IFetchersClientFilterSquadMember[] {
+  static #getUsers(usersRecord: Record<string, string>, isSelected: boolean): IFetchedClientFilterSquadMember[] {
     return Object.entries(usersRecord).map(([id, name]) => {
       return {
         id,
@@ -11,7 +11,7 @@ export class ClientFiltersUtils {
     });
   }
 
-  static getFilters({ squads }: IApiClientFilterResponse) {
+  static getFilters({ squads }: IFetchedClientFilterResponse) {
     const SET_AS_SELECTED = true;
 
     return squads.map(({ squadName, developers, reviewers }) => {

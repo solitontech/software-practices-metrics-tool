@@ -1,5 +1,5 @@
 import { formatDateWithoutTime } from "./formatTimeUtils";
-import { IFetchersCodeReviewPullRequest } from "../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../fetchers";
 
 const SEARCH_KEYS = {
   TAGS: "tags",
@@ -9,10 +9,10 @@ const SEARCH_KEYS = {
 };
 
 export const getDeepSearchPullRequests = (
-  pullRequests: IFetchersCodeReviewPullRequest[],
+  pullRequests: IFetchedCodeReviewPullRequest[],
   mappedKey: string,
   value: string,
-): IFetchersCodeReviewPullRequest[] => {
+): IFetchedCodeReviewPullRequest[] => {
   if (mappedKey === SEARCH_KEYS.TAGS) {
     return filterByTags(pullRequests, value);
   } else if (mappedKey === SEARCH_KEYS.VOTES_HISTORY_TIMELINE) {
@@ -25,40 +25,40 @@ export const getDeepSearchPullRequests = (
 };
 
 const filterByTags = (
-  pullRequests: IFetchersCodeReviewPullRequest[],
+  pullRequests: IFetchedCodeReviewPullRequest[],
   value: string,
-): IFetchersCodeReviewPullRequest[] => {
+): IFetchedCodeReviewPullRequest[] => {
   return pullRequests.filter((row) => row.tags.some((tag: string) => tag.toLowerCase().includes(value)));
 };
 
 const filterByVotesHistoryTimeline = (
-  pullRequests: IFetchersCodeReviewPullRequest[],
+  pullRequests: IFetchedCodeReviewPullRequest[],
   value: string,
-): IFetchersCodeReviewPullRequest[] => {
+): IFetchedCodeReviewPullRequest[] => {
   return pullRequests.filter((row) =>
     row.votesHistoryTimeline.some((vote) => vote.author.toLowerCase().includes(value)),
   );
 };
 
 const filterByDate = (
-  pullRequests: IFetchersCodeReviewPullRequest[],
+  pullRequests: IFetchedCodeReviewPullRequest[],
   mappedKey: string,
   value: string,
-): IFetchersCodeReviewPullRequest[] => {
+): IFetchedCodeReviewPullRequest[] => {
   return pullRequests.filter((row) => {
-    const formattedValue = formatDateWithoutTime(row[mappedKey as keyof IFetchersCodeReviewPullRequest] as string[]);
+    const formattedValue = formatDateWithoutTime(row[mappedKey as keyof IFetchedCodeReviewPullRequest] as string[]);
     const rowValue = formattedValue?.toLowerCase();
     return rowValue && rowValue.includes(value);
   });
 };
 
 const filterByOtherKeys = (
-  pullRequests: IFetchersCodeReviewPullRequest[],
+  pullRequests: IFetchedCodeReviewPullRequest[],
   mappedKey: string,
   value: string,
-): IFetchersCodeReviewPullRequest[] => {
+): IFetchedCodeReviewPullRequest[] => {
   return pullRequests.filter((row) => {
-    const rowValue = (row[mappedKey as keyof IFetchersCodeReviewPullRequest] as string)?.toLowerCase();
+    const rowValue = (row[mappedKey as keyof IFetchedCodeReviewPullRequest] as string)?.toLowerCase();
     return rowValue && rowValue.includes(value);
   });
 };

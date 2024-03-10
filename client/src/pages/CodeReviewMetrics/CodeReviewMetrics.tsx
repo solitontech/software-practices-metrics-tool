@@ -120,9 +120,8 @@ export const CodeReviewMetrics = () => {
       return <LoadingSpinner content="Loading pull requests..." />;
     }
 
-    // TODO: is error and error should auto infer type narrowing
     if (isError && error) {
-      return <DisplayError error={error.response.data.error} />;
+      return <DisplayError error={error?.response?.data.error} />;
     }
 
     if (isTableView()) {

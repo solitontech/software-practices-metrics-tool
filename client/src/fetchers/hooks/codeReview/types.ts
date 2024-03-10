@@ -1,22 +1,22 @@
-interface IPullRequestReviewerComments {
+interface IFetchedPullRequestReviewerComments {
   reviewer: string;
   comments: number;
 }
 
-interface IPullRequestComments {
+interface IFetchedPullRequestComments {
   totalComments: number;
   numberOfNitComments: number;
   numberOfMajorComments: number;
 }
 
-interface IPullRequestVotesTimeline {
+interface IFetchedPullRequestVotesTimeline {
   id: string;
   author: string;
   vote: string;
   timeOfVote: Date; //TODO: date is "string format" in the API and add this field wit null type
 }
 
-interface IPullRequestVotes {
+interface IFetchedPullRequestVotes {
   approved: number;
   approvedWithSuggestions: number;
   waitForAuthor: number;
@@ -24,7 +24,7 @@ interface IPullRequestVotes {
   noVote: number;
 }
 
-export interface IFetchersCodeReviewPullRequest {
+export interface IFetchedCodeReviewPullRequest {
   id: number;
   title: string;
   status: string;
@@ -33,12 +33,12 @@ export interface IFetchersCodeReviewPullRequest {
   isRequiredReviewers: boolean;
   creationDate: string;
   closedDate: string | null;
-  votes: IPullRequestVotes;
-  votesTimeline: IPullRequestVotesTimeline[];
-  votesHistory: IPullRequestVotes; //TODO: Omit<IPullRequestVotes, "noVote">
-  votesHistoryTimeline: IPullRequestVotesTimeline[];
-  comments: IPullRequestComments;
-  reviewerComments: IPullRequestReviewerComments[];
+  votes: IFetchedPullRequestVotes;
+  votesTimeline: IFetchedPullRequestVotesTimeline[];
+  votesHistory: IFetchedPullRequestVotes; //TODO: Omit<IPullRequestVotes, "noVote">
+  votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
+  comments: IFetchedPullRequestComments;
+  reviewerComments: IFetchedPullRequestReviewerComments[];
   tags: string[];
   firstReviewResponseTimeInSeconds: number | null;
   approvalTimeInSeconds: number | null;
@@ -46,9 +46,9 @@ export interface IFetchersCodeReviewPullRequest {
   url: string;
 }
 
-export interface IApiCodeReviewResponse {
+export interface IFetchedCodeReviewResponse {
   count: number;
-  pullRequests: IFetchersCodeReviewPullRequest[];
+  pullRequests: IFetchedCodeReviewPullRequest[];
   errorCount: number;
   filteredCount: number;
 }

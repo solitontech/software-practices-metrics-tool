@@ -1,6 +1,6 @@
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 import { Graph } from "./timeMetricsGraphUtils";
-import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { Day, getFormattedDateText } from "../../../../../../utils/formatTimeUtils";
 import { DAY, ONE_WEEK_IN_MILLISECONDS, SIX_DAYS_IN_MILLISECONDS } from "../metricsTrendGraphConstants";
 
@@ -70,7 +70,7 @@ export class Weekly extends Graph {
   }
 
   static getWeeklyTimeMetrics(
-    pullRequests: IFetchersCodeReviewPullRequest[],
+    pullRequests: IFetchedCodeReviewPullRequest[],
     startDate: Date,
     endDate: Date,
   ): IPullRequestsTimeMetrics[] {

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { IApiCodeReviewResponse } from "./types";
+import { IFetchedCodeReviewResponse } from "./types";
 import { CodeReviewUtils } from "./utils";
 import { ClientFilterContext } from "../../../context";
 import { ApiEndPoint, ApiUtils } from "../../api";
@@ -12,7 +12,7 @@ import { QUERY_KEY } from "../../constants/queryKey.constant";
 async function fetchCodeReviewMetrics(api: URL, paginationCursor: number) {
   api.searchParams.set("paginationCursor", paginationCursor.toString());
 
-  const { data } = await axios.get<IApiCodeReviewResponse>(api.href);
+  const { data } = await axios.get<IFetchedCodeReviewResponse>(api.href);
 
   return {
     data: data.pullRequests,
@@ -41,10 +41,10 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
   return {
     isPending,
     isError,
-    data: pullRequests ? pullRequests : { pullRequests: [], errorCount: 0 },
+    data: pullRequests ?? { pullRequests: [], errorCount: 0 },
     error,
   };
 };
 
 /* interface exports */
-export type { IFetchersCodeReviewPullRequest } from "./types";
+export type { IFetchedCodeReviewPullRequest } from "./types";

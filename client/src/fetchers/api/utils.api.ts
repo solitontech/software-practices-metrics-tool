@@ -1,17 +1,16 @@
 import { START_PAGINATION_CURSOR, PAGINATION_LIMIT } from "./constant.api";
 
-interface IApiCollectedData<T> {
+interface IFetchedCollectedData<T> {
   data: T[];
   count: number;
   errorCount?: number;
   filteredCount?: number;
 }
 
+type IFetchData = (api: URL, paginationCursor: number) => Promise<IFetchedCollectedData<T>>;
+
 export class ApiUtils {
-  static async continuedFetching<T>(
-    fetchData: (api: URL, paginationCursor: number) => Promise<IApiCollectedData<T>>,
-    apiURL: URL,
-  ) {
+  static async continuedFetching<T>(fetchData: IFetchData, apiURL: URL) {
     const allData: T[] = [];
 
     let paginationCursor = START_PAGINATION_CURSOR;

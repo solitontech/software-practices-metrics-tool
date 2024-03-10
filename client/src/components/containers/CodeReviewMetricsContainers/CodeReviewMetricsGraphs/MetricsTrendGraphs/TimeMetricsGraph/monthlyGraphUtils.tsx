@@ -1,6 +1,6 @@
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 import { Graph } from "./timeMetricsGraphUtils";
-import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { Year, getFormattedDateText } from "../../../../../../utils/formatTimeUtils";
 import { DAY, MONTHS_IN_YEAR, YEAR } from "../metricsTrendGraphConstants";
 
@@ -65,7 +65,7 @@ export class Monthly extends Graph {
   }
 
   static getMonthlyTimeMetrics(
-    pullRequests: IFetchersCodeReviewPullRequest[],
+    pullRequests: IFetchedCodeReviewPullRequest[],
     startDate: Date,
     endDate: Date,
   ): IPullRequestsTimeMetrics[] {

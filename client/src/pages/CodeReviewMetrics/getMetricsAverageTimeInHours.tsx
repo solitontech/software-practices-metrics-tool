@@ -1,10 +1,10 @@
 import { NOT_AVAILABLE } from "../../constants/commonConstants.ts";
 import { SECONDS_IN_ONE_HOUR } from "../../constants/timeConstants.ts";
-import { IFetchersCodeReviewPullRequest } from "../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../fetchers";
 
 export const getMetricsAverageTimeInHours = (
-  pullRequests: IFetchersCodeReviewPullRequest[],
-  metrics: keyof IFetchersCodeReviewPullRequest,
+  pullRequests: IFetchedCodeReviewPullRequest[],
+  metrics: keyof IFetchedCodeReviewPullRequest,
 ): string | number => {
   if (!pullRequests) return NOT_AVAILABLE;
 

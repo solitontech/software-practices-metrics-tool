@@ -9,7 +9,7 @@ import {
   MINUTES_IN_ONE_HOUR,
   FRACTION_TO_FIND_TIME,
 } from "../../../../constants/timeConstants";
-import { IFetchersCodeReviewPullRequest } from "../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../fetchers";
 import { cacheWrapperForUnaryFunction } from "../../../../utils/cache";
 import { formatHoursToDays } from "../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 
@@ -28,14 +28,14 @@ export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | 
   });
 });
 
-export function sortPullRequests(pullRequests: IFetchersCodeReviewPullRequest[], sort: Record<string, string>) {
+export function sortPullRequests(pullRequests: IFetchedCodeReviewPullRequest[], sort: Record<string, string>) {
   return pullRequests.sort(
-    (firstPullRequest: IFetchersCodeReviewPullRequest, secondPullRequest: IFetchersCodeReviewPullRequest) => {
+    (firstPullRequest: IFetchedCodeReviewPullRequest, secondPullRequest: IFetchedCodeReviewPullRequest) => {
       for (const key in sort) {
         if (sort[key] === sortMap.noSort) continue;
 
-        let firstValue = firstPullRequest[key as keyof IFetchersCodeReviewPullRequest];
-        let secondValue = secondPullRequest[key as keyof IFetchersCodeReviewPullRequest];
+        let firstValue = firstPullRequest[key as keyof IFetchedCodeReviewPullRequest];
+        let secondValue = secondPullRequest[key as keyof IFetchedCodeReviewPullRequest];
 
         // If they are, return 0, indicating that both values are considered equal.
         if (!firstValue && !secondValue) {
@@ -102,9 +102,9 @@ export const convertTimeToDays = (timeInSeconds: number, formattedTime: string):
 };
 
 export const getFilteredPullRequests = (
-  pullRequests: IFetchersCodeReviewPullRequest[],
+  pullRequests: IFetchedCodeReviewPullRequest[],
   filters: Filters,
-): IFetchersCodeReviewPullRequest[] => {
+): IFetchedCodeReviewPullRequest[] => {
   const columnNameToFilter = Object.keys(filters).find((filterKey: string) => {
     const filter = filters[filterKey as FilterColumn];
 
@@ -137,7 +137,7 @@ export const getFilteredPullRequests = (
   });
 };
 
-export const getTotalComments = (pullRequests: IFetchersCodeReviewPullRequest[]): number => {
+export const getTotalComments = (pullRequests: IFetchedCodeReviewPullRequest[]): number => {
   return pullRequests.reduce((totalComments, pullRequest) => {
     return totalComments + pullRequest.comments.totalComments;
   }, 0);

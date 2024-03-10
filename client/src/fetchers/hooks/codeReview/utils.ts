@@ -1,7 +1,5 @@
-import { IApiCodeReviewResponse } from "./types";
+import { IFetchedCodeReviewResponse } from "./types";
 import { IContextClientFilterSquad } from "../../../context";
-
-type IFilteredCodeReviewResponse = Omit<IApiCodeReviewResponse, "filteredCount" | "count">;
 
 export class CodeReviewUtils {
   static #getSquadsUserIdsMap(squads: IContextClientFilterSquad[]) {
@@ -26,7 +24,7 @@ export class CodeReviewUtils {
   }
 
   static getFilteredPullRequests = (
-    data: IFilteredCodeReviewResponse | undefined,
+    data: Omit<IFetchedCodeReviewResponse, "filteredCount" | "count"> | undefined,
     filters: IContextClientFilterSquad[],
   ) => {
     if (!data || !filters.length) {

@@ -5,7 +5,7 @@ import { GRAPH_COLOR, GRAPH_PLOT_NAME, GRAPH_TOOLTIP_HEADER, TREND_VIEW_CLASS } 
 import styles from "./TimeMetricsGraph.module.scss";
 import { IPullRequestsTimeMetrics, TimeMetrics } from "./timeMetricsGraphInterface";
 import { Weekly } from "./weeklyGraphUtils";
-import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { GRAPH_TYPE, TREND_VIEW } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
 import { BarMode, IBarPlot, TrendView } from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
@@ -13,7 +13,7 @@ import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
 
 interface Props {
-  pullRequests: IFetchersCodeReviewPullRequest[];
+  pullRequests: IFetchedCodeReviewPullRequest[];
   startDate: Date;
   endDate: Date;
 }

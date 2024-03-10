@@ -8,7 +8,7 @@ import styles from "./LeastVotesGraph.module.scss";
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Monthly } from "./monthlyGraphUtils";
 import { Weekly } from "./weeklyGraphUtils";
-import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { TREND_VIEW, GRAPH_TYPE } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
@@ -18,7 +18,7 @@ import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
 
 interface Props {
-  pullRequests: IFetchersCodeReviewPullRequest[];
+  pullRequests: IFetchedCodeReviewPullRequest[];
   startDate: Date;
   endDate: Date;
 }

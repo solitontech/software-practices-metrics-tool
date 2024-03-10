@@ -1,6 +1,6 @@
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 import { SECONDS_IN_ONE_HOUR } from "../../../../../../constants/timeConstants";
-import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { formatHoursToDays } from "../../../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 import {
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
@@ -16,12 +16,12 @@ const MAX_CHARACTERS = MAX_CHARACTERS_IN_LINE_IN_TOOLTIP;
 const MAX_ROWS = MAX_PULL_REQUEST_ID_ROWS;
 
 export class Graph {
-  static pullRequests: IFetchersCodeReviewPullRequest[];
+  static pullRequests: IFetchedCodeReviewPullRequest[];
   static startDate: Date;
   static endDate: Date;
 
   static appendPullRequestId(
-    pullRequest: IFetchersCodeReviewPullRequest,
+    pullRequest: IFetchedCodeReviewPullRequest,
     intervals: IPullRequestsTimeMetrics[],
     index: number,
   ): IPullRequestsTimeMetrics[] {

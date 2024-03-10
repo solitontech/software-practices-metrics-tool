@@ -1,11 +1,11 @@
-import { IFetchersClientFilterSquadMember } from "../../fetchers";
+import { IFetchedClientFilterSquadMember } from "../../fetchers";
 
 export interface IContextClientFilterSquad {
   squadName: string;
-  developers: IFetchersClientFilterSquadMember[];
-  reviewers: IFetchersClientFilterSquadMember[];
+  developers: IFetchedClientFilterSquadMember[];
+  reviewers: IFetchedClientFilterSquadMember[];
 }
-export type IContextClientFilterSquadMembers = IFetchersClientFilterSquadMember[];
+export type IContextClientFilterSquadMembers = IFetchedClientFilterSquadMember[];
 
 export type IContextClientFilterSquadMemberKey = keyof Pick<IContextClientFilterSquad, "developers" | "reviewers">;
 

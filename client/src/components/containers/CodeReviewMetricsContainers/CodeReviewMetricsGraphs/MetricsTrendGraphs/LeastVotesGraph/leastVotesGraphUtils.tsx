@@ -1,5 +1,5 @@
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
-import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { Vote } from "../../../CodeReviewMetricsTable/interfaces";
 import {
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
@@ -16,12 +16,12 @@ const MAX_CHARACTERS = MAX_CHARACTERS_IN_LINE_IN_TOOLTIP;
 const MAX_ROWS = MAX_PULL_REQUEST_ID_ROWS;
 
 export class Graph {
-  static pullRequests: IFetchersCodeReviewPullRequest[];
+  static pullRequests: IFetchedCodeReviewPullRequest[];
   static startDate: Date;
   static endDate: Date;
 
   static appendPullRequestId(
-    pullRequest: IFetchersCodeReviewPullRequest,
+    pullRequest: IFetchedCodeReviewPullRequest,
     intervals: PullRequestsVotesAnalysis[],
     index: number,
   ): PullRequestsVotesAnalysis[] {

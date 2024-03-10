@@ -7,9 +7,9 @@ import { CustomTableCell } from "./CustomTableCell";
 import { Vote, IColumn, Filters, FilterColumn } from "./interfaces";
 import { CodeReviewMetricsTableRow } from "./TableChildren/CodeReviewMetricsTableRow";
 import { VOTES_FILTER_DEFAULT_STATE } from "./VotesFilter/votesFilterConstants";
-import { IFetchersCodeReviewPullRequest } from "../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../fetchers";
 interface Props {
-  pullRequests: IFetchersCodeReviewPullRequest[];
+  pullRequests: IFetchedCodeReviewPullRequest[];
 }
 
 const SORT_DEFAULT_STATE = {

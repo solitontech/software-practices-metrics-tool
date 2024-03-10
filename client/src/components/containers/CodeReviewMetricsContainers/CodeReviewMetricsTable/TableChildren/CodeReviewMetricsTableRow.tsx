@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 import { VotesTimeLineView } from "./VotesTimeLineView";
 import { NOT_AVAILABLE } from "../../../../../constants/commonConstants";
-import { IFetchersCodeReviewPullRequest } from "../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
 import { formatDate, formatDateWithoutTime } from "../../../../../utils/formatTimeUtils";
 import styles from "../CodeReviewMetricsTable.module.scss";
 import { getFormattedReviewerComments } from "../codeReviewMetricsTableUtils";
@@ -14,7 +14,7 @@ import { ConvertHoursToDays } from "../ConvertHoursToDays";
 import { CustomCommentIcon } from "../CustomCommentIcon";
 interface Props {
   index: number;
-  row: IFetchersCodeReviewPullRequest;
+  row: IFetchedCodeReviewPullRequest;
 }
 
 export const CodeReviewMetricsTableRow = memo(({ index, row }: Props) => {

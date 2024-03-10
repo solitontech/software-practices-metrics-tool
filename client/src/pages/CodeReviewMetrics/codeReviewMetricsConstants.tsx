@@ -2,12 +2,12 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 
-import { IFetchersCodeReviewPullRequest } from "../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../fetchers";
 
 export const CODE_REVIEW_METRICS = {
-  FIRST_REVIEW_RESPONSE: "firstReviewResponseTimeInSeconds" as keyof IFetchersCodeReviewPullRequest,
-  APPROVAL_TIME: "approvalTimeInSeconds" as keyof IFetchersCodeReviewPullRequest,
-  MERGE_TIME: "mergeTimeInSeconds" as keyof IFetchersCodeReviewPullRequest,
+  FIRST_REVIEW_RESPONSE: "firstReviewResponseTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
+  APPROVAL_TIME: "approvalTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
+  MERGE_TIME: "mergeTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
 };
 
 export const CODE_REVIEW_METRICS_TAB_VALUE = {
