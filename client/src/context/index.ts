@@ -1,1 +1,1 @@
-export * from "./clientFilters";
+export * from "./clientFilters/clientFilters.context";

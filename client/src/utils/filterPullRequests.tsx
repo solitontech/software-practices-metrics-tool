@@ -4,13 +4,13 @@ import {
   ALL_CHIPS,
   CHIP,
 } from "../components/containers/CodeReviewMetricsContainers/CodeReviewChips/codeReviewSearchChipsConstants";
-import { IPullRequestList } from "../components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTable/interfaces";
+import { IFetchersCodeReviewPullRequest } from "../fetchers";
 
 export const filterPullRequests = (
-  pullRequests: IPullRequestList[],
+  pullRequests: IFetchersCodeReviewPullRequest[],
   userSearchKey: string,
   userSearchTerm: string,
-): IPullRequestList[] => {
+): IFetchersCodeReviewPullRequest[] => {
   if (userSearchKey === ALL_CHIPS) {
     return getSearchedPullRequests(pullRequests, userSearchTerm);
   } else {
@@ -26,7 +26,10 @@ export const filterPullRequests = (
   }
 };
 
-const getSearchedPullRequests = (pullRequests: IPullRequestList[], searchTerm: string): IPullRequestList[] => {
+const getSearchedPullRequests = (
+  pullRequests: IFetchersCodeReviewPullRequest[],
+  searchTerm: string,
+): IFetchersCodeReviewPullRequest[] => {
   return pullRequests.filter((row) => {
     const { title, createdBy, creationDate, closedDate, status, tags, votesHistoryTimeline } = row;
     const formattedCreationDate = formatDateWithoutTime(creationDate);

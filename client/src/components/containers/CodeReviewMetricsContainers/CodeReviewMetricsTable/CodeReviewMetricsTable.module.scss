@@ -60,7 +60,7 @@
 }
 
 .comments {
-  @include flex-center;
+  @include flex-align-center;
   gap: 4px;
   justify-content: center;
   color: $primary-color;

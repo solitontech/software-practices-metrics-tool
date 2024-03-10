@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { pathToCodeReviewMetrics, pathToMetrics, pathToTrunkBasedMetrics } from "../../constants/routeConstants";
-import { ClientFiltersProvider } from "../../context/clientFilters/context";
+import { ClientFilterProvider } from "../../context/clientFilters/clientFilters.context";
 import { ErrorBoundary } from "../../errorBoundary/ErrorBoundary";
 import { CodeReviewMetrics } from "../CodeReviewMetrics/CodeReviewMetrics";
 import { Home } from "../Home/Home";
@@ -10,7 +10,7 @@ import { TrunkBasedMetrics } from "../TrunkBasedMetrics/TrunkBasedMetrics";
 
 export const App = () => {
   return (
-    <ClientFiltersProvider>
+    <ClientFilterProvider>
       <Routes>
         <Route path="/" element={<Navigate to={pathToCodeReviewMetrics} />} />
         <Route
@@ -56,6 +56,6 @@ export const App = () => {
           }
         />
       </Routes>
-    </ClientFiltersProvider>
+    </ClientFilterProvider>
   );
 };

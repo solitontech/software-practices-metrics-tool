@@ -3,13 +3,12 @@ import { Tooltip } from "@mui/material";
 
 import styles from "./LeastVotesGraph.module.scss";
 import { LeastVotesGraphUtils } from "./leastVotesGraphUtils";
+import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
 import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/interfaces";
 import { PieChart } from "../../../../../reusables/MetricsGraphs/PieChart/PieChart";
-import { IPullRequestList } from "../../../CodeReviewMetricsTable/interfaces";
-
 interface Props {
-  pullRequests: IPullRequestList[];
+  pullRequests: IFetchersCodeReviewPullRequest[];
 }
 
 const GRAPH_TITLE = `Pull Requests least votes`;

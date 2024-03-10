@@ -35,7 +35,7 @@
   padding: $secondary-padding;
 }
 
-.squadMargin {
+.squadContainer:not(:last-child) {
   border-bottom: 1px solid $border-color;
 }
 
@@ -48,11 +48,11 @@
   padding-bottom: $large-padding;
 }
 
-.userFiltersContainer {
+.categoryContainer {
   display: flex;
 }
 
-.userFilterContainer {
+.memberContainer {
   width: 50%;
 }
 

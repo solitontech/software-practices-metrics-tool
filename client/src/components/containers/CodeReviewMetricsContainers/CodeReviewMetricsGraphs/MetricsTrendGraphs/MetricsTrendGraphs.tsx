@@ -1,10 +1,10 @@
 import { LeastVotesAnalysisGraph } from "./LeastVotesGraph/LeastVotesGraph";
 import styles from "./MetricsTrendGraphs.module.scss";
 import { TimeMetricsAnalysisGraph } from "./TimeMetricsGraph/TimeMetricsGraph";
-import { IPullRequestList } from "../../CodeReviewMetricsTable/interfaces";
+import { IFetchersCodeReviewPullRequest } from "../../../../../fetchers";
 
 interface Props {
-  pullRequests: IPullRequestList[];
+  pullRequests: IFetchersCodeReviewPullRequest[];
   startDate: Date;
   endDate: Date;
 }

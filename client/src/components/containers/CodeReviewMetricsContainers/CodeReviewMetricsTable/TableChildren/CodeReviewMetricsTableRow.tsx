@@ -6,16 +6,15 @@ import { NavLink } from "react-router-dom";
 
 import { VotesTimeLineView } from "./VotesTimeLineView";
 import { NOT_AVAILABLE } from "../../../../../constants/commonConstants";
+import { IFetchersCodeReviewPullRequest } from "../../../../../fetchers";
 import { formatDate, formatDateWithoutTime } from "../../../../../utils/formatTimeUtils";
 import styles from "../CodeReviewMetricsTable.module.scss";
 import { getFormattedReviewerComments } from "../codeReviewMetricsTableUtils";
 import { ConvertHoursToDays } from "../ConvertHoursToDays";
 import { CustomCommentIcon } from "../CustomCommentIcon";
-import { IPullRequestList } from "../interfaces";
-
 interface Props {
   index: number;
-  row: IPullRequestList;
+  row: IFetchersCodeReviewPullRequest;
 }
 
 export const CodeReviewMetricsTableRow = memo(({ index, row }: Props) => {

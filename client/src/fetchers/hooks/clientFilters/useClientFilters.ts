@@ -1,27 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { ApiURL } from "../../api";
+import { IApiClientFilterResponse } from "./types";
+import { ClientFiltersUtils } from "./utils";
+import { ApiEndPoint } from "../../api";
 import { QUERY_KEY } from "../../constants/queryKey.constant";
-
-export interface IApiClientFilterResponse {
-  tags: [];
-  squads: Array<{
-    squadName: string;
-    developers: Record<string, string>;
-    reviewers: Record<string, string>;
-  }>;
-}
 
 export const useClientFilters = () => {
   const clientFiltersQuery = useQuery({
     queryKey: [QUERY_KEY.CLIENT_FILTERS],
     queryFn: async () => {
-      const { data } = await axios.get<IApiClientFilterResponse>(ApiURL.clientFilters());
+      const { data } = await axios.get<IApiClientFilterResponse>(ApiEndPoint.clientFilters());
 
       return data;
+    },
+    select: (data) => {
+      return ClientFiltersUtils.getFilters(data);
     },
   });
 
   return clientFiltersQuery;
 };
+
+/*TODO: verify the real need of these types*/
+/* interface exports */
+export type { IApiClientFilterResponse, IFetchersClientFilterSquadMember } from "./types";

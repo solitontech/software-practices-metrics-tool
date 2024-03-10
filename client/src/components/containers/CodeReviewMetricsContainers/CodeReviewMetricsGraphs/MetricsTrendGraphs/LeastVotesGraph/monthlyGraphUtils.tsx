@@ -1,7 +1,7 @@
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Graph } from "./leastVotesGraphUtils";
+import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
 import { Year, getFormattedDateText } from "../../../../../../utils/formatTimeUtils";
-import { IPullRequestList } from "../../../CodeReviewMetricsTable/interfaces";
 import { DAY, MONTHS_IN_YEAR, YEAR } from "../metricsTrendGraphConstants";
 
 export class Monthly extends Graph {
@@ -62,7 +62,7 @@ export class Monthly extends Graph {
   }
 
   static getMonthlyLeastVotes(
-    pullRequests: IPullRequestList[],
+    pullRequests: IFetchersCodeReviewPullRequest[],
     startDate: Date,
     endDate: Date,
   ): PullRequestsVotesAnalysis[] {

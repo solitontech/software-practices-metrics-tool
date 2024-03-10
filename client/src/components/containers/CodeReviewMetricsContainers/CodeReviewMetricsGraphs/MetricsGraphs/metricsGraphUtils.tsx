@@ -1,9 +1,9 @@
 import { ITimeMetricsGraph } from "./TimeMetricsGraph/timeMetricsGraphInterfaces";
-import { IPullRequestList } from "../../CodeReviewMetricsTable/interfaces";
+import { IFetchersCodeReviewPullRequest } from "../../../../../fetchers";
 
 export const getGraphObject = (
-  pullRequests: IPullRequestList[],
-  key: keyof IPullRequestList,
+  pullRequests: IFetchersCodeReviewPullRequest[],
+  key: keyof IFetchersCodeReviewPullRequest,
   metricType: string,
 ): ITimeMetricsGraph => {
   const filteredPullRequests = pullRequests.filter((pullRequest) => pullRequest[key]);

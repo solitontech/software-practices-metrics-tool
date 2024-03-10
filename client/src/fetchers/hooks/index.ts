@@ -1,3 +1,3 @@
 export * from "./clientFilters/useClientFilters";
-export * from "./codeReview";
+export * from "./codeReview/useCodeReviewMetrics";
 export * from "./trunkBasedDevelopment";

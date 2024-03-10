@@ -1,7 +1,7 @@
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Graph } from "./leastVotesGraphUtils";
+import { IFetchersCodeReviewPullRequest } from "../../../../../../fetchers";
 import { Day, getFormattedDateText } from "../../../../../../utils/formatTimeUtils";
-import { IPullRequestList } from "../../../CodeReviewMetricsTable/interfaces";
 import { DAY, ONE_WEEK_IN_MILLISECONDS, SIX_DAYS_IN_MILLISECONDS } from "../metricsTrendGraphConstants";
 
 export class Weekly extends Graph {
@@ -67,7 +67,7 @@ export class Weekly extends Graph {
   }
 
   static getWeeklyLeastVotes(
-    pullRequests: IPullRequestList[],
+    pullRequests: IFetchersCodeReviewPullRequest[],
     startDate: Date,
     endDate: Date,
   ): PullRequestsVotesAnalysis[] {

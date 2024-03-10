@@ -31,7 +31,7 @@
 .branchName {
   @include text;
   @include url;
-  @include flex-center;
+  @include flex-align-center;
   max-width: 450px;
   gap: 20px;
 }

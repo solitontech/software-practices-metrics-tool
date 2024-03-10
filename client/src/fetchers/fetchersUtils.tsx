@@ -3,10 +3,6 @@ import { DateTime } from "luxon";
 
 import { FIRST_PAGE, PAGINATION_LIMIT } from "./constants/query.constant";
 import {
-  IPullRequestInfo,
-  IPullRequestList,
-} from "../components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTable/interfaces";
-import {
   ICodeFreeze,
   ICommit,
 } from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/interfaces";
@@ -69,22 +65,6 @@ export async function continueFetching<T>(
   }
 
   return { list: allData, errorCount: paginationErrorCount };
-}
-
-export async function fetchDataForPullRequests(
-  api: URL,
-  paginationCursor: number,
-): Promise<PaginationData<IPullRequestList>> {
-  api.searchParams.set("paginationCursor", paginationCursor.toString());
-
-  const { data } = await axios.get<IPullRequestInfo>(api.href);
-
-  return {
-    data: data.pullRequests,
-    count: data.count,
-    errorCount: data.errorCount,
-    filteredCount: data.filteredCount,
-  };
 }
 
 export async function fetchDataForCommits(api: URL, paginationCursor: number): Promise<PaginationData<ICommit>> {

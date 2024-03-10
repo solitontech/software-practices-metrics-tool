@@ -3,13 +3,13 @@
   color: $primary-color;
 }
 
-@mixin flex-center {
+@mixin flex-align-center {
   display: flex;
   align-items: center;
 }
 
 @mixin flex-column-center {
-  @include flex-center;
+  @include flex-align-center;
   flex-direction: column;
   justify-content: center;
 }
@@ -25,7 +25,7 @@
 }
 
 @mixin table-details {
-  @include flex-center;
+  @include flex-align-center;
   height: 80px;
 }
 
@@ -105,7 +105,7 @@
 }
 
 @mixin tile-content {
-  @include flex-center;
+  @include flex-align-center;
   gap: 6px;
 }
 
@@ -117,7 +117,7 @@
 }
 
 @mixin info-icon {
-  @include flex-center;
+  @include flex-align-center;
   cursor: pointer;
 }
 
@@ -162,7 +162,7 @@
 @mixin pull-request-url {
   @include url;
   color: $primary-color;
-  @include flex-center;
+  @include flex-align-center;
 }
 
 @mixin graph-info-icon {

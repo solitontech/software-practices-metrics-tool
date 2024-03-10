@@ -1,15 +1,19 @@
-export interface IContextClientFiltersSquadUser {
-  name: string;
-  isSelected: boolean;
-}
+import { IFetchersClientFilterSquadMember } from "../../fetchers";
 
-export interface IContextClientFiltersSquad {
+export interface IContextClientFilterSquad {
   squadName: string;
-  developers: Record<string, IContextClientFiltersSquadUser>;
-  reviewers: Record<string, IContextClientFiltersSquadUser>;
+  developers: IFetchersClientFilterSquadMember[];
+  reviewers: IFetchersClientFilterSquadMember[];
+}
+export type IContextClientFilterSquadMembers = IFetchersClientFilterSquadMember[];
+
+export type IContextClientFilterSquadMemberKey = keyof Pick<IContextClientFilterSquad, "developers" | "reviewers">;
+
+export interface IContextClientFilter {
+  filters: IContextClientFilterSquad[];
+  setFilters: React.Dispatch<React.SetStateAction<IContextClientFilterSquad[]>>;
 }
 
-export interface IContextClientFilters {
-  filters: IContextClientFiltersSquad[];
-  setFilters: React.Dispatch<React.SetStateAction<IContextClientFiltersSquad[]>>;
+export interface IContextClientFilterProps {
+  children: React.ReactNode;
 }

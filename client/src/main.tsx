@@ -11,7 +11,9 @@ import "./styles/index.scss";
 import { queryClient } from "./fetchers/setup/queryClient.ts";
 import { App } from "./pages/index.ts";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const renderNode = document.getElementById("root") as HTMLElement;
+
+ReactDOM.createRoot(renderNode).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

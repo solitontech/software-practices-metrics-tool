@@ -64,7 +64,7 @@
 .branchName {
   color: $primary-color;
   @include url;
-  @include flex-center;
+  @include flex-align-center;
   gap: 4px;
 }
 

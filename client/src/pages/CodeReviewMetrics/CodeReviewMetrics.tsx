@@ -30,7 +30,7 @@ import { MetricsToggleTab } from "../../components/reusables/MetricsToggleTab/Me
 import { SearchBox } from "../../components/reusables/SearchBox/SearchBox.tsx";
 import SnackbarMessage from "../../components/reusables/SnackbarMessage/SnackbarMessage.tsx";
 import { ErrorBoundary } from "../../errorBoundary/ErrorBoundary.tsx";
-import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics.ts";
+import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics";
 import { filterPullRequests } from "../../utils/filterPullRequests.tsx";
 
 const today = DateTime.local();
@@ -44,34 +44,27 @@ const SEARCH_BOX_ID = "search-box";
 type CodeReviewMetricsView = "table" | "graph" | "trend-graph";
 
 export const CodeReviewMetrics = () => {
-  const [selectedChips, setSelectedChips] = useState(ALL_CHIPS);
-
-  const [searchPlaceHolder, setSearchPlaceHolder] = useState<string>(PLACEHOLDER);
-
-  const [isSearchBoxDropdownOpen, setIsSearchBoxDropdownOpen] = useState(false);
-
-  const [searchTerm, setSearchTerm] = useState("");
-
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
+  const [isSearchBoxDropdownOpen, setIsSearchBoxDropdownOpen] = useState(false);
+  const [searchPlaceHolder, setSearchPlaceHolder] = useState<string>(PLACEHOLDER);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedChips, setSelectedChips] = useState(ALL_CHIPS);
   const [selectedView, setSelectedView] = useState<CodeReviewMetricsView>(
     CODE_REVIEW_METRICS_TAB_VALUE.TABLE as CodeReviewMetricsView,
   );
-
   const [dates, setDates] = useState({
     startDate: sevenDaysAgoFromToday.toJSDate(),
     endDate: today.toJSDate(),
   });
 
   const {
-    isLoading,
-    data: { pullRequestList, errorCount },
+    isPending,
+    isError,
+    data: { pullRequests, errorCount },
     error,
   } = useCodeReviewMetrics(dates.startDate, dates.endDate);
 
-  const searchedPullRequests = searchTerm
-    ? filterPullRequests(pullRequestList, selectedChips, searchTerm)
-    : pullRequestList;
+  const searchedPullRequests = searchTerm ? filterPullRequests(pullRequests, selectedChips, searchTerm) : pullRequests;
 
   const averageFirstReviewResponseTime = getMetricsAverageTimeInHours(
     searchedPullRequests,
@@ -123,11 +116,12 @@ export const CodeReviewMetrics = () => {
   }, [errorCount]);
 
   const renderView = () => {
-    if (isLoading) {
+    if (isPending) {
       return <LoadingSpinner content="Loading pull requests..." />;
     }
 
-    if (error) {
+    // TODO: is error and error should auto infer type narrowing
+    if (isError && error) {
       return <DisplayError error={error.response.data.error} />;
     }
 

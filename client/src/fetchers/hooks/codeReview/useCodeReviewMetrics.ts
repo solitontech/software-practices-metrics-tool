@@ -1,29 +1,68 @@
 import { useContext } from "react";
 
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-import { IPullRequestSuccessInfo } from "../../../components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTable/interfaces";
-import { ClientFiltersContext } from "../../../context/clientFilters/context";
-import { getClientFilteredPullRequests } from "../../../utils/clientFilters";
+import { IApiCodeReviewResponse, IFetchersCodeReviewPullRequest } from "./types";
+import { CodeReviewUtils } from "./utils";
+import { ClientFilterContext } from "../../../context";
+import { ApiEndPoint, ApiUtils } from "../../api";
 import { QUERY_KEY } from "../../constants/queryKey.constant";
-import { fetchPullRequests } from "../../queries/codeReview/codeReviewFetchers";
 import { ICustomError } from "../types/types";
 
-export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
-  const { filters } = useContext(ClientFiltersContext);
+interface IApiCollectedData<T> {
+  data: T[];
+  count: number;
+  errorCount?: number;
+  filteredCount?: number;
+}
 
-  const { isLoading, data, error } = useQuery<IPullRequestSuccessInfo, ICustomError>({
+async function fetchCodeReviewMetrics(
+  api: URL,
+  paginationCursor: number,
+): Promise<IApiCollectedData<IFetchersCodeReviewPullRequest>> {
+  api.searchParams.set("paginationCursor", paginationCursor.toString());
+
+  const { data } = await axios.get<IApiCodeReviewResponse>(api.href);
+
+  return {
+    data: data.pullRequests,
+    count: data.count,
+    errorCount: data.errorCount,
+    filteredCount: data.filteredCount,
+  };
+}
+
+interface Result {
+  pullRequests: IFetchersCodeReviewPullRequest[];
+  errorCount: number;
+}
+
+export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
+  const { filters } = useContext(ClientFilterContext);
+
+  const { isPending, isError, data, error } = useQuery<Result, ICustomError>({
     queryKey: [QUERY_KEY.CODE_REVIEW, startDate, endDate],
     queryFn: async () => {
-      return await fetchPullRequests(startDate, endDate);
+      const apiURL = ApiEndPoint.codeReviewMetrics(startDate, endDate);
+
+      const { data: pullRequests, errorCount } = await ApiUtils.continuedFetching(fetchCodeReviewMetrics, apiURL);
+
+      return { pullRequests, errorCount };
     },
   });
 
-  const filteredPullRequests = getClientFilteredPullRequests(data, filters);
+  console.log("DEBUG: TEST", filters, data);
+
+  const filteredPullRequests = CodeReviewUtils.getClientFilteredPullRequests(data, filters);
 
   return {
-    isLoading,
-    data: filteredPullRequests ?? ({ pullRequestList: [], errorCount: 0 } as IPullRequestSuccessInfo),
+    isPending,
+    isError,
+    data: filteredPullRequests ? filteredPullRequests : { pullRequests: [], errorCount: 0 },
     error,
   };
 };
+
+/* interface exports */
+export type { IFetchersCodeReviewPullRequest } from "./types";

@@ -1,7 +1,7 @@
 import durationFormat from "humanize-duration";
 
 import { sortMap } from "./codeReviewMetricsTableConstants";
-import { FilterColumn, Filters, IPullRequestList, IReviewerComments, Vote } from "./interfaces";
+import { FilterColumn, Filters, IReviewerComments, Vote } from "./interfaces";
 import { NOT_AVAILABLE } from "../../../../constants/commonConstants";
 import {
   HOURS_IN_A_DAY,
@@ -9,6 +9,7 @@ import {
   MINUTES_IN_ONE_HOUR,
   FRACTION_TO_FIND_TIME,
 } from "../../../../constants/timeConstants";
+import { IFetchersCodeReviewPullRequest } from "../../../../fetchers";
 import { cacheWrapperForUnaryFunction } from "../../../../utils/cache";
 import { formatHoursToDays } from "../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 
@@ -27,65 +28,67 @@ export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | 
   });
 });
 
-export function sortPullRequests(pullRequests: IPullRequestList[], sort: Record<string, string>) {
-  return pullRequests.sort((firstPullRequest: IPullRequestList, secondPullRequest: IPullRequestList) => {
-    for (const key in sort) {
-      if (sort[key] === sortMap.noSort) continue;
+export function sortPullRequests(pullRequests: IFetchersCodeReviewPullRequest[], sort: Record<string, string>) {
+  return pullRequests.sort(
+    (firstPullRequest: IFetchersCodeReviewPullRequest, secondPullRequest: IFetchersCodeReviewPullRequest) => {
+      for (const key in sort) {
+        if (sort[key] === sortMap.noSort) continue;
 
-      let firstValue = firstPullRequest[key as keyof IPullRequestList];
-      let secondValue = secondPullRequest[key as keyof IPullRequestList];
+        let firstValue = firstPullRequest[key as keyof IFetchersCodeReviewPullRequest];
+        let secondValue = secondPullRequest[key as keyof IFetchersCodeReviewPullRequest];
 
-      // If they are, return 0, indicating that both values are considered equal.
-      if (!firstValue && !secondValue) {
-        return 0;
-      }
+        // If they are, return 0, indicating that both values are considered equal.
+        if (!firstValue && !secondValue) {
+          return 0;
+        }
 
-      /*If the above condition is not met, check if firstValue is falsy.
+        /*If the above condition is not met, check if firstValue is falsy.
         If it is, return 1, indicating that firstValue is considered greater than secondValue.
         This sorts it to the end or "right" side in ascending order.*/
-      if (!firstValue) {
-        return 1;
-      }
+        if (!firstValue) {
+          return 1;
+        }
 
-      /*If none of the previous conditions are met, check if secondValue is falsy.
+        /*If none of the previous conditions are met, check if secondValue is falsy.
         If it is, return -1, indicating that secondValue is considered greater than firstValue.
         This sorts it to the end or "right" side in descending order.*/
-      if (!secondValue) {
-        return -1;
-      }
-
-      if (key === "comments") {
-        firstValue = firstPullRequest.comments.totalComments;
-        secondValue = secondPullRequest.comments.totalComments;
-      }
-
-      if (sort[key] === sortMap.asc) {
-        if (firstValue < secondValue) {
-          return 1;
-        }
-
-        if (firstValue > secondValue) {
+        if (!secondValue) {
           return -1;
         }
-      } else if (sort[key] === sortMap.desc) {
-        if (firstValue === null) {
-          return 1;
+
+        if (key === "comments") {
+          firstValue = firstPullRequest.comments.totalComments;
+          secondValue = secondPullRequest.comments.totalComments;
         }
 
-        //1 means that the first element should be sorted before the second element.
-        if (firstValue > secondValue) {
-          return 1;
-        }
+        if (sort[key] === sortMap.asc) {
+          if (firstValue < secondValue) {
+            return 1;
+          }
 
-        //-1 means that the second element should be sorted before the first element.
-        if (firstValue < secondValue) {
-          return -1;
+          if (firstValue > secondValue) {
+            return -1;
+          }
+        } else if (sort[key] === sortMap.desc) {
+          if (firstValue === null) {
+            return 1;
+          }
+
+          //1 means that the first element should be sorted before the second element.
+          if (firstValue > secondValue) {
+            return 1;
+          }
+
+          //-1 means that the second element should be sorted before the first element.
+          if (firstValue < secondValue) {
+            return -1;
+          }
         }
       }
-    }
-    //0 means that the relative order of first and second element should remain unchanged.
-    return 0;
-  });
+      //0 means that the relative order of first and second element should remain unchanged.
+      return 0;
+    },
+  );
 }
 
 export const convertTimeToDays = (timeInSeconds: number, formattedTime: string): string => {
@@ -98,7 +101,10 @@ export const convertTimeToDays = (timeInSeconds: number, formattedTime: string):
   return formattedTime;
 };
 
-export const getFilteredPullRequests = (pullRequests: IPullRequestList[], filters: Filters): IPullRequestList[] => {
+export const getFilteredPullRequests = (
+  pullRequests: IFetchersCodeReviewPullRequest[],
+  filters: Filters,
+): IFetchersCodeReviewPullRequest[] => {
   const columnNameToFilter = Object.keys(filters).find((filterKey: string) => {
     const filter = filters[filterKey as FilterColumn];
 
@@ -131,7 +137,7 @@ export const getFilteredPullRequests = (pullRequests: IPullRequestList[], filter
   });
 };
 
-export const getTotalComments = (pullRequests: IPullRequestList[]): number => {
+export const getTotalComments = (pullRequests: IFetchersCodeReviewPullRequest[]): number => {
   return pullRequests.reduce((totalComments, pullRequest) => {
     return totalComments + pullRequest.comments.totalComments;
   }, 0);

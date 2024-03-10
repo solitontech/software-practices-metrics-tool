@@ -28,14 +28,14 @@
 }
 
 .drawerToolbar {
-  @include flex-center;
+  @include flex-align-center;
 
   height: 81px;
   justify-content: space-around;
 }
 
 @mixin commonLink {
-  @include flex-center;
+  @include flex-align-center;
   @include page;
   @include pageName;
 

@@ -4,12 +4,12 @@ import styles from "./CodeReviewMetricsTable.module.scss";
 import { columns, sortMap } from "./codeReviewMetricsTableConstants";
 import { getFilteredPullRequests, getTotalComments, sortPullRequests } from "./codeReviewMetricsTableUtils";
 import { CustomTableCell } from "./CustomTableCell";
-import { IPullRequestList, Vote, IColumn, Filters, FilterColumn } from "./interfaces";
+import { Vote, IColumn, Filters, FilterColumn } from "./interfaces";
 import { CodeReviewMetricsTableRow } from "./TableChildren/CodeReviewMetricsTableRow";
 import { VOTES_FILTER_DEFAULT_STATE } from "./VotesFilter/votesFilterConstants";
-
+import { IFetchersCodeReviewPullRequest } from "../../../../fetchers";
 interface Props {
-  pullRequests: IPullRequestList[];
+  pullRequests: IFetchersCodeReviewPullRequest[];
 }
 
 const SORT_DEFAULT_STATE = {
