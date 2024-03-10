@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { ICommitSuccessInfo } from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/interfaces";
-import { QUERY_KEY } from "../../constants/queryKey.constant";
 import { fetchCodeFreezeMetrics } from "../../queries/trunkBasedDevelopment/trunkBasedFetchers";
+import { QUERY_KEY } from "../../setup/queryKey";
 import { ICustomError } from "../types/types";
 
 export const useTrunkBasedMetricsCodeFreeze = (startDate: Date, endDate: Date) => {

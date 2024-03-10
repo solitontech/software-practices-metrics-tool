@@ -1,7 +1,6 @@
 import axios from "axios";
 import { DateTime } from "luxon";
 
-import { FIRST_PAGE, PAGINATION_LIMIT } from "./constants/query.constant";
 import {
   ICodeFreeze,
   ICommit,
@@ -17,6 +16,8 @@ import {
 
 const dateFormat = "yyyy-MM-dd";
 
+const PAGINATION_LIMIT = 300;
+const FIRST_PAGE = 1;
 interface PaginationData<T> {
   data: T[];
   count: number;

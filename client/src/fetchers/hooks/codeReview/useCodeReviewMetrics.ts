@@ -7,7 +7,7 @@ import { IFetchedCodeReviewResponse } from "./types";
 import { CodeReviewUtils } from "./utils";
 import { ClientFilterContext } from "../../../context";
 import { ApiEndPoint, ApiUtils } from "../../api";
-import { QUERY_KEY } from "../../constants/queryKey.constant";
+import { QUERY_KEY } from "../../setup/queryKey";
 
 async function fetchCodeReviewMetrics(api: URL, paginationCursor: number) {
   api.searchParams.set("paginationCursor", paginationCursor.toString());

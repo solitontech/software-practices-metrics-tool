@@ -4,7 +4,7 @@ import axios from "axios";
 import { IFetchedClientFilterResponse } from "./types";
 import { ClientFiltersUtils } from "./utils";
 import { ApiEndPoint } from "../../api";
-import { QUERY_KEY } from "../../constants/queryKey.constant";
+import { QUERY_KEY } from "../../setup/queryKey";
 
 export const useClientFilters = () => {
   const clientFiltersQuery = useQuery({

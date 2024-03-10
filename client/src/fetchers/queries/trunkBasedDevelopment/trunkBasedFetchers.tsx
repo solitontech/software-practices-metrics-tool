@@ -13,7 +13,6 @@ import {
   IPullRequestsMergedToMain,
   IPullRequestsMergedToMainSuccessInfo,
 } from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/interfaces";
-import { PAGINATION_LIMIT } from "../../constants/query.constant";
 import {
   continueFetching,
   fetchDataForCommits,
@@ -22,6 +21,8 @@ import {
   fetchDataForPullRequestsMergedToMain,
   trunkBasedMetricsAPI,
 } from "../../fetchersUtils";
+
+const PAGINATION_LIMIT = 300;
 
 export const fetchTotalBranches = async (): Promise<ITotalBranches> => {
   const api = new URL(`${trunkBasedMetricsAPI}/branches`);

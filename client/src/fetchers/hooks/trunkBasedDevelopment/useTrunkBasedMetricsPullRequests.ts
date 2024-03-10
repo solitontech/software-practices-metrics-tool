@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { IPullRequestsMergedToMainSuccessInfo } from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/interfaces";
-import { QUERY_KEY } from "../../constants/queryKey.constant";
 import { fetchPullRequestsMergedToMain } from "../../queries/trunkBasedDevelopment/trunkBasedFetchers";
+import { QUERY_KEY } from "../../setup/queryKey";
 import { ICustomError } from "../types/types";
 
 export const useTrunkBasedMetricsPullRequests = (startDate: Date, endDate: Date) => {
