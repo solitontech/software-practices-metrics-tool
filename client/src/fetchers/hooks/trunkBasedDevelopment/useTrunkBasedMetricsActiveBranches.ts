@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { IFetchedTrunkBasedActiveBranchesResponse } from "./types";
-import { ApiEndPoint, ApiUtils } from "../../api";
+import { ApiEndPoint, ApiUtil } from "../../api";
 import { QUERY_KEY } from "../../setup/queryKey";
 
 export async function fetchActiveBranches(url: URL, paginationCursor: number) {
@@ -21,7 +21,7 @@ export const useTrunkBasedMetricsActiveBranches = () => {
     queryFn: async () => {
       const apiURL = ApiEndPoint.trunkBasedActiveBranches();
 
-      const { data: activeBranches, errorCount } = await ApiUtils.continuedFetching(fetchActiveBranches, apiURL);
+      const { data: activeBranches, errorCount } = await ApiUtil.continuedFetching(fetchActiveBranches, apiURL);
 
       return { activeBranches, errorCount };
     },

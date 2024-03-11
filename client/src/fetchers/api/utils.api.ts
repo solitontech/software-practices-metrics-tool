@@ -1,6 +1,6 @@
 import { START_PAGINATION_CURSOR, PAGINATION_LIMIT } from "./constant.api";
 import { IFetchAllData } from "./types.api";
-export class ApiUtils {
+export class ApiUtil {
   static async continuedFetching<T>(fetchData: IFetchAllData<T>, apiURL: URL) {
     const allData: T[] = [];
 
