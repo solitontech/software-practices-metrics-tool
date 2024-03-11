@@ -12,15 +12,10 @@ interface IBranches {
 export interface IActiveBranch {
   name: string;
   title: string;
-  creationDate: string;
   createdBy: string;
+  creationDate: string;
   pullRequestURL: string;
   branchURL: string;
-}
-
-export interface IActiveBranchSuccessInfo {
-  activeBranchesList: IActiveBranch[];
-  errorCount?: number;
 }
 
 export interface ITotalBranches {

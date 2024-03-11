@@ -6,10 +6,6 @@ import {
   ICommit,
 } from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/interfaces";
 import {
-  IActiveBranch,
-  IActiveBranches,
-} from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
-import {
   IPullRequestsInfoMergedToMain,
   IPullRequestsMergedToMain,
 } from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/interfaces";
@@ -73,16 +69,6 @@ export async function fetchDataForCommits(api: URL, paginationCursor: number): P
   const { data } = await axios.get<ICodeFreeze>(api.href);
 
   return { data: data.commits, count: data.count };
-}
-
-export async function fetchDataForActiveBranches(
-  api: URL,
-  paginationCursor: number,
-): Promise<PaginationData<IActiveBranch>> {
-  api.searchParams.set("paginationCursor", paginationCursor.toString());
-  const { data } = await axios.get<IActiveBranches>(api.href);
-
-  return { data: data.branches, count: data.count };
 }
 
 export async function fetchDataForPullRequestsMergedToMain(

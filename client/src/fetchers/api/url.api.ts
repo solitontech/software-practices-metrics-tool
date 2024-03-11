@@ -31,4 +31,13 @@ export class ApiEndPoint {
 
     return url;
   }
+
+  static trunkBasedActiveBranches() {
+    const url = new URL(`${this.#baseURL}/api/v1/metrics/trunk-based-development/activeBranches`);
+
+    url.searchParams.append("paginationCursor", String(START_PAGINATION_CURSOR));
+    url.searchParams.append("paginationSize", String(PAGINATION_LIMIT));
+
+    return url;
+  }
 }

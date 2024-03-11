@@ -39,7 +39,7 @@ export const TrunkBasedMetricsTiles = () => {
   } = useTrunkBasedMetricsTotalBranches();
 
   const {
-    data: { activeBranchesList },
+    data: { activeBranches },
   } = useTrunkBasedMetricsActiveBranches();
 
   return (
@@ -63,9 +63,7 @@ export const TrunkBasedMetricsTiles = () => {
             size="16px"
           />
           <div className={styles.tileInfo}>
-            <div data-testid="active-branches">
-              {activeBranchesList.length ? activeBranchesList.length : NOT_AVAILABLE}
-            </div>
+            <div data-testid="active-branches">{activeBranches.length ? activeBranches.length : NOT_AVAILABLE}</div>
             <div
               className={styles.icon}
               data-testid="active-branches-button"
@@ -98,7 +96,7 @@ export const TrunkBasedMetricsTiles = () => {
       <DialogBox
         open={isActiveBranchDialogOpen}
         onClose={() => setIsActiveBranchDialogOpen(false)}
-        content={<TrunkBasedActiveBranchesTable activeBranches={activeBranchesList} />}
+        content={<TrunkBasedActiveBranchesTable activeBranches={activeBranches} />}
         minWidth="800px"
       >
         <div>Active PR&apos;s to trunk branch</div>

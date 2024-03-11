@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { IFetchedClientFilterResponse } from "./types";
-import { ClientFiltersUtils } from "./utils";
+import { ClientFiltersUtil } from "./utils";
 import { ApiEndPoint } from "../../api";
 import { QUERY_KEY } from "../../setup/queryKey";
 
@@ -15,7 +15,7 @@ export const useClientFilters = () => {
       return data;
     },
     select: (data) => {
-      return ClientFiltersUtils.getFilters(data);
+      return ClientFiltersUtil.getFilters(data);
     },
   });
 

@@ -1,6 +1,6 @@
 import { IFetchedClientFilterResponse, IFetchedClientFilterSquadMember } from "./types";
 
-export class ClientFiltersUtils {
+export class ClientFiltersUtil {
   static #getUsers(usersRecord: Record<string, string>, isSelected: boolean): IFetchedClientFilterSquadMember[] {
     return Object.entries(usersRecord).map(([id, name]) => {
       return {

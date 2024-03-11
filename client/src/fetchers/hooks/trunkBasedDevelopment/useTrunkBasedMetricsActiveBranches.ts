@@ -1,21 +1,36 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-import { IActiveBranchSuccessInfo } from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
-import { fetchActiveBranches } from "../../queries/trunkBasedDevelopment/trunkBasedFetchers";
+import { IFetchedTrunkBasedActiveBranchesResponse } from "./types";
+import { ApiEndPoint, ApiUtils } from "../../api";
 import { QUERY_KEY } from "../../setup/queryKey";
-import { ICustomError } from "../types/types";
+
+export async function fetchActiveBranches(url: URL, paginationCursor: number) {
+  url.searchParams.set("paginationCursor", String(paginationCursor));
+
+  const {
+    data: { branches, count },
+  } = await axios.get<IFetchedTrunkBasedActiveBranchesResponse>(url.href);
+
+  return { data: branches, count };
+}
 
 export const useTrunkBasedMetricsActiveBranches = () => {
-  const { isLoading, data, error } = useQuery<IActiveBranchSuccessInfo, ICustomError>({
+  const { isPending, isError, data, error } = useQuery({
     queryKey: [QUERY_KEY.TRUNK_BASED_ACTIVE_BRANCHES],
     queryFn: async () => {
-      return await fetchActiveBranches();
+      const apiURL = ApiEndPoint.trunkBasedActiveBranches();
+
+      const { data: activeBranches, errorCount } = await ApiUtils.continuedFetching(fetchActiveBranches, apiURL);
+
+      return { activeBranches, errorCount };
     },
   });
 
   return {
-    isLoading,
-    data: data ?? ({ activeBranchesList: [] } as IActiveBranchSuccessInfo),
+    isPending,
+    isError,
+    data: data ?? { activeBranches: [], errorCount: 0 },
     error,
   };
 };
