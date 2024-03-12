@@ -1,17 +1,16 @@
-import styles from "./PageNotFound.module.scss";
-import pageNotFoundImage from "../../assets/images/pageNotFound.png";
+import pageNotFoundImage from "src/assets/images/pageNotFound.png";
+import { ErrorBoundary } from "src/components";
 
-const pageNotFound = "Page not found";
-const description = "The address you've entered doesn't exist. Please recheck the address you've entered";
+import styles from "./PageNotFound.module.scss";
 
 export const PageNotFound = () => {
   return (
-    <div className={styles.pageNotFound}>
-      <div>
-        <img src={pageNotFoundImage} alt={pageNotFound}></img>
-      </div>
-      <div className={styles.pageNotFoundText}>{pageNotFound}</div>
-      <div className={styles.description}>{description}</div>
-    </div>
+    <ErrorBoundary key="page-not-found">
+      <section className={styles.pageNotFound}>
+        <img src={pageNotFoundImage} alt="Page not found"></img>
+        <h2 className={styles.pageNotFoundText}>Page not found</h2>
+        <p className={styles.description}>The address you have entered does not exist</p>
+      </section>
+    </ErrorBoundary>
   );
 };

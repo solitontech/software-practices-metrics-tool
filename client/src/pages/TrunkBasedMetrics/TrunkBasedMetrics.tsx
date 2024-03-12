@@ -2,16 +2,14 @@ import { useState } from "react";
 
 import { DateTime } from "luxon";
 
+import { CommonLayout, DateRangePicker, MetricsToggleTab, ErrorBoundary } from "src/components";
+
 import styles from "./TrunkBasedMetrics.module.scss";
 import { TRUNK_BASED_METRICS_TABS, TRUNK_BASED_METRICS_TAB_VALUE } from "./trunkBasedMetricsConstants";
 import { TrunkBasedMetricsGraphs } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/TrunkBasedMetricsGraphs";
 import { TrunkBasedMetricsTiles } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/TrunkBasedMetricsTiles";
 import { TrunkBasedPullRequestsTable } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/TrunkBasedPullRequestsTable";
-import { CommonLayout } from "../../components/reusables/CommonLayout/CommonLayout";
-import { DateRangePicker } from "../../components/reusables/DateRangePicker/DateRangePicker";
 import { IMetricsView } from "../../components/reusables/MetricsToggleTab/interfaces";
-import { MetricsToggleTab } from "../../components/reusables/MetricsToggleTab/MetricsToggleTab";
-import { ErrorBoundary } from "../../errorBoundary/ErrorBoundary";
 
 const today = DateTime.local();
 const sevenDaysAgoFromToday = today.minus({ days: 7 });
@@ -70,30 +68,32 @@ export const TrunkBasedMetrics = () => {
   };
 
   return (
-    <CommonLayout pageHeader="Trunk Based Metrics">
-      <div className={styles.trunkBased}>
-        <div className={styles.tableDetails}>
-          <div className={styles.header}>
-            <DateRangePicker
-              date={dates}
-              onStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
-              onEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
-              minDate={sixMonthsAgoFromToday.toJSDate()}
-              maxDate={today.toJSDate()}
-            />
-            <MetricsToggleTab
-              metricsViews={metricsToggleTabs}
-              selectedView={selectedView}
-              onViewChange={handleViewChange}
-            />
-            <div className={styles.tiles}>
-              <TrunkBasedMetricsTiles />
+    <ErrorBoundary key="trunk-based-metrics">
+      <CommonLayout pageHeader="Trunk Based Metrics">
+        <div className={styles.trunkBased}>
+          <div className={styles.tableDetails}>
+            <div className={styles.header}>
+              <DateRangePicker
+                date={dates}
+                onStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
+                onEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
+                minDate={sixMonthsAgoFromToday.toJSDate()}
+                maxDate={today.toJSDate()}
+              />
+              <MetricsToggleTab
+                metricsViews={metricsToggleTabs}
+                selectedView={selectedView}
+                onViewChange={handleViewChange}
+              />
+              <div className={styles.tiles}>
+                <TrunkBasedMetricsTiles />
+              </div>
             </div>
           </div>
-        </div>
 
-        {renderView()}
-      </div>
-    </CommonLayout>
+          {renderView()}
+        </div>
+      </CommonLayout>
+    </ErrorBoundary>
   );
 };

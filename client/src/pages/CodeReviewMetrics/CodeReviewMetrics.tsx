@@ -24,17 +24,17 @@ import { CodeReviewMetricsTiles } from "../../components/containers/CodeReviewMe
 import { CommonLayout } from "../../components/reusables/CommonLayout/CommonLayout";
 import { DateRangePicker } from "../../components/reusables/DateRangePicker/DateRangePicker.tsx";
 import { DisplayError } from "../../components/reusables/DisplayError/DisplayError.tsx";
+import { ErrorBoundary } from "../../components/reusables/ErrorBoundary/ErrorBoundary.tsx";
 import { LoadingSpinner } from "../../components/reusables/LoadingSpinner/LoadingSpinner.tsx";
 import { IMetricsView } from "../../components/reusables/MetricsToggleTab/interfaces.tsx";
 import { MetricsToggleTab } from "../../components/reusables/MetricsToggleTab/MetricsToggleTab.tsx";
 import { SearchBox } from "../../components/reusables/SearchBox/SearchBox.tsx";
 import SnackbarMessage from "../../components/reusables/SnackbarMessage/SnackbarMessage.tsx";
-import { ErrorBoundary } from "../../errorBoundary/ErrorBoundary.tsx";
-import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics";
+import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics.hook.ts";
 import { filterPullRequests } from "../../utils/filterPullRequests.tsx";
 
 const today = DateTime.local();
-const sevenDaysAgoFromToday = today.minus({ days: 7 });
+const sevenDaysAgoFromToday = today.minus({ days: 15 });
 const sixMonthsAgoFromToday = today.minus({ days: 190 });
 const metricsToggleTabs = CODE_REVIEW_METRICS_TABS as IMetricsView<CodeReviewMetricsView>[];
 
@@ -189,68 +189,70 @@ export const CodeReviewMetrics = () => {
   };
 
   return (
-    <CommonLayout
-      id={SEARCH_BOX_ID}
-      pageHeader="Code Review Metrics"
-      searchBox={
-        <SearchBox
-          onChange={handleSearchChange}
-          label="Search Pull Requests"
-          width={380}
-          placeHolder={searchPlaceHolder}
-          isDebounced={true}
-          onClick={() => setIsSearchBoxDropdownOpen(true)}
-        ></SearchBox>
-      }
-      filter={<ClientFilters />}
-      searchDialogBox={
-        isSearchBoxDropdownOpen && (
-          <div className={styles.dropDown}>
-            {CHIP.map((chip) => (
-              <CodeReviewSearchChips
-                key={chip.chipKey}
-                label={chip.chipLabel}
-                selected={selectedChips.includes(chip.chipKey)}
-                onClick={() => handleChipClick(chip.chipKey as keyof typeof CHIP)}
+    <ErrorBoundary key="code-review-metrics">
+      <CommonLayout
+        id={SEARCH_BOX_ID}
+        pageHeader="Code Review Metrics"
+        searchBox={
+          <SearchBox
+            onChange={handleSearchChange}
+            label="Search Pull Requests"
+            width={380}
+            placeHolder={searchPlaceHolder}
+            isDebounced={true}
+            onClick={() => setIsSearchBoxDropdownOpen(true)}
+          ></SearchBox>
+        }
+        filter={<ClientFilters />}
+        searchDialogBox={
+          isSearchBoxDropdownOpen && (
+            <div className={styles.dropDown}>
+              {CHIP.map((chip) => (
+                <CodeReviewSearchChips
+                  key={chip.chipKey}
+                  label={chip.chipLabel}
+                  selected={selectedChips.includes(chip.chipKey)}
+                  onClick={() => handleChipClick(chip.chipKey as keyof typeof CHIP)}
+                />
+              ))}
+            </div>
+          )
+        }
+      >
+        <div className={styles.codeReview}>
+          <SnackbarMessage
+            open={snackbarOpen}
+            onClose={() => {
+              setSnackbarOpen(false);
+            }}
+            message={`Failed to fetch ${errorCount} pull request. Please try again.`}
+          />
+          <div className={styles.tableDetails}>
+            <div className={styles.header}>
+              <DateRangePicker
+                date={dates}
+                onStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
+                onEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
+                minDate={sixMonthsAgoFromToday.toJSDate()}
+                maxDate={today.toJSDate()}
               />
-            ))}
-          </div>
-        )
-      }
-    >
-      <div className={styles.codeReview}>
-        <SnackbarMessage
-          open={snackbarOpen}
-          onClose={() => {
-            setSnackbarOpen(false);
-          }}
-          message={`Failed to fetch ${errorCount} pull request. Please try again.`}
-        />
-        <div className={styles.tableDetails}>
-          <div className={styles.header}>
-            <DateRangePicker
-              date={dates}
-              onStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
-              onEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
-              minDate={sixMonthsAgoFromToday.toJSDate()}
-              maxDate={today.toJSDate()}
-            />
-            <MetricsToggleTab
-              metricsViews={metricsToggleTabs}
-              selectedView={selectedView}
-              onViewChange={handleViewChange}
-            />
-            <div className={styles.tiles}>
-              <CodeReviewMetricsTiles
-                averageFirstReviewResponseTime={averageFirstReviewResponseTime}
-                averageApprovalTime={averageApprovalTime}
-                averageMergeTime={averageMergeTime}
+              <MetricsToggleTab
+                metricsViews={metricsToggleTabs}
+                selectedView={selectedView}
+                onViewChange={handleViewChange}
               />
+              <div className={styles.tiles}>
+                <CodeReviewMetricsTiles
+                  averageFirstReviewResponseTime={averageFirstReviewResponseTime}
+                  averageApprovalTime={averageApprovalTime}
+                  averageMergeTime={averageMergeTime}
+                />
+              </div>
             </div>
           </div>
+          {renderView()}
         </div>
-        {renderView()}
-      </div>
-    </CommonLayout>
+      </CommonLayout>
+    </ErrorBoundary>
   );
 };

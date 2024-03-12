@@ -7,9 +7,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-import "./styles/index.scss";
-import { queryClient } from "./fetchers";
-import { App } from "./pages";
+import "src/styles/index.scss";
+import { queryClient } from "src/fetchers";
+import { AppRoutes } from "src/routes";
 
 const renderNode = document.getElementById("root") as HTMLElement;
 
@@ -19,7 +19,7 @@ ReactDOM.createRoot(renderNode).render(
       <BrowserRouter>
         <StyledEngineProvider injectFirst>
           <CssBaseline />
-          <App />
+          <AppRoutes />
           <ReactQueryDevtools initialIsOpen={false} />
         </StyledEngineProvider>
       </BrowserRouter>

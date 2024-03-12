@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./TrunkBasedNamingConventionTable.module.scss";
 import { columns } from "./trunkBasedNamingConventionTableConstants.ts";
 import { filterBranches } from "./trunkBasedNamingConventionUtils.tsx";
-import { ErrorBoundary } from "../../../../errorBoundary/ErrorBoundary.tsx";
+import { ErrorBoundary } from "../../../reusables/ErrorBoundary/ErrorBoundary.tsx";
 import { SearchBox } from "../../../reusables/SearchBox/SearchBox.tsx";
 import { IBranchInfo } from "../TrunkBasedMetricsTiles/interfaces.tsx";
 
