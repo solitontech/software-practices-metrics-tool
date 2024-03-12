@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { IFetchedTrunkBranchCommitsResponse } from "./types";
-import { ApiEndPoint, ApiUtil } from "../../api";
-import { QUERY_KEY } from "../../setup/queryKey";
+import { ApiEndPoint, ApiHelpers } from "../../../api";
+import { QUERY_KEY } from "../../../setup/queryKey";
 
 export async function fetchTrunkBranchCommits(url: URL, paginationCursor: number) {
   url.searchParams.set("paginationCursor", String(paginationCursor));
@@ -21,7 +21,7 @@ export const useTrunkBranchCommits = (startDate: Date, endDate: Date) => {
     queryFn: async () => {
       const apiURL = ApiEndPoint.trunkBranchCommits(startDate, endDate);
 
-      const { data: commits, errorCount } = await ApiUtil.continuedFetching(fetchTrunkBranchCommits, apiURL);
+      const { data: commits, errorCount } = await ApiHelpers.continuedFetching(fetchTrunkBranchCommits, apiURL);
 
       return { commits, errorCount };
     },

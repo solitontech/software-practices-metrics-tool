@@ -1,2 +1,2 @@
-export * from "./endPoints/endpoints.api";
-export * from "./utils/util.api";
+export * from "./endPoint/endpoint.api";
+export * from "./helpers/helpers.api";

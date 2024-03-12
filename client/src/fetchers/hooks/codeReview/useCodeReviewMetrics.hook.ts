@@ -3,10 +3,10 @@ import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import { CodeReviewMetricsUtils } from "./codeReviewUtils";
 import { IFetchedCodeReviewResponse } from "./types";
-import { CodeReviewMetricsUtil } from "./utils";
 import { ClientFilterContext } from "../../../context";
-import { ApiEndPoint, ApiUtil } from "../../api";
+import { ApiEndPoint, ApiHelpers } from "../../api";
 import { QUERY_KEY } from "../../setup/queryKey";
 
 async function fetchCodeReviewMetrics(url: URL, paginationCursor: number) {
@@ -32,13 +32,13 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
     queryFn: async () => {
       const apiURL = ApiEndPoint.codeReviewMetrics(startDate, endDate);
 
-      const { data: pullRequests, errorCount } = await ApiUtil.continuedFetching(fetchCodeReviewMetrics, apiURL);
+      const { data: pullRequests, errorCount } = await ApiHelpers.continuedFetching(fetchCodeReviewMetrics, apiURL);
 
       return { pullRequests, errorCount };
     },
   });
 
-  const pullRequests = CodeReviewMetricsUtil.getFilteredPullRequests(data, filters);
+  const pullRequests = CodeReviewMetricsUtils.getFilteredPullRequests(data, filters);
 
   return {
     isPending,

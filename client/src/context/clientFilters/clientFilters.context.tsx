@@ -28,6 +28,6 @@ export const ClientFilterProvider = ({ children }: IContextClientFilterProps) =>
 export type {
   IContextClientFilter,
   IContextClientFilterSquad,
-  IContextClientFilterSquadMemberKey,
   IContextClientFilterSquadMembers,
+  IContextClientFilterSquadMemberKey,
 } from "./types";

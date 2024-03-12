@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./styles/index.scss";
 import { queryClient } from "./fetchers";
-import { App } from "./pages/index.ts";
+import { App } from "./pages";
 
 const renderNode = document.getElementById("root") as HTMLElement;
 

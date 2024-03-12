@@ -15,7 +15,7 @@ import styles from "./TrunkBasedPullRequestsTable.module.scss";
 import { columns } from "./trunkBasedPullRequestsTableConstants";
 import { filterPullRequests, getMergedPullRequest } from "./trunkBasedPullRequestsTableUtils";
 import { ErrorBoundary } from "../../../../errorBoundary/ErrorBoundary";
-import { useTrunkMergedPullRequests } from "../../../../fetchers";
+import { usePullRequestsMergedToTrunk } from "../../../../fetchers";
 import { formatDate, formatDateWithoutTime } from "../../../../utils/formatTimeUtils";
 import { DisplayError } from "../../../reusables/DisplayError/DisplayError";
 import { InfoIconTooltip } from "../../../reusables/InfoIconTooltip/InfoIconTooltip";
@@ -45,7 +45,7 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
     isError,
     data: { pullRequests },
     error,
-  } = useTrunkMergedPullRequests(startDate, endDate);
+  } = usePullRequestsMergedToTrunk(startDate, endDate);
 
   if (isPending) {
     return <LoadingSpinner content="Loading branches..." />;

@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { IFetchedTrunkBranchPullRequestsResponse } from "./types";
-import { ApiEndPoint, ApiUtil } from "../../api";
-import { QUERY_KEY } from "../../setup/queryKey";
+import { ApiEndPoint, ApiHelpers } from "../../../api";
+import { QUERY_KEY } from "../../../setup/queryKey";
 
-export async function fetchPullRequestsMergedToTrunkBranch(url: URL, paginationCursor: number) {
+export async function fetchPullRequestsMergedToTrunk(url: URL, paginationCursor: number) {
   url.searchParams.set("paginationCursor", String(paginationCursor));
 
   const {
@@ -15,14 +15,14 @@ export async function fetchPullRequestsMergedToTrunkBranch(url: URL, paginationC
   return { data: pullRequests, count };
 }
 
-export const useTrunkMergedPullRequests = (startDate: Date, endDate: Date) => {
+export const usePullRequestsMergedToTrunk = (startDate: Date, endDate: Date) => {
   const { isPending, isError, data, error } = useQuery({
     queryKey: [QUERY_KEY.TRUNK_BASED_PULL_REQUESTS, startDate, endDate],
     queryFn: async () => {
       const apiURL = ApiEndPoint.pullRequestsMergedToTrunkBranch(startDate, endDate);
 
-      const { data: pullRequests, errorCount } = await ApiUtil.continuedFetching(
-        fetchPullRequestsMergedToTrunkBranch,
+      const { data: pullRequests, errorCount } = await ApiHelpers.continuedFetching(
+        fetchPullRequestsMergedToTrunk,
         apiURL,
       );
 

@@ -1,7 +1,7 @@
 import { IFetchedCodeReviewResponse } from "./types";
 import { IContextClientFilterSquad } from "../../../context";
 
-export class CodeReviewMetricsUtil {
+export class CodeReviewMetricsUtils {
   static #getSquadsUserIdsMap(squads: IContextClientFilterSquad[]) {
     const developersMap = new Map();
     const reviewersMap = new Map();
