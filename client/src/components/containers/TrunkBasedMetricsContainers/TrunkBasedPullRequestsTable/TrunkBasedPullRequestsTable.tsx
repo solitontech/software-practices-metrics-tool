@@ -15,7 +15,7 @@ import styles from "./TrunkBasedPullRequestsTable.module.scss";
 import { columns } from "./trunkBasedPullRequestsTableConstants";
 import { filterPullRequests, getMergedPullRequest } from "./trunkBasedPullRequestsTableUtils";
 import { ErrorBoundary } from "../../../../errorBoundary/ErrorBoundary";
-import { useTrunkBasedMetricsPullRequests } from "../../../../fetchers/hooks/trunkBasedDevelopment/useTrunkBasedMetricsPullRequests";
+import { useTrunkMergedPullRequests } from "../../../../fetchers";
 import { formatDate, formatDateWithoutTime } from "../../../../utils/formatTimeUtils";
 import { DisplayError } from "../../../reusables/DisplayError/DisplayError";
 import { InfoIconTooltip } from "../../../reusables/InfoIconTooltip/InfoIconTooltip";
@@ -41,22 +41,21 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
   }, [startDate, endDate]);
 
   const {
-    isLoading: isPullRequestsLoading,
-    data: { pullRequestsMergedList },
-    error: pullRequestsError,
-  } = useTrunkBasedMetricsPullRequests(startDate, endDate);
+    isPending,
+    isError,
+    data: { pullRequests },
+    error,
+  } = useTrunkMergedPullRequests(startDate, endDate);
 
-  if (isPullRequestsLoading) {
+  if (isPending) {
     return <LoadingSpinner content="Loading branches..." />;
   }
 
-  if (pullRequestsError) {
-    return <DisplayError error={pullRequestsError?.response.data.error} />;
+  if (isError) {
+    return <DisplayError error={error?.response?.data.error} />;
   }
 
-  const searchedActiveBranches = searchTerm
-    ? filterPullRequests(pullRequestsMergedList, searchTerm)
-    : pullRequestsMergedList;
+  const searchedActiveBranches = searchTerm ? filterPullRequests(pullRequests, searchTerm) : pullRequests;
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.trim());

@@ -10,7 +10,9 @@ export const useClientFilters = () => {
   const clientFiltersQuery = useQuery({
     queryKey: [QUERY_KEY.CLIENT_FILTERS],
     queryFn: async () => {
-      const { data } = await axios.get<IFetchedClientFilterResponse>(ApiEndPoint.clientFilters());
+      const apiURL = ApiEndPoint.clientFilters();
+
+      const { data } = await axios.get<IFetchedClientFilterResponse>(apiURL.href);
 
       return data;
     },

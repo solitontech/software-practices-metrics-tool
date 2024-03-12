@@ -1,17 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-import { ITotalBranches } from "../../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
-import { fetchTotalBranches } from "../../queries/trunkBasedDevelopment/trunkBasedFetchers";
+import { IFetchedTrunkBranchesResponse } from "./types";
+import { ApiEndPoint } from "../../api";
 import { QUERY_KEY } from "../../setup/queryKey";
-import { ICustomError } from "../types/types";
 
 export const useTrunkBasedMetricsTotalBranches = () => {
-  const { isLoading, data, error } = useQuery<ITotalBranches, ICustomError>({
+  const { isPending, isError, data, error } = useQuery({
     queryKey: [QUERY_KEY.TRUNK_BASED_TOTAL_BRANCHES],
     queryFn: async () => {
-      return await fetchTotalBranches();
+      const apiURL = ApiEndPoint.trunkBasedTotalBranches();
+
+      const { data } = await axios.get<IFetchedTrunkBranchesResponse>(apiURL.href);
+
+      return data;
     },
   });
 
-  return { isLoading, data: data, error };
+  return { isPending, isError, data, error };
 };
