@@ -1,2 +1,2 @@
-export * from "./url.api";
-export * from "./utils.api";
+export * from "./endPoints/endpoints.api";
+export * from "./utils/util.api";

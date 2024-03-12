@@ -1,5 +1,6 @@
-import { START_PAGINATION_CURSOR, PAGINATION_LIMIT } from "./constant.api";
 import { IFetchAllData } from "./types.api";
+import { START_PAGINATION_CURSOR, PAGINATION_LIMIT } from "../constants/constants.api";
+
 export class ApiUtil {
   static async continuedFetching<T>(fetchData: IFetchAllData<T>, apiURL: URL) {
     const allData: T[] = [];
@@ -20,11 +21,11 @@ export class ApiUtil {
         } else {
           continueFetching = false;
         }
-      } catch (e) {
+      } catch (error) {
         continueFetching = false;
 
         if (paginationCursor === START_PAGINATION_CURSOR) {
-          throw e;
+          throw error;
         }
       }
     }

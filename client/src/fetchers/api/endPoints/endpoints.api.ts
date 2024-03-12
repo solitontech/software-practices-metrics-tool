@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-import { PAGINATION_LIMIT, START_PAGINATION_CURSOR } from "./constant.api";
+import { PAGINATION_LIMIT, START_PAGINATION_CURSOR } from "../constants/constants.api";
 
 export class ApiEndPoint {
   static get #baseDomain() {
