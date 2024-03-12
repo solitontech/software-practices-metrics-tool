@@ -40,4 +40,15 @@ export class ApiEndPoint {
 
     return url;
   }
+
+  static trunkBranchCommits(startDate: Date, endDate: Date) {
+    const url = new URL(`${this.#baseURL}/api/v1/metrics/trunk-based-development/commits`);
+
+    url.searchParams.append("startDate", this.#getISOFormateDate(startDate));
+    url.searchParams.append("endDate", this.#getISOFormateDate(endDate));
+    url.searchParams.append("paginationCursor", String(START_PAGINATION_CURSOR));
+    url.searchParams.append("paginationSize", String(PAGINATION_LIMIT));
+
+    return url;
+  }
 }

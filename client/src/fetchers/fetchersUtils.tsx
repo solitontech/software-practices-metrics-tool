@@ -2,10 +2,6 @@ import axios from "axios";
 import { DateTime } from "luxon";
 
 import {
-  ICodeFreeze,
-  ICommit,
-} from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/interfaces";
-import {
   IPullRequestsInfoMergedToMain,
   IPullRequestsMergedToMain,
 } from "../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/interfaces";
@@ -62,13 +58,6 @@ export async function continueFetching<T>(
   }
 
   return { list: allData, errorCount: paginationErrorCount };
-}
-
-export async function fetchDataForCommits(api: URL, paginationCursor: number): Promise<PaginationData<ICommit>> {
-  api.searchParams.set("paginationCursor", paginationCursor.toString());
-  const { data } = await axios.get<ICodeFreeze>(api.href);
-
-  return { data: data.commits, count: data.count };
 }
 
 export async function fetchDataForPullRequestsMergedToMain(

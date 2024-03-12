@@ -1,7 +1,7 @@
 import { ICommitsForDate } from "./interfaces";
 import styles from "./TrunkBasedMetricsGraphs.module.scss";
 import { getCodeFreezeMetricToPlot } from "./trunkBasedMetricsGraphsUtils";
-import { useTrunkBasedMetricsCodeFreeze } from "../../../../fetchers/hooks/trunkBasedDevelopment/useTrunkBasedMetricsCodeFreeze";
+import { useTrunkBranchCommits } from "../../../../fetchers/hooks";
 import { BarChart } from "../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { IBarPlot } from "../../../reusables/MetricsGraphs/BarChart/interfaces";
 
@@ -17,10 +17,10 @@ const GRAPH_COLOR = styles.GRAPH_COLOR;
 
 export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: Props) => {
   const {
-    data: { commitList },
-  } = useTrunkBasedMetricsCodeFreeze(startDate, endDate);
+    data: { commits },
+  } = useTrunkBranchCommits(startDate, endDate);
 
-  const codeFreezeMetrics: ICommitsForDate = getCodeFreezeMetricToPlot(startDate, endDate, commitList);
+  const codeFreezeMetrics: ICommitsForDate = getCodeFreezeMetricToPlot(startDate, endDate, commits);
 
   const codeFreezeKeys = Object.keys(codeFreezeMetrics);
 
@@ -39,7 +39,7 @@ export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: Props) => {
           plots: [plot],
           xAxisName: X_AXIS_NAME,
           yAxisName: Y_AXIS_NAME,
-          graphAnnotationText: `Total Commits in trunk branch : ${commitList.length}`,
+          graphAnnotationText: `Total Commits in trunk branch : ${commits.length}`,
           graphTitle: GRAPH_TITLE,
         }}
       />

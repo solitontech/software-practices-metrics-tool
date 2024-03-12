@@ -1,4 +1,4 @@
 export * from "./useTrunkBasedMetricsActiveBranches";
-export * from "./useTrunkBasedMetricsCodeFreeze";
+export * from "./useTrunkBranchCommits";
 export * from "./useTrunkBasedMetricsPullRequests";
 export * from "./useTrunkBasedMetricsTotalBranches";
