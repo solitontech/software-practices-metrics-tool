@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 
 import { cacheWrapperForUnaryFunction } from "./cache";
-import { NOT_AVAILABLE } from "../constants/commonConstants";
+import { NOT_AVAILABLE } from "../constants/common.constants";
 
 export type Day = "2-digit" | undefined;
 

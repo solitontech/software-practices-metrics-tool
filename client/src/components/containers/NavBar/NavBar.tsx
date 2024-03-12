@@ -9,7 +9,7 @@ import styles from "./NavBar.module.scss";
 import { routes } from "./navBarConstants.tsx";
 import logo from "../../../assets/images/solitonWhiteLogo.svg";
 import techForceLogo from "../../../assets/images/techForceLogo.png";
-import { pathToMetrics } from "../../../constants/routeConstants.ts";
+import { pathToMetrics } from "../../../constants/route.constant.ts";
 
 export interface Route {
   name: string;

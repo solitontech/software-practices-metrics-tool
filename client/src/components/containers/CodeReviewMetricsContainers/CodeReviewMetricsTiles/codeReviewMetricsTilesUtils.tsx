@@ -5,7 +5,7 @@ import {
   HOURS_IN_A_DAY,
   MINUTES_IN_ONE_HOUR,
   ONE_HOUR,
-} from "../../../../constants/timeConstants";
+} from "../../../../constants/time.constant";
 import { cacheWrapperForUnaryFunction } from "../../../../utils/cache";
 
 export const GREEN_COLOR = "green";

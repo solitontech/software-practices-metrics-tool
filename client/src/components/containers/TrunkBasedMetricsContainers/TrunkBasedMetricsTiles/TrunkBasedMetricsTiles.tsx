@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 import styles from "./TrunkBasedMetricsTiles.module.scss";
 import dataInfoAlert from "../../../../assets/images/dataInfoAlert.svg";
-import { NOT_AVAILABLE } from "../../../../constants/commonConstants";
+import { NOT_AVAILABLE } from "../../../../constants/common.constants";
 import { useTrunkBasedMetricsActiveBranches, useTrunkBasedMetricsTotalBranches } from "../../../../fetchers";
 import { DialogBox } from "../../../reusables/DialogBox/DialogBox";
 import { InfoIconTooltip } from "../../../reusables/InfoIconTooltip/InfoIconTooltip";

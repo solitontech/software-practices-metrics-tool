@@ -5,7 +5,7 @@ import { Chip } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import { VotesTimeLineView } from "./VotesTimeLineView";
-import { NOT_AVAILABLE } from "../../../../../constants/commonConstants";
+import { NOT_AVAILABLE } from "../../../../../constants/common.constants";
 import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
 import { formatDate, formatDateWithoutTime } from "../../../../../utils/formatTimeUtils";
 import styles from "../CodeReviewMetricsTable.module.scss";

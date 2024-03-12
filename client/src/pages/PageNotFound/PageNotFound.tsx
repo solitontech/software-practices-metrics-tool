@@ -1,9 +1,8 @@
 import styles from "./PageNotFound.module.scss";
 import pageNotFoundImage from "../../assets/images/pageNotFound.png";
 
-const description =
-  " The address you've entered doesn't exist or has been removed. Please recheck the address you've entered";
 const pageNotFound = "Page not found";
+const description = "The address you've entered doesn't exist. Please recheck the address you've entered";
 
 export const PageNotFound = () => {
   return (

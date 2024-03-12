@@ -1,5 +1,5 @@
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
-import { SECONDS_IN_ONE_HOUR } from "../../../../../../constants/timeConstants";
+import { SECONDS_IN_ONE_HOUR } from "../../../../../../constants/time.constant";
 import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { formatHoursToDays } from "../../../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 import {

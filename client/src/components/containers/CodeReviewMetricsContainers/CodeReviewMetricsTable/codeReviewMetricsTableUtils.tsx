@@ -2,13 +2,13 @@ import durationFormat from "humanize-duration";
 
 import { sortMap } from "./codeReviewMetricsTableConstants";
 import { FilterColumn, Filters, IReviewerComments, Vote } from "./interfaces";
-import { NOT_AVAILABLE } from "../../../../constants/commonConstants";
+import { NOT_AVAILABLE } from "../../../../constants/common.constants";
 import {
   HOURS_IN_A_DAY,
   SECONDS_IN_ONE_HOUR,
   MINUTES_IN_ONE_HOUR,
   FRACTION_TO_FIND_TIME,
-} from "../../../../constants/timeConstants";
+} from "../../../../constants/time.constant";
 import { IFetchedCodeReviewPullRequest } from "../../../../fetchers";
 import { cacheWrapperForUnaryFunction } from "../../../../utils/cache";
 import { formatHoursToDays } from "../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";

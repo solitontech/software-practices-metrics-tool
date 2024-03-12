@@ -1,5 +1,5 @@
 import { ITimeMetricsPullRequest } from "./timeMetricsGraphInterfaces";
-import { SECONDS_IN_ONE_HOUR } from "../../../../../../constants/timeConstants";
+import { SECONDS_IN_ONE_HOUR } from "../../../../../../constants/time.constant";
 import { RED_COLOR, appendHoursToNumber } from "../../../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 import {
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
