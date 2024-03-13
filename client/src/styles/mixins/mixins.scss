@@ -190,7 +190,7 @@
   line-height: 1.43;
   letter-spacing: $primary-letter-spacing;
   border-bottom: 1px solid $table-border;
-  padding: $primary-padding;
+  padding: $spacing-lg;
 }
 
 @mixin filter-icon-container {

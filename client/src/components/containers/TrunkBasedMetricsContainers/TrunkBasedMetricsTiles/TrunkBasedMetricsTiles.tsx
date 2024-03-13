@@ -93,23 +93,23 @@ export const TrunkBasedMetricsTiles = () => {
       </Tile>
 
       <DialogBox
-        open={isActiveBranchDialogOpen}
-        onClose={() => setIsActiveBranchDialogOpen(false)}
-        content={<TrunkBasedActiveBranchesTable activeBranches={activeBranches} />}
-        minWidth="800px"
+        isOpen={isActiveBranchDialogOpen}
+        handleClose={() => setIsActiveBranchDialogOpen(false)}
+        title="Active PR's to trunk branch"
+        width="800px"
       >
-        <div>Active PR&apos;s to trunk branch</div>
+        <TrunkBasedActiveBranchesTable activeBranches={activeBranches} />
       </DialogBox>
 
       <DialogBox
-        open={isBranchesNamingConventionDialogOpen}
-        onClose={() => setIsBranchesNamingConventionDialogOpen(false)}
-        content={
+        isOpen={isBranchesNamingConventionDialogOpen}
+        handleClose={() => setIsBranchesNamingConventionDialogOpen(false)}
+        title={
           <TrunkBasedNamingConventionTable
             branchesNotFollowingNamingStandard={branchesNotFollowingNamingStandardBranches}
           />
         }
-        minWidth="550px"
+        width="550px"
       >
         <div className={styles.tileContent}>
           <div>Branches not following naming standard</div>

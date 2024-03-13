@@ -14,7 +14,7 @@
   overflow-y: scroll;
   width: 500px;
   background-color: $primary-background-color;
-  padding: $primary-padding;
+  padding: $spacing-lg;
   padding-top: 0px;
   margin-top: $secondary-minimum-margin;
 }
@@ -64,7 +64,7 @@
 }
 
 .userContainer {
-  padding: 0px $primary-padding;
+  padding: 0px $spacing-lg;
 }
 
 .userLabel {

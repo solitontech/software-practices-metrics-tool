@@ -5,14 +5,13 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Tooltip } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import { CustomVote } from "src/components";
+import { CustomVote, DialogBox } from "src/components";
 
 import approvedSvg from "../../../../../assets/images/approved.svg";
 import approvedWithSuggestionsSvg from "../../../../../assets/images/approvedWithSuggestions.svg";
 import noVoteSvg from "../../../../../assets/images/noVote.svg";
 import rejectedSvg from "../../../../../assets/images/rejected.svg";
 import waitForAuthorSvg from "../../../../../assets/images/waitForAuthor.svg";
-import { DialogBox } from "../../../../reusables/DialogBox/DialogBox";
 import { CodeReviewTimeLineTable } from "../../CodeReviewTimeLineTable/CodeReviewTimeLineTable";
 import styles from "../CodeReviewMetricsTable.module.scss";
 import { ITimeLine, IVotesTimeline } from "../interfaces";
