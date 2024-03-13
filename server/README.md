@@ -36,7 +36,8 @@ Make sure you have the following dependencies installed on your machine:
 
 ### 1. Copy the contents of this repository
 
-1. Copy all the contents of this Backend code into the preferred directory within your project's repository.
+1. Copy all the contents of this Backend code into the preferred directory
+ within your project's repository.
 
 ### 2. Install Dependencies
 
