@@ -2,7 +2,7 @@
 
 .codeReviewTable {
   @include metrics-table;
-  margin-top: $secondary-margin;
+  margin-top: $spacing-xxl;
 }
 
 .codeReview {
@@ -26,7 +26,7 @@
 }
 
 .dropDown {
-  padding: $large-padding;
+  padding: $spacing-sm;
   position: absolute;
   top: 49px;
   left: 0;

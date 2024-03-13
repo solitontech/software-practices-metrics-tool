@@ -1,66 +1,49 @@
 @import "src/styles/index.scss";
 
-@mixin pageName {
-  font-weight: $regular-font-weight;
-  line-height: $ternary-line-height;
-  color: $ternary-color;
-  font-size: $font-size-xmd;
-}
-
 @mixin page {
-  border-radius: 4px;
-  height: 50px !important;
-  margin: $medium-margin auto !important;
-  padding: 0px !important;
-  width: 150px !important;
+  border-radius: $app-primary-border-radius;
+  height: 50px;
+  margin: $spacing-lg auto;
+  padding: 0px;
+  width: 150px;
 
   &:hover {
-    background-color: $light-blue;
+    background-color: $app-secondary-anchor-color;
   }
 
-  &.selectedPage {
-    color: $highlight-color;
-    background-color: $dark-blue;
+  &.activePage {
+    color: $app-ternary-anchor-color;
+    background-color: $app-primary-anchor-color;
+
     &:hover {
-      background-color: $light-blue;
+      background-color: $app-secondary-anchor-color;
     }
   }
 }
 
-.drawerToolbar {
-  @include flex-align-center;
-
-  height: 81px;
-  justify-content: space-around;
-}
-
-@mixin commonLink {
+@mixin link {
   @include flex-align-center;
   @include page;
-  @include pageName;
-
-  color: inherit;
+  font-weight: $regular-font-weight;
+  color: $app-ternary-color;
+  font-size: $font-size-xmd;
   text-decoration: none;
 }
 
-.link {
-  @include commonLink;
+.expandedLink {
+  @include link;
 }
 
-.smallLink {
-  @include commonLink;
-  width: 40px !important;
-  height: 30px !important;
+.collapsedLink {
+  @include link;
+  width: 40px;
+  height: 30px;
 }
 
-.utilizeAvailableSpace {
-  flex-grow: 1;
-}
-
-@mixin commonPageIconCtr {
-  margin: auto $small-margin !important;
-  min-width: 12px !important;
-  color: $highlight-color;
+@mixin navIcon {
+  margin: auto $spacing-md;
+  min-width: 12px;
+  color: $app-ternary-anchor-color;
 
   .pageIcon {
     height: auto;
@@ -68,76 +51,13 @@
   }
 }
 
-.pageIconCtr {
-  @include commonPageIconCtr;
+.expandedIcon {
+  @include navIcon;
+  @include flex-row-center;
   width: 15%;
 }
 
-.smallPageIconCtr {
-  @include commonPageIconCtr;
-}
-
-.menuIcon {
-  padding: 0px $spacing-md 0px $spacing-lg;
-}
-
-.navBar {
-  width: 180px;
-}
-
-.drawerPaper {
-  background: $app-secondary-color;
-  color: $ternary-color;
-  width: 180px;
-  position: relative;
-  height: 100%;
-}
-
-.smallDrawerPaper {
-  background: $app-secondary-color;
-  color: $ternary-color;
-  width: 48px;
-  position: relative;
-  height: 100%;
-}
-
-.iconButton {
-  padding: 0px;
-  color: $app-primary-color;
-
-  &:hover {
-    background-color: transparent;
-  }
-}
-
-.techForce {
-  height: 75px;
-  align-self: center;
-  width: 75px;
-}
-
-.logoText {
-  color: $ternary-color;
-  font-size: $font-size-xmd;
-  text-align: center;
-  font-weight: 600;
-  margin-top: $minimum-margin;
-}
-
-.smallDrawerContent {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: $ternary-margin $base-margin;
-  gap: 8px;
-}
-
-.cursorPointer {
-  cursor: pointer;
-}
-
-.icon {
-  color: $primary-text-color;
-  font-size: 24px;
+.collapsedIcon {
+  @include navIcon;
+  @include flex-row-center;
 }

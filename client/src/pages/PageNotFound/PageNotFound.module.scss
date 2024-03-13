@@ -6,11 +6,11 @@
 }
 
 .pageNotFoundText {
-  margin: $primary-margin $no-margin $secondary-margin;
+  margin: $spacing-xxxxl 0 $spacing-xxl;
   line-height: $secondary-line-height;
   letter-spacing: 0px;
   color: $app-secondary-color;
-  font-size: $ternary-font-size;
+  font-size: $font-size-xxxxl;
   font-weight: $medium-font-weight;
 }
 

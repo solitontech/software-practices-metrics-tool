@@ -18,7 +18,7 @@
 
 .trunkBasedTable {
   @include metrics-table;
-  margin-top: $ternary-margin;
+  margin-top: $spacing-xl;
 }
 
 .underDevelopment {

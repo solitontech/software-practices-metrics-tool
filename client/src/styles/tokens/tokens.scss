@@ -4,15 +4,12 @@ $secondary-text-color: #000000;
 $tool-tip-background-color: #ebebeb;
 
 $ternary-color: #93b8d8;
-$highlight-color: #dbe7f2;
 $url-color: #5f66aa;
 
 $primary-box-shadow: #00000080;
 
-$dark-blue: #054288;
-$light-blue: #0e84d7;
-
-$scrollbar-color: #424242;
+$app-primary-anchor-color: #054288;
+$app-secondary-anchor-color: #0e84d7;
 
 $active-color: #e5bd74;
 $completed-color: #94d594;
@@ -27,30 +24,14 @@ $icon-color: #a2a5a9;
 $tile-text-color: #757d83;
 $chip-background-color: #e5e5e5;
 
-$small-font-size: 13px;
-$secondary-font-size: 16px;
-$large-font-size: 18px;
-$ternary-font-size: 36px;
+$font-size-lg: 18px;
 
 $small-icon-size: 12px;
 $medium-icon-size: 15px;
 $large-icon-size: 18px;
 $ternary-icon-size: 32px;
 
-$maximum-font-weight: 900;
-
-$large-padding: 8px;
-$padding-large: 40px;
-
-$no-margin: 0px;
-$minimum-margin: 4px;
 $secondary-minimum-margin: 6px;
-$base-margin: 10px;
-$small-margin: 12px;
-$medium-margin: 15px;
-$ternary-margin: 20px;
-$secondary-margin: 25px;
-$primary-margin: 35px;
 $maximum-margin: 40px;
 
 $secondary-line-height: 1.16px;
@@ -97,6 +78,8 @@ $font-size-mlg: 16px;
 $font-size-lg: 18px;
 $font-size-xl: 20px;
 $font-size-xxl: 24px;
+$font-size-xxxl: 28px;
+$font-size-xxxxl: 32px;
 
 /* font weights */
 $thin-font-weight: 100;
@@ -112,11 +95,21 @@ $app-primary-background-color: #fff;
 $app-secondary-background-color: #f5f6f9;
 
 /* border colors */
-$app-primary-border-color: #0000003b;
+$app-primary-border-color: #00003b;
 
 /* border radius */
 $app-primary-border-radius: 4px;
 
-/* themes */
+/* text color */
+$app-primary-text-color: #fff; //TODO: TBD
+$app-secondary-text-color: #fff;
+
+/* anchor themes */
+$app-primary-anchor-color: #054288;
+$app-secondary-anchor-color: #0e84d7;
+$app-ternary-anchor-color: #dbe7f2;
+
+/* common themes */
 $app-primary-color: #757d83;
 $app-secondary-color: #0f52a0;
+$app-ternary-color: #93b8d8;

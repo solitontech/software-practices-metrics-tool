@@ -1,0 +1,41 @@
+@import "src/styles/index.scss";
+
+.paper {
+  background: $app-secondary-color;
+  color: $app-ternary-color;
+  height: 100%;
+  position: relative;
+  width: 180px;
+  padding-top: $spacing-sm;
+}
+
+.toolbar {
+  @include flex-align-center;
+  height: 50px;
+  justify-content: space-around;
+}
+
+.arrow {
+  background-color: transparent;
+  border: none;
+  color: $app-secondary-text-color;
+  cursor: pointer;
+}
+
+.flexGrow {
+  flex-grow: 1;
+}
+
+.techForce {
+  align-self: center;
+  height: 70px;
+  width: 70px;
+}
+
+.logoText {
+  color: $app-ternary-color;
+  font-size: $font-size-xmd;
+  font-weight: $semi-bold-font-weight;
+  text-align: center;
+  margin: $spacing-lg 0;
+}

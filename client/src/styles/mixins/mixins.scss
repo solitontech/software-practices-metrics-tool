@@ -98,14 +98,14 @@
 @mixin link-icon {
   color: $app-secondary-color;
   vertical-align: middle;
-  margin-left: $minimum-margin;
+  margin-left: $spacing-xs;
   font-size: $small-icon-size;
 }
 
 @mixin no-data-message {
   text-align: center;
   color: $app-primary-color;
-  font-size: $secondary-font-size;
+  font-size: $font-size-mlg;
   border-bottom: 1px solid $table-border;
   height: 75px;
 }
@@ -126,7 +126,7 @@
 }
 
 @mixin total-count {
-  font-size: $secondary-font-size;
+  font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
   color: $app-primary-color;
   word-spacing: 2px;
@@ -152,7 +152,7 @@
 
 @mixin graphs-container {
   width: 100%;
-  margin-top: $minimum-margin;
+  margin-top: $spacing-xs;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -171,7 +171,7 @@
   top: 0;
   background-color: $primary-text-color;
   color: $secondary-text-color;
-  font-weight: $maximum-font-weight;
+  font-weight: $extra-bold-font-weight;
 }
 
 @mixin table-body {

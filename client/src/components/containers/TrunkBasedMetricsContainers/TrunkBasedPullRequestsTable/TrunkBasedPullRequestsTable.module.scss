@@ -25,7 +25,7 @@
 
 .header {
   @include table-header;
-  margin-top: $minimum-margin;
+  margin-top: $spacing-xs;
 }
 
 .title {

@@ -7,8 +7,8 @@
 }
 
 .clearFilterContainer {
-  margin-top: $small-margin;
-  margin-bottom: $base-margin;
+  margin-top: $spacing-md;
+  margin-bottom: $spacing-md;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -39,7 +39,7 @@
 }
 
 .title {
-  margin-left: $ternary-margin;
+  margin-left: $spacing-xl;
   font-size: $font-size-xmd;
   text-align: left;
 }
