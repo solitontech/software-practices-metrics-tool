@@ -12,10 +12,10 @@ export const InfoIconTooltip = ({ content, size }: IInfoIconTooltipProps) => {
   const title = <span className={styles.toolTip}>{content}</span>;
 
   return (
-    <div className={styles.infoIcon}>
+    <span className={styles.infoIcon}>
       <Tooltip arrow title={title} data-testid={content}>
         <InfoIcon style={{ fontSize: size }} />
       </Tooltip>
-    </div>
+    </span>
   );
 };

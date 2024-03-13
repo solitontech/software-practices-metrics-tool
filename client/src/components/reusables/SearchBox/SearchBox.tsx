@@ -9,7 +9,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import styles from "./SearchBox.module.scss";
 import { InfoIconTooltip } from "../InfoIconTooltip/InfoIconTooltip";
 
-interface Props {
+interface ISearchBoxProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   label: string;
   width?: number;
@@ -24,15 +24,15 @@ interface ITimeRef {
 }
 
 export const SearchBox = ({
-  onChange,
   label,
-  width = 200,
   placeHolder = "",
+  width = 200,
+  onChange,
   isDebounced = false,
   delay = 400,
   onClick,
-}: Props) => {
-  const inputLabelId = useId();
+}: ISearchBoxProps) => {
+  const id = useId();
   const timeoutRef = useRef<ITimeRef>({
     timerId: null,
   });
@@ -52,13 +52,12 @@ export const SearchBox = ({
   };
 
   return (
-    <div className={styles.searchBox}>
+    <div className={styles.container}>
       <FormControl sx={{ m: 1, backgroundColor: "white", margin: "8px 0px" }}>
-        <InputLabel htmlFor={inputLabelId} className={styles.label}>
+        <InputLabel htmlFor={id} className={styles.label}>
           {label}
         </InputLabel>
         <OutlinedInput
-          id="outlined-adornment-amount"
           startAdornment={
             <InputAdornment position="start">
               <SearchIcon />
@@ -72,7 +71,7 @@ export const SearchBox = ({
           label={label}
           onChange={handleInputChange}
           onClick={onClick}
-          aria-labelledby={inputLabelId}
+          aria-labelledby={id}
           style={{ width: width }}
           placeholder={placeHolder}
           autoComplete="off"

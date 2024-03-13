@@ -9,4 +9,5 @@ export * from "./InfoIconTooltip/InfoIconTooltip";
 export * from "./LoadingSpinner/LoadingSpinner";
 export * from "./MetricsToggleTab/MetricsToggleTab";
 export * from "./SearchBox/SearchBox";
+export * from "./SnackBar/SnackBar";
 export * from "./Tile/Tile";
