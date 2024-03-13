@@ -21,10 +21,6 @@
   @include tiles;
 }
 
-.underDevelopment {
-  @include under-development;
-}
-
 .dropDown {
   padding: $spacing-sm;
   position: absolute;

@@ -1,0 +1,6 @@
+@import "src/styles/index.scss";
+
+.trunkBasedTable {
+  @include metrics-table;
+  margin-top: $spacing-xl;
+}

@@ -1,92 +1,72 @@
 import { useState } from "react";
 
-import { DateTime } from "luxon";
+import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import TableRowsIcon from "@mui/icons-material/TableRows";
 
-import { CommonLayout, DateRangePicker, TabToggle, ErrorBoundary } from "src/components";
+import {
+  CommonLayout,
+  DateRangePicker,
+  TabToggle,
+  ErrorBoundary,
+  TrunkBasedMetricsTabs,
+  TrunkBasedMetricsTiles,
+} from "src/components";
+import { dateRange } from "src/constants";
 
 import styles from "./TrunkBasedMetrics.module.scss";
-import { TRUNK_BASED_METRICS_TABS, TRUNK_BASED_METRICS_TAB_VALUE } from "./trunkBasedMetricsConstants";
-import { TrunkBasedMetricsGraphs } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/TrunkBasedMetricsGraphs";
-import { TrunkBasedMetricsTiles } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/TrunkBasedMetricsTiles";
-import { TrunkBasedPullRequestsTable } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/TrunkBasedPullRequestsTable";
+import { ITrukBasedMetricsTabs, ITrunkBasedMetricsTabValue } from "./types";
 
-const today = DateTime.local();
-const sevenDaysAgoFromToday = today.minus({ days: 7 });
-const sixMonthsAgoFromToday = today.minus({ days: 190 });
-const metricsToggleTabs = TRUNK_BASED_METRICS_TABS;
-
-type TrunkBasedMetricsView = "table" | "graph";
+const tabs: ITrukBasedMetricsTabs[] = [
+  {
+    label: "TABLE VIEW",
+    value: "table",
+    icon: <TableRowsIcon />,
+  },
+  {
+    label: "GRAPHICAL VIEW",
+    value: "graph",
+    icon: <BarChartOutlinedIcon />,
+  },
+];
 
 export const TrunkBasedMetrics = () => {
-  const [selectedView, setSelectedView] = useState<TrunkBasedMetricsView>(
-    TRUNK_BASED_METRICS_TAB_VALUE.TABLE as TrunkBasedMetricsView,
-  );
-
+  const [selectedTab, setSelectedTab] = useState<ITrunkBasedMetricsTabValue>("table");
   const [dates, setDates] = useState({
-    startDate: sevenDaysAgoFromToday.toJSDate(),
-    endDate: today.toJSDate(),
+    startDate: dateRange.sevenDaysAgoFromToday,
+    endDate: dateRange.today,
   });
-
-  const handleViewChange = (newView: string) => {
-    setSelectedView(newView as TrunkBasedMetricsView);
-  };
-
-  const isTableView = () => {
-    return selectedView === (TRUNK_BASED_METRICS_TAB_VALUE.TABLE as TrunkBasedMetricsView);
-  };
-
-  const isGraphView = () => {
-    return selectedView === (TRUNK_BASED_METRICS_TAB_VALUE.GRAPH as TrunkBasedMetricsView);
-  };
-
-  const renderView = () => {
-    if (isTableView()) {
-      return (
-        <div className={styles.trunkBasedTable}>
-          <ErrorBoundary key="trunk-based-table">
-            <TrunkBasedPullRequestsTable startDate={dates.startDate} endDate={dates.endDate} />
-          </ErrorBoundary>
-        </div>
-      );
-    }
-
-    if (isGraphView()) {
-      return (
-        <ErrorBoundary key="trunk-based-graph">
-          <TrunkBasedMetricsGraphs startDate={dates.startDate} endDate={dates.endDate} />
-        </ErrorBoundary>
-      );
-    }
-  };
 
   const handleDateChange = (date: Date, dateType: "startDate" | "endDate") => {
     setDates((prevDates) => ({
       ...prevDates,
-      [dateType]: date || prevDates[dateType],
+      [dateType]: date ?? prevDates[dateType],
     }));
   };
 
   return (
     <ErrorBoundary key="trunk-based-metrics">
       <CommonLayout title="Trunk Based Metrics">
-        <div className={styles.trunkBased}>
+        <div className={styles.container}>
           <div className={styles.tableDetails}>
             <div className={styles.header}>
               <DateRangePicker
                 date={dates}
                 handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
                 handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
-                minDate={sixMonthsAgoFromToday.toJSDate()}
-                maxDate={today.toJSDate()}
+                minDate={dateRange.sixMonthsAgoFromToday}
+                maxDate={dateRange.today}
               />
-              <TabToggle tabs={metricsToggleTabs} selectedTab={selectedView} handleTabChange={handleViewChange} />
+              <TabToggle
+                tabs={tabs}
+                selectedTab={selectedTab}
+                handleTabChange={(value) => setSelectedTab(value as ITrunkBasedMetricsTabValue)}
+              />
               <div className={styles.tiles}>
                 <TrunkBasedMetricsTiles />
               </div>
             </div>
           </div>
-
-          {renderView()}
+          <TrunkBasedMetricsTabs dates={dates} selectedTab={selectedTab} />
         </div>
       </CommonLayout>
     </ErrorBoundary>

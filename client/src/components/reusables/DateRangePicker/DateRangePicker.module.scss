@@ -27,8 +27,12 @@
   width: 90px;
 }
 
-.date:focus {
+.date:hover {
   border: 1px solid $app-primary-border-color;
+}
+
+.date:focus {
+  border: 1px solid $app-secondary-color;
   outline: none;
 }
 

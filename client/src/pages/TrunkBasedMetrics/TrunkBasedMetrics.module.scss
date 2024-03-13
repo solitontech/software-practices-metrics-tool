@@ -1,6 +1,6 @@
 @import "src/styles/index.scss";
 
-.trunkBased {
+.container {
   @include metrics;
 }
 
@@ -14,13 +14,4 @@
 
 .tiles {
   @include tiles;
-}
-
-.trunkBasedTable {
-  @include metrics-table;
-  margin-top: $spacing-xl;
-}
-
-.underDevelopment {
-  @include under-development;
 }

@@ -1,6 +1,5 @@
-import { NOT_AVAILABLE } from "../../constants/common.constants.ts";
-import { SECONDS_IN_ONE_HOUR } from "../../constants/time.constant.ts";
-import { IFetchedCodeReviewPullRequest } from "../../fetchers";
+import { SECONDS_IN_ONE_HOUR, NOT_AVAILABLE } from "src/constants";
+import { IFetchedCodeReviewPullRequest } from "src/fetchers";
 
 export const getMetricsAverageTimeInHours = (
   pullRequests: IFetchedCodeReviewPullRequest[],

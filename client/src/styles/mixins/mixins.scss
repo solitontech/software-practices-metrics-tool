@@ -1,28 +1,16 @@
 @import "./flex.mixin.scss";
 @import "./content.mixin.scss";
+@import "./layout.mixin.scss";
 
 @mixin url {
   text-decoration: none;
   font-weight: $medium-font-weight;
   cursor: pointer;
+
   &:hover {
     text-decoration: underline;
     color: $url-color;
   }
-}
-
-@mixin table-details {
-  @include flex-align-center;
-  height: 80px;
-}
-
-@mixin header {
-  @include flex-row;
-  gap: 20px;
-  width: 100%;
-  justify-content: space-between;
-  height: 65px;
-  color: $app-primary-color;
 }
 
 @mixin paper {
@@ -37,6 +25,7 @@
 
 @mixin row-even {
   background-color: $table-background;
+
   &:hover {
     background-color: $darker-shade;
   }
@@ -44,6 +33,7 @@
 
 @mixin row-odd {
   background-color: $app-secondary-text-color;
+
   &:hover {
     background-color: $darker-shade;
   }
@@ -54,33 +44,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-@mixin tiles {
-  @include flex-row;
-  gap: 20px;
-  color: $app-primary-color;
-}
-
-@mixin under-development {
-  text-align: center;
-  font-weight: $semi-bold-font-weight;
-  font-size: $font-size-xl;
-  margin-top: 5%;
-}
-
-@mixin metrics-table {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  max-height: 90%;
-  overflow-y: auto;
-  height: calc(100% - 110px);
-}
-
-@mixin metrics {
-  height: 100%;
-  width: 98%;
 }
 
 @mixin tile-content {
