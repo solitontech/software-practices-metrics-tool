@@ -10,7 +10,7 @@ interface INavBarCollapsedProps {
 
 export const NavBarCollapsed = ({ routes, handleExpand }: INavBarCollapsedProps) => {
   return (
-    <div>
+    <nav>
       <Drawer
         variant="permanent"
         classes={{
@@ -20,13 +20,13 @@ export const NavBarCollapsed = ({ routes, handleExpand }: INavBarCollapsedProps)
         style={{ height: "100%" }}
       >
         <div className={styles.toolbar}>
-          <div onClick={handleExpand} className={styles.arrow}>
+          <button onClick={handleExpand} className={styles.arrow}>
             <ArrowCircleRightOutlinedIcon className={styles.icon} />
-          </div>
+          </button>
 
           <div className={styles.flexGrow}>{routes}</div>
         </div>
       </Drawer>
-    </div>
+    </nav>
   );
 };

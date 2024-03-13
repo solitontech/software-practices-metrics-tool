@@ -43,7 +43,7 @@
 }
 
 @mixin row-odd {
-  background-color: $primary-text-color;
+  background-color: $app-secondary-text-color;
   &:hover {
     background-color: $darker-shade;
   }
@@ -122,7 +122,7 @@
 
 @mixin capitalize {
   text-transform: capitalize;
-  color: $primary-text-color;
+  color: $app-secondary-text-color;
 }
 
 @mixin total-count {
@@ -169,7 +169,7 @@
 @mixin table-head {
   position: sticky;
   top: 0;
-  background-color: $primary-text-color;
+  background-color: $app-secondary-text-color;
   color: $secondary-text-color;
   font-weight: $extra-bold-font-weight;
 }

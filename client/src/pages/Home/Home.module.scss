@@ -6,19 +6,19 @@
 }
 
 .bugReport {
-  position: fixed;
-  right: 30px;
-  bottom: 50px;
+  align-items: center;
   background-color: $app-secondary-color;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  bottom: 50px;
   display: flex;
+  height: 50px;
   justify-content: center;
-  align-items: center;
+  position: fixed;
+  right: 30px;
+  width: 50px;
 }
 
 .icon {
-  color: $primary-text-color;
+  color: $app-secondary-text-color;
   cursor: pointer;
 }

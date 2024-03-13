@@ -13,7 +13,7 @@ interface INavBarExpandedProps {
 
 export const NavBarExpanded = ({ routes, handleCollapse }: INavBarExpandedProps) => {
   return (
-    <div className={styles.navBar}>
+    <nav className={styles.navBar}>
       <Drawer
         anchor="left"
         style={{ height: "100%" }}
@@ -34,6 +34,6 @@ export const NavBarExpanded = ({ routes, handleCollapse }: INavBarExpandedProps)
         </div>
         <p className={styles.logoText}>Powered by TechOps</p>
       </Drawer>
-    </div>
+    </nav>
   );
 };

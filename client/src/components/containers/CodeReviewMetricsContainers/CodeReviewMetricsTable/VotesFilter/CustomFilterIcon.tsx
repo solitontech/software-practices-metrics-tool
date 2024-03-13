@@ -14,7 +14,7 @@ export const CustomFilterIcon = ({ handleFilter, showNoVote, filter, handleFilte
   const isFilterSelected = Object.keys(filter).some((key) => filter[key as Vote]);
 
   return (
-    <FilterIcon isFilterSelected={isFilterSelected} style={styles.tableFilterIcon}>
+    <FilterIcon isActive={isFilterSelected} style={styles.tableFilterIcon}>
       <div className={styles.voteFilterContainer}>
         <VotesFilter
           filter={filter}
