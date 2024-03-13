@@ -69,7 +69,7 @@ export const TrunkBasedMetrics = () => {
 
   return (
     <ErrorBoundary key="trunk-based-metrics">
-      <CommonLayout pageHeader="Trunk Based Metrics">
+      <CommonLayout title="Trunk Based Metrics">
         <div className={styles.trunkBased}>
           <div className={styles.tableDetails}>
             <div className={styles.header}>

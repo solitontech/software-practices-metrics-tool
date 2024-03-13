@@ -8,10 +8,10 @@
 .pageNotFoundText {
   margin: $primary-margin $no-margin $secondary-margin;
   line-height: $secondary-line-height;
-  letter-spacing: $no-letter-spacing;
+  letter-spacing: 0px;
   color: $secondary-color;
   font-size: $ternary-font-size;
-  font-weight: $secondary-font-weight;
+  font-weight: $medium-font-weight;
 }
 
 .description {

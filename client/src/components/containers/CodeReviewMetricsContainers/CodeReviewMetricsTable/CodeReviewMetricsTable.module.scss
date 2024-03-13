@@ -63,7 +63,7 @@
   @include flex-align-center;
   gap: 4px;
   justify-content: center;
-  color: $primary-color;
+  color: $app-primary-color;
 }
 
 .icon {
@@ -100,7 +100,7 @@
 
 .buttonColor {
   @include common-icon;
-  color: $primary-color;
+  color: $app-primary-color;
 }
 
 .timelineIconColor {

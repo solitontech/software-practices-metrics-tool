@@ -1,7 +1,7 @@
 @import "../../../styles/index.scss";
 
 @mixin pageName {
-  font-weight: $ternary-font-weight;
+  font-weight: $regular-font-weight;
   line-height: $ternary-line-height;
   color: $ternary-color;
   font-size: $medium-font-size;
@@ -11,7 +11,7 @@
   border-radius: 4px;
   height: 50px !important;
   margin: $medium-margin auto !important;
-  padding: $ternary-padding !important;
+  padding: 0px !important;
   width: 150px !important;
 
   &:hover {
@@ -78,7 +78,7 @@
 }
 
 .menuIcon {
-  padding: $ternary-padding $secondary-padding $ternary-padding $primary-padding;
+  padding: 0px $secondary-padding 0px $primary-padding;
 }
 
 .navBar {
@@ -102,8 +102,8 @@
 }
 
 .iconButton {
-  padding: $ternary-padding;
-  color: $primary-color;
+  padding: 0px;
+  color: $app-primary-color;
 
   &:hover {
     background-color: transparent;

@@ -10,13 +10,13 @@
 
 .searchBox input {
   height: 10px !important;
-  padding: $primary-padding $ternary-padding !important;
+  padding: $primary-padding 0px !important;
   &::placeholder {
     font-size: 12px !important;
   }
 }
 
 .label {
-  font-weight: $primary-font-weight;
-  color: $primary-color;
+  font-weight: $semi-bold-font-weight;
+  color: $app-primary-color;
 }

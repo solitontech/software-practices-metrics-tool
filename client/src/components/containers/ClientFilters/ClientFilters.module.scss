@@ -12,10 +12,10 @@
   @include filter-container;
   max-height: 85vh;
   overflow-y: scroll;
-  width: 400px;
+  width: 500px;
   background-color: $primary-background-color;
   padding: $primary-padding;
-  padding-top: $ternary-padding;
+  padding-top: 0px;
   margin-top: $secondary-minimum-margin;
 }
 
@@ -23,7 +23,7 @@
   padding: $secondary-padding;
   text-align: center;
   font-size: $secondary-font-size;
-  font-weight: $primary-font-weight;
+  font-weight: $semi-bold-font-weight;
 }
 
 .noFiltersContent {
@@ -44,7 +44,7 @@
   width: 100%;
   text-align: center;
   font-size: $secondary-font-size;
-  font-weight: $primary-font-weight;
+  font-weight: $semi-bold-font-weight;
   padding-bottom: $large-padding;
 }
 
@@ -60,15 +60,15 @@
   @include ellipsis;
   width: 100%;
   font-size: $medium-font-size;
-  font-weight: $secondary-font-weight;
+  font-weight: $medium-font-weight;
 }
 
 .userContainer {
-  padding: $ternary-padding $primary-padding;
+  padding: 0px $primary-padding;
 }
 
 .userLabel {
   @include ellipsis;
   width: 100%;
-  font-size: $small-font-size;
+  font-size: $font-size-xmd;
 }

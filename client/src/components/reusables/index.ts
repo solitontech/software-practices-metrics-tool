@@ -1,4 +1,3 @@
-export * from "./Card/Card";
 export * from "./Checkbox/Checkbox";
 export * from "./CommonLayout/CommonLayout";
 export * from "./CustomVote/CustomVote";
@@ -7,7 +6,6 @@ export * from "./DialogBox/DialogBox";
 export * from "./DisplayError/DisplayError";
 export * from "./ErrorBoundary/ErrorBoundary";
 export * from "./Filter/Filter";
-export * from "./Header/Header";
 export * from "./InfoIconTooltip/InfoIconTooltip";
 export * from "./LoadingSpinner/LoadingSpinner";
 export * from "./MetricsToggleTab/MetricsToggleTab";

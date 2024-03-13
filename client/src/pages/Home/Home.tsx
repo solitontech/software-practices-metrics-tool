@@ -10,7 +10,7 @@ import styles from "./Home.module.scss";
 export const Home = () => {
   return (
     <ErrorBoundary key="home">
-      <div className={styles.home}>
+      <section className={styles.home}>
         <NavBar />
         <Outlet />
         <NavLink to={BUG_REPORT_LINK} target="_blank">
@@ -20,7 +20,7 @@ export const Home = () => {
             </button>
           </Tooltip>
         </NavLink>
-      </div>
+      </section>
     </ErrorBoundary>
   );
 };

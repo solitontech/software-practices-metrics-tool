@@ -1,22 +1,8 @@
-@mixin flex-row {
-  display: flex;
-  color: $primary-color;
-}
-
-@mixin flex-align-center {
-  display: flex;
-  align-items: center;
-}
-
-@mixin flex-column-center {
-  @include flex-align-center;
-  flex-direction: column;
-  justify-content: center;
-}
+@import "./flex.mixin.scss";
 
 @mixin url {
   text-decoration: none;
-  font-weight: $secondary-font-weight;
+  font-weight: $medium-font-weight;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
@@ -35,6 +21,7 @@
   width: 100%;
   justify-content: space-between;
   height: 65px;
+  color: $app-primary-color;
 }
 
 @mixin paper {
@@ -77,12 +64,13 @@
 @mixin tiles {
   @include flex-row;
   gap: 20px;
+  color: $app-primary-color;
 }
 
 @mixin under-development {
   text-align: center;
-  font-weight: $primary-font-weight;
-  font-size: $primary-font-size;
+  font-weight: $semi-bold-font-weight;
+  font-size: $font-size-xl;
   margin-top: 5%;
 }
 
@@ -130,14 +118,14 @@
 
 @mixin no-data-message {
   text-align: center;
-  color: $primary-color;
+  color: $app-primary-color;
   font-size: $secondary-font-size;
   border-bottom: 1px solid $table-border;
   height: 75px;
 }
 
 @mixin text {
-  color: $primary-color;
+  color: $app-primary-color;
 }
 
 @mixin ellipsis {
@@ -153,21 +141,21 @@
 
 @mixin total-count {
   font-size: $secondary-font-size;
-  font-weight: $primary-font-weight;
-  color: $primary-color;
+  font-weight: $semi-bold-font-weight;
+  color: $app-primary-color;
   word-spacing: 2px;
   letter-spacing: $secondary-letter-spacing;
 }
 
 @mixin pull-request-url {
   @include url;
-  color: $primary-color;
+  color: $app-primary-color;
   @include flex-align-center;
 }
 
 @mixin graph-info-icon {
   font-size: $medium-icon-size;
-  color: $primary-color;
+  color: $app-primary-color;
 }
 
 @mixin graph-info-container {
@@ -188,9 +176,9 @@
 }
 
 @mixin description {
-  color: $primary-color;
-  font-size: $primary-font-size;
-  font-weight: $ternary-font-weight;
+  color: $app-primary-color;
+  font-size: $font-size-xl;
+  font-weight: $regular-font-weight;
   text-align: center;
 }
 
@@ -212,7 +200,7 @@
 }
 
 @mixin table-cell {
-  font-weight: $secondary-font-weight;
+  font-weight: $medium-font-weight;
   font-size: 0.875rem;
   line-height: 1.43;
   letter-spacing: $primary-letter-spacing;
@@ -233,5 +221,5 @@
 
 @mixin common-icon {
   cursor: pointer;
-  font-size: $extra-large-icon-size;
+  font-size: $icon-size-xl;
 }

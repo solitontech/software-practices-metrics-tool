@@ -80,6 +80,7 @@ export const CodeReviewMetrics = () => {
   };
 
   const handleSearchBoxOutsideClick = (event: MouseEvent) => {
+    // TODO: This is broken and needs to be fixed
     const searchBox = document.getElementById(SEARCH_BOX_ID);
 
     if (searchBox && !searchBox.contains(event.target as Node)) {
@@ -191,32 +192,31 @@ export const CodeReviewMetrics = () => {
   return (
     <ErrorBoundary key="code-review-metrics">
       <CommonLayout
-        id={SEARCH_BOX_ID}
-        pageHeader="Code Review Metrics"
-        searchBox={
-          <SearchBox
-            onChange={handleSearchChange}
-            label="Search Pull Requests"
-            width={380}
-            placeHolder={searchPlaceHolder}
-            isDebounced={true}
-            onClick={() => setIsSearchBoxDropdownOpen(true)}
-          ></SearchBox>
-        }
-        filter={<ClientFilters />}
-        searchDialogBox={
-          isSearchBoxDropdownOpen && (
-            <div className={styles.dropDown}>
-              {CHIP.map((chip) => (
-                <CodeReviewSearchChips
-                  key={chip.chipKey}
-                  label={chip.chipLabel}
-                  selected={selectedChips.includes(chip.chipKey)}
-                  onClick={() => handleChipClick(chip.chipKey as keyof typeof CHIP)}
-                />
-              ))}
-            </div>
-          )
+        title="Code Review Metrics"
+        actions={
+          <div>
+            <SearchBox
+              onChange={handleSearchChange}
+              label="Search Pull Requests"
+              width={380}
+              placeHolder={searchPlaceHolder}
+              isDebounced={true}
+              onClick={() => setIsSearchBoxDropdownOpen(true)}
+            ></SearchBox>
+            {isSearchBoxDropdownOpen && (
+              <div className={styles.dropDown}>
+                {CHIP.map((chip) => (
+                  <CodeReviewSearchChips
+                    key={chip.chipKey}
+                    label={chip.chipLabel}
+                    selected={selectedChips.includes(chip.chipKey)}
+                    onClick={() => handleChipClick(chip.chipKey as keyof typeof CHIP)}
+                  />
+                ))}
+              </div>
+            )}
+            <ClientFilters />
+          </div>
         }
       >
         <div className={styles.codeReview}>

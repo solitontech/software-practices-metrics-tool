@@ -45,7 +45,7 @@
 }
 
 .checkboxContainer {
-  padding: $minimum-padding $ternary-padding;
+  padding: $spacing-xs 0px;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -60,7 +60,7 @@
 }
 
 .checkbox {
-  height: $extra-large-icon-size;
+  height: $icon-size-xl;
   width: 10%;
 }
 

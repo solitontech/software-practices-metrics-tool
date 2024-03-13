@@ -2,7 +2,7 @@
 
 .vote {
   @include flex-column-center;
-  color: $primary-color;
+  color: $app-primary-color;
   width: fit-content !important;
 }
 

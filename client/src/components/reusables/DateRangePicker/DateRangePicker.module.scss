@@ -3,7 +3,7 @@
 .date {
   border: 1px solid $border-color;
   border-radius: 4px;
-  color: $primary-color;
+  color: $app-primary-color;
   height: 35px;
   text-align: center;
   font-size: $medium-font-size;
@@ -13,7 +13,7 @@
 
 .datePicker {
   display: flex;
-  color: $primary-color;
+  color: $app-primary-color;
   align-items: center;
   gap: 5px;
 }
