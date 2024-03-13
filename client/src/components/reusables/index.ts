@@ -3,7 +3,6 @@ export * from "./CommonLayout/CommonLayout";
 export * from "./CustomVote/CustomVote";
 export * from "./DateRangePicker/DateRangePicker";
 export * from "./DialogBox/DialogBox";
-export * from "./DisplayError/DisplayError";
 export * from "./ErrorBoundary/ErrorBoundary";
 export * from "./Filter/Filter";
 export * from "./InfoIconTooltip/InfoIconTooltip";

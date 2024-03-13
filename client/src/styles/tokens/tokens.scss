@@ -25,9 +25,6 @@ $darker-shade: darken($table-background, 10%);
 
 $icon-color: #a2a5a9;
 
-$border-color: #0000003b;
-$secondary-border-color: #0000001e;
-
 $tile-text-color: #757d83;
 $chip-background-color: #e5e5e5;
 
@@ -73,6 +70,7 @@ $primary-letter-spacing: 0.2px;
 $secondary-letter-spacing: 0.4px;
 
 /* revamped tokens */
+
 /* For margins and padding */
 $spacing-xm: 2px;
 $spacing-xs: 4px;
@@ -83,6 +81,7 @@ $spacing-xl: 20px;
 $spacing-xxl: 24px;
 $spacing-xxxl: 28px;
 $spacing-xxxxl: 32px;
+$spacing-vlg: 40px;
 
 /* For icons */
 $icon-size-xm: 2px;
@@ -113,9 +112,13 @@ $semi-bold-font-weight: 600;
 $bold-font-weight: 700;
 $extra-bold-font-weight: 900;
 
-/* for background colors */
+/* For background colors */
 $primary-background-color: #fff;
 $secondary-background-color: #f5f6f9;
+
+/* For border colors */
+$primary-border-color: #0000003b;
+$secondary-border-color: #0000001e;
 
 /* themes */
 $app-primary-color: #757d83;

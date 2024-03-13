@@ -1,11 +1,7 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.errorMessage {
-  @include flex-align-center;
-
-  width: 100%;
-  text-align: center;
-  height: 100%;
-  justify-content: center;
+.message {
+  @include flex-row-center;
   font-weight: $semi-bold-font-weight;
+  width: 100%;
 }

@@ -97,3 +97,7 @@
 .tableView {
   @include table-view;
 }
+
+.errorMessage {
+  @include error-message;
+}

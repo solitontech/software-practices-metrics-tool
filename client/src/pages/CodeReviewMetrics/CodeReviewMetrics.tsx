@@ -25,7 +25,6 @@ import { CodeReviewMetricsTable } from "../../components/containers/CodeReviewMe
 import { CodeReviewMetricsTiles } from "../../components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTiles/CodeReviewMetricsTiles.tsx";
 import { CommonLayout } from "../../components/reusables/CommonLayout/CommonLayout";
 import { DateRangePicker } from "../../components/reusables/DateRangePicker/DateRangePicker.tsx";
-import { DisplayError } from "../../components/reusables/DisplayError/DisplayError.tsx";
 import { ErrorBoundary } from "../../components/reusables/ErrorBoundary/ErrorBoundary.tsx";
 import { IMetricsView } from "../../components/reusables/MetricsToggleTab/interfaces.tsx";
 import { MetricsToggleTab } from "../../components/reusables/MetricsToggleTab/MetricsToggleTab.tsx";
@@ -35,7 +34,7 @@ import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeRev
 import { filterPullRequests } from "../../utils/filterPullRequests.tsx";
 
 const today = DateTime.local();
-const sevenDaysAgoFromToday = today.minus({ days: 15 });
+const sevenDaysAgoFromToday = today.minus({ days: 16 });
 const sixMonthsAgoFromToday = today.minus({ days: 190 });
 const metricsToggleTabs = CODE_REVIEW_METRICS_TABS as IMetricsView<CodeReviewMetricsView>[];
 
@@ -118,12 +117,12 @@ export const CodeReviewMetrics = () => {
   }, [errorCount]);
 
   const renderView = () => {
-    if (isPending || true) {
+    if (isPending) {
       return <LoadingSpinner content="Loading pull requests..." />;
     }
 
     if (isError && error) {
-      return <DisplayError error={error?.response?.data.error} />;
+      return <p className={styles.errorMessage}>{error?.response?.data.error}</p>;
     }
 
     if (isTableView()) {

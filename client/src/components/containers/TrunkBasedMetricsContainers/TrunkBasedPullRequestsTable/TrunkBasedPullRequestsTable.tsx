@@ -16,7 +16,6 @@ import { columns } from "./trunkBasedPullRequestsTableConstants";
 import { filterPullRequests, getMergedPullRequest } from "./trunkBasedPullRequestsTableUtils";
 import { usePullRequestsMergedToTrunk } from "../../../../fetchers";
 import { formatDate, formatDateWithoutTime } from "../../../../utils/formatTimeUtils";
-import { DisplayError } from "../../../reusables/DisplayError/DisplayError";
 import { ErrorBoundary } from "../../../reusables/ErrorBoundary/ErrorBoundary";
 import { InfoIconTooltip } from "../../../reusables/InfoIconTooltip/InfoIconTooltip";
 import { LoadingSpinner } from "../../../reusables/LoadingSpinner/LoadingSpinner";
@@ -52,7 +51,7 @@ export const TrunkBasedPullRequestsTable = ({ startDate, endDate }: Props) => {
   }
 
   if (isError) {
-    return <DisplayError error={error?.response?.data.error} />;
+    return <p className={styles.errorMessage}>{error?.response?.data.error}</p>;
   }
 
   const searchedActiveBranches = searchTerm ? filterPullRequests(pullRequests, searchTerm) : pullRequests;

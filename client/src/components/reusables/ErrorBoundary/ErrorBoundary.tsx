@@ -2,17 +2,18 @@ import { Component, ReactNode } from "react";
 
 import styles from "./ErrorBoundary.module.scss";
 
-type IProps = {
+interface IErrorBoundaryProps {
   children: ReactNode;
-};
+}
 
-type IState = {
+interface IErrorBoundaryState {
   hasError: boolean;
-};
+}
 
-export class ErrorBoundary extends Component<IProps, IState> {
-  constructor(props: IProps) {
+export class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
+  constructor(props: IErrorBoundaryProps) {
     super(props);
+
     this.state = { hasError: false };
   }
 
@@ -22,7 +23,7 @@ export class ErrorBoundary extends Component<IProps, IState> {
 
   render() {
     if (this.state.hasError) {
-      return <div className={styles.errorMessage}>Something went wrong. Please refresh the app.</div>;
+      return <div className={styles.message}>Something went wrong. Please refresh the app.</div>;
     }
 
     return this.props.children;
