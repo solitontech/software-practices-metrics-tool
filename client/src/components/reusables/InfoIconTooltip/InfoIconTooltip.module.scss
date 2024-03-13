@@ -1,9 +1,10 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .toolTip {
-  @include tool-tip;
+  font-size: $font-size-md;
 }
 
 .infoIcon {
-  @include info-icon;
+  @include flex-align-center;
+  cursor: pointer;
 }

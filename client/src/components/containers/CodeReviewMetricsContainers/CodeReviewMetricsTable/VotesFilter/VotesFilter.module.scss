@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: center;
   border: none;
-  font-size: $minimum-font-size;
+  font-size: $font-size-md;
   cursor: pointer;
   color: $primary-text-color;
   background: $secondary-color;
@@ -71,7 +71,7 @@
 .voteLabel {
   @include ellipsis;
   width: 75%;
-  font-size: $minimum-font-size;
+  font-size: $font-size-md;
   text-align: start;
 }
 

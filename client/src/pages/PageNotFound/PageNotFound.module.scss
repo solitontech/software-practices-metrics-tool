@@ -15,7 +15,7 @@
 }
 
 .description {
-  @include description;
+  @include text-description;
 
   width: 570px;
 }

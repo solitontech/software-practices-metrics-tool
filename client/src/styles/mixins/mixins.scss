@@ -1,4 +1,5 @@
 @import "./flex.mixin.scss";
+@import "./content.mixin.scss";
 
 @mixin url {
   text-decoration: none;
@@ -88,10 +89,6 @@
   width: 98%;
 }
 
-@mixin tool-tip {
-  font-size: $minimum-font-size;
-}
-
 @mixin tile-content {
   @include flex-align-center;
   gap: 6px;
@@ -102,11 +99,6 @@
   display: flex;
   gap: 20px;
   height: 90%;
-}
-
-@mixin info-icon {
-  @include flex-align-center;
-  cursor: pointer;
 }
 
 @mixin link-icon {
@@ -173,13 +165,6 @@
   overflow: scroll;
   gap: 50px;
   height: calc(100% - 90px);
-}
-
-@mixin description {
-  color: $app-primary-color;
-  font-size: $font-size-xl;
-  font-weight: $regular-font-weight;
-  text-align: center;
 }
 
 @mixin table {

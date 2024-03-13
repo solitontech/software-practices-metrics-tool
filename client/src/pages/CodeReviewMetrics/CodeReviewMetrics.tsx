@@ -3,6 +3,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { DateTime } from "luxon";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { LoadingSpinner } from "src/components";
+
 import styles from "./CodeReviewMetrics.module.scss";
 import {
   CODE_REVIEW_METRICS,
@@ -25,7 +27,6 @@ import { CommonLayout } from "../../components/reusables/CommonLayout/CommonLayo
 import { DateRangePicker } from "../../components/reusables/DateRangePicker/DateRangePicker.tsx";
 import { DisplayError } from "../../components/reusables/DisplayError/DisplayError.tsx";
 import { ErrorBoundary } from "../../components/reusables/ErrorBoundary/ErrorBoundary.tsx";
-import { LoadingSpinner } from "../../components/reusables/LoadingSpinner/LoadingSpinner.tsx";
 import { IMetricsView } from "../../components/reusables/MetricsToggleTab/interfaces.tsx";
 import { MetricsToggleTab } from "../../components/reusables/MetricsToggleTab/MetricsToggleTab.tsx";
 import { SearchBox } from "../../components/reusables/SearchBox/SearchBox.tsx";
@@ -117,7 +118,7 @@ export const CodeReviewMetrics = () => {
   }, [errorCount]);
 
   const renderView = () => {
-    if (isPending) {
+    if (isPending || true) {
       return <LoadingSpinner content="Loading pull requests..." />;
     }
 

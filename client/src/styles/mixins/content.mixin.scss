@@ -1,0 +1,6 @@
+@mixin text-description {
+  color: $app-primary-color;
+  font-size: $font-size-xl;
+  font-weight: $regular-font-weight;
+  text-align: center;
+}
