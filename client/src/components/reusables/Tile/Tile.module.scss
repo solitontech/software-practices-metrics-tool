@@ -1,24 +1,21 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .tile {
-  color: $tile-text-color;
-  width: fit-content;
-  height: fit-content;
+  @include flex-column;
   background-color: $primary-background-color;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  padding: $medium-padding $secondary-padding;
-  gap: 5px;
-  border: 1px solid $primary-border-color;
+  color: $app-primary-color;
+  gap: $spacing-sm;
+  height: fit-content;
+  padding: $spacing-sm $spacing-md;
+  width: fit-content;
 }
 
 .title {
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
+  font-weight: $medium-font-weight;
 }
 
-.value {
-  font-size: $secondary-font-size;
-  font-weight: 900;
+.children {
+  font-size: $font-size-mlg;
+  font-weight: $medium-font-weight;
 }

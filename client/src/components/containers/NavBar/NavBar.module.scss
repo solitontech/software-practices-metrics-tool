@@ -4,7 +4,7 @@
   font-weight: $regular-font-weight;
   line-height: $ternary-line-height;
   color: $ternary-color;
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
 }
 
 @mixin page {
@@ -78,7 +78,7 @@
 }
 
 .menuIcon {
-  padding: 0px $secondary-padding 0px $spacing-lg;
+  padding: 0px $spacing-md 0px $spacing-lg;
 }
 
 .navBar {
@@ -118,7 +118,7 @@
 
 .logoText {
   color: $ternary-color;
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
   text-align: center;
   font-weight: 600;
   margin-top: $minimum-margin;

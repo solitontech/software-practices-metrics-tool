@@ -20,19 +20,19 @@
 }
 
 .noFiltersHeading {
-  padding: $secondary-padding;
+  padding: $spacing-md;
   text-align: center;
   font-size: $secondary-font-size;
   font-weight: $semi-bold-font-weight;
 }
 
 .noFiltersContent {
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
   text-align: center;
 }
 
 .squadContainer {
-  padding: $secondary-padding;
+  padding: $spacing-md;
 }
 
 .squadContainer:not(:last-child) {
@@ -59,7 +59,7 @@
 .squadCategory {
   @include ellipsis;
   width: 100%;
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
   font-weight: $medium-font-weight;
 }
 

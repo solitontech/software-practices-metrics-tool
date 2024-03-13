@@ -6,7 +6,7 @@
 
 .text {
   @include text;
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
   letter-spacing: $primary-letter-spacing;
   border-bottom: 1px solid $table-border;
   padding: $spacing-lg;
@@ -23,7 +23,7 @@
 .navLink {
   @include ellipsis;
 
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
 }
 
 .dialogIcon {
@@ -127,7 +127,7 @@
 }
 
 .time {
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
 }
 
 .prTitle {
@@ -154,7 +154,7 @@
 
 .dialogHeader {
   width: 22%;
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
 }
 
 .prDetails {
