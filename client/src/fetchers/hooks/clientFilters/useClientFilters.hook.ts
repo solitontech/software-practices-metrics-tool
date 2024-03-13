@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import { ApiEndPoint, QUERY_KEY } from "src/fetchers";
+
 import { ClientFiltersUtils } from "./clientFiltersUtils";
 import { IFetchedClientFilterResponse } from "./types";
-import { ApiEndPoint } from "../../api";
-import { QUERY_KEY } from "../../setup/queryKey";
 
 export const useClientFilters = () => {
   const clientFiltersQuery = useQuery({
@@ -24,5 +24,5 @@ export const useClientFilters = () => {
   return clientFiltersQuery;
 };
 
-/* interface exports */
+/* interface exports for consumers*/
 export type { IFetchedClientFilterSquadMember } from "./types";

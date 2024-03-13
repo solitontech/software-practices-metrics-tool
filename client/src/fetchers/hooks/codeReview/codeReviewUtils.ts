@@ -1,5 +1,6 @@
+import { IContextClientFilterSquad } from "src/context";
+
 import { IFetchedCodeReviewResponse } from "./types";
-import { IContextClientFilterSquad } from "../../../context";
 
 export class CodeReviewMetricsUtils {
   static #getSquadsUserIdsMap(squads: IContextClientFilterSquad[]) {

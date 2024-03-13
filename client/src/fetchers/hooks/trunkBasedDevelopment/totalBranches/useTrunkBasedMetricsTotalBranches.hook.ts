@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import { ApiEndPoint, QUERY_KEY } from "src/fetchers";
+
 import { IFetchedTrunkBranchesResponse } from "./types";
-import { ApiEndPoint } from "../../../api";
-import { QUERY_KEY } from "../../../setup/queryKey";
 
 export const useTrunkBasedMetricsTotalBranches = () => {
   const { isPending, isError, data, error } = useQuery({

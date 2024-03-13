@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import { ClientFilterContext } from "src/context";
+import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/fetchers";
+
 import { CodeReviewMetricsUtils } from "./codeReviewUtils";
 import { IFetchedCodeReviewResponse } from "./types";
-import { ClientFilterContext } from "../../../context";
-import { ApiEndPoint, ApiHelpers } from "../../api";
-import { QUERY_KEY } from "../../setup/queryKey";
 
 async function fetchCodeReviewMetrics(url: URL, paginationCursor: number) {
   url.searchParams.set("paginationCursor", String(paginationCursor));
@@ -48,5 +48,5 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
   };
 };
 
-/* interface exports */
+/* interface exports for consumers*/
 export type { IFetchedCodeReviewPullRequest } from "./types";

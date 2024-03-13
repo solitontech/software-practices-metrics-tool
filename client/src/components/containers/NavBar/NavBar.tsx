@@ -9,7 +9,6 @@ import styles from "./NavBar.module.scss";
 import { routes } from "./navBarConstants.tsx";
 import logo from "../../../assets/images/solitonWhiteLogo.svg";
 import techForceLogo from "../../../assets/images/techForceLogo.png";
-import { pathToMetrics } from "../../../constants/route.constant.ts";
 
 export interface Route {
   name: string;
@@ -52,9 +51,7 @@ export const NavBar = () => {
             style={{ height: "100%" }}
           >
             <div className={styles.drawerToolbar}>
-              <NavLink to={pathToMetrics}>
-                <img src={logo} alt="Soliton"></img>
-              </NavLink>
+              <img src={logo} alt="Soliton"></img>
               <div className={styles.cursorPointer} onClick={() => setIsNavBarOpen(!isNavBarOpen)}>
                 <ArrowCircleLeftOutlinedIcon className={styles.icon} />
               </div>

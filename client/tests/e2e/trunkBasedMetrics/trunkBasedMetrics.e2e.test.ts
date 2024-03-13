@@ -1,10 +1,11 @@
 import "dotenv/config";
 import { test, expect, Page } from "@playwright/test";
 
-import { pathToTrunkBasedMetrics } from "../../../src/constants/route.constant";
+import { routePaths } from "src/constants";
+
 import { TIMEOUT_PERIOD, WAIT_UNTIL } from "../constants/e2e.constants";
 
-const trunkBasedMetricsEndPoint = `${process.env.CLIENT_DEV_URL}${pathToTrunkBasedMetrics}`;
+const trunkBasedMetricsEndPoint = `${process.env.CLIENT_DEV_URL}${routePaths.trunkBasedMetrics}`;
 
 test.describe("Trunk Based Metrics page", () => {
   let page: Page;

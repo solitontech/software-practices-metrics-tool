@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import { QUERY_KEY, ApiHelpers, ApiEndPoint } from "src/fetchers";
+
 import { IFetchedTrunkBasedActiveBranchesResponse } from "./types";
-import { ApiEndPoint, ApiHelpers } from "../../../api";
-import { QUERY_KEY } from "../../../setup/queryKey";
 
 export async function fetchActiveBranches(url: URL, paginationCursor: number) {
   url.searchParams.set("paginationCursor", String(paginationCursor));

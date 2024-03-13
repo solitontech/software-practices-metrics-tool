@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import { ApiEndPoint, ApiHelpers, QUERY_KEY } from "src/fetchers";
+
 import { IFetchedTrunkBranchCommitsResponse } from "./types";
-import { ApiEndPoint, ApiHelpers } from "../../../api";
-import { QUERY_KEY } from "../../../setup/queryKey";
 
 export async function fetchTrunkBranchCommits(url: URL, paginationCursor: number) {
   url.searchParams.set("paginationCursor", String(paginationCursor));
