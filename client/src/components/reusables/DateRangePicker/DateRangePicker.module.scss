@@ -1,31 +1,37 @@
 @import "src/styles/index.scss";
 
-.date {
-  border: 1px solid $app-primary-border-color;
-  border-radius: 4px;
-  color: $app-primary-color;
-  height: 35px;
-  text-align: center;
-  font-size: $font-size-xmd;
-  padding: 0px !important;
-  width: 90px !important;
+.container {
+  @include flex-column;
+  justify-content: space-between;
+}
+
+.label {
+  @include flex-align-center;
+  gap: $spacing-xs;
 }
 
 .datePicker {
-  display: flex;
+  @include flex-align-center;
+  gap: $spacing-sm;
+}
+
+.date {
+  border: 1px solid $app-primary-border-color;
+  border-radius: $app-primary-border-radius;
   color: $app-primary-color;
-  align-items: center;
-  gap: 5px;
+  font-size: $font-size-xmd;
+  height: 34px;
+  min-width: 90px;
+  padding: 0;
+  text-align: center;
+  width: 90px;
 }
 
-.popper {
-  z-index: 100 !important;
+.date:focus {
+  border: 1px solid $app-primary-border-color;
+  outline: none;
 }
 
-.tileContent {
-  @include tile-content;
-}
-
-.dateHeader {
-  @include date-header;
+.dateSelector {
+  z-index: 10 !important;
 }
