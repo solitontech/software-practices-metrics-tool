@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { DateTime } from "luxon";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { LoadingSpinner } from "src/components";
+import { LoadingSpinner, SnackBar, TabToggle } from "src/components";
 
 import styles from "./CodeReviewMetrics.module.scss";
 import {
@@ -26,17 +26,14 @@ import { CodeReviewMetricsTiles } from "../../components/containers/CodeReviewMe
 import { CommonLayout } from "../../components/reusables/CommonLayout/CommonLayout";
 import { DateRangePicker } from "../../components/reusables/DateRangePicker/DateRangePicker.tsx";
 import { ErrorBoundary } from "../../components/reusables/ErrorBoundary/ErrorBoundary.tsx";
-import { IMetricsView } from "../../components/reusables/MetricsToggleTab/interfaces.tsx";
-import { MetricsToggleTab } from "../../components/reusables/MetricsToggleTab/MetricsToggleTab.tsx";
 import { SearchBox } from "../../components/reusables/SearchBox/SearchBox.tsx";
-import SnackbarMessage from "../../components/reusables/SnackbarMessage/SnackbarMessage.tsx";
 import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics.hook.ts";
 import { filterPullRequests } from "../../utils/filterPullRequests.tsx";
 
 const today = DateTime.local();
-const sevenDaysAgoFromToday = today.minus({ days: 16 });
+const sevenDaysAgoFromToday = today.minus({ days: 7 });
 const sixMonthsAgoFromToday = today.minus({ days: 190 });
-const metricsToggleTabs = CODE_REVIEW_METRICS_TABS as IMetricsView<CodeReviewMetricsView>[];
+const metricsToggleTabs = CODE_REVIEW_METRICS_TABS;
 
 const PLACEHOLDER = "Search for date, title, tags, author, reviewer & status";
 const SEARCH_BOX_ID = "search-box";
@@ -75,8 +72,8 @@ export const CodeReviewMetrics = () => {
 
   const averageMergeTime = getMetricsAverageTimeInHours(searchedPullRequests, CODE_REVIEW_METRICS.MERGE_TIME);
 
-  const handleViewChange = (newView: CodeReviewMetricsView) => {
-    setSelectedView(newView);
+  const handleViewChange = (newView: string) => {
+    setSelectedView(newView as CodeReviewMetricsView);
   };
 
   const handleSearchBoxOutsideClick = (event: MouseEvent) => {
@@ -220,9 +217,9 @@ export const CodeReviewMetrics = () => {
         }
       >
         <div className={styles.codeReview}>
-          <SnackbarMessage
-            open={snackbarOpen}
-            onClose={() => {
+          <SnackBar
+            isOpen={snackbarOpen}
+            handleClose={() => {
               setSnackbarOpen(false);
             }}
             message={`Failed to fetch ${errorCount} pull request. Please try again.`}
@@ -236,11 +233,7 @@ export const CodeReviewMetrics = () => {
                 minDate={sixMonthsAgoFromToday.toJSDate()}
                 maxDate={today.toJSDate()}
               />
-              <MetricsToggleTab
-                metricsViews={metricsToggleTabs}
-                selectedView={selectedView}
-                onViewChange={handleViewChange}
-              />
+              <TabToggle tabs={metricsToggleTabs} selectedTab={selectedView} handleTabChange={handleViewChange} />
               <div className={styles.tiles}>
                 <CodeReviewMetricsTiles
                   averageFirstReviewResponseTime={averageFirstReviewResponseTime}

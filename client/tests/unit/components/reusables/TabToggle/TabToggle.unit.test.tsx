@@ -1,18 +1,18 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
-import { MetricsToggleTab } from "../../../../../src/components/reusables/MetricsToggleTab/MetricsToggleTab";
+import { TabToggle } from "src/components";
 
-describe("MetricsToggleTab component", () => {
+describe("TabToggle component", () => {
   const metricsViews = [
-    { value: "view1", displayName: "View 1", icon: null },
-    { value: "view2", displayName: "View 2", icon: null },
+    { label: "View 1", value: "view1", icon: null },
+    { label: "View 2", value: "view2", icon: null },
   ];
 
-  let onViewChange: (view: string) => void;
+  let handleTabChange: (view: string) => void;
 
   beforeEach(() => {
-    onViewChange = vi.fn();
+    handleTabChange = vi.fn();
   });
 
   afterEach(() => {
@@ -20,7 +20,7 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should render toggle tabs", () => {
-    render(<MetricsToggleTab metricsViews={metricsViews} selectedView="view1" onViewChange={onViewChange} />);
+    render(<TabToggle tabs={metricsViews} selectedTab="view1" handleTabChange={handleTabChange} />);
 
     // user should see the two toggle tabs
     const view1Element = screen.getByText(/view 1/i);
@@ -31,31 +31,31 @@ describe("MetricsToggleTab component", () => {
   });
 
   it("should calls onViewChange method when a view is selected", () => {
-    render(<MetricsToggleTab metricsViews={metricsViews} selectedView="view1" onViewChange={onViewChange} />);
+    render(<TabToggle tabs={metricsViews} selectedTab="view1" handleTabChange={handleTabChange} />);
 
     const view2Element = screen.getByText(/view 2/i);
 
     // user clicks the view 2 tab
     fireEvent.click(view2Element);
 
-    expect(onViewChange).toHaveBeenCalledWith("view2");
+    expect(handleTabChange).toHaveBeenCalledWith("view2");
   });
 
   it("should not call onViewChange method when the selected view is clicked", () => {
-    render(<MetricsToggleTab metricsViews={metricsViews} selectedView="view1" onViewChange={onViewChange} />);
+    render(<TabToggle tabs={metricsViews} selectedTab="view1" handleTabChange={handleTabChange} />);
 
     const view1Element = screen.getByText(/view 1/i);
 
     // user clicks the view 1 tab which is already active tab
     fireEvent.click(view1Element);
 
-    expect(onViewChange).not.toHaveBeenCalled();
+    expect(handleTabChange).not.toHaveBeenCalled();
   });
 
   it("should render icon when provided", () => {
-    const metricsViews = [{ value: "view1", displayName: "View 1", icon: <div>Icon</div> }];
+    const metricsViews = [{ value: "view1", label: "View 1", icon: <div>Icon</div> }];
 
-    render(<MetricsToggleTab metricsViews={metricsViews} selectedView="view1" onViewChange={onViewChange} />);
+    render(<TabToggle tabs={metricsViews} selectedTab="view1" handleTabChange={handleTabChange} />);
 
     const iconElement = screen.getByText(/icon/i);
     const view1Element = screen.getByText(/view 1/i);

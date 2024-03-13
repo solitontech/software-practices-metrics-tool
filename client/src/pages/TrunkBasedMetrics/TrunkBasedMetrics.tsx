@@ -2,19 +2,18 @@ import { useState } from "react";
 
 import { DateTime } from "luxon";
 
-import { CommonLayout, DateRangePicker, MetricsToggleTab, ErrorBoundary } from "src/components";
+import { CommonLayout, DateRangePicker, TabToggle, ErrorBoundary } from "src/components";
 
 import styles from "./TrunkBasedMetrics.module.scss";
 import { TRUNK_BASED_METRICS_TABS, TRUNK_BASED_METRICS_TAB_VALUE } from "./trunkBasedMetricsConstants";
 import { TrunkBasedMetricsGraphs } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/TrunkBasedMetricsGraphs";
 import { TrunkBasedMetricsTiles } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/TrunkBasedMetricsTiles";
 import { TrunkBasedPullRequestsTable } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/TrunkBasedPullRequestsTable";
-import { IMetricsView } from "../../components/reusables/MetricsToggleTab/interfaces";
 
 const today = DateTime.local();
 const sevenDaysAgoFromToday = today.minus({ days: 7 });
 const sixMonthsAgoFromToday = today.minus({ days: 190 });
-const metricsToggleTabs = TRUNK_BASED_METRICS_TABS as IMetricsView<TrunkBasedMetricsView>[];
+const metricsToggleTabs = TRUNK_BASED_METRICS_TABS;
 
 type TrunkBasedMetricsView = "table" | "graph";
 
@@ -28,8 +27,8 @@ export const TrunkBasedMetrics = () => {
     endDate: today.toJSDate(),
   });
 
-  const handleViewChange = (newView: TrunkBasedMetricsView) => {
-    setSelectedView(newView);
+  const handleViewChange = (newView: string) => {
+    setSelectedView(newView as TrunkBasedMetricsView);
   };
 
   const isTableView = () => {
@@ -80,11 +79,7 @@ export const TrunkBasedMetrics = () => {
                 minDate={sixMonthsAgoFromToday.toJSDate()}
                 maxDate={today.toJSDate()}
               />
-              <MetricsToggleTab
-                metricsViews={metricsToggleTabs}
-                selectedView={selectedView}
-                onViewChange={handleViewChange}
-              />
+              <TabToggle tabs={metricsToggleTabs} selectedTab={selectedView} handleTabChange={handleViewChange} />
               <div className={styles.tiles}>
                 <TrunkBasedMetricsTiles />
               </div>

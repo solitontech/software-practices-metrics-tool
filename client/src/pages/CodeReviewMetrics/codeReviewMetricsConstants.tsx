@@ -18,18 +18,18 @@ export const CODE_REVIEW_METRICS_TAB_VALUE = {
 
 export const CODE_REVIEW_METRICS_TABS = [
   {
+    label: "TABLE VIEW",
     value: CODE_REVIEW_METRICS_TAB_VALUE.TABLE,
-    displayName: "TABLE VIEW",
     icon: <TableRowsIcon />,
   },
   {
+    label: "GRAPHICAL VIEW",
     value: CODE_REVIEW_METRICS_TAB_VALUE.GRAPH,
-    displayName: "GRAPHICAL VIEW",
     icon: <BarChartOutlinedIcon />,
   },
   {
+    label: "TREND ANALYSIS",
     value: CODE_REVIEW_METRICS_TAB_VALUE.TREND_GRAPH,
-    displayName: "TREND ANALYSIS",
     icon: <InsightsOutlinedIcon />,
   },
 ];

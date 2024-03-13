@@ -8,13 +8,13 @@ export const TRUNK_BASED_METRICS_TAB_VALUE = {
 
 export const TRUNK_BASED_METRICS_TABS = [
   {
+    label: "TABLE VIEW",
     value: TRUNK_BASED_METRICS_TAB_VALUE.TABLE,
-    displayName: "TABLE VIEW",
     icon: <TableRowsIcon />,
   },
   {
+    label: "GRAPHICAL VIEW",
     value: TRUNK_BASED_METRICS_TAB_VALUE.GRAPH,
-    displayName: "GRAPHICAL VIEW",
     icon: <BarChartOutlinedIcon />,
   },
 ];
