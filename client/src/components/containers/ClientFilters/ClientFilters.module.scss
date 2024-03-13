@@ -13,7 +13,7 @@
   max-height: 85vh;
   overflow-y: scroll;
   width: 500px;
-  background-color: $primary-background-color;
+  background-color: $app-primary-background-color;
   padding: $spacing-lg;
   padding-top: 0px;
   margin-top: $secondary-minimum-margin;
@@ -36,7 +36,7 @@
 }
 
 .squadContainer:not(:last-child) {
-  border-bottom: 1px solid $primary-border-color;
+  border-bottom: 1px solid $app-primary-border-color;
 }
 
 .squadName {

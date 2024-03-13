@@ -1,7 +1,7 @@
 @import "src/styles/index.scss";
 
 .container {
-  background-color: $secondary-background-color;
+  background-color: $app-secondary-background-color;
   height: 100%;
   overflow-x: scroll;
   padding-left: $spacing-xxxl;
@@ -14,9 +14,9 @@
 }
 
 .title {
+  color: $app-primary-color;
   font-size: $font-size-lg;
   font-weight: $medium-font-weight;
-  color: $app-primary-color;
 }
 
 .main {
