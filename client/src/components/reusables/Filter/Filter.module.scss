@@ -1,14 +1,14 @@
 @import "src/styles/index.scss";
 
-.filterIconContainer {
+.container {
   position: relative;
 }
 
 .filterIcon {
-  cursor: pointer;
   color: $app-primary-color;
+  cursor: pointer;
 }
 
-.filterIconSelected {
-  color: $secondary-color;
+.isActive {
+  color: $app-secondary-color;
 }

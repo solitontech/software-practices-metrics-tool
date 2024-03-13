@@ -3,7 +3,6 @@ $secondary-text-color: #000000;
 
 $tool-tip-background-color: #ebebeb;
 
-$secondary-color: #0f52a0;
 $ternary-color: #93b8d8;
 $highlight-color: #dbe7f2;
 $url-color: #5f66aa;
@@ -65,9 +64,9 @@ $ternary-shadow-color: #0000001e;
 $primary-letter-spacing: 0.2px;
 $secondary-letter-spacing: 0.4px;
 
-/* revamped tokens */
+/* tokens */
 
-/* For margins and padding */
+/* margins and padding */
 $spacing-xm: 2px;
 $spacing-xs: 4px;
 $spacing-sm: 8px;
@@ -79,7 +78,7 @@ $spacing-xxxl: 28px;
 $spacing-xxxxl: 32px;
 $spacing-vlg: 40px;
 
-/* For icons */
+/* icons */
 $icon-size-xm: 2px;
 $icon-size-xs: 4px;
 $icon-size-sm: 8px;
@@ -90,7 +89,7 @@ $icon-size-xxl: 24px;
 $icon-size-xxxl: 28px;
 $icon-size-xxxxl: 32px;
 
-/* For font sizes */
+/* font sizes */
 $font-size-sm: 8px;
 $font-size-md: 12px;
 $font-size-xmd: 14px;
@@ -99,7 +98,7 @@ $font-size-lg: 18px;
 $font-size-xl: 20px;
 $font-size-xxl: 24px;
 
-/* For font weights */
+/* font weights */
 $thin-font-weight: 100;
 $light-font-weight: 300;
 $regular-font-weight: 400;
@@ -108,13 +107,13 @@ $semi-bold-font-weight: 600;
 $bold-font-weight: 700;
 $extra-bold-font-weight: 900;
 
-/* For background colors */
+/* background colors */
 $primary-background-color: #fff;
 $secondary-background-color: #f5f6f9;
 
-/* For border colors */
+/* border colors */
 $primary-border-color: #0000003b;
-$secondary-border-color: #0000001e;
 
 /* themes */
 $app-primary-color: #757d83;
+$app-secondary-color: #0f52a0;

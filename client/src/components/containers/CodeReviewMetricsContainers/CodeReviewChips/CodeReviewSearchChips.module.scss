@@ -6,9 +6,9 @@
 }
 
 .selectedChip {
-  background-color: $secondary-color;
+  background-color: $app-secondary-color;
   color: $primary-background-color;
   &:hover {
-    background-color: lighten($secondary-color, 10%);
+    background-color: lighten($app-secondary-color, 10%);
   }
 }
