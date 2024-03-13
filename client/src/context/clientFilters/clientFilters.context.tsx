@@ -1,7 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 
-import { IContextClientFilter, IContextClientFilterSquad, IContextClientFilterProps } from "./types";
-import { useClientFilters } from "../../fetchers";
+import { useClientFilters } from "src/fetchers";
+
+import { IContextClientFilter, IContextClientFilterSquad } from "./types";
+
+interface IContextClientFilterProps {
+  children: React.ReactNode;
+}
 
 export const ClientFilterContext = createContext<IContextClientFilter>({
   filters: [],
@@ -24,7 +29,7 @@ export const ClientFilterProvider = ({ children }: IContextClientFilterProps) =>
   return <ClientFilterContext.Provider value={{ filters, setFilters }}>{children}</ClientFilterContext.Provider>;
 };
 
-/* interface exports */
+/* interface exports for context consumers*/
 export type {
   IContextClientFilter,
   IContextClientFilterSquad,

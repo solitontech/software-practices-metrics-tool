@@ -1,4 +1,6 @@
-export const pathToHome = "/";
-export const pathToMetrics = "/metrics";
-export const pathToCodeReviewMetrics = `${pathToMetrics}/code-review-metrics`;
-export const pathToTrunkBasedMetrics = `${pathToMetrics}/trunk-based-metrics`;
+export const routePaths = {
+  home: "/",
+  metrics: "/metrics",
+  codeReviewMetrics: "/metrics/code-review-metrics",
+  trunkBasedMetrics: "/metrics/trunk-based-metrics",
+};
