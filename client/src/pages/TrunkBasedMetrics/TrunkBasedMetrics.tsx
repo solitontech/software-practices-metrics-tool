@@ -37,33 +37,30 @@ export const TrunkBasedMetrics = () => {
   });
 
   const handleDateChange = (date: Date, dateType: "startDate" | "endDate") => {
-    setDates((prevDates) => ({
-      ...prevDates,
-      [dateType]: date ?? prevDates[dateType],
-    }));
+    setDates((prevDates) => {
+      return { ...prevDates, [dateType]: date ?? prevDates[dateType] };
+    });
   };
 
   return (
     <ErrorBoundary key="trunk-based-metrics">
       <CommonLayout title="Trunk Based Metrics">
         <div className={styles.container}>
-          <div className={styles.tableDetails}>
-            <div className={styles.header}>
-              <DateRangePicker
-                date={dates}
-                handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
-                handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
-                minDate={dateRange.sixMonthsAgoFromToday}
-                maxDate={dateRange.today}
-              />
-              <TabToggle
-                tabs={tabs}
-                selectedTab={selectedTab}
-                handleTabChange={(value) => setSelectedTab(value as ITrunkBasedMetricsTabValue)}
-              />
-              <div className={styles.tiles}>
-                <TrunkBasedMetricsTiles />
-              </div>
+          <div className={styles.headerContainer}>
+            <DateRangePicker
+              date={dates}
+              handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
+              handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
+              minDate={dateRange.sixMonthsAgoFromToday}
+              maxDate={dateRange.today}
+            />
+            <TabToggle
+              tabs={tabs}
+              selectedTab={selectedTab}
+              handleTabChange={(value) => setSelectedTab(value as ITrunkBasedMetricsTabValue)}
+            />
+            <div className={styles.tilesContainer}>
+              <TrunkBasedMetricsTiles />
             </div>
           </div>
           <TrunkBasedMetricsTabs dates={dates} selectedTab={selectedTab} />

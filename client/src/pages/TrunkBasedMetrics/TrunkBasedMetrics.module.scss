@@ -1,17 +1,16 @@
 @import "src/styles/index.scss";
 
 .container {
-  @include metrics;
+  @include metrics-container;
 }
 
-.header {
-  @include header;
+.headerContainer {
+  @include flex-align-center;
+  color: $app-primary-color;
+  height: 70px;
+  justify-content: space-between;
 }
 
-.tableDetails {
-  @include table-details;
-}
-
-.tiles {
-  @include tiles;
+.tilesContainer {
+  @include tiles-container;
 }
