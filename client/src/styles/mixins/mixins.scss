@@ -39,11 +39,6 @@
   }
 }
 
-@mixin tile-content {
-  @include flex-align-center;
-  gap: 6px;
-}
-
 @mixin link-icon {
   color: $app-secondary-color;
   vertical-align: middle;

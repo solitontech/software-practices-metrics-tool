@@ -1,7 +1,8 @@
 @import "src/styles/index.scss";
 
 .tileContent {
-  @include tile-content;
+  @include flex-align-center;
+  gap: 6px;
 }
 
 .tileInfo {

@@ -12,5 +12,11 @@
 }
 
 .errorMessage {
-  @include error-message;
+  border: 1px solid $app-primary-border-color;
+  color: $app-primary-color;
+  font-weight: $medium-font-weight;
+  margin: $spacing-vlg 0;
+  padding: $spacing-xs;
+  text-align: center;
+  width: 100%;
 }

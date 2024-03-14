@@ -5,10 +5,10 @@ import styles from "./InfoIconTooltip.module.scss";
 
 interface IInfoIconTooltipProps {
   content: string;
-  size: string;
+  size?: string;
 }
 
-export const InfoIconTooltip = ({ content, size }: IInfoIconTooltipProps) => {
+export const InfoIconTooltip = ({ content, size = "16px" }: IInfoIconTooltipProps) => {
   const title = <span className={styles.toolTip}>{content}</span>;
 
   return (

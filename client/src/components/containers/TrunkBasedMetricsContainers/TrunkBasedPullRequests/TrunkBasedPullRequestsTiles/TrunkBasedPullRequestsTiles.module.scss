@@ -1,12 +1,11 @@
 @import "src/styles/index.scss";
 
-.tiles {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 270px;
+.container {
+  @include flex-column;
+  gap: $spacing-xl;
 }
 
 .tileContent {
-  @include tile-content;
+  @include flex-align-center;
+  gap: $spacing-sm;
 }

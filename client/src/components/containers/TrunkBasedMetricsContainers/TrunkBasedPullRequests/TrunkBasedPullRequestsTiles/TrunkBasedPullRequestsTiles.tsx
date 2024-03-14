@@ -2,7 +2,7 @@ import { Tile, InfoIconTooltip } from "src/components";
 import { IFetchedTrunkBranchPullRequest } from "src/fetchers";
 
 import styles from "./TrunkBasedPullRequestsTiles.module.scss";
-import { getMergedPullRequest } from "./utils";
+import { getMergedPullRequest } from "./trunkBasedPullRequestsTilesUtils";
 
 interface ITrunkBasedPullRequestsTilesProps {
   pullRequests: IFetchedTrunkBranchPullRequest[];
@@ -12,21 +12,17 @@ export const TrunkBasedPullRequestsTiles = ({ pullRequests }: ITrunkBasedPullReq
   const mergedPullRequest = getMergedPullRequest(pullRequests);
 
   return (
-    <div className={styles.tiles}>
+    <div className={styles.container}>
       <Tile title="Total Pull Requests">
         <div className={styles.tileContent}>
-          <InfoIconTooltip content="Total pull requests for the selected start date range" size="16px" />
-          <div>
-            <span data-testid="total-pull-requests">{pullRequests.length}</span>
-          </div>
+          <InfoIconTooltip content="Total pull requests for the selected start date range" />
+          <p data-testid="total-pull-requests">{pullRequests.length}</p>
         </div>
       </Tile>
       <Tile title="Percentage of branches merged">
         <div className={styles.tileContent}>
-          <InfoIconTooltip content={mergedPullRequest.count} size="16px" />
-          <div>
-            <span data-testid="merged-branches-percentage">{mergedPullRequest.percentage}</span>
-          </div>
+          <InfoIconTooltip content={mergedPullRequest.count} />
+          <p data-testid="merged-branches-percentage">{mergedPullRequest.percentage}</p>
         </div>
       </Tile>
     </div>

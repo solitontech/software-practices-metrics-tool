@@ -13,5 +13,6 @@
 }
 
 .tileContent {
-  @include tile-content;
+  @include flex-align-center;
+  gap: 6px;
 }
