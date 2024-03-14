@@ -1,0 +1,16 @@
+@import "src/styles/index.scss";
+
+.headerContainer {
+  width: 100%;
+}
+
+.viewContainer {
+  display: flex;
+  gap: $spacing-xl;
+  height: calc(100% - 60px);
+  width: 100%;
+}
+
+.errorMessage {
+  @include error-message;
+}

@@ -1,0 +1,63 @@
+@import "src/styles/index.scss";
+
+.paper {
+  @include paper;
+  height: 100%;
+  min-height: 440px;
+  width: calc(100% - 300px);
+}
+
+.rowEven {
+  @include row-even;
+}
+
+.rowOdd {
+  @include row-odd;
+}
+
+.date {
+  color: $app-primary-color;
+}
+
+.title {
+  @include ellipsis;
+  display: block;
+  width: 250px;
+}
+
+.linkIcon {
+  @include link-icon;
+}
+
+.pullRequestURL {
+  @include pull-request-url;
+}
+
+.noDataMessage {
+  @include no-data-message;
+}
+
+.branchName {
+  @include url;
+  @include flex-align-center;
+  color: $app-primary-color;
+  gap: 4px;
+}
+
+.active {
+  background-color: $active-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
+}
+
+.completed {
+  background-color: $completed-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
+}
+
+.abandoned {
+  background-color: $abandoned-color;
+  text-transform: capitalize;
+  color: $app-secondary-text-color;
+}

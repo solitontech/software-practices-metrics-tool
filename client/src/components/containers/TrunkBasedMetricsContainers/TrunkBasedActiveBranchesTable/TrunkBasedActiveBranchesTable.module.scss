@@ -5,18 +5,21 @@
 }
 
 .text {
-  @include text;
+  color: $app-primary-color;
 }
 
 .branchName {
-  @include text;
+  color: $app-primary-color;
   max-width: 355px;
   display: flex;
   align-items: center;
 }
 
 .header {
-  @include table-header;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .totalCount {
@@ -41,7 +44,7 @@
 }
 
 .date {
-  @include text;
+  color: $app-primary-color;
 }
 
 .paper {

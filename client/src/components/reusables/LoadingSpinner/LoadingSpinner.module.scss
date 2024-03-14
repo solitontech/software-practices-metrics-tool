@@ -2,18 +2,20 @@
 
 .loadingPage {
   @include flex-column-center;
-  height: calc(100% - 150px);
+  height: 100%;
+  width: 100%;
 }
 
 .container {
   @include flex-column-center;
-  width: 20%;
+  height: 50%;
+  width: 50%;
 }
 
 .image {
-  width: 40%;
+  width: 25%;
 }
 
 .description {
-  @include text-description;
+  @include large-text-description;
 }

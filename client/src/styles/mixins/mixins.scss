@@ -39,23 +39,9 @@
   }
 }
 
-@mixin table-header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 @mixin tile-content {
   @include flex-align-center;
   gap: 6px;
-}
-
-@mixin table-view {
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  height: 90%;
 }
 
 @mixin link-icon {
@@ -71,10 +57,6 @@
   font-size: $font-size-mlg;
   border-bottom: 1px solid $table-border;
   height: 75px;
-}
-
-@mixin text {
-  color: $app-primary-color;
 }
 
 @mixin ellipsis {

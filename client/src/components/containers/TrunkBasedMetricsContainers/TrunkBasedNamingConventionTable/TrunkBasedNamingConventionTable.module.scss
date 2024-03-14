@@ -5,8 +5,11 @@
 }
 
 .tableHeader {
-  @include table-header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 55px;
+  width: 100%;
 }
 
 .totalCount {
@@ -14,7 +17,10 @@
 }
 
 .tableView {
-  @include table-view;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  height: 90%;
 }
 
 .paper {
@@ -29,9 +35,9 @@
 }
 
 .branchName {
-  @include text;
   @include url;
   @include flex-align-center;
+  color: $app-primary-color;
   max-width: 450px;
   gap: 20px;
 }

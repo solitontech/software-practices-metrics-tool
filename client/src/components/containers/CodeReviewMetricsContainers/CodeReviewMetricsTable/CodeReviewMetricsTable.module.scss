@@ -5,7 +5,7 @@
 }
 
 .text {
-  @include text;
+  color: $app-primary-color;
   font-size: $font-size-xmd;
   letter-spacing: $primary-letter-spacing;
   border-bottom: 1px solid $table-border;
@@ -91,7 +91,10 @@
 }
 
 .header {
-  @include table-header;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .totalPRs {

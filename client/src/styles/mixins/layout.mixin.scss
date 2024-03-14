@@ -1,33 +1,18 @@
-@mixin metrics {
+@mixin metrics-container {
   height: 100%;
-  width: 98%;
-}
-
-@mixin header {
-  @include flex-row;
-  gap: 20px;
   width: 100%;
-  justify-content: space-between;
-  height: 65px;
-  color: $app-primary-color;
-}
-
-@mixin table-details {
-  @include flex-align-center;
-  height: 80px;
-}
-
-@mixin tiles {
-  @include flex-row;
-  gap: 20px;
-  color: $app-primary-color;
 }
 
 @mixin metrics-table {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  @include flex-column;
+  @include flex-align-center;
   max-height: 90%;
   overflow-y: auto;
-  height: calc(100% - 110px);
+  height: calc(100% - 100px);
+}
+
+@mixin tiles-container {
+  @include flex-row;
+  color: $app-primary-color;
+  gap: $spacing-xl;
 }

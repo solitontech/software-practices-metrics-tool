@@ -5,7 +5,7 @@
 }
 
 .text {
-  @include text;
+  color: $app-primary-color;
   text-align: left;
 }
 

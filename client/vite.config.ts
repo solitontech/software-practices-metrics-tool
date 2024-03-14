@@ -5,6 +5,12 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  css: {
+    modules: {
+      localsConvention: "camelCaseOnly",
+      generateScopedName: "[name]__[local]___[hash:base64:5]",
+    },
+  },
   test: {
     include: ["**/*.unit.test.tsx", "**/*.integration.test.tsx"],
     globals: true,

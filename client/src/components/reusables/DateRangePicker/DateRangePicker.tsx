@@ -28,7 +28,7 @@ export const DateRangePicker = ({
   return (
     <div className={styles.container}>
       <div className={styles.label}>
-        <p>Select start date range</p>
+        <p className={styles.title}>Select start date range</p>
         <InfoIconTooltip
           content="If selected date range or pull request volume is high, data fetching will be slow"
           size="16px"

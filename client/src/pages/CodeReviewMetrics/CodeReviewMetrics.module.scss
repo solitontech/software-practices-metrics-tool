@@ -6,19 +6,21 @@
 }
 
 .codeReview {
-  @include metrics;
+  @include metrics-container;
 }
 
 .tableDetails {
-  @include table-details;
+  @include flex-align-center;
 }
 
 .header {
-  @include header;
+  @include flex-align-center;
+  color: $app-primary-color;
+  justify-content: space-between;
 }
 
 .tiles {
-  @include tiles;
+  @include tiles-container;
 }
 
 .dropDown {

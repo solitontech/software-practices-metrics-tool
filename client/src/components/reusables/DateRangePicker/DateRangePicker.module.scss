@@ -8,11 +8,18 @@
 .label {
   @include flex-align-center;
   gap: $spacing-xs;
+  margin-top: $spacing-xs;
+}
+
+.title {
+  font-size: $font-size-xmd;
+  font-weight: $medium-font-weight;
 }
 
 .datePicker {
   @include flex-align-center;
   gap: $spacing-sm;
+  margin-top: $spacing-sm;
 }
 
 .date {
@@ -20,7 +27,7 @@
   border-radius: $app-primary-border-radius;
   color: $app-primary-color;
   font-size: $font-size-xmd;
-  height: 34px;
+  height: 35px;
   min-width: 90px;
   padding: 0;
   text-align: center;

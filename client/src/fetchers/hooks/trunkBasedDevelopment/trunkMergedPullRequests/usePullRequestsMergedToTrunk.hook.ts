@@ -37,3 +37,6 @@ export const usePullRequestsMergedToTrunk = (startDate: Date, endDate: Date) => 
     error,
   };
 };
+
+/* export interfaces for consumers */
+export type { IFetchedTrunkBranchPullRequest } from "./types";
