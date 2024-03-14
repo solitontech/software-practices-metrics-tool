@@ -19,6 +19,8 @@ interface ITrunkBasedPullRequestsTableProps {
   pullRequests: IFetchedTrunkBranchPullRequest[];
 }
 
+//TODO: Refactor to native table component for performance
+
 export const TrunkBasedPullRequestsTable = ({ pullRequests }: ITrunkBasedPullRequestsTableProps) => {
   return (
     <Paper className={styles.container}>

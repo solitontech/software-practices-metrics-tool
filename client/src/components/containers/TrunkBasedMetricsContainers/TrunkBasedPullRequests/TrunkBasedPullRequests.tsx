@@ -1,11 +1,15 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
-import { ErrorBoundary, LoadingSpinner, SearchBox } from "src/components";
+import {
+  ErrorBoundary,
+  LoadingSpinner,
+  SearchBox,
+  TrunkBasedPullRequestsTable,
+  TrunkBasedPullRequestsTiles,
+} from "src/components";
 import { usePullRequestsMergedToTrunk } from "src/fetchers";
 
 import styles from "./TrunkBasedPullRequests.module.scss";
-import { TrunkBasedPullRequestsTable } from "./TrunkBasedPullRequestsTable/TrunkBasedPullRequestsTable";
-import { TrunkBasedPullRequestsTiles } from "./TrunkBasedPullRequestsTiles/TrunkBasedPullRequestsTiles";
 import { filterPullRequests } from "./trunkBasedPullRequestsUtils";
 
 interface ITrunkBasedPullRequestsProps {

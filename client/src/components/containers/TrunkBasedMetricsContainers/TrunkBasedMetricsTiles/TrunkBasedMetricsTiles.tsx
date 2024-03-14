@@ -45,7 +45,7 @@ export const TrunkBasedMetricsTiles = () => {
     <>
       <Tile title={TRUNK_BASED_METRICS_TILE_HEADERS.TOTAL_BRANCHES}>
         <div className={styles.tileContent}>
-          <InfoIconTooltip content="Total number of branches in the repository" size="16px" />
+          <InfoIconTooltip content="Total number of branches in the repository" />
           <div className={styles.tileInfo}>
             <div data-testid="total-branches">{totalNumberOfBranches ? totalNumberOfBranches : NOT_AVAILABLE}</div>
             <NavLink to={branchesURL} target="blank" className={styles.navLink}>
@@ -59,7 +59,6 @@ export const TrunkBasedMetricsTiles = () => {
           <InfoIconTooltip
             content="Active pull requests raised to the trunk
                 branch ( Recommendation - Number of active PRs should not be more than  number of developers in the team )"
-            size="16px"
           />
           <div className={styles.tileInfo}>
             <div data-testid="active-branches">{activeBranches.length ? activeBranches.length : NOT_AVAILABLE}</div>
@@ -77,7 +76,6 @@ export const TrunkBasedMetricsTiles = () => {
         <div className={styles.tileContent}>
           <InfoIconTooltip
             content={`${branchesFollowingNamingStandardCount} branches following naming standard ( Recommended naming standard is - users/firstname-lastname/task-name )`}
-            size="16px"
           />
           <div className={styles.tileInfo}>
             <div data-testid="branches-following-naming-standard">{percentageOfBranchesFollowingStandard}</div>
@@ -117,7 +115,6 @@ export const TrunkBasedMetricsTiles = () => {
             content={`${branchesNotFollowingNamingStandardCount} branches not
               following naming standard ( Recommended naming standard is -
                 users/firstname-lastname/task-name )`}
-            size="16px"
           />
         </div>
       </DialogBox>

@@ -57,7 +57,6 @@ export const CodeReviewMetricsTiles = ({
                 averageFirstReviewResponseTime,
                 recommendedTimeForMetrics.firstReviewResponseTime(PR_THRESHOLDS.FIRST_REVIEW_RESPONSE_TIME.MIN),
               )}
-              size="16px"
             />
             <div>
               <span data-testid="first-review-response-time" className={styles[firstReviewResponseTimeTextColor]}>
@@ -77,7 +76,6 @@ export const CodeReviewMetricsTiles = ({
                 averageApprovalTime,
                 recommendedTimeForMetrics.approvalTime(PR_THRESHOLDS.APPROVAL_TIME.MIN),
               )}
-              size="16px"
             />
             <div>
               <span data-testid="approval-time" className={styles[approvalTimeTextColor]}>
@@ -97,7 +95,6 @@ export const CodeReviewMetricsTiles = ({
                 averageMergeTime,
                 recommendedTimeForMetrics.mergeTime(PR_THRESHOLDS.MERGE_TIME.MIN),
               )}
-              size="16px"
             />
             <div>
               <span data-testid="merge-time" className={`${styles[mergeTimeTextColor]} mergeTime`}>
