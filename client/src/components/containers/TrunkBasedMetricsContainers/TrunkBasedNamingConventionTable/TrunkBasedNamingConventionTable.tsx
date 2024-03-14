@@ -11,24 +11,24 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
+import { SearchBox, ErrorBoundary } from "src/components";
 import { IFetchedTrunkMetricsBranch } from "src/fetchers";
 
 import styles from "./TrunkBasedNamingConventionTable.module.scss";
-import { columns } from "./trunkBasedNamingConventionTableConstants.ts";
 import { filterBranches } from "./trunkBasedNamingConventionUtils.tsx";
-import { ErrorBoundary } from "../../../reusables/ErrorBoundary/ErrorBoundary.tsx";
-import { SearchBox } from "../../../reusables/SearchBox/SearchBox.tsx";
 
-interface Props {
+interface ITrunkBasedNamingConventionTableProps {
   branchesNotFollowingNamingStandard: IFetchedTrunkMetricsBranch[];
 }
 
-export const TrunkBasedNamingConventionTable = ({ branchesNotFollowingNamingStandard }: Props) => {
+//TODO: refactor to use native table component for better performance
+
+export const TrunkBasedNamingConventionTable = ({
+  branchesNotFollowingNamingStandard,
+}: ITrunkBasedNamingConventionTableProps) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchedBranches = searchTerm
-    ? filterBranches(searchTerm, branchesNotFollowingNamingStandard)
-    : branchesNotFollowingNamingStandard;
+  const filteredBranches = filterBranches(searchTerm, branchesNotFollowingNamingStandard);
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.trim());
@@ -36,64 +36,52 @@ export const TrunkBasedNamingConventionTable = ({ branchesNotFollowingNamingStan
 
   return (
     <ErrorBoundary>
-      <div className={styles.tableHeader}>
+      <div className={styles.header}>
         <SearchBox
-          onChange={handleSearchChange}
-          label="Search Branches"
-          width={270}
-          placeHolder="Search Branch Name"
+          label="Search branches"
+          placeHolder="Search branch name"
+          width={320}
           isDebounced={true}
+          onChange={handleSearchChange}
         ></SearchBox>
-        <div className={styles.totalCount}>Total Branches: {searchedBranches.length}</div>
+        <p className={styles.totalCount}>Total branches: {filteredBranches.length}</p>
       </div>
-      <div className={styles.tableView}>
-        <Paper className={styles.paper}>
-          <TableContainer sx={{ maxHeight: "400px" }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell key={column.id} align={column.align} style={{ width: column.width }}>
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {searchedBranches.length ? (
-                  searchedBranches.map((row, index) => {
-                    const isEvenRow = index % 2 === 0;
 
-                    return (
-                      <TableRow
-                        role="checkbox"
-                        tabIndex={-1}
-                        className={isEvenRow ? styles.rowEven : styles.rowOdd}
-                        key={row.id + row.name}
-                      >
-                        <TableCell>
-                          <NavLink to={row.url} target="_blank" className={styles.branchName}>
-                            <Tooltip title={row.name} placement="bottom-start">
-                              <span className={styles.title}>{row.name}</span>
-                            </Tooltip>
-                            <OpenInNewIcon className={styles.linkIcon} />
-                          </NavLink>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={columns.length} className={styles.noDataMessage}>
-                      No data available
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </div>
+      <Paper className={styles.container}>
+        <TableContainer sx={{ maxHeight: "100%" }}>
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow>
+                <TableCell align="left">Branch Name</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredBranches.length ? (
+                filteredBranches.map((row) => {
+                  return (
+                    <TableRow key={row.id + row.name} role="checkbox" tabIndex={-1} className={styles.tableRow}>
+                      <TableCell>
+                        <NavLink to={row.url} target="_blank" className={styles.branchName}>
+                          <Tooltip title={row.name} placement="bottom-start">
+                            <span className={styles.title}>{row.name}</span>
+                          </Tooltip>
+                          <OpenInNewIcon className={styles.linkIcon} />
+                        </NavLink>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={1} className={styles.noDataMessage}>
+                    No data available
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
     </ErrorBoundary>
   );
 };

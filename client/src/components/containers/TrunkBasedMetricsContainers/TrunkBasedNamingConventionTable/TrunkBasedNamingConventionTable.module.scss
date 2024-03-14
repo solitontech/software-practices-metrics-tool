@@ -1,19 +1,8 @@
 @import "src/styles/index.scss";
 
-.noDataMessage {
-  text-align: center;
-  color: $app-primary-color;
-  font-size: $font-size-mlg;
-  border-bottom: 1px solid $app-secondary-border-color;
-  height: 75px;
-}
-
-.tableHeader {
-  display: flex;
-  align-items: center;
+.header {
+  @include flex-align-center;
   justify-content: space-between;
-  height: 55px;
-  width: 100%;
 }
 
 .totalCount {
@@ -22,51 +11,38 @@
   color: $app-primary-color;
 }
 
-.tableView {
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  height: 90%;
+.container {
+  border: 1px solid $app-secondary-border-color;
+  height: 480px;
+  max-height: 480px;
 }
 
-.paper {
-  width: 100%;
-  border: 1px solid $app-primary-border-color;
-  height: 95%;
-  box-shadow:
-    0px 2px 1px -1px $primary-shadow-color,
-    0px 1px 1px 0px $secondary-shadow-color,
-    0px 1px 3px 0px $ternary-shadow-color;
-  min-height: 400px;
-  height: 100%;
-  width: 100%;
+.title {
+  @include ellipsis;
+  display: block;
+  max-width: 500px;
 }
 
 .branchName {
   @include flex-align-center;
-  text-decoration: none;
-  font-weight: $medium-font-weight;
-  cursor: pointer;
   color: $app-primary-color;
-  max-width: 450px;
-  gap: 20px;
+  cursor: pointer;
+  font-weight: $medium-font-weight;
+  text-decoration: none;
+  gap: $spacing-xs;
 
   &:hover {
-    text-decoration: underline;
     color: $app-primary-anchor-color;
   }
 }
 
-.rowEven {
-  background-color: $app-secondary-background-color;
+.linkIcon {
+  color: $app-secondary-color;
+  font-size: $icon-size-md;
 }
 
-.rowOdd {
-  background-color: $app-secondary-text-color;
-}
-
-.title {
-  width: 400px;
-  display: block;
-  @include ellipsis;
+.noDataMessage {
+  border-bottom: 1px solid $app-secondary-border-color;
+  font-size: $font-size-mlg;
+  text-align: center;
 }

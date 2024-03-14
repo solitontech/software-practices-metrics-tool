@@ -21,6 +21,6 @@ export const DIALOG = {
   },
   namingConvention: {
     title: "Branches not following naming standard",
-    width: "550px",
+    width: "600px",
   },
 };
