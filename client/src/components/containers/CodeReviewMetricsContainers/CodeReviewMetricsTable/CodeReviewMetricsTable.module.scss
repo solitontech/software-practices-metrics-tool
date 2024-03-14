@@ -48,17 +48,17 @@
 
 .active {
   @include capitalize;
-  background-color: $active-color;
+  background-color: $app-chip-active-color;
 }
 
 .completed {
   @include capitalize;
-  background-color: $completed-color;
+  background-color: $app-chip-completed-color;
 }
 
 .abandoned {
   @include capitalize;
-  background-color: $abandoned-color;
+  background-color: $app-chip-abandoned-color;
 }
 
 .paper {
@@ -120,7 +120,9 @@
 }
 
 .totalPRs {
-  @include total-count;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
+  color: $app-primary-color;
 }
 
 .buttonColor {
@@ -148,7 +150,7 @@
   flex-direction: column;
   width: 40px;
   height: 50px;
-  margin-top: $secondary-minimum-margin;
+  margin-top: $spacing-sm;
 }
 
 .time {
@@ -194,7 +196,7 @@
 }
 
 .tag {
-  background-color: $chip-background-color;
+  background-color: $app-ternary-background-color;
   font-size: $font-size-md;
   white-space: nowrap;
   overflow: hidden;

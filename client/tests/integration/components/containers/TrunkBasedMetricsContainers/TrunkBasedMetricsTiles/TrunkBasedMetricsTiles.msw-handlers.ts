@@ -1,6 +1,6 @@
 import { http, HttpResponse, delay } from "msw";
 
-import { IFetchedTrunkMetricsBranches, IFetchedTrunkBranchesResponse, ApiEndPoint } from "src/fetchers";
+import { IFetchedTrunkBasedActiveBranchesResponse, IFetchedTrunkBranchesResponse, ApiEndPoint } from "src/fetchers";
 
 export const getBranchesHandler = (branches: IFetchedTrunkBranchesResponse, delayTime: number = 0) => {
   return http.get(ApiEndPoint.trunkBasedTotalBranches().href, async () => {
@@ -10,7 +10,10 @@ export const getBranchesHandler = (branches: IFetchedTrunkBranchesResponse, dela
   });
 };
 
-export const getActiveBranchesHandler = (activeBranches: IFetchedTrunkMetricsBranches, delayTime: number = 0) => {
+export const getActiveBranchesHandler = (
+  activeBranches: IFetchedTrunkBasedActiveBranchesResponse,
+  delayTime: number = 0,
+) => {
   return http.get(ApiEndPoint.trunkBasedActiveBranches().href, async () => {
     await delay(delayTime);
 

@@ -1,20 +1,21 @@
-import { formatDate } from "../../../../utils/formatTimeUtils";
-import { IActiveBranch } from "../TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes";
+import { IFetchedTrunkBasedActiveBranch } from "src/fetchers";
+import { formatDate } from "src/utils";
 
-export function filterActiveBranches(branches: IActiveBranch[], searchTerm: string): IActiveBranch[] {
-  return branches.filter((row) => {
-    const normalizedSearchTerm = searchTerm.toLocaleLowerCase();
+export function filterActiveBranches(searchKeyword: string, branches: IFetchedTrunkBasedActiveBranch[]) {
+  if (!searchKeyword) {
+    return branches;
+  }
 
-    const { title, creationDate, name, createdBy } = row;
-
+  return branches.filter(({ title, creationDate, name, createdBy }) => {
+    const searchTerm = searchKeyword.toLocaleLowerCase();
     const formattedCreationDate = formatDate(creationDate);
 
     return (
-      title.toLowerCase().includes(normalizedSearchTerm) ||
-      creationDate.toLowerCase().includes(normalizedSearchTerm) ||
-      formattedCreationDate.toLowerCase().includes(normalizedSearchTerm) ||
-      createdBy.toLowerCase().includes(normalizedSearchTerm) ||
-      name.toLowerCase().includes(normalizedSearchTerm)
+      title.toLocaleLowerCase().includes(searchTerm) ||
+      creationDate.toLocaleLowerCase().includes(searchTerm) ||
+      formattedCreationDate.toLocaleLowerCase().includes(searchTerm) ||
+      createdBy.toLocaleLowerCase().includes(searchTerm) ||
+      name.toLocaleLowerCase().includes(searchTerm)
     );
   });
 }

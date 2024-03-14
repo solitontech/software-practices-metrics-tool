@@ -11,22 +11,23 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
+import { IFetchedTrunkMetricsBranch } from "src/fetchers";
+
 import styles from "./TrunkBasedNamingConventionTable.module.scss";
 import { columns } from "./trunkBasedNamingConventionTableConstants.ts";
 import { filterBranches } from "./trunkBasedNamingConventionUtils.tsx";
 import { ErrorBoundary } from "../../../reusables/ErrorBoundary/ErrorBoundary.tsx";
 import { SearchBox } from "../../../reusables/SearchBox/SearchBox.tsx";
-import { IBranchInfo } from "../TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes.tsx";
 
 interface Props {
-  branchesNotFollowingNamingStandard: IBranchInfo[];
+  branchesNotFollowingNamingStandard: IFetchedTrunkMetricsBranch[];
 }
 
 export const TrunkBasedNamingConventionTable = ({ branchesNotFollowingNamingStandard }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const searchedBranches = searchTerm
-    ? filterBranches(branchesNotFollowingNamingStandard, searchTerm)
+    ? filterBranches(searchTerm, branchesNotFollowingNamingStandard)
     : branchesNotFollowingNamingStandard;
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {

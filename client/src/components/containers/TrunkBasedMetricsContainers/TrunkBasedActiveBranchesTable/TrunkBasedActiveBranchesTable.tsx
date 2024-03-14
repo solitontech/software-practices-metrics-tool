@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Tooltip } from "@mui/material";
@@ -11,41 +11,44 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
+import { SearchBox } from "src/components";
+import { IFetchedTrunkBasedActiveBranch } from "src/fetchers";
+import { formatDate } from "src/utils";
+
 import styles from "./TrunkBasedActiveBranchesTable.module.scss";
 import { columns } from "./trunkBasedActiveBranchesTableConstants";
 import { filterActiveBranches } from "./trunkBasedActiveBranchesTableUtils";
-import { formatDate } from "../../../../utils/formatTimeUtils";
-import { SearchBox } from "../../../reusables/SearchBox/SearchBox";
-import { IActiveBranch } from "../TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes";
 
-interface Props {
-  activeBranches: IActiveBranch[];
+interface ITrunkBasedActiveBranchesTableProps {
+  activeBranches: IFetchedTrunkBasedActiveBranch[];
 }
 
-export const TrunkBasedActiveBranchesTable = ({ activeBranches }: Props) => {
+//TODO: refactor to use native table component for better performance
+
+export const TrunkBasedActiveBranchesTable = ({ activeBranches }: ITrunkBasedActiveBranchesTableProps) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchedActiveBranches = searchTerm ? filterActiveBranches(activeBranches, searchTerm) : activeBranches;
+  const filteredBraches = filterActiveBranches(searchTerm, activeBranches);
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.trim());
   };
 
   return (
-    <>
+    <React.Fragment>
       <div className={styles.header}>
         <SearchBox
-          onChange={handleSearchChange}
           label="Search for active pull requests"
-          width={370}
           placeHolder="Search for branch name, title, author, creation date"
+          width={370}
           isDebounced={true}
+          onChange={handleSearchChange}
         ></SearchBox>
-        <div className={styles.totalCount}>Total Active PR&apos;s: {searchedActiveBranches.length}</div>
+        <p className={styles.totalCount}>Total count : {filteredBraches.length}</p>
       </div>
-      <Paper className={styles.paper}>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
+      <Paper className={styles.container}>
+        <TableContainer sx={{ maxHeight: "100%" }}>
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
@@ -56,17 +59,10 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: Props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {searchedActiveBranches.length ? (
-                searchedActiveBranches.map((row, index) => {
-                  const isEvenRow = index % 2 === 0;
-
+              {filteredBraches.length ? (
+                filteredBraches.map((row) => {
                   return (
-                    <TableRow
-                      role="checkbox"
-                      tabIndex={-1}
-                      className={isEvenRow ? styles.rowEven : styles.rowOdd}
-                      key={String(row.title)}
-                    >
+                    <TableRow key={row.title} role="checkbox" tabIndex={-1} className={styles.tableRow}>
                       <TableCell>
                         <NavLink to={row.branchURL} target="_blank" className={styles.branchName}>
                           <Tooltip title={row.name} placement="bottom-start">
@@ -76,14 +72,14 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: Props) => {
                         </NavLink>
                       </TableCell>
                       <TableCell>
-                        <NavLink to={row.pullRequestURL} className={styles.pullRequestURL} target="_blank">
+                        <NavLink to={row.pullRequestURL} className={styles.pullRequest} target="_blank">
                           <Tooltip title={row.title} placement="bottom-start">
                             <span className={styles.title}>{row.title}</span>
                           </Tooltip>
                           <OpenInNewIcon className={styles.linkIcon} />
                         </NavLink>
                       </TableCell>
-                      <TableCell className={styles.text}>{row.createdBy}</TableCell>
+                      <TableCell className={styles.createdBy}>{row.createdBy}</TableCell>
                       <TableCell className={styles.date}>{formatDate(row.creationDate)}</TableCell>
                     </TableRow>
                   );
@@ -99,6 +95,6 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: Props) => {
           </Table>
         </TableContainer>
       </Paper>
-    </>
+    </React.Fragment>
   );
 };

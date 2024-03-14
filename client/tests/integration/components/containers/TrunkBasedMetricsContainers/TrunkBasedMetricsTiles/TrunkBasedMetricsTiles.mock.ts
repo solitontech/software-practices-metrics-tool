@@ -1,6 +1,4 @@
-import { ITotalBranches } from "../../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes";
-
-export const BRANCHES: ITotalBranches = {
+export const BRANCHES = {
   branchesURL: "mockURL",
   totalNumberOfBranches: 10,
   percentageOfBranchesFollowingStandard: "50%",

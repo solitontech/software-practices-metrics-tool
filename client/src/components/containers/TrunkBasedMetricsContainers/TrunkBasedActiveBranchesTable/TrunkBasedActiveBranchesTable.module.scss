@@ -1,93 +1,62 @@
 @import "src/styles/index.scss";
 
-.noDataMessage {
-  text-align: center;
-  color: $app-primary-color;
-  font-size: $font-size-mlg;
-  border-bottom: 1px solid $app-secondary-border-color;
-  height: 75px;
-}
-
-.text {
-  color: $app-primary-color;
-}
-
-.branchName {
-  color: $app-primary-color;
-  max-width: 355px;
-  display: flex;
-  align-items: center;
-}
-
 .header {
-  width: 100%;
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
   justify-content: space-between;
 }
 
 .totalCount {
-  @include total-count;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
+  color: $app-primary-color;
+}
+
+.container {
+  border: 1px solid $app-secondary-border-color;
+  height: 500px;
+  max-height: 500px;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
 }
 
 .title {
-  width: 200px;
-  display: block;
   @include ellipsis;
+  display: block;
+  width: 200px;
+}
+
+.branchName,
+.pullRequest {
+  @include flex-align-center;
+  color: $app-primary-color;
+  cursor: pointer;
+  font-weight: $medium-font-weight;
+  text-decoration: none;
+  gap: $spacing-xs;
+
+  &:hover {
+    color: $app-primary-anchor-color;
+  }
+}
+
+.date,
+.createdBy {
+  color: $app-primary-color;
 }
 
 .linkIcon {
   color: $app-secondary-color;
-  vertical-align: middle;
-  margin-left: 4px;
   font-size: $icon-size-md;
 }
 
-.pullRequestURL {
-  text-decoration: none;
-  font-weight: $medium-font-weight;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-    color: $app-primary-anchor-color;
-  }
-
-  color: $app-primary-color;
-  @include flex-align-center;
-}
-
-.date {
-  color: $app-primary-color;
-}
-
-.paper {
-  width: 100%;
-  border: 1px solid $app-primary-border-color;
-  height: 95%;
-  box-shadow:
-    0px 2px 1px -1px $primary-shadow-color,
-    0px 1px 1px 0px $secondary-shadow-color,
-    0px 1px 3px 0px $ternary-shadow-color;
-  min-height: 440px;
-}
-
-.rowEven {
-  background-color: $app-secondary-background-color;
-}
-
-.rowOdd {
-  background-color: $app-secondary-text-color;
-}
-
-.branchName {
-  color: $app-primary-color;
-  text-decoration: none;
-  font-weight: $medium-font-weight;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-    color: $app-primary-anchor-color;
-  }
+.noDataMessage {
+  border-bottom: 1px solid $app-secondary-border-color;
+  font-size: $font-size-mlg;
+  text-align: center;
 }

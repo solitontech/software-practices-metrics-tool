@@ -48,7 +48,7 @@ export const TrunkBasedMetricsTiles = () => {
       <Tile title={TILE.totalBranches.title}>
         <div className={styles.tileContent}>
           <InfoIconTooltip content={TILE.totalBranches.toolTip} />
-          <p data-testid="total-branches">{totalNumberOfBranches ?? NOT_AVAILABLE}</p>
+          <p data-testid="total-branches">{totalNumberOfBranches || NOT_AVAILABLE}</p>
           <NavLink to={branchesURL} target="blank" className={styles.navLink}>
             <OpenInNewIcon className={styles.navIcon} />
           </NavLink>
@@ -58,7 +58,7 @@ export const TrunkBasedMetricsTiles = () => {
       <Tile title={TILE.activePR.title}>
         <div className={styles.tileContent}>
           <InfoIconTooltip content={TILE.activePR.toolTip} />
-          <p data-testid="active-branches">{activeBranches.length ?? NOT_AVAILABLE}</p>
+          <p data-testid="active-branches">{activeBranches.length || NOT_AVAILABLE}</p>
           <img
             data-testid="active-branches-button"
             src={dataInfoAlert}
@@ -72,7 +72,9 @@ export const TrunkBasedMetricsTiles = () => {
       <Tile title={TILE.namingConvention.title}>
         <div className={styles.tileContent}>
           <InfoIconTooltip content={`${branchesFollowingNamingStandard.count} ${TILE.namingConvention.toolTip}`} />
-          <p data-testid="branches-following-naming-standard">{percentageOfBranchesFollowingStandard}</p>
+          <p data-testid="branches-following-naming-standard">
+            {percentageOfBranchesFollowingStandard || NOT_AVAILABLE}
+          </p>
           <img
             data-testid="branches-naming-convention-button"
             src={dataInfoAlert}

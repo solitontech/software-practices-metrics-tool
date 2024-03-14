@@ -1,15 +1,15 @@
 @import "src/styles/index.scss";
 
 .green {
-  color: $completed-color;
+  color: $app-chip-completed-color;
 }
 
 .red {
-  color: $abandoned-color;
+  color: $app-chip-abandoned-color;
 }
 
 .yellow {
-  color: $active-color;
+  color: $app-chip-active-color;
 }
 
 .tileContent {

@@ -1,4 +1,4 @@
-interface IFetchedTrunkBasedActiveBranches {
+export interface IFetchedTrunkBasedActiveBranch {
   name: string;
   title: string;
   createdBy: string;
@@ -9,5 +9,5 @@ interface IFetchedTrunkBasedActiveBranches {
 
 export interface IFetchedTrunkBasedActiveBranchesResponse {
   count: number;
-  branches: IFetchedTrunkBasedActiveBranches[];
+  branches: IFetchedTrunkBasedActiveBranch[];
 }

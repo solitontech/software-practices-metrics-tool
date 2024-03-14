@@ -19,13 +19,6 @@
   color: $app-secondary-text-color;
 }
 
-@mixin total-count {
-  font-size: $font-size-mlg;
-  font-weight: $semi-bold-font-weight;
-  color: $app-primary-color;
-  word-spacing: 2px;
-  letter-spacing: $secondary-letter-spacing;
-}
 
 @mixin graph-info-icon {
   font-size: $icon-size-lg;

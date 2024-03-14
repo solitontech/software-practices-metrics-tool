@@ -4,29 +4,11 @@ $tool-tip-background-color: #ebebeb;
 
 $ternary-color: #93b8d8;
 
-$active-color: #e5bd74;
-$completed-color: #94d594;
-$abandoned-color: #cb5050;
-
 $icon-color: #a2a5a9;
-
-$tile-text-color: #757d83;
-$chip-background-color: #e5e5e5;
-
-$secondary-minimum-margin: 6px;
-$maximum-margin: 40px;
-
-$secondary-line-height: 1.16px;
-$ternary-line-height: 16.5px;
-$primary-line-height: 24px;
 
 $primary-shadow-color: #00000033;
 $secondary-shadow-color: #00000024;
 $ternary-shadow-color: #0000001e;
-
-$secondary-letter-spacing: 0.4px;
-
-/* tokens */
 
 /* margins and padding */
 $spacing-xm: 2px;
@@ -74,6 +56,7 @@ $extra-bold-font-weight: 900;
 /* background colors */
 $app-primary-background-color: #fff;
 $app-secondary-background-color: #f5f6f9;
+$app-ternary-background-color: #e5e5e5;
 
 /* border colors */
 $app-primary-border-color: #00003b;
@@ -86,10 +69,15 @@ $app-primary-border-radius: 4px;
 $app-primary-text-color: #969696; //TBD
 $app-secondary-text-color: #fff;
 
-/* anchor themes */
+/* anchor color */
 $app-primary-anchor-color: #054288;
 $app-secondary-anchor-color: #0e84d7;
 $app-ternary-anchor-color: #dbe7f2;
+
+/* chip color */
+$app-chip-active-color: #e5bd74;
+$app-chip-completed-color: #94d594;
+$app-chip-abandoned-color: #cb5050;
 
 /* common themes */
 $app-primary-color: #757d83;

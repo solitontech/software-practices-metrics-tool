@@ -34,3 +34,6 @@ export const useTrunkBasedMetricsActiveBranches = () => {
     error,
   };
 };
+
+/*  export interface for consumer */
+export type { IFetchedTrunkBasedActiveBranchesResponse, IFetchedTrunkBasedActiveBranch } from "./types";

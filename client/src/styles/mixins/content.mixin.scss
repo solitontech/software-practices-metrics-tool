@@ -5,19 +5,19 @@
 }
 
 @mixin chip-active {
-  background-color: $active-color;
+  background-color: $app-chip-active-color;
   color: $app-secondary-text-color;
   text-transform: capitalize;
 }
 
 @mixin chip-completed {
-  background-color: $completed-color;
+  background-color: $app-chip-completed-color;
   color: $app-secondary-text-color;
   text-transform: capitalize;
 }
 
 @mixin chip-abandoned {
-  background-color: $abandoned-color;
+  background-color: $app-chip-abandoned-color;
   color: $app-secondary-text-color;
   text-transform: capitalize;
 }

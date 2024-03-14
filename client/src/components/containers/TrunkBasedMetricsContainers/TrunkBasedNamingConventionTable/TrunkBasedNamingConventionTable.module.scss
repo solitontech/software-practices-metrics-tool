@@ -17,7 +17,9 @@
 }
 
 .totalCount {
-  @include total-count;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
+  color: $app-primary-color;
 }
 
 .tableView {
@@ -38,13 +40,6 @@
   min-height: 400px;
   height: 100%;
   width: 100%;
-}
-
-.linkIcon {
-  color: $app-secondary-color;
-  vertical-align: middle;
-  margin-left: $spacing-xs;
-  font-size: $icon-size-md;
 }
 
 .branchName {

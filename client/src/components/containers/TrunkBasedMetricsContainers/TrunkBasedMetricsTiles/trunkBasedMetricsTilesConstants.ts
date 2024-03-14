@@ -16,7 +16,7 @@ export const TILE = {
 
 export const DIALOG = {
   activePR: {
-    title: "Active PR's to trunk branch",
+    title: "Active pull requests to trunk branch",
     width: "800px",
   },
   namingConvention: {

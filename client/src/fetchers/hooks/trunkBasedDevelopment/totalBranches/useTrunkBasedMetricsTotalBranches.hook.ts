@@ -35,4 +35,4 @@ export const useTrunkBasedMetricsTotalBranches = () => {
 };
 
 /* export interfaces for consumer */
-export type { IFetchedTrunkBranchesResponse, IFetchedTrunkMetricsBranches } from "./types";
+export type { IFetchedTrunkBranchesResponse, IFetchedTrunkMetricsBranch } from "./types";

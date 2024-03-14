@@ -1,10 +1,10 @@
-interface IFetchedTrunkMetricsBranch {
+export interface IFetchedTrunkMetricsBranch {
   id: string;
   name: string;
   url: string;
 }
 
-export interface IFetchedTrunkMetricsBranches {
+interface IFetchedTrunkMetricsBranches {
   count: number;
   branches: IFetchedTrunkMetricsBranch[];
 }
