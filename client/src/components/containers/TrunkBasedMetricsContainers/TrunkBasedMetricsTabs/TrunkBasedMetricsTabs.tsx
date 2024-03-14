@@ -1,4 +1,4 @@
-import { TrunkBasedPullRequestsTable, TrunkBasedMetricsGraphs, ErrorBoundary } from "src/components";
+import { TrunkBasedPullRequests, TrunkBasedMetricsGraphs, ErrorBoundary } from "src/components";
 
 import styles from "./TrunkBasedMetricsTabs.module.scss";
 
@@ -15,7 +15,7 @@ export const TrunkBasedMetricsTabs = ({ selectedTab, dates }: ITrunkBasedMetrics
     return (
       <div className={styles.trunkBasedTable}>
         <ErrorBoundary key="trunk-based-table">
-          <TrunkBasedPullRequestsTable startDate={dates.startDate} endDate={dates.endDate} />
+          <TrunkBasedPullRequests startDate={dates.startDate} endDate={dates.endDate} />
         </ErrorBoundary>
       </div>
     );
