@@ -1,7 +1,11 @@
 @import "src/styles/index.scss";
 
 .noDataMessage {
-  @include no-data-message;
+  text-align: center;
+  color: $app-primary-color;
+  font-size: $font-size-mlg;
+  border-bottom: 1px solid $app-secondary-border-color;
+  height: 75px;
 }
 
 .text {
@@ -10,15 +14,21 @@
 }
 
 .paper {
-  @include paper;
+  width: 100%;
+  border: 1px solid $app-primary-border-color;
+  height: 95%;
+  box-shadow:
+    0px 2px 1px -1px $primary-shadow-color,
+    0px 1px 1px 0px $secondary-shadow-color,
+    0px 1px 3px 0px $ternary-shadow-color;
 }
 
 .rowEven {
-  @include row-even;
+  background-color: $app-secondary-background-color;
 }
 
 .rowOdd {
-  @include row-odd;
+  background-color: $app-secondary-text-color;
 }
 
 .tableContainer {

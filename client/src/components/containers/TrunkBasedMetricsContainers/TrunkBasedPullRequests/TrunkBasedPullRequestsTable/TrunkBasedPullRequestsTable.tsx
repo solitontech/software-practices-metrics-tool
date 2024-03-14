@@ -12,20 +12,16 @@ import { NavLink } from "react-router-dom";
 import { IFetchedTrunkBranchPullRequest } from "src/fetchers";
 import { formatDateWithoutTime, formatDate } from "src/utils";
 
-import { tableColumns } from "./constants";
 import styles from "./TrunkBasedPullRequestsTable.module.scss";
-import { filterPullRequests } from "./utils";
+import { tableColumns } from "./trunkBasedPullRequestsTableConstants";
 
 interface ITrunkBasedPullRequestsTableProps {
-  searchTerm: string;
   pullRequests: IFetchedTrunkBranchPullRequest[];
 }
 
-export const TrunkBasedPullRequestsTable = ({ searchTerm, pullRequests }: ITrunkBasedPullRequestsTableProps) => {
-  const filteredPullRequests = filterPullRequests(searchTerm, pullRequests);
-
+export const TrunkBasedPullRequestsTable = ({ pullRequests }: ITrunkBasedPullRequestsTableProps) => {
   return (
-    <Paper className={styles.paper}>
+    <Paper className={styles.container}>
       <TableContainer sx={{ maxHeight: "100%" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -43,17 +39,15 @@ export const TrunkBasedPullRequestsTable = ({ searchTerm, pullRequests }: ITrunk
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredPullRequests.length ? (
-              filteredPullRequests.map((row, idx) => {
-                const isEvenRow = idx % 2 === 0;
-
+            {pullRequests.length ? (
+              pullRequests.map((row) => {
                 return (
                   <TableRow
                     data-testid="trunk-based-metrics-table-row"
                     key={row.title}
                     role="checkbox"
                     tabIndex={-1}
-                    className={isEvenRow ? styles.rowEven : styles.rowOdd}
+                    className={styles.tableRow}
                   >
                     <TableCell className={styles.date}>
                       <Tooltip title={formatDate(row.creationDate)} arrow>
@@ -74,7 +68,7 @@ export const TrunkBasedPullRequestsTable = ({ searchTerm, pullRequests }: ITrunk
                       </NavLink>
                     </TableCell>
                     <TableCell>
-                      <NavLink to={row.pullRequestURL} className={styles.pullRequestURL} target="_blank">
+                      <NavLink to={row.pullRequestURL} className={styles.pullRequest} target="_blank">
                         <Tooltip title={row.title} placement="bottom-start">
                           <span className={styles.title}>{row.title}</span>
                         </Tooltip>

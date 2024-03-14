@@ -1,63 +1,62 @@
 @import "src/styles/index.scss";
 
-.paper {
-  @include paper;
-  height: 100%;
-  min-height: 440px;
-  width: calc(100% - 300px);
+.container {
+  border: 1px solid $app-secondary-border-color;
+  width: calc(100% - 250px);
 }
 
-.rowEven {
-  @include row-even;
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
 }
 
-.rowOdd {
-  @include row-odd;
+.tableRow:nth-child(even) {
+  @include table-row-even;
 }
 
 .date {
   color: $app-primary-color;
 }
 
+.branchName,
+.pullRequest {
+  @include flex-align-center;
+  color: $app-primary-color;
+  cursor: pointer;
+  font-weight: $medium-font-weight;
+  text-decoration: none;
+  gap: $spacing-xs;
+
+  &:hover {
+    color: $app-primary-anchor-color;
+  }
+}
+
 .title {
   @include ellipsis;
   display: block;
-  width: 250px;
+  max-width: 350px;
+  width: fit-content;
 }
 
 .linkIcon {
-  @include link-icon;
-}
-
-.pullRequestURL {
-  @include pull-request-url;
-}
-
-.noDataMessage {
-  @include no-data-message;
-}
-
-.branchName {
-  @include url;
-  @include flex-align-center;
-  color: $app-primary-color;
-  gap: 4px;
+  color: $app-secondary-color;
+  font-size: $icon-size-md;
 }
 
 .active {
-  background-color: $active-color;
-  color: $app-secondary-text-color;
-  text-transform: capitalize;
+  @include chip-active;
 }
 
 .completed {
-  background-color: $completed-color;
-  color: $app-secondary-text-color;
-  text-transform: capitalize;
+  @include chip-completed;
 }
 
 .abandoned {
-  background-color: $abandoned-color;
-  text-transform: capitalize;
-  color: $app-secondary-text-color;
+  @include chip-abandoned;
+}
+
+.noDataMessage {
+  border-bottom: 1px solid $app-secondary-border-color;
+  font-size: $font-size-mlg;
+  text-align: center;
 }

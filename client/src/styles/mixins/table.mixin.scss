@@ -1,0 +1,15 @@
+@mixin table-row-odd {
+  background-color: darken($app-primary-background-color, 3%);
+
+  &:hover {
+    background-color: darken($app-primary-background-color, 5%);
+  }
+}
+
+@mixin table-row-even {
+  background-color: $app-primary-background-color;
+
+  &:hover {
+    background-color: darken($app-primary-background-color, 5%);
+  }
+}

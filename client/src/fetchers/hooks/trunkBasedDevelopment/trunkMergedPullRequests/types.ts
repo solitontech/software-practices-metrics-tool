@@ -3,9 +3,9 @@ export interface IFetchedTrunkBranchPullRequest {
   name: string;
   title: string;
   creationDate: string;
-  closedDate: string; // TODO: Possible null value
+  closedDate: string | null;
   pullRequestURL: string;
-  status: string;
+  status: "active" | "completed" | "abandoned";
 }
 
 export interface IFetchedTrunkBranchPullRequestsResponse {

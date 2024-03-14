@@ -1,7 +1,11 @@
 @import "src/styles/index.scss";
 
 .noDataMessage {
-  @include no-data-message;
+  text-align: center;
+  color: $app-primary-color;
+  font-size: $font-size-mlg;
+  border-bottom: 1px solid $app-secondary-border-color;
+  height: 75px;
 }
 
 .text {
@@ -36,11 +40,21 @@
   color: $app-secondary-color;
   vertical-align: middle;
   margin-left: 4px;
-  font-size: $small-icon-size;
+  font-size: $icon-size-md;
 }
 
 .pullRequestURL {
-  @include pull-request-url;
+  text-decoration: none;
+  font-weight: $medium-font-weight;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: $app-primary-anchor-color;
+  }
+
+  color: $app-primary-color;
+  @include flex-align-center;
 }
 
 .date {
@@ -48,19 +62,32 @@
 }
 
 .paper {
-  @include paper;
+  width: 100%;
+  border: 1px solid $app-primary-border-color;
+  height: 95%;
+  box-shadow:
+    0px 2px 1px -1px $primary-shadow-color,
+    0px 1px 1px 0px $secondary-shadow-color,
+    0px 1px 3px 0px $ternary-shadow-color;
   min-height: 440px;
 }
 
 .rowEven {
-  @include row-even;
+  background-color: $app-secondary-background-color;
 }
 
 .rowOdd {
-  @include row-odd;
+  background-color: $app-secondary-text-color;
 }
 
 .branchName {
   color: $app-primary-color;
-  @include url;
+  text-decoration: none;
+  font-weight: $medium-font-weight;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: $app-primary-anchor-color;
+  }
 }

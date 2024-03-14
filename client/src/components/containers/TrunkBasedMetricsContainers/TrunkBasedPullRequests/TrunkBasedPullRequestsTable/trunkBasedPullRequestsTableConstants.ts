@@ -1,4 +1,4 @@
-import { ITrunkBasedPullRequestsTableColumn } from "./types";
+import { ITrunkBasedPullRequestsTableColumn } from "./trunkBasedPullRequestsTableTypes";
 
 export const tableColumns: ITrunkBasedPullRequestsTableColumn[] = [
   {
@@ -16,13 +16,13 @@ export const tableColumns: ITrunkBasedPullRequestsTableColumn[] = [
   {
     id: "name",
     label: "Branch Name",
-    width: 300,
+    width: 350,
     align: "left",
   },
   {
     id: "title",
     label: "Pull Request Title",
-    width: 30,
+    width: 350,
     align: "left",
   },
   {

@@ -6,6 +6,7 @@ import { usePullRequestsMergedToTrunk } from "src/fetchers";
 import styles from "./TrunkBasedPullRequests.module.scss";
 import { TrunkBasedPullRequestsTable } from "./TrunkBasedPullRequestsTable/TrunkBasedPullRequestsTable";
 import { TrunkBasedPullRequestsTiles } from "./TrunkBasedPullRequestsTiles/TrunkBasedPullRequestsTiles";
+import { filterPullRequests } from "./trunkBasedPullRequestsUtils";
 
 interface ITrunkBasedPullRequestsProps {
   startDate: Date;
@@ -32,6 +33,9 @@ export const TrunkBasedPullRequests = ({ startDate, endDate }: ITrunkBasedPullRe
     return <p className={styles.errorMessage}>{error?.response?.data.error}</p>;
   }
 
+  const filteredPullRequests = filterPullRequests(searchTerm, data.pullRequests);
+  const mergedPullRequests = data.pullRequests.filter(({ status }) => status === "completed");
+
   return (
     <ErrorBoundary>
       <div className={styles.headerContainer}>
@@ -44,8 +48,11 @@ export const TrunkBasedPullRequests = ({ startDate, endDate }: ITrunkBasedPullRe
         ></SearchBox>
       </div>
       <div className={styles.viewContainer}>
-        <TrunkBasedPullRequestsTable searchTerm={searchTerm} pullRequests={data.pullRequests} />
-        <TrunkBasedPullRequestsTiles pullRequests={data.pullRequests} />
+        <TrunkBasedPullRequestsTable pullRequests={filteredPullRequests} />
+        <TrunkBasedPullRequestsTiles
+          pullRequestCount={data.pullRequests.length}
+          mergeCount={mergedPullRequests.length}
+        />
       </div>
     </ErrorBoundary>
   );

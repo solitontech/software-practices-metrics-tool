@@ -1,6 +1,7 @@
 @import "./flex.mixin.scss";
 @import "./content.mixin.scss";
 @import "./layout.mixin.scss";
+@import "./table.mixin.scss";
 
 @mixin url {
   text-decoration: none;
@@ -9,55 +10,8 @@
 
   &:hover {
     text-decoration: underline;
-    color: $url-color;
+    color: $app-primary-anchor-color;
   }
-}
-
-@mixin paper {
-  width: 100%;
-  border: 1px solid $app-primary-border-color;
-  height: 95%;
-  box-shadow:
-    0px 2px 1px -1px $primary-shadow-color,
-    0px 1px 1px 0px $secondary-shadow-color,
-    0px 1px 3px 0px $ternary-shadow-color;
-}
-
-@mixin row-even {
-  background-color: $table-background;
-
-  &:hover {
-    background-color: $darker-shade;
-  }
-}
-
-@mixin row-odd {
-  background-color: $app-secondary-text-color;
-
-  &:hover {
-    background-color: $darker-shade;
-  }
-}
-
-@mixin link-icon {
-  color: $app-secondary-color;
-  vertical-align: middle;
-  margin-left: $spacing-xs;
-  font-size: $small-icon-size;
-}
-
-@mixin no-data-message {
-  text-align: center;
-  color: $app-primary-color;
-  font-size: $font-size-mlg;
-  border-bottom: 1px solid $table-border;
-  height: 75px;
-}
-
-@mixin ellipsis {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 @mixin capitalize {
@@ -73,14 +27,8 @@
   letter-spacing: $secondary-letter-spacing;
 }
 
-@mixin pull-request-url {
-  @include url;
-  color: $app-primary-color;
-  @include flex-align-center;
-}
-
 @mixin graph-info-icon {
-  font-size: $medium-icon-size;
+  font-size: $icon-size-lg;
   color: $app-primary-color;
 }
 
@@ -122,8 +70,7 @@
   font-weight: $medium-font-weight;
   font-size: 0.875rem;
   line-height: 1.43;
-  letter-spacing: $primary-letter-spacing;
-  border-bottom: 1px solid $table-border;
+  border-bottom: 1px solid $app-secondary-border-color;
   padding: $spacing-lg;
 }
 
@@ -135,7 +82,6 @@
 
 @mixin filter-container {
   background-color: $tool-tip-background-color;
-  box-shadow: 1px 1px 3px $primary-box-shadow;
 }
 
 @mixin common-icon {
