@@ -1,9 +1,7 @@
 import { useId } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
@@ -39,10 +37,6 @@ export const DialogBox = ({ isOpen, handleClose, children, title, width }: IDial
       </DialogTitle>
 
       <DialogContent>{children}</DialogContent>
-
-      <DialogActions className={styles.actions}>
-        <Button onClick={handleClose}>Close</Button>
-      </DialogActions>
     </Dialog>
   );
 };

@@ -1,5 +1,5 @@
 import { formatDate } from "../../../../utils/formatTimeUtils";
-import { IActiveBranch } from "../TrunkBasedMetricsTiles/interfaces";
+import { IActiveBranch } from "../TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes";
 
 export function filterActiveBranches(branches: IActiveBranch[], searchTerm: string): IActiveBranch[] {
   return branches.filter((row) => {

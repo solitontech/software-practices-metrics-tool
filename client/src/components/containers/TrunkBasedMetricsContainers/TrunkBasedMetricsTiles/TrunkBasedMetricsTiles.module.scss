@@ -2,31 +2,21 @@
 
 .tileContent {
   @include flex-align-center;
-  gap: 6px;
+  gap: $spacing-sm;
 }
 
-.tileInfo {
-  @include flex-row;
-  align-items: center;
-  gap: 8px;
-  color: $app-primary-color;
+.navLink {
+  @include flex-justify-center;
 }
 
 .navIcon {
   font-size: $icon-size-lg;
   cursor: pointer;
-  color: $app-secondary-color;
+  color: $app-primary-anchor-color;
 }
 
 .dialogIcon {
-  height: 20px;
-  cursor: pointer;
-}
-
-.icon {
   align-self: flex-start;
-}
-
-.navLink {
-  height: 22px;
+  cursor: pointer;
+  height: 20px;
 }

@@ -4,7 +4,7 @@ interface IFetchedTrunkMetricsBranch {
   url: string;
 }
 
-interface IFetchedTrunkMetricsBranches {
+export interface IFetchedTrunkMetricsBranches {
   count: number;
   branches: IFetchedTrunkMetricsBranch[];
 }

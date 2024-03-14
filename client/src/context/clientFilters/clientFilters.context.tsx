@@ -19,7 +19,7 @@ export const ClientFilterProvider = ({ children }: IContextClientFilterProps) =>
   const { isPending, isError, data } = useClientFilters();
 
   useEffect(() => {
-    if (isPending || isError) {
+    if (isPending || isError || !data) {
       return;
     }
 

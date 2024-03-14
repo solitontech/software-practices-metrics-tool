@@ -17,5 +17,22 @@ export const useTrunkBasedMetricsTotalBranches = () => {
     },
   });
 
-  return { isPending, isError, data, error };
+  return {
+    isPending,
+    isError,
+    data: data ?? {
+      branchesURL: "",
+      totalNumberOfBranches: 0,
+      percentageOfBranchesFollowingStandard: "",
+      branchesFollowingNamingStandard: { count: 0, branches: [] },
+      branchesNotFollowingNamingStandard: {
+        count: 0,
+        branches: [],
+      },
+    },
+    error,
+  };
 };
+
+/* export interfaces for consumer */
+export type { IFetchedTrunkBranchesResponse, IFetchedTrunkMetricsBranches } from "./types";

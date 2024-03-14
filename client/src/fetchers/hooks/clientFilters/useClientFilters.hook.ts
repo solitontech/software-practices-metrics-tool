@@ -7,7 +7,7 @@ import { ClientFiltersUtils } from "./clientFiltersUtils";
 import { IFetchedClientFilterResponse } from "./types";
 
 export const useClientFilters = () => {
-  const clientFiltersQuery = useQuery({
+  const { isPending, isError, data, error } = useQuery({
     queryKey: [QUERY_KEY.CLIENT_FILTERS],
     queryFn: async () => {
       const apiURL = ApiEndPoint.clientFilters();
@@ -21,7 +21,12 @@ export const useClientFilters = () => {
     },
   });
 
-  return clientFiltersQuery;
+  return {
+    isPending,
+    isError,
+    data,
+    error,
+  };
 };
 
 /* interface exports for consumers*/

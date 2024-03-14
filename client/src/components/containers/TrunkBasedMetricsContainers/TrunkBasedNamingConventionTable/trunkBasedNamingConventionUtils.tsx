@@ -1,4 +1,4 @@
-import { IBranchInfo } from "../TrunkBasedMetricsTiles/interfaces";
+import { IBranchInfo } from "../TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes";
 
 export const filterBranches = (branches: IBranchInfo[], searchTerm: string): IBranchInfo[] => {
   const normalizedSearchTerm = searchTerm.toLocaleLowerCase();

@@ -16,7 +16,7 @@ import { columns } from "./trunkBasedActiveBranchesTableConstants";
 import { filterActiveBranches } from "./trunkBasedActiveBranchesTableUtils";
 import { formatDate } from "../../../../utils/formatTimeUtils";
 import { SearchBox } from "../../../reusables/SearchBox/SearchBox";
-import { IActiveBranch } from "../TrunkBasedMetricsTiles/interfaces";
+import { IActiveBranch } from "../TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes";
 
 interface Props {
   activeBranches: IActiveBranch[];

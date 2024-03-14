@@ -1,7 +1,4 @@
-import {
-  IActiveBranches,
-  ITotalBranches,
-} from "../../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
+import { ITotalBranches } from "../../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes";
 
 export const BRANCHES: ITotalBranches = {
   branchesURL: "mockURL",
@@ -44,7 +41,7 @@ export const BRANCHES: ITotalBranches = {
   },
 };
 
-export const ACTIVE_BRANCHES: IActiveBranches = {
+export const ACTIVE_BRANCHES = {
   count: 2,
   branches: [
     {

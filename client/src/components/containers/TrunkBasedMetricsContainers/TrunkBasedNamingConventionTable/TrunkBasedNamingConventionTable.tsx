@@ -16,7 +16,7 @@ import { columns } from "./trunkBasedNamingConventionTableConstants.ts";
 import { filterBranches } from "./trunkBasedNamingConventionUtils.tsx";
 import { ErrorBoundary } from "../../../reusables/ErrorBoundary/ErrorBoundary.tsx";
 import { SearchBox } from "../../../reusables/SearchBox/SearchBox.tsx";
-import { IBranchInfo } from "../TrunkBasedMetricsTiles/interfaces.tsx";
+import { IBranchInfo } from "../TrunkBasedMetricsTiles/trunkBasedMetricsTilesTypes.tsx";
 
 interface Props {
   branchesNotFollowingNamingStandard: IBranchInfo[];
