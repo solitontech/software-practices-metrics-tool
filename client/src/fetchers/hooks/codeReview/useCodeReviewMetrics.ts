@@ -6,8 +6,8 @@ import axios from "axios";
 import { ClientFilterContext } from "src/context";
 import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/fetchers";
 
+import { IFetchedCodeReviewResponse } from "./codeReviewTypes";
 import { CodeReviewMetricsUtils } from "./codeReviewUtils";
-import { IFetchedCodeReviewResponse } from "./types";
 
 async function fetchCodeReviewMetrics(url: URL, paginationCursor: number) {
   url.searchParams.set("paginationCursor", String(paginationCursor));
@@ -48,5 +48,5 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
   };
 };
 
-/* interface exports for consumers*/
-export type { IFetchedCodeReviewPullRequest } from "./types";
+/* interface exports for consumers */
+export type { IFetchedCodeReviewPullRequest } from "./codeReviewTypes";

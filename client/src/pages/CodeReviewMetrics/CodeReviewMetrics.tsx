@@ -11,6 +11,7 @@ import {
   CODE_REVIEW_METRICS_TABS,
   CODE_REVIEW_METRICS_TAB_VALUE,
 } from "./codeReviewMetricsConstants.tsx";
+import { filterPullRequests } from "./codeReviewMetricsUtils.ts";
 import { getMetricsAverageTimeInHours } from "./getMetricsAverageTimeInHours.tsx";
 import { ClientFilters } from "../../components/containers/ClientFilters/ClientFilters.tsx";
 import { CodeReviewSearchChips } from "../../components/containers/CodeReviewMetricsContainers/CodeReviewChips/CodeReviewSearchChips.tsx";
@@ -27,8 +28,7 @@ import { CommonLayout } from "../../components/reusables/CommonLayout/CommonLayo
 import { DateRangePicker } from "../../components/reusables/DateRangePicker/DateRangePicker.tsx";
 import { ErrorBoundary } from "../../components/reusables/ErrorBoundary/ErrorBoundary.tsx";
 import { SearchBox } from "../../components/reusables/SearchBox/SearchBox.tsx";
-import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics.hook.ts";
-import { filterPullRequests } from "../../utils/filterPullRequests.tsx";
+import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics.ts";
 
 const today = DateTime.local();
 const sevenDaysAgoFromToday = today.minus({ days: 7 });

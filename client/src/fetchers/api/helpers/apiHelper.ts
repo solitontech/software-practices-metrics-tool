@@ -1,6 +1,6 @@
 import { START_PAGINATION_CURSOR, PAGINATION_LIMIT } from "src/fetchers";
 
-import { IFetchAllData } from "./types";
+import { IFetchAllData } from "./apiHelperTypes";
 
 export class ApiHelpers {
   static async continuedFetching<T>(fetchData: IFetchAllData<T>, apiURL: URL) {

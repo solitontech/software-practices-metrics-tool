@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { QUERY_KEY, ApiHelpers, ApiEndPoint } from "src/fetchers";
 
-import { IFetchedTrunkBasedActiveBranchesResponse } from "./types";
+import { IFetchedTrunkBasedActiveBranchesResponse } from "./trunkBasedMetricsActiveBranchesTypes";
 
 export async function fetchActiveBranches(url: URL, paginationCursor: number) {
   url.searchParams.set("paginationCursor", String(paginationCursor));
@@ -35,5 +35,8 @@ export const useTrunkBasedMetricsActiveBranches = () => {
   };
 };
 
-/*  export interface for consumer */
-export type { IFetchedTrunkBasedActiveBranchesResponse, IFetchedTrunkBasedActiveBranch } from "./types";
+/* interface exports for consumers */
+export type {
+  IFetchedTrunkBasedActiveBranchesResponse,
+  IFetchedTrunkBasedActiveBranch,
+} from "./trunkBasedMetricsActiveBranchesTypes";

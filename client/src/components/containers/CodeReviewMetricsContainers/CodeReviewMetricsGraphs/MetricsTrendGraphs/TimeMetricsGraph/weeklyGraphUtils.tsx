@@ -1,8 +1,8 @@
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 import { Graph } from "./timeMetricsGraphUtils";
 import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
-import { Day, getFormattedDateText } from "../../../../../../utils/formatTimeUtils";
-import { DAY, ONE_WEEK_IN_MILLISECONDS, SIX_DAYS_IN_MILLISECONDS } from "../metricsTrendGraphConstants";
+import { getFormattedDateText } from "../../../../../../utils/dateUtil";
+import { ONE_WEEK_IN_MILLISECONDS, SIX_DAYS_IN_MILLISECONDS } from "../metricsTrendGraphConstants";
 
 export class Weekly extends Graph {
   static numberOfWeeks: number;
@@ -23,8 +23,8 @@ export class Weekly extends Graph {
 
     const endDateOfWeek = isLastWeek ? this.endDate : new Date(startDateOfWeek.getTime() + SIX_DAYS_IN_MILLISECONDS);
 
-    const formattedStartDate = getFormattedDateText(startDateOfWeek, DAY.TWO_DIGIT as Day);
-    const formattedEndDate = getFormattedDateText(endDateOfWeek, DAY.TWO_DIGIT as Day);
+    const formattedStartDate = getFormattedDateText(startDateOfWeek, "2-digit");
+    const formattedEndDate = getFormattedDateText(endDateOfWeek, "2-digit");
 
     return `${formattedStartDate} - ${formattedEndDate}`;
   }

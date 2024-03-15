@@ -6,7 +6,7 @@ import { sortMap } from "./codeReviewMetricsTableConstants";
 import { FilterColumn, Filters, IReviewerComments, Vote } from "./interfaces";
 import { NOT_AVAILABLE } from "../../../../constants/common.constants";
 import { IFetchedCodeReviewPullRequest } from "../../../../fetchers";
-import { cacheWrapperForUnaryFunction } from "../../../../utils/cache";
+import { cacheWrapperForUnaryFunction } from "../../../../utils/cacheUtil";
 import { formatHoursToDays } from "../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 
 export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | null) => {

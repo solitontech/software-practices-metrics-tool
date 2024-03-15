@@ -1,3 +1,3 @@
-export * from "./endPoint/endpoint.api";
-export * from "./helpers/helpers.api";
-export * from "./constants/constants.api";
+export * from "./endPoint/apiEndpoint";
+export * from "./helpers/apiHelper";
+export * from "./constants/apiConstants";

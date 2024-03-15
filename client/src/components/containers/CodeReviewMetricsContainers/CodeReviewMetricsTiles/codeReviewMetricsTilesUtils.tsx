@@ -2,7 +2,7 @@ import humanizeDuration from "humanize-duration";
 
 import { FRACTION_TO_FIND_TIME, HOURS_IN_A_DAY, MINUTES_IN_ONE_HOUR, ONE_HOUR } from "src/constants";
 
-import { cacheWrapperForUnaryFunction } from "../../../../utils/cache";
+import { cacheWrapperForUnaryFunction } from "../../../../utils/cacheUtil";
 
 export const GREEN_COLOR = "green";
 export const RED_COLOR = "red";

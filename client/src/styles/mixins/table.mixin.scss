@@ -2,7 +2,7 @@
   background-color: darken($app-primary-background-color, 3%);
 
   &:hover {
-    background-color: darken($app-primary-background-color, 5%);
+    background-color: darken($app-primary-background-color, 7%);
   }
 }
 
@@ -10,6 +10,6 @@
   background-color: $app-primary-background-color;
 
   &:hover {
-    background-color: darken($app-primary-background-color, 5%);
+    background-color: darken($app-primary-background-color, 7%);
   }
 }

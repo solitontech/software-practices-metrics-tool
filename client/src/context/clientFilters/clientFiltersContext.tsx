@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { useClientFilters } from "src/fetchers";
 
-import { IContextClientFilter, IContextClientFilterSquad } from "./types";
+import { IContextClientFilter, IContextClientFilterSquad } from "./clientFiltersContextTypes";
 
 interface IContextClientFilterProps {
   children: React.ReactNode;
@@ -35,4 +35,4 @@ export type {
   IContextClientFilterSquad,
   IContextClientFilterSquadMembers,
   IContextClientFilterSquadMemberKey,
-} from "./types";
+} from "./clientFiltersContextTypes";

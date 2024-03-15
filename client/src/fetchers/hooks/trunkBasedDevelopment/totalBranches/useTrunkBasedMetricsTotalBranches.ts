@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { ApiEndPoint, QUERY_KEY } from "src/fetchers";
 
-import { IFetchedTrunkBranchesResponse } from "./types";
+import { IFetchedTrunkBranchesResponse } from "./trunkBasedMetricsTotalBranchesTypes";
 
 export const useTrunkBasedMetricsTotalBranches = () => {
   const { isPending, isError, data, error } = useQuery({
@@ -34,5 +34,5 @@ export const useTrunkBasedMetricsTotalBranches = () => {
   };
 };
 
-/* export interfaces for consumer */
-export type { IFetchedTrunkBranchesResponse, IFetchedTrunkMetricsBranch } from "./types";
+/* interface exports for consumers */
+export type { IFetchedTrunkBranchesResponse, IFetchedTrunkMetricsBranch } from "./trunkBasedMetricsTotalBranchesTypes";

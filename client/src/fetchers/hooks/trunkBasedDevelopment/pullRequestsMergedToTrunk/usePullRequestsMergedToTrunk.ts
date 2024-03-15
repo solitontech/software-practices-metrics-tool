@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/fetchers";
 
-import { IFetchedTrunkBranchPullRequestsResponse } from "./types";
+import { IFetchedTrunkBranchPullRequestsResponse } from "./pullRequestsMergedToTrunkTypes";
 
 export async function fetchPullRequestsMergedToTrunk(url: URL, paginationCursor: number) {
   url.searchParams.set("paginationCursor", String(paginationCursor));
@@ -38,5 +38,5 @@ export const usePullRequestsMergedToTrunk = (startDate: Date, endDate: Date) => 
   };
 };
 
-/* export interfaces for consumers */
-export type { IFetchedTrunkBranchPullRequest } from "./types";
+/* interface exports for consumers */
+export type { IFetchedTrunkBranchPullRequest } from "./pullRequestsMergedToTrunkTypes";

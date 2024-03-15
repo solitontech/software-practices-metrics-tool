@@ -3,8 +3,8 @@ import axios from "axios";
 
 import { ApiEndPoint, QUERY_KEY } from "src/fetchers";
 
+import { IFetchedClientFilterResponse } from "./clientFiltersTypes";
 import { ClientFiltersUtils } from "./clientFiltersUtils";
-import { IFetchedClientFilterResponse } from "./types";
 
 export const useClientFilters = () => {
   const { isPending, isError, data, error } = useQuery({
@@ -29,5 +29,5 @@ export const useClientFilters = () => {
   };
 };
 
-/* interface exports for consumers*/
-export type { IFetchedClientFilterSquadMember } from "./types";
+/* interface exports for consumers */
+export type { IFetchedClientFilterSquadMember } from "./clientFiltersTypes";

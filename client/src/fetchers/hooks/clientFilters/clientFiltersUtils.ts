@@ -1,4 +1,4 @@
-import { IFetchedClientFilterResponse, IFetchedClientFilterSquadMember } from "./types";
+import { IFetchedClientFilterResponse, IFetchedClientFilterSquadMember } from "./clientFiltersTypes";
 
 export class ClientFiltersUtils {
   static #getUsers(usersRecord: Record<string, string>, isSelected: boolean): IFetchedClientFilterSquadMember[] {

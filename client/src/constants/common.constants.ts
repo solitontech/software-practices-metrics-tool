@@ -1,8 +1,7 @@
 import { DateTime } from "luxon";
 
-export const BUG_REPORT_LINK = "https://dev.azure.com/Soliton/SolitonCentral/_workitems/edit/31686";
-
 export const NOT_AVAILABLE = "-";
+export const BUG_REPORT_LINK = "https://dev.azure.com/Soliton/SolitonCentral/_workitems/edit/31686";
 
 export const HOURS_IN_A_DAY = 24;
 export const SECONDS_IN_ONE_HOUR = 3600;
