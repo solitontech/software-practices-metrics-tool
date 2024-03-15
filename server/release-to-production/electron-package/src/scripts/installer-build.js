@@ -14,16 +14,16 @@ class InstallerBuilder {
   static #serverPackageJsonPath = join(this.#currentDirname, '..', '..', '..', '..', 'package.json');
 
   static #createBackUpPackageJson() {
-    console.log(chalk.grey('\nCreating backup of package.json\n'));
+    console.log(chalk.grey('\nCreating backup of package.json & package.lock.json\n'));
 
     copyFileSync(this.#currentPackageJsonPath, this.#backupPackageJsonPath);
     copyFileSync(this.#currentPackageLockJsonPath, this.#backupPackageLockJsonPath);
 
-    console.log(chalk.green('\npackage.json Backup created successfully\n'));
+    console.log(chalk.green('\nBackup created successfully for package.json & package.lock.json\n'));
   }
 
   static #copyDirectoriesFromServer() {
-    console.log(chalk.grey('\nCopying src , docs and dist directories\n'));
+    console.log(chalk.grey('\nCopying src , docs and dist directories of server into electron-package\n'));
 
     FileSystemOperator.copyDirectory(join('..', '..', 'src'), join('server', 'src'));
     FileSystemOperator.copyDirectory(join('..', '..', 'dist'), join('server', 'dist'));
@@ -36,7 +36,7 @@ class InstallerBuilder {
   }
 
   static #settingProductionEnvironment() {
-    console.log(chalk.grey('\nSetting production environment\n'));
+    console.log(chalk.grey('\nSetting production environment in .env\n'));
 
     const envFilePath = join(this.#currentDirname, '..', '..', 'server', 'src', 'configs', '.env');
     const env = readFileSync(envFilePath, 'utf-8');
@@ -46,23 +46,15 @@ class InstallerBuilder {
     console.log(chalk.green('\nProduction environment set successfully\n'));
   }
 
-  static #deleteDirectoriesCopiedFromServer() {
-    console.log(chalk.grey('\nDeleting src , dist and docs directories\n'));
-
-    FileSystemOperator.deleteDirectories(['server']);
-
-    console.log(chalk.green('\nDirectories deleted successfully\n'));
-  }
-
   static #mergeDependencies() {
-    console.log(chalk.grey('\nMerging dependencies from source package.json into current package.json\n'));
+    console.log(chalk.grey('\nMerging dependencies from server package.json into electron-package package.json\n'));
 
     const currentPackageJson = JSON.parse(readFileSync(this.#currentPackageJsonPath, 'utf-8'));
-    const sourcePackageJson = JSON.parse(readFileSync(this.#serverPackageJsonPath, 'utf-8'));
+    const serverPackageJson = JSON.parse(readFileSync(this.#serverPackageJsonPath, 'utf-8'));
 
     currentPackageJson.dependencies = {
       ...currentPackageJson.dependencies,
-      ...sourcePackageJson.dependencies,
+      ...serverPackageJson.dependencies,
     };
 
     writeFileSync(this.#currentPackageJsonPath, JSON.stringify(currentPackageJson, null, 2));
@@ -79,11 +71,19 @@ class InstallerBuilder {
   }
 
   static #buildElectron() {
-    console.log(chalk.grey('\nBuilding Electron\n'));
+    console.log(chalk.grey('\nBuilding Electron installer\n'));
 
     FileSystemOperator.runCommand('electron-forge', ['make']);
 
     console.log(chalk.green('\nElectron build successfully\n'));
+  }
+
+  static #deleteDirectoriesCopiedFromServer() {
+    console.log(chalk.grey('\nDeleting server directories\n'));
+
+    FileSystemOperator.deleteDirectories(['server']);
+
+    console.log(chalk.green('\nDirectories deleted successfully\n'));
   }
 
   static #restorePackageJson() {
@@ -95,7 +95,7 @@ class InstallerBuilder {
     copyFileSync(this.#backupPackageLockJsonPath, this.#currentPackageLockJsonPath);
     unlinkSync(this.#backupPackageLockJsonPath);
 
-    console.log(chalk.green('\npackage.json restored successfully\n'));
+    console.log(chalk.green('\nRestored package.json successfully\n'));
   }
 
   static build() {
