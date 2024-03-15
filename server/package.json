@@ -1,7 +1,7 @@
 {
   "name": "software-practices-metrics-tool",
   "version": "1.0.0",
-  "description": "This tool will be useful to measure the metrics for different software practices",
+  "description": "The Software Practices Metrics Tool is an open-source project aimed at assisting teams in measuring and enhancing their adherence to industry-recommended software practices. It offers comprehensive insights into crucial practices like code review and trunk-based development, empowering teams to elevate the quality and efficiency of their projects. Presently, it supports projects housed in Azure DevOps repositories.",
   "main": "index.js",
   "scripts": {
     "start:prod": "NODE_ENVIRONMENT=production node src/index.js",

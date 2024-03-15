@@ -1,120 +1,129 @@
-// build.js
 import { copyFileSync, readFileSync, writeFileSync, unlinkSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { spawnSync, execSync } from 'child_process';
+import { dirname, join, sep as separator } from 'path';
 import { fileURLToPath } from 'url';
+import chalk from 'chalk';
 
-// Get the directory of the current module
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { FileSystemOperations } from '../utils/index.js';
 
-// Save original package.json
-const currentPackageJsonPath = resolve(__dirname, '../../package.json');
-const backupPackageJsonPath = resolve(__dirname, '../../package.json.bak');
+class InstallerBuilder {
+  static #currentDirname = dirname(fileURLToPath(import.meta.url));
+  static #currentPackageJsonPath = 'package.json';
+  static #backupPackageJsonPath = 'package.temp.json';
+  static #serverPackageJsonPath = join(this.#currentDirname, '..', '..', '..', '..', 'package.json');
 
-const createBackUpPackageJson = () => {
-  console.log('\nCreating backup of package.json\n');
+  static #createBackUpPackageJson() {
+    console.log(chalk.grey('\nCreating backup of package.json\n'));
 
-  copyFileSync(currentPackageJsonPath, backupPackageJsonPath);
-};
+    copyFileSync(this.#currentPackageJsonPath, this.#backupPackageJsonPath);
 
-// Copy src and dist directories
-const copyDirectories = () => {
-  console.log('\nCopying src , docs and dist directories\n');
-
-  spawnSync('xcopy', ['..\\..\\src', '.\\src', '/E', '/I'], { stdio: 'inherit' });
-  spawnSync('xcopy', ['..\\..\\dist', '.\\dist', '/E', '/I'], { stdio: 'inherit' });
-  spawnSync('xcopy', ['..\\..\\docs\\open-api-doc-swagger.yaml', '.\\docs\\', '/E', '/I'], {
-    stdio: 'inherit',
-  });
-};
-
-const settingProductionEnvironment = () => {
-  console.log('\nSetting production environment\n');
-
-  const env = readFileSync(resolve(__dirname, '..', '..', 'src', 'configs', '.env'), 'utf-8');
-  writeFileSync(resolve(__dirname, '..', '..', 'src', 'configs', '.env'), `${env}\nNODE_ENVIRONMENT=production`);
-};
-
-// Delete src and dist directories
-const deleteDirectories = () => {
-  console.log('\nDeleting src , docs and dist directories\n');
-
-  // Copy the files or folders you want to keep to a temporary location
-  spawnSync('xcopy', ['.\\src\\main.js', '.\\temp\\', '/E', '/I'], { stdio: 'inherit', shell: true });
-  spawnSync('xcopy', ['.\\src\\scripts\\installer-build.js', '.\\temp\\', '/E', '/I'], {
-    stdio: 'inherit',
-    shell: true,
-  });
-  spawnSync('xcopy', ['.\\src\\assets', '.\\temp\\assets', '/E', '/I'], { stdio: 'inherit', shell: true });
-
-  // Delete the directory
-  spawnSync('rd', ['/s', '/q', 'src', 'dist', 'docs'], { stdio: 'inherit', shell: true });
-
-  // Copy the files or folders back to the original location
-  spawnSync('xcopy', ['.\\temp\\main.js', '.\\src\\', '/E', '/I'], { stdio: 'inherit', shell: true });
-  spawnSync('xcopy', ['.\\temp\\installer-build.js', '.\\src\\scripts\\', '/E', '/I'], {
-    stdio: 'inherit',
-    shell: true,
-  });
-  spawnSync('xcopy', ['.\\temp\\assets', '.\\src\\assets', '/E', '/I'], { stdio: 'inherit', shell: true });
-
-  spawnSync('rd', ['/s', '/q', '.\\temp'], { stdio: 'inherit', shell: true });
-};
-
-// Merge dependencies from source package.json into current package.json
-const mergeDependencies = () => {
-  console.log('\nMerging dependencies from source package.json into current package.json\n');
-
-  const sourcePackageJsonPath = resolve(__dirname, '..', '..', '..', '..', 'package.json');
-
-  const currentPackageJson = JSON.parse(readFileSync(currentPackageJsonPath, 'utf-8'));
-  const sourcePackageJson = JSON.parse(readFileSync(sourcePackageJsonPath, 'utf-8'));
-
-  currentPackageJson.dependencies = {
-    ...currentPackageJson.dependencies,
-    ...sourcePackageJson.dependencies,
-  };
-
-  writeFileSync(currentPackageJsonPath, JSON.stringify(currentPackageJson, null, 2));
-};
-
-// Install dependencies
-const installDependencies = () => {
-  console.log('\nInstalling dependencies\n');
-
-  const result = spawnSync('npm', ['install'], { stdio: 'inherit', shell: true });
-  if (result.error) {
-    throw result.error;
+    console.log(chalk.green('\npackage.json Backup created successfully\n'));
   }
-};
 
-const buildElectron = () => {
-  console.log('\nBuilding Electron\n');
+  static #createBackUpSourceDirectory() {
+    console.log(chalk.grey('\nCreating backup of source directory\n'));
 
-  const result = spawnSync('electron-forge', ['make'], { stdio: 'inherit', shell: true });
-  if (result.error) {
-    throw result.error;
+    FileSystemOperations.copyDirectory('src', join('temp', 'src'));
+    FileSystemOperations.deleteDirectories(['src']);
+
+    console.log(chalk.green('\nSource directory Backup created successfully\n'));
   }
-};
 
-const restorePackageJson = () => {
-  console.log('\nRestoring package.json\n');
+  static #restoreSourceDirectory() {
+    console.log(chalk.grey('\nRestoring source directory\n'));
 
-  copyFileSync(backupPackageJsonPath, currentPackageJsonPath);
-  unlinkSync(backupPackageJsonPath);
-};
+    FileSystemOperations.copyDirectory(join('temp', 'src'), 'src');
+    FileSystemOperations.deleteDirectories(['temp']);
 
-// Build process
-try {
-  createBackUpPackageJson();
-  copyDirectories();
-  settingProductionEnvironment();
-  mergeDependencies();
-  installDependencies();
-  buildElectron();
-} catch (error) {
-  console.error('Build process failed:', error);
-} finally {
-  deleteDirectories();
-  restorePackageJson();
+    console.log(chalk.green('\nSource directory restored successfully\n'));
+  }
+
+  static #copyDirectoriesFromServer() {
+    console.log(chalk.grey('\nCopying src , docs and dist directories\n'));
+
+    FileSystemOperations.copyDirectory(join('..', '..', 'src'), 'src');
+    FileSystemOperations.copyDirectory(join('..', '..', 'dist'), 'dist');
+    FileSystemOperations.copyFile(join('..', '..', 'docs', 'open-api-doc-swagger.yaml'), join('docs', separator));
+
+    console.log(chalk.green('\nDirectories copied successfully\n'));
+  }
+
+  static #settingProductionEnvironment() {
+    console.log(chalk.grey('\nSetting production environment\n'));
+
+    const envFilePath = join(this.#currentDirname, '..', '..', 'src', 'configs', '.env');
+    const env = readFileSync(envFilePath, 'utf-8');
+
+    writeFileSync(envFilePath, `${env}\nNODE_ENVIRONMENT=production`);
+
+    console.log(chalk.green('\nProduction environment set successfully\n'));
+  }
+
+  static #deleteDirectoriesCopiedFromServer() {
+    console.log(chalk.grey('\nDeleting src , dist and docs directories\n'));
+
+    FileSystemOperations.deleteDirectories(['src', 'dist', 'docs']);
+
+    console.log(chalk.green('\nDirectories deleted successfully\n'));
+  }
+
+  static #mergeDependencies() {
+    console.log(chalk.grey('\nMerging dependencies from source package.json into current package.json\n'));
+
+    const currentPackageJson = JSON.parse(readFileSync(this.#currentPackageJsonPath, 'utf-8'));
+    const sourcePackageJson = JSON.parse(readFileSync(this.#serverPackageJsonPath, 'utf-8'));
+
+    currentPackageJson.dependencies = {
+      ...currentPackageJson.dependencies,
+      ...sourcePackageJson.dependencies,
+    };
+
+    writeFileSync(this.#currentPackageJsonPath, JSON.stringify(currentPackageJson, null, 2));
+
+    console.log(chalk.green('\nDependencies merged successfully\n'));
+  }
+
+  static #installDependencies() {
+    console.log(chalk.grey('\nInstalling dependencies\n'));
+
+    FileSystemOperations.runCommand('npm', ['install']);
+
+    console.log(chalk.green('\nDependencies installed successfully\n'));
+  }
+
+  static #buildElectron() {
+    console.log(chalk.grey('\nBuilding Electron\n'));
+
+    FileSystemOperations.runCommand('electron-forge', ['make']);
+
+    console.log(chalk.green('\nElectron build successfully\n'));
+  }
+
+  static #restorePackageJson() {
+    console.log(chalk.grey('\nRestoring package.json\n'));
+
+    copyFileSync(this.#backupPackageJsonPath, this.#currentPackageJsonPath);
+    unlinkSync(this.#backupPackageJsonPath);
+
+    console.log(chalk.green('\npackage.json restored successfully\n'));
+  }
+
+  static build() {
+    try {
+      this.#createBackUpPackageJson();
+      this.#createBackUpSourceDirectory();
+      this.#copyDirectoriesFromServer();
+      this.#settingProductionEnvironment();
+      this.#mergeDependencies();
+      this.#installDependencies();
+      this.#buildElectron();
+    } catch (error) {
+      console.error(chalk.grey('Build process failed:', error));
+    } finally {
+      this.#deleteDirectoriesCopiedFromServer();
+      this.#restoreSourceDirectory();
+      this.#restorePackageJson();
+    }
+  }
 }
+
+InstallerBuilder.build();
