@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
 import { ServerConfiguration } from '../configs/server.config.js';
+import { log } from 'console';
 
 class BuildDocker {
   static #dockerImageName;
@@ -69,6 +70,7 @@ class BuildDocker {
     const regexPattern = new RegExp('image: software-practices-metrics-tool:.*', 'g');
     const isPatternMatched = regexPattern.test(composeFileContent);
 
+    log('isPatternMatched', isPatternMatched);
     if (!isPatternMatched) {
       console.log(chalk.gray('Invalid image in compose.yaml file.'));
       console.log(
