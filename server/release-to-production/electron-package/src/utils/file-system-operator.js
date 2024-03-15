@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process';
 
-export class FileSystemOperations {
+export class FileSystemOperator {
   static runCommand(command, args) {
     spawnSync(command, args, { stdio: 'inherit', shell: true });
   }

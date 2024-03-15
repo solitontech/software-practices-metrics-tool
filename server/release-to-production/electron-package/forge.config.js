@@ -3,11 +3,12 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 import { fileURLToPath, format } from 'url';
 import { dirname, join } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const currentDir = dirname(fileURLToPath(import.meta.url));
+const iconPath = join(currentDir, 'src/assets/media/tech-force-logo.ico');
 
 export const packagerConfig = {
   asar: true,
-  icon: join(__dirname, 'src/assets/media/tech-force-logo.ico'),
+  icon: iconPath,
 };
 
 export const rebuildConfig = {};
@@ -16,7 +17,7 @@ export const makers = [
   {
     name: '@electron-forge/maker-squirrel',
     config: {
-      setupIcon: join(__dirname, 'src/assets/media/tech-force-logo.ico'),
+      setupIcon: iconPath,
     },
   },
   {
@@ -27,7 +28,7 @@ export const makers = [
     name: '@electron-forge/maker-deb',
     config: {
       options: {
-        icon: join(__dirname, 'src/assets/media/tech-force-logo.ico'),
+        icon: iconPath,
       },
     },
   },

@@ -3,7 +3,7 @@ import { dirname, join, sep as separator } from 'path';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 
-import { FileSystemOperations } from '../utils/index.js';
+import { FileSystemOperator } from '../utils/index.js';
 
 class InstallerBuilder {
   static #currentDirname = dirname(fileURLToPath(import.meta.url));
@@ -22,8 +22,8 @@ class InstallerBuilder {
   static #createBackUpSourceDirectory() {
     console.log(chalk.grey('\nCreating backup of source directory\n'));
 
-    FileSystemOperations.copyDirectory('src', join('temp', 'src'));
-    FileSystemOperations.deleteDirectories(['src']);
+    FileSystemOperator.copyDirectory('src', join('temp', 'src'));
+    FileSystemOperator.deleteDirectories(['src']);
 
     console.log(chalk.green('\nSource directory Backup created successfully\n'));
   }
@@ -31,8 +31,8 @@ class InstallerBuilder {
   static #restoreSourceDirectory() {
     console.log(chalk.grey('\nRestoring source directory\n'));
 
-    FileSystemOperations.copyDirectory(join('temp', 'src'), 'src');
-    FileSystemOperations.deleteDirectories(['temp']);
+    FileSystemOperator.copyDirectory(join('temp', 'src'), 'src');
+    FileSystemOperator.deleteDirectories(['temp']);
 
     console.log(chalk.green('\nSource directory restored successfully\n'));
   }
@@ -40,9 +40,9 @@ class InstallerBuilder {
   static #copyDirectoriesFromServer() {
     console.log(chalk.grey('\nCopying src , docs and dist directories\n'));
 
-    FileSystemOperations.copyDirectory(join('..', '..', 'src'), 'src');
-    FileSystemOperations.copyDirectory(join('..', '..', 'dist'), 'dist');
-    FileSystemOperations.copyFile(join('..', '..', 'docs', 'open-api-doc-swagger.yaml'), join('docs', separator));
+    FileSystemOperator.copyDirectory(join('..', '..', 'src'), 'src');
+    FileSystemOperator.copyDirectory(join('..', '..', 'dist'), 'dist');
+    FileSystemOperator.copyFile(join('..', '..', 'docs', 'open-api-doc-swagger.yaml'), join('docs', separator));
 
     console.log(chalk.green('\nDirectories copied successfully\n'));
   }
@@ -61,7 +61,7 @@ class InstallerBuilder {
   static #deleteDirectoriesCopiedFromServer() {
     console.log(chalk.grey('\nDeleting src , dist and docs directories\n'));
 
-    FileSystemOperations.deleteDirectories(['src', 'dist', 'docs']);
+    FileSystemOperator.deleteDirectories(['src', 'dist', 'docs']);
 
     console.log(chalk.green('\nDirectories deleted successfully\n'));
   }
@@ -85,7 +85,7 @@ class InstallerBuilder {
   static #installDependencies() {
     console.log(chalk.grey('\nInstalling dependencies\n'));
 
-    FileSystemOperations.runCommand('npm', ['install']);
+    FileSystemOperator.runCommand('npm', ['install']);
 
     console.log(chalk.green('\nDependencies installed successfully\n'));
   }
@@ -93,7 +93,7 @@ class InstallerBuilder {
   static #buildElectron() {
     console.log(chalk.grey('\nBuilding Electron\n'));
 
-    FileSystemOperations.runCommand('electron-forge', ['make']);
+    FileSystemOperator.runCommand('electron-forge', ['make']);
 
     console.log(chalk.green('\nElectron build successfully\n'));
   }
