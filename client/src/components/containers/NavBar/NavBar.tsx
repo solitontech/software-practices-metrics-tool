@@ -1,30 +1,12 @@
 import { useState } from "react";
 
-import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
 import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 
-import trunkBased from "src/assets/images/trunkBased.svg";
-import { routePaths } from "src/constants";
-
 import styles from "./NavBar.module.scss";
 import { NavBarCollapsed } from "./NavBarCollapsed/NavBarCollapsed.tsx";
+import { routes } from "./navBarConstants.tsx";
 import { NavBarExpanded } from "./NavBarExpanded/NavBarExpanded.tsx";
-
-const routes = [
-  {
-    name: "Code review Metrics",
-    label: "Code review",
-    link: routePaths.codeReviewMetrics,
-    icon: <CodeOutlinedIcon />,
-  },
-  {
-    name: "Trunk Based Metrics",
-    label: "Trunk Based",
-    link: routePaths.trunkBasedMetrics,
-    icon: <img src={trunkBased} />,
-  },
-];
 
 export const NavBar = () => {
   const [isNavBarOpen, setIsNavBarOpen] = useState(false);

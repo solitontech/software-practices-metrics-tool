@@ -23,6 +23,8 @@ interface ITimeRef {
   timerId: ReturnType<typeof setTimeout> | null;
 }
 
+//TODO: Figure out alternate way to avoid inline styles and use class for width
+
 export const SearchBox = ({
   label,
   placeHolder = "",

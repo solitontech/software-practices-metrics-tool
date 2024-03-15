@@ -16,6 +16,8 @@ interface ITabToggleProps {
   handleTabChange: (value: string) => void;
 }
 
+// TODO: user class instead of inline styles
+
 export const TabToggle = ({ tabs, selectedTab, handleTabChange }: ITabToggleProps) => {
   const handleChange = (_event: MouseEvent, newValue: string | null) => {
     if (newValue) {

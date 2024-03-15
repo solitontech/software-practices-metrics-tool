@@ -24,8 +24,8 @@
 @mixin link {
   @include flex-align-center;
   @include page;
-  font-weight: $regular-font-weight;
   color: $app-quaternary-anchor-color;
+  font-weight: $regular-font-weight;
   font-size: $font-size-xmd;
   text-decoration: none;
 }

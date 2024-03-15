@@ -4,7 +4,7 @@ import { PAGINATION_LIMIT, START_PAGINATION_CURSOR } from "src/fetchers";
 
 export class ApiEndPoint {
   static get #baseDomain() {
-    const localServerUrl = "http://localhost:3000";
+    const localServerUrl = import.meta.env.VITE_DEVELOPMENT_SERVER_URL;
 
     return import.meta.env.MODE === "development" ? localServerUrl : window.location.origin;
   }

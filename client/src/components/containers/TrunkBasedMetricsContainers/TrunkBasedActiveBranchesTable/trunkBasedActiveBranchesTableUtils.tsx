@@ -6,8 +6,9 @@ export function filterActiveBranches(searchKeyword: string, branches: IFetchedTr
     return branches;
   }
 
+  const searchTerm = searchKeyword.toLocaleLowerCase();
+
   return branches.filter(({ title, creationDate, name, createdBy }) => {
-    const searchTerm = searchKeyword.toLocaleLowerCase();
     const formattedCreationDate = formatDate(creationDate);
 
     return (

@@ -14,9 +14,6 @@ export const useClientFilters = () => {
 
       const { data } = await axios.get<IFetchedClientFilterResponse>(apiURL.href);
 
-      return data;
-    },
-    select: (data) => {
       return ClientFiltersUtils.getFilters(data);
     },
   });
