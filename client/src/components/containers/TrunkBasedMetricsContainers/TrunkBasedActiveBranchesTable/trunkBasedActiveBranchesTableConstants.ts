@@ -1,4 +1,4 @@
-import { IActiveBranchesTableColumn } from "./trunkBasedActiveBranchesTableType";
+import { IActiveBranchesTableColumn } from "./trunkBasedActiveBranchesTableTypes";
 
 export const columns: IActiveBranchesTableColumn[] = [
   {
