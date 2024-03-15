@@ -9,6 +9,7 @@ interface IBarChartProps {
   graph: IBarChart;
 }
 
+//TODO: remove enum and use constants to avoid typescript "as" conversion
 export const BarChart = ({
   graph: {
     plots,

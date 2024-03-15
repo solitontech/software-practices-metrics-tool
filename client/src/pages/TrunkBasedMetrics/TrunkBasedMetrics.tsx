@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import TableRowsIcon from "@mui/icons-material/TableRows";
-
 import {
   CommonLayout,
   DateRangePicker,
@@ -14,20 +11,8 @@ import {
 import { dateRange } from "src/constants";
 
 import styles from "./TrunkBasedMetrics.module.scss";
-import { ITrukBasedMetricsTabs, ITrunkBasedMetricsTabValue } from "./types";
-
-const tabs: ITrukBasedMetricsTabs[] = [
-  {
-    label: "TABLE VIEW",
-    value: "table",
-    icon: <TableRowsIcon />,
-  },
-  {
-    label: "GRAPHICAL VIEW",
-    value: "graph",
-    icon: <BarChartOutlinedIcon />,
-  },
-];
+import { trunkBasedTabs } from "./trunkBasedMetricsConstants";
+import { ITrunkBasedMetricsTabValue } from "./trunkBasedMetricsTypes";
 
 export const TrunkBasedMetrics = () => {
   const [selectedTab, setSelectedTab] = useState<ITrunkBasedMetricsTabValue>("table");
@@ -42,6 +27,10 @@ export const TrunkBasedMetrics = () => {
     });
   };
 
+  const handleTabChange = (value: string) => {
+    setSelectedTab(value as ITrunkBasedMetricsTabValue);
+  };
+
   return (
     <ErrorBoundary key="trunk-based-metrics">
       <CommonLayout title="Trunk Based Metrics">
@@ -54,11 +43,7 @@ export const TrunkBasedMetrics = () => {
               minDate={dateRange.sixMonthsAgoFromToday}
               maxDate={dateRange.today}
             />
-            <TabToggle
-              tabs={tabs}
-              selectedTab={selectedTab}
-              handleTabChange={(value) => setSelectedTab(value as ITrunkBasedMetricsTabValue)}
-            />
+            <TabToggle tabs={trunkBasedTabs} selectedTab={selectedTab} handleTabChange={handleTabChange} />
             <div className={styles.tilesContainer}>
               <TrunkBasedMetricsTiles />
             </div>

@@ -5,9 +5,9 @@
   display: flex;
   justify-content: center;
   height: calc(100% - 100px);
-  margin-top: $spacing-xs;
+  margin-top: $spacing-lg;
 }
 
 :export {
-  GRAPH_COLOR: $app-secondary-color;
+  GRAPH_COLOR: $app-quaternary-text-color;
 }

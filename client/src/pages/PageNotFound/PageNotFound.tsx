@@ -8,7 +8,7 @@ export const PageNotFound = () => {
     <ErrorBoundary key="page-not-found">
       <section className={styles.pageNotFound}>
         <img src={pageNotFoundImage} alt="Page not found"></img>
-        <h2 className={styles.pageNotFoundText}>Page not found</h2>
+        <h3 className={styles.pageNotFoundText}>Page not found</h3>
         <p className={styles.description}>The address you have entered does not exist</p>
       </section>
     </ErrorBoundary>

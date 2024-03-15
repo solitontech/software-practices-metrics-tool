@@ -14,13 +14,13 @@
 }
 
 .date {
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
 }
 
 .branchName,
 .pullRequest {
   @include flex-align-center;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   cursor: pointer;
   font-weight: $medium-font-weight;
   text-decoration: none;
@@ -39,7 +39,7 @@
 }
 
 .linkIcon {
-  color: $app-secondary-color;
+  color: $app-quaternary-text-color;
   font-size: $icon-size-md;
 }
 

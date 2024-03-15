@@ -18,13 +18,13 @@
 
 .header {
   @include flex-align-center;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   justify-content: space-between;
 }
 
 .tiles {
   @include flex-row;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   gap: $spacing-xl;
 }
 
@@ -42,7 +42,7 @@
 
 .errorMessage {
   border: 1px solid $app-primary-border-color;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   font-weight: $medium-font-weight;
   margin: $spacing-vlg 0;
   padding: $spacing-xs;

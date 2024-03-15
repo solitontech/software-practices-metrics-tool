@@ -8,6 +8,7 @@ interface IHistogramChartProps {
   graph: IHistogramChart;
 }
 
+//TODO: remove enum and use constants to avoid typescript "as" conversion
 export const HistogramChart = ({
   graph: {
     plot: { xValues, startValue, endValue, binSize, binText, markerColor, hoverText },

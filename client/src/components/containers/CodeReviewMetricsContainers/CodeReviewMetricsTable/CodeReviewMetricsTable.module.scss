@@ -2,14 +2,14 @@
 
 .noDataMessage {
   text-align: center;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   font-size: $font-size-mlg;
   border-bottom: 1px solid $app-secondary-border-color;
   height: 75px;
 }
 
 .text {
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   font-size: $font-size-xmd;
   border-bottom: 1px solid $app-secondary-border-color;
   padding: $spacing-lg;
@@ -25,12 +25,12 @@
     color: $app-primary-anchor-color;
   }
 
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   @include flex-align-center;
 }
 
 .linkIcon {
-  color: $app-secondary-color;
+  color: $app-quaternary-text-color;
   vertical-align: middle;
   margin-left: $spacing-xs;
   font-size: $icon-size-md;
@@ -84,7 +84,7 @@
   @include flex-align-center;
   gap: 4px;
   justify-content: center;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
 }
 
 .icon {
@@ -120,17 +120,17 @@
 .totalPRs {
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
 }
 
 .buttonColor {
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   cursor: pointer;
   font-size: $icon-size-xl;
 }
 
 .timelineIconColor {
-  color: $app-secondary-color;
+  color: $app-quaternary-text-color;
   cursor: pointer;
   font-size: $icon-size-xl;
 }
@@ -219,7 +219,7 @@
 }
 
 .tableBody {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 .tableCell {

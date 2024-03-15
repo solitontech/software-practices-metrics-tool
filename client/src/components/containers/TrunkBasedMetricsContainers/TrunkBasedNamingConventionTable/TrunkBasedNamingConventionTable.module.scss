@@ -8,7 +8,7 @@
 .totalCount {
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
 }
 
 .container {
@@ -25,7 +25,7 @@
 
 .branchName {
   @include flex-align-center;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   cursor: pointer;
   font-weight: $medium-font-weight;
   text-decoration: none;
@@ -37,7 +37,7 @@
 }
 
 .linkIcon {
-  color: $app-secondary-color;
+  color: $app-quaternary-text-color;
   font-size: $icon-size-md;
 }
 

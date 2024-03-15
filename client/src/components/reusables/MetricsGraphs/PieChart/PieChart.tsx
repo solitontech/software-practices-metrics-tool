@@ -8,6 +8,7 @@ interface IPieChartProps {
   graph: IPieChart;
 }
 
+//TODO: remove enum and use constants to avoid typescript "as" conversion
 export const PieChart = ({
   graph: {
     plots,

@@ -25,7 +25,7 @@
 .date {
   border: 1px solid $app-secondary-border-color;
   border-radius: $app-primary-border-radius;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   font-size: $font-size-xmd;
   height: 35px;
   min-width: 90px;
@@ -39,7 +39,7 @@
 }
 
 .date:focus {
-  border: 1px solid $app-secondary-color;
+  border: 1px solid $app-quaternary-background-color;
   outline: none;
 }
 

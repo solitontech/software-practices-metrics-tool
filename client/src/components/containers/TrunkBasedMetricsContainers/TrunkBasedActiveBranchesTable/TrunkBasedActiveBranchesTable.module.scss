@@ -8,7 +8,7 @@
 .totalCount {
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
 }
 
 .container {
@@ -34,7 +34,7 @@
 .branchName,
 .pullRequest {
   @include flex-align-center;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   cursor: pointer;
   font-weight: $medium-font-weight;
   text-decoration: none;
@@ -47,11 +47,11 @@
 
 .date,
 .createdBy {
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
 }
 
 .linkIcon {
-  color: $app-secondary-color;
+  color: $app-quaternary-text-color;
   font-size: $icon-size-md;
 }
 

@@ -45,6 +45,7 @@ $extra-bold-font-weight: 900;
 $app-primary-background-color: #fff;
 $app-secondary-background-color: #f5f6f9;
 $app-ternary-background-color: #e5e5e5;
+$app-quaternary-background-color: #0f52a0;
 
 /* border colors */
 $app-primary-border-color: #00003b;
@@ -56,11 +57,14 @@ $app-primary-border-radius: 4px;
 /* text color */
 $app-primary-text-color: #313131;
 $app-secondary-text-color: #fff;
+$app-ternary-text-color: #757d83;
+$app-quaternary-text-color: #0f52a0;
 
 /* anchor color */
 $app-primary-anchor-color: #054288;
 $app-secondary-anchor-color: #0e84d7;
 $app-ternary-anchor-color: #dbe7f2;
+$app-quaternary-anchor-color: #93b8d8;
 
 /* chip color */
 $app-chip-active-color: #e5bd74;
@@ -70,7 +74,3 @@ $app-chip-abandoned-color: #cb5050;
 /* graph colors */
 $app-primary-graph-color: #054288;
 
-/* common */
-$app-primary-color: #757d83;
-$app-secondary-color: #0f52a0;
-$app-ternary-color: #93b8d8;

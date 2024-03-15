@@ -18,7 +18,7 @@ export const FilterIcon = ({ isActive, style, children }: IFilterIconProps) => {
   //TODO: extract as reusable hook
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+      if (event.target instanceof Node && filterRef.current && !filterRef.current.contains(event.target)) {
         setIsVisible(false);
       }
     };

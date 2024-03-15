@@ -3,7 +3,7 @@
 .tile {
   @include flex-column;
   background-color: $app-primary-background-color;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   gap: $spacing-sm;
   height: fit-content;
   padding: $spacing-sm $spacing-md;

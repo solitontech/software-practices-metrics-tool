@@ -6,11 +6,11 @@
 }
 
 .bugReport {
-  align-items: center;
-  background-color: $app-secondary-color;
+  @include flex-align-center;
+  background-color: $app-quaternary-background-color;
   border-radius: 50%;
+  border: none;
   bottom: 50px;
-  display: flex;
   height: 50px;
   justify-content: center;
   position: fixed;

@@ -6,13 +6,13 @@
 }
 
 .title {
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   font-weight: $semi-bold-font-weight;
 }
 
 .closeButton {
   background-color: transparent;
   border: none;
-  color: $app-primary-color;
+  color: $app-ternary-text-color;
   cursor: pointer;
 }

@@ -1,8 +1,8 @@
 @import "src/styles/index.scss";
 
 .paper {
-  background: $app-secondary-color;
-  color: $app-ternary-color;
+  background: $app-quaternary-background-color;
+  color: $app-quaternary-anchor-color;
   height: 100%;
   position: relative;
   width: 180px;
@@ -33,7 +33,7 @@
 }
 
 .logoText {
-  color: $app-ternary-color;
+  color: $app-quaternary-anchor-color;
   font-size: $font-size-xmd;
   font-weight: $semi-bold-font-weight;
   text-align: center;
