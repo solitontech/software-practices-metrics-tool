@@ -5,13 +5,13 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Tooltip } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
+import { CustomVote, DialogBox } from "src/components";
+
 import approvedSvg from "../../../../../assets/images/approved.svg";
 import approvedWithSuggestionsSvg from "../../../../../assets/images/approvedWithSuggestions.svg";
 import noVoteSvg from "../../../../../assets/images/noVote.svg";
 import rejectedSvg from "../../../../../assets/images/rejected.svg";
 import waitForAuthorSvg from "../../../../../assets/images/waitForAuthor.svg";
-import { CustomVote } from "../../../../reusables/CustomVote/CustomVote";
-import { DialogBox } from "../../../../reusables/DialogBox/DialogBox";
 import { CodeReviewTimeLineTable } from "../../CodeReviewTimeLineTable/CodeReviewTimeLineTable";
 import styles from "../CodeReviewMetricsTable.module.scss";
 import { ITimeLine, IVotesTimeline } from "../interfaces";
@@ -82,10 +82,10 @@ export const VotesTimeLineView = ({
         </div>
       </div>
       <DialogBox
-        open={isVotesTimeLineOpen}
-        onClose={() => setIsVotesTimeLineOpen(false)}
-        content={<CodeReviewTimeLineTable timeLine={votesTimeline.timeLine} />}
-        minWidth="600px"
+        isOpen={isVotesTimeLineOpen}
+        handleClose={() => setIsVotesTimeLineOpen(false)}
+        title={<CodeReviewTimeLineTable timeLine={votesTimeline.timeLine} />}
+        width="600px"
       >
         <div className={styles.dialogHeader}>Votes Timeline -</div>
         <div className={styles.prDetails}>

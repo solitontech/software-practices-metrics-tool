@@ -2,12 +2,12 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 
-import { IPullRequestList } from "../../components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTable/interfaces";
+import { IFetchedCodeReviewPullRequest } from "../../fetchers";
 
 export const CODE_REVIEW_METRICS = {
-  FIRST_REVIEW_RESPONSE: "firstReviewResponseTimeInSeconds" as keyof IPullRequestList,
-  APPROVAL_TIME: "approvalTimeInSeconds" as keyof IPullRequestList,
-  MERGE_TIME: "mergeTimeInSeconds" as keyof IPullRequestList,
+  FIRST_REVIEW_RESPONSE: "firstReviewResponseTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
+  APPROVAL_TIME: "approvalTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
+  MERGE_TIME: "mergeTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
 };
 
 export const CODE_REVIEW_METRICS_TAB_VALUE = {
@@ -18,18 +18,18 @@ export const CODE_REVIEW_METRICS_TAB_VALUE = {
 
 export const CODE_REVIEW_METRICS_TABS = [
   {
+    label: "TABLE VIEW",
     value: CODE_REVIEW_METRICS_TAB_VALUE.TABLE,
-    displayName: "TABLE VIEW",
     icon: <TableRowsIcon />,
   },
   {
+    label: "GRAPHICAL VIEW",
     value: CODE_REVIEW_METRICS_TAB_VALUE.GRAPH,
-    displayName: "GRAPHICAL VIEW",
     icon: <BarChartOutlinedIcon />,
   },
   {
+    label: "TREND ANALYSIS",
     value: CODE_REVIEW_METRICS_TAB_VALUE.TREND_GRAPH,
-    displayName: "TREND ANALYSIS",
     icon: <InsightsOutlinedIcon />,
   },
 ];

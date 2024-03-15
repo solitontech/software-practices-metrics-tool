@@ -1,9 +1,13 @@
-@import "../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.graph {
-  @include graphs-container;
+.graphContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: calc(100% - 100px);
+  margin-top: $spacing-lg;
 }
 
 :export {
-  GRAPH_COLOR: $secondary-color;
+  GRAPH_COLOR: $app-quaternary-text-color;
 }

@@ -1,45 +1,42 @@
+import { useId } from "react";
+
 import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import styles from "./DialogBox.module.scss";
 
-interface Props {
-  open: boolean;
-  onClose: () => void;
+interface IDialogBoxProps {
+  isOpen: boolean;
+  handleClose: () => void;
+  title: React.ReactNode | string;
   children: React.ReactNode;
-  content: React.ReactNode;
-  minWidth: string;
+  width: string;
 }
 
-export const DialogBox = ({ open, onClose, children, content, minWidth }: Props) => {
+export const DialogBox = ({ isOpen, handleClose, children, title, width }: IDialogBoxProps) => {
+  const id = useId();
+
   return (
     <Dialog
-      open={open}
-      onClose={onClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      aria-labelledby={id}
+      open={isOpen}
+      onClose={handleClose}
       PaperProps={{
         style: {
-          minWidth: minWidth,
+          minWidth: width,
         },
       }}
     >
-      <DialogTitle id="alert-dialog-title" className={styles.dialogTitle}>
-        <div className={styles.title}>{children}</div>
-        <div className={styles.closeButton}>
-          <CloseIcon onClick={onClose} />
-        </div>
+      <DialogTitle id={id} className={styles.titleContainer}>
+        <h5 className={styles.title}>{title}</h5>
+        <button className={styles.closeButton}>
+          <CloseIcon onClick={handleClose} />
+        </button>
       </DialogTitle>
-      <DialogContent>{content}</DialogContent>
-      <DialogActions className={styles.dialogActions}>
-        <Button onClick={onClose} autoFocus>
-          Close
-        </Button>
-      </DialogActions>
+
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   );
 };

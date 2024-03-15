@@ -8,16 +8,21 @@ import styles from "./LeastVotesGraph.module.scss";
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Monthly } from "./monthlyGraphUtils";
 import { Weekly } from "./weeklyGraphUtils";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { TREND_VIEW, GRAPH_TYPE } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
-import { TrendView, BarMode, IBarPlot } from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
-import { IPullRequestList, Vote } from "../../../CodeReviewMetricsTable/interfaces";
+import {
+  IBarChartTrendView,
+  IBarChartMode,
+  IBarPlot,
+} from "../../../../../reusables/MetricsGraphs/BarChart/barChartTypes";
+import { Vote } from "../../../CodeReviewMetricsTable/interfaces";
 import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
 
 interface Props {
-  pullRequests: IPullRequestList[];
+  pullRequests: IFetchedCodeReviewPullRequest[];
   startDate: Date;
   endDate: Date;
 }
@@ -36,11 +41,11 @@ const GRAPH_TOOLTIP_HEADER: Record<Vote, string> = {
 export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Props) => {
   const isMonthlyDisabled = areDatesInSameMonthAndYear(startDate, endDate);
 
-  const defaultGraphMode = (isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY) as TrendView;
+  const defaultGraphMode = (isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY) as IBarChartTrendView;
 
-  const [trendView, setTrendView] = useState<TrendView>(defaultGraphMode);
+  const [trendView, setTrendView] = useState<IBarChartTrendView>(defaultGraphMode);
 
-  const [barMode, setBarMode] = useState<BarMode>(GRAPH_TYPE.GROUP as BarMode);
+  const [barMode, setBarMode] = useState<IBarChartMode>(GRAPH_TYPE.GROUP as IBarChartMode);
 
   const xAxisName = trendView === TREND_VIEW.WEEKLY ? "Weeks" : "Months";
 
@@ -120,7 +125,7 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
       </div>
 
       <BarChart
-        graphObject={{
+        graph={{
           plots: Object.values(plots),
           xAxisName: xAxisName,
           yAxisName: Y_AXIS_NAME,

@@ -1,51 +1,48 @@
-@import "../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.noDataMessage {
-  @include no-data-message;
-}
-
-.tableHeader {
-  @include table-header;
-  height: 55px;
+.header {
+  @include flex-align-center;
+  justify-content: space-between;
 }
 
 .totalCount {
-  @include total-count;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
+  color: $app-ternary-text-color;
 }
 
-.tableView {
-  @include table-view;
-}
-
-.paper {
-  @include paper;
-  min-height: 400px;
-  height: 100%;
-  width: 100%;
-}
-
-.linkIcon {
-  @include link-icon;
-}
-
-.branchName {
-  @include text;
-  @include url;
-  @include flex-center;
-  max-width: 450px;
-  gap: 20px;
-}
-
-.rowEven {
-  @include row-even;
-}
-
-.rowOdd {
-  @include row-odd;
+.container {
+  border: 1px solid $app-secondary-border-color;
+  height: 480px;
+  max-height: 480px;
 }
 
 .title {
-  width: 400px;
-  display: block;
   @include ellipsis;
+  display: block;
+  max-width: 500px;
+}
+
+.branchName {
+  @include flex-align-center;
+  color: $app-ternary-text-color;
+  cursor: pointer;
+  font-weight: $medium-font-weight;
+  text-decoration: none;
+  gap: $spacing-xs;
+
+  &:hover {
+    color: $app-primary-anchor-color;
+  }
+}
+
+.linkIcon {
+  color: $app-quaternary-text-color;
+  font-size: $icon-size-md;
+}
+
+.noDataMessage {
+  border-bottom: 1px solid $app-secondary-border-color;
+  font-size: $font-size-mlg;
+  text-align: center;
 }

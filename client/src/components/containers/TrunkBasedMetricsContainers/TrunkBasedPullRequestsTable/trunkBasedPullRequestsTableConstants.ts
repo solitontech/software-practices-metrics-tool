@@ -1,9 +1,6 @@
-import { IColumn } from "./interfaces";
+import { ITrunkBasedPullRequestsTableColumn } from "./trunkBasedPullRequestsTableTypes";
 
-export const BASE_PERCENTAGE = 100;
-export const COMPLETED = "completed";
-
-export const columns: readonly IColumn[] = [
+export const tableColumns: ITrunkBasedPullRequestsTableColumn[] = [
   {
     id: "creationDate",
     label: "Start Date",
@@ -19,13 +16,13 @@ export const columns: readonly IColumn[] = [
   {
     id: "name",
     label: "Branch Name",
-    width: 300,
+    width: 350,
     align: "left",
   },
   {
     id: "title",
     label: "Pull Request Title",
-    width: 300,
+    width: 350,
     align: "left",
   },
   {

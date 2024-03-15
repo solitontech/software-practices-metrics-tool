@@ -1,8 +1,8 @@
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Graph } from "./leastVotesGraphUtils";
-import { Year, getFormattedDateText } from "../../../../../../utils/formatTimeUtils";
-import { IPullRequestList } from "../../../CodeReviewMetricsTable/interfaces";
-import { DAY, MONTHS_IN_YEAR, YEAR } from "../metricsTrendGraphConstants";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
+import { getFormattedDateText } from "../../../../../../utils/dateUtil";
+import { DAY, MONTHS_IN_YEAR } from "../metricsTrendGraphConstants";
 
 export class Monthly extends Graph {
   private static getNumberOfMonths() {
@@ -20,7 +20,7 @@ export class Monthly extends Graph {
 
     const monthIntervalStartDate = new Date(this.startDate.getFullYear(), currentMonth);
 
-    return getFormattedDateText(monthIntervalStartDate, DAY.UNDEFINED, YEAR.NUMERIC as Year);
+    return getFormattedDateText(monthIntervalStartDate, DAY.UNDEFINED, "numeric");
   }
 
   private static getIntervals(count: number): PullRequestsVotesAnalysis[] {
@@ -62,7 +62,7 @@ export class Monthly extends Graph {
   }
 
   static getMonthlyLeastVotes(
-    pullRequests: IPullRequestList[],
+    pullRequests: IFetchedCodeReviewPullRequest[],
     startDate: Date,
     endDate: Date,
   ): PullRequestsVotesAnalysis[] {

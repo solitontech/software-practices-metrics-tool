@@ -1,26 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { IClientFilters } from "../../../components/containers/ClientFilters/clientFiltersInterfaces";
-import { API } from "../../api";
-import { QUERY_KEY } from "../../constants/queryKey.constant";
-import { ICustomError } from "../types/types";
+import { ApiEndPoint, QUERY_KEY } from "src/fetchers";
 
-async function fetchClientFilters() {
-  const { data } = await axios.get<IClientFilters>(API.clientFilters());
-
-  return data;
-}
+import { IFetchedClientFilterResponse } from "./clientFiltersTypes";
+import { ClientFiltersUtils } from "./clientFiltersUtils";
 
 export const useClientFilters = () => {
-  const { isLoading, data, error } = useQuery<IClientFilters, ICustomError>({
+  const { isPending, isError, data, error } = useQuery({
     queryKey: [QUERY_KEY.CLIENT_FILTERS],
-    queryFn: fetchClientFilters,
+    queryFn: async () => {
+      const apiURL = ApiEndPoint.clientFilters();
+
+      const { data } = await axios.get<IFetchedClientFilterResponse>(apiURL.href);
+
+      return data;
+    },
+    select: (data) => {
+      return ClientFiltersUtils.getFilters(data);
+    },
   });
 
   return {
-    isLoading,
-    data: data ?? ({ tags: [], squads: [] } as IClientFilters),
+    isPending,
+    isError,
+    data,
     error,
   };
 };
+
+/* interface exports for consumers */
+export type { IFetchedClientFilterSquadMember } from "./clientFiltersTypes";

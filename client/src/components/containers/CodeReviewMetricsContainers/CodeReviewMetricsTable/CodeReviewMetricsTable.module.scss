@@ -1,29 +1,45 @@
-@import "../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .noDataMessage {
-  @include no-data-message;
+  text-align: center;
+  color: $app-ternary-text-color;
+  font-size: $font-size-mlg;
+  border-bottom: 1px solid $app-secondary-border-color;
+  height: 75px;
 }
 
 .text {
-  @include text;
-  font-size: $medium-font-size;
-  letter-spacing: $primary-letter-spacing;
-  border-bottom: 1px solid $table-border;
-  padding: $primary-padding;
+  color: $app-ternary-text-color;
+  font-size: $font-size-xmd;
+  border-bottom: 1px solid $app-secondary-border-color;
+  padding: $spacing-lg;
 }
 
 .pullRequestURL {
-  @include pull-request-url;
+  text-decoration: none;
+  font-weight: $medium-font-weight;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: $app-primary-anchor-color;
+  }
+
+  color: $app-ternary-text-color;
+  @include flex-align-center;
 }
 
 .linkIcon {
-  @include link-icon;
+  color: $app-quaternary-text-color;
+  vertical-align: middle;
+  margin-left: $spacing-xs;
+  font-size: $icon-size-md;
 }
 
 .navLink {
   @include ellipsis;
 
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
 }
 
 .dialogIcon {
@@ -31,45 +47,49 @@
 }
 
 .active {
-  @include capitalize;
-  background-color: $active-color;
+  text-transform: capitalize;
+  color: $app-secondary-text-color;
+  background-color: $app-chip-active-color;
 }
 
 .completed {
-  @include capitalize;
-  background-color: $completed-color;
+  text-transform: capitalize;
+  color: $app-secondary-text-color;
+  background-color: $app-chip-completed-color;
 }
 
 .abandoned {
-  @include capitalize;
-  background-color: $abandoned-color;
+  text-transform: capitalize;
+  color: $app-secondary-text-color;
+  background-color: $app-chip-abandoned-color;
 }
 
 .paper {
-  @include paper;
+  width: 100%;
+  border: 1px solid $app-primary-border-color;
+  height: 95%;
   overflow: scroll;
   border-radius: 4px;
 }
 
 .rowEven {
-  @include row-even;
+  background-color: $app-secondary-background-color;
 }
 
 .rowOdd {
-  @include row-odd;
+  background-color: $app-secondary-text-color;
 }
 
 .comments {
-  @include flex-center;
+  @include flex-align-center;
   gap: 4px;
   justify-content: center;
-  color: $primary-color;
+  color: $app-ternary-text-color;
 }
 
 .icon {
   width: 20px;
   height: 20px;
-  color: $icon-color;
 }
 
 @mixin votesList {
@@ -91,21 +111,28 @@
 }
 
 .header {
-  @include table-header;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .totalPRs {
-  @include total-count;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
+  color: $app-ternary-text-color;
 }
 
 .buttonColor {
-  @include common-icon;
-  color: $primary-color;
+  color: $app-ternary-text-color;
+  cursor: pointer;
+  font-size: $icon-size-xl;
 }
 
 .timelineIconColor {
-  @include common-icon;
-  color: $secondary-color;
+  color: $app-quaternary-text-color;
+  cursor: pointer;
+  font-size: $icon-size-xl;
 }
 
 .historyIcon {
@@ -123,11 +150,11 @@
   flex-direction: column;
   width: 40px;
   height: 50px;
-  margin-top: $secondary-minimum-margin;
+  margin-top: $spacing-sm;
 }
 
 .time {
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
 }
 
 .prTitle {
@@ -154,7 +181,7 @@
 
 .dialogHeader {
   width: 22%;
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
 }
 
 .prDetails {
@@ -169,8 +196,8 @@
 }
 
 .tag {
-  background-color: $chip-background-color;
-  font-size: $minimum-font-size;
+  background-color: $app-ternary-background-color;
+  font-size: $font-size-md;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -179,19 +206,28 @@
 }
 
 .table {
-  @include table;
+  border-spacing: 0;
+  width: 100%;
 }
 
 .tableHead {
-  @include table-head;
+  position: sticky;
+  top: 0;
+  background-color: $app-secondary-text-color;
+  color: $app-primary-text-color;
+  font-weight: $extra-bold-font-weight;
 }
 
 .tableBody {
-  @include table-body;
+  overflow-y: scroll;
 }
 
 .tableCell {
-  @include table-cell;
+  font-weight: $medium-font-weight;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  border-bottom: 1px solid $app-secondary-border-color;
+  padding: $spacing-lg;
 }
 
 .date {

@@ -2,21 +2,25 @@ import BugReportIcon from "@mui/icons-material/BugReport";
 import { Tooltip } from "@mui/material";
 import { NavLink, Outlet } from "react-router-dom";
 
+import { NavBar, ErrorBoundary } from "src/components";
+import { BUG_REPORT_LINK } from "src/constants";
+
 import styles from "./Home.module.scss";
-import { NavBar } from "../../components/containers/NavBar/NavBar.tsx";
 
 export const Home = () => {
   return (
-    <div className={styles.home}>
-      <NavBar />
-      <Outlet />
-      <NavLink to="https://dev.azure.com/Soliton/SolitonCentral/_workitems/edit/31686" target="_blank">
-        <Tooltip title="Report Bug" arrow>
-          <div className={styles.bugReport}>
-            <BugReportIcon className={styles.icon} />
-          </div>
-        </Tooltip>
-      </NavLink>
-    </div>
+    <ErrorBoundary key="home">
+      <section className={styles.home}>
+        <NavBar />
+        <Outlet />
+        <NavLink to={BUG_REPORT_LINK} target="_blank">
+          <Tooltip title="Report Bug" arrow>
+            <button className={styles.bugReport}>
+              <BugReportIcon className={styles.icon} />
+            </button>
+          </Tooltip>
+        </NavLink>
+      </section>
+    </ErrorBoundary>
   );
 };

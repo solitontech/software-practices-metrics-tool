@@ -1,0 +1,11 @@
+@import "src/styles/index.scss";
+
+.container {
+  @include flex-column;
+  gap: $spacing-xl;
+}
+
+.tileContent {
+  @include flex-align-center;
+  gap: $spacing-sm;
+}

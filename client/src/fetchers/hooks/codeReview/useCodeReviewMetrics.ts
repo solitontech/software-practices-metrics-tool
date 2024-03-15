@@ -1,28 +1,52 @@
 import { useContext } from "react";
 
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-import { IPullRequestSuccessInfo } from "../../../components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTable/interfaces";
-import { ClientFiltersContext } from "../../../contexts/clientFiltersContext/clientFiltersContext";
-import { getClientFilteredPullRequests } from "../../../utils/clientFilters";
-import { QUERY_KEY } from "../../constants/queryKey.constant";
-import { fetchPullRequests } from "../../queries/codeReview/codeReviewFetchers";
-import { ICustomError } from "../types/types";
+import { ClientFilterContext } from "src/context";
+import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/fetchers";
+
+import { IFetchedCodeReviewResponse } from "./codeReviewTypes";
+import { CodeReviewMetricsUtils } from "./codeReviewUtils";
+
+async function fetchCodeReviewMetrics(url: URL, paginationCursor: number) {
+  url.searchParams.set("paginationCursor", String(paginationCursor));
+
+  const {
+    data: { pullRequests, count, errorCount, filteredCount },
+  } = await axios.get<IFetchedCodeReviewResponse>(url.href);
+
+  return {
+    data: pullRequests,
+    count,
+    errorCount,
+    filteredCount,
+  };
+}
 
 export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
-  const { filters } = useContext(ClientFiltersContext);
-  const { isLoading, data, error } = useQuery<IPullRequestSuccessInfo, ICustomError>({
+  const { filters } = useContext(ClientFilterContext);
+
+  const { isPending, isError, data, error } = useQuery({
     queryKey: [QUERY_KEY.CODE_REVIEW, startDate, endDate],
     queryFn: async () => {
-      return await fetchPullRequests(startDate, endDate);
+      const apiURL = ApiEndPoint.codeReviewMetrics(startDate, endDate);
+
+      const { data: pullRequests, errorCount } = await ApiHelpers.continuedFetching(fetchCodeReviewMetrics, apiURL);
+
+      return { pullRequests, errorCount };
     },
   });
 
-  const filteredPullRequests = getClientFilteredPullRequests(data, filters);
+  const pullRequests = CodeReviewMetricsUtils.getFilteredPullRequests(data, filters);
 
   return {
-    isLoading,
-    data: filteredPullRequests ?? ({ pullRequestList: [], errorCount: 0 } as IPullRequestSuccessInfo),
+    isPending,
+    isError,
+    data: pullRequests ?? { pullRequests: [], errorCount: 0 },
     error,
   };
 };
+
+/* interface exports for consumers */
+export type { IFetchedCodeReviewPullRequest } from "./codeReviewTypes";

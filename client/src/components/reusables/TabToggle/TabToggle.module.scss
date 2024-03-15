@@ -1,0 +1,10 @@
+@import "src/styles/index.scss";
+
+.toggle {
+  @include flex-align-center;
+  gap: $spacing-sm;
+}
+
+.icon {
+  margin-top: $spacing-xs;
+}

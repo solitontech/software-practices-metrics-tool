@@ -1,45 +1,41 @@
 import { ReactNode, useRef, useEffect, useState } from "react";
 
 import FilterListIcon from "@mui/icons-material/FilterList";
+import clsx from "clsx";
 
 import styles from "./Filter.module.scss";
 
-interface Props {
+interface IFilterIconProps {
   children: ReactNode;
-  isFilterSelected?: boolean;
+  isActive?: boolean;
   style?: string;
 }
 
-export const FilterIcon = ({ children, isFilterSelected, style }: Props) => {
-  const [isVisible, setIsVisible] = useState(false);
+export const FilterIcon = ({ isActive, style, children }: IFilterIconProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const toggleFilterVisibility = () => {
-    setIsVisible(!isVisible);
-  };
-
+  //TODO: extract as reusable hook
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+      if (event.target instanceof Node && filterRef.current && !filterRef.current.contains(event.target)) {
         setIsVisible(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
-    <div className={styles.filterIconContainer}>
+    <div className={styles.container} ref={filterRef}>
       <FilterListIcon
-        onClick={toggleFilterVisibility}
-        className={`${styles.filterIcon} ${isFilterSelected ? styles.filterIconSelected : ""} ${style}`}
+        onClick={() => setIsVisible(!isVisible)}
+        className={clsx(styles.filterIcon, style, isActive && styles.isActive)}
       />
 
-      {isVisible && <div ref={filterRef}>{children}</div>}
+      {isVisible && <div>{children}</div>}
     </div>
   );
 };

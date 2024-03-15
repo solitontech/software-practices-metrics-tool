@@ -1,7 +1,7 @@
 import styles from "./CodeReviewTimeLineTable.module.scss";
 import { columns, votesImage, votesLabel } from "./codeReviewTimeLineTableConstants";
 import { IVotesLabel } from "./interfaces";
-import { formatDate } from "../../../../utils/formatTimeUtils";
+import { formatDate } from "../../../../utils/dateUtil";
 import { CustomVote } from "../../../reusables/CustomVote/CustomVote";
 import { IVotesTimeline } from "../CodeReviewMetricsTable/interfaces";
 

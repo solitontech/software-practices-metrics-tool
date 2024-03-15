@@ -1,38 +1,51 @@
-@import "../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .codeReviewTable {
-  @include metrics-table;
-  margin-top: $secondary-margin;
+  height: calc(100% - 100px);
+  margin-top: $spacing-xxl;
+  max-height: 90%;
+  overflow-y: auto;
 }
 
 .codeReview {
-  @include metrics;
+  height: 100%;
+  width: 100%;
 }
 
 .tableDetails {
-  @include table-details;
+  @include flex-align-center;
 }
 
 .header {
-  @include header;
+  @include flex-align-center;
+  color: $app-ternary-text-color;
+  justify-content: space-between;
 }
 
 .tiles {
-  @include tiles;
-}
-
-.underDevelopment {
-  @include under-development;
+  @include flex-row;
+  color: $app-ternary-text-color;
+  gap: $spacing-xl;
 }
 
 .dropDown {
-  padding: $large-padding;
+  padding: $spacing-sm;
   position: absolute;
   top: 49px;
   left: 0;
-  background-color: $primary-background-color;
-  border: 1px solid $table-border;
+  background-color: $app-primary-background-color;
+  border: 1px solid $app-secondary-border-color;
   border-radius: 4px;
   z-index: 999;
+  width: 100%;
+}
+
+.errorMessage {
+  border: 1px solid $app-primary-border-color;
+  color: $app-ternary-text-color;
+  font-weight: $medium-font-weight;
+  margin: $spacing-vlg 0;
+  padding: $spacing-xs;
+  text-align: center;
   width: 100%;
 }

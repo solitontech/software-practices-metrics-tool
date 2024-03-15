@@ -2,17 +2,16 @@ import { Config, Data, Layout, ModeBarDefaultButtons } from "plotly.js";
 import Plot from "react-plotly.js";
 
 import { EMPTY_STRING, TAB_SPACE } from "./barChartConstants";
-import { IBarChart } from "./interfaces";
-import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsConstants";
+import { IBarChart } from "./barChartTypes";
+import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsGraphConstants";
 
-interface Props {
-  graphObject: IBarChart;
+interface IBarChartProps {
+  graph: IBarChart;
 }
 
-const GRAPH_TYPE = "bar";
-
+//TODO: remove enum and use constants to avoid typescript "as" conversion
 export const BarChart = ({
-  graphObject: {
+  graph: {
     plots,
     graphTitle = "",
     xAxisName = "",
@@ -25,10 +24,10 @@ export const BarChart = ({
     annotationYPosition = ANNOTATIONS.Y_POSITION,
     yAxisTickSuffix,
   },
-}: Props) => {
+}: IBarChartProps) => {
   const data: Data[] = plots.map((plot) => {
     return {
-      type: GRAPH_TYPE,
+      type: "bar",
       x: plot.xLabels,
       y: plot.yValues,
       marker: {

@@ -1,99 +1,62 @@
-@import "../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.noDataMessage {
-  @include no-data-message;
+.container {
+  border: 1px solid $app-secondary-border-color;
+  width: calc(100% - 250px);
 }
 
-.text {
-  @include text;
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
 }
 
-.branchName {
-  @include text;
-  max-width: 450px;
-  display: block;
-}
-
-.tableHeader {
-  @include table-header;
-  height: 55px;
-}
-
-.totalCount {
-  @include total-count;
-}
-
-.header {
-  @include table-header;
-  margin-top: $minimum-margin;
-}
-
-.title {
-  width: 250px;
-  display: block;
-  @include ellipsis;
-}
-
-.linkIcon {
-  @include link-icon;
-}
-
-.pullRequestURL {
-  @include pull-request-url;
+.tableRow:nth-child(even) {
+  @include table-row-even;
 }
 
 .date {
-  @include text;
+  color: $app-ternary-text-color;
 }
 
-.paper {
-  @include paper;
-  min-height: 440px;
-  height: 100%;
-  width: calc(100% - 300px);
+.branchName,
+.pullRequest {
+  @include flex-align-center;
+  color: $app-ternary-text-color;
+  cursor: pointer;
+  font-weight: $medium-font-weight;
+  text-decoration: none;
+  gap: $spacing-xs;
+
+  &:hover {
+    color: $app-primary-anchor-color;
+  }
 }
 
-.rowEven {
-  @include row-even;
+.title {
+  @include ellipsis;
+  display: block;
+  max-width: 350px;
+  width: fit-content;
 }
 
-.rowOdd {
-  @include row-odd;
-}
-
-.branchName {
-  color: $primary-color;
-  @include url;
-  @include flex-center;
-  gap: 4px;
-}
-
-.tiles {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 270px;
+.linkIcon {
+  color: $app-quaternary-text-color;
+  font-size: $icon-size-md;
 }
 
 .active {
-  @include capitalize;
-  background-color: $active-color;
+  @include chip-active;
 }
 
 .completed {
-  @include capitalize;
-  background-color: $completed-color;
+  @include chip-completed;
 }
 
 .abandoned {
-  @include capitalize;
-  background-color: $abandoned-color;
+  @include chip-abandoned;
 }
 
-.tileContent {
-  @include tile-content;
-}
-
-.tableView {
-  @include table-view;
+.noDataMessage {
+  border-bottom: 1px solid $app-secondary-border-color;
+  font-size: $font-size-mlg;
+  text-align: center;
 }

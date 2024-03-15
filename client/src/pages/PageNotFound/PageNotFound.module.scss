@@ -1,22 +1,21 @@
-@import "../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .pageNotFound {
   @include flex-column-center;
-
   width: 100%;
 }
 
 .pageNotFoundText {
-  margin: $primary-margin $no-margin $secondary-margin;
-  line-height: $secondary-line-height;
-  letter-spacing: $no-letter-spacing;
-  color: $secondary-color;
-  font-size: $ternary-font-size;
-  font-weight: $secondary-font-weight;
+  margin: $spacing-lg 0 $spacing-lg;
+  color: $app-quaternary-text-color;
+  font-size: $font-size-xxxl;
+  font-weight: $medium-font-weight;
 }
 
 .description {
-  @include description;
-
+  color: $app-ternary-text-color;
+  font-size: $font-size-xl;
+  font-weight: $regular-font-weight;
+  text-align: center;
   width: 570px;
 }

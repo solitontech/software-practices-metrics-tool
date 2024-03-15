@@ -2,11 +2,10 @@ import { LeastVotesGraph } from "./LeastVotesGraph/LeastVotesGraph";
 import styles from "./MetricsGraph.module.scss";
 import { getGraphObject } from "./metricsGraphUtils";
 import { TimeMetricsGraph } from "./TimeMetricsGraph/TimeMetricsGraph";
+import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
 import { CODE_REVIEW_METRICS } from "../../../../../pages/CodeReviewMetrics/codeReviewMetricsConstants";
-import { IPullRequestList } from "../../CodeReviewMetricsTable/interfaces";
-
 interface Props {
-  pullRequests: IPullRequestList[];
+  pullRequests: IFetchedCodeReviewPullRequest[];
   averageFirstReviewResponseTime: number | string;
   averageApprovalTime: number | string;
   averageMergeTime: number | string;

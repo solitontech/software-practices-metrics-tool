@@ -1,24 +1,18 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.closeButton {
-  cursor: pointer;
-  padding-top: $minimum-padding;
-}
-
-.dialogTitle {
+.titleContainer {
   display: flex;
   justify-content: space-between;
 }
 
-.dialogActions {
-  padding-right: $primary-padding;
+.title {
+  color: $app-ternary-text-color;
+  font-weight: $semi-bold-font-weight;
 }
 
-.title {
-  color: #757d83;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 90%;
+.closeButton {
+  background-color: transparent;
+  border: none;
+  color: $app-ternary-text-color;
+  cursor: pointer;
 }

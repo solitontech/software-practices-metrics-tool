@@ -1,9 +1,16 @@
 /// <reference types="vitest" />
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tsconfigPaths()],
+  css: {
+    modules: {
+      localsConvention: "camelCaseOnly",
+      generateScopedName: "[name]__[local]___[hash:base64:5]",
+    },
+  },
   test: {
     include: ["**/*.unit.test.tsx", "**/*.integration.test.tsx"],
     globals: true,

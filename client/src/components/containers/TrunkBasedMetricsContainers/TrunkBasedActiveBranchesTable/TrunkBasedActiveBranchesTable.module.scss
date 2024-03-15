@@ -1,63 +1,62 @@
-@import "../../../../styles/index.scss";
-
-.noDataMessage {
-  @include no-data-message;
-}
-
-.text {
-  @include text;
-}
-
-.branchName {
-  @include text;
-  max-width: 355px;
-  display: flex;
-  align-items: center;
-}
+@import "src/styles/index.scss";
 
 .header {
-  @include table-header;
+  @include flex-align-center;
+  justify-content: space-between;
 }
 
 .totalCount {
-  @include total-count;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
+  color: $app-ternary-text-color;
+}
+
+.container {
+  border: 1px solid $app-secondary-border-color;
+  height: 480px;
+  max-height: 480px;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
 }
 
 .title {
-  width: 200px;
-  display: block;
   @include ellipsis;
+  display: block;
+  width: 200px;
+}
+
+.branchName,
+.pullRequest {
+  @include flex-align-center;
+  color: $app-ternary-text-color;
+  cursor: pointer;
+  font-weight: $medium-font-weight;
+  text-decoration: none;
+  gap: $spacing-xs;
+
+  &:hover {
+    color: $app-primary-anchor-color;
+  }
+}
+
+.date,
+.createdBy {
+  color: $app-ternary-text-color;
 }
 
 .linkIcon {
-  color: $secondary-color;
-  vertical-align: middle;
-  margin-left: 4px;
-  font-size: $small-icon-size;
+  color: $app-quaternary-text-color;
+  font-size: $icon-size-md;
 }
 
-.pullRequestURL {
-  @include pull-request-url;
-}
-
-.date {
-  @include text;
-}
-
-.paper {
-  @include paper;
-  min-height: 440px;
-}
-
-.rowEven {
-  @include row-even;
-}
-
-.rowOdd {
-  @include row-odd;
-}
-
-.branchName {
-  color: $primary-color;
-  @include url;
+.noDataMessage {
+  border-bottom: 1px solid $app-secondary-border-color;
+  font-size: $font-size-mlg;
+  text-align: center;
 }

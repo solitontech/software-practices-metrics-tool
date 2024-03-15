@@ -1,86 +1,76 @@
-$primary-background-color: #fff;
-$secondary-background-color: #f5f6f9;
-$tool-tip-background-color: #ebebeb;
+/* margins and padding */
+$spacing-xm: 2px;
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 20px;
+$spacing-xxl: 24px;
+$spacing-xxxl: 28px;
+$spacing-xxxxl: 32px;
+$spacing-vlg: 40px;
 
-$primary-color: #757d83;
-$secondary-color: #0f52a0;
-$ternary-color: #93b8d8;
-$highlight-color: #dbe7f2;
-$url-color: #5f66aa;
+/* icons */
+$icon-size-xm: 2px;
+$icon-size-xs: 4px;
+$icon-size-sm: 8px;
+$icon-size-md: 12px;
+$icon-size-lg: 16px;
+$icon-size-xl: 20px;
+$icon-size-xxl: 24px;
+$icon-size-xxxl: 28px;
+$icon-size-xxxxl: 32px;
 
-$primary-box-shadow: #00000080;
+/* font sizes */
+$font-size-sm: 8px;
+$font-size-md: 12px;
+$font-size-xmd: 14px;
+$font-size-mlg: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 20px;
+$font-size-xxl: 24px;
+$font-size-xxxl: 28px;
+$font-size-xxxxl: 32px;
 
-$dark-blue: #054288;
-$light-blue: #0e84d7;
+/* font weights */
+$thin-font-weight: 100;
+$light-font-weight: 300;
+$regular-font-weight: 400;
+$medium-font-weight: 500;
+$semi-bold-font-weight: 600;
+$bold-font-weight: 700;
+$extra-bold-font-weight: 900;
 
-$scrollbar-color: #424242;
+/* background colors */
+$app-primary-background-color: #fff;
+$app-secondary-background-color: #f5f6f9;
+$app-ternary-background-color: #e5e5e5;
+$app-quaternary-background-color: #0f52a0;
 
-$active-color: #e5bd74;
-$completed-color: #94d594;
-$abandoned-color: #cb5050;
+/* border colors */
+$app-primary-border-color: #00003b;
+$app-secondary-border-color: #d6d6d6;
 
-$primary-text-color: #fff;
-$secondary-text-color: #000000;
+/* border radius */
+$app-primary-border-radius: 4px;
 
-$table-border: #e0e0e0;
-$table-background: #f2f2f2;
-$darker-shade: darken($table-background, 10%);
+/* text color */
+$app-primary-text-color: #313131;
+$app-secondary-text-color: #fff;
+$app-ternary-text-color: #757d83;
+$app-quaternary-text-color: #0f52a0;
 
-$icon-color: #a2a5a9;
+/* anchor color */
+$app-primary-anchor-color: #054288;
+$app-secondary-anchor-color: #0e84d7;
+$app-ternary-anchor-color: #dbe7f2;
+$app-quaternary-anchor-color: #93b8d8;
 
-$border-color: #0000003b;
-$secondary-border-color: #0000001e;
+/* chip color */
+$app-chip-active-color: #e5bd74;
+$app-chip-completed-color: #94d594;
+$app-chip-abandoned-color: #cb5050;
 
-$tile-text-color: #757d83;
-$chip-background-color: #e5e5e5;
+/* graph colors */
+$app-primary-graph-color: #054288;
 
-$minimum-font-size: 12px;
-$small-font-size: 13px;
-$medium-font-size: 14px;
-$secondary-font-size: 16px;
-$large-font-size: 18px;
-$primary-font-size: 20px;
-$ternary-font-size: 36px;
-
-$small-icon-size: 12px;
-$medium-icon-size: 15px;
-$large-icon-size: 18px;
-$extra-large-icon-size: 20px;
-$ternary-icon-size: 32px;
-
-$ternary-font-weight: 400;
-$secondary-font-weight: 500;
-$primary-font-weight: 600;
-$maximum-font-weight: 900;
-
-$ternary-padding: 0px;
-$minimum-padding: 4px;
-$medium-padding: 6px;
-$large-padding: 8px;
-$secondary-padding: 12px;
-$primary-padding: 16px;
-$padding-small: 30px;
-$padding-large: 40px;
-
-$no-margin: 0px;
-$minimum-margin: 4px;
-$secondary-minimum-margin: 6px;
-$base-margin: 10px;
-$small-margin: 12px;
-$medium-margin: 15px;
-$ternary-margin: 20px;
-$secondary-margin: 25px;
-$primary-margin: 35px;
-$maximum-margin: 40px;
-
-$secondary-line-height: 1.16px;
-$ternary-line-height: 16.5px;
-$primary-line-height: 24px;
-
-$primary-shadow-color: #00000033;
-$secondary-shadow-color: #00000024;
-$ternary-shadow-color: #0000001e;
-
-$primary-letter-spacing: 0.2px;
-$secondary-letter-spacing: 0.4px;
-$no-letter-spacing: 0px;

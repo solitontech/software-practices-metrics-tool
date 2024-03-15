@@ -1,6 +1,6 @@
-import { IColumn } from "./interfaces";
+import { IActiveBranchesTableColumn } from "./trunkBasedActiveBranchesTableTypes";
 
-export const columns: readonly IColumn[] = [
+export const columns: IActiveBranchesTableColumn[] = [
   {
     id: "name",
     label: "Branch Name",

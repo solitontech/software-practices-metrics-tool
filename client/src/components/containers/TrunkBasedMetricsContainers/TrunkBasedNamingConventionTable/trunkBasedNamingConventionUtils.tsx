@@ -1,9 +1,13 @@
-import { IBranchInfo } from "../TrunkBasedMetricsTiles/interfaces";
+import { IFetchedTrunkMetricsBranch } from "src/fetchers";
 
-export const filterBranches = (branches: IBranchInfo[], searchTerm: string): IBranchInfo[] => {
-  const normalizedSearchTerm = searchTerm.toLocaleLowerCase();
+export const filterBranches = (searchKeyword: string, branches: IFetchedTrunkMetricsBranch[]) => {
+  if (!searchKeyword) {
+    return branches;
+  }
+
+  const searchTerm = searchKeyword.toLocaleLowerCase();
 
   return branches.filter(({ name }) => {
-    return name.toLocaleLowerCase().includes(normalizedSearchTerm);
+    return name.toLocaleLowerCase().includes(searchTerm);
   });
 };

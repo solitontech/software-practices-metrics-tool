@@ -1,24 +1,24 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .loadingPage {
   @include flex-column-center;
-
-  height: calc(100% - 125px);
+  height: 100%;
   width: 100%;
 }
 
-.loadingImage {
-  height: 100%;
+.container {
+  @include flex-column-center;
+  height: 50%;
   width: 50%;
 }
 
-.loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 20%;
+.image {
+  width: 25%;
 }
 
 .description {
-  @include description;
+  color: $app-ternary-text-color;
+  font-size: $font-size-xl;
+  font-weight: $regular-font-weight;
+  text-align: center;
 }
