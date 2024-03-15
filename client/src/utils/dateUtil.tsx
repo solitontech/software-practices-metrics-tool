@@ -7,6 +7,7 @@ import { cacheWrapperForUnaryFunction } from "./cacheUtil";
 type TDay = "2-digit" | undefined;
 type TYear = "numeric" | undefined;
 
+// TODO: change name to getFormattedDateWithTime & getFormattedDateWithoutTime
 export const formatDate = cacheWrapperForUnaryFunction((date: string) => {
   if (!date) {
     return NOT_AVAILABLE;

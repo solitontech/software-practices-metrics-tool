@@ -15,6 +15,8 @@ interface IDialogBoxProps {
   width: string;
 }
 
+//TODO: Alterate way figure out to avoid inline styles
+
 export const DialogBox = ({ isOpen, handleClose, children, title, width }: IDialogBoxProps) => {
   const id = useId();
 

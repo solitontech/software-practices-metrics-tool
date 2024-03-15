@@ -8,6 +8,7 @@ interface IInfoIconTooltipProps {
   size?: string;
 }
 
+//TODO: Better way to avoid inline style is to expose a iconClass instead of size
 export const InfoIconTooltip = ({ content, size = "16px" }: IInfoIconTooltipProps) => {
   const title = <span className={styles.toolTip}>{content}</span>;
 
