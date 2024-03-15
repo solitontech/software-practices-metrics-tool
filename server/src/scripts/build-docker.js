@@ -38,12 +38,14 @@ class BuildDocker {
     console.log(chalk.grey('\nCreating tar file from builded docker image...'));
 
     const [tarFileName] = this.#dockerImageName.split(':');
-    const outputPath = path.join(this.#currentDir, '/../../release-to-production/docker-packaging', `${tarFileName}.tar`);
+    const outputPath = path.join(this.#currentDir, '/../../release-to-production/docker-package', `${tarFileName}.tar`);
     const command = `docker save -o ${outputPath} ${this.#dockerImageName}`;
 
     execSync(command);
 
-    console.log(chalk.green('\nDocker tar file created successfully in docker-packaging in release-to-production directory.'));
+    console.log(
+      chalk.green('\nDocker tar file created successfully in docker-packaging in release-to-production directory.')
+    );
   }
 
   static #buildImageAsTarFile() {
@@ -62,7 +64,7 @@ class BuildDocker {
   }
 
   static #changeImageVersionInComposeFile() {
-    const filePath = path.join(this.#currentDir, '/../../release-to-production/docker-packaging/compose.yaml');
+    const filePath = path.join(this.#currentDir, '/../../release-to-production/docker-package/compose.yaml');
     const composeFileContent = fs.readFileSync(filePath, 'utf8');
 
     // RegExp pattern to match the image in compose file
