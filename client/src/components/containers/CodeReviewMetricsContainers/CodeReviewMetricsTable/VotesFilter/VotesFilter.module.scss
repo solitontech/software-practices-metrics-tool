@@ -29,7 +29,9 @@
 }
 
 .voteFilterContainer {
-  @include filter-icon-container;
+  position: absolute;
+  right: 0;
+  z-index: 2;
 }
 
 .heading {

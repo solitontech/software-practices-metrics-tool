@@ -1,17 +1,15 @@
 import { Config, Data, Layout, ModeBarDefaultButtons } from "plotly.js";
 import Plot from "react-plotly.js";
 
-import { IHistogramChart } from "./histogramInterfaces";
-import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsConstants";
+import { IHistogramChart } from "./histogramTypes";
+import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsGraphConstants";
 
-interface Props {
-  graphObject: IHistogramChart;
+interface IHistogramChartProps {
+  graph: IHistogramChart;
 }
 
-const GRAPH_TYPE = "histogram";
-
 export const HistogramChart = ({
-  graphObject: {
+  graph: {
     plot: { xValues, startValue, endValue, binSize, binText, markerColor, hoverText },
     xAxisName = "",
     yAxisName = "",
@@ -21,10 +19,10 @@ export const HistogramChart = ({
     graphAnnotationText,
     fileNameForImage = "histogram-chart",
   },
-}: Props) => {
+}: IHistogramChartProps) => {
   const data: Data[] = [
     {
-      type: GRAPH_TYPE,
+      type: "histogram",
       x: xValues,
       xbins: {
         start: startValue,

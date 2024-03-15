@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 export function cacheWrapperForUnaryFunction<T>(func: (arg: any) => T): (arg: any) => T {
   const cache: Map<any, T> = new Map();
 

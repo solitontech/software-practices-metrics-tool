@@ -1,12 +1,15 @@
 @import "src/styles/index.scss";
 
 .codeReviewTable {
-  @include metrics-table;
+  height: calc(100% - 100px);
   margin-top: $spacing-xxl;
+  max-height: 90%;
+  overflow-y: auto;
 }
 
 .codeReview {
-  @include metrics-container;
+  height: 100%;
+  width: 100%;
 }
 
 .tableDetails {
@@ -20,7 +23,9 @@
 }
 
 .tiles {
-  @include tiles-container;
+  @include flex-row;
+  color: $app-primary-color;
+  gap: $spacing-xl;
 }
 
 .dropDown {

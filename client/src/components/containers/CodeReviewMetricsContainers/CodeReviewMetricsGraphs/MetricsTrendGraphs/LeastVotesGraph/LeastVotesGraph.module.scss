@@ -5,7 +5,9 @@
 }
 
 .infoIconContainer {
-  @include graph-info-container;
+  position: absolute;
+  top: 38px;
+  z-index: 1;
   left: 54.6%;
 }
 
@@ -19,5 +21,6 @@
 }
 
 .infoIcon {
-  @include graph-info-icon;
+    font-size: $icon-size-lg;
+  color: $app-primary-color;
 }

@@ -6,9 +6,9 @@ export interface IBarPlot {
   plotName: string;
 }
 
-export type BarMode = "stack" | "group";
+export type IBarChartMode = "stack" | "group";
 
-export type TrendView = "monthly" | "weekly";
+export type IBarChartTrendView = "monthly" | "weekly";
 
 export interface IBarChart {
   plots: IBarPlot[];
@@ -20,6 +20,6 @@ export interface IBarChart {
   fileNameForImage?: string;
   graphAnnotationText: string;
   annotationYPosition?: number;
-  barMode?: BarMode;
+  barMode?: IBarChartMode;
   yAxisTickSuffix?: string;
 }

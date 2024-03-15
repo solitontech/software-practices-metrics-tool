@@ -47,17 +47,20 @@
 }
 
 .active {
-  @include capitalize;
+  text-transform: capitalize;
+  color: $app-secondary-text-color;
   background-color: $app-chip-active-color;
 }
 
 .completed {
-  @include capitalize;
+  text-transform: capitalize;
+  color: $app-secondary-text-color;
   background-color: $app-chip-completed-color;
 }
 
 .abandoned {
-  @include capitalize;
+  text-transform: capitalize;
+  color: $app-secondary-text-color;
   background-color: $app-chip-abandoned-color;
 }
 
@@ -121,13 +124,15 @@
 }
 
 .buttonColor {
-  @include common-icon;
   color: $app-primary-color;
+  cursor: pointer;
+  font-size: $icon-size-xl;
 }
 
 .timelineIconColor {
-  @include common-icon;
   color: $app-secondary-color;
+  cursor: pointer;
+  font-size: $icon-size-xl;
 }
 
 .historyIcon {
@@ -201,19 +206,28 @@
 }
 
 .table {
-  @include table;
+  border-spacing: 0;
+  width: 100%;
 }
 
 .tableHead {
-  @include table-head;
+  position: sticky;
+  top: 0;
+  background-color: $app-secondary-text-color;
+  color: $app-primary-text-color;
+  font-weight: $extra-bold-font-weight;
 }
 
 .tableBody {
-  @include table-body;
+    overflow-y: scroll;
 }
 
 .tableCell {
-  @include table-cell;
+  font-weight: $medium-font-weight;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  border-bottom: 1px solid $app-secondary-border-color;
+  padding: $spacing-lg;
 }
 
 .date {

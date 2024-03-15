@@ -1,7 +1,8 @@
 @import "src/styles/index.scss";
 
 .container {
-  @include metrics-container;
+  height: 100%;
+  width: 100%;
 }
 
 .headerContainer {
@@ -12,5 +13,7 @@
 }
 
 .tilesContainer {
-  @include tiles-container;
+  @include flex-row;
+  color: $app-primary-color;
+  gap: $spacing-xl;
 }

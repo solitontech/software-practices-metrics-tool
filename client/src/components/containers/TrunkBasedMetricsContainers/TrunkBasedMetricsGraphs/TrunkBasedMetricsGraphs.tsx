@@ -27,7 +27,7 @@ export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: ITrunkBasedMetri
   //TODO: Improvement add dynamic width & height for graph based on available space
 
   return (
-    <div className={styles.graph}>
+    <div className={styles.graphContainer}>
       <BarChart
         graph={{
           plots: [plot],

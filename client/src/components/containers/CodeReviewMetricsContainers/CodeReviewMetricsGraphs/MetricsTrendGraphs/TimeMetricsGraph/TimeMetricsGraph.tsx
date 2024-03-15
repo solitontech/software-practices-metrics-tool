@@ -8,7 +8,11 @@ import { Weekly } from "./weeklyGraphUtils";
 import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { GRAPH_TYPE, TREND_VIEW } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
-import { BarMode, IBarPlot, TrendView } from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
+import {
+  IBarChartMode,
+  IBarPlot,
+  IBarChartTrendView,
+} from "../../../../../reusables/MetricsGraphs/BarChart/barChartTypes";
 import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
 
@@ -26,9 +30,9 @@ const Y_AXIS_SUFFIX = " hrs";
 export const TimeMetricsAnalysisGraph = ({ pullRequests, startDate, endDate }: Props) => {
   const isMonthlyDisabled = areDatesInSameMonthAndYear(startDate, endDate);
 
-  const defaultGraphMode = (isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY) as TrendView;
+  const defaultGraphMode = (isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY) as IBarChartTrendView;
 
-  const [trendView, setTrendView] = useState<TrendView>(defaultGraphMode);
+  const [trendView, setTrendView] = useState<IBarChartTrendView>(defaultGraphMode);
 
   const xAxisName = trendView === TREND_VIEW.WEEKLY ? "Weeks" : "Months";
 
@@ -92,13 +96,13 @@ export const TimeMetricsAnalysisGraph = ({ pullRequests, startDate, endDate }: P
       </div>
 
       <BarChart
-        graphObject={{
+        graph={{
           plots: Object.values(plots),
           xAxisName: xAxisName,
           yAxisName: Y_AXIS_NAME,
           graphAnnotationText: `Total Pull Requests : ${pullRequests.length}`,
           graphTitle: GRAPH_TITLE,
-          barMode: GRAPH_TYPE.GROUP as BarMode,
+          barMode: GRAPH_TYPE.GROUP as IBarChartMode,
           yAxisTickSuffix: Y_AXIS_SUFFIX,
         }}
       />

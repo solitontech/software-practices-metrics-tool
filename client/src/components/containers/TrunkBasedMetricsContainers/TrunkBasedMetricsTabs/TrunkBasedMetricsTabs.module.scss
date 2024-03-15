@@ -1,6 +1,10 @@
 @import "src/styles/index.scss";
 
 .trunkBasedTable {
-  @include metrics-table;
+  @include flex-column;
+  @include flex-align-center;
+  height: calc(100% - 100px);
   margin-top: $spacing-xl;
+  max-height: 90%;
+  overflow-y: auto;
 }

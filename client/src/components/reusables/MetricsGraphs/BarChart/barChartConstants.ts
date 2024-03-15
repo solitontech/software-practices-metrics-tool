@@ -1,5 +1,4 @@
 export const TAB_SPACE = "    ";
-
 export const EMPTY_STRING = "";
 
 export const GRAPH_TYPE = {

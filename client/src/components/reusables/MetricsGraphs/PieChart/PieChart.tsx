@@ -1,17 +1,15 @@
 import { Config, Data, Layout } from "plotly.js";
 import Plot from "react-plotly.js";
 
-import { IPieChart as IPieChart } from "./interfaces";
-import { ANNOTATIONS, GRAPH } from "../metricsConstants";
+import { IPieChart } from "./pieChartTypes";
+import { ANNOTATIONS, GRAPH } from "../metricsGraphConstants";
 
-interface Props {
-  graphObject: IPieChart;
+interface IPieChartProps {
+  graph: IPieChart;
 }
 
-const GRAPH_TYPE = "pie";
-
 export const PieChart = ({
-  graphObject: {
+  graph: {
     plots,
     totalValue,
     graphTitle = "",
@@ -21,7 +19,7 @@ export const PieChart = ({
     graphAnnotationText,
     annotationYPosition = ANNOTATIONS.Y_POSITION,
   },
-}: Props) => {
+}: IPieChartProps) => {
   const values: number[] = [];
   const labels: string[] = [];
   const colors: string[] = [];
@@ -41,7 +39,7 @@ export const PieChart = ({
 
   const data: Data[] = [
     {
-      type: GRAPH_TYPE,
+      type: "pie",
       values,
       labels,
       marker: {

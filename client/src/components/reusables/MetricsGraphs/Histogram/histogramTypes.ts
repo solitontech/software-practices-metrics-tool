@@ -1,4 +1,4 @@
-export interface IHistogram {
+interface IHistogramPlot {
   xValues: number[];
   startValue: number;
   endValue: number;
@@ -9,7 +9,7 @@ export interface IHistogram {
 }
 
 export interface IHistogramChart {
-  plot: IHistogram;
+  plot: IHistogramPlot;
   xAxisName?: string;
   yAxisName?: string;
   graphTitle?: string;

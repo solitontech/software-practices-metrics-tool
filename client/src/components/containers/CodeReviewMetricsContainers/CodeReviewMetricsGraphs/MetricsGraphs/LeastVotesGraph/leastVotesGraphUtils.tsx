@@ -1,4 +1,4 @@
-import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/interfaces";
+import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieChartTypes";
 import { IVotes } from "../../../CodeReviewMetricsTable/interfaces";
 import { VOTES } from "../../../CodeReviewMetricsTable/VotesFilter/votesFilterConstants";
 import {
