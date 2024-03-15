@@ -1,4 +1,5 @@
-import { app, BrowserWindow, Menu } from 'electron';
+import electron from 'electron';
+const { app, BrowserWindow, Menu } = electron;
 import electronSquirrelStartup from 'electron-squirrel-startup';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';

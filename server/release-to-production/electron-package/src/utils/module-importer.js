@@ -1,6 +1,6 @@
 export class ModuleImporter {
   static #developmentSourcePath = '../../../../src';
-  static #productionSourcePath = '../../src';
+  static #productionSourcePath = '../../server/src';
   static #sourcePath;
   static #port;
 

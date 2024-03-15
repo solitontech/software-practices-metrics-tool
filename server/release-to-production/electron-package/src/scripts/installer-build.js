@@ -8,41 +8,29 @@ import { FileSystemOperator } from '../utils/index.js';
 class InstallerBuilder {
   static #currentDirname = dirname(fileURLToPath(import.meta.url));
   static #currentPackageJsonPath = 'package.json';
+  static #currentPackageLockJsonPath = 'package-lock.json';
   static #backupPackageJsonPath = 'package.temp.json';
+  static #backupPackageLockJsonPath = 'package-lock.temp.json';
   static #serverPackageJsonPath = join(this.#currentDirname, '..', '..', '..', '..', 'package.json');
 
   static #createBackUpPackageJson() {
     console.log(chalk.grey('\nCreating backup of package.json\n'));
 
     copyFileSync(this.#currentPackageJsonPath, this.#backupPackageJsonPath);
+    copyFileSync(this.#currentPackageLockJsonPath, this.#backupPackageLockJsonPath);
 
     console.log(chalk.green('\npackage.json Backup created successfully\n'));
-  }
-
-  static #createBackUpSourceDirectory() {
-    console.log(chalk.grey('\nCreating backup of source directory\n'));
-
-    FileSystemOperator.copyDirectory('src', join('temp', 'src'));
-    FileSystemOperator.deleteDirectories(['src']);
-
-    console.log(chalk.green('\nSource directory Backup created successfully\n'));
-  }
-
-  static #restoreSourceDirectory() {
-    console.log(chalk.grey('\nRestoring source directory\n'));
-
-    FileSystemOperator.copyDirectory(join('temp', 'src'), 'src');
-    FileSystemOperator.deleteDirectories(['temp']);
-
-    console.log(chalk.green('\nSource directory restored successfully\n'));
   }
 
   static #copyDirectoriesFromServer() {
     console.log(chalk.grey('\nCopying src , docs and dist directories\n'));
 
-    FileSystemOperator.copyDirectory(join('..', '..', 'src'), 'src');
-    FileSystemOperator.copyDirectory(join('..', '..', 'dist'), 'dist');
-    FileSystemOperator.copyFile(join('..', '..', 'docs', 'open-api-doc-swagger.yaml'), join('docs', separator));
+    FileSystemOperator.copyDirectory(join('..', '..', 'src'), join('server', 'src'));
+    FileSystemOperator.copyDirectory(join('..', '..', 'dist'), join('server', 'dist'));
+    FileSystemOperator.copyFile(
+      join('..', '..', 'docs', 'open-api-doc-swagger.yaml'),
+      join('server', 'docs', separator)
+    );
 
     console.log(chalk.green('\nDirectories copied successfully\n'));
   }
@@ -50,7 +38,7 @@ class InstallerBuilder {
   static #settingProductionEnvironment() {
     console.log(chalk.grey('\nSetting production environment\n'));
 
-    const envFilePath = join(this.#currentDirname, '..', '..', 'src', 'configs', '.env');
+    const envFilePath = join(this.#currentDirname, '..', '..', 'server', 'src', 'configs', '.env');
     const env = readFileSync(envFilePath, 'utf-8');
 
     writeFileSync(envFilePath, `${env}\nNODE_ENVIRONMENT=production`);
@@ -61,7 +49,7 @@ class InstallerBuilder {
   static #deleteDirectoriesCopiedFromServer() {
     console.log(chalk.grey('\nDeleting src , dist and docs directories\n'));
 
-    FileSystemOperator.deleteDirectories(['src', 'dist', 'docs']);
+    FileSystemOperator.deleteDirectories(['server']);
 
     console.log(chalk.green('\nDirectories deleted successfully\n'));
   }
@@ -104,23 +92,24 @@ class InstallerBuilder {
     copyFileSync(this.#backupPackageJsonPath, this.#currentPackageJsonPath);
     unlinkSync(this.#backupPackageJsonPath);
 
+    copyFileSync(this.#backupPackageLockJsonPath, this.#currentPackageLockJsonPath);
+    unlinkSync(this.#backupPackageLockJsonPath);
+
     console.log(chalk.green('\npackage.json restored successfully\n'));
   }
 
   static build() {
     try {
       this.#createBackUpPackageJson();
-      this.#createBackUpSourceDirectory();
       this.#copyDirectoriesFromServer();
       this.#settingProductionEnvironment();
       this.#mergeDependencies();
       this.#installDependencies();
       this.#buildElectron();
     } catch (error) {
-      console.error(chalk.grey('Build process failed:', error));
+      console.error(chalk.red('Build process failed:', error));
     } finally {
       this.#deleteDirectoriesCopiedFromServer();
-      this.#restoreSourceDirectory();
       this.#restorePackageJson();
     }
   }
