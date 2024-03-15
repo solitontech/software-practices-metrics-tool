@@ -9,7 +9,7 @@
 }
 
 .filterContainer {
-  @include filter-container;
+  background-color: $app-ternary-background-color;
   max-height: 85vh;
   overflow-y: scroll;
   width: 500px;

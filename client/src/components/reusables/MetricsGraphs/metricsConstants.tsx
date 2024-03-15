@@ -6,7 +6,7 @@ export enum GRAPH {
   HOVER_ALIGN = "left",
   AXIS_RANGE_MODE = "nonnegative",
   WIDTH = 1100,
-  HEIGHT = 570,
+  HEIGHT = 550,
   TOOL_TIP_BACKGROUND_COLOR = "#4f5355",
   DRAG_MODE = "pan",
 }

@@ -34,3 +34,6 @@ export const useTrunkBranchCommits = (startDate: Date, endDate: Date) => {
     error,
   };
 };
+
+/* interface exports for consumers */
+export type { IFetchedTrunkBranchCommit } from "./types";

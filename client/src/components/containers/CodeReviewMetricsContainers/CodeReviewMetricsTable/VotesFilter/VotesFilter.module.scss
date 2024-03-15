@@ -1,7 +1,7 @@
 @import "src/styles/index.scss";
 
 .filterContainer {
-  @include filter-container;
+  background-color: $app-ternary-background-color;
   padding: $spacing-sm;
   width: 150px;
 }

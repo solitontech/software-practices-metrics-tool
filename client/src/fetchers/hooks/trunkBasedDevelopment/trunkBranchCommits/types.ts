@@ -4,7 +4,7 @@ interface IFetchedTrunkBranchCommitAuthor {
   date: string;
 }
 
-interface IFetchedTrunkBranchCommit {
+export interface IFetchedTrunkBranchCommit {
   id: string;
   comment: string;
   author: IFetchedTrunkBranchCommitAuthor;

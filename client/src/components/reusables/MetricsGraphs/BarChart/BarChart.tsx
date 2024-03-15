@@ -6,13 +6,13 @@ import { IBarChart } from "./interfaces";
 import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsConstants";
 
 interface Props {
-  graphObject: IBarChart;
+  graph: IBarChart;
 }
 
 const GRAPH_TYPE = "bar";
 
 export const BarChart = ({
-  graphObject: {
+  graph: {
     plots,
     graphTitle = "",
     xAxisName = "",

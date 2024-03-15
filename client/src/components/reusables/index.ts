@@ -11,3 +11,6 @@ export * from "./TabToggle/TabToggle";
 export * from "./SearchBox/SearchBox";
 export * from "./SnackBar/SnackBar";
 export * from "./Tile/Tile";
+export * from "./MetricsGraphs/BarChart/BarChart";
+export * from "./MetricsGraphs/Histogram/Histogram";
+export * from "./MetricsGraphs/PieChart/PieChart";

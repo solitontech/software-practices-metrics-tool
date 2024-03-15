@@ -19,7 +19,6 @@
   color: $app-secondary-text-color;
 }
 
-
 @mixin graph-info-icon {
   font-size: $icon-size-lg;
   color: $app-primary-color;
@@ -31,17 +30,6 @@
   z-index: 1;
 }
 
-@mixin graphs-container {
-  width: 100%;
-  margin-top: $spacing-xs;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  overflow: scroll;
-  gap: 50px;
-  height: calc(100% - 90px);
-}
-
 @mixin table {
   border-spacing: 0;
   width: 100%;
@@ -51,7 +39,7 @@
   position: sticky;
   top: 0;
   background-color: $app-secondary-text-color;
-  color: $secondary-text-color;
+  color: $app-primary-text-color;
   font-weight: $extra-bold-font-weight;
 }
 
@@ -71,10 +59,6 @@
   position: absolute;
   right: 0;
   z-index: 2;
-}
-
-@mixin filter-container {
-  background-color: $tool-tip-background-color;
 }
 
 @mixin common-icon {

@@ -1,7 +1,11 @@
 @import "src/styles/index.scss";
 
 .graph {
-  @include graphs-container;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: calc(100% - 100px);
+  margin-top: $spacing-xs;
 }
 
 :export {
