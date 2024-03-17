@@ -27,6 +27,7 @@ class InstallerBuilder {
 
     FileSystemOperator.copyDirectory(join('..', '..', 'src'), join('server', 'src'));
     FileSystemOperator.copyDirectory(join('..', '..', 'dist'), join('server', 'dist'));
+
     FileSystemOperator.copyFile(
       join('..', '..', 'docs', 'open-api-doc-swagger.yaml'),
       join('server', 'docs', separator)
