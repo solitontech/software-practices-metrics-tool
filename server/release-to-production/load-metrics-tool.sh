@@ -18,4 +18,4 @@ if [ $? -ne 0 ]; then
 fi
 
 echo -e "\nDocker container created successfully."
-echo -e "\nMetrics tool is running in http://localhost:3000."
+echo -e "\nMetrics tool is running in http://localhost:3498."
