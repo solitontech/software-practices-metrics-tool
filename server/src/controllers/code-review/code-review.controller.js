@@ -1,6 +1,6 @@
-import { DateValidation, PaginationValidation } from '../../validations/index.js';
-import { VersionControl } from '../../services/version-control/version-control.js';
-import { STATUS_CODE } from '../../constants/index.js';
+import { DateValidation, PaginationValidation } from '##/validations/index.js';
+import { VersionControl } from '##/use-cases/version-control/version-control.js';
+import { STATUS_CODE } from '##/constants/index.js';
 
 export class CodeReviewController {
   static async getCodeReview(req, res) {

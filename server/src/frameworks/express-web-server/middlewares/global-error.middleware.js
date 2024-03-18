@@ -1,10 +1,10 @@
-import { AppError, logDevError } from '../utils/index.js';
-import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../constants/index.js';
+import { AppError, logError } from '##/utils/index.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/index.js';
 
 // express global error handler (https://expressjs.com/en/guide/error-handling.html)
 // eslint-disable-next-line no-unused-vars
 export const globalErrorHandlerMiddleware = (error, req, res, next) => {
-  logDevError(error);
+  logError(error);
 
   if (error instanceof AppError) {
     return res.status(error.statusCode).json({

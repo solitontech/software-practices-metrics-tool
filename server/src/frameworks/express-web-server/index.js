@@ -1,7 +1,7 @@
 import app from './app.js';
 
-import { ServerConfiguration } from './configs/server.config.js';
-import { logError } from './utils/logger.js';
+import { ServerConfiguration } from '##/configs/server.config.js';
+import { logError } from '##/utils/logger.util.js';
 
 const { port } = ServerConfiguration.environmentVariables;
 

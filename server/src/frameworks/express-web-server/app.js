@@ -3,10 +3,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 
+import { ServerConfiguration } from '##/configs/server.config.js';
+import { NODE_ENVIRONMENT_MODE, STATUS_CODE } from '##/constants/index.js';
+
 import { router } from './routes/routes.js';
 import { globalErrorHandlerMiddleware } from './middlewares/index.js';
-import { ServerConfiguration } from './configs/server.config.js';
-import { NODE_ENVIRONMENT_MODE, STATUS_CODE } from './constants/index.js';
 
 const dirName = path.dirname(fileURLToPath(import.meta.url));
 const app = express();

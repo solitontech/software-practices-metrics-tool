@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
-import { ServerConfiguration } from '../configs/server.config.js';
+import { ServerConfiguration } from '##/configs/server.config.js';
 
 class BuildDocker {
   static #dockerImageName;

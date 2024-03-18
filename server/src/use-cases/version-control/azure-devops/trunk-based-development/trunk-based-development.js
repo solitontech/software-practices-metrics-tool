@@ -7,7 +7,7 @@ import {
   REQUIRED_BRANCH_PARTS,
   SEPARATOR,
   USERS,
-} from './constants.js';
+} from './trunk-based-development.constants.js';
 
 export class TrunkBasedDevelopment {
   static #isBranchFollowingNamingStandard(branchName) {

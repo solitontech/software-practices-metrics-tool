@@ -2,9 +2,9 @@ import axios from 'axios';
 import btoa from 'btoa';
 import { URL } from 'node:url';
 
-import { STATUS_CODE } from '../../../../constants/index.js';
-import { AppError } from '../../../../utils/index.js';
-import { ServerConfiguration } from '../../../../configs/server.config.js';
+import { STATUS_CODE } from '##/constants/index.js';
+import { AppError } from '##/utils/index.js';
+import { ServerConfiguration } from '##/configs/server.config.js';
 
 const {
   organization: ORGANIZATION,
@@ -14,7 +14,7 @@ const {
   authToken: TOKEN,
 } = ServerConfiguration.versionControl;
 
-export class AzureDevopsApi {
+export class AzureDevopsEntity {
   static #baseUrl = new URL(`https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`);
   static #apiVersion = '7.1-preview.1';
 
