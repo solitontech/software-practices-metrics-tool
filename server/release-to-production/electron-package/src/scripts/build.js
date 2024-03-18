@@ -3,7 +3,7 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 
-import { ExecuteTerminalCommand } from '../setup/index.js';
+import { DirectoryService } from '../setup/index.js';
 
 class Build {
   static #currentDirname = dirname(fileURLToPath(import.meta.url));
@@ -28,17 +28,20 @@ class Build {
   static #copyDirectoriesFromServerToElectronPackage() {
     console.log(chalk.grey('\nCopying src , docs and dist directories of server into electron-package\n'));
 
-    ExecuteTerminalCommand.copyDirectory(
+    // Copy src directory in server to server directory in electron-package
+    DirectoryService.copyDirectory(
       path.join(this.#electronPackageDirectoryPath, '../../src'),
       path.join(this.#electronPackageDirectoryPath, 'server/src')
     );
 
-    ExecuteTerminalCommand.copyDirectory(
+    // Copy dist directory in server to server directory in electron-package
+    DirectoryService.copyDirectory(
       path.join(this.#electronPackageDirectoryPath, '../../dist'),
       path.join(this.#electronPackageDirectoryPath, 'server/dist')
     );
 
-    ExecuteTerminalCommand.copyDirectory(
+    // Copy docs directory in server to server directory in electron-package
+    DirectoryService.copyDirectory(
       path.join(this.#electronPackageDirectoryPath, '../../docs'),
       path.join(this.#electronPackageDirectoryPath, 'server/docs')
     );
@@ -49,7 +52,7 @@ class Build {
   static #settingProductionEnvironmentForElectronPackage() {
     console.log(chalk.grey('\nSetting production environment in server .env of electron package directory\n'));
 
-    const envFilePath = path.join(this.#currentDirname, '../../server/src', 'configs', '.env');
+    const envFilePath = path.join(this.#electronPackageDirectoryPath, 'server/src/configs/.env');
     const env = fs.readFileSync(envFilePath, 'utf-8');
 
     fs.writeFileSync(envFilePath, `${env}\nNODE_ENVIRONMENT=production`);
@@ -80,7 +83,7 @@ class Build {
   static #installDependenciesInsideElectron() {
     console.log(chalk.grey('\nInstalling electron-package dependencies\n'));
 
-    ExecuteTerminalCommand.runCommand('npm', ['install']);
+    DirectoryService.runCommand('npm', ['install']);
 
     console.log(chalk.green('\nDependencies of electron-package installed successfully\n'));
   }
@@ -88,7 +91,7 @@ class Build {
   static #buildElectron() {
     console.log(chalk.grey('\nBuilding Electron installer\n'));
 
-    ExecuteTerminalCommand.runCommand('electron-forge', ['make']);
+    DirectoryService.runCommand('electron-forge', ['make']);
 
     console.log(chalk.green('\nElectron build successfully\n'));
   }
@@ -96,7 +99,7 @@ class Build {
   static #deleteDirectoriesCopiedFromServerInElectron() {
     console.log(chalk.grey('\nDeleting copied server directory in electron-package\n'));
 
-    ExecuteTerminalCommand.deleteDirectories([path.join(this.#electronPackageDirectoryPath, 'server')]);
+    DirectoryService.deleteDirectories([path.join(this.#electronPackageDirectoryPath, 'server')]);
 
     console.log(chalk.green('\nCopied server directory in electron-package deleted successfully\n'));
   }

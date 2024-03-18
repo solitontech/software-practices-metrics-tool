@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process';
 
-export class ExecuteTerminalCommand {
+export class DirectoryService {
   static runCommand(command, args) {
     spawnSync(command, args, { stdio: 'inherit', shell: true });
   }
