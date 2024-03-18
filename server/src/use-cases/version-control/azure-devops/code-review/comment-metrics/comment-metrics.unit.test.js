@@ -1,6 +1,6 @@
 import { describe, it, expect } from '@jest/globals';
 
-import { CommentMetrics } from '../../../../../../../src/services/version-control/azure-devops/code-review/comment-metrics/comment-metrics.js';
+import { CommentMetrics } from '##/use-cases/version-control/azure-devops/code-review/comment-metrics/comment-metrics.js';
 
 describe('CommentMetrics~getPullRequestComments - method to get the count for nit, major and total comments for a pull request from threads.', () => {
   it('should correctly count comments', () => {

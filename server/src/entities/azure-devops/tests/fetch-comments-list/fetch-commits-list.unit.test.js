@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { jest, describe, it, expect, afterEach } from '@jest/globals';
 
-import { AzureDevopsApi } from '../../../../../../../src/services/version-control/azure-devops/apis/azure-devops.api.js';
-import { AppError } from '../../../../../../../src/utils/app-error.js';
+import { AzureDevopsEntity } from '##/entities/azure-devops/azure-devops.entity.js';
+import { AppError } from '##/utils/app-error.util.js';
+import { ServerConfiguration } from '##/configs/server.config.js';
 
+import { STATUS_CODE } from '##/constants/index.js';
 import { AZURE_TRUNK_BRANCH_COMMITS_RESPONSE } from './fetch-commits-list.mock.js';
-import { ServerConfiguration } from '../../../../../../../src/configs/server.config.js';
-import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
 
 const {
   organization: ORGANIZATION,
@@ -34,7 +34,7 @@ const AXIOS_REQUEST_PARAMETERS = [
 
 jest.mock('axios');
 
-describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk branch in the given range.', () => {
+describe('AzureDevopsEntity~fetchCommitsList - return all commits from the trunk branch in the given range.', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
@@ -43,7 +43,7 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
     const mockResponse = { data: AZURE_TRUNK_BRANCH_COMMITS_RESPONSE, status: STATUS_CODE.OK };
     axios.get = jest.fn().mockResolvedValue(mockResponse);
 
-    const response = await AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = await AzureDevopsEntity.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
     expect(response).toEqual(AZURE_TRUNK_BRANCH_COMMITS_RESPONSE);
@@ -56,38 +56,41 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
 
     jest.spyOn(AppError, 'throwAppError');
 
-    const response = AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = AzureDevopsEntity.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     await expect(response).rejects.toThrow(AppError);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
-    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
+    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsEntity.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
   it('should throw AppError with status 404 when request to azure api fails due to 404', async () => {
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.NOT_FOUND } });
     jest.spyOn(AppError, 'throwAppError');
 
-    const response = AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = AzureDevopsEntity.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     await expect(response).rejects.toThrow(AppError);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
-    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
+    expect(AppError.throwAppError).toHaveBeenCalledWith(
+      AzureDevopsEntity.invalidRepositoryDetails,
+      STATUS_CODE.NOT_FOUND
+    );
   });
 
   it('should throw AppError with status 401 when request to azure api fails due to 401', async () => {
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.UNAUTHORIZED_ACCESS } });
     jest.spyOn(AppError, 'throwAppError');
 
-    const response = AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = AzureDevopsEntity.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     await expect(response).rejects.toThrow(AppError);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
 
     expect(AppError.throwAppError).toHaveBeenCalledWith(
-      AzureDevopsApi.invalidAzureToken,
+      AzureDevopsEntity.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
     );
   });
@@ -96,14 +99,14 @@ describe('AzureDevopsApi~fetchCommitsList - return all commits from the trunk br
     axios.get = jest.fn().mockResolvedValue({ status: STATUS_CODE.NON_AUTHORITATIVE_INFORMATION });
     jest.spyOn(AppError, 'throwAppError');
 
-    const response = AzureDevopsApi.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = AzureDevopsEntity.fetchCommitsList(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     await expect(response).rejects.toThrow(AppError);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
 
     expect(AppError.throwAppError).toHaveBeenCalledWith(
-      AzureDevopsApi.invalidAzureToken,
+      AzureDevopsEntity.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
     );
   });

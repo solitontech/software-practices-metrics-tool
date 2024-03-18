@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { jest, describe, it, expect, afterEach } from '@jest/globals';
 
-import { AppError } from '../../../../../../../src/utils/app-error.js';
-import { ServerConfiguration } from '../../../../../../../src/configs/server.config.js';
-import { AzureDevopsApi } from '../../../../../../../src/services/version-control/azure-devops/apis/azure-devops.api.js';
+import { AzureDevopsEntity } from '##/entities/azure-devops/azure-devops.entity.js';
+import { AppError } from '##/utils/app-error.util.js';
+import { ServerConfiguration } from '##/configs/server.config.js';
+import { STATUS_CODE } from '##/constants/index.js';
 
-import { STATUS_CODE } from '../../../../../../../src/constants/http-status-code.constant.js';
+import { AZURE_PULL_REQUESTS_RESPONSE } from '../common-mock/azure-pull-request.mock.js';
 import {
   PULL_REQUESTS_WITH_THREADS,
   PULL_REQUESTS_WITH_THREADS_ERROR,
@@ -14,7 +15,6 @@ import {
   SQUADS,
   THREADS,
 } from './fetch-pull-requests.mock.js';
-import { AZURE_PULL_REQUESTS_RESPONSE } from '../common-mock/azure-pull-request.mock.js';
 
 const {
   organization: ORGANIZATION,
@@ -43,7 +43,7 @@ const AXIOS_REQUEST_PARAMETERS = [
 
 jest.mock('axios');
 
-describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads in azure repository within the selected range', () => {
+describe('AzureDevopsEntity~fetchPullRequests - return pull requests with threads in azure repository within the selected range', () => {
   afterEach(() => {
     jest.restoreAllMocks();
   });
@@ -69,7 +69,7 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
       }
     });
 
-    const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = await AzureDevopsEntity.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     // total 4 API calls are made, 1 API call is for fetching pull requests (count = 3)  and other 3 API calls for threads of each pull request
     expect(axios.get).toHaveBeenCalledTimes(4);
@@ -113,7 +113,7 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
       }
     });
 
-    const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = await AzureDevopsEntity.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     // total 4 API calls are made, 1 API call is for fetching pull requests (count = 3)  and other 3 API calls for threads of each pull request
     expect(axios.get).toHaveBeenCalledTimes(4);
@@ -158,7 +158,7 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
       }
     });
 
-    const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = await AzureDevopsEntity.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     // total 3 API calls are made, 1 API call is for fetching pull requests (count = 3)  and other 2 API calls for threads of each pull request
     // as a pull request got filtered using squads
@@ -204,7 +204,7 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
       }
     });
 
-    const response = await AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = await AzureDevopsEntity.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     // total 3 API calls are made, 1 API call is for fetching pull requests (count = 3)  and other 2 API calls for threads of each pull request
     // as a pull request got filtered using squads
@@ -237,12 +237,12 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
     axios.get = jest.fn().mockResolvedValue(mockResponse);
     jest.spyOn(AppError, 'throwAppError');
 
-    const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = AzureDevopsEntity.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     await expect(response).rejects.toThrow(AppError);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
-    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.dataNotFound, STATUS_CODE.NOT_FOUND);
+    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsEntity.dataNotFound, STATUS_CODE.NOT_FOUND);
   });
 
   it('should throw AppError with status 404 when request to azure api fails due to 404', async () => {
@@ -252,12 +252,12 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.NOT_FOUND } });
     jest.spyOn(AppError, 'throwAppError');
 
-    const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = AzureDevopsEntity.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     await expect(response).rejects.toThrow(AppError);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
-    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsApi.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
+    expect(AppError.throwAppError).toHaveBeenCalledWith(AzureDevopsEntity.invalidRepositoryDetails, STATUS_CODE.NOT_FOUND);
   });
 
   it('should throw AppError with status 401 when request to azure api fails due to 401', async () => {
@@ -267,14 +267,14 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
     axios.get = jest.fn().mockRejectedValue({ response: { status: STATUS_CODE.UNAUTHORIZED_ACCESS } });
     jest.spyOn(AppError, 'throwAppError');
 
-    const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = AzureDevopsEntity.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     await expect(response).rejects.toThrow(AppError);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
 
     expect(AppError.throwAppError).toHaveBeenCalledWith(
-      AzureDevopsApi.invalidAzureToken,
+      AzureDevopsEntity.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
     );
   });
@@ -286,14 +286,14 @@ describe('AzureDevopsApi~fetchPullRequests - return pull requests with threads i
     axios.get = jest.fn().mockResolvedValue({ status: STATUS_CODE.NON_AUTHORITATIVE_INFORMATION });
     jest.spyOn(AppError, 'throwAppError');
 
-    const response = AzureDevopsApi.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
+    const response = AzureDevopsEntity.fetchPullRequests(START_DATE, END_DATE, PAGE, PAGE_SIZE);
 
     await expect(response).rejects.toThrow(AppError);
 
     expect(axios.get).toHaveBeenCalledWith(...AXIOS_REQUEST_PARAMETERS);
 
     expect(AppError.throwAppError).toHaveBeenCalledWith(
-      AzureDevopsApi.invalidAzureToken,
+      AzureDevopsEntity.invalidAzureToken,
       STATUS_CODE.UNAUTHORIZED_ACCESS
     );
   });
