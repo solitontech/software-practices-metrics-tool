@@ -1,4 +1,4 @@
-import { Config, Data, Layout, ModeBarDefaultButtons } from "plotly.js";
+import { Config, Data, Layout } from "plotly.js";
 import Plot from "react-plotly.js";
 
 import { EMPTY_STRING, TAB_SPACE } from "./barChartConstants";
@@ -9,15 +9,14 @@ interface IBarChartProps {
   graph: IBarChart;
 }
 
-//TODO: remove enum and use constants to avoid typescript "as" conversion
 export const BarChart = ({
   graph: {
     plots,
     graphTitle = "",
     xAxisName = "",
     yAxisName = "",
-    graphHeight = GRAPH.HEIGHT as number,
-    graphWidth = GRAPH.WIDTH as number,
+    graphHeight = GRAPH.HEIGHT,
+    graphWidth = GRAPH.WIDTH,
     fileNameForImage = "bar-chart",
     graphAnnotationText,
     barMode = "group",
@@ -38,7 +37,7 @@ export const BarChart = ({
       hoverinfo: GRAPH.HOVER_INFO,
       hoverlabel: {
         align: GRAPH.HOVER_ALIGN,
-        bgcolor: GRAPH.TOOL_TIP_BACKGROUND_COLOR as string,
+        bgcolor: GRAPH.TOOL_TIP_BACKGROUND_COLOR,
       },
       name: plot.plotName,
     };
@@ -49,8 +48,8 @@ export const BarChart = ({
       text: graphTitle,
       xref: ANNOTATIONS.AXIS_REFERENCE,
       yref: ANNOTATIONS.AXIS_REFERENCE,
-      x: ANNOTATIONS.X_POSITION as number,
-      y: ANNOTATIONS.Y_POSITION as number,
+      x: ANNOTATIONS.X_POSITION,
+      y: ANNOTATIONS.Y_POSITION,
     },
     xaxis: {
       title: xAxisName,
@@ -66,7 +65,7 @@ export const BarChart = ({
     width: graphWidth,
     height: graphHeight,
     font: {
-      family: GRAPH.FONT_FAMILY as string,
+      family: GRAPH.FONT_FAMILY,
     },
     annotations: [
       {
@@ -76,11 +75,11 @@ export const BarChart = ({
         yref: ANNOTATIONS.AXIS_REFERENCE,
         text: graphAnnotationText,
         showarrow: false,
-        bordercolor: ANNOTATIONS.BORDER_COLOR as string,
-        borderwidth: ANNOTATIONS.BORDER_WIDTH as number,
-        borderpad: ANNOTATIONS.BORDER_PAD as number,
+        bordercolor: ANNOTATIONS.BORDER_COLOR,
+        borderwidth: ANNOTATIONS.BORDER_WIDTH,
+        borderpad: ANNOTATIONS.BORDER_PAD,
         font: {
-          size: ANNOTATIONS.FONT_SIZE as number,
+          size: ANNOTATIONS.FONT_SIZE,
         },
       },
     ],
@@ -93,7 +92,7 @@ export const BarChart = ({
     toImageButtonOptions: {
       filename: fileNameForImage,
     },
-    modeBarButtonsToRemove: GRAPH_MODE_BAR_BUTTONS_TO_REMOVE as ModeBarDefaultButtons[],
+    modeBarButtonsToRemove: GRAPH_MODE_BAR_BUTTONS_TO_REMOVE,
     scrollZoom: true,
   };
 
