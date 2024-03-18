@@ -15,16 +15,19 @@ export const rebuildConfig = {};
 
 export const makers = [
   {
+    // This package is for building Windows installers
     name: '@electron-forge/maker-squirrel',
     config: {
       setupIcon: iconPath,
     },
   },
   {
+    // This package is for building a zip file of your application for macOS
     name: '@electron-forge/maker-zip',
     platforms: ['darwin'],
   },
   {
+    // This package is for building Debian packages, which can be installed on Debian-based Linux distributions like Ubuntu
     name: '@electron-forge/maker-deb',
     config: {
       options: {
@@ -33,6 +36,7 @@ export const makers = [
     },
   },
   {
+    // This package is for building RPM packages, which can be installed on RPM-based Linux distributions like Fedora and CentOS
     name: '@electron-forge/maker-rpm',
     config: {},
   },
