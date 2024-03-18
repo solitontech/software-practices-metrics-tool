@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "prepare": "cd .. && husky install client/.husky",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --write .",
@@ -69,7 +68,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "husky": "^9.0.11",
     "jsdom": "^22.1.0",
     "lint-staged": "^15.2.2",
     "msw": "^2.2.3",
