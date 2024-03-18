@@ -1,12 +1,12 @@
 import { app } from 'electron';
-import { Application, ModuleImporter } from './utils/index.js';
+import { Application, ModuleImport } from './setup/index.js';
 
 Application.handleAppStartUpDueToInstaller();
 
 app.on('ready', async () => {
-  await ModuleImporter.importModules();
+  await ModuleImport.importServerModules();
 
-  const port = await ModuleImporter.getPort();
+  const port = ModuleImport.serverPort;
 
   Application.createWindow(port);
 });

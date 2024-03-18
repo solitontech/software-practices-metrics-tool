@@ -1,1 +1,1 @@
-export * from './node-environment.constant';
+export * from './node-environment.constant.js';

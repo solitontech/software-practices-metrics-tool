@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENVIRONMENT=development&& electron-forge start",
     "package": "electron-forge package",
-    "build": "set NODE_ENVIRONMENT=production&& node ./src/scripts/installer-build.js"
+    "build": "set NODE_ENVIRONMENT=production&& node ./src/scripts/build.js"
   },
   "keywords": [],
   "author": "TechOps",

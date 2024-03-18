@@ -1,6 +1,6 @@
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
-import { fileURLToPath, format } from 'url';
+import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
@@ -11,6 +11,7 @@ export const packagerConfig = {
   icon: iconPath,
 };
 
+// `rebuildConfig` is for `electron-rebuild`, which rebuilds native Node.js modules for Electron's Node.js version. An empty object means default configuration is used.
 export const rebuildConfig = {};
 
 export const makers = [
