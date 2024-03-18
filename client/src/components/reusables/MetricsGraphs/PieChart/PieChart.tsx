@@ -8,14 +8,13 @@ interface IPieChartProps {
   graph: IPieChart;
 }
 
-//TODO: remove enum and use constants to avoid typescript "as" conversion
 export const PieChart = ({
   graph: {
     plots,
     totalValue,
     graphTitle = "",
-    graphHeight = GRAPH.HEIGHT as number,
-    graphWidth = GRAPH.WIDTH as number,
+    graphHeight = GRAPH.HEIGHT,
+    graphWidth = GRAPH.WIDTH,
     fileNameForImage = "pie-chart",
     graphAnnotationText,
     annotationYPosition = ANNOTATIONS.Y_POSITION,
@@ -51,7 +50,7 @@ export const PieChart = ({
       hoverinfo: GRAPH.HOVER_INFO,
       hoverlabel: {
         align: GRAPH.HOVER_ALIGN,
-        bgcolor: GRAPH.TOOL_TIP_BACKGROUND_COLOR as string,
+        bgcolor: GRAPH.TOOL_TIP_BACKGROUND_COLOR,
       },
     },
   ];
@@ -61,13 +60,13 @@ export const PieChart = ({
       text: graphTitle,
       xref: ANNOTATIONS.AXIS_REFERENCE,
       yref: ANNOTATIONS.AXIS_REFERENCE,
-      x: ANNOTATIONS.X_POSITION as number,
-      y: ANNOTATIONS.Y_POSITION as number,
+      x: ANNOTATIONS.X_POSITION,
+      y: ANNOTATIONS.Y_POSITION,
     },
     width: graphWidth,
     height: graphHeight,
     font: {
-      family: GRAPH.FONT_FAMILY as string,
+      family: GRAPH.FONT_FAMILY,
     },
     annotations: [
       {
@@ -77,11 +76,11 @@ export const PieChart = ({
         yref: ANNOTATIONS.AXIS_REFERENCE,
         text: graphAnnotationText,
         showarrow: false,
-        bordercolor: ANNOTATIONS.BORDER_COLOR as string,
-        borderwidth: ANNOTATIONS.BORDER_WIDTH as number,
-        borderpad: ANNOTATIONS.BORDER_PAD as number,
+        bordercolor: ANNOTATIONS.BORDER_COLOR,
+        borderwidth: ANNOTATIONS.BORDER_WIDTH,
+        borderpad: ANNOTATIONS.BORDER_PAD,
         font: {
-          size: ANNOTATIONS.FONT_SIZE as number,
+          size: ANNOTATIONS.FONT_SIZE,
         },
       },
     ],
