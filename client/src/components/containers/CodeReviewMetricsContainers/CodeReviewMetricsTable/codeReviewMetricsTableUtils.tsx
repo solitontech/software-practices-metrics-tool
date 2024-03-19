@@ -6,11 +6,11 @@ import {
   MINUTES_IN_ONE_HOUR,
   FRACTION_TO_FIND_TIME,
 } from "src/constants/constants";
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
 import { sortMap } from "./codeReviewMetricsTableConstants";
 import { FilterColumn, Filters, IReviewerComments, Vote } from "./interfaces";
 import { NOT_AVAILABLE } from "../../../../constants/common.constants";
-import { IFetchedCodeReviewPullRequest } from "../../../../fetchers/fetchers";
 import { cacheWrapperForUnaryFunction } from "../../../../utils/cacheUtil";
 import { formatHoursToDays } from "../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 

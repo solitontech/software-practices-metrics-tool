@@ -1,6 +1,7 @@
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Graph } from "./leastVotesGraphUtils";
-import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers/fetchers";
 import { getFormattedDateText } from "../../../../../../utils/dateUtil";
 import { ONE_WEEK_IN_MILLISECONDS, SIX_DAYS_IN_MILLISECONDS } from "../metricsTrendGraphConstants";
 

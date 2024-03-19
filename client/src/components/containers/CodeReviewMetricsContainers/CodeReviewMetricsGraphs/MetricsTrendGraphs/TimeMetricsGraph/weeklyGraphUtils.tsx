@@ -1,6 +1,7 @@
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 import { Graph } from "./timeMetricsGraphUtils";
-import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers/fetchers";
 import { getFormattedDateText } from "../../../../../../utils/dateUtil";
 import { ONE_WEEK_IN_MILLISECONDS, SIX_DAYS_IN_MILLISECONDS } from "../metricsTrendGraphConstants";
 
