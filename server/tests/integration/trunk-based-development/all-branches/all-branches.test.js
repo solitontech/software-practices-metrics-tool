@@ -3,20 +3,20 @@ import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '##/frameworks/express-web-server/app.js';
 import { AppError } from '##/utils/index.js';
-import { AzureDevopsEntity } from '##/entities/azure-devops/azure-devops.entity.js';
+import { AzureDevopsApi } from '##/use-cases/version-control/azure-devops/apis/azure-devops.api.js';
 import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/index.js';
 
 import { AZURE_ALL_BRANCHES_RESPONSE, SERVER_BRANCHES_RESPONSE } from './all-branches.mock.js';
 
-const { invalidRepositoryDetails, invalidAzureToken } = AzureDevopsEntity;
+const { invalidRepositoryDetails, invalidAzureToken } = AzureDevopsApi;
 
-jest.mock('##/entities/azure-devops/azure-devops.entity.js');
+jest.mock('##/use-cases/version-control/azure-devops/apis/azure-devops.api.js');
 
 describe('Trunk based metrics - get all branches in the repository', () => {
   const apiEndPoint = '/api/v1/metrics/trunk-based-development/branches';
 
   it('should return all branches for the repository with response status code 200', async () => {
-    AzureDevopsEntity.fetchAllBranches = jest.fn().mockResolvedValue(AZURE_ALL_BRANCHES_RESPONSE);
+    AzureDevopsApi.fetchAllBranches = jest.fn().mockResolvedValue(AZURE_ALL_BRANCHES_RESPONSE);
 
     const response = await request(app).get(apiEndPoint);
 
@@ -25,7 +25,7 @@ describe('Trunk based metrics - get all branches in the repository', () => {
   });
 
   it('should handle internal server error with response status 500', async () => {
-    AzureDevopsEntity.fetchAllBranches = jest
+    AzureDevopsApi.fetchAllBranches = jest
       .fn()
       .mockRejectedValue(new Error(SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 
@@ -36,7 +36,7 @@ describe('Trunk based metrics - get all branches in the repository', () => {
   });
 
   it('should handle no data found error due to invalid server configurations with response status 404', async () => {
-    AzureDevopsEntity.fetchAllBranches = jest
+    AzureDevopsApi.fetchAllBranches = jest
       .fn()
       .mockRejectedValue(new AppError(invalidRepositoryDetails, STATUS_CODE.NOT_FOUND));
 
@@ -49,7 +49,7 @@ describe('Trunk based metrics - get all branches in the repository', () => {
   });
 
   it('should handle unauthorized access with response status 401', async () => {
-    AzureDevopsEntity.fetchAllBranches = jest
+    AzureDevopsApi.fetchAllBranches = jest
       .fn()
       .mockRejectedValue(new AppError(invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS));
 

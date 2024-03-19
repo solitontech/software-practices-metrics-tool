@@ -3,7 +3,7 @@ import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '##/frameworks/express-web-server/app.js';
 import { AppError } from '##/utils/index.js';
-import { AzureDevopsEntity } from '##/entities/azure-devops/azure-devops.entity.js';
+import { AzureDevopsApi } from '##/use-cases/version-control/azure-devops/apis/azure-devops.api.js';
 import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/index.js';
 
 import { AZURE_ACTIVE_BRANCHES_RESPONSE, SERVER_ACTIVE_BRANCHES_RESPONSE } from './active-branches.mock.js';
@@ -19,15 +19,15 @@ import {
   PAGINATION_CURSOR_MUST_BE_GREATER_THAN_ZERO,
 } from '../../constants/common-constants.js';
 
-const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsEntity;
+const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
-jest.mock('##/entities/azure-devops/azure-devops.entity.js');
+jest.mock('##/use-cases/version-control/azure-devops/apis/azure-devops.api.js');
 
 describe('Trunk based metrics - get active branches in the repository', () => {
   const apiEndPoint = '/api/v1/metrics/trunk-based-development/activeBranches';
 
   it('should return active branches for the repository with response status code 200', async () => {
-    AzureDevopsEntity.fetchActivePullRequests = jest.fn().mockResolvedValue(AZURE_ACTIVE_BRANCHES_RESPONSE);
+    AzureDevopsApi.fetchActivePullRequests = jest.fn().mockResolvedValue(AZURE_ACTIVE_BRANCHES_RESPONSE);
 
     const paginationSize = 10;
     const paginationCursor = 1;
@@ -41,7 +41,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   });
 
   it('should handle internal server error with response status 500', async () => {
-    AzureDevopsEntity.fetchActivePullRequests = jest
+    AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
       .mockRejectedValue(new Error(SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 
@@ -172,7 +172,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   });
 
   it('should handle no data found error due to invalid server configurations with response status 404', async () => {
-    AzureDevopsEntity.fetchActivePullRequests = jest
+    AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
       .mockRejectedValue(new AppError(invalidRepositoryDetails, STATUS_CODE.NOT_FOUND));
 
@@ -190,7 +190,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   });
 
   it('should handle unauthorized access with response status 401', async () => {
-    AzureDevopsEntity.fetchActivePullRequests = jest
+    AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
       .mockRejectedValue(new AppError(invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS));
 
@@ -208,7 +208,7 @@ describe('Trunk based metrics - get active branches in the repository', () => {
   });
 
   it('should handle no data found error with response status 404', async () => {
-    AzureDevopsEntity.fetchActivePullRequests = jest
+    AzureDevopsApi.fetchActivePullRequests = jest
       .fn()
       .mockRejectedValue(new AppError(dataNotFound, STATUS_CODE.NOT_FOUND));
 

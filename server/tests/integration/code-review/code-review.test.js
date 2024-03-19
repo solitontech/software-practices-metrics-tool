@@ -2,16 +2,16 @@ import request from 'supertest';
 import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '##/frameworks/express-web-server/app.js';
-import { AzureDevopsEntity } from '##/entities/azure-devops/azure-devops.entity.js';
+import { AzureDevopsApi } from '##/use-cases/version-control/azure-devops/apis/azure-devops.api.js';
 import { AppError } from '##/utils/index.js';
 
 import { runDatePaginationValidationTests } from '../common-tests/date-pagination-tests.js';
 import { AZURE_PULL_REQUESTS_RESPONSE, SERVER_PULL_REQUESTS_RESPONSE } from './code-review.mock.js';
 import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/index.js';
 
-const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsEntity;
+const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
-jest.mock('##/entities/azure-devops/azure-devops.entity.js');
+jest.mock('##/use-cases/version-control/azure-devops/apis/azure-devops.api.js');
 
 describe('Code review metrics - get all pull requests raised to trunk branch in the repository within selected range', () => {
   const apiEndPoint = '/api/v1/metrics/code-review';
@@ -22,7 +22,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
   const queryParams = `?startDate=${startDate}&endDate=${endDate}&paginationCursor=${paginationCursor}&paginationSize=${paginationSize}`;
 
   it('should return all pull requests raised to trunk branch within selected range for the repository with response status code 200', async () => {
-    AzureDevopsEntity.fetchPullRequests = jest.fn().mockResolvedValue(AZURE_PULL_REQUESTS_RESPONSE);
+    AzureDevopsApi.fetchPullRequests = jest.fn().mockResolvedValue(AZURE_PULL_REQUESTS_RESPONSE);
 
     const response = await request(app).get(apiEndPoint + queryParams);
 
@@ -31,7 +31,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
   });
 
   it('should handle no data found error due to invalid server configurations with response status 404', async () => {
-    AzureDevopsEntity.fetchPullRequests = jest
+    AzureDevopsApi.fetchPullRequests = jest
       .fn()
       .mockRejectedValue(new AppError(invalidRepositoryDetails, STATUS_CODE.NOT_FOUND));
 
@@ -44,9 +44,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
   });
 
   it('should handle no data found error with response status 404', async () => {
-    AzureDevopsEntity.fetchPullRequests = jest
-      .fn()
-      .mockRejectedValue(new AppError(dataNotFound, STATUS_CODE.NOT_FOUND));
+    AzureDevopsApi.fetchPullRequests = jest.fn().mockRejectedValue(new AppError(dataNotFound, STATUS_CODE.NOT_FOUND));
 
     const response = await request(app).get(apiEndPoint + queryParams);
 
@@ -57,7 +55,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
   });
 
   it('should handle unauthorized access with response status 401', async () => {
-    AzureDevopsEntity.fetchPullRequests = jest
+    AzureDevopsApi.fetchPullRequests = jest
       .fn()
       .mockRejectedValue(new AppError(invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS));
 
@@ -70,7 +68,7 @@ describe('Code review metrics - get all pull requests raised to trunk branch in 
   });
 
   it('should handle internal server error with response status 500', async () => {
-    AzureDevopsEntity.fetchPullRequests = jest
+    AzureDevopsApi.fetchPullRequests = jest
       .fn()
       .mockRejectedValue(new Error(SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 

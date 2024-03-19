@@ -3,7 +3,7 @@ import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '##/frameworks/express-web-server/app.js';
 import { AppError } from '##/utils/index.js';
-import { AzureDevopsEntity } from '##/entities/azure-devops/azure-devops.entity.js';
+import { AzureDevopsApi } from '##/use-cases/version-control/azure-devops/apis/azure-devops.api.js';
 import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/index.js';
 
 import {
@@ -12,9 +12,9 @@ import {
 } from './trunk-branch-commits.mock.js';
 import { runDatePaginationValidationTests } from '../../common-tests/date-pagination-tests.js';
 
-const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsEntity;
+const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
-jest.mock('##/entities/azure-devops/azure-devops.entity.js');
+jest.mock('##/use-cases/version-control/azure-devops/apis/azure-devops.api.js');
 
 describe('Trunk based metrics - get all the commits in the trunk branch within selected range in the repository', () => {
   const apiEndPoint = '/api/v1/metrics/trunk-based-development/commits';
@@ -25,7 +25,7 @@ describe('Trunk based metrics - get all the commits in the trunk branch within s
   const queryParams = `?startDate=${startDate}&endDate=${endDate}&paginationCursor=${paginationCursor}&paginationSize=${paginationSize}`;
 
   it('should return all commits in trunk branch within selected range for the repository with response status code 200', async () => {
-    AzureDevopsEntity.fetchCommitsList = jest.fn().mockResolvedValue(AZURE_TRUNK_BRANCH_COMMITS_RESPONSE);
+    AzureDevopsApi.fetchCommitsList = jest.fn().mockResolvedValue(AZURE_TRUNK_BRANCH_COMMITS_RESPONSE);
 
     const response = await request(app).get(apiEndPoint + queryParams);
 
@@ -34,7 +34,7 @@ describe('Trunk based metrics - get all the commits in the trunk branch within s
   });
 
   it('should handle no data found error due to invalid server configurations with response status 404', async () => {
-    AzureDevopsEntity.fetchCommitsList = jest
+    AzureDevopsApi.fetchCommitsList = jest
       .fn()
       .mockRejectedValue(new AppError(invalidRepositoryDetails, STATUS_CODE.NOT_FOUND));
 
@@ -47,7 +47,7 @@ describe('Trunk based metrics - get all the commits in the trunk branch within s
   });
 
   it('should handle no data found error with response status 404', async () => {
-    AzureDevopsEntity.fetchCommitsList = jest.fn().mockRejectedValue(new AppError(dataNotFound, STATUS_CODE.NOT_FOUND));
+    AzureDevopsApi.fetchCommitsList = jest.fn().mockRejectedValue(new AppError(dataNotFound, STATUS_CODE.NOT_FOUND));
 
     const response = await request(app).get(apiEndPoint + queryParams);
 
@@ -58,7 +58,7 @@ describe('Trunk based metrics - get all the commits in the trunk branch within s
   });
 
   it('should handle unauthorized access with response status 401', async () => {
-    AzureDevopsEntity.fetchCommitsList = jest
+    AzureDevopsApi.fetchCommitsList = jest
       .fn()
       .mockRejectedValue(new AppError(invalidAzureToken, STATUS_CODE.UNAUTHORIZED_ACCESS));
 
@@ -71,7 +71,7 @@ describe('Trunk based metrics - get all the commits in the trunk branch within s
   });
 
   it('should handle internal server error with response status 500', async () => {
-    AzureDevopsEntity.fetchCommitsList = jest
+    AzureDevopsApi.fetchCommitsList = jest
       .fn()
       .mockRejectedValue(new Error(SERVER_ERROR_MESSAGE.INTERNAL_SERVER_ERROR));
 
