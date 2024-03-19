@@ -14,7 +14,7 @@ const {
   authToken: TOKEN,
 } = ServerConfiguration.versionControl;
 
-export class AzureDevopsEntity {
+export class AzureDevopsApi {
   static #baseUrl = new URL(`https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_apis/git/repositories/${REPOSITORY_ID}`);
   static #apiVersion = '7.1-preview.1';
 
