@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // serve client build dist to user
-app.use(express.static(path.join(dirName, '../dist')));
+app.use(express.static(path.join(dirName, '../../../dist')));
 
 app.use(router);
 
