@@ -1,13 +1,6 @@
 import { VOTE } from '../constants/index.js';
 
 export class VoteMetrics {
-  static #getLastTimeOfVote = (reviewerId, votesTimeline) => {
-    const reversedTimeLine = votesTimeline.slice().reverse();
-    const reviewer = reversedTimeLine.find(({ id }) => id === reviewerId);
-
-    return reviewer?.timeOfVote ?? null;
-  };
-
   static getPullRequestVotes(reviewers) {
     const votesResults = {
       [VOTE.APPROVED]: 0,
@@ -18,6 +11,21 @@ export class VoteMetrics {
     };
 
     reviewers.forEach(({ vote }) => {
+      votesResults[vote]++;
+    });
+
+    return votesResults;
+  }
+
+  static getPullRequestVotesHistory(votesCycle) {
+    const votesResults = {
+      [VOTE.APPROVED]: 0,
+      [VOTE.APPROVED_WITH_SUGGESTIONS]: 0,
+      [VOTE.WAIT_FOR_AUTHOR]: 0,
+      [VOTE.REJECTED]: 0,
+    };
+
+    votesCycle.forEach(({ vote }) => {
       votesResults[vote]++;
     });
 
@@ -38,18 +46,10 @@ export class VoteMetrics {
     });
   }
 
-  static getPullRequestVotesHistory(votesCycle) {
-    const votesResults = {
-      [VOTE.APPROVED]: 0,
-      [VOTE.APPROVED_WITH_SUGGESTIONS]: 0,
-      [VOTE.WAIT_FOR_AUTHOR]: 0,
-      [VOTE.REJECTED]: 0,
-    };
+  static #getLastTimeOfVote(reviewerId, votesTimeline) {
+    const reversedTimeLine = votesTimeline.slice().reverse();
+    const reviewer = reversedTimeLine.find(({ id }) => id === reviewerId);
 
-    votesCycle.forEach(({ vote }) => {
-      votesResults[vote]++;
-    });
-
-    return votesResults;
+    return reviewer?.timeOfVote ?? null;
   }
 }
