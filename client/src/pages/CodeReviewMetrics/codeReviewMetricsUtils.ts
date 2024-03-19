@@ -2,7 +2,7 @@ import {
   ALL_CHIPS,
   CHIP,
 } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewChips/codeReviewSearchChipsConstants";
-import { IFetchedCodeReviewPullRequest } from "src/fetchers/fetchers";
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 import { formatDateWithoutTime } from "src/utils/utils";
 
 const SEARCH_KEYS = {

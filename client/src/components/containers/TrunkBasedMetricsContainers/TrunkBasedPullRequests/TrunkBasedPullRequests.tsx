@@ -7,7 +7,7 @@ import {
   TrunkBasedPullRequestsTable,
   TrunkBasedPullRequestsTiles,
 } from "src/components/components";
-import { usePullRequestsMergedToTrunk } from "src/fetchers/fetchers";
+import { usePullRequestsMergedToTrunk } from "src/services/api/api";
 
 import styles from "./TrunkBasedPullRequests.module.scss";
 import { filterPullRequests } from "./trunkBasedPullRequestsUtils";

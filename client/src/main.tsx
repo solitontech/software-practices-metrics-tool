@@ -8,7 +8,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import "src/styles/index.scss";
-import { queryClient } from "src/fetchers/fetchers";
+import { queryClient } from "src/services/api/api";
 import { AppRoutes } from "src/routes/routes";
 
 const renderNode = document.getElementById("root") as HTMLElement;

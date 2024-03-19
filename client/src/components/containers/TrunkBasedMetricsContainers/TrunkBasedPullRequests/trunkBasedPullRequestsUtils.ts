@@ -1,4 +1,4 @@
-import { IFetchedTrunkBranchPullRequest } from "src/fetchers/fetchers";
+import { IFetchedTrunkBranchPullRequest } from "src/services/api/api";
 import { formatDateWithoutTime } from "src/utils/utils";
 
 export function filterPullRequests(searchKeyword: string, pullRequests: IFetchedTrunkBranchPullRequest[]) {

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { ClientFilterContext } from "src/context/context";
-import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/fetchers/fetchers";
+import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/services/api/api";
 
 import { IFetchedCodeReviewResponse } from "./codeReviewTypes";
 import { CodeReviewMetricsUtils } from "./codeReviewUtils";

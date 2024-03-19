@@ -4,7 +4,7 @@ import {
   IFetchedTrunkBasedActiveBranchesResponse,
   IFetchedTrunkBranchesResponse,
   ApiEndPoint,
-} from "src/fetchers/fetchers";
+} from "src/services/api/api";
 
 export const getBranchesHandler = (branches: IFetchedTrunkBranchesResponse, delayTime: number = 0) => {
   return http.get(ApiEndPoint.trunkBasedTotalBranches().href, async () => {

@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { LoadingSpinner, SnackBar, TabToggle } from "src/components/components.ts";
 
+import { useCodeReviewMetrics } from "src/services/api/api";
 import styles from "./CodeReviewMetrics.module.scss";
 import {
   CODE_REVIEW_METRICS,
@@ -28,7 +29,6 @@ import { CommonLayout } from "../../components/reusables/CommonLayout/CommonLayo
 import { DateRangePicker } from "../../components/reusables/DateRangePicker/DateRangePicker.tsx";
 import { ErrorBoundary } from "../../components/reusables/ErrorBoundary/ErrorBoundary.tsx";
 import { SearchBox } from "../../components/reusables/SearchBox/SearchBox.tsx";
-import { useCodeReviewMetrics } from "../../fetchers/hooks/codeReview/useCodeReviewMetrics.ts";
 
 const today = DateTime.local();
 const sevenDaysAgoFromToday = today.minus({ days: 7 });

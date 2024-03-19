@@ -1,4 +1,4 @@
-import { IFetchedTrunkBasedActiveBranch } from "src/fetchers/fetchers";
+import { IFetchedTrunkBasedActiveBranch } from "src/services/api/api";
 import { formatDate } from "src/utils/utils";
 
 export function filterActiveBranches(searchKeyword: string, branches: IFetchedTrunkBasedActiveBranch[]) {

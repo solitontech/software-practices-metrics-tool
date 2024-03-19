@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
 import { SearchBox, ErrorBoundary } from "src/components/components.ts";
-import { IFetchedTrunkMetricsBranch } from "src/fetchers/fetchers.ts";
+import { IFetchedTrunkMetricsBranch } from "src/services/api/api.ts";
 
 import styles from "./TrunkBasedNamingConventionTable.module.scss";
 import { filterBranches } from "./trunkBasedNamingConventionUtils.tsx";

@@ -1,5 +1,5 @@
 import { SECONDS_IN_ONE_HOUR, NOT_AVAILABLE } from "src/constants/constants";
-import { IFetchedCodeReviewPullRequest } from "src/fetchers/fetchers";
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
 export const getMetricsAverageTimeInHours = (
   pullRequests: IFetchedCodeReviewPullRequest[],

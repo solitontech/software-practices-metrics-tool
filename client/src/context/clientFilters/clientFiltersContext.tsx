@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import { useClientFilters } from "src/fetchers/fetchers";
+import { useClientFilters } from "src/services/api/api";
 
 import { IContextClientFilter, IContextClientFilterSquad } from "./clientFiltersContextTypes";
 

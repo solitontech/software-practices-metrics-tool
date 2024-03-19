@@ -12,7 +12,7 @@ import {
   TrunkBasedNamingConventionTable,
 } from "src/components/components";
 import { NOT_AVAILABLE } from "src/constants/constants";
-import { useTrunkBasedMetricsActiveBranches, useTrunkBasedMetricsTotalBranches } from "src/fetchers/fetchers";
+import { useTrunkBasedMetricsActiveBranches, useTrunkBasedMetricsTotalBranches } from "src/services/api/api";
 
 import styles from "./TrunkBasedMetricsTiles.module.scss";
 import { TILE, DIALOG } from "./trunkBasedMetricsTilesConstants";

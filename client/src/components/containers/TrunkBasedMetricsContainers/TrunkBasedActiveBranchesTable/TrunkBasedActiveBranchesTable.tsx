@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
 import { SearchBox } from "src/components/components";
-import { IFetchedTrunkBasedActiveBranch } from "src/fetchers/fetchers";
+import { IFetchedTrunkBasedActiveBranch } from "src/services/api/api";
 import { formatDate } from "src/utils/utils";
 
 import styles from "./TrunkBasedActiveBranchesTable.module.scss";
