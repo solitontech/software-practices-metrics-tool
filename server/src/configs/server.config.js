@@ -20,6 +20,22 @@ export class ServerConfiguration {
     this.#loadEnvironmentVariables();
   }
 
+  static get clientFilters() {
+    return this.#clientFilters;
+  }
+
+  static get clientFiltersSquads() {
+    return this.#clientFilters.squads;
+  }
+
+  static get versionControl() {
+    return this.#versionControl;
+  }
+
+  static get environmentVariables() {
+    return this.#environmentVariables;
+  }
+
   static #loadServerConfigs() {
     const configs = JSON.parse(readFileSync(this.#serverConfigPath, 'utf8'));
 
@@ -51,21 +67,5 @@ export class ServerConfiguration {
     });
 
     EnvValidation.terminateOnValidationError(this.#environmentVariables);
-  }
-
-  static get clientFilters() {
-    return this.#clientFilters;
-  }
-
-  static get clientFiltersSquads() {
-    return this.#clientFilters.squads;
-  }
-
-  static get versionControl() {
-    return this.#versionControl;
-  }
-
-  static get environmentVariables() {
-    return this.#environmentVariables;
   }
 }

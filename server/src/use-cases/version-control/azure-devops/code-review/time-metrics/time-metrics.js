@@ -1,8 +1,33 @@
 import { PULL_REQUEST_STATUS, VOTE } from '../constants/index.js';
 
 export class TimeMetrics {
-  static #isReviewerApproved({ vote }) {
-    return vote === VOTE.APPROVED || vote === VOTE.APPROVED_WITH_SUGGESTIONS;
+  static getFirstReviewResponseTime({ creationDate, votesHistoryTimeline }) {
+    if (!votesHistoryTimeline.length) {
+      return null;
+    }
+
+    const [firstVote] = votesHistoryTimeline;
+    const { timeOfVote } = firstVote;
+
+    return this.#getTimeInSeconds(timeOfVote, creationDate);
+  }
+
+  static getPullRequestMergeTime({ status, creationDate, closedDate }) {
+    if (status !== PULL_REQUEST_STATUS.COMPLETED) {
+      return null;
+    }
+
+    return this.#getTimeInSeconds(closedDate, creationDate);
+  }
+
+  static getPullRequestApprovalTime({ creationDate, reviewers, votesHistoryTimeline }) {
+    if (!this.#isRequiredReviewersApproved(Object.values(reviewers))) {
+      return null;
+    }
+
+    const approvalTime = this.#getLatestReviewerApprovalTime(votesHistoryTimeline, reviewers);
+
+    return this.#getTimeInSeconds(approvalTime, creationDate);
   }
 
   static #isRequiredReviewersApproved(reviewers) {
@@ -40,32 +65,7 @@ export class TimeMetrics {
     return Math.round(timeInSeconds);
   }
 
-  static getFirstReviewResponseTime({ creationDate, votesHistoryTimeline }) {
-    if (!votesHistoryTimeline.length) {
-      return null;
-    }
-
-    const [firstVote] = votesHistoryTimeline;
-    const { timeOfVote } = firstVote;
-
-    return this.#getTimeInSeconds(timeOfVote, creationDate);
-  }
-
-  static getPullRequestApprovalTime({ creationDate, reviewers, votesHistoryTimeline }) {
-    if (!this.#isRequiredReviewersApproved(Object.values(reviewers))) {
-      return null;
-    }
-
-    const approvalTime = this.#getLatestReviewerApprovalTime(votesHistoryTimeline, reviewers);
-
-    return this.#getTimeInSeconds(approvalTime, creationDate);
-  }
-
-  static getPullRequestMergeTime({ status, creationDate, closedDate }) {
-    if (status !== PULL_REQUEST_STATUS.COMPLETED) {
-      return null;
-    }
-
-    return this.#getTimeInSeconds(closedDate, creationDate);
+  static #isReviewerApproved({ vote }) {
+    return vote === VOTE.APPROVED || vote === VOTE.APPROVED_WITH_SUGGESTIONS;
   }
 }

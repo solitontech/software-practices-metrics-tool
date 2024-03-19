@@ -10,16 +10,6 @@ import {
 } from './trunk-based-development.constants.js';
 
 export class TrunkBasedDevelopment {
-  static #isBranchFollowingNamingStandard(branchName) {
-    const parts = branchName.split(SEPARATOR);
-    const [firstPart] = parts;
-
-    const isBranchNameStartsWithUsers = firstPart === USERS;
-    const hasRequiredParts = parts.length === REQUIRED_BRANCH_PARTS;
-
-    return isBranchNameStartsWithUsers && hasRequiredParts;
-  }
-
   static getBranchMetrics({ value: allBranches, count: totalNumberOfBranches }) {
     const { branchesFollowingNamingStandard, branchesNotFollowingNamingStandard } = allBranches.reduce(
       (acc, { name, objectId: id }) => {
@@ -117,5 +107,15 @@ export class TrunkBasedDevelopment {
       count,
       commits,
     };
+  }
+
+  static #isBranchFollowingNamingStandard(branchName) {
+    const parts = branchName.split(SEPARATOR);
+    const [firstPart] = parts;
+
+    const isBranchNameStartsWithUsers = firstPart === USERS;
+    const hasRequiredParts = parts.length === REQUIRED_BRANCH_PARTS;
+
+    return isBranchNameStartsWithUsers && hasRequiredParts;
   }
 }

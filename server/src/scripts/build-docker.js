@@ -17,6 +17,26 @@ class BuildDocker {
     this.#dockerImageName = 'software-practices-metrics-tool:' + imageVersion;
   }
 
+  static startBuild() {
+    this.#buildImageAsTarFile();
+    this.#changeImageVersionInComposeFile();
+  }
+
+  static #buildImageAsTarFile() {
+    console.log(`Building docker image ( ${this.#dockerImageName} )`);
+
+    if (!this.#isImageNameValid(this.#dockerImageName)) {
+      throw new Error(`
+        Invalid image name - ${this.#dockerImageName}
+        - Change the ".env" file "PRODUCTION_DOCKER_IMAGE_VERSION" key like the following example:
+        - Example: 1.0.0
+      `);
+    }
+
+    this.#buildImage();
+    this.#createTarFileFromImage();
+  }
+
   static #isImageNameValid(name) {
     // Regex match example : software-practices-metrics-tool:1.0.0
     const imageNameRegex = /^[a-z0-9-]+:[0-9]+\.[0-9]+\.[0-9]+$/i;
@@ -46,21 +66,6 @@ class BuildDocker {
     console.log(chalk.green('\nDocker tar file created successfully in release-to-production directory.'));
   }
 
-  static #buildImageAsTarFile() {
-    console.log(`Building docker image ( ${this.#dockerImageName} )`);
-
-    if (!this.#isImageNameValid(this.#dockerImageName)) {
-      throw new Error(`
-        Invalid image name - ${this.#dockerImageName}
-        - Change the ".env" file "PRODUCTION_DOCKER_IMAGE_VERSION" key like the following example:
-        - Example: 1.0.0
-      `);
-    }
-
-    this.#buildImage();
-    this.#createTarFileFromImage();
-  }
-
   static #changeImageVersionInComposeFile() {
     const filePath = path.join(this.#currentDir, '/../../release-to-production/compose.yaml');
     const composeFileContent = fs.readFileSync(filePath, 'utf8');
@@ -83,11 +88,6 @@ class BuildDocker {
     fs.writeFileSync(filePath, modifiedData, 'utf8');
 
     console.log(chalk.green('Compose.yaml file has been updated with the new image tag.'));
-  }
-
-  static startBuild() {
-    this.#buildImageAsTarFile();
-    this.#changeImageVersionInComposeFile();
   }
 }
 
