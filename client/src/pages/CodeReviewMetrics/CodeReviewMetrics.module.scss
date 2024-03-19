@@ -28,18 +28,6 @@
   gap: $spacing-xl;
 }
 
-.dropDown {
-  padding: $spacing-sm;
-  position: absolute;
-  top: 49px;
-  left: 0;
-  background-color: $app-primary-background-color;
-  border: 1px solid $app-secondary-border-color;
-  border-radius: 4px;
-  z-index: 999;
-  width: 100%;
-}
-
 .errorMessage {
   border: 1px solid $app-primary-border-color;
   color: $app-ternary-text-color;

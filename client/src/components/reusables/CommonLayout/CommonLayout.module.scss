@@ -10,7 +10,8 @@
 
 .header {
   @include flex-align-center;
-  height: 50px;
+  height: 65px;
+  justify-content: space-between;
 }
 
 .title {
@@ -20,11 +21,10 @@
 }
 
 .main {
-  height: calc(100% - 50px);
+  height: calc(100% - 65px);
   overflow-x: hidden;
 }
 
 .actions {
-  @include flex-align-center;
-  gap: $spacing-md;
+  @include flex-row;
 }

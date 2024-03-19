@@ -12,20 +12,20 @@
 
 .filterContainer {
   background-color: $app-ternary-background-color;
-  max-height: 85vh;
-  overflow-y: scroll;
-  width: 500px;
   background-color: $app-primary-background-color;
+  max-height: 85vh;
+  margin-top: $spacing-sm;
+  overflow-y: scroll;
   padding: $spacing-lg;
   padding-top: 0px;
-  margin-top: $spacing-sm;
+  width: 500px;
 }
 
 .noFiltersHeading {
-  padding: $spacing-md;
-  text-align: center;
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
+  text-align: center;
+  padding: $spacing-md;
 }
 
 .noFiltersContent {
@@ -43,11 +43,11 @@
 
 .squadName {
   @include ellipsis;
-  width: 100%;
-  text-align: center;
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
   padding-bottom: $spacing-sm;
+  text-align: center;
+  width: 100%;
 }
 
 .categoryContainer {

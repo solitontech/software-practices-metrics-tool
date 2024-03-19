@@ -1,9 +1,7 @@
-import {
-  ALL_CHIPS,
-  CHIP,
-} from "src/components/containers/CodeReviewMetricsContainers/CodeReviewChips/codeReviewSearchChipsConstants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 import { formatDateWithoutTime } from "src/utils/utils";
+
+import { CHIPS } from "../../components/containers/CodeReviewMetricsContainers/CodeReviewSearchBox/codeReviewSearchBoxConstants";
 
 const SEARCH_KEYS = {
   TAGS: "tags",
@@ -72,10 +70,10 @@ export const filterPullRequests = (
   userSearchKey: string,
   userSearchTerm: string,
 ): IFetchedCodeReviewPullRequest[] => {
-  if (userSearchKey === ALL_CHIPS) {
+  if (!userSearchKey) {
     return getSearchedPullRequests(pullRequests, userSearchTerm);
   } else {
-    const chip = CHIP.find((chip) => chip.chipKey === userSearchKey);
+    const chip = CHIPS.find((chip) => chip.key === userSearchKey);
 
     if (!chip) {
       return [];
