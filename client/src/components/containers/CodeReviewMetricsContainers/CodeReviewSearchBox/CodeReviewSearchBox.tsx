@@ -4,7 +4,6 @@ import { Chip } from "@mui/material";
 import clsx from "clsx";
 
 import { ClientFilters, SearchBox } from "src/components/components";
-import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./CodeReviewSearchBox.module.scss";
 import { CHIPS } from "./codeReviewSearchBoxConstants";
@@ -48,8 +47,9 @@ export const CodeReviewSearchBox = ({
 
     if (selectedChip.includes(chip.key)) {
       setSearchPlaceHolder(PLACEHOLDER);
+      handleChipChange("");
 
-      return handleChipChange("");
+      return;
     }
 
     handleChipChange(chip.key);

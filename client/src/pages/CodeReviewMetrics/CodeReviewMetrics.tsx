@@ -1,7 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
-import "react-datepicker/dist/react-datepicker.css";
-
 import {
   LoadingSpinner,
   SnackBar,
@@ -18,6 +16,7 @@ import {
 import { dateRange } from "src/constants/constants";
 import { useCodeReviewMetrics } from "src/services/api/api";
 
+import "react-datepicker/dist/react-datepicker.css";
 import styles from "./CodeReviewMetrics.module.scss";
 import {
   CODE_REVIEW_METRICS,
@@ -27,15 +26,13 @@ import {
 import { filterPullRequests } from "./codeReviewMetricsUtils.ts";
 import { getMetricsAverageTimeInHours } from "./getMetricsAverageTimeInHours.tsx";
 
-const metricsToggleTabs = CODE_REVIEW_METRICS_TABS;
-
 type CodeReviewMetricsView = "table" | "graph" | "trend-graph";
 
 export const CodeReviewMetrics = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedChips, setSelectedChips] = useState("");
-  const [selectedView, setSelectedView] = useState<CodeReviewMetricsView>(
+  const [selectedChip, setSelectedChip] = useState("");
+  const [selectedTab, setSelectedTab] = useState<CodeReviewMetricsView>(
     CODE_REVIEW_METRICS_TAB_VALUE.TABLE as CodeReviewMetricsView,
   );
   const [dates, setDates] = useState({
@@ -50,7 +47,7 @@ export const CodeReviewMetrics = () => {
     error,
   } = useCodeReviewMetrics(dates.startDate, dates.endDate);
 
-  const searchedPullRequests = searchTerm ? filterPullRequests(pullRequests, selectedChips, searchTerm) : pullRequests;
+  const searchedPullRequests = searchTerm ? filterPullRequests(pullRequests, selectedChip, searchTerm) : pullRequests;
 
   const averageFirstReviewResponseTime = getMetricsAverageTimeInHours(
     searchedPullRequests,
@@ -61,20 +58,16 @@ export const CodeReviewMetrics = () => {
 
   const averageMergeTime = getMetricsAverageTimeInHours(searchedPullRequests, CODE_REVIEW_METRICS.MERGE_TIME);
 
-  const handleViewChange = (newView: string) => {
-    setSelectedView(newView as CodeReviewMetricsView);
-  };
-
   const isTableView = () => {
-    return selectedView === (CODE_REVIEW_METRICS_TAB_VALUE.TABLE as CodeReviewMetricsView);
+    return selectedTab === (CODE_REVIEW_METRICS_TAB_VALUE.TABLE as CodeReviewMetricsView);
   };
 
   const isGraphView = () => {
-    return selectedView === (CODE_REVIEW_METRICS_TAB_VALUE.GRAPH as CodeReviewMetricsView);
+    return selectedTab === (CODE_REVIEW_METRICS_TAB_VALUE.GRAPH as CodeReviewMetricsView);
   };
 
   const isTrendAnalysisView = () => {
-    return selectedView === (CODE_REVIEW_METRICS_TAB_VALUE.TREND_GRAPH as CodeReviewMetricsView);
+    return selectedTab === (CODE_REVIEW_METRICS_TAB_VALUE.TREND_GRAPH as CodeReviewMetricsView);
   };
 
   useEffect(() => {
@@ -143,8 +136,8 @@ export const CodeReviewMetrics = () => {
         title="Code Review Metrics"
         actions={
           <CodeReviewSearchBox
-            selectedChips={selectedChips}
-            handleChipChange={setSelectedChips}
+            selectedChip={selectedChip}
+            handleChipChange={setSelectedChip}
             handleSearchChange={(event: ChangeEvent<HTMLInputElement>) => {
               setSearchTerm(event.target.value.trim().toLocaleLowerCase());
             }}
@@ -160,13 +153,17 @@ export const CodeReviewMetrics = () => {
           <div className={styles.tableDetails}>
             <div className={styles.header}>
               <DateRangePicker
+                minDate={dateRange.sixMonthsAgoFromToday}
+                maxDate={dateRange.today}
                 date={dates}
                 handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
                 handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
-                minDate={dateRange.sixMonthsAgoFromToday}
-                maxDate={dateRange.today}
               />
-              <TabToggle tabs={metricsToggleTabs} selectedTab={selectedView} handleTabChange={handleViewChange} />
+              <TabToggle
+                tabs={CODE_REVIEW_METRICS_TABS}
+                selectedTab={selectedTab}
+                handleTabChange={(value) => setSelectedTab(value as CodeReviewMetricsView)}
+              />
               <div className={styles.tiles}>
                 <CodeReviewMetricsTiles
                   averageFirstReviewResponseTime={averageFirstReviewResponseTime}
