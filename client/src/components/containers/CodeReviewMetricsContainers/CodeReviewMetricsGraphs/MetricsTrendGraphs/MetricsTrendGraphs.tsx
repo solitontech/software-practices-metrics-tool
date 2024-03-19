@@ -1,7 +1,8 @@
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import { LeastVotesAnalysisGraph } from "./LeastVotesGraph/LeastVotesGraph";
 import styles from "./MetricsTrendGraphs.module.scss";
 import { TimeMetricsAnalysisGraph } from "./TimeMetricsGraph/TimeMetricsGraph";
-import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
 
 interface Props {
   pullRequests: IFetchedCodeReviewPullRequest[];

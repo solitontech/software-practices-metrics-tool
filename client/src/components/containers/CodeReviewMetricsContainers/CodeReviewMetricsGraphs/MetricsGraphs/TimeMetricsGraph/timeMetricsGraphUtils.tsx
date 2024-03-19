@@ -1,4 +1,4 @@
-import { SECONDS_IN_ONE_HOUR } from "src/constants";
+import { SECONDS_IN_ONE_HOUR } from "src/constants/constants";
 
 import { ITimeMetricsPullRequest } from "./timeMetricsGraphInterfaces";
 import { RED_COLOR, appendHoursToNumber } from "../../../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";

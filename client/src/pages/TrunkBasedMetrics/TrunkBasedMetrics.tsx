@@ -7,8 +7,8 @@ import {
   ErrorBoundary,
   TrunkBasedMetricsTabs,
   TrunkBasedMetricsTiles,
-} from "src/components";
-import { dateRange } from "src/constants";
+} from "src/components/components";
+import { dateRange } from "src/constants/constants";
 
 import styles from "./TrunkBasedMetrics.module.scss";
 import { trunkBasedTabs } from "./trunkBasedMetricsConstants";

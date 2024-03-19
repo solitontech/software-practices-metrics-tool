@@ -1,7 +1,7 @@
 import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
 
 import trunkBased from "src/assets/images/trunkBased.svg";
-import { routePaths } from "src/constants";
+import { routePaths } from "src/constants/constants";
 
 export const routes = [
   {

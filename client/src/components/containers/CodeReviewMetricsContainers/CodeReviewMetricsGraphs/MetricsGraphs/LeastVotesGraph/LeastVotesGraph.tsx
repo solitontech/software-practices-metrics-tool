@@ -1,9 +1,10 @@
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import styles from "./LeastVotesGraph.module.scss";
 import { LeastVotesGraphUtils } from "./leastVotesGraphUtils";
-import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { PieChart } from "../../../../../reusables/MetricsGraphs/PieChart/PieChart";
 import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieChartTypes";

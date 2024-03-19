@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { test, expect, Page } from "@playwright/test";
 
-import { routePaths } from "src/constants";
+import { routePaths } from "src/constants/constants";
 
 import { TIMEOUT_PERIOD, WAIT_UNTIL } from "../constants/e2e.constants";
 

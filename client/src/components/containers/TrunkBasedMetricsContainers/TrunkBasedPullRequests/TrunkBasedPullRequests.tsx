@@ -6,8 +6,8 @@ import {
   SearchBox,
   TrunkBasedPullRequestsTable,
   TrunkBasedPullRequestsTiles,
-} from "src/components";
-import { usePullRequestsMergedToTrunk } from "src/fetchers";
+} from "src/components/components";
+import { usePullRequestsMergedToTrunk } from "src/services/api/api";
 
 import styles from "./TrunkBasedPullRequests.module.scss";
 import { filterPullRequests } from "./trunkBasedPullRequestsUtils";

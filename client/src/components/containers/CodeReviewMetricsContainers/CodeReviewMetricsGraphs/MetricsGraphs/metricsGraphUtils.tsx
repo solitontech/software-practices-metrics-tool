@@ -1,5 +1,6 @@
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import { ITimeMetricsGraph } from "./TimeMetricsGraph/timeMetricsGraphInterfaces";
-import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
 
 export const getGraphObject = (
   pullRequests: IFetchedCodeReviewPullRequest[],

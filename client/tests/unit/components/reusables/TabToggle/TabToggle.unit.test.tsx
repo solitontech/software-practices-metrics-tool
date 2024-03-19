@@ -1,7 +1,7 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
-import { TabToggle } from "src/components";
+import { TabToggle } from "src/components/components";
 
 describe("TabToggle component", () => {
   const metricsViews = [

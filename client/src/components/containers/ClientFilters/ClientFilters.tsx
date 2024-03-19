@@ -2,14 +2,14 @@ import { useContext } from "react";
 
 import { produce } from "immer";
 
-import styles from "./ClientFilters.module.scss";
+import { Checkbox, FilterIcon } from "src/components/components";
 import {
   ClientFilterContext,
   IContextClientFilterSquadMemberKey,
   IContextClientFilterSquadMembers,
-} from "../../../context";
-import { Checkbox } from "../../reusables/Checkbox/Checkbox";
-import { FilterIcon } from "../../reusables/Filter/Filter";
+} from "src/context/context";
+
+import styles from "./ClientFilters.module.scss";
 
 interface ICategory {
   label: string;

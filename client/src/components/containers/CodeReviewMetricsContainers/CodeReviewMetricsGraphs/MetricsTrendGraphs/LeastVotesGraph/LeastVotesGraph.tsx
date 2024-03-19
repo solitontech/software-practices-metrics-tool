@@ -3,12 +3,13 @@ import { useState } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import { LEAST_VOTE_CLASS } from "./leastVotesConstants";
 import styles from "./LeastVotesGraph.module.scss";
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Monthly } from "./monthlyGraphUtils";
 import { Weekly } from "./weeklyGraphUtils";
-import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { TREND_VIEW, GRAPH_TYPE } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";

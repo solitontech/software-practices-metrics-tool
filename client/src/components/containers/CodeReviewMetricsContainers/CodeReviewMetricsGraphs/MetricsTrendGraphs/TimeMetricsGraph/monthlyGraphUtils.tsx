@@ -1,6 +1,7 @@
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 import { Graph } from "./timeMetricsGraphUtils";
-import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
 import { getFormattedDateText } from "../../../../../../utils/dateUtil";
 import { DAY, MONTHS_IN_YEAR } from "../metricsTrendGraphConstants";
 

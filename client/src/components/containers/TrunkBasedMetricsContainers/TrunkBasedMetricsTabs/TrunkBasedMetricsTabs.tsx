@@ -1,4 +1,4 @@
-import { TrunkBasedPullRequests, TrunkBasedMetricsGraphs, ErrorBoundary } from "src/components";
+import { TrunkBasedPullRequests, TrunkBasedMetricsGraphs, ErrorBoundary } from "src/components/components";
 
 import styles from "./TrunkBasedMetricsTabs.module.scss";
 

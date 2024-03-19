@@ -1,6 +1,10 @@
 import { http, HttpResponse, delay } from "msw";
 
-import { IFetchedTrunkBasedActiveBranchesResponse, IFetchedTrunkBranchesResponse, ApiEndPoint } from "src/fetchers";
+import {
+  IFetchedTrunkBasedActiveBranchesResponse,
+  IFetchedTrunkBranchesResponse,
+  ApiEndPoint,
+} from "src/services/api/api";
 
 export const getBranchesHandler = (branches: IFetchedTrunkBranchesResponse, delayTime: number = 0) => {
   return http.get(ApiEndPoint.trunkBasedTotalBranches().href, async () => {

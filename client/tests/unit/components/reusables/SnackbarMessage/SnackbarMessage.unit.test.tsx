@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { describe, it, expect, vi } from "vitest";
 
-import { SnackBar } from "src/components";
+import { SnackBar } from "src/components/components";
 
 vi.useFakeTimers();
 

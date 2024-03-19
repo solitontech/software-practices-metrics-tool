@@ -4,9 +4,10 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Chip } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import { VotesTimeLineView } from "./VotesTimeLineView";
 import { NOT_AVAILABLE } from "../../../../../constants/common.constants";
-import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
 import { formatDate, formatDateWithoutTime } from "../../../../../utils/dateUtil";
 import styles from "../CodeReviewMetricsTable.module.scss";
 import { getFormattedReviewerComments } from "../codeReviewMetricsTableUtils";

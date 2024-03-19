@@ -1,4 +1,4 @@
-import { IContextClientFilterSquad } from "src/context";
+import { IContextClientFilterSquad } from "src/context/context";
 
 import { IFetchedCodeReviewResponse } from "./codeReviewTypes";
 

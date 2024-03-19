@@ -1,6 +1,6 @@
 import humanizeDuration from "humanize-duration";
 
-import { FRACTION_TO_FIND_TIME, HOURS_IN_A_DAY, MINUTES_IN_ONE_HOUR, ONE_HOUR } from "src/constants";
+import { FRACTION_TO_FIND_TIME, HOURS_IN_A_DAY, MINUTES_IN_ONE_HOUR, ONE_HOUR } from "src/constants/constants";
 
 import { cacheWrapperForUnaryFunction } from "../../../../utils/cacheUtil";
 

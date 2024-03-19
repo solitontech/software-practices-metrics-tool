@@ -1,4 +1,4 @@
-import { Tile, InfoIconTooltip } from "src/components";
+import { Tile, InfoIconTooltip } from "src/components/components";
 
 import styles from "./TrunkBasedPullRequestsTiles.module.scss";
 

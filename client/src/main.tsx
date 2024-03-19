@@ -8,8 +8,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import "src/styles/index.scss";
-import { queryClient } from "src/fetchers";
-import { AppRoutes } from "src/routes";
+import { queryClient } from "src/services/api/api";
+import { AppRoutes } from "src/routes/routes";
 
 const renderNode = document.getElementById("root") as HTMLElement;
 

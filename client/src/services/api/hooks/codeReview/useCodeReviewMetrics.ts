@@ -3,8 +3,8 @@ import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { ClientFilterContext } from "src/context";
-import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/fetchers";
+import { ClientFilterContext } from "src/context/context";
+import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/services/api/api";
 
 import { IFetchedCodeReviewResponse } from "./codeReviewTypes";
 import { CodeReviewMetricsUtils } from "./codeReviewUtils";

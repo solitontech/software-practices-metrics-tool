@@ -1,4 +1,4 @@
-import { IFetchedClientFilterSquadMember } from "../../fetchers";
+import { IFetchedClientFilterSquadMember } from "src/services/api/api";
 
 export type IContextClientFilterSquadMembers = IFetchedClientFilterSquadMember[];
 export interface IContextClientFilterSquad {

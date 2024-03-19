@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/fetchers";
+import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/services/api/api";
 
 import { IFetchedTrunkBranchPullRequestsResponse } from "./pullRequestsMergedToTrunkTypes";
 
