@@ -3,15 +3,14 @@ import { ChangeEvent, useEffect, useState, useRef } from "react";
 import { Chip } from "@mui/material";
 import clsx from "clsx";
 
-import "react-datepicker/dist/react-datepicker.css";
-
 import { ClientFilters, SearchBox } from "src/components/components";
+import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./CodeReviewSearchBox.module.scss";
 import { CHIPS } from "./codeReviewSearchBoxConstants";
 
 interface ICodeReviewSearchBoxProps {
-  selectedChips: string;
+  selectedChip: string;
   handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleChipChange: (chip: string) => void;
 }
@@ -19,7 +18,7 @@ interface ICodeReviewSearchBoxProps {
 const PLACEHOLDER = "Search for date, title, tags, author, reviewer & status";
 
 export const CodeReviewSearchBox = ({
-  selectedChips,
+  selectedChip,
   handleSearchChange,
   handleChipChange,
 }: ICodeReviewSearchBoxProps) => {
@@ -40,15 +39,16 @@ export const CodeReviewSearchBox = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleChipClick = (selectedChip: string) => {
-    const chip = CHIPS.find((chip) => chip.key === selectedChip);
+  const handleChipClick = (currentChip: string) => {
+    const chip = CHIPS.find((chip) => chip.key === currentChip);
 
     if (!chip) {
       return;
     }
 
-    if (selectedChips.includes(chip.key)) {
+    if (selectedChip.includes(chip.key)) {
       setSearchPlaceHolder(PLACEHOLDER);
+
       return handleChipChange("");
     }
 
@@ -70,13 +70,13 @@ export const CodeReviewSearchBox = ({
         {isSearchDropdownOpen && (
           <div className={styles.chipContainer}>
             {CHIPS.map(({ key, label }) => {
-              const selectedChip = clsx(selectedChips.includes(key) && styles.selectedChip);
+              const selectedClass = clsx(selectedChip.includes(key) && styles.selectedChip);
 
               return (
                 <Chip
                   key={key}
                   label={label}
-                  className={`${selectedChip} ${styles.chipBox}`}
+                  className={`${styles.chipBox} ${selectedClass}`}
                   onClick={() => handleChipClick(key)}
                 />
               );
