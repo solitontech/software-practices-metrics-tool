@@ -12,8 +12,8 @@ class BuildClient {
   static #clientTrunkBranch = 'main';
 
   static {
-    this.#clientDirectory = path.join(this.#dirName, '../../../Client');
-    this.#serverDirectory = path.join(this.#dirName, '../../../Server');
+    this.#clientDirectory = path.join(this.#dirName, '../../../client');
+    this.#serverDirectory = path.join(this.#dirName, '../../../server');
   }
 
   static startBuild() {
