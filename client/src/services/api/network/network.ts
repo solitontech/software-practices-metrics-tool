@@ -1,3 +1,3 @@
-export * from "./endPoint/apiEndpoint";
+export * from "./networkEndpoint";
 export * from "./helpers/apiHelper";
-export * from "./constants/apiConstants";
+export * from "./networkConstants";
