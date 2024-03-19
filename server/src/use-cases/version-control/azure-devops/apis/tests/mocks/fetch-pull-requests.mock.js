@@ -1,4 +1,4 @@
-export const SQUADS = [
+export const CLIENT_FILTER_SQUADS = [
   {
     squadName: 'SPMT',
     developers: {
@@ -7,7 +7,7 @@ export const SQUADS = [
   },
 ];
 
-export const THREADS = {
+export const PULL_REQUESTS_THREADS = {
   count: 2,
   value: [
     {

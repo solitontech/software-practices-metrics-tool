@@ -1,6 +1,6 @@
 import { describe, it, expect } from '@jest/globals';
 
-import { VoteMetrics } from '../../../../../../../src/services/version-control/azure-devops/code-review/vote-metrics/vote-metrics.js';
+import { VoteMetrics } from '##/use-cases/version-control/azure-devops/code-review/vote-metrics/vote-metrics.js';
 
 describe('VoteMetrics~getPullRequestVotes - method to get pull request votes from reviewers', () => {
   it('should return pull request votes for pull request reviewers', () => {
