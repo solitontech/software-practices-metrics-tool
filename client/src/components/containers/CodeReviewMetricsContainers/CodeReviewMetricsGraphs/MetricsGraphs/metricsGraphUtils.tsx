@@ -1,5 +1,5 @@
 import { ITimeMetricsGraph } from "./TimeMetricsGraph/timeMetricsGraphInterfaces";
-import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers/fetchers";
 
 export const getGraphObject = (
   pullRequests: IFetchedCodeReviewPullRequest[],

@@ -1,7 +1,7 @@
-import { SECONDS_IN_ONE_HOUR } from "src/constants";
+import { SECONDS_IN_ONE_HOUR } from "src/constants/constants";
 
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
-import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers/fetchers";
 import { formatHoursToDays } from "../../../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 import {
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,

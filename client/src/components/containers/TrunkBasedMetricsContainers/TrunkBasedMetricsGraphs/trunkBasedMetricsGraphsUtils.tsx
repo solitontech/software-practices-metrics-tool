@@ -1,5 +1,5 @@
-import { IFetchedTrunkBranchCommit } from "src/fetchers";
-import { formatDate, getFormattedDateText } from "src/utils";
+import { IFetchedTrunkBranchCommit } from "src/fetchers/fetchers";
+import { formatDate, getFormattedDateText } from "src/utils/utils";
 
 interface ITrunkGraphCommitsForDate {
   [date: string]: number;

@@ -1,7 +1,7 @@
 import { LeastVotesAnalysisGraph } from "./LeastVotesGraph/LeastVotesGraph";
 import styles from "./MetricsTrendGraphs.module.scss";
 import { TimeMetricsAnalysisGraph } from "./TimeMetricsGraph/TimeMetricsGraph";
-import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers/fetchers";
 
 interface Props {
   pullRequests: IFetchedCodeReviewPullRequest[];

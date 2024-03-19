@@ -5,7 +5,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Tooltip } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import { CustomVote, DialogBox } from "src/components";
+import { CustomVote, DialogBox } from "src/components/components";
 
 import approvedSvg from "../../../../../assets/images/approved.svg";
 import approvedWithSuggestionsSvg from "../../../../../assets/images/approvedWithSuggestions.svg";

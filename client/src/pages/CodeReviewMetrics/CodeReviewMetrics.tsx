@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { DateTime } from "luxon";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { LoadingSpinner, SnackBar, TabToggle } from "src/components";
+import { LoadingSpinner, SnackBar, TabToggle } from "src/components/components.ts";
 
 import styles from "./CodeReviewMetrics.module.scss";
 import {

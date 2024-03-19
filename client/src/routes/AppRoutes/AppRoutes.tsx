@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { routePaths } from "src/constants";
-import { ClientFilterProvider } from "src/context";
-import { CodeReviewMetrics, Home, PageNotFound, TrunkBasedMetrics } from "src/pages";
+import { routePaths } from "src/constants/constants";
+import { ClientFilterProvider } from "src/context/context";
+import { CodeReviewMetrics, Home, PageNotFound, TrunkBasedMetrics } from "src/pages/pages";
 
 export const AppRoutes = () => {
   return (

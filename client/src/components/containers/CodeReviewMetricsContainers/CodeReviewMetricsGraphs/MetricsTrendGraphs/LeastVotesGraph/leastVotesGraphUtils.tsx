@@ -1,5 +1,5 @@
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
-import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers/fetchers";
 import { Vote } from "../../../CodeReviewMetricsTable/interfaces";
 import {
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,

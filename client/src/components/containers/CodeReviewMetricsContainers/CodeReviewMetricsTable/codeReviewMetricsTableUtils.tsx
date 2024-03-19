@@ -1,11 +1,16 @@
 import durationFormat from "humanize-duration";
 
-import { HOURS_IN_A_DAY, SECONDS_IN_ONE_HOUR, MINUTES_IN_ONE_HOUR, FRACTION_TO_FIND_TIME } from "src/constants";
+import {
+  HOURS_IN_A_DAY,
+  SECONDS_IN_ONE_HOUR,
+  MINUTES_IN_ONE_HOUR,
+  FRACTION_TO_FIND_TIME,
+} from "src/constants/constants";
 
 import { sortMap } from "./codeReviewMetricsTableConstants";
 import { FilterColumn, Filters, IReviewerComments, Vote } from "./interfaces";
 import { NOT_AVAILABLE } from "../../../../constants/common.constants";
-import { IFetchedCodeReviewPullRequest } from "../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../fetchers/fetchers";
 import { cacheWrapperForUnaryFunction } from "../../../../utils/cacheUtil";
 import { formatHoursToDays } from "../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 

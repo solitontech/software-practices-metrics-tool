@@ -11,9 +11,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
-import { SearchBox } from "src/components";
-import { IFetchedTrunkBasedActiveBranch } from "src/fetchers";
-import { formatDate } from "src/utils";
+import { SearchBox } from "src/components/components";
+import { IFetchedTrunkBasedActiveBranch } from "src/fetchers/fetchers";
+import { formatDate } from "src/utils/utils";
 
 import styles from "./TrunkBasedActiveBranchesTable.module.scss";
 import { columns } from "./trunkBasedActiveBranchesTableConstants";

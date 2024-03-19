@@ -2,7 +2,7 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 
-import { IFetchedCodeReviewPullRequest } from "../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../fetchers/fetchers";
 
 export const CODE_REVIEW_METRICS = {
   FIRST_REVIEW_RESPONSE: "firstReviewResponseTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,

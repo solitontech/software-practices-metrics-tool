@@ -2,8 +2,8 @@ import BugReportIcon from "@mui/icons-material/BugReport";
 import { Tooltip } from "@mui/material";
 import { NavLink, Outlet } from "react-router-dom";
 
-import { NavBar, ErrorBoundary } from "src/components";
-import { BUG_REPORT_LINK } from "src/constants";
+import { NavBar, ErrorBoundary } from "src/components/components";
+import { BUG_REPORT_LINK } from "src/constants/constants";
 
 import styles from "./Home.module.scss";
 

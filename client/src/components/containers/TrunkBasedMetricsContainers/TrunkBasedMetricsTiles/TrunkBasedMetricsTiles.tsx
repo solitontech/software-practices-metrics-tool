@@ -10,9 +10,9 @@ import {
   Tile,
   TrunkBasedActiveBranchesTable,
   TrunkBasedNamingConventionTable,
-} from "src/components";
-import { NOT_AVAILABLE } from "src/constants";
-import { useTrunkBasedMetricsActiveBranches, useTrunkBasedMetricsTotalBranches } from "src/fetchers";
+} from "src/components/components";
+import { NOT_AVAILABLE } from "src/constants/constants";
+import { useTrunkBasedMetricsActiveBranches, useTrunkBasedMetricsTotalBranches } from "src/fetchers/fetchers";
 
 import styles from "./TrunkBasedMetricsTiles.module.scss";
 import { TILE, DIALOG } from "./trunkBasedMetricsTilesConstants";

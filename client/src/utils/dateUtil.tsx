@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-import { NOT_AVAILABLE } from "src/constants";
+import { NOT_AVAILABLE } from "src/constants/constants";
 
 import { cacheWrapperForUnaryFunction } from "./cacheUtil";
 

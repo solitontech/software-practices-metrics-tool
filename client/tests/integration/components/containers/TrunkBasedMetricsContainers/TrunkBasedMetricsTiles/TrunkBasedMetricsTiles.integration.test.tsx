@@ -9,7 +9,7 @@ import {
   getBranchesHandler,
   getServerErrorHandler,
 } from "./TrunkBasedMetricsTiles.msw-handlers";
-import { queryClient } from "../../../../../../src/fetchers";
+import { queryClient } from "../../../../../../src/fetchers/fetchers";
 
 describe("TrunkBasedMetricsTiles component", () => {
   let server: ReturnType<typeof setupServer>;

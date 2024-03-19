@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 import { VotesTimeLineView } from "./VotesTimeLineView";
 import { NOT_AVAILABLE } from "../../../../../constants/common.constants";
-import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../fetchers/fetchers";
 import { formatDate, formatDateWithoutTime } from "../../../../../utils/dateUtil";
 import styles from "../CodeReviewMetricsTable.module.scss";
 import { getFormattedReviewerComments } from "../codeReviewMetricsTableUtils";

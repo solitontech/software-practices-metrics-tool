@@ -9,8 +9,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
-import { IFetchedTrunkBranchPullRequest } from "src/fetchers";
-import { formatDateWithoutTime, formatDate } from "src/utils";
+import { IFetchedTrunkBranchPullRequest } from "src/fetchers/fetchers";
+import { formatDateWithoutTime, formatDate } from "src/utils/utils";
 
 import styles from "./TrunkBasedPullRequestsTable.module.scss";
 import { tableColumns } from "./trunkBasedPullRequestsTableConstants";

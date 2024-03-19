@@ -1,5 +1,5 @@
-import { BarChart } from "src/components";
-import { useTrunkBranchCommits } from "src/fetchers";
+import { BarChart } from "src/components/components";
+import { useTrunkBranchCommits } from "src/fetchers/fetchers";
 
 import styles from "./TrunkBasedMetricsGraphs.module.scss";
 import { TrunkBasedMetricsGraphsUtils } from "./trunkBasedMetricsGraphsUtils";

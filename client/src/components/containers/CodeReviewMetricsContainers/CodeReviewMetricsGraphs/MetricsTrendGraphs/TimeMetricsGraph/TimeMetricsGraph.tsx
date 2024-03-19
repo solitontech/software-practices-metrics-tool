@@ -5,7 +5,7 @@ import { GRAPH_COLOR, GRAPH_PLOT_NAME, GRAPH_TOOLTIP_HEADER, TREND_VIEW_CLASS } 
 import styles from "./TimeMetricsGraph.module.scss";
 import { IPullRequestsTimeMetrics, TimeMetrics } from "./timeMetricsGraphInterface";
 import { Weekly } from "./weeklyGraphUtils";
-import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers";
+import { IFetchedCodeReviewPullRequest } from "../../../../../../fetchers/fetchers";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { GRAPH_TYPE, TREND_VIEW } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
 import {

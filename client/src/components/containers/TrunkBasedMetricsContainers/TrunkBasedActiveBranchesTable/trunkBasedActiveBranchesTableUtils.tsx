@@ -1,5 +1,5 @@
-import { IFetchedTrunkBasedActiveBranch } from "src/fetchers";
-import { formatDate } from "src/utils";
+import { IFetchedTrunkBasedActiveBranch } from "src/fetchers/fetchers";
+import { formatDate } from "src/utils/utils";
 
 export function filterActiveBranches(searchKeyword: string, branches: IFetchedTrunkBasedActiveBranch[]) {
   if (!searchKeyword) {

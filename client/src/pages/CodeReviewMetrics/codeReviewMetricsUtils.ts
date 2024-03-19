@@ -2,8 +2,8 @@ import {
   ALL_CHIPS,
   CHIP,
 } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewChips/codeReviewSearchChipsConstants";
-import { IFetchedCodeReviewPullRequest } from "src/fetchers";
-import { formatDateWithoutTime } from "src/utils";
+import { IFetchedCodeReviewPullRequest } from "src/fetchers/fetchers";
+import { formatDateWithoutTime } from "src/utils/utils";
 
 const SEARCH_KEYS = {
   TAGS: "tags",

@@ -1,4 +1,4 @@
-import { IFetchedTrunkMetricsBranch } from "src/fetchers";
+import { IFetchedTrunkMetricsBranch } from "src/fetchers/fetchers";
 
 export const filterBranches = (searchKeyword: string, branches: IFetchedTrunkMetricsBranch[]) => {
   if (!searchKeyword) {

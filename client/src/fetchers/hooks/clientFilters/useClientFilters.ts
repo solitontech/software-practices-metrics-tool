@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-import { ApiEndPoint, QUERY_KEY } from "src/fetchers";
+import { ApiEndPoint, QUERY_KEY } from "src/fetchers/fetchers";
 
 import { IFetchedClientFilterResponse } from "./clientFiltersTypes";
 import { ClientFiltersUtils } from "./clientFiltersUtils";

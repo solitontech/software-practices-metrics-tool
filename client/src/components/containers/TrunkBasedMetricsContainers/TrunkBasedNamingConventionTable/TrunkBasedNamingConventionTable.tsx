@@ -11,8 +11,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
-import { SearchBox, ErrorBoundary } from "src/components";
-import { IFetchedTrunkMetricsBranch } from "src/fetchers";
+import { SearchBox, ErrorBoundary } from "src/components/components.ts";
+import { IFetchedTrunkMetricsBranch } from "src/fetchers/fetchers.ts";
 
 import styles from "./TrunkBasedNamingConventionTable.module.scss";
 import { filterBranches } from "./trunkBasedNamingConventionUtils.tsx";

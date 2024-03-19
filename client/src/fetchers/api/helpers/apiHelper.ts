@@ -1,4 +1,4 @@
-import { START_PAGINATION_CURSOR, PAGINATION_LIMIT } from "src/fetchers";
+import { START_PAGINATION_CURSOR, PAGINATION_LIMIT } from "src/fetchers/fetchers";
 
 import { IFetchAllData } from "./apiHelperTypes";
 
