@@ -16,8 +16,6 @@ interface ITabToggleProps {
   handleTabChange: (value: string) => void;
 }
 
-// TODO: user class instead of inline styles
-
 export const TabToggle = ({ tabs, selectedTab, handleTabChange }: ITabToggleProps) => {
   const handleChange = (_event: MouseEvent, newValue: string | null) => {
     if (newValue) {
@@ -26,13 +24,7 @@ export const TabToggle = ({ tabs, selectedTab, handleTabChange }: ITabToggleProp
   };
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        display: "flex",
-        height: "50px",
-      }}
-    >
+    <Paper elevation={0} className={styles.toggleContainer}>
       <ToggleButtonGroup value={selectedTab} exclusive onChange={handleChange}>
         (
         {tabs.map((tab) => {

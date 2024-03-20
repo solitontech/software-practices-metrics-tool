@@ -85,7 +85,7 @@ export const VotesTimeLineView = ({
         isOpen={isVotesTimeLineOpen}
         handleClose={() => setIsVotesTimeLineOpen(false)}
         title={<CodeReviewTimeLineTable timeLine={votesTimeline.timeLine} />}
-        width="600px"
+        dialogClassName={styles.votesTimelineDialog}
       >
         <div className={styles.dialogHeader}>Votes Timeline -</div>
         <div className={styles.prDetails}>

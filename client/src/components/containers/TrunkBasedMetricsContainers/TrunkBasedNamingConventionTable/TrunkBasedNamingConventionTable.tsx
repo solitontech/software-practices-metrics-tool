@@ -40,7 +40,7 @@ export const TrunkBasedNamingConventionTable = ({
         <SearchBox
           label="Search branches"
           placeHolder="Search branch name"
-          width={320}
+          searchBoxClassName={styles.searchBox}
           isDebounced={true}
           onChange={handleSearchChange}
         ></SearchBox>
