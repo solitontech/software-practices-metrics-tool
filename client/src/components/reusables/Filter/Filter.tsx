@@ -4,6 +4,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import clsx from "clsx";
 
 import styles from "./Filter.module.scss";
+import { useHandleClickOutside } from "src/services/common/common";
 
 interface IFilterIconProps {
   children: ReactNode;
@@ -15,18 +16,7 @@ export const FilterIcon = ({ isActive, style, children }: IFilterIconProps) => {
   const filterRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  //TODO: extract as reusable hook
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (event.target instanceof Node && filterRef.current && !filterRef.current.contains(event.target)) {
-        setIsVisible(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  useHandleClickOutside(filterRef, setIsVisible);
 
   return (
     <div className={styles.container} ref={filterRef}>

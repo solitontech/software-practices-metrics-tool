@@ -4,6 +4,7 @@ import { Chip } from "@mui/material";
 import clsx from "clsx";
 
 import { ClientFilters, SearchBox } from "src/components/components";
+import { useHandleClickOutside } from "src/services/common/common";
 
 import styles from "./CodeReviewSearchBox.module.scss";
 import { CHIPS } from "./codeReviewSearchBoxConstants";
@@ -25,18 +26,7 @@ export const CodeReviewSearchBox = ({
   const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
   const [searchPlaceHolder, setSearchPlaceHolder] = useState(PLACEHOLDER);
 
-  //TODO: extract as reusable hook
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (event.target instanceof Node && searchRef.current && !searchRef.current.contains(event.target)) {
-        setIsSearchDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  useHandleClickOutside(searchRef, setIsSearchDropdownOpen);
 
   const handleChipClick = (currentChip: string) => {
     const chip = CHIPS.find((chip) => chip.key === currentChip);
