@@ -1,5 +1,5 @@
 import { IFetchedTrunkBranchPullRequest } from "src/services/api/api";
-import { formatDateWithoutTime } from "src/utils/utils";
+import { getFormattedDateWithoutTime } from "src/utils/utils";
 
 export function filterPullRequests(searchKeyword: string, pullRequests: IFetchedTrunkBranchPullRequest[]) {
   if (!searchKeyword) {
@@ -9,8 +9,8 @@ export function filterPullRequests(searchKeyword: string, pullRequests: IFetched
   const searchTerm = searchKeyword.toLocaleLowerCase().trim();
 
   return pullRequests.filter(({ title, creationDate, closedDate, name, status }) => {
-    const formattedCreationDate = formatDateWithoutTime(creationDate);
-    const formattedClosedDate = formatDateWithoutTime(closedDate);
+    const formattedCreationDate = getFormattedDateWithoutTime(creationDate);
+    const formattedClosedDate = getFormattedDateWithoutTime(closedDate);
 
     return (
       title.toLocaleLowerCase().includes(searchTerm) ||

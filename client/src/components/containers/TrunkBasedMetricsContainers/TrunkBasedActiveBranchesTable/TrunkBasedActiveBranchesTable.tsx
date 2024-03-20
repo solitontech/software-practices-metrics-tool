@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
 
 import { SearchBox } from "src/components/components";
 import { IFetchedTrunkBasedActiveBranch } from "src/services/api/api";
-import { formatDate } from "src/utils/utils";
+import { getFormattedDateWithTime } from "src/utils/utils";
 
 import styles from "./TrunkBasedActiveBranchesTable.module.scss";
 import { columns } from "./trunkBasedActiveBranchesTableConstants";
@@ -80,7 +80,7 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: ITrunkBasedAct
                         </NavLink>
                       </TableCell>
                       <TableCell className={styles.createdBy}>{row.createdBy}</TableCell>
-                      <TableCell className={styles.date}>{formatDate(row.creationDate)}</TableCell>
+                      <TableCell className={styles.date}>{getFormattedDateWithTime(row.creationDate)}</TableCell>
                     </TableRow>
                   );
                 })
