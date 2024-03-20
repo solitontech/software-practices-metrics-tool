@@ -4,7 +4,7 @@ info:
   description: Consists of API endpoints for software practices metrics tool which includes Code Review Metrics, Trunk Based Development, Client Filters Endpoints.
   version: 1.0.0
 servers:
-  - url: http://localhost:3000/api/v1
+  - url: http://localhost:3498/api/v1
 paths:
   /metrics/trunk-based-development/commits/:
     get:

@@ -64,9 +64,9 @@ ensure docker daemon is running (`$ docker ps`).
 
 6. Run load-metrics-tool.sh script in git bash (`$ ./load-metrics-tool.sh`), the
  script will build the docker container & the metrics tool application
-   will started at [http://localhost:3000](http://localhost:3000).
+   will started at [http://localhost:3498](http://localhost:3498).
 
-7. In case your host's port 3000 is occupied, you can specify a different port
+7. In case your host's port 3498 is occupied, you can specify a different port
  in compose.yaml file.
 
 8. Use below commands to re-run or stop the container using terminal, and ensure
