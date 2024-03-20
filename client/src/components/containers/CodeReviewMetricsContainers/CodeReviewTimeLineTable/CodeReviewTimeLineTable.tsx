@@ -1,7 +1,7 @@
 import styles from "./CodeReviewTimeLineTable.module.scss";
 import { columns, votesImage, votesLabel } from "./codeReviewTimeLineTableConstants";
 import { IVotesLabel } from "./interfaces";
-import { formatDate } from "../../../../utils/dateUtil";
+import { getFormattedDateWithTime } from "../../../../utils/dateUtil";
 import { CustomVote } from "../../../reusables/CustomVote/CustomVote";
 import { IVotesTimeline } from "../CodeReviewMetricsTable/interfaces";
 
@@ -56,7 +56,7 @@ export const CodeReviewTimeLineTable = ({ timeLine }: Props) => {
                     >
                       {row.author}
                     </th>
-                    <th className={`${styles.text} ${styles.tableCell}`}>{formatDate(row.time)}</th>
+                    <th className={`${styles.text} ${styles.tableCell}`}>{getFormattedDateWithTime(row.time)}</th>
                     <th className={`${styles.text} ${styles.tableCell}`}>
                       <CustomVote
                         imgSrc={votesImage[row.vote as keyof IVotesLabel]}

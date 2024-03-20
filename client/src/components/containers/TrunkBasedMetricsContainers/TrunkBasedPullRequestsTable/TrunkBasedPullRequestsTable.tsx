@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
 import { IFetchedTrunkBranchPullRequest } from "src/services/api/api";
-import { formatDateWithoutTime, formatDate } from "src/utils/utils";
+import { getFormattedDateWithoutTime, getFormattedDateWithTime } from "src/utils/utils";
 
 import styles from "./TrunkBasedPullRequestsTable.module.scss";
 import { tableColumns } from "./trunkBasedPullRequestsTableConstants";
@@ -52,13 +52,13 @@ export const TrunkBasedPullRequestsTable = ({ pullRequests }: ITrunkBasedPullReq
                     className={styles.tableRow}
                   >
                     <TableCell className={styles.date}>
-                      <Tooltip title={formatDate(row.creationDate)} arrow>
-                        <span>{formatDateWithoutTime(row.creationDate)}</span>
+                      <Tooltip title={getFormattedDateWithTime(row.creationDate)} arrow>
+                        <span>{getFormattedDateWithoutTime(row.creationDate)}</span>
                       </Tooltip>
                     </TableCell>
                     <TableCell className={styles.date}>
-                      <Tooltip title={formatDate(row.closedDate)} arrow>
-                        <span>{formatDateWithoutTime(row.closedDate)}</span>
+                      <Tooltip title={getFormattedDateWithTime(row.closedDate)} arrow>
+                        <span>{getFormattedDateWithoutTime(row.closedDate)}</span>
                       </Tooltip>
                     </TableCell>
                     <TableCell>

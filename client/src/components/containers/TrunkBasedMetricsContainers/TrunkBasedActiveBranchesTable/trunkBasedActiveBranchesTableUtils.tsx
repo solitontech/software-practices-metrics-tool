@@ -1,5 +1,5 @@
 import { IFetchedTrunkBasedActiveBranch } from "src/services/api/api";
-import { formatDate } from "src/utils/utils";
+import { getFormattedDateWithTime } from "src/utils/utils";
 
 export function filterActiveBranches(searchKeyword: string, branches: IFetchedTrunkBasedActiveBranch[]) {
   if (!searchKeyword) {
@@ -9,7 +9,7 @@ export function filterActiveBranches(searchKeyword: string, branches: IFetchedTr
   const searchTerm = searchKeyword.toLocaleLowerCase();
 
   return branches.filter(({ title, creationDate, name, createdBy }) => {
-    const formattedCreationDate = formatDate(creationDate);
+    const formattedCreationDate = getFormattedDateWithTime(creationDate);
 
     return (
       title.toLocaleLowerCase().includes(searchTerm) ||

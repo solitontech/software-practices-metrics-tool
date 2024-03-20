@@ -1,5 +1,5 @@
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
-import { formatDateWithoutTime } from "src/utils/utils";
+import { getFormattedDateWithoutTime } from "src/utils/utils";
 
 import { CHIPS } from "../../components/containers/CodeReviewMetricsContainers/CodeReviewSearchBox/codeReviewSearchBoxConstants";
 
@@ -48,7 +48,9 @@ const filterByDate = (
   value: string,
 ): IFetchedCodeReviewPullRequest[] => {
   return pullRequests.filter((row) => {
-    const formattedValue = formatDateWithoutTime(row[mappedKey as keyof IFetchedCodeReviewPullRequest] as string[]);
+    const formattedValue = getFormattedDateWithoutTime(
+      row[mappedKey as keyof IFetchedCodeReviewPullRequest] as string[],
+    );
     const rowValue = formattedValue?.toLowerCase();
     return rowValue && rowValue.includes(value);
   });
@@ -91,8 +93,8 @@ const getSearchedPullRequests = (
 ): IFetchedCodeReviewPullRequest[] => {
   return pullRequests.filter((row) => {
     const { title, createdBy, creationDate, closedDate, status, tags, votesHistoryTimeline } = row;
-    const formattedCreationDate = formatDateWithoutTime(creationDate);
-    const formattedClosedDate = formatDateWithoutTime(closedDate);
+    const formattedCreationDate = getFormattedDateWithoutTime(creationDate);
+    const formattedClosedDate = getFormattedDateWithoutTime(closedDate);
     const reviewerInVotes = votesHistoryTimeline.some((vote) => vote.author.toLowerCase().includes(searchTerm));
 
     return (

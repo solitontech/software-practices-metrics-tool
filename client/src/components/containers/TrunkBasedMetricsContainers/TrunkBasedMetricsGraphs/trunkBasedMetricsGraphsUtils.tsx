@@ -1,5 +1,5 @@
 import { IFetchedTrunkBranchCommit } from "src/services/api/api";
-import { formatDate, getFormattedDateText } from "src/utils/utils";
+import { getFormattedDateWithTime, getFormattedDateText } from "src/utils/utils";
 
 interface ITrunkGraphCommitsForDate {
   [date: string]: number;
@@ -43,7 +43,7 @@ export class TrunkBasedMetricsGraphsUtils {
 
   static #countCommitsForDates(dateCounts: ITrunkGraphCommitsForDate, commits: IFetchedTrunkBranchCommit[]) {
     commits.forEach((item) => {
-      const date = getFormattedDateText(new Date(formatDate(item.author.date)), "2-digit");
+      const date = getFormattedDateText(new Date(getFormattedDateWithTime(item.author.date)), "2-digit");
 
       dateCounts[date]++;
     });
