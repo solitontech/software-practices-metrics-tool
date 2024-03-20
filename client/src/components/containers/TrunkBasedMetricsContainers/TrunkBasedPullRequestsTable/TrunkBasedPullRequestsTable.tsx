@@ -1,12 +1,5 @@
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Chip, Tooltip } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
 import { IFetchedTrunkBranchPullRequest } from "src/services/api/api";
@@ -19,80 +12,77 @@ interface ITrunkBasedPullRequestsTableProps {
   pullRequests: IFetchedTrunkBranchPullRequest[];
 }
 
-//TODO: Refactor to native table component for performance
-
 export const TrunkBasedPullRequestsTable = ({ pullRequests }: ITrunkBasedPullRequestsTableProps) => {
   return (
-    <Paper className={styles.container}>
-      <TableContainer sx={{ maxHeight: "100%" }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {tableColumns.map((column) => (
-                <TableCell
-                  data-testid={`${column.id}-table-header`}
-                  key={column.id}
-                  align={column.align}
-                  style={{ width: column.width }}
+    <div className={styles.container}>
+      <table className={styles.table} aria-label="sticky table">
+        <thead className={styles.tableHead}>
+          <tr>
+            {tableColumns.map((column) => (
+              <td
+                data-testid={`${column.id}-table-header`}
+                key={column.id}
+                align={column.align}
+                style={{ width: column.width }}
+                className={styles.tableCell}
+              >
+                {column.label}
+              </td>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {pullRequests.length ? (
+            pullRequests.map((row) => {
+              return (
+                <tr
+                  data-testid="trunk-based-metrics-table-row"
+                  key={row.title}
+                  role="checkbox"
+                  tabIndex={-1}
+                  className={styles.tableRow}
                 >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {pullRequests.length ? (
-              pullRequests.map((row) => {
-                return (
-                  <TableRow
-                    data-testid="trunk-based-metrics-table-row"
-                    key={row.title}
-                    role="checkbox"
-                    tabIndex={-1}
-                    className={styles.tableRow}
-                  >
-                    <TableCell className={styles.date}>
-                      <Tooltip title={formatDate(row.creationDate)} arrow>
-                        <span>{formatDateWithoutTime(row.creationDate)}</span>
+                  <td className={`${styles.date} ${styles.tableCell}`}>
+                    <Tooltip title={formatDate(row.creationDate)} arrow>
+                      <span>{formatDateWithoutTime(row.creationDate)}</span>
+                    </Tooltip>
+                  </td>
+                  <td className={`${styles.date} ${styles.tableCell}`}>
+                    <Tooltip title={formatDate(row.closedDate)} arrow>
+                      <span>{formatDateWithoutTime(row.closedDate)}</span>
+                    </Tooltip>
+                  </td>
+                  <td className={styles.tableCell}>
+                    <NavLink to={row.branchURL} target="_blank" className={styles.branchName}>
+                      <Tooltip title={row.name} placement="bottom-start">
+                        <span className={styles.title}>{row.name}</span>
                       </Tooltip>
-                    </TableCell>
-                    <TableCell className={styles.date}>
-                      <Tooltip title={formatDate(row.closedDate)} arrow>
-                        <span>{formatDateWithoutTime(row.closedDate)}</span>
+                      <OpenInNewIcon className={styles.linkIcon} />
+                    </NavLink>
+                  </td>
+                  <td className={styles.tableCell}>
+                    <NavLink to={row.pullRequestURL} className={styles.pullRequest} target="_blank">
+                      <Tooltip title={row.title} placement="bottom-start">
+                        <span className={styles.title}>{row.title}</span>
                       </Tooltip>
-                    </TableCell>
-                    <TableCell>
-                      <NavLink to={row.branchURL} target="_blank" className={styles.branchName}>
-                        <Tooltip title={row.name} placement="bottom-start">
-                          <span className={styles.title}>{row.name}</span>
-                        </Tooltip>
-                        <OpenInNewIcon className={styles.linkIcon} />
-                      </NavLink>
-                    </TableCell>
-                    <TableCell>
-                      <NavLink to={row.pullRequestURL} className={styles.pullRequest} target="_blank">
-                        <Tooltip title={row.title} placement="bottom-start">
-                          <span className={styles.title}>{row.title}</span>
-                        </Tooltip>
-                        <OpenInNewIcon className={styles.linkIcon} />
-                      </NavLink>
-                    </TableCell>
-                    <TableCell>
-                      <Chip className={styles[row.status]} label={row.status} />
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            ) : (
-              <TableRow>
-                <TableCell colSpan={tableColumns.length} className={styles.noDataMessage}>
-                  No data available
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+                      <OpenInNewIcon className={styles.linkIcon} />
+                    </NavLink>
+                  </td>
+                  <td className={styles.tableCell}>
+                    <Chip className={styles[row.status]} label={row.status} />
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan={tableColumns.length} className={`${styles.noDataMessage} ${styles.tableCell}`}>
+                No data available
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };

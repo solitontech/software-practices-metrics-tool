@@ -3,6 +3,7 @@
 .container {
   border: 1px solid $app-secondary-border-color;
   width: calc(100% - 250px);
+  overflow: scroll;
 }
 
 .tableRow:nth-child(odd) {
@@ -59,4 +60,24 @@
   border-bottom: 1px solid $app-secondary-border-color;
   font-size: $font-size-mlg;
   text-align: center;
+}
+
+.table {
+  border-spacing: 0;
+}
+
+.tableHead {
+  position: sticky;
+  top: 0;
+  background-color: $app-secondary-text-color;
+  color: $app-primary-text-color;
+  font-weight: $extra-bold-font-weight;
+}
+
+.tableCell {
+  font-weight: $medium-font-weight;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  border-bottom: 1px solid $app-secondary-border-color;
+  padding: $spacing-lg;
 }
