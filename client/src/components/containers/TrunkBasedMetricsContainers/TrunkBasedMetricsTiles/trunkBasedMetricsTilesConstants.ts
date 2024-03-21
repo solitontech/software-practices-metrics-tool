@@ -6,11 +6,11 @@ export const TILE = {
   activePR: {
     title: "Active PR's to trunk branch",
     toolTip:
-      "Active pull requests raised to the trunk branch. Recommendation - Number of active PRs should not be more than  number of developers in the team",
+      "Active pull requests raised to the trunk branch. Recommendation (Number of active PR's should not be more than  number of developers in the team)",
   },
   namingConvention: {
     title: "Branches following naming standard",
-    toolTip: "branches following naming standard. Recommended naming standard is - users/firstname-lastname/task-name",
+    toolTip: "branches following naming standard. Recommended naming standard is (users/firstname-lastname/task-name)",
   },
 };
 
