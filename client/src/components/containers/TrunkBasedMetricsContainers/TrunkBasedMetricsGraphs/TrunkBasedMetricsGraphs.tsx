@@ -13,12 +13,12 @@ interface ITrunkBasedMetricsGraphsProps {
 }
 
 export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: ITrunkBasedMetricsGraphsProps) => {
-  const { data } = useTrunkBranchCommits(startDate, endDate);
-
   const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useDimensions(containerRef, setDimensions);
+
+  const { data } = useTrunkBranchCommits(startDate, endDate);
 
   const commitsToPlot = TrunkBasedMetricsGraphsUtils.getCommitsToPlot(startDate, endDate, data.commits);
 
