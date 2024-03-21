@@ -1,1 +1,1 @@
-export * from "./handleClickOutside/handleClickOutside";
+export * from "./useOutsideClick/useOutsideClick";
