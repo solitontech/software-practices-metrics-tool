@@ -1,4 +1,5 @@
 export * from "./CodeReviewSearchBox/CodeReviewSearchBox";
+export * from "./CodeReviewMetricsTabs/CodeReviewMetricsTabs";
 export * from "./CodeReviewTimeLineTable/CodeReviewTimeLineTable";
 export * from "./CodeReviewMetricsTiles/CodeReviewMetricsTiles";
 export * from "./CodeReviewMetricsTable/CodeReviewMetricsTable";

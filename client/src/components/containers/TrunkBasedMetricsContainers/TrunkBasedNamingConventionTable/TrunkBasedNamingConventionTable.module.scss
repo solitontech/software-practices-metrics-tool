@@ -23,15 +23,20 @@
 }
 
 .table {
+  border: 1px solid $app-secondary-border-color;
   border-spacing: 0;
+  width: 100%;
 }
 
 .tableHead {
   background-color: $app-secondary-text-color;
   color: $app-primary-text-color;
-  font-weight: $extra-bold-font-weight;
   position: sticky;
   top: 0;
+}
+
+.tableHead td {
+  font-weight: $medium-font-weight;
 }
 
 .tableCell {
@@ -41,6 +46,14 @@
   font-weight: $medium-font-weight;
   line-height: $app-primary-line-height;
   padding: $spacing-lg;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
 }
 
 .title {

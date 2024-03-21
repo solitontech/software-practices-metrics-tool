@@ -71,7 +71,9 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: ITrunkBasedAct
                         <OpenInNewIcon className={styles.linkIcon} />
                       </NavLink>
                     </td>
-                    <td className={styles.tableCell}>{row.createdBy}</td>
+                    <td title={row.createdBy} className={styles.tableCell}>
+                      {row.createdBy}
+                    </td>
                     <td className={styles.tableCell}>{getFormattedDateWithTime(row.creationDate)}</td>
                   </tr>
                 );

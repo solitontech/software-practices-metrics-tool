@@ -1,8 +1,15 @@
-import { SECONDS_IN_ONE_HOUR } from "src/constants/constants";
+import durationFormat from "humanize-duration";
+
+import {
+  HOURS_IN_A_DAY,
+  SECONDS_IN_ONE_HOUR,
+  MINUTES_IN_ONE_HOUR,
+  FRACTION_TO_FIND_TIME,
+} from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+import { cacheWrapperForUnaryFunction } from "src/utils/utils";
 
 import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
-import { formatHoursToDays } from "../../../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 import {
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
@@ -15,6 +22,20 @@ import {
 const MAX_LINE = MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP;
 const MAX_CHARACTERS = MAX_CHARACTERS_IN_LINE_IN_TOOLTIP;
 const MAX_ROWS = MAX_PULL_REQUEST_ID_ROWS;
+
+//TODO: migrate this function to common utility adn check for this function name in other files
+const formatHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
+  if (hours >= HOURS_IN_A_DAY) {
+    const durationInMilliseconds = hours * MINUTES_IN_ONE_HOUR * MINUTES_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;
+
+    return durationFormat(durationInMilliseconds, {
+      units: ["d", "h"],
+      round: true,
+    });
+  }
+
+  return `${hours} hours`;
+});
 
 export class Graph {
   static pullRequests: IFetchedCodeReviewPullRequest[];

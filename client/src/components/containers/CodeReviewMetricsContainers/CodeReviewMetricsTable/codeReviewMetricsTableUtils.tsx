@@ -7,12 +7,24 @@ import {
   FRACTION_TO_FIND_TIME,
 } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+import { cacheWrapperForUnaryFunction } from "src/utils/utils";
 
 import { sortMap } from "./codeReviewMetricsTableConstants";
 import { FilterColumn, Filters, IReviewerComments, Vote } from "./interfaces";
 import { NOT_AVAILABLE } from "../../../../constants/common.constants";
-import { cacheWrapperForUnaryFunction } from "../../../../utils/cacheUtil";
-import { formatHoursToDays } from "../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
+
+const formatHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
+  if (hours >= HOURS_IN_A_DAY) {
+    const durationInMilliseconds = hours * MINUTES_IN_ONE_HOUR * MINUTES_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;
+
+    return durationFormat(durationInMilliseconds, {
+      units: ["d", "h"],
+      round: true,
+    });
+  }
+
+  return `${hours} hours`;
+});
 
 export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | null) => {
   if (!value) {

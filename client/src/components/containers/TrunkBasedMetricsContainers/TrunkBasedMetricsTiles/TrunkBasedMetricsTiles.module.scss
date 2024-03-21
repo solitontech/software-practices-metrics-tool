@@ -1,8 +1,13 @@
 @import "src/styles/index.scss";
 
-.tileContent {
+.tileContainer {
   @include flex-align-center;
   gap: $spacing-sm;
+}
+
+.tileContent {
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
 .navLink {
@@ -22,7 +27,7 @@
 }
 
 .activePullRequestDialog {
-  width: 800px;
+  width: 900px;
 }
 
 .namingConventionDialog {

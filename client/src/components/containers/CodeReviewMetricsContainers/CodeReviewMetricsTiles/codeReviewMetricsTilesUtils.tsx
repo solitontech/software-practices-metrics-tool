@@ -1,41 +1,53 @@
 import humanizeDuration from "humanize-duration";
 
-import { FRACTION_TO_FIND_TIME, HOURS_IN_A_DAY, MINUTES_IN_ONE_HOUR, ONE_HOUR } from "src/constants/constants";
+import { FRACTION_TO_FIND_TIME, HOURS_IN_A_DAY, MINUTES_IN_ONE_HOUR } from "src/constants/constants";
+import { cacheWrapperForUnaryFunction } from "src/utils/utils";
 
-import { cacheWrapperForUnaryFunction } from "../../../../utils/cacheUtil";
+import { MIN_THRESHOLD_CLASS, MAX_THRESHOLD_CLASS, INSIDE_THRESHOLD_CLASS } from "./codeReviewMetricsTilesConstants";
 
-export const GREEN_COLOR = "green";
-export const RED_COLOR = "red";
-export const YELLOW_COLOR = "yellow";
+export class CodeReviewMetricsTilesUtil {
+  static getTileClass(minThreshold: number, maxThreshold: number, value: number | string) {
+    if (typeof value == "string") {
+      return "";
+    }
 
-export function getToolTipText(value: number, recommendedTime: string): string {
-  return formatHoursToDays(value) + " ( " + recommendedTime + " )";
-}
+    if (value < minThreshold) {
+      return MIN_THRESHOLD_CLASS;
+    }
 
-export function getTileColor(minThreshold: number, maxThreshold: number, value: number | string): string {
-  if (typeof value == "string") return "";
+    if (value > maxThreshold) {
+      return MAX_THRESHOLD_CLASS;
+    }
 
-  if (value < minThreshold) return GREEN_COLOR;
-  if (value > maxThreshold) return RED_COLOR;
-  else return YELLOW_COLOR;
-}
-
-export function appendHoursToNumber(hours: number): string {
-  if (hours <= ONE_HOUR) {
-    return `${hours} hour`;
-  }
-  return `${hours} hours`;
-}
-
-export const formatHoursToDays = cacheWrapperForUnaryFunction((hours: number): string => {
-  if (hours >= HOURS_IN_A_DAY) {
-    const durationInMilliseconds = hours * MINUTES_IN_ONE_HOUR * MINUTES_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;
-
-    return humanizeDuration(durationInMilliseconds, {
-      units: ["d", "h"],
-      round: true,
-    });
+    return INSIDE_THRESHOLD_CLASS;
   }
 
-  return appendHoursToNumber(hours);
-});
+  static getDisplayHours(hours: number | string) {
+    if (typeof hours === "string") {
+      return hours;
+    }
+
+    return `${hours} hours`;
+  }
+
+  static getToolTipText(time: number | string, recommendation: string) {
+    if (typeof time === "string") {
+      return `(${recommendation})`;
+    }
+
+    return `${this.#formatHoursToDays(time)} (${recommendation})`;
+  }
+
+  static #formatHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
+    if (hours >= HOURS_IN_A_DAY) {
+      const durationInMilliseconds = hours * MINUTES_IN_ONE_HOUR * MINUTES_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;
+
+      return humanizeDuration(durationInMilliseconds, {
+        units: ["d", "h"],
+        round: true,
+      });
+    }
+
+    return `${hours} hours`;
+  });
+}

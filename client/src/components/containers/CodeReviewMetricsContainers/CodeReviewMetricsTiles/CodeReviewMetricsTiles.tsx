@@ -1,111 +1,71 @@
-import styles from "./CodeReviewMetricsTiles.module.scss";
-import { appendHoursToNumber, getTileColor, getToolTipText } from "./codeReviewMetricsTilesUtils";
-import { InfoIconTooltip } from "../../../reusables/InfoIconTooltip/InfoIconTooltip";
-import { Tile } from "../../../reusables/Tile/Tile";
+import React from "react";
 
-interface Props {
-  averageFirstReviewResponseTime: number | string;
-  averageApprovalTime: number | string;
-  averageMergeTime: number | string;
+import { InfoIconTooltip, Tile } from "src/components/components";
+
+import styles from "./CodeReviewMetricsTiles.module.scss";
+import { HEADERS, THRESHOLDS, recommendedTime } from "./codeReviewMetricsTilesConstants";
+import { CodeReviewMetricsTilesUtil } from "./codeReviewMetricsTilesUtils";
+
+interface ICodeReviewMetricsTilesProps {
+  firstReviewResponseTime: number | string;
+  approvalTime: number | string;
+  mergeTime: number | string;
 }
 
-const CODE_REVIEW_METRICS_TILE_HEADERS = {
-  FIRST_REVIEW_RESPONSE: "Avg first review response time",
-  APPROVAL_TIME: "Avg approval time",
-  MERGE_TIME: "Avg merge time",
-};
-
-const PR_THRESHOLDS = {
-  FIRST_REVIEW_RESPONSE_TIME: { MIN: 24, MAX: 48 },
-  APPROVAL_TIME: { MIN: 48, MAX: 72 },
-  MERGE_TIME: { MIN: 72, MAX: 96 },
-};
-
-const recommendedTimeForMetrics = {
-  firstReviewResponseTime: (value: number) =>
-    `Recommended time for first review response should be less than ${value} hours`,
-  approvalTime: (value: number) => `Recommended time for approval should be less than ${value} hours`,
-  mergeTime: (value: number) => `Recommended time for merge should be less than ${value} hours`,
-};
-
 export const CodeReviewMetricsTiles = ({
-  averageFirstReviewResponseTime,
-  averageApprovalTime,
-  averageMergeTime,
-}: Props) => {
-  const firstReviewResponseTimeTextColor = getTileColor(
-    PR_THRESHOLDS.FIRST_REVIEW_RESPONSE_TIME.MIN,
-    PR_THRESHOLDS.FIRST_REVIEW_RESPONSE_TIME.MAX,
-    averageFirstReviewResponseTime,
+  firstReviewResponseTime,
+  approvalTime,
+  mergeTime,
+}: ICodeReviewMetricsTilesProps) => {
+  const firstReviewResponseTimeClass = CodeReviewMetricsTilesUtil.getTileClass(
+    THRESHOLDS.FIRST_REVIEW.MIN,
+    THRESHOLDS.FIRST_REVIEW.MAX,
+    firstReviewResponseTime,
   );
 
-  const approvalTimeTextColor = getTileColor(
-    PR_THRESHOLDS.APPROVAL_TIME.MIN,
-    PR_THRESHOLDS.APPROVAL_TIME.MAX,
-    averageApprovalTime,
+  const approvalTimeClass = CodeReviewMetricsTilesUtil.getTileClass(
+    THRESHOLDS.APPROVAL.MIN,
+    THRESHOLDS.APPROVAL.MAX,
+    approvalTime,
   );
 
-  const mergeTimeTextColor = getTileColor(PR_THRESHOLDS.MERGE_TIME.MIN, PR_THRESHOLDS.MERGE_TIME.MAX, averageMergeTime);
+  const mergeTimeClass = CodeReviewMetricsTilesUtil.getTileClass(THRESHOLDS.MERGE.MIN, THRESHOLDS.MERGE.MAX, mergeTime);
 
   return (
-    <>
-      <Tile title={CODE_REVIEW_METRICS_TILE_HEADERS.FIRST_REVIEW_RESPONSE}>
-        {typeof averageFirstReviewResponseTime !== "string" ? (
-          <div className={styles.tileContent}>
-            <InfoIconTooltip
-              content={getToolTipText(
-                averageFirstReviewResponseTime,
-                recommendedTimeForMetrics.firstReviewResponseTime(PR_THRESHOLDS.FIRST_REVIEW_RESPONSE_TIME.MIN),
-              )}
-            />
-            <div>
-              <span data-testid="first-review-response-time" className={styles[firstReviewResponseTimeTextColor]}>
-                {appendHoursToNumber(averageFirstReviewResponseTime)}
-              </span>
-            </div>
-          </div>
-        ) : (
-          <span>{averageFirstReviewResponseTime}</span>
-        )}
+    <React.Fragment>
+      <Tile title={HEADERS.FIRST_REVIEW}>
+        <div className={styles.tileContent}>
+          <InfoIconTooltip
+            content={CodeReviewMetricsTilesUtil.getToolTipText(
+              firstReviewResponseTime,
+              recommendedTime.firstReviewResponseTime,
+            )}
+          />
+          <p data-testid="first-review-response-time" className={styles[firstReviewResponseTimeClass]}>
+            {CodeReviewMetricsTilesUtil.getDisplayHours(firstReviewResponseTime)}
+          </p>
+        </div>
       </Tile>
-      <Tile title={CODE_REVIEW_METRICS_TILE_HEADERS.APPROVAL_TIME}>
-        {typeof averageApprovalTime !== "string" ? (
-          <div className={styles.tileContent}>
-            <InfoIconTooltip
-              content={getToolTipText(
-                averageApprovalTime,
-                recommendedTimeForMetrics.approvalTime(PR_THRESHOLDS.APPROVAL_TIME.MIN),
-              )}
-            />
-            <div>
-              <span data-testid="approval-time" className={styles[approvalTimeTextColor]}>
-                {appendHoursToNumber(averageApprovalTime)}
-              </span>
-            </div>
-          </div>
-        ) : (
-          <span>{averageApprovalTime}</span>
-        )}
+
+      <Tile title={HEADERS.APPROVAL}>
+        <div className={styles.tileContent}>
+          <InfoIconTooltip
+            content={CodeReviewMetricsTilesUtil.getToolTipText(approvalTime, recommendedTime.approvalTime)}
+          />
+          <p data-testid="approval-time" className={styles[approvalTimeClass]}>
+            {CodeReviewMetricsTilesUtil.getDisplayHours(approvalTime)}
+          </p>
+        </div>
       </Tile>
-      <Tile title={CODE_REVIEW_METRICS_TILE_HEADERS.MERGE_TIME}>
-        {typeof averageMergeTime !== "string" ? (
-          <div className={styles.tileContent}>
-            <InfoIconTooltip
-              content={getToolTipText(
-                averageMergeTime,
-                recommendedTimeForMetrics.mergeTime(PR_THRESHOLDS.MERGE_TIME.MIN),
-              )}
-            />
-            <div>
-              <span data-testid="merge-time" className={`${styles[mergeTimeTextColor]} mergeTime`}>
-                {appendHoursToNumber(averageMergeTime)}
-              </span>
-            </div>
-          </div>
-        ) : (
-          <span>{averageMergeTime}</span>
-        )}
+
+      <Tile title={HEADERS.MERGE}>
+        <div className={styles.tileContent}>
+          <InfoIconTooltip content={CodeReviewMetricsTilesUtil.getToolTipText(mergeTime, recommendedTime.mergeTime)} />
+          <p data-testid="merge-time" className={styles[mergeTimeClass]}>
+            {CodeReviewMetricsTilesUtil.getDisplayHours(mergeTime)}
+          </p>
+        </div>
       </Tile>
-    </>
+    </React.Fragment>
   );
 };

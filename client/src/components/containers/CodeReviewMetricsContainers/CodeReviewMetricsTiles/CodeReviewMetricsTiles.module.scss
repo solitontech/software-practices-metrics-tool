@@ -1,18 +1,24 @@
 @import "src/styles/index.scss";
 
-.green {
+.minThreshold {
   color: $app-chip-completed-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
-.red {
-  color: $app-chip-abandoned-color;
-}
-
-.yellow {
+.insideThreshold {
   color: $app-chip-active-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
+}
+
+.maxThreshold {
+  color: $app-chip-abandoned-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
 .tileContent {
   @include flex-align-center;
-  gap: 6px;
+  gap: $spacing-sm;
 }

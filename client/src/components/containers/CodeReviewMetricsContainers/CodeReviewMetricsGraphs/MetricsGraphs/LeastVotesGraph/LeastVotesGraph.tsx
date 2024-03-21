@@ -5,12 +5,29 @@ import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
 import styles from "./LeastVotesGraph.module.scss";
 import { LeastVotesGraphUtils } from "./leastVotesGraphUtils";
-import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { PieChart } from "../../../../../reusables/MetricsGraphs/PieChart/PieChart";
 import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieChartTypes";
 interface Props {
   pullRequests: IFetchedCodeReviewPullRequest[];
 }
+
+//TODO: Make below constants common
+
+const VOTE_LABEL = {
+  APPROVED: "Approved",
+  APPROVED_WITH_SUGGESTIONS: "Approved with suggestions",
+  WAIT_FOR_AUTHOR: "Wait for author",
+  REJECTED: "Rejected",
+  NO_VOTE: "No vote",
+};
+
+const VOTE_COLOR = {
+  APPROVED: "#008000",
+  APPROVED_WITH_SUGGESTIONS: "#90EE90",
+  WAIT_FOR_AUTHOR: "#FFA500",
+  REJECTED: "#FF0000",
+  NO_VOTE: "#d9d9d9",
+};
 
 const GRAPH_TITLE = `Pull Requests least votes`;
 const GRAPH_HOVER_TEXT_TITLES: Record<string, string> = {
