@@ -19,12 +19,12 @@
 }
 
 .searchIcon {
-  font-size: 20px;
+  font-size: $icon-size-xl;
 }
 
 .searchBox {
-  background-color: white;
-  margin: 8px 0px;
+  background-color: $app-primary-background-color;
+  margin: $spacing-sm 0px;
 }
 
 .searchBoxInput {
