@@ -72,4 +72,13 @@ export class TrunkBasedMetricsGraphsUtils {
 
     return this.#getDateWithCommitsToPlot(datesInRange, commits);
   }
+
+  static getAnnotationYPosition(height: number) {
+    const graphMaxHeight = 600;
+    const annotationYPosition = 1.05;
+
+    if (height > graphMaxHeight) {
+      return annotationYPosition;
+    }
+  }
 }
