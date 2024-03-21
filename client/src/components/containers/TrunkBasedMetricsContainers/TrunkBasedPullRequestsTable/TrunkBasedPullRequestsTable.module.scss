@@ -2,7 +2,29 @@
 
 .container {
   border: 1px solid $app-secondary-border-color;
+  overflow: scroll;
   width: calc(100% - 250px);
+}
+
+.table {
+  border-spacing: 0;
+}
+
+.tableHead {
+  background-color: $app-secondary-text-color;
+  color: $app-primary-text-color;
+  font-weight: $extra-bold-font-weight;
+  position: sticky;
+  top: 0;
+}
+
+.tableCell {
+  border-bottom: 1px solid $app-secondary-border-color;
+  color: $app-ternary-text-color;
+  font-size: $font-size-xmd;
+  font-weight: $medium-font-weight;
+  line-height: $app-primary-line-height;
+  padding: $spacing-lg;
 }
 
 .tableRow:nth-child(odd) {
@@ -13,18 +35,14 @@
   @include table-row-even;
 }
 
-.date {
-  color: $app-ternary-text-color;
-}
-
 .branchName,
 .pullRequest {
   @include flex-align-center;
   color: $app-ternary-text-color;
   cursor: pointer;
   font-weight: $medium-font-weight;
-  text-decoration: none;
   gap: $spacing-xs;
+  text-decoration: none;
 
   &:hover {
     color: $app-primary-anchor-color;

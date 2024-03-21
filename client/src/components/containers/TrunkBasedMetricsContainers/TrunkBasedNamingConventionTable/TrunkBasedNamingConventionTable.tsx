@@ -1,14 +1,7 @@
 import { ChangeEvent, useState } from "react";
+import clsx from "clsx";
 
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Tooltip } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import { NavLink } from "react-router-dom";
 
 import { SearchBox, ErrorBoundary } from "src/components/components.ts";
@@ -20,8 +13,6 @@ import { filterBranches } from "./trunkBasedNamingConventionUtils.tsx";
 interface ITrunkBasedNamingConventionTableProps {
   branchesNotFollowingNamingStandard: IFetchedTrunkMetricsBranch[];
 }
-
-//TODO: refactor to use native table component for better performance
 
 export const TrunkBasedNamingConventionTable = ({
   branchesNotFollowingNamingStandard,
@@ -47,41 +38,42 @@ export const TrunkBasedNamingConventionTable = ({
         <p className={styles.totalCount}>Total branches: {filteredBranches.length}</p>
       </div>
 
-      <Paper className={styles.container}>
-        <TableContainer sx={{ maxHeight: "100%" }}>
-          <Table stickyHeader>
-            <TableHead>
-              <TableRow>
-                <TableCell align="left">Branch Name</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredBranches.length ? (
-                filteredBranches.map((row) => {
-                  return (
-                    <TableRow key={row.id + row.name} role="checkbox" tabIndex={-1} className={styles.tableRow}>
-                      <TableCell>
-                        <NavLink to={row.url} target="_blank" className={styles.branchName}>
-                          <Tooltip title={row.name} placement="bottom-start">
-                            <span className={styles.title}>{row.name}</span>
-                          </Tooltip>
-                          <OpenInNewIcon className={styles.linkIcon} />
-                        </NavLink>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={1} className={styles.noDataMessage}>
-                    No data available
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
+      <div className={styles.container}>
+        <table className={styles.table}>
+          <thead className={styles.tableHead}>
+            <tr>
+              <td className={styles.tableCell} align="left">
+                Branch Name
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredBranches.length ? (
+              filteredBranches.map((row) => {
+                return (
+                  <tr key={row.id + row.name} className={styles.tableRow}>
+                    <td className={styles.tableCell}>
+                      <NavLink to={row.url} target="_blank" className={styles.branchName}>
+                        <span title={row.name} className={styles.title}>
+                          {row.name}
+                        </span>
+
+                        <OpenInNewIcon className={styles.linkIcon} />
+                      </NavLink>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan={1} className={clsx(styles.noDataMessage, styles.tableCell)}>
+                  No data available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </ErrorBoundary>
   );
 };
