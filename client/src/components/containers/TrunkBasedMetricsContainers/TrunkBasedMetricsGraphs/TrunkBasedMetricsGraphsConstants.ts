@@ -1,0 +1,4 @@
+export const GRAPH = {
+  MAX_HEIGHT: 600,
+  ANNOTATION_Y_POSITION: 1.05,
+};

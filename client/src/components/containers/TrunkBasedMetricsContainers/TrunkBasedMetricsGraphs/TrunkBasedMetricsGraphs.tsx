@@ -1,5 +1,8 @@
+import { useRef, useState } from "react";
+
 import { BarChart } from "src/components/components";
 import { useTrunkBranchCommits } from "src/services/api/api";
+import { useDimensions, IDimensions } from "src/hooks/hooks";
 
 import styles from "./TrunkBasedMetricsGraphs.module.scss";
 import { TrunkBasedMetricsGraphsUtils } from "./trunkBasedMetricsGraphsUtils";
@@ -24,17 +27,23 @@ export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: ITrunkBasedMetri
     plotName: "",
   };
 
-  //TODO: Improvement add dynamic width & height for graph based on available space
+  const containerRef = useRef(null);
+  const [dimensions, setDimensions] = useState<IDimensions>({ width: 0, height: 0 });
+
+  useDimensions(containerRef, setDimensions);
 
   return (
-    <div className={styles.graphContainer}>
+    <div ref={containerRef} className={styles.graphContainer}>
       <BarChart
         graph={{
+          graphWidth: dimensions.width,
+          graphHeight: dimensions.height,
           plots: [plot],
           xAxisName: "Days",
           yAxisName: "Number of commits",
           graphAnnotationText: `Total Commits in trunk branch : ${data.commits.length}`,
           graphTitle: "Commit frequency in trunk branch",
+          annotationYPosition: TrunkBasedMetricsGraphsUtils.getAnnotationYPosition(dimensions.height),
         }}
       />
     </div>

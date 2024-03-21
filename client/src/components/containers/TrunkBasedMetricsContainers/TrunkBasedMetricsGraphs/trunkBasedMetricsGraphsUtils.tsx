@@ -1,6 +1,8 @@
 import { IFetchedTrunkBranchCommit } from "src/services/api/api";
 import { getFormattedDateWithTime, getFormattedDateText } from "src/utils/utils";
 
+import { GRAPH } from "./TrunkBasedMetricsGraphsConstants";
+
 interface ITrunkGraphCommitsForDate {
   [date: string]: number;
 }
@@ -71,5 +73,11 @@ export class TrunkBasedMetricsGraphsUtils {
     const datesInRange = this.#generateDatesInRange(normalizedStartDate, normalizedEndDate);
 
     return this.#getDateWithCommitsToPlot(datesInRange, commits);
+  }
+
+  static getAnnotationYPosition(height: number) {
+    if (height > GRAPH.MAX_HEIGHT) {
+      return GRAPH.ANNOTATION_Y_POSITION;
+    }
   }
 }
