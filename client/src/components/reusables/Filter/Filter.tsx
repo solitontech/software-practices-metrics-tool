@@ -1,10 +1,10 @@
-import { ReactNode, useRef, useEffect, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 
 import FilterListIcon from "@mui/icons-material/FilterList";
 import clsx from "clsx";
 
 import styles from "./Filter.module.scss";
-import { useHandleClickOutside } from "src/services/common/common";
+import { useHandleClickOutside } from "src/hooks/hooks";
 
 interface IFilterIconProps {
   children: ReactNode;

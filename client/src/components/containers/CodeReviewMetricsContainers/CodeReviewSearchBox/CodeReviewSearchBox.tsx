@@ -1,10 +1,10 @@
-import { ChangeEvent, useEffect, useState, useRef } from "react";
+import { ChangeEvent, useState, useRef } from "react";
 
 import { Chip } from "@mui/material";
 import clsx from "clsx";
 
 import { ClientFilters, SearchBox } from "src/components/components";
-import { useHandleClickOutside } from "src/services/common/common";
+import { useHandleClickOutside } from "src/hooks/hooks";
 
 import styles from "./CodeReviewSearchBox.module.scss";
 import { CHIPS } from "./codeReviewSearchBoxConstants";
