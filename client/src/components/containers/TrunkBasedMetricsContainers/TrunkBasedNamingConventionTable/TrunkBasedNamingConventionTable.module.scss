@@ -6,9 +6,9 @@
 }
 
 .totalCount {
+  color: $app-ternary-text-color;
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
-  color: $app-ternary-text-color;
 }
 
 .container {
@@ -50,8 +50,8 @@
   color: $app-ternary-text-color;
   cursor: pointer;
   font-weight: $medium-font-weight;
-  text-decoration: none;
   gap: $spacing-xs;
+  text-decoration: none;
 
   &:hover {
     color: $app-primary-anchor-color;

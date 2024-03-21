@@ -41,8 +41,8 @@
   color: $app-ternary-text-color;
   cursor: pointer;
   font-weight: $medium-font-weight;
-  text-decoration: none;
   gap: $spacing-xs;
+  text-decoration: none;
 
   &:hover {
     color: $app-primary-anchor-color;
