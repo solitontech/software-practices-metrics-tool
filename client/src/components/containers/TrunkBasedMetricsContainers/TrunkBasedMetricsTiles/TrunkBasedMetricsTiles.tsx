@@ -89,7 +89,7 @@ export const TrunkBasedMetricsTiles = () => {
         isOpen={isActiveBranchesDialogOpen}
         handleClose={toggleActiveBranchesDialog}
         title={DIALOG.activePR.title}
-        dialogClassName={styles.activePullRequestDialog}
+        className={styles.activePullRequestDialog}
       >
         <TrunkBasedActiveBranchesTable activeBranches={activeBranches} />
       </DialogBox>
@@ -98,7 +98,7 @@ export const TrunkBasedMetricsTiles = () => {
         isOpen={isBranchesNamingDialogOpen}
         handleClose={toggleBranchesNamingDialog}
         title={DIALOG.namingConvention.title}
-        dialogClassName={styles.namingConventionDialog}
+        className={styles.namingConventionDialog}
       >
         <TrunkBasedNamingConventionTable
           branchesNotFollowingNamingStandard={branchesNotFollowingNamingStandard.branches}

@@ -12,10 +12,10 @@ interface IDialogBoxProps {
   handleClose: () => void;
   title: React.ReactNode | string;
   children: React.ReactNode;
-  dialogClassName: string;
+  className: string;
 }
 
-export const DialogBox = ({ isOpen, handleClose, children, title, dialogClassName: dialogStyles }: IDialogBoxProps) => {
+export const DialogBox = ({ isOpen, handleClose, children, title, className }: IDialogBoxProps) => {
   const id = useId();
 
   return (
@@ -24,7 +24,7 @@ export const DialogBox = ({ isOpen, handleClose, children, title, dialogClassNam
       open={isOpen}
       onClose={handleClose}
       PaperProps={{
-        className: `${dialogStyles} ${styles.dialog}`,
+        className: `${className} ${styles.dialog}`,
       }}
     >
       <DialogTitle id={id} className={styles.titleContainer}>

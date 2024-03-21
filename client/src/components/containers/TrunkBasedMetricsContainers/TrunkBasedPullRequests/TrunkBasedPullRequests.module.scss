@@ -4,6 +4,10 @@
   width: 100%;
 }
 
+.searchBox {
+  width: 380px;
+}
+
 .viewContainer {
   display: flex;
   gap: $spacing-xl;
@@ -19,8 +23,4 @@
   padding: $spacing-xs;
   text-align: center;
   width: 100%;
-}
-
-.searchBox{
-  width: 380px;
 }

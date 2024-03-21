@@ -5,6 +5,10 @@
   justify-content: space-between;
 }
 
+.searchBox {
+  width: 370px;
+}
+
 .totalCount {
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
@@ -59,8 +63,4 @@
   border-bottom: 1px solid $app-secondary-border-color;
   font-size: $font-size-mlg;
   text-align: center;
-}
-
-.searchBox {
-  width: 370px;
 }

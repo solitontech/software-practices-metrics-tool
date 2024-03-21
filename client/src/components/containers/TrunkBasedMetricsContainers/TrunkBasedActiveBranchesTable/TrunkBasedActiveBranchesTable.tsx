@@ -40,7 +40,7 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: ITrunkBasedAct
         <SearchBox
           label="Search for active pull requests"
           placeHolder="Search for branch name, title, author, creation date"
-          searchBoxClassName={styles.searchBox}
+          className={styles.searchBox}
           isDebounced={true}
           onChange={handleSearchChange}
         ></SearchBox>

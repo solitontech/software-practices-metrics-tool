@@ -65,7 +65,7 @@ export const CodeReviewSearchBox = ({
           onChange={handleSearchChange}
           onClick={() => setIsSearchDropdownOpen(true)}
           isDebounced={true}
-          searchBoxClassName={styles.searchBox}
+          className={styles.searchBox}
         ></SearchBox>
         {isSearchDropdownOpen && (
           <div className={styles.chipContainer}>

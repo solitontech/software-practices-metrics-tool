@@ -1,5 +1,9 @@
 @import "src/styles/index.scss";
 
+.dialog {
+  max-width: unset;
+}
+
 .titleContainer {
   display: flex;
   justify-content: space-between;
@@ -15,8 +19,4 @@
   border: none;
   color: $app-ternary-text-color;
   cursor: pointer;
-}
-
-.dialog {
-  max-width: unset;
 }

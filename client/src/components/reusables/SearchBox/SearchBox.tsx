@@ -1,4 +1,5 @@
 import { ChangeEvent, useId, useRef } from "react";
+import clsx from "clsx";
 
 import SearchIcon from "@mui/icons-material/Search";
 import FormControl from "@mui/material/FormControl";
@@ -12,7 +13,7 @@ import { InfoIconTooltip } from "../InfoIconTooltip/InfoIconTooltip";
 interface ISearchBoxProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   label: string;
-  searchBoxClassName?: string;
+  className?: string;
   placeHolder?: string;
   isDebounced?: boolean;
   delay?: number;
@@ -26,7 +27,7 @@ interface ITimeRef {
 export const SearchBox = ({
   label,
   placeHolder = "",
-  searchBoxClassName = styles.searchBoxInput,
+  className,
   onChange,
   isDebounced = false,
   delay = 400,
@@ -65,14 +66,14 @@ export const SearchBox = ({
           }
           endAdornment={
             <InputAdornment position="end">
-              <InfoIconTooltip content={placeHolder} iconClassName={styles.searchIcon} />
+              <InfoIconTooltip content={placeHolder} className={styles.searchIcon} />
             </InputAdornment>
           }
           label={label}
           onChange={handleInputChange}
           onClick={onClick}
           aria-labelledby={id}
-          className={searchBoxClassName}
+          className={clsx(className ?? styles.searchBoxInput)}
           placeholder={placeHolder}
           autoComplete="off"
         />
