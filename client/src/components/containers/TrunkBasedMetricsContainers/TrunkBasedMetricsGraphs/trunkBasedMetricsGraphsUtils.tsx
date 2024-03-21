@@ -74,10 +74,10 @@ export class TrunkBasedMetricsGraphsUtils {
   }
 
   static getAnnotationYPosition(height: number) {
-    const maxHeight = 600;
+    const graphMaxHeight = 600;
     const annotationYPosition = 1.05;
 
-    if (height > maxHeight) {
+    if (height > graphMaxHeight) {
       return annotationYPosition;
     }
   }
