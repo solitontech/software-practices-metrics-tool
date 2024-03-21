@@ -8,7 +8,7 @@ import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
 import { VotesTimeLineView } from "./VotesTimeLineView";
 import { NOT_AVAILABLE } from "../../../../../constants/common.constants";
-import { formatDate, formatDateWithoutTime } from "../../../../../utils/dateUtil";
+import { getFormattedDateWithTime, getFormattedDateWithoutTime } from "../../../../../utils/dateUtil";
 import styles from "../CodeReviewMetricsTable.module.scss";
 import { getFormattedReviewerComments } from "../codeReviewMetricsTableUtils";
 import { ConvertHoursToDays } from "../ConvertHoursToDays";
@@ -32,13 +32,13 @@ export const CodeReviewMetricsTableRow = memo(({ index, row }: Props) => {
       data-testid="code-review-metrics-table-row"
     >
       <td className={`${styles.text} ${styles.date}`}>
-        <time className={styles.startDate} title={formatDate(row.creationDate)}>
-          {formatDateWithoutTime(row.creationDate)}
+        <time className={styles.startDate} title={getFormattedDateWithTime(row.creationDate)}>
+          {getFormattedDateWithoutTime(row.creationDate)}
         </time>
       </td>
       <td className={`${styles.text} ${styles.date}`}>
-        <time className={styles.startDate} title={formatDate(row.closedDate)}>
-          {formatDateWithoutTime(row.closedDate)}
+        <time className={styles.startDate} title={getFormattedDateWithTime(row.closedDate)}>
+          {getFormattedDateWithoutTime(row.closedDate)}
         </time>
       </td>
       <td className={styles.text}>
