@@ -1,44 +1,33 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
 import {
-  LoadingSpinner,
   SnackBar,
   TabToggle,
   CommonLayout,
   DateRangePicker,
   ErrorBoundary,
-  CodeReviewMetricsGraph,
-  MetricsTrendAnalysisGraphs,
-  CodeReviewMetricsTable,
   CodeReviewMetricsTiles,
   CodeReviewSearchBox,
+  CodeReviewMetricsTabs,
 } from "src/components/components";
 import { dateRange } from "src/constants/constants";
 import { useCodeReviewMetrics } from "src/services/api/api";
 
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./CodeReviewMetrics.module.scss";
-import {
-  CODE_REVIEW_METRICS,
-  CODE_REVIEW_METRICS_TABS,
-  CODE_REVIEW_METRICS_TAB_VALUE,
-} from "./codeReviewMetricsConstants.tsx";
-import { filterPullRequests } from "./codeReviewMetricsUtils.ts";
-import { getMetricsAverageTimeInHours } from "./getMetricsAverageTimeInHours.tsx";
-
-type CodeReviewMetricsView = "table" | "graph" | "trend-graph";
+import { CODE_REVIEW_METRICS, CODE_REVIEW_METRICS_TABS } from "./codeReviewMetricsConstants.tsx";
+import { ICodeReviewMetricsTabValue } from "./codeReviewMetricsType.ts";
+import { CodeReviewMetricsUtil } from "./codeReviewMetricsUtils.ts";
 
 export const CodeReviewMetrics = () => {
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedChip, setSelectedChip] = useState("");
-  const [selectedTab, setSelectedTab] = useState<CodeReviewMetricsView>(
-    CODE_REVIEW_METRICS_TAB_VALUE.TABLE as CodeReviewMetricsView,
-  );
   const [dates, setDates] = useState({
     startDate: dateRange.sevenDaysAgoFromToday,
     endDate: dateRange.today,
   });
+  const [selectedTab, setSelectedTab] = useState<ICodeReviewMetricsTabValue>("table");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedChip, setSelectedChip] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const {
     isPending,
@@ -47,87 +36,45 @@ export const CodeReviewMetrics = () => {
     error,
   } = useCodeReviewMetrics(dates.startDate, dates.endDate);
 
-  const searchedPullRequests = searchTerm ? filterPullRequests(pullRequests, selectedChip, searchTerm) : pullRequests;
+  const searchedPullRequests = searchTerm
+    ? CodeReviewMetricsUtil.filterPullRequests(pullRequests, selectedChip, searchTerm)
+    : pullRequests;
 
-  const averageFirstReviewResponseTime = getMetricsAverageTimeInHours(
+  const averageFirstReviewResponseTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
     searchedPullRequests,
     CODE_REVIEW_METRICS.FIRST_REVIEW_RESPONSE,
   );
 
-  const averageApprovalTime = getMetricsAverageTimeInHours(searchedPullRequests, CODE_REVIEW_METRICS.APPROVAL_TIME);
+  const averageApprovalTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
+    searchedPullRequests,
+    CODE_REVIEW_METRICS.APPROVAL_TIME,
+  );
 
-  const averageMergeTime = getMetricsAverageTimeInHours(searchedPullRequests, CODE_REVIEW_METRICS.MERGE_TIME);
-
-  const isTableView = () => {
-    return selectedTab === (CODE_REVIEW_METRICS_TAB_VALUE.TABLE as CodeReviewMetricsView);
-  };
-
-  const isGraphView = () => {
-    return selectedTab === (CODE_REVIEW_METRICS_TAB_VALUE.GRAPH as CodeReviewMetricsView);
-  };
-
-  const isTrendAnalysisView = () => {
-    return selectedTab === (CODE_REVIEW_METRICS_TAB_VALUE.TREND_GRAPH as CodeReviewMetricsView);
-  };
+  const averageMergeTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
+    searchedPullRequests,
+    CODE_REVIEW_METRICS.MERGE_TIME,
+  );
 
   useEffect(() => {
-    if (errorCount > 0) {
-      setSnackbarOpen(true);
-    } else {
-      setSnackbarOpen(false);
+    if (errorCount) {
+      return setSnackbarOpen(true);
     }
+
+    setSnackbarOpen(false);
   }, [errorCount]);
 
-  const renderView = () => {
-    if (isPending) {
-      return <LoadingSpinner content="Loading pull requests..." />;
-    }
-
-    if (isError && error) {
-      return <p className={styles.errorMessage}>{error?.response?.data.error}</p>;
-    }
-
-    if (isTableView()) {
-      return (
-        <div className={styles.codeReviewTable}>
-          <ErrorBoundary key="code-review-table">
-            <CodeReviewMetricsTable pullRequests={searchedPullRequests} />
-          </ErrorBoundary>
-        </div>
-      );
-    }
-
-    if (isGraphView()) {
-      return (
-        <ErrorBoundary key="code-review-graph">
-          <CodeReviewMetricsGraph
-            pullRequests={searchedPullRequests}
-            averageFirstReviewResponseTime={averageFirstReviewResponseTime}
-            averageApprovalTime={averageApprovalTime}
-            averageMergeTime={averageMergeTime}
-          />
-        </ErrorBoundary>
-      );
-    }
-
-    if (isTrendAnalysisView()) {
-      return (
-        <ErrorBoundary key="code-review-trend">
-          <MetricsTrendAnalysisGraphs
-            pullRequests={searchedPullRequests}
-            startDate={dates.startDate}
-            endDate={dates.endDate}
-          />
-        </ErrorBoundary>
-      );
-    }
+  const handleDateChange = (date: Date, dateType: "startDate" | "endDate") => {
+    setDates((prevDates) => {
+      return { ...prevDates, [dateType]: date ?? prevDates[dateType] };
+    });
   };
 
-  const handleDateChange = (date: Date, dateType: "startDate" | "endDate") => {
-    setDates((prevDates) => ({
-      ...prevDates,
-      [dateType]: date || prevDates[dateType],
-    }));
+  const handleTabChange = (value: string) => {
+    setSelectedTab(value as ICodeReviewMetricsTabValue);
+  };
+
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value.toLowerCase());
   };
 
   return (
@@ -138,9 +85,7 @@ export const CodeReviewMetrics = () => {
           <CodeReviewSearchBox
             selectedChip={selectedChip}
             handleChipChange={setSelectedChip}
-            handleSearchChange={(event: ChangeEvent<HTMLInputElement>) => {
-              setSearchTerm(event.target.value.trim().toLocaleLowerCase());
-            }}
+            handleSearchChange={handleSearchChange}
           />
         }
       >
@@ -159,11 +104,7 @@ export const CodeReviewMetrics = () => {
                 handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
                 handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
               />
-              <TabToggle
-                tabs={CODE_REVIEW_METRICS_TABS}
-                selectedTab={selectedTab}
-                handleTabChange={(value) => setSelectedTab(value as CodeReviewMetricsView)}
-              />
+              <TabToggle tabs={CODE_REVIEW_METRICS_TABS} selectedTab={selectedTab} handleTabChange={handleTabChange} />
               <div className={styles.tiles}>
                 <CodeReviewMetricsTiles
                   averageFirstReviewResponseTime={averageFirstReviewResponseTime}
@@ -173,7 +114,17 @@ export const CodeReviewMetrics = () => {
               </div>
             </div>
           </div>
-          {renderView()}
+          <CodeReviewMetricsTabs
+            selectedTab={selectedTab}
+            dates={dates}
+            pullRequests={searchedPullRequests}
+            isPending={isPending}
+            isError={isError}
+            errorMessage={error?.response?.data?.error ?? ""}
+            averageFirstReviewResponseTime={averageFirstReviewResponseTime}
+            averageApprovalTime={averageApprovalTime}
+            averageMergeTime={averageMergeTime}
+          />
         </div>
       </CommonLayout>
     </ErrorBoundary>

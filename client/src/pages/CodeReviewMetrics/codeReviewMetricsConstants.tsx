@@ -4,32 +4,26 @@ import TableRowsIcon from "@mui/icons-material/TableRows";
 
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
-export const CODE_REVIEW_METRICS = {
-  FIRST_REVIEW_RESPONSE: "firstReviewResponseTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
-  APPROVAL_TIME: "approvalTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
-  MERGE_TIME: "mergeTimeInSeconds" as keyof IFetchedCodeReviewPullRequest,
-};
-
-export const CODE_REVIEW_METRICS_TAB_VALUE = {
-  TABLE: "table",
-  GRAPH: "graph",
-  TREND_GRAPH: "trend-graph",
+export const CODE_REVIEW_METRICS: Record<string, keyof IFetchedCodeReviewPullRequest> = {
+  FIRST_REVIEW_RESPONSE: "firstReviewResponseTimeInSeconds",
+  APPROVAL_TIME: "approvalTimeInSeconds",
+  MERGE_TIME: "mergeTimeInSeconds",
 };
 
 export const CODE_REVIEW_METRICS_TABS = [
   {
     label: "TABLE VIEW",
-    value: CODE_REVIEW_METRICS_TAB_VALUE.TABLE,
+    value: "table",
     icon: <TableRowsIcon />,
   },
   {
     label: "GRAPHICAL VIEW",
-    value: CODE_REVIEW_METRICS_TAB_VALUE.GRAPH,
+    value: "graph",
     icon: <BarChartOutlinedIcon />,
   },
   {
     label: "TREND ANALYSIS",
-    value: CODE_REVIEW_METRICS_TAB_VALUE.TREND_GRAPH,
+    value: "trendGraph",
     icon: <InsightsOutlinedIcon />,
   },
 ];
