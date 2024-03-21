@@ -4,7 +4,11 @@
   font-size: $font-size-md;
 }
 
-.infoIcon {
+.infoIconContainer {
   @include flex-align-center;
   cursor: pointer;
+}
+
+.infoIcon {
+  font-size: 16px;
 }
