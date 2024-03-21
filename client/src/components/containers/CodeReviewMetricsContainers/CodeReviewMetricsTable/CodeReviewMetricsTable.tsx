@@ -61,9 +61,9 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: Props) => {
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.totalPRs}>
+        <p className={styles.totalPRs}>
           Total PR&apos;s: {filteredPullRequests.length} | Total Comments: {totalComments}
-        </div>
+        </p>
       </div>
       <div className={styles.paper}>
         <table className={styles.table}>

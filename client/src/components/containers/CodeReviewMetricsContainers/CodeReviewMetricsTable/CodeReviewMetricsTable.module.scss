@@ -1,259 +1,214 @@
 @import "src/styles/index.scss";
 
+.header {
+  @include flex-align-center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .noDataMessage {
-  text-align: center;
+  border-bottom: 1px solid $app-secondary-border-color;
   color: $app-ternary-text-color;
   font-size: $font-size-mlg;
-  border-bottom: 1px solid $app-secondary-border-color;
   height: 75px;
+  text-align: center;
 }
-
 .text {
+  border-bottom: 1px solid $app-secondary-border-color;
   color: $app-ternary-text-color;
   font-size: $font-size-xmd;
-  border-bottom: 1px solid $app-secondary-border-color;
   padding: $spacing-lg;
 }
-
 .pullRequestURL {
-  text-decoration: none;
-  font-weight: $medium-font-weight;
+  @include flex-align-center;
+  color: $app-ternary-text-color;
   cursor: pointer;
+  font-weight: $medium-font-weight;
+  text-decoration: none;
 
   &:hover {
-    text-decoration: underline;
     color: $app-primary-anchor-color;
+    text-decoration: underline;
   }
-
-  color: $app-ternary-text-color;
-  @include flex-align-center;
 }
-
 .linkIcon {
   color: $app-quaternary-text-color;
-  vertical-align: middle;
-  margin-left: $spacing-xs;
   font-size: $icon-size-md;
+  margin-left: $spacing-xs;
+  vertical-align: middle;
 }
-
 .navLink {
   @include ellipsis;
-
   font-size: $font-size-xmd;
 }
-
 .dialogIcon {
   display: flex;
 }
-
 .active {
-  text-transform: capitalize;
-  color: $app-secondary-text-color;
   background-color: $app-chip-active-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
 }
-
 .completed {
-  text-transform: capitalize;
-  color: $app-secondary-text-color;
   background-color: $app-chip-completed-color;
-}
-
-.abandoned {
-  text-transform: capitalize;
   color: $app-secondary-text-color;
-  background-color: $app-chip-abandoned-color;
+  text-transform: capitalize;
 }
-
+.abandoned {
+  background-color: $app-chip-abandoned-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
+}
 .paper {
-  width: 100%;
   border: 1px solid $app-primary-border-color;
+  border-radius: 4px;
   height: 95%;
   overflow: scroll;
-  border-radius: 4px;
+  width: 100%;
 }
-
 .rowEven {
   background-color: $app-secondary-background-color;
 }
-
 .rowOdd {
   background-color: $app-secondary-text-color;
 }
-
 .comments {
   @include flex-align-center;
+  color: $app-ternary-text-color;
   gap: 4px;
   justify-content: center;
-  color: $app-ternary-text-color;
 }
-
 .icon {
-  width: 20px;
   height: 20px;
+  width: 20px;
 }
-
 @mixin votesList {
-  gap: 3px;
-  width: 120px;
-  height: 30px;
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
+  display: flex;
+  gap: 3px;
+  height: 30px;
+  justify-content: flex-start;
+  width: 120px;
 }
-
 .currentVotesList {
   @include votesList;
   width: 145px;
 }
-
 .votesTimeLine {
   @include votesList;
 }
-
-.header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .totalPRs {
+  color: $app-ternary-text-color;
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
-  color: $app-ternary-text-color;
 }
-
 .buttonColor {
   color: $app-ternary-text-color;
   cursor: pointer;
   font-size: $icon-size-xl;
 }
-
 .timelineIconColor {
   color: $app-quaternary-text-color;
   cursor: pointer;
   font-size: $icon-size-xl;
 }
-
 .historyIcon {
   height: 40px;
 }
-
 .tableHeader {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 4px;
 }
-
 .sortingIcon {
   display: flex;
   flex-direction: column;
-  width: 40px;
   height: 50px;
   margin-top: $spacing-sm;
+  width: 40px;
 }
-
 .time {
   font-size: $font-size-xmd;
 }
-
 .prTitle {
-  width: 300px;
+  display: block;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
-  display: block;
+  width: 300px;
 }
-
 .startDate {
   display: block;
   width: 65px;
 }
-
 .closedDate {
   display: block;
   width: 75px;
 }
-
 .closedDateTitle[aria-label="Closed Date"] {
   width: max-content;
 }
-
 .dialogHeader {
-  width: 22%;
   font-size: $font-size-xmd;
+  width: 22%;
 }
-
 .prDetails {
   width: 78%;
 }
-
 .tagsContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
   row-gap: 8px;
 }
-
 .tag {
   background-color: $app-ternary-background-color;
   font-size: $font-size-md;
-  white-space: nowrap;
+  height: fit-content;
+  max-width: 110px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 110px;
-  height: fit-content;
+  white-space: nowrap;
 }
-
 .table {
   border-spacing: 0;
   width: 100%;
 }
-
 .tableHead {
-  position: sticky;
-  top: 0;
   background-color: $app-secondary-text-color;
   color: $app-primary-text-color;
   font-weight: $extra-bold-font-weight;
+  position: sticky;
+  top: 0;
 }
-
 .tableBody {
   overflow-y: scroll;
 }
-
 .tableCell {
-  font-weight: $medium-font-weight;
-  font-size: 0.875rem;
-  line-height: 1.43;
   border-bottom: 1px solid $app-secondary-border-color;
+  font-size: 0.875rem;
+  font-weight: $medium-font-weight;
+  line-height: 1.43;
   padding: $spacing-lg;
 }
-
 .date {
   min-width: 98px;
 }
-
 .tags {
   min-width: 150px;
 }
-
 .author {
   min-width: 150px;
 }
-
 .commentCount {
   min-width: 130px;
 }
-
 .firstReviewTime {
   min-width: 160px;
 }
-
 .approvalTime {
   min-width: 135px;
 }
-
 .mergeTime {
   min-width: 120px;
 }
