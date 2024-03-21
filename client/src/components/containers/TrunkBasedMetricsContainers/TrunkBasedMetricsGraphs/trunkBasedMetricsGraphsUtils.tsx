@@ -1,8 +1,6 @@
 import { IFetchedTrunkBranchCommit } from "src/services/api/api";
 import { getFormattedDateWithTime, getFormattedDateText } from "src/utils/utils";
 
-import { GRAPH } from "./TrunkBasedMetricsGraphsConstants";
-
 interface ITrunkGraphCommitsForDate {
   [date: string]: number;
 }
@@ -76,8 +74,11 @@ export class TrunkBasedMetricsGraphsUtils {
   }
 
   static getAnnotationYPosition(height: number) {
-    if (height > GRAPH.MAX_HEIGHT) {
-      return GRAPH.ANNOTATION_Y_POSITION;
+    const maxHeight = 600;
+    const annotationYPosition = 1.05;
+
+    if (height > maxHeight) {
+      return annotationYPosition;
     }
   }
 }

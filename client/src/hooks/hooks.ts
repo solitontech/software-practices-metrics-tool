@@ -1,2 +1,2 @@
 export * from "./useOutsideClick/useOutsideClick";
-export * from "./dimensions/useDimensions";
+export * from "./useDimensions/useDimensions";
