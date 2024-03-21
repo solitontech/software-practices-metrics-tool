@@ -1,4 +1,5 @@
 import { ChangeEvent, useId, useRef } from "react";
+import clsx from "clsx";
 
 import SearchIcon from "@mui/icons-material/Search";
 import FormControl from "@mui/material/FormControl";
@@ -12,7 +13,7 @@ import { InfoIconTooltip } from "../InfoIconTooltip/InfoIconTooltip";
 interface ISearchBoxProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   label: string;
-  width?: number;
+  className?: string;
   placeHolder?: string;
   isDebounced?: boolean;
   delay?: number;
@@ -23,12 +24,10 @@ interface ITimeRef {
   timerId: ReturnType<typeof setTimeout> | null;
 }
 
-//TODO: Figure out alternate way to avoid inline styles and use class for width
-
 export const SearchBox = ({
   label,
   placeHolder = "",
-  width = 200,
+  className,
   onChange,
   isDebounced = false,
   delay = 400,
@@ -55,7 +54,7 @@ export const SearchBox = ({
 
   return (
     <div className={styles.container}>
-      <FormControl sx={{ m: 1, backgroundColor: "white", margin: "8px 0px" }}>
+      <FormControl className={styles.searchBox}>
         <InputLabel htmlFor={id} className={styles.label}>
           {label}
         </InputLabel>
@@ -67,14 +66,14 @@ export const SearchBox = ({
           }
           endAdornment={
             <InputAdornment position="end">
-              <InfoIconTooltip content={placeHolder} size="20px" />
+              <InfoIconTooltip content={placeHolder} className={styles.searchIcon} />
             </InputAdornment>
           }
           label={label}
           onChange={handleInputChange}
           onClick={onClick}
           aria-labelledby={id}
-          style={{ width: width }}
+          className={clsx(className ?? styles.searchBoxInput)}
           placeholder={placeHolder}
           autoComplete="off"
         />

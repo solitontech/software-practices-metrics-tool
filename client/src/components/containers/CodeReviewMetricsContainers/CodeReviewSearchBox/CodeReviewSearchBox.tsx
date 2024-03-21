@@ -1,9 +1,10 @@
-import { ChangeEvent, useEffect, useState, useRef } from "react";
+import { ChangeEvent, useState, useRef } from "react";
 
 import { Chip } from "@mui/material";
 import clsx from "clsx";
 
 import { ClientFilters, SearchBox } from "src/components/components";
+import { useOutsideClick } from "src/hooks/hooks";
 
 import styles from "./CodeReviewSearchBox.module.scss";
 import { CHIPS } from "./codeReviewSearchBoxConstants";
@@ -25,18 +26,7 @@ export const CodeReviewSearchBox = ({
   const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
   const [searchPlaceHolder, setSearchPlaceHolder] = useState(PLACEHOLDER);
 
-  //TODO: extract as reusable hook
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (event.target instanceof Node && searchRef.current && !searchRef.current.contains(event.target)) {
-        setIsSearchDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  useOutsideClick(searchRef, setIsSearchDropdownOpen);
 
   const handleChipClick = (currentChip: string) => {
     const chip = CHIPS.find((chip) => chip.key === currentChip);
@@ -65,7 +55,7 @@ export const CodeReviewSearchBox = ({
           onChange={handleSearchChange}
           onClick={() => setIsSearchDropdownOpen(true)}
           isDebounced={true}
-          width={380}
+          className={styles.searchBoxInput}
         ></SearchBox>
         {isSearchDropdownOpen && (
           <div className={styles.chipContainer}>

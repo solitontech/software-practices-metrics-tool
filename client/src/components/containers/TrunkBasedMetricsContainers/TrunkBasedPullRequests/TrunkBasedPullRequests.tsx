@@ -46,7 +46,7 @@ export const TrunkBasedPullRequests = ({ startDate, endDate }: ITrunkBasedPullRe
         <SearchBox
           onChange={handleSearchChange}
           label="Search Pull Requests"
-          width={380}
+          className={styles.searchBox}
           placeHolder="Search for dates, branch name, title and status"
           isDebounced={true}
         ></SearchBox>

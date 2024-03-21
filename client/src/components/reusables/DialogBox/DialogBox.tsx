@@ -12,12 +12,10 @@ interface IDialogBoxProps {
   handleClose: () => void;
   title: React.ReactNode | string;
   children: React.ReactNode;
-  width: string;
+  className: string;
 }
 
-//TODO: Alterate way figure out to avoid inline styles
-
-export const DialogBox = ({ isOpen, handleClose, children, title, width }: IDialogBoxProps) => {
+export const DialogBox = ({ isOpen, handleClose, children, title, className }: IDialogBoxProps) => {
   const id = useId();
 
   return (
@@ -26,9 +24,7 @@ export const DialogBox = ({ isOpen, handleClose, children, title, width }: IDial
       open={isOpen}
       onClose={handleClose}
       PaperProps={{
-        style: {
-          minWidth: width,
-        },
+        className: `${className} ${styles.dialog}`,
       }}
     >
       <DialogTitle id={id} className={styles.titleContainer}>

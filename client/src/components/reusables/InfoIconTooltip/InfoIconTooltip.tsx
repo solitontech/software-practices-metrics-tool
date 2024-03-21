@@ -1,21 +1,21 @@
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
+import clsx from "clsx";
 
 import styles from "./InfoIconTooltip.module.scss";
 
 interface IInfoIconTooltipProps {
   content: string;
-  size?: string;
+  className?: string;
 }
 
-//TODO: Better way to avoid inline style is to expose a iconClass instead of size
-export const InfoIconTooltip = ({ content, size = "16px" }: IInfoIconTooltipProps) => {
+export const InfoIconTooltip = ({ content, className }: IInfoIconTooltipProps) => {
   const title = <span className={styles.toolTip}>{content}</span>;
 
   return (
-    <span className={styles.infoIcon}>
+    <span className={styles.infoIconContainer}>
       <Tooltip arrow title={title} data-testid={content}>
-        <InfoIcon style={{ fontSize: size }} />
+        <InfoIcon className={clsx(styles.infoIcon, className)} />
       </Tooltip>
     </span>
   );

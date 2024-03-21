@@ -1,5 +1,9 @@
 @import "src/styles/index.scss";
 
+.dialog {
+  max-width: unset;
+}
+
 .titleContainer {
   display: flex;
   justify-content: space-between;

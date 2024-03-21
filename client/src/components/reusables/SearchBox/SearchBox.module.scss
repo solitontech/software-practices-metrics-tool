@@ -17,3 +17,16 @@
     font-size: $font-size-md;
   }
 }
+
+.searchIcon {
+  font-size: $icon-size-xl;
+}
+
+.searchBox {
+  background-color: $app-primary-background-color;
+  margin: $spacing-sm 0px;
+}
+
+.searchBoxInput {
+  width: 200px;
+}
