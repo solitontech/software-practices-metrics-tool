@@ -9,10 +9,10 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "server/**/*.{js,ts}": [
+    "server/**/*.{js,json,md}": [
       "cd server && npm run lint-staged"
     ],
-    "client/**/*.{js,ts}": [
+    "client/**/*": [
       "cd client && npm run lint-staged"
     ]
   },
