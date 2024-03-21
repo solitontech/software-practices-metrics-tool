@@ -4,20 +4,27 @@ import { IDimensions } from "./dimensionsTypes";
 
 export const useDimensions = (ref: RefObject<HTMLElement>, setDimensions: (dimensions: IDimensions) => void) => {
   useEffect(() => {
+    const currentRef = ref.current;
+
     const updateDimensions = () => {
-      if (ref.current instanceof HTMLElement) {
+      if (currentRef instanceof HTMLElement) {
         setDimensions({
-          width: ref.current.offsetWidth,
-          height: ref.current.offsetHeight,
+          width: currentRef.offsetWidth,
+          height: currentRef.offsetHeight,
         });
       }
     };
 
-    window.addEventListener("resize", updateDimensions);
-    updateDimensions();
+    const resizeObserver = new ResizeObserver(updateDimensions);
+
+    if (currentRef) {
+      resizeObserver.observe(currentRef);
+    }
 
     return () => {
-      window.removeEventListener("resize", updateDimensions);
+      if (currentRef) {
+        resizeObserver.unobserve(currentRef);
+      }
     };
   }, [ref, setDimensions]);
 };
