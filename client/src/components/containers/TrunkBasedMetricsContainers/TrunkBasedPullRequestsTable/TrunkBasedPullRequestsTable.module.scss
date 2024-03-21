@@ -2,8 +2,8 @@
 
 .container {
   border: 1px solid $app-secondary-border-color;
-  width: calc(100% - 250px);
   overflow: scroll;
+  width: calc(100% - 250px);
 }
 
 .table {
@@ -23,7 +23,7 @@
   color: $app-ternary-text-color;
   font-size: $font-size-xmd;
   font-weight: $medium-font-weight;
-  line-height: $table-line-height;
+  line-height: $app-primary-line-height;
   padding: $spacing-lg;
 }
 

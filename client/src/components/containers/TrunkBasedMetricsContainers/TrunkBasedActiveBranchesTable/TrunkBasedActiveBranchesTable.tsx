@@ -52,7 +52,7 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: ITrunkBasedAct
             {filteredBranches.length ? (
               filteredBranches.map((row) => {
                 return (
-                  <tr key={row.title} role="checkbox" tabIndex={-1} className={styles.tableRow}>
+                  <tr key={row.title} className={styles.tableRow}>
                     <td className={styles.tableCell}>
                       <NavLink to={row.branchURL} target="_blank" className={styles.branchName}>
                         <span title={row.name} className={styles.title}>

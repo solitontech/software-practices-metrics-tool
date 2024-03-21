@@ -36,13 +36,7 @@ export const TrunkBasedPullRequestsTable = ({ pullRequests }: ITrunkBasedPullReq
           {pullRequests.length ? (
             pullRequests.map((row) => {
               return (
-                <tr
-                  data-testid="trunk-based-metrics-table-row"
-                  key={row.title}
-                  role="checkbox"
-                  tabIndex={-1}
-                  className={styles.tableRow}
-                >
+                <tr data-testid="trunk-based-metrics-table-row" key={row.title} className={styles.tableRow}>
                   <td className={styles.tableCell}>
                     <span title={getFormattedDateWithTime(row.creationDate)}>
                       {getFormattedDateWithoutTime(row.creationDate)}

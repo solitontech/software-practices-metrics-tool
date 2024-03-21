@@ -51,7 +51,7 @@ export const TrunkBasedNamingConventionTable = ({
             {filteredBranches.length ? (
               filteredBranches.map((row) => {
                 return (
-                  <tr key={row.id + row.name} role="checkbox" tabIndex={-1} className={styles.tableRow}>
+                  <tr key={row.id + row.name} className={styles.tableRow}>
                     <td className={styles.tableCell}>
                       <NavLink to={row.url} target="_blank" className={styles.branchName}>
                         <span title={row.name} className={styles.title}>
