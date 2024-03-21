@@ -1,44 +1,48 @@
 @import "src/styles/index.scss";
 
+.header {
+  @include flex-align-center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .noDataMessage {
-  text-align: center;
+  border-bottom: 1px solid $app-secondary-border-color;
   color: $app-ternary-text-color;
   font-size: $font-size-mlg;
-  border-bottom: 1px solid $app-secondary-border-color;
   height: 75px;
+  text-align: center;
 }
 
 .text {
+  border-bottom: 1px solid $app-secondary-border-color;
   color: $app-ternary-text-color;
   font-size: $font-size-xmd;
-  border-bottom: 1px solid $app-secondary-border-color;
   padding: $spacing-lg;
 }
 
 .pullRequestURL {
-  text-decoration: none;
-  font-weight: $medium-font-weight;
+  @include flex-align-center;
+  color: $app-ternary-text-color;
   cursor: pointer;
+  font-weight: $medium-font-weight;
+  text-decoration: none;
 
   &:hover {
-    text-decoration: underline;
     color: $app-primary-anchor-color;
+    text-decoration: underline;
   }
-
-  color: $app-ternary-text-color;
-  @include flex-align-center;
 }
 
 .linkIcon {
   color: $app-quaternary-text-color;
-  vertical-align: middle;
-  margin-left: $spacing-xs;
   font-size: $icon-size-md;
+  margin-left: $spacing-xs;
+  vertical-align: middle;
 }
 
 .navLink {
   @include ellipsis;
-
   font-size: $font-size-xmd;
 }
 
@@ -47,29 +51,29 @@
 }
 
 .active {
-  text-transform: capitalize;
-  color: $app-secondary-text-color;
   background-color: $app-chip-active-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
 }
 
 .completed {
-  text-transform: capitalize;
-  color: $app-secondary-text-color;
   background-color: $app-chip-completed-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
 }
 
 .abandoned {
-  text-transform: capitalize;
-  color: $app-secondary-text-color;
   background-color: $app-chip-abandoned-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
 }
 
 .paper {
-  width: 100%;
   border: 1px solid $app-primary-border-color;
+  border-radius: 4px;
   height: 95%;
   overflow: scroll;
-  border-radius: 4px;
+  width: 100%;
 }
 
 .rowEven {
@@ -82,23 +86,23 @@
 
 .comments {
   @include flex-align-center;
+  color: $app-ternary-text-color;
   gap: 4px;
   justify-content: center;
-  color: $app-ternary-text-color;
 }
 
 .icon {
-  width: 20px;
   height: 20px;
+  width: 20px;
 }
 
 @mixin votesList {
-  gap: 3px;
-  width: 120px;
-  height: 30px;
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
+  display: flex;
+  gap: 3px;
+  height: 30px;
+  justify-content: flex-start;
+  width: 120px;
 }
 
 .currentVotesList {
@@ -110,17 +114,10 @@
   @include votesList;
 }
 
-.header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .totalPRs {
+  color: $app-ternary-text-color;
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
-  color: $app-ternary-text-color;
 }
 
 .buttonColor {
@@ -140,17 +137,17 @@
 }
 
 .tableHeader {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 4px;
 }
 
 .sortingIcon {
   display: flex;
   flex-direction: column;
-  width: 40px;
   height: 50px;
   margin-top: $spacing-sm;
+  width: 40px;
 }
 
 .time {
@@ -158,11 +155,11 @@
 }
 
 .prTitle {
-  width: 300px;
+  display: block;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
-  display: block;
+  width: 300px;
 }
 
 .startDate {
@@ -179,13 +176,9 @@
   width: max-content;
 }
 
-.votesTimelineDialog {
-  width: 600px;
-}
-
 .dialogHeader {
-  width: 22%;
   font-size: $font-size-xmd;
+  width: 22%;
 }
 
 .prDetails {
@@ -202,11 +195,11 @@
 .tag {
   background-color: $app-ternary-background-color;
   font-size: $font-size-md;
-  white-space: nowrap;
+  height: fit-content;
+  max-width: 110px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 110px;
-  height: fit-content;
+  white-space: nowrap;
 }
 
 .table {
@@ -215,11 +208,11 @@
 }
 
 .tableHead {
-  position: sticky;
-  top: 0;
   background-color: $app-secondary-text-color;
   color: $app-primary-text-color;
   font-weight: $extra-bold-font-weight;
+  position: sticky;
+  top: 0;
 }
 
 .tableBody {
@@ -227,10 +220,10 @@
 }
 
 .tableCell {
-  font-weight: $medium-font-weight;
-  font-size: 0.875rem;
-  line-height: 1.43;
   border-bottom: 1px solid $app-secondary-border-color;
+  font-size: 0.875rem;
+  font-weight: $medium-font-weight;
+  line-height: 1.43;
   padding: $spacing-lg;
 }
 
@@ -260,4 +253,8 @@
 
 .mergeTime {
   min-width: 120px;
+}
+
+.votesTimelineDialog {
+  width: 650px;
 }

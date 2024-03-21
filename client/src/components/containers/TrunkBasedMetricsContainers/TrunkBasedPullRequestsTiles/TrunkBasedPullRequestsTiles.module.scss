@@ -5,7 +5,12 @@
   gap: $spacing-xl;
 }
 
-.tileContent {
+.tileContainer {
   @include flex-align-center;
   gap: $spacing-sm;
+}
+
+.tileContent {
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }

@@ -1,7 +1,7 @@
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Chip } from "@mui/material";
-import { NavLink } from "react-router-dom";
 import clsx from "clsx";
+import { NavLink } from "react-router-dom";
 
 import { IFetchedTrunkBranchPullRequest } from "src/services/api/api";
 import { getFormattedDateWithoutTime, getFormattedDateWithTime } from "src/utils/utils";

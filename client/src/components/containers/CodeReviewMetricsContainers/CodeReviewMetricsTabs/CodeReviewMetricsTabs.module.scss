@@ -1,0 +1,16 @@
+@import "src/styles/index.scss";
+
+.codeReviewTable {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.errorMessage {
+  border: 1px solid $app-secondary-border-color;
+  color: $app-ternary-text-color;
+  font-weight: $medium-font-weight;
+  margin: $spacing-vlg 0;
+  padding: $spacing-xs;
+  text-align: center;
+  width: 100%;
+}

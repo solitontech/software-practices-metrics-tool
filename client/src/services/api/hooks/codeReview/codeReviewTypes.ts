@@ -9,19 +9,19 @@ interface IFetchedPullRequestComments {
   numberOfMajorComments: number;
 }
 
-interface IFetchedPullRequestVotesTimeline {
-  id: string;
-  author: string;
-  vote: string;
-  timeOfVote: Date; //TODO: date is "string format" in the API and add this field wit null type
-}
-
 interface IFetchedPullRequestVotes {
   approved: number;
   approvedWithSuggestions: number;
   waitForAuthor: number;
   rejected: number;
   noVote: number;
+}
+
+export interface IFetchedPullRequestVotesTimeline {
+  id: string;
+  author: string;
+  vote: keyof IFetchedPullRequestVotes;
+  timeOfVote: Date; //TODO: date is "string format" in the API and add this field wit null type
 }
 
 export interface IFetchedCodeReviewPullRequest {
