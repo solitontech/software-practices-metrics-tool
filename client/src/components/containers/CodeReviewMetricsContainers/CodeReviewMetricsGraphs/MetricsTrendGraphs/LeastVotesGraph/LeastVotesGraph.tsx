@@ -10,7 +10,6 @@ import styles from "./LeastVotesGraph.module.scss";
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Monthly } from "./monthlyGraphUtils";
 import { Weekly } from "./weeklyGraphUtils";
-import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { TREND_VIEW, GRAPH_TYPE } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
 import {
@@ -27,6 +26,23 @@ interface Props {
   startDate: Date;
   endDate: Date;
 }
+
+//TODO: Make below constants as a separate file
+const VOTE_LABEL = {
+  APPROVED: "Approved",
+  APPROVED_WITH_SUGGESTIONS: "Approved with suggestions",
+  WAIT_FOR_AUTHOR: "Wait for author",
+  REJECTED: "Rejected",
+  NO_VOTE: "No vote",
+};
+
+const VOTE_COLOR = {
+  APPROVED: "#008000",
+  APPROVED_WITH_SUGGESTIONS: "#90EE90",
+  WAIT_FOR_AUTHOR: "#FFA500",
+  REJECTED: "#FF0000",
+  NO_VOTE: "#d9d9d9",
+};
 
 const GRAPH_TITLE = "Pull Requests least votes trend";
 const Y_AXIS_NAME = "Pull Requests count";
