@@ -15,6 +15,11 @@ interface ITrunkBasedMetricsGraphsProps {
 export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: ITrunkBasedMetricsGraphsProps) => {
   const { data } = useTrunkBranchCommits(startDate, endDate);
 
+  const containerRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useDimensions(containerRef, setDimensions);
+
   const commitsToPlot = TrunkBasedMetricsGraphsUtils.getCommitsToPlot(startDate, endDate, data.commits);
 
   const commitsToPlotKeys = Object.keys(commitsToPlot);
@@ -26,11 +31,6 @@ export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: ITrunkBasedMetri
     hoverText: commitsToPlotKeys,
     plotName: "",
   };
-
-  const containerRef = useRef(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
-  useDimensions(containerRef, setDimensions);
 
   return (
     <div ref={containerRef} className={styles.graphContainer}>
