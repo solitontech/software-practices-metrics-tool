@@ -2,14 +2,20 @@
 
 .minThreshold {
   color: $app-chip-completed-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
 .insideThreshold {
   color: $app-chip-active-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
 .maxThreshold {
   color: $app-chip-abandoned-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
 .tileContent {

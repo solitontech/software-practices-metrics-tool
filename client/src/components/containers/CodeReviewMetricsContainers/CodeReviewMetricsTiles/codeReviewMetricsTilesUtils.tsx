@@ -32,10 +32,10 @@ export class CodeReviewMetricsTilesUtil {
 
   static getToolTipText(time: number | string, recommendation: string) {
     if (typeof time === "string") {
-      return `( ${recommendation} )`;
+      return `(${recommendation})`;
     }
 
-    return `${this.#formatHoursToDays(time)} ( ${recommendation} )`;
+    return `${this.#formatHoursToDays(time)} (${recommendation})`;
   }
 
   static #formatHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {

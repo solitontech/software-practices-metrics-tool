@@ -7,6 +7,7 @@
 }
 
 .table {
+  border: 1px solid $app-secondary-border-color;
   border-spacing: 0;
   width: 100%;
 }
@@ -19,11 +20,15 @@
   top: 0;
 }
 
+.tableHead td {
+  font-weight: $medium-font-weight;
+}
+
 .tableCell {
   border-bottom: 1px solid $app-secondary-border-color;
   color: $app-ternary-text-color;
   font-size: $font-size-xmd;
-  font-weight: $medium-font-weight;
+  font-weight: $regular-font-weight;
   line-height: $app-primary-line-height;
   padding: $spacing-lg;
 }

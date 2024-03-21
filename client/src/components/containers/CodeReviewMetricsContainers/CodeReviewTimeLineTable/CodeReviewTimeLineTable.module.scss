@@ -1,59 +1,47 @@
 @import "src/styles/index.scss";
 
-.noDataMessage {
-  text-align: center;
-  color: $app-ternary-text-color;
-  font-size: $font-size-mlg;
-  border-bottom: 1px solid $app-secondary-border-color;
-  height: 75px;
-}
-
-.text {
-  color: $app-ternary-text-color;
-  text-align: left;
-}
-
-.paper {
+.container {
+  overflow: scroll;
   width: 100%;
-  border: 1px solid $app-primary-border-color;
-  height: 95%;
-}
-
-.rowEven {
-  background-color: $app-secondary-background-color;
-}
-
-.rowOdd {
-  background-color: $app-secondary-text-color;
-}
-
-.tableContainer {
-  max-height: 440px;
-  width: 100%;
-  overflow-x: auto;
 }
 
 .table {
+  border: 1px solid $app-secondary-border-color;
   border-spacing: 0;
   width: 100%;
 }
 
 .tableHead {
-  position: sticky;
-  top: 0;
   background-color: $app-secondary-text-color;
   color: $app-primary-text-color;
-  font-weight: $extra-bold-font-weight;
+  position: sticky;
+  top: 0;
 }
 
-.tableBody {
-  overflow-y: scroll;
+.tableHead td {
+  font-weight: $medium-font-weight;
+  text-align: left;
 }
 
 .tableCell {
-  font-weight: $medium-font-weight;
-  font-size: 0.875rem;
-  line-height: 1.43;
   border-bottom: 1px solid $app-secondary-border-color;
+  color: $app-ternary-text-color;
+  font-size: $font-size-xmd;
+  font-weight: $medium-font-weight;
+  line-height: $app-primary-line-height;
   padding: $spacing-lg;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
+}
+
+.noDataMessage {
+  border-bottom: 1px solid $app-secondary-border-color;
+  font-size: $font-size-mlg;
+  text-align: center;
 }

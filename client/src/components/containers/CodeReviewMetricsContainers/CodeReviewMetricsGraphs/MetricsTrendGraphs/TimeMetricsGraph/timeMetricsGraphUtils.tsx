@@ -23,7 +23,7 @@ const MAX_LINE = MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP;
 const MAX_CHARACTERS = MAX_CHARACTERS_IN_LINE_IN_TOOLTIP;
 const MAX_ROWS = MAX_PULL_REQUEST_ID_ROWS;
 
-//TODO: migrate this function to common utility
+//TODO: migrate this function to common utility adn check for this function name in other files
 const formatHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
   if (hours >= HOURS_IN_A_DAY) {
     const durationInMilliseconds = hours * MINUTES_IN_ONE_HOUR * MINUTES_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;

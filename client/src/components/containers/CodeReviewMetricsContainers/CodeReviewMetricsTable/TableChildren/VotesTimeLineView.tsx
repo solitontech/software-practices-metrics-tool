@@ -1,11 +1,9 @@
 import { useState } from "react";
 
 import HistoryTwoToneIcon from "@mui/icons-material/HistoryTwoTone";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Tooltip } from "@mui/material";
-import { NavLink } from "react-router-dom";
 
 import { CustomVote, DialogBox } from "src/components/components";
+import { IFetchedPullRequestVotesTimeline } from "src/services/api/api";
 
 import approvedSvg from "../../../../../assets/images/approved.svg";
 import approvedWithSuggestionsSvg from "../../../../../assets/images/approvedWithSuggestions.svg";
@@ -14,7 +12,7 @@ import rejectedSvg from "../../../../../assets/images/rejected.svg";
 import waitForAuthorSvg from "../../../../../assets/images/waitForAuthor.svg";
 import { CodeReviewTimeLineTable } from "../../CodeReviewTimeLineTable/CodeReviewTimeLineTable";
 import styles from "../CodeReviewMetricsTable.module.scss";
-import { ITimeLine, IVotesTimeline } from "../interfaces";
+import { ITimeLine } from "../interfaces";
 
 interface Props {
   className: string;
@@ -24,7 +22,7 @@ interface Props {
   rejected: number;
   isNoVotesVisible?: boolean;
   noVote?: number;
-  votesTimeLine: IVotesTimeline[];
+  votesTimeLine: IFetchedPullRequestVotesTimeline[];
   title: string;
   url: string;
 }
@@ -84,20 +82,10 @@ export const VotesTimeLineView = ({
       <DialogBox
         isOpen={isVotesTimeLineOpen}
         handleClose={() => setIsVotesTimeLineOpen(false)}
-        title={<CodeReviewTimeLineTable timeLine={votesTimeline.timeLine} />}
+        title="Votes Timeline"
         className={styles.votesTimelineDialog}
       >
-        <div className={styles.dialogHeader}>Votes Timeline -</div>
-        <div className={styles.prDetails}>
-          <Tooltip title={votesTimeline.title} placement="bottom-start">
-            <NavLink to={votesTimeline.url} target="_blank" className={styles.pullRequestURL}>
-              <div className={styles.navLink}>{votesTimeline.title}</div>
-              <div className={styles.dialogIcon}>
-                <OpenInNewIcon className={styles.linkIcon} />
-              </div>
-            </NavLink>
-          </Tooltip>
-        </div>
+        <CodeReviewTimeLineTable timeLine={votesTimeline.timeLine} />
       </DialogBox>
     </>
   );

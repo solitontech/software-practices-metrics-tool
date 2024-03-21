@@ -1,32 +1,28 @@
-import { IColumn, IVotesLabel } from "./interfaces";
-import approved from "../../../../assets/images/approved.svg";
-import approvedWithSuggestions from "../../../../assets/images/approvedWithSuggestions.svg";
-import noVote from "../../../../assets/images/noVote.svg";
-import rejected from "../../../../assets/images/rejected.svg";
-import waitForAuthor from "../../../../assets/images/waitForAuthor.svg";
+import approved from "src/assets/images/approved.svg";
+import approvedWithSuggestions from "src/assets/images/approvedWithSuggestions.svg";
+import noVote from "src/assets/images/noVote.svg";
+import rejected from "src/assets/images/rejected.svg";
+import waitForAuthor from "src/assets/images/waitForAuthor.svg";
 
-export const columns: readonly IColumn[] = [
+export const columns = [
   {
     id: "author",
     label: "Reviewed By",
     width: 220,
-    align: "left",
   },
   {
     id: "time",
     label: "Time",
     width: 135,
-    align: "left",
   },
   {
     id: "vote",
     label: "Vote",
     width: 30,
-    align: "left",
   },
 ];
 
-export const votesLabel: IVotesLabel = {
+export const votesLabel = {
   approved: "Approved",
   rejected: "Rejected",
   approvedWithSuggestions: "Approved With Suggestions",
@@ -34,7 +30,7 @@ export const votesLabel: IVotesLabel = {
   noVote: "No Vote",
 };
 
-export const votesImage: IVotesLabel = {
+export const votesImage = {
   approved: approved,
   approvedWithSuggestions: approvedWithSuggestions,
   rejected: rejected,

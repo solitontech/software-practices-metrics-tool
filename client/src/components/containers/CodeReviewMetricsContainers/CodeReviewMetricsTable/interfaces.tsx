@@ -1,3 +1,5 @@
+import { IFetchedPullRequestVotesTimeline } from "src/services/api/api";
+
 export type Vote = "approved" | "approvedWithSuggestions" | "noVote" | "waitForAuthor" | "rejected";
 
 export type Filter = Record<Vote, boolean>;
@@ -95,7 +97,7 @@ export interface IColumn {
 }
 
 export interface ITimeLine {
-  timeLine: IVotesTimeline[];
+  timeLine: IFetchedPullRequestVotesTimeline[];
   title: string;
   url: string;
 }
