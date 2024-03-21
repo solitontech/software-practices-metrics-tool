@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
+import clsx from "clsx";
 
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Tooltip } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import { SearchBox } from "src/components/components";
@@ -55,30 +55,30 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: ITrunkBasedAct
                   <tr key={row.title} role="checkbox" tabIndex={-1} className={styles.tableRow}>
                     <td className={styles.tableCell}>
                       <NavLink to={row.branchURL} target="_blank" className={styles.branchName}>
-                        <Tooltip title={row.name} placement="bottom-start">
-                          <span className={styles.title}>{row.name}</span>
-                        </Tooltip>
+                        <span title={row.name} className={styles.title}>
+                          {row.name}
+                        </span>
+
                         <OpenInNewIcon className={styles.linkIcon} />
                       </NavLink>
                     </td>
                     <td className={styles.tableCell}>
                       <NavLink to={row.pullRequestURL} className={styles.pullRequest} target="_blank">
-                        <Tooltip title={row.title} placement="bottom-start">
-                          <span className={styles.title}>{row.title}</span>
-                        </Tooltip>
+                        <span title={row.title} className={styles.title}>
+                          {row.title}
+                        </span>
+
                         <OpenInNewIcon className={styles.linkIcon} />
                       </NavLink>
                     </td>
-                    <td className={`${styles.createdBy} ${styles.tableCell}`}>{row.createdBy}</td>
-                    <td className={`${styles.date} ${styles.tableCell}`}>
-                      {getFormattedDateWithTime(row.creationDate)}
-                    </td>
+                    <td className={styles.tableCell}>{row.createdBy}</td>
+                    <td className={styles.tableCell}>{getFormattedDateWithTime(row.creationDate)}</td>
                   </tr>
                 );
               })
             ) : (
               <tr>
-                <td colSpan={columns.length} className={`${styles.noDataMessage} ${styles.tableCell}`}>
+                <td colSpan={columns.length} className={clsx(styles.noDataMessage, styles.tableCell)}>
                   No data available
                 </td>
               </tr>

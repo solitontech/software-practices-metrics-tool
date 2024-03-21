@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
+import clsx from "clsx";
 
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Tooltip } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import { SearchBox, ErrorBoundary } from "src/components/components.ts";
@@ -54,9 +54,10 @@ export const TrunkBasedNamingConventionTable = ({
                   <tr key={row.id + row.name} role="checkbox" tabIndex={-1} className={styles.tableRow}>
                     <td className={styles.tableCell}>
                       <NavLink to={row.url} target="_blank" className={styles.branchName}>
-                        <Tooltip title={row.name} placement="bottom-start">
-                          <span className={styles.title}>{row.name}</span>
-                        </Tooltip>
+                        <span title={row.name} className={styles.title}>
+                          {row.name}
+                        </span>
+
                         <OpenInNewIcon className={styles.linkIcon} />
                       </NavLink>
                     </td>
@@ -65,7 +66,7 @@ export const TrunkBasedNamingConventionTable = ({
               })
             ) : (
               <tr>
-                <td colSpan={1} className={`${styles.noDataMessage} ${styles.tableCell}`}>
+                <td colSpan={1} className={clsx(styles.noDataMessage, styles.tableCell)}>
                   No data available
                 </td>
               </tr>

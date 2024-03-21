@@ -1,6 +1,7 @@
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Chip, Tooltip } from "@mui/material";
+import { Chip } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import clsx from "clsx";
 
 import { IFetchedTrunkBranchPullRequest } from "src/services/api/api";
 import { getFormattedDateWithoutTime, getFormattedDateWithTime } from "src/utils/utils";
@@ -42,29 +43,31 @@ export const TrunkBasedPullRequestsTable = ({ pullRequests }: ITrunkBasedPullReq
                   tabIndex={-1}
                   className={styles.tableRow}
                 >
-                  <td className={`${styles.date} ${styles.tableCell}`}>
-                    <Tooltip title={getFormattedDateWithTime(row.creationDate)} arrow>
-                      <span>{getFormattedDateWithoutTime(row.creationDate)}</span>
-                    </Tooltip>
+                  <td className={styles.tableCell}>
+                    <span title={getFormattedDateWithTime(row.creationDate)}>
+                      {getFormattedDateWithoutTime(row.creationDate)}
+                    </span>
                   </td>
-                  <td className={`${styles.date} ${styles.tableCell}`}>
-                    <Tooltip title={getFormattedDateWithTime(row.closedDate)} arrow>
-                      <span>{getFormattedDateWithoutTime(row.closedDate)}</span>
-                    </Tooltip>
+                  <td className={styles.tableCell}>
+                    <span title={getFormattedDateWithTime(row.closedDate)}>
+                      {getFormattedDateWithoutTime(row.closedDate)}
+                    </span>
                   </td>
                   <td className={styles.tableCell}>
                     <NavLink to={row.branchURL} target="_blank" className={styles.branchName}>
-                      <Tooltip title={row.name} placement="bottom-start">
-                        <span className={styles.title}>{row.name}</span>
-                      </Tooltip>
+                      <span title={row.name} className={styles.title}>
+                        {row.name}
+                      </span>
+
                       <OpenInNewIcon className={styles.linkIcon} />
                     </NavLink>
                   </td>
                   <td className={styles.tableCell}>
                     <NavLink to={row.pullRequestURL} className={styles.pullRequest} target="_blank">
-                      <Tooltip title={row.title} placement="bottom-start">
-                        <span className={styles.title}>{row.title}</span>
-                      </Tooltip>
+                      <span title={row.title} className={styles.title}>
+                        {row.title}
+                      </span>
+
                       <OpenInNewIcon className={styles.linkIcon} />
                     </NavLink>
                   </td>
@@ -76,7 +79,7 @@ export const TrunkBasedPullRequestsTable = ({ pullRequests }: ITrunkBasedPullReq
             })
           ) : (
             <tr>
-              <td colSpan={tableColumns.length} className={`${styles.noDataMessage} ${styles.tableCell}`}>
+              <td colSpan={tableColumns.length} className={clsx(styles.noDataMessage, styles.tableCell)}>
                 No data available
               </td>
             </tr>
