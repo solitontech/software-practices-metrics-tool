@@ -2,8 +2,8 @@ import { SECONDS_IN_ONE_HOUR, NOT_AVAILABLE } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 import { getFormattedDateWithoutTime } from "src/utils/utils";
 
-import { CHIPS } from "../../components/containers/CodeReviewMetricsContainers/CodeReviewSearchBox/codeReviewSearchBoxConstants";
-//TODO: BReak the above chip dependency
+import { CHIPS } from "./codeReviewMetricsConstants";
+
 export class CodeReviewMetricsUtil {
   static getMetricsAverageTimeInHours(
     pullRequests: IFetchedCodeReviewPullRequest[],
@@ -52,7 +52,11 @@ export class CodeReviewMetricsUtil {
     });
   }
 
-  static #getDeepSearchPullRequests(pullRequests: IFetchedCodeReviewPullRequest[], key: string, searchTerm: string) {
+  static #getDeepSearchPullRequests(
+    pullRequests: IFetchedCodeReviewPullRequest[],
+    key: keyof IFetchedCodeReviewPullRequest,
+    searchTerm: string,
+  ) {
     const SEARCH_KEYS: Record<string, Partial<keyof IFetchedCodeReviewPullRequest>> = {
       TAGS: "tags",
       CREATION_DATE: "creationDate",
@@ -97,12 +101,15 @@ export class CodeReviewMetricsUtil {
     });
   }
 
-  static #filterByOtherKeys(pullRequests: IFetchedCodeReviewPullRequest[], mappedKey: string, searchTerm: string) {
+  static #filterByOtherKeys(
+    pullRequests: IFetchedCodeReviewPullRequest[],
+    mappedKey: keyof IFetchedCodeReviewPullRequest,
+    searchTerm: string,
+  ) {
     return pullRequests.filter((row) => {
-      //TODO: remove this type conversion
-      const rowValue = (row[mappedKey as keyof IFetchedCodeReviewPullRequest] as string)?.toLocaleLowerCase();
+      const rowValue = row[mappedKey];
 
-      return rowValue?.includes(searchTerm);
+      return typeof rowValue === "string" && rowValue.toLocaleLowerCase().includes(searchTerm);
     });
   }
 }

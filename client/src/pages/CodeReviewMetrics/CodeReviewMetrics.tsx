@@ -15,7 +15,7 @@ import { useCodeReviewMetrics } from "src/services/api/api";
 
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./CodeReviewMetrics.module.scss";
-import { CODE_REVIEW_METRICS, CODE_REVIEW_METRICS_TABS } from "./codeReviewMetricsConstants.tsx";
+import { CODE_REVIEW_METRICS, CODE_REVIEW_METRICS_TABS, CHIPS } from "./codeReviewMetricsConstants";
 import { ICodeReviewMetricsTabValue } from "./codeReviewMetricsType.ts";
 import { CodeReviewMetricsUtil } from "./codeReviewMetricsUtils.ts";
 
@@ -84,6 +84,7 @@ export const CodeReviewMetrics = () => {
         actions={
           <CodeReviewSearchBox
             selectedChip={selectedChip}
+            chips={CHIPS}
             handleChipChange={setSelectedChip}
             handleSearchChange={handleSearchChange}
           />

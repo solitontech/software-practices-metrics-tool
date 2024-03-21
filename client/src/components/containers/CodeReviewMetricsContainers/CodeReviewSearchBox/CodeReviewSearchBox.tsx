@@ -7,10 +7,9 @@ import { ClientFilters, SearchBox } from "src/components/components";
 import { useOutsideClick } from "src/hooks/hooks";
 
 import styles from "./CodeReviewSearchBox.module.scss";
-import { CHIPS } from "./codeReviewSearchBoxConstants";
-
 interface ICodeReviewSearchBoxProps {
   selectedChip: string;
+  chips: { key: string; label: string; placeholder: string }[];
   handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleChipChange: (chip: string) => void;
 }
@@ -19,6 +18,7 @@ const PLACEHOLDER = "Search for date, title, tags, author, reviewer & status";
 
 export const CodeReviewSearchBox = ({
   selectedChip,
+  chips,
   handleSearchChange,
   handleChipChange,
 }: ICodeReviewSearchBoxProps) => {
@@ -29,7 +29,7 @@ export const CodeReviewSearchBox = ({
   useOutsideClick(searchRef, setIsSearchDropdownOpen);
 
   const handleChipClick = (currentChip: string) => {
-    const chip = CHIPS.find((chip) => chip.key === currentChip);
+    const chip = chips.find((chip) => chip.key === currentChip);
 
     if (!chip) {
       return;
@@ -59,7 +59,7 @@ export const CodeReviewSearchBox = ({
         ></SearchBox>
         {isSearchDropdownOpen && (
           <div className={styles.chipContainer}>
-            {CHIPS.map(({ key, label }) => {
+            {chips.map(({ key, label }) => {
               const selectedClass = clsx(selectedChip.includes(key) && styles.selectedChip);
 
               return (
