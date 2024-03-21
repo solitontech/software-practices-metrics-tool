@@ -40,17 +40,17 @@ export const CodeReviewMetrics = () => {
     ? CodeReviewMetricsUtil.filterPullRequests(pullRequests, selectedChip, searchTerm)
     : pullRequests;
 
-  const averageFirstReviewResponseTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
+  const firstReviewResponseTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
     searchedPullRequests,
     CODE_REVIEW_METRICS.FIRST_REVIEW_RESPONSE,
   );
 
-  const averageApprovalTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
+  const approvalTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
     searchedPullRequests,
     CODE_REVIEW_METRICS.APPROVAL_TIME,
   );
 
-  const averageMergeTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
+  const mergeTime = CodeReviewMetricsUtil.getMetricsAverageTimeInHours(
     searchedPullRequests,
     CODE_REVIEW_METRICS.MERGE_TIME,
   );
@@ -89,42 +89,42 @@ export const CodeReviewMetrics = () => {
           />
         }
       >
-        <div className={styles.codeReview}>
+        <div className={styles.container}>
           <SnackBar
             isOpen={snackbarOpen}
             message={`Failed to fetch ${errorCount} pull request. Please try again.`}
             handleClose={() => setSnackbarOpen(false)}
           />
-          <div className={styles.tableDetails}>
-            <div className={styles.header}>
-              <DateRangePicker
-                minDate={dateRange.sixMonthsAgoFromToday}
-                maxDate={dateRange.today}
-                date={dates}
-                handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
-                handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
+          <div className={styles.headerContainer}>
+            <DateRangePicker
+              minDate={dateRange.sixMonthsAgoFromToday}
+              maxDate={dateRange.today}
+              date={dates}
+              handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
+              handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
+            />
+            <TabToggle tabs={CODE_REVIEW_METRICS_TABS} selectedTab={selectedTab} handleTabChange={handleTabChange} />
+            <div className={styles.tilesContainer}>
+              <CodeReviewMetricsTiles
+                firstReviewResponseTime={firstReviewResponseTime}
+                approvalTime={approvalTime}
+                mergeTime={mergeTime}
               />
-              <TabToggle tabs={CODE_REVIEW_METRICS_TABS} selectedTab={selectedTab} handleTabChange={handleTabChange} />
-              <div className={styles.tiles}>
-                <CodeReviewMetricsTiles
-                  averageFirstReviewResponseTime={averageFirstReviewResponseTime}
-                  averageApprovalTime={averageApprovalTime}
-                  averageMergeTime={averageMergeTime}
-                />
-              </div>
             </div>
           </div>
-          <CodeReviewMetricsTabs
-            selectedTab={selectedTab}
-            dates={dates}
-            pullRequests={searchedPullRequests}
-            isPending={isPending}
-            isError={isError}
-            errorMessage={error?.response?.data?.error ?? ""}
-            averageFirstReviewResponseTime={averageFirstReviewResponseTime}
-            averageApprovalTime={averageApprovalTime}
-            averageMergeTime={averageMergeTime}
-          />
+          <div className={styles.tabContainer}>
+            <CodeReviewMetricsTabs
+              selectedTab={selectedTab}
+              dates={dates}
+              pullRequests={searchedPullRequests}
+              isPending={isPending}
+              isError={isError}
+              errorMessage={error?.response?.data?.error ?? ""}
+              firstReviewResponseTime={firstReviewResponseTime}
+              approvalTime={approvalTime}
+              mergeTime={mergeTime}
+            />
+          </div>
         </div>
       </CommonLayout>
     </ErrorBoundary>

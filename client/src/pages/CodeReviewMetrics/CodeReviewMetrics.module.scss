@@ -1,39 +1,25 @@
 @import "src/styles/index.scss";
 
-.codeReviewTable {
-  height: calc(100% - 100px);
-  margin-top: $spacing-xxl;
-  max-height: 90%;
-  overflow-y: auto;
-}
-
-.codeReview {
+.container {
   height: 100%;
   width: 100%;
 }
 
-.tableDetails {
-  @include flex-align-center;
-}
-
-.header {
+.headerContainer {
   @include flex-align-center;
   color: $app-ternary-text-color;
   justify-content: space-between;
+  height: 70px;
+  padding-top: $spacing-xm;
 }
 
-.tiles {
+.tilesContainer {
   @include flex-row;
   color: $app-ternary-text-color;
   gap: $spacing-xl;
 }
 
-.errorMessage {
-  border: 1px solid $app-primary-border-color;
-  color: $app-ternary-text-color;
-  font-weight: $medium-font-weight;
-  margin: $spacing-vlg 0;
-  padding: $spacing-xs;
-  text-align: center;
-  width: 100%;
+.tabContainer {
+  height: calc(100% - 70px);
+  padding-top: $spacing-lg;
 }
