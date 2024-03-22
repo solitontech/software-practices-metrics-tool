@@ -12,7 +12,6 @@ import rejectedSvg from "../../../../../assets/images/rejected.svg";
 import waitForAuthorSvg from "../../../../../assets/images/waitForAuthor.svg";
 import { CodeReviewTimeLineTable } from "../../CodeReviewTimeLineTable/CodeReviewTimeLineTable";
 import styles from "../CodeReviewMetricsTable.module.scss";
-import { ITimeLine } from "../codeReviewMetricsTableTypes";
 
 interface Props {
   className: string;
@@ -23,6 +22,12 @@ interface Props {
   isNoVotesVisible?: boolean;
   noVote?: number;
   votesTimeLine: IFetchedPullRequestVotesTimeline[];
+  title: string;
+  url: string;
+}
+
+interface ITimeLine {
+  timeLine: IFetchedPullRequestVotesTimeline[];
   title: string;
   url: string;
 }

@@ -1,22 +1,19 @@
 import { CodeReviewSortingIcon } from "src/components/components";
 import { VOTES, sortMap } from "src/constants/constants";
+import { IFetchedPullRequestVotes } from "src/services/api/api";
 
-import {
-  ICodeReviewTableColumn,
-  ICodeReviewTableVotesFilterColumn,
-  ICodeReviewTableVotesFilter,
-} from "./codeReviewMetricsTableTypes";
+import { ICodeReviewTableColumn, ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
 import { CustomFilterIcon } from "./VotesFilter/CustomFilterIcon";
 
 export const columns: ICodeReviewTableColumn[] = [
   {
-    id: "startDate",
+    id: "creationDate",
     label: "Start Date",
     minWidth: 98,
     align: "left",
   },
   {
-    id: "endDate",
+    id: "closedDate",
     label: "End Date",
     minWidth: 98,
     align: "left",
@@ -96,7 +93,7 @@ export const DEFAULT_SORT_STATE = {
   mergeTimeInSeconds: sortMap.noSort,
 };
 
-const VOTES_FILTER_DEFAULT_STATE: ICodeReviewTableVotesFilter = {
+const VOTES_FILTER_DEFAULT_STATE: Record<keyof IFetchedPullRequestVotes, boolean> = {
   [VOTES.APPROVED]: false,
   [VOTES.APPROVED_WITH_SUGGESTIONS]: false,
   [VOTES.WAIT_FOR_AUTHOR]: false,
@@ -104,7 +101,10 @@ const VOTES_FILTER_DEFAULT_STATE: ICodeReviewTableVotesFilter = {
   [VOTES.NO_VOTE]: false,
 };
 
-export const DEFAULT_FILTER_STATE: Record<ICodeReviewTableVotesFilterColumn, ICodeReviewTableVotesFilter> = {
+export const DEFAULT_FILTER_STATE: Record<
+  ICodeReviewTableVotesFilterColumn,
+  Record<keyof IFetchedPullRequestVotes, boolean>
+> = {
   votesHistory: VOTES_FILTER_DEFAULT_STATE,
   votes: VOTES_FILTER_DEFAULT_STATE,
 };

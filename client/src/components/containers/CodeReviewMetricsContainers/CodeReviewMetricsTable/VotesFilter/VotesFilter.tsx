@@ -1,3 +1,5 @@
+import { IFetchedPullRequestVotes } from "src/services/api/api";
+
 import styles from "./VotesFilter.module.scss";
 import { VOTES } from "./votesFilterConstants";
 import approved from "../../../../../assets/images/approved.svg";
@@ -5,12 +7,10 @@ import approvedWithSuggestions from "../../../../../assets/images/approvedWithSu
 import noVote from "../../../../../assets/images/noVote.svg";
 import rejected from "../../../../../assets/images/rejected.svg";
 import waitForAuthor from "../../../../../assets/images/waitForAuthor.svg";
-import { ICodeReviewTableVotesFilter, ICodeReviewTableVotes } from "../codeReviewMetricsTableTypes";
-
 interface Props {
   showNoVotes: boolean;
-  filter: ICodeReviewTableVotesFilter;
-  handleChange: (type: ICodeReviewTableVotes, value: boolean) => void;
+  filter: Record<keyof IFetchedPullRequestVotes, boolean>;
+  handleChange: (type: keyof IFetchedPullRequestVotes, value: boolean) => void;
   handleReset: () => void;
 }
 
@@ -24,7 +24,7 @@ export const VotesFilter = ({ showNoVotes, filter, handleChange, handleReset }: 
           className={styles.checkbox}
           type="checkbox"
           checked={filter.approved}
-          onChange={() => handleChange(VOTES.APPROVED as ICodeReviewTableVotes, !filter.approved)}
+          onChange={() => handleChange(VOTES.APPROVED as keyof IFetchedPullRequestVotes, !filter.approved)}
         />
 
         <div className={styles.voteImageLabelContainer}>
@@ -42,7 +42,10 @@ export const VotesFilter = ({ showNoVotes, filter, handleChange, handleReset }: 
           type="checkbox"
           checked={filter.approvedWithSuggestions}
           onChange={() =>
-            handleChange(VOTES.APPROVED_WITH_SUGGESTIONS as ICodeReviewTableVotes, !filter.approvedWithSuggestions)
+            handleChange(
+              VOTES.APPROVED_WITH_SUGGESTIONS as keyof IFetchedPullRequestVotes,
+              !filter.approvedWithSuggestions,
+            )
           }
         />
 
@@ -60,7 +63,7 @@ export const VotesFilter = ({ showNoVotes, filter, handleChange, handleReset }: 
           className={styles.checkbox}
           type="checkbox"
           checked={filter.waitForAuthor}
-          onChange={() => handleChange(VOTES.WAIT_FOR_AUTHOR as ICodeReviewTableVotes, !filter.waitForAuthor)}
+          onChange={() => handleChange(VOTES.WAIT_FOR_AUTHOR as keyof IFetchedPullRequestVotes, !filter.waitForAuthor)}
         />
 
         <div className={styles.voteImageLabelContainer}>
@@ -77,7 +80,7 @@ export const VotesFilter = ({ showNoVotes, filter, handleChange, handleReset }: 
           className={styles.checkbox}
           type="checkbox"
           checked={filter.rejected}
-          onChange={() => handleChange(VOTES.REJECTED as ICodeReviewTableVotes, !filter.rejected)}
+          onChange={() => handleChange(VOTES.REJECTED as keyof IFetchedPullRequestVotes, !filter.rejected)}
         />
 
         <div className={styles.voteImageLabelContainer}>
@@ -95,7 +98,7 @@ export const VotesFilter = ({ showNoVotes, filter, handleChange, handleReset }: 
             className={styles.checkbox}
             type="checkbox"
             checked={filter.noVote}
-            onChange={() => handleChange(VOTES.NO_VOTE as ICodeReviewTableVotes, !filter.noVote)}
+            onChange={() => handleChange(VOTES.NO_VOTE as keyof IFetchedPullRequestVotes, !filter.noVote)}
           />
 
           <div className={styles.voteImageLabelContainer}>

@@ -7,15 +7,14 @@ import {
   FRACTION_TO_FIND_TIME,
   sortMap,
 } from "src/constants/constants";
-import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+import {
+  IFetchedCodeReviewPullRequest,
+  IFetchedPullRequestVotes,
+  IFetchedPullRequestReviewerComments,
+} from "src/services/api/api";
 import { getHoursToDays, cacheWrapperForUnaryFunction } from "src/utils/utils";
 
-import {
-  ICodeReviewTableVotesFilterColumn,
-  ICodeReviewTableVotesFilter,
-  IReviewerComments,
-  ICodeReviewTableVotes,
-} from "./codeReviewMetricsTableTypes";
+import { ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
 import { NOT_AVAILABLE } from "../../../../constants/common.constants";
 
 export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | null) => {
@@ -108,12 +107,12 @@ export const convertTimeToDays = (timeInSeconds: number, formattedTime: string):
 
 export const getFilteredPullRequests = (
   pullRequests: IFetchedCodeReviewPullRequest[],
-  filters: Record<ICodeReviewTableVotesFilterColumn, ICodeReviewTableVotesFilter>,
+  filters: Record<ICodeReviewTableVotesFilterColumn, Record<keyof IFetchedPullRequestVotes, boolean>>,
 ): IFetchedCodeReviewPullRequest[] => {
   const columnNameToFilter = Object.keys(filters).find((filterKey: string) => {
     const filter = filters[filterKey as ICodeReviewTableVotesFilterColumn];
 
-    return Object.keys(filter).some((vote: string) => filter[vote as ICodeReviewTableVotes]);
+    return Object.keys(filter).some((vote: string) => filter[vote as keyof IFetchedPullRequestVotes]);
   }) as ICodeReviewTableVotesFilterColumn | null;
 
   if (!columnNameToFilter) {
@@ -121,7 +120,7 @@ export const getFilteredPullRequests = (
   }
 
   const filter = filters[columnNameToFilter];
-  const votesToFilter = Object.keys(filter).filter((vote) => filter[vote as ICodeReviewTableVotes]);
+  const votesToFilter = Object.keys(filter).filter((vote) => filter[vote as keyof IFetchedPullRequestVotes]);
 
   if (!votesToFilter.length) {
     return pullRequests;
@@ -135,7 +134,7 @@ export const getFilteredPullRequests = (
     }
 
     const selectedVotes = votesToFilter.filter((vote) => {
-      return votes[vote as ICodeReviewTableVotes] > 0;
+      return votes[vote as keyof IFetchedPullRequestVotes] > 0;
     });
 
     return selectedVotes.length > 0;
@@ -148,7 +147,7 @@ export const getTotalComments = (pullRequests: IFetchedCodeReviewPullRequest[]):
   }, 0);
 };
 
-export const getFormattedReviewerComments = (comments: IReviewerComments[]) => {
+export const getFormattedReviewerComments = (comments: IFetchedPullRequestReviewerComments[]) => {
   return comments.reduce((accumulated, currentValue) => {
     return `${accumulated} ${currentValue.reviewer} - ${currentValue.comments} |`;
   }, "");

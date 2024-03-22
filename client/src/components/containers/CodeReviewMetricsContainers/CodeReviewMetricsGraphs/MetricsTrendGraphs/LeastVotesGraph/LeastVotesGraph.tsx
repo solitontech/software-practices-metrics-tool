@@ -4,7 +4,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
 import { VOTES_LABEL, VOTES_COLOR } from "src/constants/constants";
-import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/services/api/api";
 
 import { LEAST_VOTE_CLASS } from "./leastVotesConstants";
 import styles from "./LeastVotesGraph.module.scss";
@@ -18,7 +18,6 @@ import {
   IBarChartMode,
   IBarPlot,
 } from "../../../../../reusables/MetricsGraphs/BarChart/barChartTypes";
-import { ICodeReviewTableVotes } from "../../../CodeReviewMetricsTable/codeReviewMetricsTableTypes";
 import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
 
@@ -31,7 +30,7 @@ interface Props {
 const GRAPH_TITLE = "Pull Requests least votes trend";
 const Y_AXIS_NAME = "Pull Requests count";
 const INFO_TEXT = "The least favored vote in PR's history timeline will be considered as least vote";
-const GRAPH_TOOLTIP_HEADER: Record<ICodeReviewTableVotes, string> = {
+const GRAPH_TOOLTIP_HEADER: Record<keyof IFetchedPullRequestVotes, string> = {
   rejected: "Pull Requests with rejected vote",
   approved: "Pull Requests with approved vote",
   waitForAuthor: "Pull Requests with wait for author vote",
@@ -57,7 +56,7 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
       ? Weekly.getWeeklyLeastVotes(pullRequests, startDate, endDate)
       : Monthly.getMonthlyLeastVotes(pullRequests, startDate, endDate);
 
-  const plots: Record<ICodeReviewTableVotes, IBarPlot> = {
+  const plots: Record<keyof IFetchedPullRequestVotes, IBarPlot> = {
     rejected: {
       plotName: VOTES_LABEL.REJECTED,
       xLabels: [],
@@ -95,7 +94,7 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
     },
   };
 
-  const addPlot = (group: PullRequestsVotesAnalysis, vote: ICodeReviewTableVotes, tooltipHeader: string) => {
+  const addPlot = (group: PullRequestsVotesAnalysis, vote: keyof IFetchedPullRequestVotes, tooltipHeader: string) => {
     plots[vote].xLabels.push(group.interval);
     plots[vote].yValues.push(group.pullRequestIds[vote].length);
     plots[vote].hoverText.push(selectedClass.getTooltipText(group.pullRequestIds[vote], tooltipHeader));
@@ -103,7 +102,11 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
 
   groupedLeastVoteAnalysis.forEach((group: PullRequestsVotesAnalysis) => {
     Object.keys(plots).forEach((vote) => {
-      addPlot(group, vote as ICodeReviewTableVotes, GRAPH_TOOLTIP_HEADER[vote as ICodeReviewTableVotes]);
+      addPlot(
+        group,
+        vote as keyof IFetchedPullRequestVotes,
+        GRAPH_TOOLTIP_HEADER[vote as keyof IFetchedPullRequestVotes],
+      );
     });
   });
 

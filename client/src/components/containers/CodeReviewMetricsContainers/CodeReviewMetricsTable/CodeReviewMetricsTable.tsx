@@ -1,10 +1,10 @@
 import { useState, memo } from "react";
 
-import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/services/api/api";
 
 import styles from "./CodeReviewMetricsTable.module.scss";
 import { columns, DEFAULT_SORT_STATE, DEFAULT_FILTER_STATE } from "./codeReviewMetricsTableConstants";
-import { ICodeReviewTableVotes, ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
+import { ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
 import { getFilteredPullRequests, getTotalComments, sortPullRequests } from "./codeReviewMetricsTableUtils";
 import { CustomTableCell } from "./CustomTableCell";
 import { CodeReviewMetricsTableRow } from "./TableChildren/CodeReviewMetricsTableRow";
@@ -30,7 +30,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
 
   const handleFilterChange = (
     columnName: ICodeReviewTableVotesFilterColumn,
-    vote: ICodeReviewTableVotes,
+    vote: keyof IFetchedPullRequestVotes,
     value: boolean,
   ) => {
     setFilters((previousState) => {

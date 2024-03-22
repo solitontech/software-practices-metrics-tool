@@ -1,6 +1,5 @@
-import { ICodeReviewTableVotes } from "../../../CodeReviewMetricsTable/codeReviewMetricsTableTypes";
-
+import { IFetchedPullRequestVotes } from "src/services/api/api";
 export interface PullRequestsVotesAnalysis {
   interval: string;
-  pullRequestIds: Record<ICodeReviewTableVotes, number[]>;
+  pullRequestIds: Record<keyof IFetchedPullRequestVotes, number[]>;
 }

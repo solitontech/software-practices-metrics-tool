@@ -1,5 +1,6 @@
+import { IFetchedPullRequestVotes } from "src/services/api/api";
+
 import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieChartTypes";
-import { IVotes } from "../../../CodeReviewMetricsTable/codeReviewMetricsTableTypes";
 import { VOTES } from "../../../CodeReviewMetricsTable/VotesFilter/votesFilterConstants";
 import {
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
@@ -28,7 +29,7 @@ export class LeastVotesGraphUtils {
     this.maxIds = this.maxLine * MAX_PULL_REQUEST_ID_ROWS;
   }
 
-  static getLeastVote = (votesHistory: IVotes): string => {
+  static getLeastVote = (votesHistory: IFetchedPullRequestVotes): string => {
     if (votesHistory.rejected) {
       return VOTES.REJECTED;
     }

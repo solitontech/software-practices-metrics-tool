@@ -1,21 +1,17 @@
+import { IFetchedPullRequestVotes } from "src/services/api/api";
+
 import styles from "./CodeReviewMetricsTable.module.scss";
-import {
-  ICodeReviewTableVotesFilterColumn,
-  ICodeReviewTableVotesFilter,
-  ICodeReviewTableVotes,
-  ICustomSortingIconProps,
-  ICodeReviewTableColumn,
-} from "./codeReviewMetricsTableTypes";
+import { ICodeReviewTableVotesFilterColumn, ICodeReviewTableColumn } from "./codeReviewMetricsTableTypes";
 
 interface TableCellProps {
   column: ICodeReviewTableColumn;
   handleSort: (columnName: string, order: string) => void;
   handleFilterChange: (
     columnName: ICodeReviewTableVotesFilterColumn,
-    vote: ICodeReviewTableVotes,
+    vote: keyof IFetchedPullRequestVotes,
     value: boolean,
   ) => void;
-  filters: Record<ICodeReviewTableVotesFilterColumn, ICodeReviewTableVotesFilter>;
+  filters: Record<ICodeReviewTableVotesFilterColumn, Record<keyof IFetchedPullRequestVotes, boolean>>;
   handleFilterReset: () => void;
 }
 
@@ -30,7 +26,7 @@ export const CustomTableCell = ({
   filters,
   handleFilterReset,
 }: TableCellProps) => {
-  const Action: ((props: ICustomSortingIconProps) => JSX.Element) | undefined = column.action;
+  const Action = column.action;
 
   return (
     <th
@@ -50,7 +46,7 @@ export const CustomTableCell = ({
             }}
             filter={filters[column.id as ICodeReviewTableVotesFilterColumn]}
             showNoVote={column.id === COLUMN_ID.VOTES}
-            handleFilter={(vote: ICodeReviewTableVotes, value: boolean) => {
+            handleFilter={(vote: keyof IFetchedPullRequestVotes, value: boolean) => {
               handleFilterChange(column.id as ICodeReviewTableVotesFilterColumn, vote, value);
             }}
             handleFilterReset={handleFilterReset}

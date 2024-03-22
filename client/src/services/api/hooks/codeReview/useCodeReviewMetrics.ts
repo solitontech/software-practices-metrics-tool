@@ -49,4 +49,9 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
 };
 
 /* interface exports for consumers */
-export type { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotesTimeline } from "./codeReviewTypes";
+export type {
+  IFetchedCodeReviewPullRequest,
+  IFetchedPullRequestVotesTimeline,
+  IFetchedPullRequestVotes,
+  IFetchedPullRequestReviewerComments,
+} from "./codeReviewTypes";
