@@ -1,11 +1,21 @@
 import styles from "./CodeReviewMetricsTable.module.scss";
-import { IColumn, FilterColumn, Filters, Vote, ICustomSortingIconProps } from "./interfaces";
+import {
+  ICodeReviewTableVotesFilterColumn,
+  ICodeReviewTableVotesFilter,
+  ICodeReviewTableVotes,
+  ICustomSortingIconProps,
+  ICodeReviewTableColumn,
+} from "./codeReviewMetricsTableTypes";
 
 interface TableCellProps {
-  column: IColumn;
+  column: ICodeReviewTableColumn;
   handleSort: (columnName: string, order: string) => void;
-  handleFilterChange: (columnName: FilterColumn, vote: Vote, value: boolean) => void;
-  filters: Filters;
+  handleFilterChange: (
+    columnName: ICodeReviewTableVotesFilterColumn,
+    vote: ICodeReviewTableVotes,
+    value: boolean,
+  ) => void;
+  filters: Record<ICodeReviewTableVotesFilterColumn, ICodeReviewTableVotesFilter>;
   handleFilterReset: () => void;
 }
 
@@ -38,10 +48,10 @@ export const CustomTableCell = ({
             handleSort={(order: string) => {
               handleSort(column.id, order);
             }}
-            filter={filters[column.id as FilterColumn]}
+            filter={filters[column.id as ICodeReviewTableVotesFilterColumn]}
             showNoVote={column.id === COLUMN_ID.VOTES}
-            handleFilter={(vote: Vote, value: boolean) => {
-              handleFilterChange(column.id as FilterColumn, vote, value);
+            handleFilter={(vote: ICodeReviewTableVotes, value: boolean) => {
+              handleFilterChange(column.id as ICodeReviewTableVotesFilterColumn, vote, value);
             }}
             handleFilterReset={handleFilterReset}
           />

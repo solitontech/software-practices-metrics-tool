@@ -5,26 +5,18 @@ import {
   SECONDS_IN_ONE_HOUR,
   MINUTES_IN_ONE_HOUR,
   FRACTION_TO_FIND_TIME,
+  sortMap,
 } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
-import { cacheWrapperForUnaryFunction } from "src/utils/utils";
+import { getHoursToDays, cacheWrapperForUnaryFunction } from "src/utils/utils";
 
-import { sortMap } from "./codeReviewMetricsTableConstants";
-import { FilterColumn, Filters, IReviewerComments, Vote } from "./interfaces";
+import {
+  ICodeReviewTableVotesFilterColumn,
+  ICodeReviewTableVotesFilter,
+  IReviewerComments,
+  ICodeReviewTableVotes,
+} from "./codeReviewMetricsTableTypes";
 import { NOT_AVAILABLE } from "../../../../constants/common.constants";
-
-const formatHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
-  if (hours >= HOURS_IN_A_DAY) {
-    const durationInMilliseconds = hours * MINUTES_IN_ONE_HOUR * MINUTES_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;
-
-    return durationFormat(durationInMilliseconds, {
-      units: ["d", "h"],
-      round: true,
-    });
-  }
-
-  return `${hours} hours`;
-});
 
 export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | null) => {
   if (!value) {
@@ -108,7 +100,7 @@ export const convertTimeToDays = (timeInSeconds: number, formattedTime: string):
   const hours = timeInSeconds / SECONDS_IN_ONE_HOUR;
 
   if (hours > HOURS_IN_A_DAY) {
-    return formatHoursToDays(hours);
+    return getHoursToDays(hours);
   }
 
   return formattedTime;
@@ -116,20 +108,20 @@ export const convertTimeToDays = (timeInSeconds: number, formattedTime: string):
 
 export const getFilteredPullRequests = (
   pullRequests: IFetchedCodeReviewPullRequest[],
-  filters: Filters,
+  filters: Record<ICodeReviewTableVotesFilterColumn, ICodeReviewTableVotesFilter>,
 ): IFetchedCodeReviewPullRequest[] => {
   const columnNameToFilter = Object.keys(filters).find((filterKey: string) => {
-    const filter = filters[filterKey as FilterColumn];
+    const filter = filters[filterKey as ICodeReviewTableVotesFilterColumn];
 
-    return Object.keys(filter).some((vote: string) => filter[vote as Vote]);
-  }) as FilterColumn | null;
+    return Object.keys(filter).some((vote: string) => filter[vote as ICodeReviewTableVotes]);
+  }) as ICodeReviewTableVotesFilterColumn | null;
 
   if (!columnNameToFilter) {
     return pullRequests;
   }
 
   const filter = filters[columnNameToFilter];
-  const votesToFilter = Object.keys(filter).filter((vote) => filter[vote as Vote]);
+  const votesToFilter = Object.keys(filter).filter((vote) => filter[vote as ICodeReviewTableVotes]);
 
   if (!votesToFilter.length) {
     return pullRequests;
@@ -143,7 +135,7 @@ export const getFilteredPullRequests = (
     }
 
     const selectedVotes = votesToFilter.filter((vote) => {
-      return votes[vote as Vote] > 0;
+      return votes[vote as ICodeReviewTableVotes] > 0;
     });
 
     return selectedVotes.length > 0;

@@ -1,6 +1,7 @@
+import durationFormat from "humanize-duration";
 import { DateTime } from "luxon";
 
-import { NOT_AVAILABLE } from "src/constants/constants";
+import { NOT_AVAILABLE, HOURS_IN_A_DAY, SECONDS_IN_ONE_HOUR, FRACTION_TO_FIND_TIME } from "src/constants/constants";
 
 import { cacheWrapperForUnaryFunction } from "./cacheUtil";
 
@@ -30,3 +31,16 @@ export function getFormattedDateText(date: Date, day?: TDay, year?: TYear) {
     year,
   });
 }
+
+export const getHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
+  if (hours >= HOURS_IN_A_DAY) {
+    const milliSeconds = hours * SECONDS_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;
+
+    return durationFormat(milliSeconds, {
+      units: ["d", "h"],
+      round: true,
+    });
+  }
+
+  return `${hours} hours`;
+});

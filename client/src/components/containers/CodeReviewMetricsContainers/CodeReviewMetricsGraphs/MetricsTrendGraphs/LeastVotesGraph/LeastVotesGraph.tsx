@@ -3,6 +3,7 @@ import { useState } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
+import { VOTES_LABEL, VOTES_COLOR } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
 import { LEAST_VOTE_CLASS } from "./leastVotesConstants";
@@ -17,7 +18,7 @@ import {
   IBarChartMode,
   IBarPlot,
 } from "../../../../../reusables/MetricsGraphs/BarChart/barChartTypes";
-import { Vote } from "../../../CodeReviewMetricsTable/interfaces";
+import { ICodeReviewTableVotes } from "../../../CodeReviewMetricsTable/codeReviewMetricsTableTypes";
 import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
 
@@ -27,27 +28,10 @@ interface Props {
   endDate: Date;
 }
 
-//TODO: Make below constants as a separate file
-const VOTE_LABEL = {
-  APPROVED: "Approved",
-  APPROVED_WITH_SUGGESTIONS: "Approved with suggestions",
-  WAIT_FOR_AUTHOR: "Wait for author",
-  REJECTED: "Rejected",
-  NO_VOTE: "No vote",
-};
-
-const VOTE_COLOR = {
-  APPROVED: "#008000",
-  APPROVED_WITH_SUGGESTIONS: "#90EE90",
-  WAIT_FOR_AUTHOR: "#FFA500",
-  REJECTED: "#FF0000",
-  NO_VOTE: "#d9d9d9",
-};
-
 const GRAPH_TITLE = "Pull Requests least votes trend";
 const Y_AXIS_NAME = "Pull Requests count";
 const INFO_TEXT = "The least favored vote in PR's history timeline will be considered as least vote";
-const GRAPH_TOOLTIP_HEADER: Record<Vote, string> = {
+const GRAPH_TOOLTIP_HEADER: Record<ICodeReviewTableVotes, string> = {
   rejected: "Pull Requests with rejected vote",
   approved: "Pull Requests with approved vote",
   waitForAuthor: "Pull Requests with wait for author vote",
@@ -73,45 +57,45 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
       ? Weekly.getWeeklyLeastVotes(pullRequests, startDate, endDate)
       : Monthly.getMonthlyLeastVotes(pullRequests, startDate, endDate);
 
-  const plots: Record<Vote, IBarPlot> = {
+  const plots: Record<ICodeReviewTableVotes, IBarPlot> = {
     rejected: {
-      plotName: VOTE_LABEL.REJECTED,
+      plotName: VOTES_LABEL.REJECTED,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.REJECTED,
+      color: VOTES_COLOR.REJECTED,
       hoverText: [],
     },
     waitForAuthor: {
-      plotName: VOTE_LABEL.WAIT_FOR_AUTHOR,
+      plotName: VOTES_LABEL.WAIT_FOR_AUTHOR,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.WAIT_FOR_AUTHOR,
+      color: VOTES_COLOR.WAIT_FOR_AUTHOR,
       hoverText: [],
     },
     approvedWithSuggestions: {
-      plotName: VOTE_LABEL.APPROVED_WITH_SUGGESTIONS,
+      plotName: VOTES_LABEL.APPROVED_WITH_SUGGESTIONS,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.APPROVED_WITH_SUGGESTIONS,
+      color: VOTES_COLOR.APPROVED_WITH_SUGGESTIONS,
       hoverText: [],
     },
     approved: {
-      plotName: VOTE_LABEL.APPROVED,
+      plotName: VOTES_LABEL.APPROVED,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.APPROVED,
+      color: VOTES_COLOR.APPROVED,
       hoverText: [],
     },
     noVote: {
-      plotName: VOTE_LABEL.NO_VOTE,
+      plotName: VOTES_LABEL.NO_VOTE,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.NO_VOTE,
+      color: VOTES_COLOR.NO_VOTE,
       hoverText: [],
     },
   };
 
-  const addPlot = (group: PullRequestsVotesAnalysis, vote: Vote, tooltipHeader: string) => {
+  const addPlot = (group: PullRequestsVotesAnalysis, vote: ICodeReviewTableVotes, tooltipHeader: string) => {
     plots[vote].xLabels.push(group.interval);
     plots[vote].yValues.push(group.pullRequestIds[vote].length);
     plots[vote].hoverText.push(selectedClass.getTooltipText(group.pullRequestIds[vote], tooltipHeader));
@@ -119,7 +103,7 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
 
   groupedLeastVoteAnalysis.forEach((group: PullRequestsVotesAnalysis) => {
     Object.keys(plots).forEach((vote) => {
-      addPlot(group, vote as Vote, GRAPH_TOOLTIP_HEADER[vote as Vote]);
+      addPlot(group, vote as ICodeReviewTableVotes, GRAPH_TOOLTIP_HEADER[vote as ICodeReviewTableVotes]);
     });
   });
 

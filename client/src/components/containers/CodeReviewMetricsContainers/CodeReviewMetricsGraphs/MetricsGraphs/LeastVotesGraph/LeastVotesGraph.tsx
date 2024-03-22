@@ -1,6 +1,7 @@
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
+import { VOTES_LABEL, VOTES_COLOR } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
 import styles from "./LeastVotesGraph.module.scss";
@@ -10,24 +11,6 @@ import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieCha
 interface Props {
   pullRequests: IFetchedCodeReviewPullRequest[];
 }
-
-//TODO: Make below constants common
-
-const VOTE_LABEL = {
-  APPROVED: "Approved",
-  APPROVED_WITH_SUGGESTIONS: "Approved with suggestions",
-  WAIT_FOR_AUTHOR: "Wait for author",
-  REJECTED: "Rejected",
-  NO_VOTE: "No vote",
-};
-
-const VOTE_COLOR = {
-  APPROVED: "#008000",
-  APPROVED_WITH_SUGGESTIONS: "#90EE90",
-  WAIT_FOR_AUTHOR: "#FFA500",
-  REJECTED: "#FF0000",
-  NO_VOTE: "#d9d9d9",
-};
 
 const GRAPH_TITLE = `Pull Requests least votes`;
 const GRAPH_HOVER_TEXT_TITLES: Record<string, string> = {
@@ -45,33 +28,33 @@ export const LeastVotesGraph = ({ pullRequests }: Props) => {
 
   const plots: Record<string, IPiePlot> = {
     rejected: {
-      label: VOTE_LABEL.REJECTED,
+      label: VOTES_LABEL.REJECTED,
       value: 0,
-      color: VOTE_COLOR.REJECTED,
+      color: VOTES_COLOR.REJECTED,
       hoverText: "",
     },
     waitForAuthor: {
-      label: VOTE_LABEL.WAIT_FOR_AUTHOR,
+      label: VOTES_LABEL.WAIT_FOR_AUTHOR,
       value: 0,
-      color: VOTE_COLOR.WAIT_FOR_AUTHOR,
+      color: VOTES_COLOR.WAIT_FOR_AUTHOR,
       hoverText: "",
     },
     approvedWithSuggestions: {
-      label: VOTE_LABEL.APPROVED_WITH_SUGGESTIONS,
+      label: VOTES_LABEL.APPROVED_WITH_SUGGESTIONS,
       value: 0,
-      color: VOTE_COLOR.APPROVED_WITH_SUGGESTIONS,
+      color: VOTES_COLOR.APPROVED_WITH_SUGGESTIONS,
       hoverText: "",
     },
     approved: {
-      label: VOTE_LABEL.APPROVED,
+      label: VOTES_LABEL.APPROVED,
       value: 0,
-      color: VOTE_COLOR.APPROVED,
+      color: VOTES_COLOR.APPROVED,
       hoverText: "",
     },
     noVote: {
-      label: VOTE_LABEL.NO_VOTE,
+      label: VOTES_LABEL.NO_VOTE,
       value: 0,
-      color: VOTE_COLOR.NO_VOTE,
+      color: VOTES_COLOR.NO_VOTE,
       hoverText: "",
     },
   };

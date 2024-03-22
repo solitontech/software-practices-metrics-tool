@@ -1,7 +1,4 @@
-import humanizeDuration from "humanize-duration";
-
-import { FRACTION_TO_FIND_TIME, HOURS_IN_A_DAY, MINUTES_IN_ONE_HOUR } from "src/constants/constants";
-import { cacheWrapperForUnaryFunction } from "src/utils/utils";
+import { getHoursToDays } from "src/utils/utils";
 
 import { MIN_THRESHOLD_CLASS, MAX_THRESHOLD_CLASS, INSIDE_THRESHOLD_CLASS } from "./codeReviewMetricsTilesConstants";
 
@@ -35,19 +32,6 @@ export class CodeReviewMetricsTilesUtil {
       return `(${recommendation})`;
     }
 
-    return `${this.#formatHoursToDays(time)} (${recommendation})`;
+    return `${getHoursToDays(time)} (${recommendation})`;
   }
-
-  static #formatHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
-    if (hours >= HOURS_IN_A_DAY) {
-      const durationInMilliseconds = hours * MINUTES_IN_ONE_HOUR * MINUTES_IN_ONE_HOUR * FRACTION_TO_FIND_TIME;
-
-      return humanizeDuration(durationInMilliseconds, {
-        units: ["d", "h"],
-        round: true,
-      });
-    }
-
-    return `${hours} hours`;
-  });
 }

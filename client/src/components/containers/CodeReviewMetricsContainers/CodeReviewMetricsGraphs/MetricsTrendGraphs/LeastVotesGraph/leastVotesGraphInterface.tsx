@@ -1,6 +1,6 @@
-import { Vote } from "../../../CodeReviewMetricsTable/interfaces";
+import { ICodeReviewTableVotes } from "../../../CodeReviewMetricsTable/codeReviewMetricsTableTypes";
 
 export interface PullRequestsVotesAnalysis {
   interval: string;
-  pullRequestIds: Record<Vote, number[]>;
+  pullRequestIds: Record<ICodeReviewTableVotes, number[]>;
 }

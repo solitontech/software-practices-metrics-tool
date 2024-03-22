@@ -1,8 +1,14 @@
-import { CustomSortingIcon } from "./CustomSortingIcon";
-import { IColumn } from "./interfaces";
+import { CodeReviewSortingIcon } from "src/components/components";
+import { VOTES, sortMap } from "src/constants/constants";
+
+import {
+  ICodeReviewTableColumn,
+  ICodeReviewTableVotesFilterColumn,
+  ICodeReviewTableVotesFilter,
+} from "./codeReviewMetricsTableTypes";
 import { CustomFilterIcon } from "./VotesFilter/CustomFilterIcon";
 
-export const columns: readonly IColumn[] = [
+export const columns: ICodeReviewTableColumn[] = [
   {
     id: "startDate",
     label: "Start Date",
@@ -38,7 +44,7 @@ export const columns: readonly IColumn[] = [
     label: "Comments",
     minWidth: 150,
     align: "left",
-    action: CustomSortingIcon,
+    action: CodeReviewSortingIcon,
   },
   {
     id: "votesHistory",
@@ -59,21 +65,21 @@ export const columns: readonly IColumn[] = [
     label: "First Review Response Time",
     align: "left",
     minWidth: 160,
-    action: CustomSortingIcon,
+    action: CodeReviewSortingIcon,
   },
   {
     id: "approvalTimeInSeconds",
     label: "Approval Time",
     align: "left",
     minWidth: 135,
-    action: CustomSortingIcon,
+    action: CodeReviewSortingIcon,
   },
   {
     id: "mergeTimeInSeconds",
     label: "Merge Time",
     align: "left",
     minWidth: 120,
-    action: CustomSortingIcon,
+    action: CodeReviewSortingIcon,
   },
   {
     id: "status",
@@ -83,8 +89,22 @@ export const columns: readonly IColumn[] = [
   },
 ];
 
-export const sortMap = {
-  asc: "asc",
-  desc: "desc",
-  noSort: " noSort",
+export const DEFAULT_SORT_STATE = {
+  comments: sortMap.noSort,
+  firstReviewResponseTimeInSeconds: sortMap.noSort,
+  approvalTimeInSeconds: sortMap.noSort,
+  mergeTimeInSeconds: sortMap.noSort,
+};
+
+const VOTES_FILTER_DEFAULT_STATE: ICodeReviewTableVotesFilter = {
+  [VOTES.APPROVED]: false,
+  [VOTES.APPROVED_WITH_SUGGESTIONS]: false,
+  [VOTES.WAIT_FOR_AUTHOR]: false,
+  [VOTES.REJECTED]: false,
+  [VOTES.NO_VOTE]: false,
+};
+
+export const DEFAULT_FILTER_STATE: Record<ICodeReviewTableVotesFilterColumn, ICodeReviewTableVotesFilter> = {
+  votesHistory: VOTES_FILTER_DEFAULT_STATE,
+  votes: VOTES_FILTER_DEFAULT_STATE,
 };

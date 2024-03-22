@@ -1,5 +1,5 @@
 import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieChartTypes";
-import { IVotes } from "../../../CodeReviewMetricsTable/interfaces";
+import { IVotes } from "../../../CodeReviewMetricsTable/codeReviewMetricsTableTypes";
 import { VOTES } from "../../../CodeReviewMetricsTable/VotesFilter/votesFilterConstants";
 import {
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,

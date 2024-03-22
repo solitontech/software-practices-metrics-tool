@@ -12,7 +12,7 @@ import rejectedSvg from "../../../../../assets/images/rejected.svg";
 import waitForAuthorSvg from "../../../../../assets/images/waitForAuthor.svg";
 import { CodeReviewTimeLineTable } from "../../CodeReviewTimeLineTable/CodeReviewTimeLineTable";
 import styles from "../CodeReviewMetricsTable.module.scss";
-import { ITimeLine } from "../interfaces";
+import { ITimeLine } from "../codeReviewMetricsTableTypes";
 
 interface Props {
   className: string;

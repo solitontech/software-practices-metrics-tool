@@ -120,12 +120,6 @@
   font-weight: $semi-bold-font-weight;
 }
 
-.buttonColor {
-  color: $app-ternary-text-color;
-  cursor: pointer;
-  font-size: $icon-size-xl;
-}
-
 .timelineIconColor {
   color: $app-quaternary-text-color;
   cursor: pointer;
@@ -140,14 +134,6 @@
   align-items: center;
   display: flex;
   gap: 4px;
-}
-
-.sortingIcon {
-  display: flex;
-  flex-direction: column;
-  height: 50px;
-  margin-top: $spacing-sm;
-  width: 40px;
 }
 
 .time {

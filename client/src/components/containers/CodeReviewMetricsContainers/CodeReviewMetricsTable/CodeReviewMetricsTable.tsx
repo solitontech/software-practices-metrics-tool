@@ -3,49 +3,39 @@ import { useState, memo } from "react";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
 import styles from "./CodeReviewMetricsTable.module.scss";
-import { columns, sortMap } from "./codeReviewMetricsTableConstants";
+import { columns, DEFAULT_SORT_STATE, DEFAULT_FILTER_STATE } from "./codeReviewMetricsTableConstants";
+import { ICodeReviewTableVotes, ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
 import { getFilteredPullRequests, getTotalComments, sortPullRequests } from "./codeReviewMetricsTableUtils";
 import { CustomTableCell } from "./CustomTableCell";
-import { Vote, IColumn, Filters, FilterColumn } from "./interfaces";
 import { CodeReviewMetricsTableRow } from "./TableChildren/CodeReviewMetricsTableRow";
-import { VOTES_FILTER_DEFAULT_STATE } from "./VotesFilter/votesFilterConstants";
-interface Props {
+
+interface ICodeReviewMetricsTableProps {
   pullRequests: IFetchedCodeReviewPullRequest[];
 }
 
-const SORT_DEFAULT_STATE = {
-  comments: sortMap.noSort,
-  firstReviewResponseTimeInSeconds: sortMap.noSort,
-  approvalTimeInSeconds: sortMap.noSort,
-  mergeTimeInSeconds: sortMap.noSort,
-};
-
-const FILTER_DEFAULT_STATE: Filters = {
-  votesHistory: VOTES_FILTER_DEFAULT_STATE,
-  votes: VOTES_FILTER_DEFAULT_STATE,
-};
-
-export const CodeReviewMetricsTable = memo(({ pullRequests }: Props) => {
-  const [filters, setFilter] = useState<Filters>(FILTER_DEFAULT_STATE);
-  const [sort, setSort] = useState<Record<string, string>>(SORT_DEFAULT_STATE);
+export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetricsTableProps) => {
+  const [sort, setSort] = useState(DEFAULT_SORT_STATE);
+  const [filters, setFilters] = useState(DEFAULT_FILTER_STATE);
 
   const sortedPullRequests = sortPullRequests(pullRequests, sort);
-
   const filteredPullRequests = getFilteredPullRequests(sortedPullRequests, filters);
-
   const totalComments = getTotalComments(filteredPullRequests);
 
   const handleSort = (columnName: string, order: string) => {
     setSort({
-      ...SORT_DEFAULT_STATE,
+      ...DEFAULT_SORT_STATE,
       [columnName]: order,
     });
   };
 
-  const handleFilterChange = (columnName: FilterColumn, vote: Vote, value: boolean) => {
-    setFilter((previousState) => {
+  const handleFilterChange = (
+    columnName: ICodeReviewTableVotesFilterColumn,
+    vote: ICodeReviewTableVotes,
+    value: boolean,
+  ) => {
+    setFilters((previousState) => {
       return {
-        ...FILTER_DEFAULT_STATE,
+        ...DEFAULT_FILTER_STATE,
         [columnName]: {
           ...previousState[columnName],
           [vote]: value,
@@ -55,7 +45,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: Props) => {
   };
 
   const handleFilterReset = () => {
-    setFilter(FILTER_DEFAULT_STATE);
+    setFilters(DEFAULT_FILTER_STATE);
   };
 
   return (
@@ -69,7 +59,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: Props) => {
         <table className={styles.table}>
           <thead className={styles.tableHead}>
             <tr>
-              {columns.map((column: IColumn) => (
+              {columns.map((column) => (
                 <CustomTableCell
                   filters={filters}
                   key={column.id}
