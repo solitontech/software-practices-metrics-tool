@@ -1,13 +1,13 @@
-import { useState, memo } from "react";
+import React, { useState, memo } from "react";
 
 import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/services/api/api";
 
 import styles from "./CodeReviewMetricsTable.module.scss";
 import { columns, DEFAULT_SORT_STATE, DEFAULT_FILTER_STATE } from "./codeReviewMetricsTableConstants";
 import { ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
-import { getFilteredPullRequests, getTotalComments, sortPullRequests } from "./codeReviewMetricsTableUtils";
-import { CustomTableCell } from "./CustomTableCell";
-import { CodeReviewMetricsTableRow } from "./TableChildren/CodeReviewMetricsTableRow";
+import { CodeReviewMetricsTableUtil } from "./codeReviewMetricsTableUtils";
+import { CodeReviewTableHeader } from "./CodeReviewTableHeader/CodeReviewTableHeader";
+import { CodeReviewTableRow } from "./CodeReviewTableRow/CodeReviewTableRow";
 
 interface ICodeReviewMetricsTableProps {
   pullRequests: IFetchedCodeReviewPullRequest[];
@@ -17,9 +17,9 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
   const [sort, setSort] = useState(DEFAULT_SORT_STATE);
   const [filters, setFilters] = useState(DEFAULT_FILTER_STATE);
 
-  const sortedPullRequests = sortPullRequests(pullRequests, sort);
-  const filteredPullRequests = getFilteredPullRequests(sortedPullRequests, filters);
-  const totalComments = getTotalComments(filteredPullRequests);
+  const sortedPullRequests = CodeReviewMetricsTableUtil.sortPullRequests(pullRequests, sort);
+  const filteredPullRequests = CodeReviewMetricsTableUtil.getFilteredPullRequests(sortedPullRequests, filters);
+  const totalComments = CodeReviewMetricsTableUtil.getTotalComments(filteredPullRequests);
 
   const handleSort = (columnName: string, order: string) => {
     setSort({
@@ -30,7 +30,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
 
   const handleFilterChange = (
     columnName: ICodeReviewTableVotesFilterColumn,
-    vote: keyof IFetchedPullRequestVotes,
+    voteKey: keyof IFetchedPullRequestVotes,
     value: boolean,
   ) => {
     setFilters((previousState) => {
@@ -38,7 +38,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
         ...DEFAULT_FILTER_STATE,
         [columnName]: {
           ...previousState[columnName],
-          [vote]: value,
+          [voteKey]: value,
         },
       };
     });
@@ -49,18 +49,16 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
   };
 
   return (
-    <>
-      <div className={styles.header}>
-        <p className={styles.totalPRs}>
-          Total PR&apos;s: {filteredPullRequests.length} | Total Comments: {totalComments}
-        </p>
-      </div>
-      <div className={styles.paper}>
+    <React.Fragment>
+      <h4 className={styles.header}>
+        Total PR&apos;s: {filteredPullRequests.length} | Total Comments: {totalComments}
+      </h4>
+      <div className={styles.tableContainer}>
         <table className={styles.table}>
           <thead className={styles.tableHead}>
             <tr>
               {columns.map((column) => (
-                <CustomTableCell
+                <CodeReviewTableHeader
                   filters={filters}
                   key={column.id}
                   column={column}
@@ -74,7 +72,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
           <tbody className={styles.tableBody}>
             {filteredPullRequests.length ? (
               filteredPullRequests.map((row, index) => {
-                return <CodeReviewMetricsTableRow key={row.id} index={index} row={row} />;
+                return <CodeReviewTableRow key={row.id} index={index} row={row} />;
               })
             ) : (
               <tr>
@@ -86,7 +84,7 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
           </tbody>
         </table>
       </div>
-    </>
+    </React.Fragment>
   );
 });
 

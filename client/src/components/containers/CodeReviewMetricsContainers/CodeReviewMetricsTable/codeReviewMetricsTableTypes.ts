@@ -1,6 +1,6 @@
 import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/services/api/api";
 
-interface ICustomSortingIconProps {
+interface ICodeReviewTableAction {
   filter: Record<keyof IFetchedPullRequestVotes, boolean>;
   showNoVote: boolean;
   handleSort: (order: string) => void;
@@ -13,7 +13,7 @@ export interface ICodeReviewTableColumn {
   label: string;
   align: "left" | "right" | "center";
   minWidth: number;
-  action?: (props: ICustomSortingIconProps) => JSX.Element;
+  action?: (props: ICodeReviewTableAction) => JSX.Element;
 }
 
 export type ICodeReviewTableVotesFilterColumn = "votes" | "votesHistory";

@@ -5,6 +5,29 @@ import { IFetchedPullRequestVotes } from "src/services/api/api";
 import { ICodeReviewTableColumn, ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
 import { CustomFilterIcon } from "./VotesFilter/CustomFilterIcon";
 
+export const DEFAULT_SORT_STATE = {
+  comments: sortMap.noSort,
+  firstReviewResponseTimeInSeconds: sortMap.noSort,
+  approvalTimeInSeconds: sortMap.noSort,
+  mergeTimeInSeconds: sortMap.noSort,
+};
+
+const VOTES_FILTER_DEFAULT_STATE: Record<keyof IFetchedPullRequestVotes, boolean> = {
+  [VOTES.APPROVED]: false,
+  [VOTES.APPROVED_WITH_SUGGESTIONS]: false,
+  [VOTES.WAIT_FOR_AUTHOR]: false,
+  [VOTES.REJECTED]: false,
+  [VOTES.NO_VOTE]: false,
+};
+
+export const DEFAULT_FILTER_STATE: Record<
+  ICodeReviewTableVotesFilterColumn,
+  Record<keyof IFetchedPullRequestVotes, boolean>
+> = {
+  votesHistory: VOTES_FILTER_DEFAULT_STATE,
+  votes: VOTES_FILTER_DEFAULT_STATE,
+};
+
 export const columns: ICodeReviewTableColumn[] = [
   {
     id: "creationDate",
@@ -85,26 +108,3 @@ export const columns: ICodeReviewTableColumn[] = [
     minWidth: 120,
   },
 ];
-
-export const DEFAULT_SORT_STATE = {
-  comments: sortMap.noSort,
-  firstReviewResponseTimeInSeconds: sortMap.noSort,
-  approvalTimeInSeconds: sortMap.noSort,
-  mergeTimeInSeconds: sortMap.noSort,
-};
-
-const VOTES_FILTER_DEFAULT_STATE: Record<keyof IFetchedPullRequestVotes, boolean> = {
-  [VOTES.APPROVED]: false,
-  [VOTES.APPROVED_WITH_SUGGESTIONS]: false,
-  [VOTES.WAIT_FOR_AUTHOR]: false,
-  [VOTES.REJECTED]: false,
-  [VOTES.NO_VOTE]: false,
-};
-
-export const DEFAULT_FILTER_STATE: Record<
-  ICodeReviewTableVotesFilterColumn,
-  Record<keyof IFetchedPullRequestVotes, boolean>
-> = {
-  votesHistory: VOTES_FILTER_DEFAULT_STATE,
-  votes: VOTES_FILTER_DEFAULT_STATE,
-};

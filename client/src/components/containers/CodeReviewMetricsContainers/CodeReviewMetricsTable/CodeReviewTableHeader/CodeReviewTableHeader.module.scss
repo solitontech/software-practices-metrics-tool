@@ -1,0 +1,13 @@
+@import "src/styles/index.scss";
+
+.tableCell {
+  border-bottom: 1px solid $app-secondary-border-color;
+  font-size: $font-size-xmd;
+  font-weight: $medium-font-weight;
+  padding: $spacing-lg;
+}
+
+.tableHeader {
+  @include flex-align-center;
+  gap: $spacing-xs;
+}
