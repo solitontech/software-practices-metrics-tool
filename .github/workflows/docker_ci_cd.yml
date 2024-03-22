@@ -1,0 +1,73 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      working-directory: server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.11.1"
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ${{ env.working-directory }}
+
+      - name: Run build script
+        run: npm run build:docker-package
+        working-directory: ${{ env.working-directory }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: release-to-production
+          path: ./${{ env.working-directory }}/release-to-production.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4.1.4
+        with:
+          name: release-to-production
+
+      - name: Dotenv action
+        id: dotenv
+        uses: falti/dotenv-action@v1.1
+        with:
+          path: server/src/configs/.env
+
+      - name: Rename artifact
+        run: mv release-to-production.zip softwarePracticesMetricsTool-V${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+
+      - name: Delete old release
+        uses: cb80/delrel@latest
+        with:
+          tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
+          name: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
+          artifacts: ./softwarePracticesMetricsTool-V${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
