@@ -17,7 +17,8 @@
     "prepare": "cd .. && husky install server/.husky",
     "lint-staged": "lint-staged",
     "build:client": "node ./src/scripts/build-client.js",
-    "build:docker": "node ./src/scripts/build-docker.js"
+    "build:docker": "node ./src/scripts/build-docker.js",
+    "build:docker-package": "node ./src/scripts/docker-package.js"
   },
   "lint-staged": {
     "*.{js,json}": [
@@ -49,6 +50,7 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
+    "archiver": "^7.0.1",
     "chalk": "^5.3.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
