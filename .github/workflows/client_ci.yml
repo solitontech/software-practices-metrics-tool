@@ -1,13 +1,14 @@
-name: Run Client CI
+name: Client CI
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
-  client-test:
+  client-build-and-test:
     runs-on: ubuntu-latest
 
     env:
