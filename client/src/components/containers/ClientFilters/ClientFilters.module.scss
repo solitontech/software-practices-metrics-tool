@@ -13,6 +13,7 @@
 .filterContainer {
   background-color: $app-ternary-background-color;
   background-color: $app-primary-background-color;
+  border: 1px solid $app-secondary-border-color;
   max-height: 85vh;
   margin-top: $spacing-sm;
   overflow-y: scroll;
