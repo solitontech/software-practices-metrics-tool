@@ -17,7 +17,7 @@ export const CodeReviewTableHeader = ({
     <th
       key={column.id}
       className={styles.tableCell}
-      style={{ minWidth: column.minWidth, textAlign: column.align }}
+      style={{ minWidth: column.width, textAlign: column.align }}
       data-testid={`${column.id}-table-header`}
     >
       <div className={styles.tableHeader}>

@@ -71,8 +71,8 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
           </thead>
           <tbody className={styles.tableBody}>
             {filteredPullRequests.length ? (
-              filteredPullRequests.map((row, index) => {
-                return <CodeReviewTableRow key={row.id} index={index} row={row} />;
+              filteredPullRequests.map((row) => {
+                return <CodeReviewTableRow key={row.id} row={row} />;
               })
             ) : (
               <tr>

@@ -12,7 +12,7 @@ export interface ICodeReviewTableColumn {
   id: keyof IFetchedCodeReviewPullRequest;
   label: string;
   align: "left" | "right" | "center";
-  minWidth: number;
+  width: number;
   action?: (props: ICodeReviewTableAction) => JSX.Element;
 }
 

@@ -8,33 +8,22 @@
 }
 
 .tableContainer {
-  border: 1px solid $app-secondary-border-color;
-  border-radius: $app-primary-border-radius;
+  @include table-container;
   max-height: 95%;
-  overflow: scroll;
 }
 
 .table {
-  border-spacing: 0;
-  width: 100%;
+  @include table;
 }
 
 .tableHead {
-  background-color: $app-secondary-text-color;
-  color: $app-primary-text-color;
-  font-weight: $extra-bold-font-weight;
-  position: sticky;
-  top: 0;
+  @include table-head;
 }
 
 .tableBody {
-  overflow-y: scroll;
+  @include table-body;
 }
 
 .noDataMessage {
-  border-bottom: 1px solid $app-secondary-border-color;
-  color: $app-ternary-text-color;
-  font-size: $font-size-mlg;
-  height: 75px;
-  text-align: center;
+  @include table-no-data-message;
 }

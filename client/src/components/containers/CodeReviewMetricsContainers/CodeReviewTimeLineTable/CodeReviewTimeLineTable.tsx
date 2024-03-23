@@ -13,24 +13,24 @@ interface ICodeReviewTimeLineTableProps {
 //TODO: fix sticky header issue & CustomVote alignment
 export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTableProps) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.tableContainer}>
       <table className={styles.table} aria-label="sticky table">
         <thead className={styles.tableHead}>
           <tr>
             {columns.map((column) => (
-              <td
+              <th
                 key={column.id}
                 style={{
                   width: column.width,
                 }}
-                className={styles.tableCell}
+                className={styles.tableHeaderCell}
               >
                 {column.label}
-              </td>
+              </th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tableBody}>
           {timeLine.length ? (
             timeLine.map((row) => {
               return (
@@ -47,7 +47,7 @@ export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTablePr
             })
           ) : (
             <tr>
-              <td colSpan={columns.length} className={clsx(styles.noDataMessage, styles.tableCell)}>
+              <td colSpan={columns.length} className={clsx(styles.noDataMessage)}>
                 No data available
               </td>
             </tr>
