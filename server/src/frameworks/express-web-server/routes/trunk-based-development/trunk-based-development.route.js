@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { TrunkBasedDevelopmentController } from '##/controllers/index.js';
-import { catchAsync } from '##/utils/index.js';
+import { TrunkBasedDevelopmentController } from '##/controllers/controllers.js';
+import { catchAsync } from '##/utils/utils.js';
 
 const router = express.Router();
 

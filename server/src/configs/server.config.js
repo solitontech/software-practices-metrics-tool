@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 
-import { EnvValidation, ServerConfigValidation } from '../validations/index.js';
-import { NODE_ENVIRONMENT_MODE } from '../constants/index.js';
+import { EnvValidation, ServerConfigValidation } from '../validations/validations.js';
+import { NODE_ENVIRONMENT_MODE } from '../constants/constants.js';
 
 export class ServerConfiguration {
   static #clientFilters;
