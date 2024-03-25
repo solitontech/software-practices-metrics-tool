@@ -16,19 +16,19 @@ export const tableColumns: ITrunkBasedPullRequestsTableColumn[] = [
   {
     id: "name",
     label: "Branch Name",
-    width: 430,
+    width: 300,
     align: "left",
   },
   {
     id: "title",
     label: "Pull Request Title",
-    width: 430,
+    width: 300,
     align: "left",
   },
   {
     id: "status",
     label: "Status",
-    width: 200,
+    width: 120,
     align: "left",
   },
 ];
