@@ -9,6 +9,8 @@
     "prepare": "cd .. && husky install",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "eslint . --ext ts,tsx --fix",
+    "lint:css": "stylelint **/*.scss",
+    "lint:css-fix": "stylelint **/*.scss --fix",
     "format": "prettier --write .",
     "format-check": "prettier . --check",
     "preview": "vite preview",
@@ -19,6 +21,10 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix",
       "prettier --write --ignore-unknown"
     ]
   },
@@ -75,6 +81,10 @@
     "msw": "^2.2.3",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
+    "stylelint": "^16.3.0",
+    "stylelint-config-css-modules": "^4.4.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-scss": "^6.2.1",
     "typescript": "^5.4.2",
     "vite": "^4.4.5",
     "vite-tsconfig-paths": "^4.3.1",
