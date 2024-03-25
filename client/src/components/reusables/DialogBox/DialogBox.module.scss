@@ -5,11 +5,11 @@
 }
 
 .titleContainer {
+  @include flex-justify-space-between;
+
   color: $app-ternary-text-color;
-  display: flex;
   font-size: $font-size-lg;
   font-weight: $semi-bold-font-weight;
-  justify-content: space-between;
 }
 
 .closeButton {
