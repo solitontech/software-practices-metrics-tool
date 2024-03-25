@@ -1,6 +1,6 @@
 import { AzureDevops } from './azure-devops/azure-devops.js';
 
-import { logError } from '##/utils/logger.util.js';
+import { logError } from '##/utils/utils.js';
 import { ServerConfiguration } from '##/configs/server.config.js';
 
 export class VersionControl {

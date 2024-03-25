@@ -1,5 +1,5 @@
 import { ServerConfiguration } from '##/configs/server.config.js';
-import { STATUS_CODE } from '##/constants/index.js';
+import { STATUS_CODE } from '##/constants/constants.js';
 
 export class ClientFiltersController {
   static async getClientFilters(req, res) {

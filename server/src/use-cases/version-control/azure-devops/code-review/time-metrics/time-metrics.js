@@ -1,4 +1,4 @@
-import { PULL_REQUEST_STATUS, VOTE } from '../constants/index.js';
+import { PULL_REQUEST_STATUS, VOTE } from '../constants/constants.js';
 
 export class TimeMetrics {
   static getFirstReviewResponseTime({ creationDate, votesHistoryTimeline }) {

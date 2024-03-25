@@ -1,4 +1,4 @@
-import { VOTE } from '../constants/index.js';
+import { VOTE } from '../constants/constants.js';
 
 export class VoteMetrics {
   static getPullRequestVotes(reviewers) {

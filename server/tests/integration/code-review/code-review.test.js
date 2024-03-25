@@ -3,11 +3,11 @@ import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '##/frameworks/express-web-server/app.js';
 import { AzureDevopsApi } from '##/use-cases/version-control/azure-devops/apis/azure-devops.api.js';
-import { AppError } from '##/utils/index.js';
+import { AppError } from '##/utils/utils.js';
 
 import { runDatePaginationValidationTests } from '../common-tests/date-pagination-tests.js';
 import { AZURE_PULL_REQUESTS_RESPONSE, SERVER_PULL_REQUESTS_RESPONSE } from './code-review.mock.js';
-import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/index.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/constants.js';
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 

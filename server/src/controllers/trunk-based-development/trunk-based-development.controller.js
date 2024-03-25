@@ -1,5 +1,5 @@
-import { DateValidation, PaginationValidation } from '##/validations/index.js';
-import { STATUS_CODE } from '##/constants/index.js';
+import { DateValidation, PaginationValidation } from '##/validations/validations.js';
+import { STATUS_CODE } from '##/constants/constants.js';
 import { VersionControl } from '##/use-cases/version-control/version-control.js';
 
 export class TrunkBasedDevelopmentController {

@@ -4,7 +4,7 @@ import { jest, describe, it, expect, afterEach } from '@jest/globals';
 import { AzureDevopsApi } from '##/use-cases/version-control/azure-devops/apis/azure-devops.api.js';
 import { AppError } from '##/utils/app-error.util.js';
 import { ServerConfiguration } from '##/configs/server.config.js';
-import { STATUS_CODE } from '##/constants/index.js';
+import { STATUS_CODE } from '##/constants/constants.js';
 
 import {
   ALL_BRANCHES_AZURE_RESPONSE,
@@ -16,7 +16,7 @@ import {
   PULL_REQUESTS_WITH_THREADS_FILTERED,
   CLIENT_FILTER_SQUADS,
   PULL_REQUESTS_THREADS,
-} from './tests/mocks/index.js';
+} from './tests/mocks/mocks.js';
 
 import {
   PAGE,
@@ -25,7 +25,7 @@ import {
   END_DATE,
   AXIOS_REQUEST_BODY_PARAMETERS,
   BASE_URL,
-} from './tests/constants/index.js';
+} from './tests/constants/constants.js';
 
 jest.mock('axios');
 

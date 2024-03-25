@@ -2,9 +2,9 @@ import request from 'supertest';
 import { jest, describe, it, expect } from '@jest/globals';
 
 import app from '##/frameworks/express-web-server/app.js';
-import { AppError } from '##/utils/index.js';
+import { AppError } from '##/utils/utils.js';
 import { AzureDevopsApi } from '##/use-cases/version-control/azure-devops/apis/azure-devops.api.js';
-import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/index.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/constants.js';
 
 import {
   AZURE_TRUNK_BRANCH_COMMITS_RESPONSE,
