@@ -17,8 +17,7 @@
     "prepare": "cd .. && husky install server/.husky",
     "lint-staged": "lint-staged",
     "build:client": "node ./src/scripts/build-client.js",
-    "build:docker": "node ./src/scripts/build-docker.js",
-    "build:docker-package": "node ./src/scripts/docker-package.js"
+    "build:docker": "node ./src/scripts/build-docker.js"
   },
   "lint-staged": {
     "*.{js,json}": [

@@ -1,5 +1,6 @@
 import fs from 'fs';
 import chalk from 'chalk';
+import archiver from 'archiver';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
@@ -10,6 +11,7 @@ class BuildDocker {
   static #dockerImageName;
 
   static #currentDir = dirname(fileURLToPath(import.meta.url));
+  static #releaseToProductionDirectory = path.join(this.#currentDir, '/../../release-to-production');
 
   static {
     const imageVersion = ServerConfiguration.environmentVariables.productionDockerImageVersion;
@@ -20,6 +22,7 @@ class BuildDocker {
   static startBuild() {
     this.#buildImageAsTarFile();
     this.#changeImageVersionInComposeFile();
+    this.#zipReleaseFolder();
   }
 
   static #buildImageAsTarFile() {
@@ -58,7 +61,7 @@ class BuildDocker {
     console.log(chalk.grey('\nCreating tar file from builded docker image...'));
 
     const [tarFileName] = this.#dockerImageName.split(':');
-    const outputPath = path.join(this.#currentDir, '/../../release-to-production', `${tarFileName}.tar`);
+    const outputPath = path.join(this.#releaseToProductionDirectory, `${tarFileName}.tar`);
     const command = `docker save -o ${outputPath} ${this.#dockerImageName}`;
 
     execSync(command);
@@ -67,7 +70,7 @@ class BuildDocker {
   }
 
   static #changeImageVersionInComposeFile() {
-    const filePath = path.join(this.#currentDir, '/../../release-to-production/compose.yaml');
+    const filePath = path.join(this.#releaseToProductionDirectory, '/compose.yaml');
     const composeFileContent = fs.readFileSync(filePath, 'utf8');
 
     // RegExp pattern to match the image in compose file
@@ -88,6 +91,30 @@ class BuildDocker {
     fs.writeFileSync(filePath, modifiedData, 'utf8');
 
     console.log(chalk.green('Compose.yaml file has been updated with the new image tag.'));
+  }
+
+  static #zipReleaseFolder() {
+    console.log('\nZipping release-to-production folder...');
+
+    const outputPath = path.join(this.#currentDir, '/../../release-to-production.zip');
+    const output = fs.createWriteStream(outputPath);
+    const compressionLevel = 9;
+
+    const archive = archiver('zip', {
+      zlib: { level: compressionLevel },
+    });
+
+    output.on('close', function () {
+      console.log('\nZipped release-to-production folder successfully.');
+    });
+
+    archive.on('error', function (err) {
+      throw err;
+    });
+
+    archive.pipe(output);
+    archive.directory(path.join(this.#releaseToProductionDirectory), false);
+    archive.finalize();
   }
 }
 
