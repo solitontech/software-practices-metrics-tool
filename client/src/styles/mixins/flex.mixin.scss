@@ -18,6 +18,11 @@
   justify-content: center;
 }
 
+@mixin flex-justify-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
 @mixin flex-row-center {
   @include flex-row;
   @include flex-align-center;
