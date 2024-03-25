@@ -38,16 +38,16 @@ export const TrunkBasedNamingConventionTable = ({
         <p className={styles.totalCount}>Total branches: {filteredBranches.length}</p>
       </div>
 
-      <div className={styles.container}>
+      <div className={styles.tableContainer}>
         <table className={styles.table}>
           <thead className={styles.tableHead}>
             <tr>
-              <td className={styles.tableCell} align="left">
+              <th className={styles.tableHeaderCell} align="left">
                 Branch Name
-              </td>
+              </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={styles.tableBody}>
             {filteredBranches.length ? (
               filteredBranches.map((row) => {
                 return (

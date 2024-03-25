@@ -1,4 +1,4 @@
-interface IFetchedPullRequestReviewerComments {
+export interface IFetchedPullRequestReviewerComments {
   reviewer: string;
   comments: number;
 }
@@ -9,7 +9,7 @@ interface IFetchedPullRequestComments {
   numberOfMajorComments: number;
 }
 
-interface IFetchedPullRequestVotes {
+export interface IFetchedPullRequestVotes {
   approved: number;
   approvedWithSuggestions: number;
   waitForAuthor: number;

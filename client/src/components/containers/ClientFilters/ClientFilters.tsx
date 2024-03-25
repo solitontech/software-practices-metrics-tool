@@ -11,7 +11,7 @@ import {
 
 import styles from "./ClientFilters.module.scss";
 
-interface ICategory {
+interface IClientFiltersCategory {
   label: string;
   key: IContextClientFilterSquadMemberKey;
   members: IContextClientFilterSquadMembers;
@@ -61,7 +61,7 @@ const MemberFilters = () => {
   return (
     <div className={styles.filterContainer}>
       {filters.map(({ squadName, developers, reviewers }, squadIdx) => {
-        const category: ICategory[] = [
+        const category: IClientFiltersCategory[] = [
           { label: "Authors", key: "developers", members: developers },
           { label: "Reviewers", key: "reviewers", members: reviewers },
         ];
@@ -107,7 +107,7 @@ const MemberFilters = () => {
 
 export const ClientFilters = () => {
   return (
-    <FilterIcon style={styles.filterIcon}>
+    <FilterIcon className={styles.filterIcon}>
       <div className={styles.clientFilterContainer}>
         <MemberFilters />
       </div>

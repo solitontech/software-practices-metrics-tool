@@ -1,7 +1,6 @@
-import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/services/api/api";
 
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
-import { Vote } from "../../../CodeReviewMetricsTable/interfaces";
 import {
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
@@ -32,7 +31,9 @@ export class Graph {
       return intervals;
     }
 
-    const pullRequestLeastVote = LeastVotesGraphUtils.getLeastVote(pullRequest.votesHistory) as Vote;
+    const pullRequestLeastVote = LeastVotesGraphUtils.getLeastVote(
+      pullRequest.votesHistory,
+    ) as keyof IFetchedPullRequestVotes;
 
     const interval = intervals[index];
     const votes = interval.pullRequestIds[pullRequestLeastVote];

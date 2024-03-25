@@ -1,260 +1,29 @@
 @import "src/styles/index.scss";
 
 .header {
-  @include flex-align-center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.noDataMessage {
-  border-bottom: 1px solid $app-secondary-border-color;
-  color: $app-ternary-text-color;
-  font-size: $font-size-mlg;
-  height: 75px;
-  text-align: center;
-}
-
-.text {
-  border-bottom: 1px solid $app-secondary-border-color;
   color: $app-ternary-text-color;
   font-size: $font-size-xmd;
-  padding: $spacing-lg;
-}
-
-.pullRequestURL {
-  @include flex-align-center;
-  color: $app-ternary-text-color;
-  cursor: pointer;
-  font-weight: $medium-font-weight;
-  text-decoration: none;
-
-  &:hover {
-    color: $app-primary-anchor-color;
-    text-decoration: underline;
-  }
-}
-
-.linkIcon {
-  color: $app-quaternary-text-color;
-  font-size: $icon-size-md;
-  margin-left: $spacing-xs;
-  vertical-align: middle;
-}
-
-.navLink {
-  @include ellipsis;
-  font-size: $font-size-xmd;
-}
-
-.dialogIcon {
-  display: flex;
-}
-
-.active {
-  background-color: $app-chip-active-color;
-  color: $app-secondary-text-color;
-  text-transform: capitalize;
-}
-
-.completed {
-  background-color: $app-chip-completed-color;
-  color: $app-secondary-text-color;
-  text-transform: capitalize;
-}
-
-.abandoned {
-  background-color: $app-chip-abandoned-color;
-  color: $app-secondary-text-color;
-  text-transform: capitalize;
-}
-
-.paper {
-  border: 1px solid $app-primary-border-color;
-  border-radius: 4px;
-  height: 95%;
-  overflow: scroll;
-  width: 100%;
-}
-
-.rowEven {
-  background-color: $app-secondary-background-color;
-}
-
-.rowOdd {
-  background-color: $app-secondary-text-color;
-}
-
-.comments {
-  @include flex-align-center;
-  color: $app-ternary-text-color;
-  gap: 4px;
-  justify-content: center;
-}
-
-.icon {
-  height: 20px;
-  width: 20px;
-}
-
-@mixin votesList {
-  align-items: center;
-  display: flex;
-  gap: 3px;
-  height: 30px;
-  justify-content: flex-start;
-  width: 120px;
-}
-
-.currentVotesList {
-  @include votesList;
-  width: 145px;
-}
-
-.votesTimeLine {
-  @include votesList;
-}
-
-.totalPRs {
-  color: $app-ternary-text-color;
-  font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
+  margin-bottom: $spacing-xs;
 }
 
-.buttonColor {
-  color: $app-ternary-text-color;
-  cursor: pointer;
-  font-size: $icon-size-xl;
-}
-
-.timelineIconColor {
-  color: $app-quaternary-text-color;
-  cursor: pointer;
-  font-size: $icon-size-xl;
-}
-
-.historyIcon {
-  height: 40px;
-}
-
-.tableHeader {
-  align-items: center;
-  display: flex;
-  gap: 4px;
-}
-
-.sortingIcon {
-  display: flex;
-  flex-direction: column;
-  height: 50px;
-  margin-top: $spacing-sm;
-  width: 40px;
-}
-
-.time {
-  font-size: $font-size-xmd;
-}
-
-.prTitle {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 300px;
-}
-
-.startDate {
-  display: block;
-  width: 65px;
-}
-
-.closedDate {
-  display: block;
-  width: 75px;
-}
-
-.closedDateTitle[aria-label="Closed Date"] {
-  width: max-content;
-}
-
-.dialogHeader {
-  font-size: $font-size-xmd;
-  width: 22%;
-}
-
-.prDetails {
-  width: 78%;
-}
-
-.tagsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  row-gap: 8px;
-}
-
-.tag {
-  background-color: $app-ternary-background-color;
-  font-size: $font-size-md;
-  height: fit-content;
-  max-width: 110px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.tableContainer {
+  @include table-container;
+  max-height: 95%;
 }
 
 .table {
-  border-spacing: 0;
-  width: 100%;
+  @include table;
 }
 
 .tableHead {
-  background-color: $app-secondary-text-color;
-  color: $app-primary-text-color;
-  font-weight: $extra-bold-font-weight;
-  position: sticky;
-  top: 0;
+  @include table-head;
 }
 
 .tableBody {
-  overflow-y: scroll;
+  @include table-body;
 }
 
-.tableCell {
-  border-bottom: 1px solid $app-secondary-border-color;
-  font-size: 0.875rem;
-  font-weight: $medium-font-weight;
-  line-height: 1.43;
-  padding: $spacing-lg;
-}
-
-.date {
-  min-width: 98px;
-}
-
-.tags {
-  min-width: 150px;
-}
-
-.author {
-  min-width: 150px;
-}
-
-.commentCount {
-  min-width: 130px;
-}
-
-.firstReviewTime {
-  min-width: 160px;
-}
-
-.approvalTime {
-  min-width: 135px;
-}
-
-.mergeTime {
-  min-width: 120px;
-}
-
-.votesTimelineDialog {
-  width: 650px;
+.noDataMessage {
+  @include table-no-data-message;
 }

@@ -1,0 +1,15 @@
+@import "src/styles/index.scss";
+
+.historyIcon {
+  height: 40px;
+}
+
+.timelineIconColor {
+  color: $app-quaternary-text-color;
+  cursor: pointer;
+  font-size: $icon-size-xl;
+}
+
+.votesTimelineDialog {
+  width: 650px;
+}

@@ -161,7 +161,7 @@ export class TimeMetricsUtils {
   static getTracesColor = (traceColor: string, noOfTraces: Record<number, number>) => {
     const addRedColor = (traceColor: string[]) => {
       traceColors.pop();
-      traceColors.push("red"); //TODO: move this as constant
+      traceColors.push("red");
 
       return traceColor;
     };
