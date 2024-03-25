@@ -28,7 +28,7 @@ export const DialogBox = ({ isOpen, handleClose, children, title, className }: I
       }}
     >
       <DialogTitle id={id} className={styles.titleContainer}>
-        <div className={styles.title}>{title}</div>
+        {title}
         <button className={styles.closeButton}>
           <CloseIcon onClick={handleClose} />
         </button>
