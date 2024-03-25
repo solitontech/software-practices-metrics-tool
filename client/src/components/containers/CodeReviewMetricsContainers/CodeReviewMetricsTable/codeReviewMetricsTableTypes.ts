@@ -4,7 +4,7 @@ interface ICodeReviewTableAction {
   filter: Record<keyof IFetchedPullRequestVotes, boolean>;
   showNoVote: boolean;
   handleSort: (order: string) => void;
-  handleFilter: (vote: keyof IFetchedPullRequestVotes, value: boolean) => void;
+  handleFilterChange: (vote: keyof IFetchedPullRequestVotes, value: boolean) => void;
   handleFilterReset: () => void;
 }
 

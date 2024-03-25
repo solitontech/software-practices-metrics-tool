@@ -4,7 +4,7 @@ export * from "./CustomVote/CustomVote";
 export * from "./DateRangePicker/DateRangePicker";
 export * from "./DialogBox/DialogBox";
 export * from "./ErrorBoundary/ErrorBoundary";
-export * from "./Filter/Filter";
+export * from "./FilterIcon/FilterIcon";
 export * from "./InfoIconTooltip/InfoIconTooltip";
 export * from "./LoadingSpinner/LoadingSpinner";
 export * from "./TabToggle/TabToggle";

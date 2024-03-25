@@ -1,7 +1,7 @@
+import { VOTES } from "src/constants/constants";
 import { IFetchedPullRequestVotes } from "src/services/api/api";
 
 import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieChartTypes";
-import { VOTES } from "../../../CodeReviewMetricsTable/VotesFilter/votesFilterConstants";
 import {
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,

@@ -3,7 +3,7 @@ import { VOTES, sortMap } from "src/constants/constants";
 import { IFetchedPullRequestVotes } from "src/services/api/api";
 
 import { ICodeReviewTableColumn, ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
-import { CustomFilterIcon } from "./VotesFilter/CustomFilterIcon";
+import { CodeReviewTableVotesFilter } from "./CodeReviewTableVotesFilter/CodeReviewTableVotesFilter";
 
 export const DEFAULT_SORT_STATE = {
   comments: sortMap.noSort,
@@ -27,6 +27,9 @@ export const DEFAULT_FILTER_STATE: Record<
   votesHistory: VOTES_FILTER_DEFAULT_STATE,
   votes: VOTES_FILTER_DEFAULT_STATE,
 };
+
+export const FILTER_COLUMN_VOTES = "votes";
+export const FILTER_COLUMN_VOTES_HISTORY = "votesHistory";
 
 export const columns: ICodeReviewTableColumn[] = [
   {
@@ -71,14 +74,14 @@ export const columns: ICodeReviewTableColumn[] = [
     label: "Votes History",
     width: 155,
     align: "center",
-    action: CustomFilterIcon,
+    action: CodeReviewTableVotesFilter,
   },
   {
     id: "votes",
     label: "Current Votes",
     width: 180,
     align: "center",
-    action: CustomFilterIcon,
+    action: CodeReviewTableVotesFilter,
   },
   {
     id: "firstReviewResponseTimeInSeconds",

@@ -1,9 +1,9 @@
 import styles from "./CodeReviewTableHeader.module.scss";
 import { ICodeReviewTableHeaderProps } from "./codeReviewTableHeaderTypes";
+import { FILTER_COLUMN_VOTES } from "../codeReviewMetricsTableConstants";
 import { ICodeReviewTableVotesFilterColumn } from "../codeReviewMetricsTableTypes";
 
-const SHOW_NO_VOTE_COLUMN_ID = "votes";
-
+//TODO: fix the type conversion
 export const CodeReviewTableHeader = ({
   column,
   filters,
@@ -25,10 +25,10 @@ export const CodeReviewTableHeader = ({
         {TableAction && (
           <TableAction
             filter={filters[column.id as ICodeReviewTableVotesFilterColumn]}
-            handleFilterReset={handleFilterReset}
-            showNoVote={column.id === SHOW_NO_VOTE_COLUMN_ID}
+            showNoVote={column.id === FILTER_COLUMN_VOTES}
             handleSort={(order) => handleSort(column.id, order)}
-            handleFilter={(vote, value) => {
+            handleFilterReset={handleFilterReset}
+            handleFilterChange={(vote, value) => {
               handleFilterChange(column.id as ICodeReviewTableVotesFilterColumn, vote, value);
             }}
           />
