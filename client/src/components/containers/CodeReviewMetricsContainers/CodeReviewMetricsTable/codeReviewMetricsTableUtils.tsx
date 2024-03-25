@@ -1,4 +1,4 @@
-import { sortMap } from "src/constants/constants";
+import { SORT_MAP } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/services/api/api";
 
 import { ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
@@ -9,7 +9,7 @@ export class CodeReviewMetricsTableUtil {
     return pullRequests.sort(
       (firstPullRequest: IFetchedCodeReviewPullRequest, secondPullRequest: IFetchedCodeReviewPullRequest) => {
         for (const key in sort) {
-          if (sort[key] === sortMap.noSort) continue;
+          if (sort[key] === SORT_MAP.NO_SORT) continue;
 
           let firstValue = firstPullRequest[key as keyof IFetchedCodeReviewPullRequest];
           let secondValue = secondPullRequest[key as keyof IFetchedCodeReviewPullRequest];
@@ -38,7 +38,7 @@ export class CodeReviewMetricsTableUtil {
             secondValue = secondPullRequest.comments.totalComments;
           }
 
-          if (sort[key] === sortMap.asc) {
+          if (sort[key] === SORT_MAP.ASCENDING) {
             if (firstValue < secondValue) {
               return 1;
             }
@@ -48,7 +48,7 @@ export class CodeReviewMetricsTableUtil {
             }
           }
 
-          if (sort[key] === sortMap.desc) {
+          if (sort[key] === SORT_MAP.DESCENDING) {
             if (firstValue === null) {
               return 1;
             }
