@@ -1,15 +1,15 @@
 import { CodeReviewSortingIcon } from "src/components/components";
-import { VOTES, sortMap } from "src/constants/constants";
+import { VOTES, SORT_MAP } from "src/constants/constants";
 import { IFetchedPullRequestVotes } from "src/services/api/api";
 
 import { ICodeReviewTableColumn, ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
 import { CodeReviewTableVotesFilter } from "./CodeReviewTableVotesFilter/CodeReviewTableVotesFilter";
 
 export const DEFAULT_SORT_STATE = {
-  comments: sortMap.noSort,
-  firstReviewResponseTimeInSeconds: sortMap.noSort,
-  approvalTimeInSeconds: sortMap.noSort,
-  mergeTimeInSeconds: sortMap.noSort,
+  comments: SORT_MAP.NO_SORT,
+  firstReviewResponseTimeInSeconds: SORT_MAP.NO_SORT,
+  approvalTimeInSeconds: SORT_MAP.NO_SORT,
+  mergeTimeInSeconds: SORT_MAP.NO_SORT,
 };
 
 const VOTES_FILTER_DEFAULT_STATE: Record<keyof IFetchedPullRequestVotes, boolean> = {

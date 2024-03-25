@@ -2,7 +2,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Tooltip } from "@mui/material";
 
-import { sortMap } from "src/constants/constants";
+import { SORT_MAP } from "src/constants/constants";
 
 import styles from "./CodeReviewSortingIcon.module.scss";
 
@@ -17,7 +17,7 @@ export const CodeReviewSortingIcon = ({ handleSort }: ICodeReviewSortingIconProp
         <ExpandLessIcon
           className={styles.sortButton}
           onClick={() => {
-            handleSort(sortMap.asc);
+            handleSort(SORT_MAP.ASCENDING);
           }}
         />
       </Tooltip>
@@ -25,7 +25,7 @@ export const CodeReviewSortingIcon = ({ handleSort }: ICodeReviewSortingIconProp
         <ExpandMoreIcon
           className={styles.sortButton}
           onClick={() => {
-            handleSort(sortMap.desc);
+            handleSort(SORT_MAP.DESCENDING);
           }}
         />
       </Tooltip>

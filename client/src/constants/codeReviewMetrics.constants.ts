@@ -22,9 +22,8 @@ export const VOTES_COLOR = {
   NO_VOTE: "#d9d9d9",
 };
 
-//TODO: Rename to caps
-export const sortMap = {
-  asc: "asc",
-  desc: "desc",
-  noSort: " noSort",
+export const SORT_MAP = {
+  ASCENDING: "asc",
+  DESCENDING: "desc",
+  NO_SORT: " noSort",
 };
