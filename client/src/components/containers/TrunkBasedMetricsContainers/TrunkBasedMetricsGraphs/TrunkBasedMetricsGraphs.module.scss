@@ -1,8 +1,8 @@
 @import "src/styles/index.scss";
 
 .graphContainer {
-  align-items: center;
-  display: flex;
+  @include flex-align-center;
+
   height: calc(100% - 100px);
   justify-content: center;
   margin-top: $spacing-lg;
