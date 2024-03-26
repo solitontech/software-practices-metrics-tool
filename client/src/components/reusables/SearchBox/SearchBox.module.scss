@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .container {
   text-align: left;
@@ -24,7 +24,7 @@
 
 .searchBox {
   background-color: $app-primary-background-color;
-  margin: $spacing-sm 0px;
+  margin: $spacing-sm 0;
 }
 
 .searchBoxInput {

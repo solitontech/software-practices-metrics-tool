@@ -1,7 +1,8 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .tile {
   @include flex-column;
+
   background-color: $app-primary-background-color;
   color: $app-ternary-text-color;
   gap: $spacing-sm;
