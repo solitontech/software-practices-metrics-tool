@@ -1,30 +1,26 @@
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
+import { IPiePlot, PieChart } from "src/components/components";
 import { VOTES_LABEL, VOTES_COLOR } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
-import styles from "./LeastVotesGraph.module.scss";
-import { LeastVotesGraphUtils } from "./leastVotesGraphUtils";
-import { PieChart } from "../../../../../reusables/MetricsGraphs/PieChart/PieChart";
-import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieChartTypes";
-interface Props {
+import styles from "./CodeReviewGraphLeastVotes.module.scss";
+import { CodeReviewGraphLeastVotesUtils } from "./codeReviewGraphLeastVotesUtils";
+import {
+  GRAPH_TITLE,
+  ANNOTATION_Y_POSITION,
+  INFO_TEXT,
+  GRAPH_HOVER_TEXT_TITLES,
+} from "./CodeReviewGraphLeasVotesConstants";
+
+interface ICodeReviewGraphLeastVotesProps {
   pullRequests: IFetchedCodeReviewPullRequest[];
 }
 
-const GRAPH_TITLE = `Pull Requests least votes`;
-const GRAPH_HOVER_TEXT_TITLES: Record<string, string> = {
-  rejected: "Pull Requests with rejected vote",
-  approved: "Pull Requests with approved vote",
-  waitForAuthor: "Pull Requests with wait for author vote",
-  noVote: "Pull Requests with no vote",
-  approvedWithSuggestions: "Pull Requests with approved with suggestions vote",
-};
-const ANNOTATION_Y_POSITION = 1.1;
-const INFO_TEXT = "The least favored vote in PR's history timeline will be considered as least vote";
-
-export const LeastVotesGraph = ({ pullRequests }: Props) => {
-  const graphAnnotationText = `Total PR's: ${pullRequests.length}`;
+export const CodeReviewGraphLeastVotes = ({ pullRequests }: ICodeReviewGraphLeastVotesProps) => {
+  const [firstPullRequest] = pullRequests;
+  const graphAnnotationText = `Total pull requests: ${pullRequests.length}`;
 
   const plots: Record<string, IPiePlot> = {
     rejected: {
@@ -59,22 +55,21 @@ export const LeastVotesGraph = ({ pullRequests }: Props) => {
     },
   };
 
-  const [firstPullRequest] = pullRequests;
-  LeastVotesGraphUtils.setMaxLineAndIds(firstPullRequest.id);
+  CodeReviewGraphLeastVotesUtils.setMaxLineAndIds(firstPullRequest.id);
 
   pullRequests.forEach((pullRequest) => {
-    const leastVotePlot = plots[LeastVotesGraphUtils.getLeastVote(pullRequest.votesHistory)];
+    const leastVote = CodeReviewGraphLeastVotesUtils.getLeastVote(pullRequest.votesHistory);
+    const leastVotePlot = plots[leastVote];
 
-    leastVotePlot.hoverText += LeastVotesGraphUtils.appendPullRequestIdAndGetGraphHoverText(
-      leastVotePlot.value,
-      pullRequest.id,
-    );
-
+    leastVotePlot.hoverText += CodeReviewGraphLeastVotesUtils.getGraphHoverText(leastVotePlot.value, pullRequest.id);
     leastVotePlot.value++;
   });
 
   Object.keys(plots).forEach((vote) => {
-    plots[vote].hoverText = LeastVotesGraphUtils.getformatGraphHoverText(plots[vote], GRAPH_HOVER_TEXT_TITLES[vote]);
+    plots[vote].hoverText = CodeReviewGraphLeastVotesUtils.getFormattedHoverText(
+      plots[vote],
+      GRAPH_HOVER_TEXT_TITLES[vote],
+    );
   });
 
   return (

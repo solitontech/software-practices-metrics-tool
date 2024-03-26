@@ -4,7 +4,7 @@
   border-radius: $app-primary-border-radius;
   height: 50px;
   margin: $spacing-lg auto;
-  padding: 0px;
+  padding: 0;
   width: 150px;
 
   &:hover {
@@ -12,8 +12,8 @@
   }
 
   &.activePage {
-    color: $app-ternary-anchor-color;
     background-color: $app-primary-anchor-color;
+    color: $app-ternary-anchor-color;
 
     &:hover {
       background-color: $app-secondary-anchor-color;
@@ -24,9 +24,10 @@
 @mixin link {
   @include flex-align-center;
   @include page;
+
   color: $app-quaternary-anchor-color;
-  font-weight: $regular-font-weight;
   font-size: $font-size-xmd;
+  font-weight: $regular-font-weight;
   text-decoration: none;
 }
 
@@ -36,14 +37,15 @@
 
 .collapsedLink {
   @include link;
-  width: 40px;
+
   height: 30px;
+  width: 40px;
 }
 
 @mixin navIcon {
+  color: $app-ternary-anchor-color;
   margin: auto $spacing-md;
   min-width: 12px;
-  color: $app-ternary-anchor-color;
 
   .pageIcon {
     height: auto;
@@ -54,6 +56,7 @@
 .expandedIcon {
   @include navIcon;
   @include flex-row-center;
+
   width: 15%;
 }
 

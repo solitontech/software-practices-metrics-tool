@@ -2,6 +2,7 @@
 
 .header {
   @include flex-align-center;
+
   justify-content: space-between;
 }
 
@@ -17,6 +18,7 @@
 
 .tableContainer {
   @include table-container;
+
   height: 480px;
   max-height: 480px;
 }
@@ -51,6 +53,7 @@
 
 .title {
   @include ellipsis;
+
   display: block;
   max-width: 500px;
 }

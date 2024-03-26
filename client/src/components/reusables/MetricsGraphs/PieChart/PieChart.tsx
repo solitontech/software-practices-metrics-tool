@@ -95,3 +95,6 @@ export const PieChart = ({
 
   return <Plot data={data} layout={layout} config={config} />;
 };
+
+/* interface export for consumers */
+export type { IPiePlot } from "./pieChartTypes";

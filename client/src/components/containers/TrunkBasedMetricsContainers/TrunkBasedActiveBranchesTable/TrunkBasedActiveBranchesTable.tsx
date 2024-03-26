@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-import clsx from "clsx";
 
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 
 import { SearchBox } from "src/components/components";

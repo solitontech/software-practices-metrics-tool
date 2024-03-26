@@ -1,5 +1,9 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
+import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
+import TableRowsIcon from "@mui/icons-material/TableRows";
+
 import {
   SnackBar,
   TabToggle,
@@ -15,9 +19,27 @@ import { useCodeReviewMetrics } from "src/services/api/api";
 
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./CodeReviewMetrics.module.scss";
-import { CODE_REVIEW_METRICS, CODE_REVIEW_METRICS_TABS, CHIPS } from "./codeReviewMetricsConstants";
+import { CODE_REVIEW_METRICS, CHIPS } from "./codeReviewMetricsConstants";
 import { ICodeReviewMetricsTabValue } from "./codeReviewMetricsType.ts";
 import { CodeReviewMetricsUtil } from "./codeReviewMetricsUtils.ts";
+
+const CODE_REVIEW_METRICS_TABS = [
+  {
+    label: "TABLE VIEW",
+    value: "table",
+    icon: <TableRowsIcon />,
+  },
+  {
+    label: "GRAPHICAL VIEW",
+    value: "graph",
+    icon: <BarChartOutlinedIcon />,
+  },
+  {
+    label: "TREND ANALYSIS",
+    value: "trendGraph",
+    icon: <InsightsOutlinedIcon />,
+  },
+];
 
 export const CodeReviewMetrics = () => {
   const [dates, setDates] = useState({

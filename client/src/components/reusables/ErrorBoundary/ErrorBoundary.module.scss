@@ -2,6 +2,7 @@
 
 .message {
   @include flex-row-center;
+
   font-weight: $semi-bold-font-weight;
   width: 100%;
 }

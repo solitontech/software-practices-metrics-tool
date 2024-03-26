@@ -7,15 +7,15 @@
 }
 
 .dropdownContainer {
+  align-items: center;
   display: flex;
   width: 200px;
-  align-items: center;
 }
 
 .selectHeading {
-  width: 160px;
   font-size: $font-size-mlg;
   font-weight: $medium-font-weight;
+  width: 160px;
 }
 
 .selectBox {

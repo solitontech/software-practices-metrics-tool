@@ -6,5 +6,6 @@
 
 .tableHeader {
   @include flex-align-center;
+
   gap: $spacing-xs;
 }

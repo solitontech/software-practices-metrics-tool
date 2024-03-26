@@ -2,6 +2,7 @@
 
 .sortingIcon {
   @include flex-column;
+
   height: 50px;
   margin-top: $spacing-sm;
   width: 40px;

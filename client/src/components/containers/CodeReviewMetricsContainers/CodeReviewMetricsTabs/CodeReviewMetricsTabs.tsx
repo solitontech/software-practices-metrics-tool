@@ -1,7 +1,7 @@
 import {
   LoadingSpinner,
   ErrorBoundary,
-  CodeReviewMetricsGraph,
+  CodeReviewGraph,
   MetricsTrendAnalysisGraphs,
   CodeReviewMetricsTable,
 } from "src/components/components";
@@ -56,11 +56,11 @@ export const CodeReviewMetricsTabs = ({
   if (selectedTab === "graph") {
     return (
       <ErrorBoundary key="code-review-graph">
-        <CodeReviewMetricsGraph
+        <CodeReviewGraph
           pullRequests={pullRequests}
-          averageFirstReviewResponseTime={firstReviewResponseTime}
-          averageApprovalTime={approvalTime}
-          averageMergeTime={mergeTime}
+          firstReviewResponseTime={firstReviewResponseTime}
+          approvalTime={approvalTime}
+          mergeTime={mergeTime}
         />
       </ErrorBoundary>
     );

@@ -5,22 +5,22 @@
 }
 
 .infoIconContainer {
+  left: 54.6%;
   position: absolute;
   top: 38px;
   z-index: 1;
-  left: 54.6%;
 }
 
 .graphButtonContainer {
-  display: flex;
   align-items: center;
+  display: flex;
+  left: 74.5%;
   position: absolute;
   top: 33px;
-  left: 74.5%;
   z-index: 1;
 }
 
 .infoIcon {
-  font-size: $icon-size-lg;
   color: $app-ternary-text-color;
+  font-size: $icon-size-lg;
 }

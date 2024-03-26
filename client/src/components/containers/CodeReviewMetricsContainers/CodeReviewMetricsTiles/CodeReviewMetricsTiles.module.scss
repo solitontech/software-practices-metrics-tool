@@ -20,5 +20,6 @@
 
 .tileContent {
   @include flex-align-center;
+
   gap: $spacing-sm;
 }

@@ -2,6 +2,9 @@
 
 .tableContainer {
   @include table-container;
+
+  height: fit-content;
+  max-height: 100%;
   width: calc(100% - 250px);
 }
 
@@ -41,6 +44,7 @@
 
 .title {
   @include ellipsis;
+
   display: block;
   max-width: 350px;
   width: fit-content;

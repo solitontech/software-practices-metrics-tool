@@ -2,6 +2,7 @@
 
 .container {
   @include flex-align-center;
+
   gap: $spacing-xs;
   padding: $spacing-xs 0;
 }

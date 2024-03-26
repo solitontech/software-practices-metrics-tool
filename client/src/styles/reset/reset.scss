@@ -13,10 +13,10 @@
 
 html,
 body {
-  font-family: "Roboto";
+  font-family: Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
   height: 100%;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
 }
 
 img,
