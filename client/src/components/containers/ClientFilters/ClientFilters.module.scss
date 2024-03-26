@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .filterIcon {
   font-size: $icon-size-xxxxl;
@@ -14,19 +14,19 @@
   background-color: $app-primary-background-color;
   border: 1px solid $app-secondary-border-color;
   border-radius: $app-primary-border-radius;
-  max-height: 85vh;
   margin-top: $spacing-sm;
-  overflow-y: scroll;
+  max-height: 85vh;
+  overflow-y: auto;
   padding: $spacing-lg;
-  padding-top: 0px;
+  padding-top: 0;
   width: 500px;
 }
 
 .noFiltersHeading {
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
-  text-align: center;
   padding: $spacing-md;
+  text-align: center;
 }
 
 .noFiltersContent {
@@ -44,6 +44,7 @@
 
 .squadName {
   @include ellipsis;
+
   font-size: $font-size-mlg;
   font-weight: $semi-bold-font-weight;
   padding-bottom: $spacing-sm;
@@ -61,17 +62,19 @@
 
 .squadCategory {
   @include ellipsis;
-  width: 100%;
+
   font-size: $font-size-xmd;
   font-weight: $medium-font-weight;
+  width: 100%;
 }
 
 .userContainer {
-  padding: 0px $spacing-lg;
+  padding: 0 $spacing-lg;
 }
 
 .userLabel {
   @include ellipsis;
-  width: 100%;
+
   font-size: $font-size-xmd;
+  width: 100%;
 }

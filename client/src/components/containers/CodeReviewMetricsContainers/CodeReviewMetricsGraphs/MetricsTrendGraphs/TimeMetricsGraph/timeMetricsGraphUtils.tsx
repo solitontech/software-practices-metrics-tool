@@ -1,16 +1,16 @@
-import { SECONDS_IN_ONE_HOUR } from "src/constants/constants";
-import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
-import { getHoursToDays } from "src/utils/utils";
-
-import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 import {
-  MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
+  SECONDS_IN_ONE_HOUR,
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
+  MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
   MAX_PULL_REQUEST_ID_ROWS,
   TAB_SPACE,
   LINE_BREAKER,
   DOUBLE_SPACE,
-} from "../../metricsConstants";
+} from "src/constants/constants";
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+import { getHoursToDays } from "src/utils/utils";
+
+import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 
 const MAX_LINE = MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP;
 const MAX_CHARACTERS = MAX_CHARACTERS_IN_LINE_IN_TOOLTIP;

@@ -1,17 +1,17 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .pieChartContainer {
   position: relative;
 }
 
 .infoIconContainer {
+  left: 580px;
   position: absolute;
   top: 38px;
   z-index: 1;
-  left: 580px;
 }
 
 .infoIcon {
-  font-size: $icon-size-lg;
   color: $app-ternary-text-color;
+  font-size: $icon-size-lg;
 }

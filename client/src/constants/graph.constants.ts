@@ -1,6 +1,4 @@
-export const RED_COLOR = "#FF0000";
 export const TRACE_COLOR = "#0F52A0";
-
 export const LINE_BREAKER = "<br>";
 export const DOUBLE_SPACE = "&nbsp;&nbsp;";
 export const TAB_SPACE = "&nbsp;&nbsp;&nbsp;&nbsp;";
