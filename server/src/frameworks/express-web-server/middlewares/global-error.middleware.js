@@ -1,5 +1,5 @@
-import { AppError, logError } from '##/utils/index.js';
-import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/index.js';
+import { AppError, logError } from '##/utils/utils.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/constants.js';
 
 // express global error handler (https://expressjs.com/en/guide/error-handling.html)
 // eslint-disable-next-line no-unused-vars

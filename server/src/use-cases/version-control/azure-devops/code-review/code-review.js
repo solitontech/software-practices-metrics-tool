@@ -2,9 +2,9 @@ import { TimeMetrics } from './time-metrics/time-metrics.js';
 import { VoteMetrics } from './vote-metrics/vote-metrics.js';
 import { CommentMetrics } from './comment-metrics/comment-metrics.js';
 
-import { AzureDevopsURL } from '../helpers/index.js';
+import { AzureDevopsURL } from '../helpers/helpers.js';
 
-import { CODE_TO_VOTE } from './constants/index.js';
+import { CODE_TO_VOTE } from './constants/constants.js';
 
 export class CodeReview {
   static getCodeReviewMetrics(rawPullRequests) {

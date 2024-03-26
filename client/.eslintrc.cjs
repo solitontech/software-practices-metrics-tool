@@ -12,7 +12,7 @@ module.exports = {
     "prettier",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "package.json", "package-lock.json"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",

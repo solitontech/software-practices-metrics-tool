@@ -15,24 +15,24 @@ interface ITrunkBasedPullRequestsTableProps {
 
 export const TrunkBasedPullRequestsTable = ({ pullRequests }: ITrunkBasedPullRequestsTableProps) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.tableContainer}>
       <table className={styles.table} aria-label="sticky table">
         <thead className={styles.tableHead}>
           <tr>
             {tableColumns.map((column) => (
-              <td
+              <th
                 data-testid={`${column.id}-table-header`}
                 key={column.id}
                 align={column.align}
-                style={{ width: column.width }}
-                className={styles.tableCell}
+                style={{ width: column.width, minWidth: column.width }}
+                className={styles.tableHeaderCell}
               >
                 {column.label}
-              </td>
+              </th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tableBody}>
           {pullRequests.length ? (
             pullRequests.map((row) => {
               return (

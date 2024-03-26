@@ -1,4 +1,4 @@
-import { AzureDevopsURL } from '../helpers/index.js';
+import { AzureDevopsURL } from '../helpers/helpers.js';
 import {
   BRANCH_SUFFIX,
   EMPTY_STRING,

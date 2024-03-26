@@ -5,12 +5,10 @@
 }
 
 .titleContainer {
-  display: flex;
-  justify-content: space-between;
-}
+  @include flex-justify-space-between;
 
-.title {
   color: $app-ternary-text-color;
+  font-size: $font-size-lg;
   font-weight: $semi-bold-font-weight;
 }
 

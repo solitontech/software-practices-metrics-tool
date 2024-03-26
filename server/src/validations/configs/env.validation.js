@@ -1,7 +1,7 @@
 import joi from 'joi';
 
 import { Validation } from '../common/validation.js';
-import { NODE_ENVIRONMENT_MODE } from '../../constants/index.js';
+import { NODE_ENVIRONMENT_MODE } from '../../constants/constants.js';
 
 export class EnvValidation {
   static #validation;

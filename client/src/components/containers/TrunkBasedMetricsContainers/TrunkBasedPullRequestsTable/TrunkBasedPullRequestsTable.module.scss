@@ -1,36 +1,28 @@
 @import "src/styles/index.scss";
 
-.container {
-  border: 1px solid $app-secondary-border-color;
-  overflow: scroll;
+.tableContainer {
+  @include table-container;
   width: calc(100% - 250px);
 }
 
 .table {
-  border: 1px solid $app-secondary-border-color;
-  border-spacing: 0;
-  width: 100%;
+  @include table;
 }
 
 .tableHead {
-  background-color: $app-secondary-text-color;
-  color: $app-primary-text-color;
-  font-weight: $extra-bold-font-weight;
-  position: sticky;
-  top: 0;
+  @include table-head;
 }
 
-.tableHead td {
-  font-weight: $medium-font-weight;
+.tableHeaderCell {
+  @include table-header-cell;
+}
+
+.tableBody {
+  @include table-body;
 }
 
 .tableCell {
-  border-bottom: 1px solid $app-secondary-border-color;
-  color: $app-ternary-text-color;
-  font-size: $font-size-xmd;
-  font-weight: $regular-font-weight;
-  line-height: $app-primary-line-height;
-  padding: $spacing-lg;
+  @include table-cell;
 }
 
 .tableRow:nth-child(odd) {
@@ -44,15 +36,7 @@
 .branchName,
 .pullRequest {
   @include flex-align-center;
-  color: $app-ternary-text-color;
-  cursor: pointer;
-  font-weight: $medium-font-weight;
-  gap: $spacing-xs;
-  text-decoration: none;
-
-  &:hover {
-    color: $app-primary-anchor-color;
-  }
+  @include table-link-cell;
 }
 
 .title {
@@ -63,8 +47,7 @@
 }
 
 .linkIcon {
-  color: $app-quaternary-text-color;
-  font-size: $icon-size-md;
+  @include table-link-icon;
 }
 
 .active {
@@ -80,7 +63,5 @@
 }
 
 .noDataMessage {
-  border-bottom: 1px solid $app-secondary-border-color;
-  font-size: $font-size-mlg;
-  text-align: center;
+  @include table-no-data-message;
 }

@@ -2,8 +2,8 @@ import axios from 'axios';
 import btoa from 'btoa';
 import { URL } from 'node:url';
 
-import { STATUS_CODE } from '##/constants/index.js';
-import { AppError } from '##/utils/index.js';
+import { STATUS_CODE } from '##/constants/constants.js';
+import { AppError } from '##/utils/utils.js';
 import { ServerConfiguration } from '##/configs/server.config.js';
 
 const {

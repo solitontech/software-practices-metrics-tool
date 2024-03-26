@@ -37,14 +37,19 @@ export const TrunkBasedActiveBranchesTable = ({ activeBranches }: ITrunkBasedAct
         ></SearchBox>
         <p className={styles.totalCount}>Total count : {filteredBranches.length}</p>
       </div>
-      <div className={styles.container}>
+      <div className={styles.tableContainer}>
         <table className={styles.table}>
           <thead className={styles.tableHead}>
             <tr>
               {columns.map((column) => (
-                <td className={styles.tableCell} key={column.id} align={column.align} style={{ width: column.width }}>
+                <th
+                  className={styles.tableHeaderCell}
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.width }}
+                >
                   {column.label}
-                </td>
+                </th>
               ))}
             </tr>
           </thead>

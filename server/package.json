@@ -14,8 +14,7 @@
     "format": "prettier --write \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "format-check": "prettier --check \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "lint": "eslint \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
-    "prepare": "cd .. && husky install server/.husky",
-    "lint-staged": "lint-staged",
+    "prepare": "cd .. && husky install",
     "build:client": "node ./src/scripts/build-client.js",
     "build:docker": "node ./src/scripts/build-docker.js"
   },
