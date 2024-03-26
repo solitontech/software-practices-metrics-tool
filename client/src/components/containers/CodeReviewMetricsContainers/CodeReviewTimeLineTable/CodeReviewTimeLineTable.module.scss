@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .tableContainer {
   @include table-container;
@@ -14,6 +14,7 @@
 
 .tableHeaderCell {
   @include table-header-cell;
+
   text-align: left;
 }
 

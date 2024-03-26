@@ -1,7 +1,8 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .sortingIcon {
   @include flex-column;
+
   height: 50px;
   margin-top: $spacing-sm;
   width: 40px;

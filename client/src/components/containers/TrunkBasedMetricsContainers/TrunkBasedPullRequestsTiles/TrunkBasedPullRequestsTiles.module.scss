@@ -1,12 +1,14 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .container {
   @include flex-column;
+
   gap: $spacing-xl;
 }
 
 .tileContainer {
   @include flex-align-center;
+
   gap: $spacing-sm;
 }
 

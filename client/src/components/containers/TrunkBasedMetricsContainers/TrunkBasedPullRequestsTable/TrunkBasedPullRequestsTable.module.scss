@@ -1,7 +1,8 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .tableContainer {
   @include table-container;
+
   width: calc(100% - 250px);
 }
 
@@ -41,6 +42,7 @@
 
 .title {
   @include ellipsis;
+
   display: block;
   max-width: 350px;
   width: fit-content;

@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .minThreshold {
   color: $app-chip-completed-color;
@@ -20,5 +20,6 @@
 
 .tileContent {
   @include flex-align-center;
+
   gap: $spacing-sm;
 }

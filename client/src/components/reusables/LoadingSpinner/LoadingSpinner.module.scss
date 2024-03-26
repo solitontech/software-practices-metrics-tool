@@ -1,13 +1,15 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .loadingPage {
   @include flex-column-center;
+
   height: 100%;
   width: 100%;
 }
 
 .container {
   @include flex-column-center;
+
   height: 50%;
   width: 50%;
 }

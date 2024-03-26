@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .tableCell {
   @include table-header-cell;
@@ -6,5 +6,6 @@
 
 .tableHeader {
   @include flex-align-center;
+
   gap: $spacing-xs;
 }

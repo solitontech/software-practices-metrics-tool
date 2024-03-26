@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .paper {
   background: $app-quaternary-background-color;
@@ -10,6 +10,7 @@
 
 .toolbar {
   @include flex-column;
+
   align-items: center;
   gap: $spacing-sm;
   height: 100%;

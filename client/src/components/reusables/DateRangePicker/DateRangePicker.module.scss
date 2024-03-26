@@ -1,12 +1,14 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .container {
   @include flex-column;
+
   justify-content: space-between;
 }
 
 .label {
   @include flex-align-center;
+
   gap: $spacing-xs;
   margin-top: $spacing-xs;
 }
@@ -18,6 +20,7 @@
 
 .datePicker {
   @include flex-align-center;
+
   gap: $spacing-sm;
   margin-top: $spacing-sm;
 }

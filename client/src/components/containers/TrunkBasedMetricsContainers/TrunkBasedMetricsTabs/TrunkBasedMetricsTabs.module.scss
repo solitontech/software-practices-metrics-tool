@@ -1,8 +1,9 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .trunkBasedTable {
   @include flex-column;
   @include flex-align-center;
+
   height: calc(100% - 100px);
   margin-top: $spacing-xl;
   max-height: 90%;

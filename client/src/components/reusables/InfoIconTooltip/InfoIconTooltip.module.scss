@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .toolTip {
   font-size: $font-size-md;
@@ -6,6 +6,7 @@
 
 .infoIconContainer {
   @include flex-align-center;
+
   cursor: pointer;
 }
 

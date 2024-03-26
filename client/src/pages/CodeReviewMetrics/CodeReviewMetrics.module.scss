@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .container {
   height: 100%;
@@ -7,14 +7,16 @@
 
 .headerContainer {
   @include flex-align-center;
+
   color: $app-ternary-text-color;
-  justify-content: space-between;
   height: 70px;
+  justify-content: space-between;
   padding-top: $spacing-xm;
 }
 
 .tilesContainer {
   @include flex-row;
+
   color: $app-ternary-text-color;
   gap: $spacing-xl;
 }

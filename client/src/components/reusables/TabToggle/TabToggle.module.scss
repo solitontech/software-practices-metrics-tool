@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .toggleContainer {
   display: flex;
@@ -7,6 +7,7 @@
 
 .toggle {
   @include flex-align-center;
+
   gap: $spacing-sm;
 }
 

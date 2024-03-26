@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .header {
   color: $app-ternary-text-color;
@@ -9,6 +9,7 @@
 
 .tableContainer {
   @include table-container;
+
   max-height: 95%;
 }
 

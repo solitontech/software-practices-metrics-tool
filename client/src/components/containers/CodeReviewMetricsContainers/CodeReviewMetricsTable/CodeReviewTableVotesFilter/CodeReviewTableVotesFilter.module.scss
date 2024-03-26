@@ -1,4 +1,5 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
+
 .filterIcon {
   margin-top: $spacing-xs;
 }
@@ -22,8 +23,9 @@
 
 .checkboxContainer {
   @include flex-align-center;
+
   gap: $spacing-sm;
-  padding: $spacing-sm 0px;
+  padding: $spacing-sm 0;
 }
 
 .checkbox {
@@ -33,6 +35,7 @@
 
 .voteImageContainer {
   @include flex-align-center;
+
   gap: $spacing-sm;
 }
 
@@ -49,12 +52,14 @@
 
 .clearFilterContainer {
   @include flex-align-center;
+
   justify-content: center;
-  margin: $spacing-md 0px $spacing-md 0px;
+  margin: $spacing-md 0 $spacing-md 0;
 }
 
 .clearFilterBtn {
   @include flex-align-center;
+
   background: $app-quaternary-background-color;
   border: none;
   border-radius: $app-primary-border-radius;

@@ -1,4 +1,4 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .home {
   display: flex;
@@ -7,9 +7,10 @@
 
 .bugReport {
   @include flex-align-center;
+
   background-color: $app-quaternary-background-color;
-  border-radius: 50%;
   border: none;
+  border-radius: 50%;
   bottom: 50px;
   height: 50px;
   justify-content: center;

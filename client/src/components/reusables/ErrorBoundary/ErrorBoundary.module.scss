@@ -1,7 +1,8 @@
-@import "src/styles/index.scss";
+@import url("src/styles/index.scss");
 
 .message {
   @include flex-row-center;
+
   font-weight: $semi-bold-font-weight;
   width: 100%;
 }
