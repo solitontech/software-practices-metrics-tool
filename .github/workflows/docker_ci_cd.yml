@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Read .nvmrc
+      - name: Read node version
         id: nvmrc
         uses: juliangruber/read-file-action@v1
         with:
@@ -56,7 +56,7 @@ jobs:
         with:
           name: release-to-production
 
-      - name: Dotenv Action
+      - name: Read environment variables
         id: dotenv
         uses: falti/dotenv-action@v1
         with:
@@ -65,13 +65,13 @@ jobs:
       - name: Rename artifact
         run: mv release-to-production.zip softwarePracticesMetricsTool-V${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
 
-      - name: Delete old release
+      - name: Delete existing release with version {${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}}
         uses: cb80/delrel@latest
         with:
           tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
+      - name: Create release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}

@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Read .nvmrc
+      - name: Read node version
         id: nvmrc
         uses: juliangruber/read-file-action@v1
         with:
