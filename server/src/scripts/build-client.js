@@ -12,8 +12,17 @@ class BuildClient {
   static #clientTrunkBranch = 'main';
 
   static {
-    this.#clientDirectory = path.join(this.#dirName, '../../../Client');
-    this.#serverDirectory = path.join(this.#dirName, '../../../Server');
+    this.#clientDirectory = path.join(this.#dirName, '../../../client');
+    this.#serverDirectory = path.join(this.#dirName, '../../../server');
+  }
+
+  static startBuild() {
+    this.#changeToClientDirectory();
+    this.#switchClientBranchToMain();
+    this.#pullLatestClientChanges();
+    this.#installClientNodeModules();
+    this.#startClientBuild();
+    this.#copyClientBuildToServerDirectory();
   }
 
   static #changeToClientDirectory() {
@@ -48,14 +57,6 @@ class BuildClient {
     execSync(`npm install`, { stdio: 'inherit' });
   }
 
-  static #copyClientBuildToServerDirectory() {
-    console.log(chalk.grey('\nCopying dist folder from Client directory to Server directory...'));
-
-    fs.copySync(path.join(this.#clientDirectory, 'dist'), path.join(this.#serverDirectory, 'dist'));
-
-    console.log(chalk.green('\nCopied dist folder from Client directory to Server directory successfully'));
-  }
-
   static #startClientBuild() {
     console.log(chalk.grey('\nRunning npm run build...'));
 
@@ -64,13 +65,12 @@ class BuildClient {
     console.log(chalk.grey('\nClient build completed successfully.'));
   }
 
-  static startBuild() {
-    this.#changeToClientDirectory();
-    this.#switchClientBranchToMain();
-    this.#pullLatestClientChanges();
-    this.#installClientNodeModules();
-    this.#startClientBuild();
-    this.#copyClientBuildToServerDirectory();
+  static #copyClientBuildToServerDirectory() {
+    console.log(chalk.grey('\nCopying dist folder from Client directory to Server directory...'));
+
+    fs.copySync(path.join(this.#clientDirectory, 'dist'), path.join(this.#serverDirectory, 'dist'));
+
+    console.log(chalk.green('\nCopied dist folder from Client directory to Server directory successfully'));
   }
 }
 

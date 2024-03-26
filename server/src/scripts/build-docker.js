@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
-import { ServerConfiguration } from '../configs/server.config.js';
+import { ServerConfiguration } from '##/configs/server.config.js';
 
 class BuildDocker {
   static #dockerImageName;
@@ -16,6 +16,26 @@ class BuildDocker {
     const imageVersion = ServerConfiguration.environmentVariables.productionDockerImageVersion;
 
     this.#dockerImageName = 'software-practices-metrics-tool:' + imageVersion;
+  }
+
+  static startBuild() {
+    this.#buildImageAsTarFile();
+    this.#changeImageVersionInComposeFile();
+  }
+
+  static #buildImageAsTarFile() {
+    console.log(`Building docker image ( ${this.#dockerImageName} )`);
+
+    if (!this.#isImageNameValid(this.#dockerImageName)) {
+      throw new Error(`
+        Invalid image name - ${this.#dockerImageName}
+        - Change the ".env" file "PRODUCTION_DOCKER_IMAGE_VERSION" key like the following example:
+        - Example: 1.0.0
+      `);
+    }
+
+    this.#buildImage();
+    this.#createTarFileFromImage();
   }
 
   static #isImageNameValid(name) {
@@ -49,21 +69,6 @@ class BuildDocker {
     );
   }
 
-  static #buildImageAsTarFile() {
-    console.log(`Building docker image ( ${this.#dockerImageName} )`);
-
-    if (!this.#isImageNameValid(this.#dockerImageName)) {
-      throw new Error(`
-        Invalid image name - ${this.#dockerImageName}
-        - Change the ".env" file "PRODUCTION_DOCKER_IMAGE_VERSION" key like the following example:
-        - Example: 1.0.0
-      `);
-    }
-
-    this.#buildImage();
-    this.#createTarFileFromImage();
-  }
-
   static #changeImageVersionInComposeFile() {
     const filePath = path.join(this.#dockerPackageDir, '/compose.yaml');
     const composeFileContent = fs.readFileSync(filePath, 'utf8');
@@ -86,11 +91,6 @@ class BuildDocker {
     fs.writeFileSync(filePath, modifiedData, 'utf8');
 
     console.log(chalk.green('Compose.yaml file has been updated with the new image tag.'));
-  }
-
-  static startBuild() {
-    this.#buildImageAsTarFile();
-    this.#changeImageVersionInComposeFile();
   }
 }
 

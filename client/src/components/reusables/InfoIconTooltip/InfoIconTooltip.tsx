@@ -1,19 +1,22 @@
 import InfoIcon from "@mui/icons-material/Info";
-import { Tooltip, Typography } from "@mui/material";
+import { Tooltip } from "@mui/material";
+import clsx from "clsx";
 
 import styles from "./InfoIconTooltip.module.scss";
 
-interface Props {
+interface IInfoIconTooltipProps {
   content: string;
-  size: string;
+  className?: string;
 }
 
-export const InfoIconTooltip = ({ content, size }: Props) => {
+export const InfoIconTooltip = ({ content, className }: IInfoIconTooltipProps) => {
+  const title = <span className={styles.toolTip}>{content}</span>;
+
   return (
-    <div className={styles.infoIcon}>
-      <Tooltip data-testid={content} title={<Typography className={styles.toolTip}>{content}</Typography>} arrow>
-        <InfoIcon style={{ fontSize: size }} />
+    <span className={styles.infoIconContainer}>
+      <Tooltip arrow title={title} data-testid={content}>
+        <InfoIcon className={clsx(styles.infoIcon, className)} />
       </Tooltip>
-    </div>
+    </span>
   );
 };

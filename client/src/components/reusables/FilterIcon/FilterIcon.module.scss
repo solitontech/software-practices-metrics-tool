@@ -1,0 +1,14 @@
+@import "src/styles/index.scss";
+
+.container {
+  position: relative;
+}
+
+.filterIcon {
+  color: $app-ternary-text-color;
+  cursor: pointer;
+}
+
+.isActive {
+  color: $app-quaternary-text-color;
+}

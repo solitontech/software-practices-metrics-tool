@@ -1,9 +1,9 @@
+import { SECONDS_IN_ONE_HOUR } from "src/constants/constants";
+
 import { ITimeMetricsPullRequest } from "./timeMetricsGraphInterfaces";
-import { SECONDS_IN_ONE_HOUR } from "../../../../../../constants/timeConstants";
-import { RED_COLOR, appendHoursToNumber } from "../../../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 import {
-  MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
+  MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
   MAX_PULL_REQUEST_ID_ROWS,
   DOUBLE_SPACE,
   LINE_BREAKER,
@@ -161,7 +161,7 @@ export class TimeMetricsUtils {
   static getTracesColor = (traceColor: string, noOfTraces: Record<number, number>) => {
     const addRedColor = (traceColor: string[]) => {
       traceColors.pop();
-      traceColors.push(RED_COLOR);
+      traceColors.push("red");
 
       return traceColor;
     };
@@ -177,7 +177,7 @@ export class TimeMetricsUtils {
 
   static getGraphAnnotationText(metricsName: string, averageTime: string | number, noOfPullRequests: number) {
     return `${`Average ${metricsName} time for a PR`}: ${
-      typeof averageTime == "number" ? appendHoursToNumber(averageTime) : averageTime
+      typeof averageTime == "number" ? `${averageTime} hours` : averageTime
     } (Total PR's: ${noOfPullRequests})`;
   }
 

@@ -1,16 +1,17 @@
-import styles from "./LoadingSpinner.module.scss";
-import loading from "../../../assets/images/loading.webp";
+import loading from "src/assets/images/loading.webp";
 
-interface Props {
+import styles from "./LoadingSpinner.module.scss";
+
+interface ILoadingSpinnerProps {
   content: string;
 }
 
-export const LoadingSpinner = ({ content }: Props) => {
+export const LoadingSpinner = ({ content }: ILoadingSpinnerProps) => {
   return (
     <div className={styles.loadingPage}>
-      <div className={styles.loading}>
-        <img className={styles.loadingImage} src={loading} alt="Loading." />
-        <div className={styles.description}>{content}</div>
+      <div className={styles.container}>
+        <img className={styles.image} src={loading} alt="loading" />
+        <p className={styles.description}>{content}</p>
       </div>
     </div>
   );

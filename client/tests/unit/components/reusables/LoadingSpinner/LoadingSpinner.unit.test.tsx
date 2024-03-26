@@ -8,7 +8,7 @@ describe("LoadingSpinner component", () => {
     render(<LoadingSpinner content="Loading..." />);
 
     // user should see the loading spinner image
-    const image = screen.getByRole("img", { name: /loading./i });
+    const image = screen.getByRole("img", { name: /loading/i });
     expect(image).toBeInTheDocument();
 
     // user should see the loading spinner content

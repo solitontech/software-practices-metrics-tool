@@ -1,22 +1,32 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.searchBox {
+.container {
   text-align: left;
 }
 
-.background {
-  background-color: $primary-background-color;
+.label {
+  color: $app-ternary-text-color;
+  font-weight: $semi-bold-font-weight;
 }
 
-.searchBox input {
-  height: 10px !important;
-  padding: $primary-padding $ternary-padding !important;
+.container input {
+  height: 10px;
+  padding: $spacing-lg 0;
+
   &::placeholder {
-    font-size: 12px !important;
+    font-size: $font-size-md;
   }
 }
 
-.label {
-  font-weight: $primary-font-weight;
-  color: $primary-color;
+.searchIcon {
+  font-size: $icon-size-xl;
+}
+
+.searchBox {
+  background-color: $app-primary-background-color;
+  margin: $spacing-sm 0px;
+}
+
+.searchBoxInput {
+  width: 200px;
 }

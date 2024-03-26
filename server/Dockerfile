@@ -13,6 +13,7 @@ WORKDIR /user/app/server
 COPY package.json ./
 COPY src/ ./src
 COPY dist/ ./dist
+COPY docs/ ./docs
 
 # Run shell command to remove scripts as they intended for developers.
 RUN rm -rf ./src/scripts

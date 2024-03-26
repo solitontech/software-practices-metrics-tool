@@ -57,7 +57,7 @@ export const TimeMetricsGraph = ({
 
   return (
     <HistogramChart
-      graphObject={{
+      graph={{
         plot: {
           xValues: metricsRoundedTimes,
           startValue,

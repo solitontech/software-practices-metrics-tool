@@ -1,4 +1,4 @@
-import { logError } from '../../utils/index.js';
+import { logError } from '../../utils/utils.js';
 
 export class Validation {
   #errorMessage;
@@ -9,18 +9,18 @@ export class Validation {
     this.#validationSchema = validationSchema;
   }
 
-  #validate(dataToValidate) {
-    return this.#validationSchema.validate(dataToValidate);
+  getValidationResult(dataToValidate) {
+    return this.#validate(dataToValidate);
   }
 
-  #logError(error) {
-    error.details.forEach(({ message }) => {
-      logError(this.#errorMessage + message);
-    });
-  }
+  terminateOnError(dataToValidate) {
+    const { error } = this.#validate(dataToValidate);
 
-  #replaceWithSingleQuotes(message) {
-    return message.replace(/"/g, "'");
+    if (error) {
+      this.#logError(error);
+
+      return process.exit(1);
+    }
   }
 
   getUserErrorMessage(error) {
@@ -37,17 +37,17 @@ export class Validation {
     return errorMessage;
   }
 
-  getValidationResult(dataToValidate) {
-    return this.#validate(dataToValidate);
+  #validate(dataToValidate) {
+    return this.#validationSchema.validate(dataToValidate);
   }
 
-  terminateOnError(dataToValidate) {
-    const { error } = this.#validate(dataToValidate);
+  #logError(error) {
+    error.details.forEach(({ message }) => {
+      logError(this.#errorMessage + message);
+    });
+  }
 
-    if (error) {
-      this.#logError(error);
-
-      return process.exit(1);
-    }
+  #replaceWithSingleQuotes(message) {
+    return message.replace(/"/g, "'");
   }
 }

@@ -1,17 +1,17 @@
 import request from 'supertest';
 import { jest, describe, it, expect } from '@jest/globals';
 
-import app from '../../../src/app.js';
-import { AzureDevopsApi } from '../../../src/services/version-control/azure-devops/apis/azure-devops.api.js';
-import { AppError } from '../../../src/utils/index.js';
+import app from '##/frameworks/express-web-server/app.js';
+import { AzureDevopsApi } from '##/use-cases/version-control/azure-devops/apis/azure-devops.api.js';
+import { AppError } from '##/utils/utils.js';
 
 import { runDatePaginationValidationTests } from '../common-tests/date-pagination-tests.js';
 import { AZURE_PULL_REQUESTS_RESPONSE, SERVER_PULL_REQUESTS_RESPONSE } from './code-review.mock.js';
-import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '../../../src/constants/index.js';
+import { SERVER_ERROR_MESSAGE, STATUS_CODE } from '##/constants/constants.js';
 
 const { invalidRepositoryDetails, invalidAzureToken, dataNotFound } = AzureDevopsApi;
 
-jest.mock('../../../src/services/version-control/azure-devops/apis/azure-devops.api.js');
+jest.mock('##/use-cases/version-control/azure-devops/apis/azure-devops.api.js');
 
 describe('Code review metrics - get all pull requests raised to trunk branch in the repository within selected range', () => {
   const apiEndPoint = '/api/v1/metrics/code-review';

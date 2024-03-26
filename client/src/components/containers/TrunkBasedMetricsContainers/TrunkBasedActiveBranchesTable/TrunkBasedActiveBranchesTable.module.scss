@@ -1,63 +1,68 @@
-@import "../../../../styles/index.scss";
-
-.noDataMessage {
-  @include no-data-message;
-}
-
-.text {
-  @include text;
-}
-
-.branchName {
-  @include text;
-  max-width: 355px;
-  display: flex;
-  align-items: center;
-}
+@import "src/styles/index.scss";
 
 .header {
-  @include table-header;
+  @include flex-align-center;
+  justify-content: space-between;
+}
+
+.searchBox {
+  width: 370px;
 }
 
 .totalCount {
-  @include total-count;
+  color: $app-ternary-text-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
+}
+
+.tableContainer {
+  @include table-container;
+  height: 480px;
+  max-height: 480px;
+  overflow-x: hidden;
+}
+
+.table {
+  @include table;
+}
+
+.tableHead {
+  @include table-head;
+}
+
+.tableHeaderCell {
+  @include table-header-cell;
+  text-align: left;
+}
+
+.tableCell {
+  @include table-cell;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
 }
 
 .title {
-  width: 200px;
-  display: block;
   @include ellipsis;
+  display: block;
+  width: 230px;
+}
+
+.branchName,
+.pullRequest {
+  @include flex-align-center;
+  @include table-link-cell;
 }
 
 .linkIcon {
-  color: $secondary-color;
-  vertical-align: middle;
-  margin-left: 4px;
-  font-size: $small-icon-size;
+  @include table-link-icon;
 }
 
-.pullRequestURL {
-  @include pull-request-url;
-}
-
-.date {
-  @include text;
-}
-
-.paper {
-  @include paper;
-  min-height: 440px;
-}
-
-.rowEven {
-  @include row-even;
-}
-
-.rowOdd {
-  @include row-odd;
-}
-
-.branchName {
-  color: $primary-color;
-  @include url;
+.noDataMessage {
+  @include table-no-data-message;
 }

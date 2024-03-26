@@ -1,20 +1,17 @@
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 
-export const TRUNK_BASED_METRICS_TAB_VALUE = {
-  TABLE: "table",
-  GRAPH: "graph",
-};
+import { ITrukBasedMetricsTabs } from "./trunkBasedMetricsTypes";
 
-export const TRUNK_BASED_METRICS_TABS = [
+export const trunkBasedTabs: ITrukBasedMetricsTabs[] = [
   {
-    value: TRUNK_BASED_METRICS_TAB_VALUE.TABLE,
-    displayName: "TABLE VIEW",
+    label: "TABLE VIEW",
+    value: "table",
     icon: <TableRowsIcon />,
   },
   {
-    value: TRUNK_BASED_METRICS_TAB_VALUE.GRAPH,
-    displayName: "GRAPHICAL VIEW",
+    label: "GRAPHICAL VIEW",
+    value: "graph",
     icon: <BarChartOutlinedIcon />,
   },
 ];

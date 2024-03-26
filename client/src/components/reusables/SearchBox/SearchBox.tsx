@@ -1,4 +1,5 @@
 import { ChangeEvent, useId, useRef } from "react";
+import clsx from "clsx";
 
 import SearchIcon from "@mui/icons-material/Search";
 import FormControl from "@mui/material/FormControl";
@@ -9,10 +10,10 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import styles from "./SearchBox.module.scss";
 import { InfoIconTooltip } from "../InfoIconTooltip/InfoIconTooltip";
 
-interface Props {
+interface ISearchBoxProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   label: string;
-  width?: number;
+  className?: string;
   placeHolder?: string;
   isDebounced?: boolean;
   delay?: number;
@@ -24,15 +25,15 @@ interface ITimeRef {
 }
 
 export const SearchBox = ({
-  onChange,
   label,
-  width = 200,
   placeHolder = "",
+  className,
+  onChange,
   isDebounced = false,
   delay = 400,
   onClick,
-}: Props) => {
-  const inputLabelId = useId();
+}: ISearchBoxProps) => {
+  const id = useId();
   const timeoutRef = useRef<ITimeRef>({
     timerId: null,
   });
@@ -52,13 +53,12 @@ export const SearchBox = ({
   };
 
   return (
-    <div className={styles.searchBox}>
-      <FormControl sx={{ m: 1, backgroundColor: "white", margin: "8px 0px" }}>
-        <InputLabel htmlFor={inputLabelId} className={styles.label}>
+    <div className={styles.container}>
+      <FormControl className={styles.searchBox}>
+        <InputLabel htmlFor={id} className={styles.label}>
           {label}
         </InputLabel>
         <OutlinedInput
-          id="outlined-adornment-amount"
           startAdornment={
             <InputAdornment position="start">
               <SearchIcon />
@@ -66,14 +66,14 @@ export const SearchBox = ({
           }
           endAdornment={
             <InputAdornment position="end">
-              <InfoIconTooltip content={placeHolder} size="20px" />
+              <InfoIconTooltip content={placeHolder} className={styles.searchIcon} />
             </InputAdornment>
           }
           label={label}
           onChange={handleInputChange}
           onClick={onClick}
-          aria-labelledby={inputLabelId}
-          style={{ width: width }}
+          aria-labelledby={id}
+          className={clsx(className ?? styles.searchBoxInput)}
           placeholder={placeHolder}
           autoComplete="off"
         />

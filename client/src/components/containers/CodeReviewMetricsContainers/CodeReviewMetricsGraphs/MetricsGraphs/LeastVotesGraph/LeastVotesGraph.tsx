@@ -1,15 +1,15 @@
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
+import { VOTES_LABEL, VOTES_COLOR } from "src/constants/constants";
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+
 import styles from "./LeastVotesGraph.module.scss";
 import { LeastVotesGraphUtils } from "./leastVotesGraphUtils";
-import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
-import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/interfaces";
 import { PieChart } from "../../../../../reusables/MetricsGraphs/PieChart/PieChart";
-import { IPullRequestList } from "../../../CodeReviewMetricsTable/interfaces";
-
+import { IPiePlot } from "../../../../../reusables/MetricsGraphs/PieChart/pieChartTypes";
 interface Props {
-  pullRequests: IPullRequestList[];
+  pullRequests: IFetchedCodeReviewPullRequest[];
 }
 
 const GRAPH_TITLE = `Pull Requests least votes`;
@@ -28,33 +28,33 @@ export const LeastVotesGraph = ({ pullRequests }: Props) => {
 
   const plots: Record<string, IPiePlot> = {
     rejected: {
-      label: VOTE_LABEL.REJECTED,
+      label: VOTES_LABEL.REJECTED,
       value: 0,
-      color: VOTE_COLOR.REJECTED,
+      color: VOTES_COLOR.REJECTED,
       hoverText: "",
     },
     waitForAuthor: {
-      label: VOTE_LABEL.WAIT_FOR_AUTHOR,
+      label: VOTES_LABEL.WAIT_FOR_AUTHOR,
       value: 0,
-      color: VOTE_COLOR.WAIT_FOR_AUTHOR,
+      color: VOTES_COLOR.WAIT_FOR_AUTHOR,
       hoverText: "",
     },
     approvedWithSuggestions: {
-      label: VOTE_LABEL.APPROVED_WITH_SUGGESTIONS,
+      label: VOTES_LABEL.APPROVED_WITH_SUGGESTIONS,
       value: 0,
-      color: VOTE_COLOR.APPROVED_WITH_SUGGESTIONS,
+      color: VOTES_COLOR.APPROVED_WITH_SUGGESTIONS,
       hoverText: "",
     },
     approved: {
-      label: VOTE_LABEL.APPROVED,
+      label: VOTES_LABEL.APPROVED,
       value: 0,
-      color: VOTE_COLOR.APPROVED,
+      color: VOTES_COLOR.APPROVED,
       hoverText: "",
     },
     noVote: {
-      label: VOTE_LABEL.NO_VOTE,
+      label: VOTES_LABEL.NO_VOTE,
       value: 0,
-      color: VOTE_COLOR.NO_VOTE,
+      color: VOTES_COLOR.NO_VOTE,
       hoverText: "",
     },
   };
@@ -84,7 +84,7 @@ export const LeastVotesGraph = ({ pullRequests }: Props) => {
       </Tooltip>
 
       <PieChart
-        graphObject={{
+        graph={{
           plots: Object.values(plots),
           totalValue: pullRequests.length,
           graphTitle: GRAPH_TITLE,

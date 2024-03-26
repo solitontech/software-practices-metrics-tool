@@ -1,9 +1,14 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .toolTip {
-  @include tool-tip;
+  font-size: $font-size-md;
+}
+
+.infoIconContainer {
+  @include flex-align-center;
+  cursor: pointer;
 }
 
 .infoIcon {
-  @include info-icon;
+  font-size: 16px;
 }

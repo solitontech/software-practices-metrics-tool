@@ -1,51 +1,69 @@
-@import "../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.noDataMessage {
-  @include no-data-message;
+.header {
+  @include flex-align-center;
+  justify-content: space-between;
 }
 
-.tableHeader {
-  @include table-header;
-  height: 55px;
+.searchBox {
+  width: 320px;
 }
 
 .totalCount {
-  @include total-count;
+  color: $app-ternary-text-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
-.tableView {
-  @include table-view;
+.tableContainer {
+  @include table-container;
+  height: 480px;
+  max-height: 480px;
 }
 
-.paper {
-  @include paper;
-  min-height: 400px;
-  height: 100%;
-  width: 100%;
+.table {
+  @include table;
 }
 
-.linkIcon {
-  @include link-icon;
+.tableHead {
+  @include table-head;
 }
 
-.branchName {
-  @include text;
-  @include url;
-  @include flex-center;
-  max-width: 450px;
-  gap: 20px;
+.tableHeaderCell {
+  @include table-header-cell;
 }
 
-.rowEven {
-  @include row-even;
+.tableBody {
+  @include table-body;
 }
 
-.rowOdd {
-  @include row-odd;
+.tableCell {
+  @include table-cell;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
 }
 
 .title {
-  width: 400px;
-  display: block;
   @include ellipsis;
+  display: block;
+  max-width: 500px;
+}
+
+.branchName {
+  @include flex-align-center;
+  @include table-link-cell;
+}
+
+.linkIcon {
+  @include table-link-icon;
+}
+
+.noDataMessage {
+  @include table-no-data-message;
 }

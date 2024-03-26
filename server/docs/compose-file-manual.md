@@ -13,7 +13,7 @@ services:
     # Ex: software-practices-metrics-tool:1.0.0
 
     ports:
-      - 3000:3000
+      - 3498:3498
       # Maps `host port: container port`.
 
     volumes:

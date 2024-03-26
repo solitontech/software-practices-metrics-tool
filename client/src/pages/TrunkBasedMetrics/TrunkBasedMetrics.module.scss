@@ -1,26 +1,19 @@
-@import "../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.trunkBased {
-  @include metrics;
+.container {
+  height: 100%;
+  width: 100%;
 }
 
-.header {
-  @include header;
+.headerContainer {
+  @include flex-align-center;
+  color: $app-ternary-text-color;
+  height: 70px;
+  justify-content: space-between;
 }
 
-.tableDetails {
-  @include table-details;
-}
-
-.tiles {
-  @include tiles;
-}
-
-.trunkBasedTable {
-  @include metrics-table;
-  margin-top: $ternary-margin;
-}
-
-.underDevelopment {
-  @include under-development;
+.tilesContainer {
+  @include flex-row;
+  color: $app-ternary-text-color;
+  gap: $spacing-xl;
 }

@@ -1,0 +1,38 @@
+@import "src/styles/index.scss";
+
+.container {
+  @include flex-align-center;
+  gap: $spacing-md;
+}
+
+.searchBox {
+  @include flex-align-center;
+  position: relative;
+}
+
+.searchBoxInput {
+  width: 380px;
+}
+
+.chipContainer {
+  background-color: $app-primary-background-color;
+  border: 1px solid $app-secondary-border-color;
+  border-radius: $app-primary-border-radius;
+  padding: $spacing-sm;
+  position: absolute;
+  top: 50px;
+}
+
+.chipBox {
+  cursor: pointer;
+  margin: $spacing-xs;
+}
+
+.selectedChip {
+  background-color: $app-quaternary-background-color;
+  color: $app-primary-background-color;
+
+  &:hover {
+    background-color: lighten($app-quaternary-background-color, 10%);
+  }
+}

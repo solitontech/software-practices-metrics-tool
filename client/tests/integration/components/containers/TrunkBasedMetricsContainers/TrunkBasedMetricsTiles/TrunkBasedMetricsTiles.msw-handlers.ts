@@ -1,21 +1,24 @@
 import { http, HttpResponse, delay } from "msw";
 
 import {
-  IActiveBranches,
-  ITotalBranches,
-} from "../../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/interfaces";
-import { trunkBasedMetricsAPI } from "../../../../../../src/fetchers/fetchersUtils";
+  IFetchedTrunkBasedActiveBranchesResponse,
+  IFetchedTrunkBranchesResponse,
+  ApiEndPoint,
+} from "src/services/api/api";
 
-export const getBranchesHandler = (branches: ITotalBranches, delayTime: number = 0) => {
-  return http.get(trunkBasedMetricsAPI + "/branches", async () => {
+export const getBranchesHandler = (branches: IFetchedTrunkBranchesResponse, delayTime: number = 0) => {
+  return http.get(ApiEndPoint.trunkBasedTotalBranches().href, async () => {
     await delay(delayTime);
 
     return HttpResponse.json(branches);
   });
 };
 
-export const getActiveBranchesHandler = (activeBranches: IActiveBranches, delayTime: number = 0) => {
-  return http.get(trunkBasedMetricsAPI + "/activeBranches", async () => {
+export const getActiveBranchesHandler = (
+  activeBranches: IFetchedTrunkBasedActiveBranchesResponse,
+  delayTime: number = 0,
+) => {
+  return http.get(ApiEndPoint.trunkBasedActiveBranches().href, async () => {
     await delay(delayTime);
 
     return HttpResponse.json(activeBranches);

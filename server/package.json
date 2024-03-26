@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "The Software Practices Metrics Tool is an open-source project aimed at assisting teams in measuring and enhancing their adherence to industry-recommended software practices. It offers comprehensive insights into crucial practices like code review and trunk-based development, empowering teams to elevate the quality and efficiency of their projects. Presently, it supports projects housed in Azure DevOps repositories.",
   "main": "index.js",
+  "imports": {
+    "##/*": "./src/*"
+  },
   "scripts": {
-    "start:prod": "NODE_ENVIRONMENT=production node src/index.js",
-    "start:dev": "set NODE_ENVIRONMENT=development&& nodemon src/index.js",
+    "start:prod": "NODE_ENVIRONMENT=production node src/frameworks/express-web-server/index.js",
+    "start:dev": "set NODE_ENVIRONMENT=development&& nodemon src/frameworks/express-web-server/index.js",
     "test": "set NODE_ENVIRONMENT=test&& node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "test-ci": "NODE_ENVIRONMENT=test node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "format": "prettier --write \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
+    "format-check": "prettier --check \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
     "lint": "eslint \"**/*.{js,json}\" && npx markdownlint-cli \"**/*.md\"",
-    "prepare": "cd .. && husky install server/.husky",
-    "lint-staged": "lint-staged",
+    "prepare": "cd .. && husky install",
     "build:client": "node ./src/scripts/build-client.js",
     "build:docker": "node ./src/scripts/build-docker.js"
   },

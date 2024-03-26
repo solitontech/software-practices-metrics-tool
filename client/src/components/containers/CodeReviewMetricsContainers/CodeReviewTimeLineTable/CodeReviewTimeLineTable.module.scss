@@ -1,30 +1,7 @@
-@import "../../../../styles/index.scss";
-
-.noDataMessage {
-  @include no-data-message;
-}
-
-.text {
-  @include text;
-  text-align: left;
-}
-
-.paper {
-  @include paper;
-}
-
-.rowEven {
-  @include row-even;
-}
-
-.rowOdd {
-  @include row-odd;
-}
+@import "src/styles/index.scss";
 
 .tableContainer {
-  max-height: 440px;
-  width: 100%;
-  overflow-x: auto;
+  @include table-container;
 }
 
 .table {
@@ -35,10 +12,23 @@
   @include table-head;
 }
 
-.tableBody {
-  @include table-body;
+.tableHeaderCell {
+  @include table-header-cell;
+  text-align: left;
 }
 
 .tableCell {
   @include table-cell;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
+}
+
+.noDataMessage {
+  @include table-no-data-message;
 }

@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 
-import { EnvValidation, ServerConfigValidation } from '../validations/index.js';
-import { NODE_ENVIRONMENT_MODE } from '../constants/index.js';
+import { EnvValidation, ServerConfigValidation } from '../validations/validations.js';
+import { NODE_ENVIRONMENT_MODE } from '../constants/constants.js';
 
 export class ServerConfiguration {
   static #clientFilters;
@@ -18,6 +18,22 @@ export class ServerConfiguration {
   static {
     this.#loadServerConfigs();
     this.#loadEnvironmentVariables();
+  }
+
+  static get clientFilters() {
+    return this.#clientFilters;
+  }
+
+  static get clientFiltersSquads() {
+    return this.#clientFilters.squads;
+  }
+
+  static get versionControl() {
+    return this.#versionControl;
+  }
+
+  static get environmentVariables() {
+    return this.#environmentVariables;
   }
 
   static #loadServerConfigs() {
@@ -51,21 +67,5 @@ export class ServerConfiguration {
     });
 
     EnvValidation.terminateOnValidationError(this.#environmentVariables);
-  }
-
-  static get clientFilters() {
-    return this.#clientFilters;
-  }
-
-  static get clientFiltersSquads() {
-    return this.#clientFilters.squads;
-  }
-
-  static get versionControl() {
-    return this.#versionControl;
-  }
-
-  static get environmentVariables() {
-    return this.#environmentVariables;
   }
 }

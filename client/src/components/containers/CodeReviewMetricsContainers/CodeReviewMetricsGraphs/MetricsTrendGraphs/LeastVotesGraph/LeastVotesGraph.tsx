@@ -3,21 +3,26 @@ import { useState } from "react";
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
+import { VOTES_LABEL, VOTES_COLOR } from "src/constants/constants";
+import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/services/api/api";
+
 import { LEAST_VOTE_CLASS } from "./leastVotesConstants";
 import styles from "./LeastVotesGraph.module.scss";
 import { PullRequestsVotesAnalysis } from "./leastVotesGraphInterface";
 import { Monthly } from "./monthlyGraphUtils";
 import { Weekly } from "./weeklyGraphUtils";
-import { VOTE_LABEL, VOTE_COLOR } from "../../../../../../pages/CodeReviewMetrics/votesConstants";
 import { BarChart } from "../../../../../reusables/MetricsGraphs/BarChart/BarChart";
 import { TREND_VIEW, GRAPH_TYPE } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
-import { TrendView, BarMode, IBarPlot } from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
-import { IPullRequestList, Vote } from "../../../CodeReviewMetricsTable/interfaces";
+import {
+  IBarChartTrendView,
+  IBarChartMode,
+  IBarPlot,
+} from "../../../../../reusables/MetricsGraphs/BarChart/barChartTypes";
 import { GraphDropdown } from "../GraphDropdown/GraphDropdown";
 import { areDatesInSameMonthAndYear } from "../metricsTrendGraphUtils";
 
 interface Props {
-  pullRequests: IPullRequestList[];
+  pullRequests: IFetchedCodeReviewPullRequest[];
   startDate: Date;
   endDate: Date;
 }
@@ -25,7 +30,7 @@ interface Props {
 const GRAPH_TITLE = "Pull Requests least votes trend";
 const Y_AXIS_NAME = "Pull Requests count";
 const INFO_TEXT = "The least favored vote in PR's history timeline will be considered as least vote";
-const GRAPH_TOOLTIP_HEADER: Record<Vote, string> = {
+const GRAPH_TOOLTIP_HEADER: Record<keyof IFetchedPullRequestVotes, string> = {
   rejected: "Pull Requests with rejected vote",
   approved: "Pull Requests with approved vote",
   waitForAuthor: "Pull Requests with wait for author vote",
@@ -36,11 +41,11 @@ const GRAPH_TOOLTIP_HEADER: Record<Vote, string> = {
 export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Props) => {
   const isMonthlyDisabled = areDatesInSameMonthAndYear(startDate, endDate);
 
-  const defaultGraphMode = (isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY) as TrendView;
+  const defaultGraphMode = (isMonthlyDisabled ? TREND_VIEW.WEEKLY : TREND_VIEW.MONTHLY) as IBarChartTrendView;
 
-  const [trendView, setTrendView] = useState<TrendView>(defaultGraphMode);
+  const [trendView, setTrendView] = useState<IBarChartTrendView>(defaultGraphMode);
 
-  const [barMode, setBarMode] = useState<BarMode>(GRAPH_TYPE.GROUP as BarMode);
+  const [barMode, setBarMode] = useState<IBarChartMode>(GRAPH_TYPE.GROUP as IBarChartMode);
 
   const xAxisName = trendView === TREND_VIEW.WEEKLY ? "Weeks" : "Months";
 
@@ -51,45 +56,45 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
       ? Weekly.getWeeklyLeastVotes(pullRequests, startDate, endDate)
       : Monthly.getMonthlyLeastVotes(pullRequests, startDate, endDate);
 
-  const plots: Record<Vote, IBarPlot> = {
+  const plots: Record<keyof IFetchedPullRequestVotes, IBarPlot> = {
     rejected: {
-      plotName: VOTE_LABEL.REJECTED,
+      plotName: VOTES_LABEL.REJECTED,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.REJECTED,
+      color: VOTES_COLOR.REJECTED,
       hoverText: [],
     },
     waitForAuthor: {
-      plotName: VOTE_LABEL.WAIT_FOR_AUTHOR,
+      plotName: VOTES_LABEL.WAIT_FOR_AUTHOR,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.WAIT_FOR_AUTHOR,
+      color: VOTES_COLOR.WAIT_FOR_AUTHOR,
       hoverText: [],
     },
     approvedWithSuggestions: {
-      plotName: VOTE_LABEL.APPROVED_WITH_SUGGESTIONS,
+      plotName: VOTES_LABEL.APPROVED_WITH_SUGGESTIONS,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.APPROVED_WITH_SUGGESTIONS,
+      color: VOTES_COLOR.APPROVED_WITH_SUGGESTIONS,
       hoverText: [],
     },
     approved: {
-      plotName: VOTE_LABEL.APPROVED,
+      plotName: VOTES_LABEL.APPROVED,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.APPROVED,
+      color: VOTES_COLOR.APPROVED,
       hoverText: [],
     },
     noVote: {
-      plotName: VOTE_LABEL.NO_VOTE,
+      plotName: VOTES_LABEL.NO_VOTE,
       xLabels: [],
       yValues: [],
-      color: VOTE_COLOR.NO_VOTE,
+      color: VOTES_COLOR.NO_VOTE,
       hoverText: [],
     },
   };
 
-  const addPlot = (group: PullRequestsVotesAnalysis, vote: Vote, tooltipHeader: string) => {
+  const addPlot = (group: PullRequestsVotesAnalysis, vote: keyof IFetchedPullRequestVotes, tooltipHeader: string) => {
     plots[vote].xLabels.push(group.interval);
     plots[vote].yValues.push(group.pullRequestIds[vote].length);
     plots[vote].hoverText.push(selectedClass.getTooltipText(group.pullRequestIds[vote], tooltipHeader));
@@ -97,7 +102,11 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
 
   groupedLeastVoteAnalysis.forEach((group: PullRequestsVotesAnalysis) => {
     Object.keys(plots).forEach((vote) => {
-      addPlot(group, vote as Vote, GRAPH_TOOLTIP_HEADER[vote as Vote]);
+      addPlot(
+        group,
+        vote as keyof IFetchedPullRequestVotes,
+        GRAPH_TOOLTIP_HEADER[vote as keyof IFetchedPullRequestVotes],
+      );
     });
   });
 
@@ -120,7 +129,7 @@ export const LeastVotesAnalysisGraph = ({ pullRequests, startDate, endDate }: Pr
       </div>
 
       <BarChart
-        graphObject={{
+        graph={{
           plots: Object.values(plots),
           xAxisName: xAxisName,
           yAxisName: Y_AXIS_NAME,
