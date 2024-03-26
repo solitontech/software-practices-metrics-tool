@@ -18,10 +18,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Read .nvmrc
+        id: nvmrc
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./server/.nvmrc
+
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20.11.1"
+          node-version: ${{ steps.nvmrc.outputs.content }}
 
       - name: Install dependencies
         run: npm ci
@@ -33,6 +39,10 @@ jobs:
 
       - name: Check lint
         run: npm run lint
+        working-directory: ${{ env.working-directory }}
+
+      - name: Check css lint
+        run: npm run lint:css
         working-directory: ${{ env.working-directory }}
 
       - name: Check build

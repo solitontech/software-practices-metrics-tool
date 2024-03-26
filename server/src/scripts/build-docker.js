@@ -97,22 +97,22 @@ class BuildDocker {
     console.log('\nZipping release-to-production folder...');
 
     const outputPath = path.join(this.#currentDir, '/../../release-to-production.zip');
-    const output = fs.createWriteStream(outputPath);
+    const writeStream = fs.createWriteStream(outputPath);
     const compressionLevel = 9;
 
     const archive = archiver('zip', {
       zlib: { level: compressionLevel },
     });
 
-    output.on('close', function () {
+    writeStream.on('close', () => {
       console.log('\nZipped release-to-production folder successfully.');
     });
 
-    archive.on('error', function (err) {
+    archive.on('error', (err) => {
       throw err;
     });
 
-    archive.pipe(output);
+    archive.pipe(writeStream);
     archive.directory(path.join(this.#releaseToProductionDirectory), false);
     archive.finalize();
   }
