@@ -1,11 +1,11 @@
 import { ChangeEvent, useId, useRef } from "react";
-import clsx from "clsx";
 
 import SearchIcon from "@mui/icons-material/Search";
 import FormControl from "@mui/material/FormControl";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import clsx from "clsx";
 
 import styles from "./SearchBox.module.scss";
 import { InfoIconTooltip } from "../InfoIconTooltip/InfoIconTooltip";

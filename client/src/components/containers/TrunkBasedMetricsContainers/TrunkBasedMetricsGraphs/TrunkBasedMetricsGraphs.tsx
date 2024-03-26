@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 
 import { BarChart } from "src/components/components";
-import { useTrunkBranchCommits } from "src/services/api/api";
 import { useDimensions } from "src/hooks/hooks";
+import { useTrunkBranchCommits } from "src/services/api/api";
 
 import styles from "./TrunkBasedMetricsGraphs.module.scss";
 import { TrunkBasedMetricsGraphsUtils } from "./trunkBasedMetricsGraphsUtils";

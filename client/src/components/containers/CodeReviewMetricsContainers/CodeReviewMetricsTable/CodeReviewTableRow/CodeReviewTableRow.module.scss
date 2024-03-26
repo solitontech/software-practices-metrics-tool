@@ -1,4 +1,4 @@
-@import url("src/styles/index.scss");
+@import "src/styles/index.scss";
 
 .tableRow:nth-child(odd) {
   @include table-row-odd;
