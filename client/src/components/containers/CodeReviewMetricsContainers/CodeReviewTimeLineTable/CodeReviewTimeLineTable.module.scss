@@ -30,6 +30,10 @@
   @include table-row-even;
 }
 
+.voteIcon {
+  display: flex;
+}
+
 .noDataMessage {
   @include table-no-data-message;
 }

@@ -1,6 +1,6 @@
 import styles from "./CodeReviewTableHeader.module.scss";
 import { ICodeReviewTableHeaderProps } from "./codeReviewTableHeaderTypes";
-import { FILTER_COLUMN_VOTES } from "../codeReviewMetricsTableConstants";
+import { FILTER_COLUMN_VOTES, FILTER_COLUMN_VOTES_HISTORY } from "../codeReviewMetricsTableConstants";
 import { ICodeReviewTableVotesFilterColumn } from "../codeReviewMetricsTableTypes";
 
 //TODO: fix the type conversion
@@ -29,7 +29,11 @@ export const CodeReviewTableHeader = ({
             handleSort={(order) => handleSort(column.id, order)}
             handleFilterReset={handleFilterReset}
             handleFilterChange={(vote, value) => {
-              handleFilterChange(column.id as ICodeReviewTableVotesFilterColumn, vote, value);
+              const isVotesColumn = column.id === FILTER_COLUMN_VOTES || column.id === FILTER_COLUMN_VOTES_HISTORY;
+
+              if (isVotesColumn) {
+                handleFilterChange(column.id, vote, value);
+              }
             }}
           />
         )}
