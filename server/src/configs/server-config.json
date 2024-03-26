@@ -1,19 +1,8 @@
 {
   "targetBranch": "main",
   "organization": "Soliton",
-  "projectName": "SolitonCentral",
-  "repositoryId": "SolitonCentral",
-  "authToken": "yerd4qzqnchk7itbubsjj6sbj6cgadk7dgeheegelmkhjmtoqkta",
-  "squads": [
-    {
-      "squadName": "SPMT",
-      "developers": {
-        "a28a5b06-3a22-6ea6-8811-e8d714f18dc6": "Roshana Ananthkumar",
-        "a34858fa-1fb1-66cf-9aa0-f3542725d865": "Vidhyaprabha Vasudevan"
-      },
-      "reviewers": {
-        "3c66f2d9-f079-65fd-af3d-0650c193e580": "Sathish Thangavel"
-      }
-    }
-  ]
+  "projectName": "my_project",
+  "repositoryId": "my_repository",
+  "authToken": "my_auth_token",
+  "squads": []
 }
