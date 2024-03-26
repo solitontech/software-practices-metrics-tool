@@ -17,7 +17,7 @@ export class ModuleImport {
   }
 
   static async importServerModules() {
-    await import(`${this.#activeCodePath}/${this.#entryFile}`);
+    await import(`${this.#activeCodePath}/frameworks/express-web-server/${this.#entryFile}`);
 
     const ServerConfigurationModule = await import(`${this.#activeCodePath}/configs/server.config.js`);
 
