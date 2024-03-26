@@ -3,13 +3,14 @@
 .container {
   background-color: $app-secondary-background-color;
   height: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
   padding: 0 $spacing-xl;
   width: 100%;
 }
 
 .header {
   @include flex-align-center;
+
   height: 65px;
   justify-content: space-between;
 }

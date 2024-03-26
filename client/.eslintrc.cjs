@@ -49,6 +49,12 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "import/no-unresolved": [
+      "error",
+      {
+        ignore: ["^msw/.+"],
+      },
+    ],
   },
   settings: {
     react: {

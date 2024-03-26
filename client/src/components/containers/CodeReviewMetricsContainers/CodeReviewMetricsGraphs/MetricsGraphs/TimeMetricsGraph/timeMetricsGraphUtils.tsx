@@ -1,14 +1,14 @@
-import { SECONDS_IN_ONE_HOUR } from "src/constants/constants";
-
-import { ITimeMetricsPullRequest } from "./timeMetricsGraphInterfaces";
 import {
+  SECONDS_IN_ONE_HOUR,
   MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
   MAX_PULL_REQUEST_ID_ROWS,
   DOUBLE_SPACE,
   LINE_BREAKER,
   TAB_SPACE,
-} from "../../metricsConstants";
+} from "src/constants/constants";
+
+import { ITimeMetricsPullRequest } from "./timeMetricsGraphInterfaces";
 
 const MAX_CHARACTERS = MAX_CHARACTERS_IN_LINE_IN_TOOLTIP;
 

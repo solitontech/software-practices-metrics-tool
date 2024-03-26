@@ -2,6 +2,7 @@
 
 .tileContainer {
   @include flex-align-center;
+
   gap: $spacing-sm;
 }
 
@@ -15,9 +16,9 @@
 }
 
 .navIcon {
-  font-size: $icon-size-lg;
-  cursor: pointer;
   color: $app-primary-anchor-color;
+  cursor: pointer;
+  font-size: $icon-size-lg;
 }
 
 .dialogIcon {

@@ -1,8 +1,8 @@
+import { HistogramChart } from "src/components/components";
+import { TRACE_COLOR } from "src/constants/constants";
+
 import { ITimeMetricsGraph, ITimeMetricsGraphOptions, ITimeMetricsPullRequest } from "./timeMetricsGraphInterfaces";
 import { TimeMetricsUtils } from "./timeMetricsGraphUtils";
-import { HistogramChart } from "../../../../../reusables/MetricsGraphs/Histogram/Histogram";
-import { TRACE_COLOR } from "../../metricsConstants";
-
 interface Props {
   graphObject: ITimeMetricsGraph;
   averageTime: number | string;

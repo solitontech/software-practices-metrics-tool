@@ -10,6 +10,7 @@
 
 .toolbar {
   @include flex-column;
+
   align-items: center;
   gap: $spacing-sm;
   height: 100%;

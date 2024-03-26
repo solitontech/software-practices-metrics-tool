@@ -4,13 +4,14 @@
   background: $app-quaternary-background-color;
   color: $app-quaternary-anchor-color;
   height: 100%;
+  padding-top: $spacing-sm;
   position: relative;
   width: 180px;
-  padding-top: $spacing-sm;
 }
 
 .toolbar {
   @include flex-align-center;
+
   height: 50px;
   justify-content: space-around;
 }
@@ -36,6 +37,6 @@
   color: $app-quaternary-anchor-color;
   font-size: $font-size-xmd;
   font-weight: $semi-bold-font-weight;
-  text-align: center;
   margin: $spacing-lg 0;
+  text-align: center;
 }

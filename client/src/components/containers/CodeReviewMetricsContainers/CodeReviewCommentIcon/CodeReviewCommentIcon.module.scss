@@ -2,6 +2,7 @@
 
 .container {
   @include flex-align-center;
+
   color: $app-ternary-text-color;
   gap: $spacing-xs;
   justify-content: left;

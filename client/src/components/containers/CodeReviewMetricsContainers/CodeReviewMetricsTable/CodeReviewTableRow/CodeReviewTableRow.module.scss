@@ -19,6 +19,7 @@
 
 .prTitle {
   @include ellipsis;
+
   width: 300px;
 }
 
@@ -35,6 +36,7 @@
 
 .tag {
   @include ellipsis;
+
   background-color: $app-ternary-background-color;
   font-size: $font-size-md;
   height: fit-content;
@@ -47,11 +49,13 @@
 
 .currentVotesList {
   @include flex-align-center;
+
   gap: $spacing-xs;
 }
 
 .votesTimeLine {
   @include flex-align-center;
+
   gap: $spacing-xs;
 }
 

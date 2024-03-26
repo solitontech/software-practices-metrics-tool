@@ -1,0 +1,10 @@
+@import "src/styles/index.scss";
+
+.graphContainer {
+  @include flex-justify-center;
+
+  flex-wrap: wrap;
+  gap: 50px;
+  height: 100%;
+  overflow: auto;
+}

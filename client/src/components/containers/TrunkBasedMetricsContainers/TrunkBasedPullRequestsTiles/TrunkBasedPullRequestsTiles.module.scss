@@ -2,11 +2,13 @@
 
 .container {
   @include flex-column;
+
   gap: $spacing-xl;
 }
 
 .tileContainer {
   @include flex-align-center;
+
   gap: $spacing-sm;
 }
 

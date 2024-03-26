@@ -5,10 +5,10 @@
 }
 
 .graphButtonContainer {
-  display: flex;
   align-items: center;
+  display: flex;
+  left: 75%;
   position: absolute;
   top: 33px;
-  left: 75%;
   z-index: 1;
 }

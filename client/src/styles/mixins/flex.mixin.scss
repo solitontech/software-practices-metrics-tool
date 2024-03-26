@@ -9,8 +9,8 @@
 }
 
 @mixin flex-align-center {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 @mixin flex-justify-center {

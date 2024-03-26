@@ -2,11 +2,13 @@
 
 .container {
   @include flex-align-center;
+
   gap: $spacing-md;
 }
 
 .searchBox {
   @include flex-align-center;
+
   position: relative;
 }
 

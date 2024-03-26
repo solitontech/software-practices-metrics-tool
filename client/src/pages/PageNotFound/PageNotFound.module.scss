@@ -2,14 +2,15 @@
 
 .pageNotFound {
   @include flex-column-center;
+
   width: 100%;
 }
 
 .pageNotFoundText {
-  margin: $spacing-lg 0 $spacing-lg;
   color: $app-quaternary-text-color;
   font-size: $font-size-xxxl;
   font-weight: $medium-font-weight;
+  margin: $spacing-lg 0 $spacing-lg;
 }
 
 .description {

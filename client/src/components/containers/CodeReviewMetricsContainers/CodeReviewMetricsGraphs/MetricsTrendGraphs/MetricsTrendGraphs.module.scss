@@ -1,12 +1,12 @@
 @import "src/styles/index.scss";
 
 .graphs {
-  width: 100%;
-  margin-top: $spacing-xs;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  overflow: scroll;
   gap: 50px;
   height: calc(100% - 90px);
+  justify-content: center;
+  margin-top: $spacing-xs;
+  overflow: auto;
+  width: 100%;
 }
