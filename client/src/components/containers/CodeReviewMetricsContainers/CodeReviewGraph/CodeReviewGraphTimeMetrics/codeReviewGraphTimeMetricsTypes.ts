@@ -1,17 +1,17 @@
-export interface ITimeMetricsPullRequest {
+export interface ICodeReviewGraphTimeMetricsPullRequest {
   pullRequestId: number;
   metricsTime: number;
 }
 
-export interface ITimeMetricsGraph {
-  pullRequests: ITimeMetricsPullRequest[];
+export interface ICodeReviewGraphTimeMetricsGraph {
+  pullRequests: ICodeReviewGraphTimeMetricsPullRequest[];
   hoursScale?: number;
   maximumHours?: number;
   traceColor?: string;
   metricsName: string;
 }
 
-export interface ITimeMetricsGraphOptions {
+export interface ICodeReviewGraphTimeMetricsGraphOptions {
   xAxisName?: string;
   yAxisName?: string;
   graphTitle?: string;
