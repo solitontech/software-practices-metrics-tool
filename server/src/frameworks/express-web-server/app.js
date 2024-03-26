@@ -44,7 +44,7 @@ app.use(router);
 
 // unhandled routes send client app for good user experience
 app.get('*', (req, res) => {
-  res.sendFile(path.join(dirName, '../dist/index.html'));
+  res.sendFile(path.join(dirName, '../../../dist/index.html'));
 });
 
 // express global error handler for api routes
