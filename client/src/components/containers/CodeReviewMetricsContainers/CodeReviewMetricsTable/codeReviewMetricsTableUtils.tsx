@@ -10,71 +10,63 @@ export class CodeReviewMetricsTableUtil {
     }, 0);
   }
 
-  //TODO: refactor this function
   static sortPullRequests(pullRequests: IFetchedCodeReviewPullRequest[], sort: Record<string, string>) {
-    return pullRequests.sort(
-      (firstPullRequest: IFetchedCodeReviewPullRequest, secondPullRequest: IFetchedCodeReviewPullRequest) => {
-        for (const key in sort) {
-          if (sort[key] === SORT_MAP.NO_SORT) continue;
+    return pullRequests.sort((firstPullRequest, secondPullRequest) => {
+      for (const key in sort) {
+        if (sort[key] === SORT_MAP.NO_SORT) continue;
 
-          let firstValue = firstPullRequest[key as keyof IFetchedCodeReviewPullRequest];
-          let secondValue = secondPullRequest[key as keyof IFetchedCodeReviewPullRequest];
+        let firstValue = firstPullRequest[key as keyof IFetchedCodeReviewPullRequest];
+        let secondValue = secondPullRequest[key as keyof IFetchedCodeReviewPullRequest];
 
-          // If they are, return 0, indicating that both values are considered equal.
-          if (!firstValue && !secondValue) {
-            return 0;
-          }
+        // 0 - indicates that both values are considered equal.
+        if (!firstValue && !secondValue) {
+          return 0;
+        }
 
-          /*If the above condition is not met, check if firstValue is falsy.
-        If it is, return 1, indicating that firstValue is considered greater than secondValue.
-        This sorts it to the end or "right" side in ascending order.*/
-          if (!firstValue) {
+        // 1 - indicates that firstValue is considered greater than secondValue.
+        // This sorts it to the end or "right" side in ascending order.
+        if (!firstValue) {
+          return 1;
+        }
+
+        // -1, indicates that secondValue is considered greater than firstValue.
+        // This sorts it to the end or "right" side in descending order.
+        if (!secondValue) {
+          return -1;
+        }
+
+        if (key === "comments") {
+          firstValue = firstPullRequest.comments.totalComments;
+          secondValue = secondPullRequest.comments.totalComments;
+        }
+
+        if (sort[key] === SORT_MAP.ASCENDING) {
+          if (firstValue < secondValue) {
             return 1;
           }
 
-          /*If none of the previous conditions are met, check if secondValue is falsy.
-        If it is, return -1, indicating that secondValue is considered greater than firstValue.
-        This sorts it to the end or "right" side in descending order.*/
-          if (!secondValue) {
+          if (firstValue > secondValue) {
             return -1;
-          }
-
-          if (key === "comments") {
-            firstValue = firstPullRequest.comments.totalComments;
-            secondValue = secondPullRequest.comments.totalComments;
-          }
-
-          if (sort[key] === SORT_MAP.ASCENDING) {
-            if (firstValue < secondValue) {
-              return 1;
-            }
-
-            if (firstValue > secondValue) {
-              return -1;
-            }
-          }
-
-          if (sort[key] === SORT_MAP.DESCENDING) {
-            if (firstValue === null) {
-              return 1;
-            }
-
-            //1 means that the first element should be sorted before the second element.
-            if (firstValue > secondValue) {
-              return 1;
-            }
-
-            //-1 means that the second element should be sorted before the first element.
-            if (firstValue < secondValue) {
-              return -1;
-            }
           }
         }
 
-        //0 means that the relative order of first and second element should remain unchanged.
-        return 0;
-      },
-    );
+        if (sort[key] === SORT_MAP.DESCENDING) {
+          if (firstValue === null) {
+            return 1;
+          }
+
+          if (firstValue > secondValue) {
+            return 1;
+          }
+
+          if (firstValue < secondValue) {
+            return -1;
+          }
+        }
+      }
+
+      return 0;
+    });
   }
 
   static #getColumnNameToFilter(
