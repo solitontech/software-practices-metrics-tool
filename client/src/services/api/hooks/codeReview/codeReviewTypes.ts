@@ -21,7 +21,7 @@ export interface IFetchedPullRequestVotesTimeline {
   id: string;
   author: string;
   vote: keyof IFetchedPullRequestVotes;
-  timeOfVote: Date; //TODO: date is "string format" in the API and add this field wit null type
+  timeOfVote: string | null;
 }
 
 export interface IFetchedCodeReviewPullRequest {

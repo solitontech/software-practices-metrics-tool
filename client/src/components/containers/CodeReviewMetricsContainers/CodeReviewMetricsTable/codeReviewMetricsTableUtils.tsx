@@ -4,6 +4,12 @@ import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/ser
 import { ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
 
 export class CodeReviewMetricsTableUtil {
+  static getTotalComments(pullRequests: IFetchedCodeReviewPullRequest[]) {
+    return pullRequests.reduce((total, { comments }) => {
+      return total + comments.totalComments;
+    }, 0);
+  }
+
   //TODO: refactor this function
   static sortPullRequests(pullRequests: IFetchedCodeReviewPullRequest[], sort: Record<string, string>) {
     return pullRequests.sort(
@@ -71,16 +77,27 @@ export class CodeReviewMetricsTableUtil {
     );
   }
 
-  //TODO: refactor this function
-  static getFilteredPullRequests = (
+  static #getColumnNameToFilter(
+    filters: Record<ICodeReviewTableVotesFilterColumn, Record<keyof IFetchedPullRequestVotes, boolean>>,
+  ) {
+    return Object.keys(filters).find((key) => {
+      const filter = filters[key as ICodeReviewTableVotesFilterColumn];
+
+      return Object.keys(filter).some((vote) => filter[vote as keyof IFetchedPullRequestVotes]);
+    }) as ICodeReviewTableVotesFilterColumn | null;
+  }
+
+  static #hasSelectedVotes(votes: IFetchedPullRequestVotes, votesToFilter: (keyof IFetchedPullRequestVotes)[]) {
+    const selectedVotes = votesToFilter.filter((vote) => votes[vote] > 0);
+
+    return selectedVotes.length > 0;
+  }
+
+  static getFilteredPullRequests(
     pullRequests: IFetchedCodeReviewPullRequest[],
     filters: Record<ICodeReviewTableVotesFilterColumn, Record<keyof IFetchedPullRequestVotes, boolean>>,
-  ) => {
-    const columnNameToFilter = Object.keys(filters).find((filterKey: string) => {
-      const filter = filters[filterKey as ICodeReviewTableVotesFilterColumn];
-
-      return Object.keys(filter).some((vote: string) => filter[vote as keyof IFetchedPullRequestVotes]);
-    }) as ICodeReviewTableVotesFilterColumn | null;
+  ) {
+    const columnNameToFilter = this.#getColumnNameToFilter(filters);
 
     if (!columnNameToFilter) {
       return pullRequests;
@@ -96,21 +113,7 @@ export class CodeReviewMetricsTableUtil {
     return pullRequests.filter((pullRequest) => {
       const votes = pullRequest[columnNameToFilter];
 
-      if (!votes) {
-        return false;
-      }
-
-      const selectedVotes = votesToFilter.filter((vote) => {
-        return votes[vote as keyof IFetchedPullRequestVotes] > 0;
-      });
-
-      return selectedVotes.length > 0;
+      return votes && this.#hasSelectedVotes(votes, votesToFilter as Array<keyof IFetchedPullRequestVotes>);
     });
-  };
-
-  static getTotalComments(pullRequests: IFetchedCodeReviewPullRequest[]) {
-    return pullRequests.reduce((total, { comments }) => {
-      return total + comments.totalComments;
-    }, 0);
   }
 }
