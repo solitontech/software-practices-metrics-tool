@@ -191,18 +191,11 @@ A commit message should consist of the following components:
 - **Type:** The type of the commit, indicating the nature of the changes (e.g., feat, fix, docs, style, refactor, test, chore).
 - **Scope:** The scope of the changes, indicating the affected module, feature, or area of the project.
 - **Subject:** A brief and descriptive summary of the changes made.
-- **Body:** Additional information about the changes, if necessary.
-- **Footer:** Additional metadata or references, such as issue tracker IDs or breaking changes.
 
 The commit message should follow the format:
 
 ```markdown
     <type>(<scope>): <subject>
-    <BLANK LINE>
-
-    <body>
-    <BLANK LINE>
-    <footer>
 ```
 
 #### Revert
@@ -220,17 +213,3 @@ The type of commit indicates the nature of the changes. Common types include:
 - **refactor:** Code refactorings.
 - **test:** Adding or updating tests.
 - **chore:** Maintenance tasks, tooling changes, or other non-production code changes.
-
-#### Subject
-
-The subject line should be concise and descriptive, summarizing the changes made in the commit.
-
-#### Body
-
-The body of the commit message should provide more detailed information about the changes,
- explaining the reasoning behind them if necessary.
-
-#### Footer
-
-The footer of the commit message can contain additional metadata or references,
- such as issue tracker IDs or breaking changes.
