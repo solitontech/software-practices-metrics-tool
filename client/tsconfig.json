@@ -22,7 +22,7 @@
     "noFallthroughCasesInSwitch": true,
 
     /* absolute path imports */
-     "baseUrl": ".",
+    "baseUrl": ".",
     "paths": {
       "src/*": ["src/*"]
     }
