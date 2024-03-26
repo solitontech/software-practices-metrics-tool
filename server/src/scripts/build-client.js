@@ -9,7 +9,6 @@ class BuildClient {
   static #serverDirectory;
 
   static #dirName = dirname(fileURLToPath(import.meta.url));
-  static #clientTrunkBranch = 'main';
 
   static {
     this.#clientDirectory = path.join(this.#dirName, '../../../client');
@@ -18,8 +17,6 @@ class BuildClient {
 
   static startBuild() {
     this.#changeToClientDirectory();
-    this.#switchClientBranchToMain();
-    this.#pullLatestClientChanges();
     this.#installClientNodeModules();
     this.#startClientBuild();
     this.#copyClientBuildToServerDirectory();
@@ -31,27 +28,7 @@ class BuildClient {
     process.chdir(this.#clientDirectory);
   }
 
-  static #switchClientBranchToMain() {
-    console.log(chalk.grey(`\nSwitching to ${this.#clientTrunkBranch} branch in Client directory\n`));
-
-    execSync(`git checkout ${this.#clientTrunkBranch}`, { stdio: 'inherit' });
-  }
-
-  static #pullLatestClientChanges() {
-    console.log(chalk.grey(`\nPulling ${this.#clientTrunkBranch} branch latest changes in Client directory\n`));
-
-    execSync(`git pull origin ${this.#clientTrunkBranch}`, { stdio: 'inherit' });
-  }
-
   static #installClientNodeModules() {
-    const nodeModulesPath = path.join(this.#clientDirectory, 'node_modules');
-
-    if (fs.existsSync(nodeModulesPath)) {
-      return console.log(
-        chalk.grey('\nnode_modules folder already present in Client directory, so skipping npm install\n')
-      );
-    }
-
     console.log(chalk.grey(`\nInstalling Client directory node_modules...`));
 
     execSync(`npm install`, { stdio: 'inherit' });
