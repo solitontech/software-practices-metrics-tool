@@ -10,7 +10,6 @@ interface ICodeReviewTimeLineTableProps {
   timeLine: IFetchedPullRequestVotesTimeline[];
 }
 
-//TODO: fix sticky header issue & CustomVote alignment
 export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTableProps) => {
   return (
     <div className={styles.tableContainer}>
@@ -39,7 +38,7 @@ export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTablePr
                     {row.author}
                   </td>
                   <td className={styles.tableCell}>{getFormattedDateWithTime(row.timeOfVote)}</td>
-                  <td className={styles.tableCell}>
+                  <td className={clsx(styles.voteIcon, styles.tableCell)}>
                     <CustomVote imgSrc={votesImage[row.vote]} tooltipText={votesLabel[row.vote]} />
                   </td>
                 </tr>
