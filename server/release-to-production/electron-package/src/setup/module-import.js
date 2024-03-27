@@ -27,4 +27,12 @@ export class ModuleImport {
   static get serverPort() {
     return this.#ServerConfiguration.environmentVariables.port;
   }
+
+  static async getToolVersion() {
+    const ServerConfigurationModule = await import(`${this.#activeCodePath}/configs/server.config.js`);
+
+    const serverConfiguration = ServerConfigurationModule.ServerConfiguration;
+
+    return serverConfiguration.environmentVariables.productionDockerImageVersion;
+  }
 }

@@ -1,4 +1,4 @@
-name: Build and Release
+name: Docker Production Release
 
 on:
   workflow_dispatch:
@@ -40,8 +40,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: release-to-production
-          path: ./${{ env.working-directory }}/release-to-production.zip
+          name: software-practices-metrics-tool
+          path: ./${{ env.working-directory }}/software-practices-metrics-tool.zip
 
   release:
     needs: build
@@ -54,7 +54,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: release-to-production
+          name: software-practices-metrics-tool
 
       - name: Read environment variables
         id: dotenv
@@ -63,7 +63,7 @@ jobs:
           path: server/src/configs/.env
 
       - name: Rename artifact
-        run: mv release-to-production.zip software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+        run: mv software-practices-metrics-tool.zip docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
 
       - name: Delete existing release with version {${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}}
         uses: cb80/delrel@latest
@@ -76,5 +76,5 @@ jobs:
         with:
           tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
           name: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
-          artifacts: ./software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+          artifacts: ./docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}

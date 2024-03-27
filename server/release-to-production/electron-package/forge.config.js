@@ -20,6 +20,7 @@ export const makers = [
     name: '@electron-forge/maker-squirrel',
     config: {
       setupIcon: iconPath,
+      setupExe: `software-practices-metrics-tool.exe`,
     },
   },
   {

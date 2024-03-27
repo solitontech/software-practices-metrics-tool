@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  server-test:
+  server-ci:
     runs-on: ubuntu-latest
 
     env:

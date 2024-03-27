@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  client-build-and-test:
+  client-ci:
     runs-on: ubuntu-latest
 
     env:

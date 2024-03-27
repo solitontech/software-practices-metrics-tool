@@ -11,7 +11,9 @@ class BuildDocker {
   static #dockerImageName;
 
   static #currentDir = dirname(fileURLToPath(import.meta.url));
-  static #dockerPackageDir = path.join(this.#currentDir, '/../../release-to-production/docker-package');
+  static #dockerPackageDir = path.join(this.#currentDir, '../../release-to-production/docker-package');
+  static sourceDirectoryPath = path.join(this.#currentDir, '../../src');
+  static serverConfigPath = path.join(this.sourceDirectoryPath, 'configs/server-config.json');
 
   static {
     const imageVersion = ServerConfiguration.environmentVariables.productionDockerImageVersion;
@@ -60,8 +62,8 @@ class BuildDocker {
   static #createTarFileFromImage() {
     console.log(chalk.grey('\nCreating tar file from builded docker image...'));
 
-    const [tarFileName] = this.#dockerImageName.split(':');
-    const outputPath = path.join(this.#dockerPackageDir, `${tarFileName}.tar`);
+    const [tarFileName, version] = this.#dockerImageName.split(':');
+    const outputPath = path.join(this.#dockerPackageDir, `${tarFileName}-v${version}.tar`);
     const command = `docker save -o ${outputPath} ${this.#dockerImageName}`;
 
     execSync(command);
@@ -96,9 +98,11 @@ class BuildDocker {
   }
 
   static #zipReleaseFolder() {
-    console.log('\nZipping release-to-production folder...');
+    console.log('\nZipping docker-package folder...');
 
-    const outputPath = path.join(this.#currentDir, '/../../release-to-production.zip');
+    this.#copyServerConfigJson();
+
+    const outputPath = path.join(this.#currentDir, '../../software-practices-metrics-tool.zip');
     const writeStream = fs.createWriteStream(outputPath);
     const compressionLevel = 9;
 
@@ -107,7 +111,7 @@ class BuildDocker {
     });
 
     writeStream.on('close', () => {
-      console.log('\nZipped release-to-production folder successfully.');
+      console.log('\nZipped docker-package folder successfully.');
     });
 
     archive.on('error', (err) => {
@@ -117,6 +121,14 @@ class BuildDocker {
     archive.pipe(writeStream);
     archive.directory(path.join(this.#dockerPackageDir), false);
     archive.finalize();
+  }
+
+  static #copyServerConfigJson() {
+    console.log(chalk.grey('\nCopying server-config.json file to docker-package...'));
+
+    fs.copyFileSync(this.serverConfigPath, path.join(this.#dockerPackageDir, 'server-config.json'));
+
+    console.log(chalk.green('\nserver-config.json file copied to docker-package successfully.'));
   }
 }
 
