@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 import archiver from 'archiver';
 
-import { DirectoryService } from '../setup/index.js';
+import { DirectoryService, ModuleImport } from '../setup/index.js';
 
 class Build {
   static #currentDirname = dirname(fileURLToPath(import.meta.url));
@@ -18,7 +18,24 @@ class Build {
 
   static #electronOutDirectoryPath = path.join(this.#electronPackageDirectoryPath, 'out');
   static #electronReleaseDirectoryPath = path.join(this.#electronPackageDirectoryPath, 'electron-dist');
-  static #serverConfigFilePath = path.join(this.#electronPackageDirectoryPath, '../../src/configs/server-config.json');
+  static #serverConfigFilePath = path.join(this.#serverPackageJsonPath, '../src/configs/server-config.json');
+
+  static async startBuild() {
+    try {
+      this.#createBackUpPackageJsonForElectron();
+      this.#copyDirectoriesFromServerToElectronPackage();
+      this.#settingProductionEnvironmentForElectronPackage();
+      this.#mergeDependenciesFromServerToElectron();
+      this.#installDependenciesInsideElectron();
+      this.#buildElectron();
+      await this.#zipReleaseFolder();
+    } catch (error) {
+      console.error(chalk.red('Build process failed:', error));
+    } finally {
+      this.#deleteDirectoriesCopiedFromServerInElectron();
+      this.#restoreElectronPackageJson();
+    }
+  }
 
   static #createBackUpPackageJsonForElectron() {
     console.log(chalk.grey('\nCreating backup of package.json & package.lock.json in electron directory\n'));
@@ -32,7 +49,11 @@ class Build {
   }
 
   static #copyDirectoriesFromServerToElectronPackage() {
-    console.log(chalk.grey('\nCopying src , docs and dist directories of server into electron-package\n'));
+    console.log(
+      chalk.grey(
+        '\nCopying src , docs and dist directories & server-config.json file of server into electron-package\n'
+      )
+    );
 
     // Copy src directory in server to server directory in electron-package
     DirectoryService.copyDirectory(
@@ -52,9 +73,15 @@ class Build {
       path.join(this.#electronPackageDirectoryPath, 'server/docs')
     );
 
+    // Copy server-config.json file in server to server directory in electron-package
+    console.log(this.#serverConfigFilePath);
     DirectoryService.copyFile(this.#serverConfigFilePath, this.#electronReleaseDirectoryPath);
 
-    console.log(chalk.green('\nsrc ,docs and dist directories of server copied successfully into electron-package\n'));
+    console.log(
+      chalk.green(
+        '\nsrc ,docs and dist directories & server-config.json file of server copied successfully into electron-package\n'
+      )
+    );
   }
 
   static #settingProductionEnvironmentForElectronPackage() {
@@ -104,6 +131,54 @@ class Build {
     console.log(chalk.green('\nElectron build successfully\n'));
   }
 
+  static async #zipReleaseFolder() {
+    console.log('\nZipping electron-dist folder...');
+
+    await this.#copyInstallerToElectronDist();
+
+    const outputPath = path.join(this.#electronPackageDirectoryPath, 'software-practices-metrics-tool.zip');
+    const writeStream = fs.createWriteStream(outputPath);
+    const compressionLevel = 9;
+
+    const archive = archiver('zip', {
+      zlib: { level: compressionLevel },
+    });
+
+    return new Promise((resolve, reject) => {
+      writeStream.on('close', function () {
+        console.log('\nZipped electron-dist folder successfully.');
+        resolve();
+      });
+
+      archive.on('error', function (err) {
+        reject(err);
+      });
+
+      archive.pipe(writeStream);
+      archive.directory(path.join(this.#electronReleaseDirectoryPath), false);
+      archive.finalize();
+    });
+  }
+
+  static async #copyInstallerToElectronDist() {
+    console.log(chalk.grey('\nCopying installer directory to electron-dist\n'));
+
+    const installerFilePath = path.join(
+      this.#electronOutDirectoryPath,
+      'make/squirrel.windows/x64/software-practices-metrics-tool.exe'
+    );
+
+    DirectoryService.copyFile(
+      installerFilePath,
+      path.join(
+        this.#electronReleaseDirectoryPath,
+        `software-practices-metrics-tool-v${await ModuleImport.getToolVersion()}.exe`
+      )
+    );
+
+    console.log(chalk.green('\nInstaller directory copied to electron-dist successfully\n'));
+  }
+
   static #deleteDirectoriesCopiedFromServerInElectron() {
     console.log(chalk.grey('\nDeleting copied server directory in electron-package\n'));
 
@@ -124,62 +199,6 @@ class Build {
     fs.unlinkSync(this.#tempElectronPackageLockJsonPath);
 
     console.log(chalk.green('\nRestored package.json in electron-package successfully\n'));
-  }
-
-  static async #zipReleaseFolder() {
-    console.log('\nZipping release-to-production folder...');
-
-    this.#copyInstallerToElectronDist();
-
-    const outputPath = path.join(this.#electronPackageDirectoryPath, 'electron-dist.zip');
-    const output = fs.createWriteStream(outputPath);
-    const compressionLevel = 9;
-
-    const archive = archiver('zip', {
-      zlib: { level: compressionLevel },
-    });
-
-    return new Promise((resolve, reject) => {
-      output.on('close', function () {
-        console.log('\nZipped release-to-production folder successfully.');
-        resolve();
-      });
-
-      archive.on('error', function (err) {
-        reject(err);
-      });
-
-      archive.pipe(output);
-      archive.directory(path.join(this.#electronReleaseDirectoryPath), false);
-      archive.finalize();
-    });
-  }
-
-  static #copyInstallerToElectronDist() {
-    console.log(chalk.grey('\nCopying installer directory to electron-dist\n'));
-
-    const makeFolderPath = path.join(this.#electronOutDirectoryPath, 'make');
-
-    DirectoryService.copyDirectory(makeFolderPath, this.#electronReleaseDirectoryPath);
-
-    console.log(chalk.green('\nInstaller directory copied to electron-dist successfully\n'));
-  }
-
-  static async startBuild() {
-    try {
-      this.#createBackUpPackageJsonForElectron();
-      this.#copyDirectoriesFromServerToElectronPackage();
-      this.#settingProductionEnvironmentForElectronPackage();
-      this.#mergeDependenciesFromServerToElectron();
-      this.#installDependenciesInsideElectron();
-      this.#buildElectron();
-      await this.#zipReleaseFolder();
-    } catch (error) {
-      console.error(chalk.red('Build process failed:', error));
-    } finally {
-      this.#deleteDirectoriesCopiedFromServerInElectron();
-      this.#restoreElectronPackageJson();
-    }
   }
 }
 

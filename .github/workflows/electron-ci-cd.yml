@@ -45,8 +45,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: electron-dist
-          path: ./${{ env.electron-working-directory }}/electron-dist.zip
+          name: software-practices-metrics-tool
+          path: ./${{ env.electron-working-directory }}/software-practices-metrics-tool.zip
 #   release:
 #     needs: build
 #     runs-on: ubuntu-latest
