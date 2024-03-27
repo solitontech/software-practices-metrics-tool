@@ -1,4 +1,4 @@
-name: Build and Release
+name: Docker Production Release
 
 on:
   workflow_dispatch:

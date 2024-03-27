@@ -2,17 +2,23 @@ import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
+import archiver from 'archiver';
 
 import { DirectoryService } from '../setup/index.js';
 
 class Build {
   static #currentDirname = dirname(fileURLToPath(import.meta.url));
   static #electronPackageDirectoryPath = path.join(this.#currentDirname, '../..');
+
   static #electronPackageJsonPath = path.join(this.#electronPackageDirectoryPath, 'package.json');
   static #electronPackageLockJsonPath = path.join(this.#electronPackageDirectoryPath, 'package-lock.json');
   static #tempElectronPackageJsonPath = path.join(this.#electronPackageDirectoryPath, 'package.temp.json');
   static #tempElectronPackageLockJsonPath = path.join(this.#electronPackageDirectoryPath, 'package-lock.temp.json');
   static #serverPackageJsonPath = path.join(this.#electronPackageDirectoryPath, '../../package.json');
+
+  static #electronOutDirectoryPath = path.join(this.#electronPackageDirectoryPath, 'out');
+  static #electronReleaseDirectoryPath = path.join(this.#electronPackageDirectoryPath, 'electron-dist');
+  static #serverConfigFilePath = path.join(this.#electronPackageDirectoryPath, '../../src/configs/server-config.json');
 
   static #createBackUpPackageJsonForElectron() {
     console.log(chalk.grey('\nCreating backup of package.json & package.lock.json in electron directory\n'));
@@ -45,6 +51,8 @@ class Build {
       path.join(this.#electronPackageDirectoryPath, '../../docs'),
       path.join(this.#electronPackageDirectoryPath, 'server/docs')
     );
+
+    DirectoryService.copyFile(this.#serverConfigFilePath, this.#electronReleaseDirectoryPath);
 
     console.log(chalk.green('\nsrc ,docs and dist directories of server copied successfully into electron-package\n'));
   }
@@ -101,6 +109,8 @@ class Build {
 
     DirectoryService.deleteDirectories([path.join(this.#electronPackageDirectoryPath, 'server')]);
 
+    DirectoryService.deleteFiles([path.join(this.#electronReleaseDirectoryPath, 'server-config.json')]);
+
     console.log(chalk.green('\nCopied server directory in electron-package deleted successfully\n'));
   }
 
@@ -116,7 +126,46 @@ class Build {
     console.log(chalk.green('\nRestored package.json in electron-package successfully\n'));
   }
 
-  static startBuild() {
+  static async #zipReleaseFolder() {
+    console.log('\nZipping release-to-production folder...');
+
+    this.#copyInstallerToElectronDist();
+
+    const outputPath = path.join(this.#electronPackageDirectoryPath, 'electron-dist.zip');
+    const output = fs.createWriteStream(outputPath);
+    const compressionLevel = 9;
+
+    const archive = archiver('zip', {
+      zlib: { level: compressionLevel },
+    });
+
+    return new Promise((resolve, reject) => {
+      output.on('close', function () {
+        console.log('\nZipped release-to-production folder successfully.');
+        resolve();
+      });
+
+      archive.on('error', function (err) {
+        reject(err);
+      });
+
+      archive.pipe(output);
+      archive.directory(path.join(this.#electronReleaseDirectoryPath), false);
+      archive.finalize();
+    });
+  }
+
+  static #copyInstallerToElectronDist() {
+    console.log(chalk.grey('\nCopying installer directory to electron-dist\n'));
+
+    const makeFolderPath = path.join(this.#electronOutDirectoryPath, 'make');
+
+    DirectoryService.copyDirectory(makeFolderPath, this.#electronReleaseDirectoryPath);
+
+    console.log(chalk.green('\nInstaller directory copied to electron-dist successfully\n'));
+  }
+
+  static async startBuild() {
     try {
       this.#createBackUpPackageJsonForElectron();
       this.#copyDirectoriesFromServerToElectronPackage();
@@ -124,6 +173,7 @@ class Build {
       this.#mergeDependenciesFromServerToElectron();
       this.#installDependenciesInsideElectron();
       this.#buildElectron();
+      await this.#zipReleaseFolder();
     } catch (error) {
       console.error(chalk.red('Build process failed:', error));
     } finally {

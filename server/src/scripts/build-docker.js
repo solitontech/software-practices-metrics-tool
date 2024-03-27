@@ -98,6 +98,8 @@ class BuildDocker {
   static #zipReleaseFolder() {
     console.log('\nZipping release-to-production folder...');
 
+    this.#copyServerConfigJson();
+
     const outputPath = path.join(this.#currentDir, '/../../release-to-production.zip');
     const writeStream = fs.createWriteStream(outputPath);
     const compressionLevel = 9;
@@ -117,6 +119,16 @@ class BuildDocker {
     archive.pipe(writeStream);
     archive.directory(path.join(this.#dockerPackageDir), false);
     archive.finalize();
+  }
+
+  static #copyServerConfigJson() {
+    console.log(chalk.grey('\nCopying server-config.json file to docker-package...'));
+
+    const srcConfigPath = path.join(this.#currentDir, '/../../src/configs/server-config.json');
+    const destConfigPath = path.join(this.#dockerPackageDir, 'server-config.json');
+    fs.copyFileSync(srcConfigPath, destConfigPath);
+
+    console.log(chalk.green('\nserver-config.json file copied to docker-package successfully.'));
   }
 }
 
