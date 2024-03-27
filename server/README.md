@@ -1,6 +1,6 @@
 # Software Practices Metrics Tool
 
-This repository contains the backend code for API's related to Software Practices Metrics tool.
+This repository contains the backend code for API's related to software practices metrics tool.
 
 ## Dependencies Used
 

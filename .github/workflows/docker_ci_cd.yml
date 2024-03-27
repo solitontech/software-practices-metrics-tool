@@ -63,7 +63,7 @@ jobs:
           path: server/src/configs/.env
 
       - name: Rename artifact
-        run: mv release-to-production.zip softwarePracticesMetricsTool-V${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+        run: mv release-to-production.zip software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
 
       - name: Delete existing release with version {${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}}
         uses: cb80/delrel@latest
@@ -76,5 +76,5 @@ jobs:
         with:
           tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
           name: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
-          artifacts: ./softwarePracticesMetricsTool-V${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+          artifacts: ./software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}
