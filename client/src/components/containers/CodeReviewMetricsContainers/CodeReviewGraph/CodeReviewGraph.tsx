@@ -3,8 +3,8 @@ import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 import styles from "./CodeReviewGraph.module.scss";
 import { GRAPH_KEY_LABEL } from "./codeReviewGraphConstants";
 import { CodeReviewGraphLeastVotes } from "./CodeReviewGraphLeastVotes/CodeReviewGraphLeastVotes";
+import { CodeReviewGraphTimeMetrics } from "./CodeReviewGraphTimeMetrics/CodeReviewGraphTimeMetrics";
 import { CodeReviewGraphUtils } from "./codeReviewGraphUtils";
-import { TimeMetricsGraph } from "../CodeReviewMetricsGraphs/MetricsGraphs/TimeMetricsGraph/TimeMetricsGraph";
 
 interface ICodeReviewGraphProps {
   pullRequests: IFetchedCodeReviewPullRequest[];
@@ -21,7 +21,7 @@ export const CodeReviewGraph = ({
 }: ICodeReviewGraphProps) => {
   return (
     <div className={styles.graphContainer}>
-      <TimeMetricsGraph
+      <CodeReviewGraphTimeMetrics
         averageTime={firstReviewResponseTime}
         graphObject={CodeReviewGraphUtils.getGraphObject(
           pullRequests,
@@ -30,7 +30,7 @@ export const CodeReviewGraph = ({
         )}
       />
 
-      <TimeMetricsGraph
+      <CodeReviewGraphTimeMetrics
         averageTime={approvalTime}
         graphObject={CodeReviewGraphUtils.getGraphObject(
           pullRequests,
@@ -39,7 +39,7 @@ export const CodeReviewGraph = ({
         )}
       />
 
-      <TimeMetricsGraph
+      <CodeReviewGraphTimeMetrics
         averageTime={mergeTime}
         graphObject={CodeReviewGraphUtils.getGraphObject(
           pullRequests,
