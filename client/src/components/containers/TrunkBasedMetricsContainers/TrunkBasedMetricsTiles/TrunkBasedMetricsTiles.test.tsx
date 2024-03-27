@@ -2,6 +2,8 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { setupServer } from "msw/node";
 import { act } from "react-dom/test-utils";
 
+import { queryClient } from "src/services/api/api";
+
 import { LoadTrunkBasedComponent } from "./mocks/LoadTrunkBasedComponent";
 import { ACTIVE_BRANCHES, BRANCHES } from "./mocks/TrunkBasedMetricsTiles.mock";
 import {
@@ -9,7 +11,6 @@ import {
   getBranchesHandler,
   getServerErrorHandler,
 } from "./mocks/TrunkBasedMetricsTiles.msw-handlers";
-import { queryClient } from "../../../../services/api/api";
 
 describe("TrunkBasedMetricsTiles component", () => {
   let server: ReturnType<typeof setupServer>;
