@@ -7,7 +7,9 @@ import approvedWithSuggestionsSvg from "src/assets/images/approvedWithSuggestion
 import noVoteSvg from "src/assets/images/noVote.svg";
 import rejectedSvg from "src/assets/images/rejected.svg";
 import waitForAuthorSvg from "src/assets/images/waitForAuthor.svg";
-import { CustomVote, DialogBox, CodeReviewTimeLineTable } from "src/components/components";
+import { CodeReviewTimeLineTable } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewTimeLineTable/CodeReviewTimeLineTable";
+import { CustomVote } from "src/components/reusables/CustomVote/CustomVote";
+import { DialogBox } from "src/components/reusables/DialogBox/DialogBox";
 import { IFetchedPullRequestVotesTimeline } from "src/services/api/api";
 
 import styles from "./CodeReviewVotesIcons.module.scss";

@@ -1,7 +1,7 @@
 import InfoIcon from "@mui/icons-material/Info";
 import { Tooltip } from "@mui/material";
 
-import { IPiePlot, PieChart } from "src/components/components";
+import { IPiePlot, PieChart } from "src/components/reusables/MetricsGraphs/PieChart/PieChart";
 import { VOTES_LABEL, VOTES_COLOR } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 

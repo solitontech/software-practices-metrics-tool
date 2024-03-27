@@ -4,7 +4,8 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 
-import { SearchBox, ErrorBoundary } from "src/components/components.ts";
+import { ErrorBoundary } from "src/components/reusables/ErrorBoundary/ErrorBoundary.tsx";
+import { SearchBox } from "src/components/reusables/SearchBox/SearchBox.tsx";
 import { IFetchedTrunkMetricsBranch } from "src/services/api/api.ts";
 
 import styles from "./TrunkBasedNamingConventionTable.module.scss";

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import { BarChart } from "src/components/components";
+import { BarChart } from "src/components/reusables/MetricsGraphs/BarChart/BarChart";
 import { useDimensions } from "src/hooks/hooks";
 import { useTrunkBranchCommits } from "src/services/api/api";
 

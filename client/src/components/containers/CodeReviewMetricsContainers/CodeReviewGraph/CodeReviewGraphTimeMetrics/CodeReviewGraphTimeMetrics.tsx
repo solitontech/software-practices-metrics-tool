@@ -1,4 +1,4 @@
-import { HistogramChart } from "src/components/components";
+import { HistogramChart } from "src/components/reusables/MetricsGraphs/Histogram/Histogram";
 import { TRACE_COLOR } from "src/constants/constants";
 
 import { HOUR_SCALE, MAXIMUM_HOURS } from "./codeReviewGraphTimeMetricsConstants";

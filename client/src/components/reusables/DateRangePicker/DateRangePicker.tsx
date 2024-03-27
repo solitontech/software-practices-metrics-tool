@@ -1,7 +1,7 @@
 import EastIcon from "@mui/icons-material/East";
 import DatePicker from "react-datepicker";
 
-import { InfoIconTooltip } from "src/components/components";
+import { InfoIconTooltip } from "src/components/reusables/InfoIconTooltip/InfoIconTooltip";
 
 import styles from "./DateRangePicker.module.scss";
 

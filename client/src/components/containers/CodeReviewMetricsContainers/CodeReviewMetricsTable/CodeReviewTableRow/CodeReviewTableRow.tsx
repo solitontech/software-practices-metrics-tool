@@ -4,7 +4,9 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Chip } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import { CodeReviewVotesIcons, CodeReviewDisplayHoursToDays, CodeReviewCommentIcon } from "src/components/components";
+import { CodeReviewCommentIcon } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewCommentIcon/CodeReviewCommentIcon";
+import { CodeReviewDisplayHoursToDays } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewDisplayHoursToDays/CodeReviewDisplayHoursToDays";
+import { CodeReviewVotesIcons } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewVotesIcons/CodeReviewVotesIcons";
 import { NOT_AVAILABLE } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 import { getFormattedDateWithTime, getFormattedDateWithoutTime } from "src/utils/utils";

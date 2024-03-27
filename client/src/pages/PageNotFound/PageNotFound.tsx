@@ -1,5 +1,5 @@
 import pageNotFoundImage from "src/assets/images/pageNotFound.png";
-import { ErrorBoundary } from "src/components/components";
+import { ErrorBoundary } from "src/components/reusables/ErrorBoundary/ErrorBoundary";
 
 import styles from "./PageNotFound.module.scss";
 

@@ -1,4 +1,4 @@
-import { CodeReviewSortingIcon } from "src/components/components";
+import { CodeReviewSortingIcon } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewSortingIcon/CodeReviewSortingIcon";
 import { VOTES, SORT_MAP } from "src/constants/constants";
 import { IFetchedPullRequestVotes } from "src/services/api/api";
 

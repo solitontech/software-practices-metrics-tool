@@ -4,16 +4,14 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import TableRowsIcon from "@mui/icons-material/TableRows";
 
-import {
-  SnackBar,
-  TabToggle,
-  CommonLayout,
-  DateRangePicker,
-  ErrorBoundary,
-  CodeReviewMetricsTiles,
-  CodeReviewSearchBox,
-  CodeReviewMetricsTabs,
-} from "src/components/components";
+import { CodeReviewMetricsTabs } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTabs/CodeReviewMetricsTabs.tsx";
+import { CodeReviewMetricsTiles } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTiles/CodeReviewMetricsTiles.tsx";
+import { CodeReviewSearchBox } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewSearchBox/CodeReviewSearchBox.tsx";
+import { CommonLayout } from "src/components/reusables/CommonLayout/CommonLayout.tsx";
+import { DateRangePicker } from "src/components/reusables/DateRangePicker/DateRangePicker.tsx";
+import { ErrorBoundary } from "src/components/reusables/ErrorBoundary/ErrorBoundary.tsx";
+import { SnackBar } from "src/components/reusables/SnackBar/SnackBar.tsx";
+import { TabToggle } from "src/components/reusables/TabToggle/TabToggle.tsx";
 import { dateRange } from "src/constants/constants";
 import { useCodeReviewMetrics } from "src/services/api/api";
 

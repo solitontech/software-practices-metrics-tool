@@ -2,7 +2,8 @@ import { useContext } from "react";
 
 import { produce } from "immer";
 
-import { Checkbox, FilterIcon } from "src/components/components";
+import { Checkbox } from "src/components/reusables/Checkbox/Checkbox";
+import { FilterIcon } from "src/components/reusables/FilterIcon/FilterIcon";
 import {
   ClientFilterContext,
   IContextClientFilterSquadMemberKey,

@@ -1,6 +1,7 @@
 import React from "react";
 
-import { InfoIconTooltip, Tile } from "src/components/components";
+import { InfoIconTooltip } from "src/components/reusables/InfoIconTooltip/InfoIconTooltip";
+import { Tile } from "src/components/reusables/Tile/Tile";
 
 import styles from "./CodeReviewMetricsTiles.module.scss";
 import { HEADERS, THRESHOLDS, recommendedTime } from "./codeReviewMetricsTilesConstants";
