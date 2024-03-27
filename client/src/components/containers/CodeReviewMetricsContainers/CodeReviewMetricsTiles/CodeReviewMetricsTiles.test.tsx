@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 
-import { CodeReviewMetricsTiles } from "../../../../../../src/components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTiles/CodeReviewMetricsTiles";
+import { CodeReviewMetricsTiles } from "./CodeReviewMetricsTiles";
 
 describe("CodeReviewMetricsTiles", () => {
   it("should render firstReviewResponse time, approval time & merge time correctly", async () => {
@@ -41,9 +41,9 @@ describe("CodeReviewMetricsTiles", () => {
     render(<CodeReviewMetricsTiles firstReviewResponseTime={25} approvalTime={50} mergeTime={75} />);
 
     const firstReviewResponseTooltipContent =
-      "1 day, 1 hour ( Recommended time for first review response should be less than 24 hours )";
-    const approvalTimeTooltipContent = "2 days, 2 hours ( Recommended time for approval should be less than 48 hours )";
-    const mergeTimeTooltipContent = "3 days, 3 hours ( Recommended time for merge should be less than 72 hours )";
+      "1 day, 1 hour (Recommended time for first review response should be less than 24 hours)";
+    const approvalTimeTooltipContent = "2 days, 2 hours (Recommended time for approval should be less than 48 hours)";
+    const mergeTimeTooltipContent = "3 days, 3 hours (Recommended time for merge should be less than 72 hours)";
 
     // when user hover over the firstReviewResponse time tooltip, user should see the recommended first review response time
     await userEvent.hover(screen.getByTestId(firstReviewResponseTooltipContent));

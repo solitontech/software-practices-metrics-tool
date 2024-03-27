@@ -3,7 +3,8 @@ import { ChangeEvent, useState, useRef } from "react";
 import { Chip } from "@mui/material";
 import clsx from "clsx";
 
-import { ClientFilters, SearchBox } from "src/components/components";
+import { ClientFilters } from "src/components/containers/ClientFilters/ClientFilters";
+import { SearchBox } from "src/components/reusables/SearchBox/SearchBox";
 import { useOutsideClick } from "src/hooks/hooks";
 
 import styles from "./CodeReviewSearchBox.module.scss";

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 
-import { LoadingSpinner } from "../../../../../src/components/reusables/LoadingSpinner/LoadingSpinner";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 describe("LoadingSpinner component", () => {
   it("should render the loading image & content for the spinner", () => {

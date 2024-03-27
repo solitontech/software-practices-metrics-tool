@@ -1,4 +1,4 @@
-import { IPiePlot } from "src/components/components";
+import { IPiePlot } from "src/components/reusables/MetricsGraphs/PieChart/PieChart";
 import {
   VOTES,
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,

@@ -1,7 +1,7 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-import { Checkbox } from "../../../../../src/components/reusables/Checkbox/Checkbox";
+import { Checkbox } from "./Checkbox";
 
 describe("Checkbox component", () => {
   let onChange: (value: boolean) => void;

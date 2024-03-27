@@ -4,7 +4,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 
-import { SearchBox } from "src/components/components";
+import { SearchBox } from "src/components/reusables/SearchBox/SearchBox";
 import { IFetchedTrunkBasedActiveBranch } from "src/services/api/api";
 import { getFormattedDateWithTime } from "src/utils/utils";
 

@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   test: {
-    include: ["**/*.unit.test.tsx", "**/*.integration.test.tsx"],
+    include: ["**/*.test.tsx"],
     globals: true,
     environment: "jsdom",
     css: true,

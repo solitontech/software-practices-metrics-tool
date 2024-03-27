@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { CustomVote } from "src/components/components";
+import { CustomVote } from "src/components/reusables/CustomVote/CustomVote";
 import { IFetchedPullRequestVotesTimeline } from "src/services/api/api";
 import { getFormattedDateWithTime } from "src/utils/utils";
 

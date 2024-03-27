@@ -3,7 +3,7 @@ import { render, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { describe, it, expect, vi } from "vitest";
 
-import { SearchBox } from "../../../../../src/components/reusables/SearchBox/SearchBox";
+import { SearchBox } from "./SearchBox";
 
 vi.useFakeTimers();
 

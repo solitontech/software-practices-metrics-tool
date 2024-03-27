@@ -1,10 +1,8 @@
-import {
-  LoadingSpinner,
-  ErrorBoundary,
-  CodeReviewGraph,
-  MetricsTrendAnalysisGraphs,
-  CodeReviewMetricsTable,
-} from "src/components/components";
+import { CodeReviewGraph } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewGraph/CodeReviewGraph";
+import { MetricsTrendAnalysisGraphs } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewMetricsGraphs/MetricsTrendGraphs/MetricsTrendGraphs";
+import { CodeReviewMetricsTable } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewMetricsTable/CodeReviewMetricsTable";
+import { ErrorBoundary } from "src/components/reusables/ErrorBoundary/ErrorBoundary";
+import { LoadingSpinner } from "src/components/reusables/LoadingSpinner/LoadingSpinner";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 
 import styles from "./CodeReviewMetricsTabs.module.scss";

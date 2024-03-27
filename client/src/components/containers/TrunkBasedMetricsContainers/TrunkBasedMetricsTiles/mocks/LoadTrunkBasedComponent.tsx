@@ -1,8 +1,9 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 
-import { TrunkBasedMetricsTiles } from "../../../../../../src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/TrunkBasedMetricsTiles";
-import { queryClient } from "../../../../../../src/services/api/api";
+import { queryClient } from "src/services/api/api";
+
+import { TrunkBasedMetricsTiles } from "../TrunkBasedMetricsTiles";
 
 export function LoadTrunkBasedComponent() {
   return (

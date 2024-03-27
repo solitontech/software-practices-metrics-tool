@@ -3,7 +3,7 @@ import approvedWithSuggestions from "src/assets/images/approvedWithSuggestions.s
 import noVote from "src/assets/images/noVote.svg";
 import rejected from "src/assets/images/rejected.svg";
 import waitForAuthor from "src/assets/images/waitForAuthor.svg";
-import { FilterIcon } from "src/components/components";
+import { FilterIcon } from "src/components/reusables/FilterIcon/FilterIcon";
 import { VOTES } from "src/constants/constants";
 import { IFetchedPullRequestVotes } from "src/services/api/api";
 

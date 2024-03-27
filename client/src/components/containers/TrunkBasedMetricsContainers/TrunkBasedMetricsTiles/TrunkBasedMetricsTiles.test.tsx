@@ -2,14 +2,15 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { setupServer } from "msw/node";
 import { act } from "react-dom/test-utils";
 
-import { LoadTrunkBasedComponent } from "./LoadTrunkBasedComponent";
-import { ACTIVE_BRANCHES, BRANCHES } from "./TrunkBasedMetricsTiles.mock";
+import { queryClient } from "src/services/api/api";
+
+import { LoadTrunkBasedComponent } from "./mocks/LoadTrunkBasedComponent";
+import { ACTIVE_BRANCHES, BRANCHES } from "./mocks/TrunkBasedMetricsTiles.mock";
 import {
   getActiveBranchesHandler,
   getBranchesHandler,
   getServerErrorHandler,
-} from "./TrunkBasedMetricsTiles.msw-handlers";
-import { queryClient } from "../../../../../../src/services/api/api";
+} from "./mocks/TrunkBasedMetricsTiles.msw-handlers";
 
 describe("TrunkBasedMetricsTiles component", () => {
   let server: ReturnType<typeof setupServer>;
@@ -95,7 +96,7 @@ describe("TrunkBasedMetricsTiles component", () => {
     const activeBranchesButton = await screen.findByTestId("active-branches-button");
 
     // user expects dialog to be closed initially
-    expect(screen.queryByText(/total active pr's: 2/i)).toBeNull();
+    expect(screen.queryByText(/total count : 2/i)).toBeNull();
 
     // user clicks on the button to open the dialog
     act(() => {
@@ -103,7 +104,7 @@ describe("TrunkBasedMetricsTiles component", () => {
     });
 
     // user should see the dialog opened
-    expect(await screen.findByText(/total active pr's: 2/i)).toBeDefined();
+    expect(await screen.findByText(/total count : 2/i)).toBeDefined();
   });
 
   it("should render table with active pull requests to the trunk branch in the dialog box", async () => {

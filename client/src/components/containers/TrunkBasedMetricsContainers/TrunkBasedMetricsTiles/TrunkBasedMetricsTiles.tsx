@@ -4,13 +4,11 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { NavLink } from "react-router-dom";
 
 import dataInfoAlert from "src/assets/images/dataInfoAlert.svg";
-import {
-  DialogBox,
-  InfoIconTooltip,
-  Tile,
-  TrunkBasedActiveBranchesTable,
-  TrunkBasedNamingConventionTable,
-} from "src/components/components";
+import { TrunkBasedActiveBranchesTable } from "src/components/containers/TrunkBasedMetricsContainers/TrunkBasedActiveBranchesTable/TrunkBasedActiveBranchesTable";
+import { TrunkBasedNamingConventionTable } from "src/components/containers/TrunkBasedMetricsContainers/TrunkBasedNamingConventionTable/TrunkBasedNamingConventionTable";
+import { DialogBox } from "src/components/reusables/DialogBox/DialogBox";
+import { InfoIconTooltip } from "src/components/reusables/InfoIconTooltip/InfoIconTooltip";
+import { Tile } from "src/components/reusables/Tile/Tile";
 import { NOT_AVAILABLE } from "src/constants/constants";
 import { useTrunkBasedMetricsActiveBranches, useTrunkBasedMetricsTotalBranches } from "src/services/api/api";
 

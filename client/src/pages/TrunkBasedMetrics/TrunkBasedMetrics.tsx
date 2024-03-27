@@ -1,13 +1,11 @@
 import { useState } from "react";
 
-import {
-  CommonLayout,
-  DateRangePicker,
-  TabToggle,
-  ErrorBoundary,
-  TrunkBasedMetricsTabs,
-  TrunkBasedMetricsTiles,
-} from "src/components/components";
+import { TrunkBasedMetricsTabs } from "src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTabs/TrunkBasedMetricsTabs";
+import { TrunkBasedMetricsTiles } from "src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/TrunkBasedMetricsTiles";
+import { CommonLayout } from "src/components/reusables/CommonLayout/CommonLayout";
+import { DateRangePicker } from "src/components/reusables/DateRangePicker/DateRangePicker";
+import { ErrorBoundary } from "src/components/reusables/ErrorBoundary/ErrorBoundary";
+import { TabToggle } from "src/components/reusables/TabToggle/TabToggle";
 import { dateRange } from "src/constants/constants";
 
 import styles from "./TrunkBasedMetrics.module.scss";
