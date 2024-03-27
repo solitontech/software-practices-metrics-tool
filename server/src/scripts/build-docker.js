@@ -11,7 +11,7 @@ class BuildDocker {
   static #dockerImageName;
 
   static #currentDir = dirname(fileURLToPath(import.meta.url));
-  static #releaseToProductionDirectory = path.join(this.#currentDir, '/../../release-to-production');
+  static #dockerPackageDir = path.join(this.#currentDir, '/../../release-to-production/docker-package');
 
   static {
     const imageVersion = ServerConfiguration.environmentVariables.productionDockerImageVersion;
@@ -61,16 +61,18 @@ class BuildDocker {
     console.log(chalk.grey('\nCreating tar file from builded docker image...'));
 
     const [tarFileName] = this.#dockerImageName.split(':');
-    const outputPath = path.join(this.#releaseToProductionDirectory, `${tarFileName}.tar`);
+    const outputPath = path.join(this.#dockerPackageDir, `${tarFileName}.tar`);
     const command = `docker save -o ${outputPath} ${this.#dockerImageName}`;
 
     execSync(command);
 
-    console.log(chalk.green('\nDocker tar file created successfully in release-to-production directory.'));
+    console.log(
+      chalk.green('\nDocker tar file created successfully in docker-package in release-to-production directory.')
+    );
   }
 
   static #changeImageVersionInComposeFile() {
-    const filePath = path.join(this.#releaseToProductionDirectory, '/compose.yaml');
+    const filePath = path.join(this.#dockerPackageDir, '/compose.yaml');
     const composeFileContent = fs.readFileSync(filePath, 'utf8');
 
     // RegExp pattern to match the image in compose file
@@ -113,7 +115,7 @@ class BuildDocker {
     });
 
     archive.pipe(writeStream);
-    archive.directory(path.join(this.#releaseToProductionDirectory), false);
+    archive.directory(path.join(this.#dockerPackageDir), false);
     archive.finalize();
   }
 }
