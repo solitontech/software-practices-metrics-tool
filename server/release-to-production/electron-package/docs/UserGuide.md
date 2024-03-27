@@ -31,16 +31,25 @@
 1. Update the server-config.json file with relevant details.
 
 2. Create a folder named SoftwarePracticesMetricsTool in
-C: => Users => your_user_name => AppData => Local.
+below mentioned path.
+
+   ```shell
+   C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool.
+   ```
 
 3. If you can't find AppData under your directory it might be hidden,
 you can view it by checking Hidden items checkbox under View tab of your
 file explorer top panel.
 
-4. Copy the configured server-config.json file to SoftwarePracticesMetricsTool
+4. Copy the configured server-config.json file to the newly created SoftwarePracticesMetricsTool
 directory.
 
-5. Double click on the exe file of SoftwarePracticesMetricsTool to run the application.
+   ```shell
+      C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool\server-config.json.
+   ```
+
+5. Double click on the installer file of SoftwarePracticesMetricsTool to run the
+ application.
 
 ## Using squads in server-config.json file
 
@@ -132,5 +141,3 @@ format.
 
 6. Ensure you enter same name for developers & reviewers section in the
  `server-config.json` which will be displayed in the dashboard to avoid confusion.
-
-7. Refer the overview video [here](https://solitontech.sharepoint.com/:f:/r/sites/SolitonTechnologies/Shared%20Documents/%F0%9F%9A%80%20Utkarsh%20-%20Tech%20Force/TechOps/Tools/SoftwarePracticesMetricsTool?csf=1&web=1&e=amyPFk)

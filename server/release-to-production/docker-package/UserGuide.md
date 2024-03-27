@@ -189,8 +189,6 @@ format.
 6. Ensure you enter same name for developers & reviewers section in the
  `server-config.json` which will be displayed in the dashboard to avoid confusion.
 
-7. Refer the overview video [here](https://solitontech.sharepoint.com/:f:/r/sites/SolitonTechnologies/Shared%20Documents/%F0%9F%9A%80%20Utkarsh%20-%20Tech%20Force/TechOps/Tools/SoftwarePracticesMetricsTool?csf=1&web=1&e=amyPFk)
-
 ## Optional Docker commands reference
 
   1. Listing docker containers
