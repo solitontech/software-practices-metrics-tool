@@ -1,5 +1,6 @@
 import fs from 'fs';
 import chalk from 'chalk';
+import archiver from 'archiver';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
@@ -21,6 +22,7 @@ class BuildDocker {
   static startBuild() {
     this.#buildImageAsTarFile();
     this.#changeImageVersionInComposeFile();
+    this.#zipReleaseFolder();
   }
 
   static #buildImageAsTarFile() {
@@ -91,6 +93,30 @@ class BuildDocker {
     fs.writeFileSync(filePath, modifiedData, 'utf8');
 
     console.log(chalk.green('Compose.yaml file has been updated with the new image tag.'));
+  }
+
+  static #zipReleaseFolder() {
+    console.log('\nZipping release-to-production folder...');
+
+    const outputPath = path.join(this.#currentDir, '/../../release-to-production.zip');
+    const writeStream = fs.createWriteStream(outputPath);
+    const compressionLevel = 9;
+
+    const archive = archiver('zip', {
+      zlib: { level: compressionLevel },
+    });
+
+    writeStream.on('close', () => {
+      console.log('\nZipped release-to-production folder successfully.');
+    });
+
+    archive.on('error', (err) => {
+      throw err;
+    });
+
+    archive.pipe(writeStream);
+    archive.directory(path.join(this.#dockerPackageDir), false);
+    archive.finalize();
   }
 }
 
