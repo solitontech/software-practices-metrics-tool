@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 
 import { EnvValidation, ServerConfigValidation } from '../validations/validations.js';
 import { NODE_ENVIRONMENT_MODE } from '../constants/constants.js';
+import { ConfigPathResolver } from '##/utils/utils.js';
 
 export class ServerConfiguration {
   static #clientFilters;
@@ -13,7 +14,7 @@ export class ServerConfiguration {
 
   static #dirName = path.dirname(fileURLToPath(import.meta.url));
   static #envFilePath = path.join(this.#dirName, './.env');
-  static #serverConfigPath = path.join(this.#dirName, './server-config.json');
+  static #serverConfigPath = ConfigPathResolver.getServerConfigPath(this.#dirName);
 
   static {
     this.#loadServerConfigs();
