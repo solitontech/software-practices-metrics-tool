@@ -30,26 +30,25 @@
 
 1. Update the server-config.json file with relevant details.
 
-2. Create a folder named SoftwarePracticesMetricsTool in
+2. Create a folder named `SoftwarePracticesMetricsTool` in
 below mentioned path.
 
    ```shell
-   C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool.
+   C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool
    ```
 
-3. If you can't find AppData under your directory it might be hidden,
+3. If you can't find `AppData` under your directory it might be hidden,
 you can view it by checking Hidden items checkbox under View tab of your
 file explorer top panel.
 
-4. Copy the configured server-config.json file to the newly created SoftwarePracticesMetricsTool
-directory.
+4. Copy the configured `server-config.json` file to the newly created `SoftwarePracticesMetricsTool`
+folder.
 
    ```shell
-      C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool\server-config.json.
+   C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool\server-config.json
    ```
 
-5. Double click on the installer file of SoftwarePracticesMetricsTool to run the
- application.
+5. Double click on the installer file to run the application.
 
 ## Using squads in server-config.json file
 
@@ -79,7 +78,7 @@ of developers and reviewers as array of key value pairs specified in the below
 format.
    - `developer_uuid (or) reviewer_uuid : developer_name (or) reviewer_name`
 
-4. After applying filters in the json file. Re run the application.
+4. After configuring filters in the `server-config.json` file. Re run the application.
 
 ### Steps to get developer uuid
 
