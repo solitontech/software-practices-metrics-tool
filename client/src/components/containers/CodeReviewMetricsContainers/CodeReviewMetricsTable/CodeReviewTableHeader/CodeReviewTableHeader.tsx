@@ -28,9 +28,7 @@ export const CodeReviewTableHeader = ({
             handleSort={(order) => handleSort(column.id, order)}
             handleFilterReset={handleFilterReset}
             handleFilterChange={(vote, value) => {
-              const isVotesColumn = column.id === FILTER_COLUMN_VOTES || column.id === FILTER_COLUMN_VOTES_HISTORY;
-
-              if (isVotesColumn) {
+              if (column.id === FILTER_COLUMN_VOTES || column.id === FILTER_COLUMN_VOTES_HISTORY) {
                 handleFilterChange(column.id, vote, value);
               }
             }}

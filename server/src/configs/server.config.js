@@ -14,7 +14,7 @@ export class ServerConfiguration {
 
   static #dirName = path.dirname(fileURLToPath(import.meta.url));
   static #envFilePath = path.join(this.#dirName, './.env');
-  static #serverConfigPath = ConfigPathResolver.getServerConfigPath(this.#dirName);
+  static #serverConfigPath = ConfigPathResolver.getServerConfigPath();
 
   static {
     this.#loadServerConfigs();
