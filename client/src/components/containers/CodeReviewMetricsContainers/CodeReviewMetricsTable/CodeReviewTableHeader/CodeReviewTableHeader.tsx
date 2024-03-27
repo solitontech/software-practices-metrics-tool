@@ -3,7 +3,6 @@ import { ICodeReviewTableHeaderProps } from "./codeReviewTableHeaderTypes";
 import { FILTER_COLUMN_VOTES, FILTER_COLUMN_VOTES_HISTORY } from "../codeReviewMetricsTableConstants";
 import { ICodeReviewTableVotesFilterColumn } from "../codeReviewMetricsTableTypes";
 
-//TODO: fix the type conversion
 export const CodeReviewTableHeader = ({
   column,
   filters,

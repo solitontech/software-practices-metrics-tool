@@ -10,7 +10,6 @@ interface ICodeReviewTimeLineTableProps {
   timeLine: IFetchedPullRequestVotesTimeline[];
 }
 
-//TODO: fix sticky header issue
 export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTableProps) => {
   return (
     <div className={styles.tableContainer}>
