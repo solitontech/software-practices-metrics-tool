@@ -2,29 +2,29 @@
 
 TODO: Describe the issue, problem, or feature request in detail. If applicable, provide links to related work items or issue tracking systems.
 
-# Expected Behavior
+## Expected Behavior
 
 TODO: Describe the expected behavior or outcome.
 
-# Current Behavior
+## Current Behavior
 
 TODO: Describe the current behavior or outcome.
 
-# Steps to Reproduce
+## Steps to Reproduce
 
 TODO: Detail the steps to reproduce the issue.
 
-# Possible Solution
+## Possible Solution
 
 TODO: Provide any possible solutions you have considered, including their potential complexities, alternative approaches, and any performance considerations.
 
-# Reference
+## Reference
 
 TODO: Include links to any relevant high-level designs (HLDs), pull requests (PRs), or external resources that might help in understanding or addressing the issue.
 
-# Environments
+## Environments
 
-TODO: For feature requests, if any of the above fields are not applicable, mark them as "Not Applicable."
+TODO: For feature requests, if any of the below fields are not applicable, mark them as "Not Applicable."
 
 - Node Version:
 - NPM Version:
@@ -32,7 +32,7 @@ TODO: For feature requests, if any of the above fields are not applicable, mark 
 - Project Version:
 - Version control system:
 
-# Checklist
+## Checklist
 
 - [ ] This is a new feature request
 - [ ] This issue has been reproduced in the latest version of the project
