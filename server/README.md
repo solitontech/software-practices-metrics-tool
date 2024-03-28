@@ -14,11 +14,11 @@ Follow the installation instructions below to set up the project.
 Refer [Get Started](../README.md#getting-started) for setting up repository and
 install dependencies.
 
-### 2. Start the application
+### 2. Start the Application
 
 1. Once the dependencies are installed, make sure you have configured
 server-config.json in configs directory follow the steps
-[Configure server configuration file](#configure-server-configuration-file).
+[Configure Server Configuration File](#configure-server-configuration-file).
 
 2. After configuring you can start the application by
  running the following command in terminal:
@@ -33,7 +33,7 @@ used for starting the development server.
 
 ### 3. Access the Application
 
-1. Once the development server is running, open your web browser and go to the address
+Once the development server is running, open your web browser and go to the address
    [http://localhost:3498](http://localhost:3498) and access the application.
 
 ## Test the Application
@@ -46,7 +46,7 @@ used for starting the development server.
 $ npm run test
 ```
 
-## Linting & formatting
+## Linting & Formatting
 
 Linting and formatting are essential for maintaining code quality and consistency
 throughout a project.
@@ -71,7 +71,7 @@ throughout a project.
    automatically fix them where possible. It's useful for quickly addressing
    common issues and ensuring that your code follows the defined coding standards.
 
-**3. Format check:**
+**3. Format Check:**
 
    ```bash
    npm run format-check
@@ -91,7 +91,7 @@ throughout a project.
    rules. It helps maintain consistency in code formatting across different
    files and modules, making the codebase easier to read and understand.
 
-## Configure server configuration file
+## Configure Server Configuration File
 
 To connect the Software Practices Metrics Tool to your Azure DevOps repositories,
 you need to configure the server configuration file named `server-config.json`.
@@ -101,50 +101,16 @@ Below is an example of the `server-config.json` file:
 
 ```json
 {
-"targetBranch": "main",
-"organization": "Soliton",
-"projectName": "my_project",
-"repositoryId": "my_repository",
-"authToken": "my_auth_token",
-"squads": []
+   "targetBranch": "main",
+   "organization": "Soliton",
+   "projectName": "my_project",
+   "repositoryId": "my_repository",
+   "authToken": "my_auth_token",
+   "squads": []
 }
 ```
 
-**Server Configuration File Breakdown:**
-
-The `server-config.json` file in server directory contains the necessary settings
- to connect the Software Practices Metrics Tool to your Azure DevOps repositories.
-  Below is a breakdown of each configuration option:
-
-- **`targetBranch`:**  
-The default branch in your Azure DevOps repository.
-
-- **`organization`:**  
-The name of your Azure DevOps organization.
-
-- **`projectName`:**  
-The name of your project within the Azure DevOps organization.
-
-- **`repositoryId`:**  
-The ID of the repository you want to connect to.
-
-- **`authToken`:**  
-Your personal access token (PAT) for authentication. You can follow the steps outlined
- [here](#steps-to-create-azure-devops-token) to create a PAT.
-
-- **`squads`:**  
-An optional field for defining squads or teams associated with the project. You
-can follow steps outlined [here](#using-squads-in-server-configjson-file)
- to configure squads.
-
-Make sure to replace the placeholder values `my_project`, `my_repository`,
- `my_auth_token`, etc. with your actual Azure DevOps project details and
-  personal access token.
-
-Once you've configured the `server-config.json` file, you'll be ready to connect
- the tool to your Azure DevOps repositories.
-
-## Steps to create Azure devops Token
+## Steps to Create Azure Devops Token
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).
 
@@ -164,7 +130,7 @@ Once you've configured the `server-config.json` file, you'll be ready to connect
 
 9. Ensure to copy and save the token value as **it won't be recoverable if lost.**
 
-## Using squads in server-config.json file
+## Using Squads in server-config.json File
 
 1. Please refer [Steps to get developer uuid](#steps-to-get-developer-uuid) &
  [Steps to get reviewer uuid](#steps-to-get-reviewer-uuid)
@@ -253,8 +219,8 @@ format.
 6. Ensure you enter same name for developers & reviewers section in the
  `server-config.json` which will be displayed in the dashboard to avoid confusion.
 
-## API End Points
+## API End Point
 
-1. Swagger Open API specification document can be accessed at the following URL:
+Swagger Open API specification document can be accessed at the following URL:
 
-   1. <http://localhost:3498/open-api-spec-doc/>
+<http://localhost:3498/open-api-spec-doc/>
