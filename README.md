@@ -1,13 +1,15 @@
 # Software Practices Metrics Tool
 
-**Software Practices Metrics tool** is designed to provide automated analytics
-on software practices like code review metrics & trunk-based development. These
-analytics & insights derived will help developers & teams to continuously
-improve their software delivery efficiency & measure their performance.
+Software practices metrics tool is an open-source project aimed at assisting teams in measuring
+ and enhancing their adherence to industry-recommended software practices. Follows client-server
+  architecture, the tool harnesses React for the client-side interface and Express Node.js for
+   the server. It offers comprehensive insights into crucial practices like code review and
+    trunk-based development, empowering teams to elevate the quality and efficiency of their
+     projects. Presently, it supports projects housed in Azure DevOps repositories.
 
 ## Client README
 
-For details on the client-side interface, check out the [Client README](./client/README.md).
+For more information about the client-side implementation, check out the [Client README](./client/README.md).
 
 ## Server README
 
@@ -15,18 +17,18 @@ For more information about the server-side implementation, please refer to the [
 
 ## Overview
 
-In today's fast-paced software development environment, adhering to best practices is crucial
- for ensuring code quality, collaboration, and overall project success. The Software Practices
-  Metrics Tool offers a robust solution for evaluating and optimizing these practices
-   within your development workflow.
+**Software practices metrics tool** is designed to provide automated analytics
+on software practices like code review metrics & trunk-based development. These
+analytics & insights derived will help developers & teams to continuously
+improve their software delivery efficiency & measure their performance.
 
 ### Key Features
 
-- **Code Review Analysis:** Gain insights into the effectiveness of code reviews, including
+- **Code review metrics:** Gain insights into the effectiveness of code reviews, including
  metrics on review times, feedback cycles, and reviewer participation.
   
-- **Trunk-Based Development Metrics:** Monitor the health of your trunk-based development approach,
- with data on branch lifecycles, merge frequency, and adherence to naming conventions.
+- **Trunk based development metrics:** Monitor the health of your trunk-based development approach,
+ with data on branch life cycles, merge frequency, and adherence to naming conventions.
 
 ## Getting Started
 
@@ -44,7 +46,7 @@ git clone https://github.com/solitontech/Software-Practices-Metrics-tool.git
 ### Set Up Your Environment
 
 Before proceeding, make sure you have Node.js and npm installed on your system. We recommend using
-Node.js version 20.11.1 for compatibility. You can download and install it from the
+Node.js version used [here](./server/nvmrc) for compatibility. You can download and install it from the
 [official Node.js website](https://nodejs.org/).
 
 Additionally, we recommend to use Visual Studio Code for this codebase. If you haven't already
