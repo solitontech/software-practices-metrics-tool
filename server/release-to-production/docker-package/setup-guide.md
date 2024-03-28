@@ -28,7 +28,7 @@
 
 6. Choose the `organization` where you want to use the token.
 
-7. Set the expiration for token,select the scope as `Custom defined`
+7. Set the expiration for token, select the scope as `Custom defined`
    and tick(mark as selected) for `Read` under `Code` scope.
 
 8. Click on `Create`.
