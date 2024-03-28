@@ -23,6 +23,10 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
 
   const formattedReviewerComments = CodeReviewTabRowUtil.getReviewerComments(row.reviewerComments);
 
+  const handleCopyToClipboard = () => {
+    navigator.clipboard.writeText(`${row.createdBy}-${row.authorId}`).catch(() => {});
+  };
+
   return (
     <tr key={row.id} className={styles.tableRow} data-testid="code-review-metrics-table-row">
       <td className={styles.tableCell}>
@@ -51,7 +55,11 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
       </td>
 
       <td className={styles.tableCell}>
-        <span title={`${row.createdBy} - ${row.authorId}`} data-uuid={row.authorId}>
+        <span
+          title={`Click to copy : ${row.createdBy}-${row.authorId}`}
+          data-uuid={row.authorId}
+          onClick={handleCopyToClipboard}
+        >
           {row.createdBy}
         </span>
       </td>

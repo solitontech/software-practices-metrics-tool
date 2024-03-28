@@ -11,6 +11,10 @@ interface ICodeReviewTimeLineTableProps {
 }
 
 export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTableProps) => {
+  const handleCopyToClipboard = (content: string) => {
+    navigator.clipboard.writeText(content).catch(() => {});
+  };
+
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table} aria-label="sticky table">
@@ -34,7 +38,12 @@ export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTablePr
             timeLine.map((row) => {
               return (
                 <tr key={row.author} className={styles.tableRow} data-testid="code-review-metrics-timeline-table">
-                  <td data-uuid={row.id} title={`${row.author} - ${row.id}`} className={styles.tableCell}>
+                  <td
+                    data-uuid={row.id}
+                    title={`Click to copy : ${row.author}-${row.id}`}
+                    className={styles.tableCell}
+                    onClick={() => handleCopyToClipboard(`${row.author}-${row.id}`)}
+                  >
                     {row.author}
                   </td>
                   <td className={styles.tableCell}>{getFormattedDateWithTime(row.timeOfVote)}</td>
