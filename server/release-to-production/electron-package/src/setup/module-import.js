@@ -28,11 +28,11 @@ export class ModuleImport {
     return this.#ServerConfiguration.environmentVariables.port;
   }
 
-  static async getToolVersion() {
+  static async getElectronPackageVersion() {
     const ServerConfigurationModule = await import(`${this.#activeCodePath}/configs/server.config.js`);
 
     const serverConfiguration = ServerConfigurationModule.ServerConfiguration;
 
-    return serverConfiguration.environmentVariables.productionDockerImageVersion;
+    return serverConfiguration.environmentVariables.productionElectronPackageVersion;
   }
 }

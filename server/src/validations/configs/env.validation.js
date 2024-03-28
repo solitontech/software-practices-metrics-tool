@@ -17,6 +17,7 @@ export class EnvValidation {
         clientDevelopmentUrlOrigin: joi.string().required(),
         swaggerEditorUrlOrigin: joi.string().required(),
         productionDockerImageVersion: joi.string().required(),
+        productionElectronPackageVersion: joi.string().required(),
       })
       .options({ abortEarly: false });
 

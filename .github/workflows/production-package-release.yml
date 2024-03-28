@@ -119,21 +119,21 @@ jobs:
 
       - name: Rename artifacts
         run: |
-          mv ./docker-package-software-practices-metrics-tool.zip docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
-          mv ./windows-installer-software-practices-metrics-tool.zip windows-installer-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+          mv ./docker-package-software-practices-metrics-tool.zip docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_PACKAGE_VERSION }}.zip
+          mv ./windows-installer-software-practices-metrics-tool.zip windows-installer-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_PACKAGE_VERSION }}.zip
 
-      - name: Delete existing release with version {${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}}
+      - name: Delete existing release with version {${{ steps.dotenv.outputs.PRODUCTION_PACKAGE_VERSION }}}
         uses: cb80/delrel@latest
         with:
-          tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
+          tag: ${{ steps.dotenv.outputs.PRODUCTION_PACKAGE_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
-          name: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
+          tag: ${{ steps.dotenv.outputs.PRODUCTION_PACKAGE_VERSION }}
+          name: ${{ steps.dotenv.outputs.PRODUCTION_PACKAGE_VERSION }}
           artifacts: |
-            ./docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
-            ./windows-installer-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+            ./docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_PACKAGE_VERSION }}.zip
+            ./windows-installer-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_PACKAGE_VERSION }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}

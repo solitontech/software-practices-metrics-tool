@@ -64,7 +64,8 @@ export class ServerConfiguration {
       versionControlSystem: process.env.VERSION_CONTROL_SYSTEM,
       clientDevelopmentUrlOrigin: process.env.CLIENT_DEVELOPMENT_URL_ORIGIN,
       swaggerEditorUrlOrigin: process.env.SWAGGER_EDITOR_URL_ORIGIN,
-      productionDockerImageVersion: process.env.PRODUCTION_DOCKER_IMAGE_VERSION,
+      productionDockerImageVersion: process.env.PRODUCTION_PACKAGE_VERSION,
+      productionElectronPackageVersion: process.env.PRODUCTION_PACKAGE_VERSION,
     });
 
     EnvValidation.terminateOnValidationError(this.#environmentVariables);
