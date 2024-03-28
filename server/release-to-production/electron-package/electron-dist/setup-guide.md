@@ -30,12 +30,12 @@
 
 ## Launching Metrics tool
 
-1. Update the server-config.json file with relevant details.
+1. Update the `server-config.json` file with relevant details.
 
 2. Create a folder named `SoftwarePracticesMetricsTool` in below mentioned path.
 
    ```shell
-   C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool
+   C:\Users\<your_user_name>\AppData\Local\SoftwarePracticesMetricsTool
    ```
 
 3. If you can't find `AppData` under your directory it might be hidden, you can
@@ -46,7 +46,7 @@
    `SoftwarePracticesMetricsTool` folder.
 
    ```shell
-   C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool\server-config.json
+   C:\Users\<your_user_name>\AppData\Local\SoftwarePracticesMetricsTool\server-config.json
    ```
 
 5. Double click on the installer file to run the application.
