@@ -20,13 +20,13 @@
 
 2. Find Personal access tokens in user settings (beside profile picture).
 
-3. Click on Personal access tokens.
+3. Click on `Personal access tokens`.
 
 4. Create new Token by clicking on `New Token`.
 
 5. Enter a name for your token.
 
-6. Choose the organization where you want to use the token.
+6. Choose the `organization` where you want to use the token.
 
 7. Set the expiration, scopes as `Custom defined` and tick `Read` for Code.
 
@@ -57,17 +57,17 @@
    5. Ensure docker daemon is running with command (`$ docker ps`). If docker
    daemon is not running open Rancher desktop application.
 
-4. Ensure server-config.json, software-practices-metrics-tool.tar, compose.yml
-   and load-metrics-tool.sh files are in same directory.
+4. Ensure `server-config.json`, `software-practices-metrics-tool.tar`, `compose.yml`
+   and `load-metrics-tool.sh` files are in same directory.
 
-5. Update the server-config.json file with relevant details.
+5. Update the `server-config.json` file with relevant details.
 
-6. Run load-metrics-tool.sh script in git bash (`$ ./load-metrics-tool.sh`), the
+6. Run `load-metrics-tool.sh` script in git bash (`$ ./load-metrics-tool.sh`), the
    script will build the docker container & the metrics tool application will
    started at [http://localhost:3498](http://localhost:3498).
 
 7. In case your host's port 3498 is occupied, you can specify a different port
-   in compose.yaml file.
+   in `compose.yaml` file.
 
 8. Use below commands to re-run or stop the container using terminal, and ensure
    you are in the compose.yml file directory location.
