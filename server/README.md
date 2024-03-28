@@ -2,6 +2,8 @@
 
 This repository contains the backend code for API's related to Software
 Practices Metrics tool.
+This repository contains the backend code for API's related to Software
+Practices Metrics tool.
 
 ## Getting Started
 
@@ -9,6 +11,10 @@ Follow the installation instructions below to set up the project.
 
 ## Installation
 
+### 1. Set Up Your Environment
+
+Refer [Get Started](../README.md#getting-started) for setting up repository and
+install dependencies.
 ### 1. Set Up Your Environment
 
 Refer [Get Started](../README.md#getting-started) for setting up repository and
@@ -30,7 +36,11 @@ server-config.json in configs directory follow the steps
 3. The above command will execute the specified script in the `scripts`
 section of the `package.json` file, typically
 used for starting the development server.
+3. The above command will execute the specified script in the `scripts`
+section of the `package.json` file, typically
+used for starting the development server.
 
+### 3. Access the Application
 ### 3. Access the Application
 
 Once the development server is running, open your web browser and go to the address
