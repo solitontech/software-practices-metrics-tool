@@ -3,7 +3,7 @@
 Software practices metrics tool is an open-source project aimed at assisting teams in measuring
  and enhancing their adherence to industry-recommended software practices. Follows client-server
   architecture, the tool harnesses React for the client-side interface and Express Node.js for
-   the server. It offers comprehensive insights into crucial practices like code review and
+   the server. It offers comprehensive insights into industry recommended software practices like code review and
     trunk-based development, empowering teams to elevate the quality and efficiency of their
      projects. Presently, it supports projects housed in Azure DevOps repositories.
 
