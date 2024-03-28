@@ -92,7 +92,7 @@ npm install
 
 ### Run the Project
 
-Refer [Configure server configuration file](./server/README.md/#configure-server-configuration-file)
+Refer [Configure Server Configuration File](./server/README.md/#configure-server-configuration-file)
 to configure server config file.
 
 Launch the server and client of the tool to start analyzing your project's
