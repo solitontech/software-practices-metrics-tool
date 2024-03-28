@@ -92,13 +92,9 @@
 
 3. Hover over the any one of the author name to see the author name and their uuid
 
-4. Right click on the author name and click `Inspect` from the menu list to open
-   Chrome devtools.
+4. Click on the author name to copy the author name and uuid to the clipboard.
 
-5. You can get uuid from `data-uuid` attribute or `title` attribute of html element
-   from the Chrome devtools.
-
-6. Copy and paste the name & uuid in `server-config.json` in specified format.
+5. Copy and paste the name & uuid in `server-config.json` in specified format.
 
 ### Steps to get reviewer uuid
 
@@ -111,13 +107,9 @@
 
 4. Hover over the any one of the reviewer name to see the name and their uuid.
 
-5. Right click on the reviewer name and click `Inspect` from the menu list to open
-   Chrome devtools.
+5. Click on the reviewer name to copy the reviewer name and uuid to the clipboard.
 
-6. You can get uuid from `data-uuid` attribute or `title` attribute of html element
-   from the Chrome devtools.
-
-7. Copy and paste the name & uuid in `server-config.json` in specified format.
+6. Copy and paste the name & uuid in `server-config.json` in specified format.
 
 ### Note
 

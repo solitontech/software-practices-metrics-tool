@@ -155,7 +155,7 @@
 
 4. Hover over the any one of the reviewer name to see the name and their uuid.
 
-5. Click on the author name to copy the author name and uuid to the clipboard.
+5. Click on the reviewer name to copy the reviewer name and uuid to the clipboard.
 
 6. Copy and paste the name & uuid in `server-config.json` in specified format.
 
