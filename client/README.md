@@ -10,10 +10,7 @@ Follow the installation instructions below to set up the project.
 ## Installation
 
 ### 1. Set Up Your Environment
-### 1. Set Up Your Environment
 
-Refer [Get Started](../README.md#getting-started) for setting up repository and
-install dependencies.
 Refer [Get Started](../README.md#getting-started) for setting up repository and
 install dependencies.
 
@@ -24,15 +21,11 @@ Once the dependencies are installed, you can start the application by running
 
 ```bash
 npm run start:dev
-npm run start:dev
 ```
 
 The above command will execute the specified script in the `scripts` section of
 the `package.json` file, typically used for starting the development server.
-The above command will execute the specified script in the `scripts` section of
-the `package.json` file, typically used for starting the development server.
 
-### 3. Access the Application
 ### 3. Access the Application
 
 Once the development server is running, open your web browser and go to the
@@ -43,16 +36,8 @@ Once the development server is running, open your web browser and go to the
 
 1. This repository consists of unit, integration, E2E tests for client.
 2. While running the E2E tests make sure you are running the client and server.
-1. This repository consists of unit, integration, E2E tests for client.
-2. While running the E2E tests make sure you are running the client and server.
 
 ```bash
-# command to run unit & integration tests
-$ npm run test
-
-# command to run E2E tests.
-$ npm run test-e2e
-```
 # command to run unit & integration tests
 $ npm run test
 
