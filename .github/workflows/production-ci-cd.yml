@@ -37,11 +37,14 @@ jobs:
         run: npm run build:docker
         working-directory: ${{ env.working-directory }}
 
+      - name: Rename zip file
+        run: mv ./${{ env.working-directory }}/software-practices-metrics-tool.zip ./${{ env.working-directory }}/docker-package-software-practices-metrics-tool.zip
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: docker-package-software-practices-metrics-tool
-          path: ./${{ env.working-directory }}/software-practices-metrics-tool.zip
+          path: ./${{ env.working-directory }}/docker-package-software-practices-metrics-tool.zip
 
   electron-build:
     runs-on: windows-latest
@@ -81,11 +84,14 @@ jobs:
         run: npm run build
         working-directory: ${{ env.electron-working-directory }}
 
+      - name: Rename zip file
+        run: mv ./${{ env.electron-working-directory }}/software-practices-metrics-tool.zip ./${{ env.electron-working-directory }}/windows-installer-software-practices-metrics-tool.zip
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer-software-practices-metrics-tool
-          path: ./${{ env.electron-working-directory }}/software-practices-metrics-tool.zip
+          path: ./${{ env.electron-working-directory }}/windows-installer-software-practices-metrics-tool.zip
 
   release:
     needs: [docker-build, electron-build]
@@ -113,8 +119,8 @@ jobs:
 
       - name: Rename artifacts
         run: |
-          mv docker-package-software-practices-metrics-tool.zip docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
-          mv windows-installer-software-practices-metrics-tool.zip windows-installer-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+          mv ./docker-package-software-practices-metrics-tool.zip docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+          mv ./windows-installer-software-practices-metrics-tool.zip windows-installer-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
 
       - name: Delete existing release with version {${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}}
         uses: cb80/delrel@latest
