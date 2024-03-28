@@ -3,7 +3,7 @@
 ## Prerequisites
 
 1. Make sure you are aware of your Azure organization, project, repository, &
-   target branch and add these details in the server-config.json file.
+   target branch and add these details in the `server-config.json` file.
 
 2. Ensure you possess a valid Azure token, otherwise create one by following
    the steps below.
