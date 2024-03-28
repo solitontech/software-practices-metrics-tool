@@ -33,7 +33,7 @@ class BuildDocker {
     if (!this.#isImageNameValid(this.#dockerImageName)) {
       throw new Error(`
         Invalid image name - ${this.#dockerImageName}
-        - Change the ".env" file "PRODUCTION_DOCKER_IMAGE_VERSION" key like the following example:
+        - Change the ".env" file "PRODUCTION_PACKAGE_VERSION" key like the following example:
         - Example: 1.0.0
       `);
     }
@@ -62,8 +62,8 @@ class BuildDocker {
   static #createTarFileFromImage() {
     console.log(chalk.grey('\nCreating tar file from builded docker image...'));
 
-    const [tarFileName, version] = this.#dockerImageName.split(':');
-    const outputPath = path.join(this.#dockerPackageDir, `${tarFileName}-v${version}.tar`);
+    const [tarFileName] = this.#dockerImageName.split(':');
+    const outputPath = path.join(this.#dockerPackageDir, `${tarFileName}.tar`);
     const command = `docker save -o ${outputPath} ${this.#dockerImageName}`;
 
     execSync(command);

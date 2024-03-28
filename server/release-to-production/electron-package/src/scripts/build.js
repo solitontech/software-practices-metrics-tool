@@ -172,7 +172,7 @@ class Build {
       installerFilePath,
       path.join(
         this.#electronReleaseDirectoryPath,
-        `software-practices-metrics-tool-v${await ModuleImport.getToolVersion()}.exe`
+        `software-practices-metrics-tool-v${await ModuleImport.getElectronPackageVersion()}.exe`
       )
     );
 
