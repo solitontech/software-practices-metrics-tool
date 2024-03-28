@@ -1,4 +1,4 @@
-@import "../../../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .dropdownContainers {
   display: flex;
@@ -7,24 +7,24 @@
 }
 
 .dropdownContainer {
+  align-items: center;
   display: flex;
   width: 200px;
-  align-items: center;
 }
 
 .selectHeading {
+  font-size: $font-size-mlg;
+  font-weight: $medium-font-weight;
   width: 160px;
-  font-size: $secondary-font-size;
-  font-weight: $secondary-font-weight;
 }
 
 .selectBox {
-  font-size: $medium-font-size;
-  height: $large-font-size;
+  font-size: $font-size-xmd;
+  height: $font-size-lg;
   width: 80px;
 }
 
 .menuItem {
-  font-size: $medium-font-size;
+  font-size: $font-size-xmd;
   height: 22px;
 }

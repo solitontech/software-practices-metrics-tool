@@ -1,0 +1,29 @@
+@import "src/styles/index.scss";
+
+.paper {
+  background: $app-quaternary-background-color;
+  color: $app-quaternary-anchor-color;
+  height: 100%;
+  position: relative;
+  width: 48px;
+}
+
+.toolbar {
+  @include flex-column;
+
+  align-items: center;
+  gap: $spacing-sm;
+  height: 100%;
+  margin: $spacing-xl $spacing-md;
+}
+
+.arrow {
+  background-color: transparent;
+  border: none;
+  color: $app-secondary-text-color;
+  cursor: pointer;
+}
+
+.flexGrow {
+  flex-grow: 1;
+}

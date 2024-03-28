@@ -1,56 +1,58 @@
 import EastIcon from "@mui/icons-material/East";
 import DatePicker from "react-datepicker";
 
+import { InfoIconTooltip } from "src/components/reusables/InfoIconTooltip/InfoIconTooltip";
+
 import styles from "./DateRangePicker.module.scss";
-import { InfoIconTooltip } from "../InfoIconTooltip/InfoIconTooltip";
 
-interface Dates {
-  startDate: Date;
-  endDate: Date;
-}
-
-interface Props {
-  date: Dates;
-  onStartDateChange: (date: Date) => void;
-  onEndDateChange: (date: Date) => void;
+interface IDateRangePickerProps {
+  date: {
+    startDate: Date;
+    endDate: Date;
+  };
   minDate: Date;
   maxDate: Date;
+  handleStartDateChange: (date: Date) => void;
+  handleEndDateChange: (date: Date) => void;
+  dateFormat?: string;
 }
 
-export const DateRangePicker = ({ date, onStartDateChange, onEndDateChange, minDate, maxDate }: Props) => {
+export const DateRangePicker = ({
+  date,
+  minDate,
+  maxDate,
+  handleStartDateChange,
+  handleEndDateChange,
+  dateFormat = "dd MMM yy",
+}: IDateRangePickerProps) => {
   return (
-    <div className={styles.dateHeader}>
-      <div className={styles.tileContent}>
-        <div>Select start date range</div>
-        <InfoIconTooltip
-          content="If selected date range or pull request volume is high, data fetching will be slow"
-          size="16px"
-        />
+    <div className={styles.container}>
+      <div className={styles.label}>
+        <p className={styles.title}>Select start date range</p>
+        <InfoIconTooltip content="If selected date range or pull request volume is high, data fetching will be slow" />
       </div>
       <div className={styles.datePicker}>
         <div>
           <DatePicker
             className={styles.date}
             selected={date.startDate}
-            onChange={onStartDateChange}
+            onChange={handleStartDateChange}
             minDate={minDate}
             maxDate={date.endDate}
-            dateFormat="dd MMM yy"
-            popperClassName={styles.popper}
+            dateFormat={dateFormat}
+            popperClassName={styles.dateSelector}
           />
         </div>
-        <div>
-          <EastIcon />
-        </div>
+        <EastIcon />
         <div>
           <DatePicker
             className={styles.date}
             selected={date.endDate}
-            onChange={onEndDateChange}
+            onChange={handleEndDateChange}
             minDate={date.startDate}
             maxDate={maxDate}
-            dateFormat="dd MMM yy"
-            popperClassName={styles.popper}
+            dateFormat={dateFormat}
+            popperClassName={styles.dateSelector}
           />
         </div>
       </div>

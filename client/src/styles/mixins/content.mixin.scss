@@ -1,0 +1,23 @@
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin chip-active {
+  background-color: $app-chip-active-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
+}
+
+@mixin chip-completed {
+  background-color: $app-chip-completed-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
+}
+
+@mixin chip-abandoned {
+  background-color: $app-chip-abandoned-color;
+  color: $app-secondary-text-color;
+  text-transform: capitalize;
+}

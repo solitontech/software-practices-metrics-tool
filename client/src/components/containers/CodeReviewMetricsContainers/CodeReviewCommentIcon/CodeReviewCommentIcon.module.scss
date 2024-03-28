@@ -1,0 +1,14 @@
+@import "src/styles/index.scss";
+
+.container {
+  @include flex-align-center;
+
+  color: $app-ternary-text-color;
+  gap: $spacing-xs;
+  justify-content: left;
+}
+
+.icon {
+  height: 20px;
+  width: 20px;
+}

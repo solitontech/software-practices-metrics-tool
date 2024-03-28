@@ -1,15 +1,15 @@
 import styles from "./Tile.module.scss";
 
-interface Props {
+interface ITileProps {
   title: string;
   children: React.ReactNode;
 }
 
-export const Tile = ({ title, children }: Props) => {
+export const Tile = ({ title, children }: ITileProps) => {
   return (
     <div className={styles.tile}>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.value}>{children}</div>
+      <h6 className={styles.title}>{title}</h6>
+      {children}
     </div>
   );
 };

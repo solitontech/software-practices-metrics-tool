@@ -1,46 +1,49 @@
-import { ICommitsForDate } from "./interfaces";
-import styles from "./TrunkBasedMetricsGraphs.module.scss";
-import { getCodeFreezeMetricToPlot } from "./trunkBasedMetricsGraphsUtils";
-import { useTrunkBasedMetricsCodeFreeze } from "../../../../fetchers/hooks/trunkBasedDevelopment/useTrunkBasedMetricsCodeFreeze";
-import { BarChart } from "../../../reusables/MetricsGraphs/BarChart/BarChart";
-import { IBarPlot } from "../../../reusables/MetricsGraphs/BarChart/interfaces";
+import { useRef, useState } from "react";
 
-interface Props {
+import { BarChart } from "src/components/reusables/MetricsGraphs/BarChart/BarChart";
+import { useDimensions } from "src/hooks/hooks";
+import { useTrunkBranchCommits } from "src/services/api/api";
+
+import styles from "./TrunkBasedMetricsGraphs.module.scss";
+import { TrunkBasedMetricsGraphsUtils } from "./trunkBasedMetricsGraphsUtils";
+
+interface ITrunkBasedMetricsGraphsProps {
   startDate: Date;
   endDate: Date;
 }
 
-const GRAPH_TITLE = "Commit frequency in trunk branch";
-const Y_AXIS_NAME = "Number of commits in trunk branch";
-const X_AXIS_NAME = "Days";
-const GRAPH_COLOR = styles.GRAPH_COLOR;
+export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: ITrunkBasedMetricsGraphsProps) => {
+  const containerRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-export const TrunkBasedMetricsGraphs = ({ startDate, endDate }: Props) => {
-  const {
-    data: { commitList },
-  } = useTrunkBasedMetricsCodeFreeze(startDate, endDate);
+  useDimensions(containerRef, setDimensions);
 
-  const codeFreezeMetrics: ICommitsForDate = getCodeFreezeMetricToPlot(startDate, endDate, commitList);
+  const { data } = useTrunkBranchCommits(startDate, endDate);
 
-  const codeFreezeKeys = Object.keys(codeFreezeMetrics);
+  const commitsToPlot = TrunkBasedMetricsGraphsUtils.getCommitsToPlot(startDate, endDate, data.commits);
 
-  const plot: IBarPlot = {
-    xLabels: codeFreezeKeys,
-    yValues: Object.values(codeFreezeMetrics),
-    color: GRAPH_COLOR,
-    hoverText: codeFreezeKeys,
-    plotName: GRAPH_TITLE,
+  const commitsToPlotKeys = Object.keys(commitsToPlot);
+
+  const plot = {
+    xLabels: commitsToPlotKeys,
+    yValues: Object.values(commitsToPlot),
+    color: styles.GRAPH_COLOR,
+    hoverText: commitsToPlotKeys,
+    plotName: "",
   };
 
   return (
-    <div className={styles.graph}>
+    <div ref={containerRef} className={styles.graphContainer}>
       <BarChart
-        graphObject={{
+        graph={{
+          graphWidth: dimensions.width,
+          graphHeight: dimensions.height,
           plots: [plot],
-          xAxisName: X_AXIS_NAME,
-          yAxisName: Y_AXIS_NAME,
-          graphAnnotationText: `Total Commits in trunk branch : ${commitList.length}`,
-          graphTitle: GRAPH_TITLE,
+          xAxisName: "Days",
+          yAxisName: "Number of commits",
+          graphAnnotationText: `Total Commits in trunk branch : ${data.commits.length}`,
+          graphTitle: "Commit frequency in trunk branch",
+          annotationYPosition: TrunkBasedMetricsGraphsUtils.getAnnotationYPosition(dimensions.height),
         }}
       />
     </div>

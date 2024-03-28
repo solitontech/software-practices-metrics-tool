@@ -1,30 +1,28 @@
-import { Config, Data, Layout, ModeBarDefaultButtons } from "plotly.js";
+import { Config, Data, Layout } from "plotly.js";
 import Plot from "react-plotly.js";
 
-import { IHistogramChart } from "./histogramInterfaces";
-import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsConstants";
+import { IHistogramChart } from "./histogramTypes";
+import { ANNOTATIONS, GRAPH, GRAPH_MODE_BAR_BUTTONS_TO_REMOVE } from "../metricsGraphConstants";
 
-interface Props {
-  graphObject: IHistogramChart;
+interface IHistogramChartProps {
+  graph: IHistogramChart;
 }
 
-const GRAPH_TYPE = "histogram";
-
 export const HistogramChart = ({
-  graphObject: {
+  graph: {
     plot: { xValues, startValue, endValue, binSize, binText, markerColor, hoverText },
     xAxisName = "",
     yAxisName = "",
     graphTitle = "",
-    graphWidth = GRAPH.WIDTH as number,
-    graphHeight = GRAPH.HEIGHT as number,
+    graphWidth = GRAPH.WIDTH,
+    graphHeight = GRAPH.HEIGHT,
     graphAnnotationText,
     fileNameForImage = "histogram-chart",
   },
-}: Props) => {
+}: IHistogramChartProps) => {
   const data: Data[] = [
     {
-      type: GRAPH_TYPE,
+      type: "histogram",
       x: xValues,
       xbins: {
         start: startValue,
@@ -39,7 +37,7 @@ export const HistogramChart = ({
       hoverinfo: GRAPH.HOVER_INFO,
       hoverlabel: {
         align: GRAPH.HOVER_ALIGN,
-        bgcolor: GRAPH.TOOL_TIP_BACKGROUND_COLOR as string,
+        bgcolor: GRAPH.TOOL_TIP_BACKGROUND_COLOR,
       },
     },
   ];
@@ -62,18 +60,18 @@ export const HistogramChart = ({
         yref: ANNOTATIONS.AXIS_REFERENCE,
         text: graphAnnotationText,
         showarrow: false,
-        bordercolor: ANNOTATIONS.BORDER_COLOR as string,
-        borderwidth: ANNOTATIONS.BORDER_WIDTH as number,
-        borderpad: ANNOTATIONS.BORDER_PAD as number,
+        bordercolor: ANNOTATIONS.BORDER_COLOR,
+        borderwidth: ANNOTATIONS.BORDER_WIDTH,
+        borderpad: ANNOTATIONS.BORDER_PAD,
         font: {
-          size: ANNOTATIONS.FONT_SIZE as number,
+          size: ANNOTATIONS.FONT_SIZE,
         },
       },
     ],
     width: graphWidth,
     height: graphHeight,
     font: {
-      family: GRAPH.FONT_FAMILY as string,
+      family: GRAPH.FONT_FAMILY,
     },
     dragmode: GRAPH.DRAG_MODE,
   };
@@ -84,7 +82,7 @@ export const HistogramChart = ({
       filename: fileNameForImage,
     },
     editable: false,
-    modeBarButtonsToRemove: GRAPH_MODE_BAR_BUTTONS_TO_REMOVE as ModeBarDefaultButtons[],
+    modeBarButtonsToRemove: GRAPH_MODE_BAR_BUTTONS_TO_REMOVE,
     scrollZoom: true,
   };
 

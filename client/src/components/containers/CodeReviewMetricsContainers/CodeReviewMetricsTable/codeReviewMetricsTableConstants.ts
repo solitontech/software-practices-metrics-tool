@@ -1,90 +1,113 @@
-import { CustomSortingIcon } from "./CustomSortingIcon";
-import { IColumn } from "./interfaces";
-import { CustomFilterIcon } from "./VotesFilter/CustomFilterIcon";
+import { CodeReviewSortingIcon } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewSortingIcon/CodeReviewSortingIcon";
+import { VOTES, SORT_MAP } from "src/constants/constants";
+import { IFetchedPullRequestVotes } from "src/services/api/api";
 
-export const columns: readonly IColumn[] = [
+import { ICodeReviewTableColumn, ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
+import { CodeReviewTableVotesFilter } from "./CodeReviewTableVotesFilter/CodeReviewTableVotesFilter";
+
+export const DEFAULT_SORT_STATE = {
+  comments: SORT_MAP.NO_SORT,
+  firstReviewResponseTimeInSeconds: SORT_MAP.NO_SORT,
+  approvalTimeInSeconds: SORT_MAP.NO_SORT,
+  mergeTimeInSeconds: SORT_MAP.NO_SORT,
+};
+
+const VOTES_FILTER_DEFAULT_STATE: Record<keyof IFetchedPullRequestVotes, boolean> = {
+  [VOTES.APPROVED]: false,
+  [VOTES.APPROVED_WITH_SUGGESTIONS]: false,
+  [VOTES.WAIT_FOR_AUTHOR]: false,
+  [VOTES.REJECTED]: false,
+  [VOTES.NO_VOTE]: false,
+};
+
+export const DEFAULT_FILTER_STATE: Record<
+  ICodeReviewTableVotesFilterColumn,
+  Record<keyof IFetchedPullRequestVotes, boolean>
+> = {
+  votesHistory: VOTES_FILTER_DEFAULT_STATE,
+  votes: VOTES_FILTER_DEFAULT_STATE,
+};
+
+export const FILTER_COLUMN_VOTES = "votes";
+export const FILTER_COLUMN_VOTES_HISTORY = "votesHistory";
+
+export const columns: ICodeReviewTableColumn[] = [
   {
-    id: "startDate",
+    id: "creationDate",
     label: "Start Date",
-    minWidth: 98,
+    width: 98,
     align: "left",
   },
   {
-    id: "endDate",
+    id: "closedDate",
     label: "End Date",
-    minWidth: 98,
+    width: 98,
     align: "left",
   },
   {
     id: "title",
     label: "Title",
-    minWidth: 340,
+    width: 340,
     align: "left",
   },
   {
     id: "tags",
     label: "Tags",
-    minWidth: 150,
+    width: 130,
     align: "left",
   },
   {
     id: "createdBy",
     label: "Author",
-    minWidth: 150,
+    width: 150,
     align: "left",
   },
   {
     id: "comments",
     label: "Comments",
-    minWidth: 150,
+    width: 150,
     align: "left",
-    action: CustomSortingIcon,
+    action: CodeReviewSortingIcon,
   },
   {
     id: "votesHistory",
     label: "Votes History",
-    minWidth: 155,
+    width: 155,
     align: "center",
-    action: CustomFilterIcon,
+    action: CodeReviewTableVotesFilter,
   },
   {
     id: "votes",
     label: "Current Votes",
-    minWidth: 180,
+    width: 180,
     align: "center",
-    action: CustomFilterIcon,
+    action: CodeReviewTableVotesFilter,
   },
   {
     id: "firstReviewResponseTimeInSeconds",
     label: "First Review Response Time",
     align: "left",
-    minWidth: 160,
-    action: CustomSortingIcon,
+    width: 160,
+    action: CodeReviewSortingIcon,
   },
   {
     id: "approvalTimeInSeconds",
     label: "Approval Time",
     align: "left",
-    minWidth: 135,
-    action: CustomSortingIcon,
+    width: 135,
+    action: CodeReviewSortingIcon,
   },
   {
     id: "mergeTimeInSeconds",
     label: "Merge Time",
     align: "left",
-    minWidth: 120,
-    action: CustomSortingIcon,
+    width: 120,
+    action: CodeReviewSortingIcon,
   },
   {
     id: "status",
     label: "Status",
     align: "left",
-    minWidth: 120,
+    width: 120,
   },
 ];
-
-export const sortMap = {
-  asc: "asc",
-  desc: "desc",
-  noSort: " noSort",
-};

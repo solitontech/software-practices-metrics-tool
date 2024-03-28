@@ -3,8 +3,9 @@ import dotenv from 'dotenv';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 
-import { EnvValidation, ServerConfigValidation } from '../validations/index.js';
-import { NODE_ENVIRONMENT_MODE } from '../constants/index.js';
+import { EnvValidation, ServerConfigValidation } from '../validations/validations.js';
+import { NODE_ENVIRONMENT_MODE } from '../constants/constants.js';
+import { ConfigPathResolver } from '##/utils/utils.js';
 
 export class ServerConfiguration {
   static #clientFilters;
@@ -13,11 +14,27 @@ export class ServerConfiguration {
 
   static #dirName = path.dirname(fileURLToPath(import.meta.url));
   static #envFilePath = path.join(this.#dirName, './.env');
-  static #serverConfigPath = path.join(this.#dirName, './server-config.json');
+  static #serverConfigPath = ConfigPathResolver.getServerConfigPath();
 
   static {
     this.#loadServerConfigs();
     this.#loadEnvironmentVariables();
+  }
+
+  static get clientFilters() {
+    return this.#clientFilters;
+  }
+
+  static get clientFiltersSquads() {
+    return this.#clientFilters.squads;
+  }
+
+  static get versionControl() {
+    return this.#versionControl;
+  }
+
+  static get environmentVariables() {
+    return this.#environmentVariables;
   }
 
   static #loadServerConfigs() {
@@ -47,25 +64,10 @@ export class ServerConfiguration {
       versionControlSystem: process.env.VERSION_CONTROL_SYSTEM,
       clientDevelopmentUrlOrigin: process.env.CLIENT_DEVELOPMENT_URL_ORIGIN,
       swaggerEditorUrlOrigin: process.env.SWAGGER_EDITOR_URL_ORIGIN,
-      productionDockerImageVersion: process.env.PRODUCTION_DOCKER_IMAGE_VERSION,
+      productionDockerImageVersion: process.env.PRODUCTION_PACKAGE_VERSION,
+      productionElectronPackageVersion: process.env.PRODUCTION_PACKAGE_VERSION,
     });
 
     EnvValidation.terminateOnValidationError(this.#environmentVariables);
-  }
-
-  static get clientFilters() {
-    return this.#clientFilters;
-  }
-
-  static get clientFiltersSquads() {
-    return this.#clientFilters.squads;
-  }
-
-  static get versionControl() {
-    return this.#versionControl;
-  }
-
-  static get environmentVariables() {
-    return this.#environmentVariables;
   }
 }

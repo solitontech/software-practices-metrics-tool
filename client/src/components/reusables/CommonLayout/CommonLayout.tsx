@@ -1,28 +1,19 @@
 import styles from "./CommonLayout.module.scss";
-import { Header } from "../Header/Header";
 
-interface Props {
-  id?: string;
-  pageHeader: string;
+interface ICommonLayoutProps {
+  title: string;
   children: React.ReactNode;
-  searchBox?: React.ReactNode;
-  filter?: React.ReactNode;
-  searchDialogBox?: React.ReactNode;
+  actions?: React.ReactNode;
 }
 
-export const CommonLayout = ({ id, pageHeader, children, searchBox, filter, searchDialogBox }: Props) => {
+export const CommonLayout = ({ title, children, actions }: ICommonLayoutProps) => {
   return (
-    <div className={styles.container}>
-      <header>
-        <Header
-          id={id}
-          pageHeader={pageHeader}
-          searchBox={searchBox}
-          filter={filter}
-          searchDialogBox={searchDialogBox}
-        />
+    <section className={styles.container}>
+      <header className={styles.header}>
+        <h2 className={styles.title}>{title}</h2>
+        {actions && <div className={styles.actions}>{actions}</div>}
       </header>
-      <main>{children}</main>
-    </div>
+      <main className={styles.main}>{children}</main>
+    </section>
   );
 };

@@ -1,0 +1,78 @@
+@mixin table-container {
+  border: 1px solid $app-secondary-border-color;
+  border-radius: $app-primary-border-radius;
+  overflow: auto;
+}
+
+@mixin table {
+  border-spacing: 0;
+  width: 100%;
+}
+
+@mixin table-head {
+  background-color: $app-secondary-text-color;
+  color: $app-primary-text-color;
+  font-weight: $extra-bold-font-weight;
+  position: sticky;
+  top: 0;
+}
+
+@mixin table-body {
+  overflow-y: auto;
+}
+
+@mixin table-header-cell {
+  border-bottom: 1px solid $app-secondary-border-color;
+  color: $app-primary-text-color;
+  font-size: $font-size-xmd;
+  padding: $spacing-lg;
+}
+
+@mixin table-cell {
+  border-bottom: 1px solid $app-secondary-border-color;
+  color: $app-ternary-text-color;
+  font-size: $font-size-xmd;
+  padding: $spacing-lg;
+}
+
+@mixin table-link-cell {
+  color: $app-ternary-text-color;
+  cursor: pointer;
+  font-weight: $medium-font-weight;
+  gap: $spacing-xs;
+  text-decoration: none;
+
+  &:hover {
+    color: $app-primary-anchor-color;
+    font-weight: $medium-font-weight;
+  }
+}
+
+@mixin table-link-icon {
+  color: $app-quaternary-text-color;
+  font-size: $icon-size-md;
+}
+
+@mixin table-row-odd {
+  background-color: darken($app-primary-background-color, 3%);
+
+  &:hover {
+    background-color: darken($app-primary-background-color, 7%);
+  }
+}
+
+@mixin table-row-even {
+  background-color: $app-primary-background-color;
+
+  &:hover {
+    background-color: darken($app-primary-background-color, 7%);
+  }
+}
+
+@mixin table-no-data-message {
+  border-bottom: 1px solid $app-secondary-border-color;
+  color: $app-ternary-text-color;
+  font-size: $font-size-mlg;
+  height: 75px;
+  text-align: center;
+}

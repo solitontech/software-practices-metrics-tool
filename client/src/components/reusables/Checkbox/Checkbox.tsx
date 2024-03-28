@@ -1,15 +1,15 @@
 import styles from "./Checkbox.module.scss";
 
-interface Props {
-  isChecked: boolean;
-  onChange: (value: boolean) => void;
+interface ICheckboxProps {
   title: string;
   labelStyle: string;
+  isChecked: boolean;
+  onChange: (value: boolean) => void;
 }
 
-export const Checkbox = ({ isChecked, onChange, title, labelStyle }: Props) => {
+export const Checkbox = ({ title, labelStyle, isChecked, onChange }: ICheckboxProps) => {
   return (
-    <label className={styles.checkboxContainer}>
+    <label className={styles.container}>
       <input
         type="checkbox"
         className={styles.checkbox}
@@ -19,9 +19,9 @@ export const Checkbox = ({ isChecked, onChange, title, labelStyle }: Props) => {
         }}
       />
 
-      <div className={labelStyle} title={title}>
+      <span className={labelStyle} title={title}>
         {title}
-      </div>
+      </span>
     </label>
   );
 };

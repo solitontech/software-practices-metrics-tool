@@ -8,18 +8,18 @@ import {
   GRAPH_TYPE,
   GRAPH_TYPE_DISPLAY_TEXT,
 } from "../../../../../reusables/MetricsGraphs/BarChart/barChartConstants";
-import { BarMode, TrendView } from "../../../../../reusables/MetricsGraphs/BarChart/interfaces";
+import { IBarChartMode, IBarChartTrendView } from "../../../../../reusables/MetricsGraphs/BarChart/barChartTypes";
 
 interface GraphOptions {
-  trendView: TrendView;
-  barMode?: BarMode;
+  trendView: IBarChartTrendView;
+  barMode?: IBarChartMode;
   isMonthlyDisabled: boolean;
 }
 
 interface Props {
   graphOptions: GraphOptions;
-  setTrendView: (value: TrendView) => void;
-  setBarMode?: (value: BarMode) => void;
+  setTrendView: (value: IBarChartTrendView) => void;
+  setBarMode?: (value: IBarChartMode) => void;
 }
 
 export const GraphDropdown = ({
@@ -37,7 +37,7 @@ export const GraphDropdown = ({
             className={styles.selectBox}
             value={trendView}
             onChange={(event) => {
-              setTrendView(event.target.value as TrendView);
+              setTrendView(event.target.value as IBarChartTrendView);
             }}
           >
             <MenuItem className={styles.menuItem} value={TREND_VIEW.WEEKLY}>
@@ -60,7 +60,7 @@ export const GraphDropdown = ({
               className={styles.selectBox}
               value={barMode}
               onChange={(event) => {
-                setBarMode(event.target.value as BarMode);
+                setBarMode(event.target.value as IBarChartMode);
               }}
             >
               <MenuItem className={styles.menuItem} value={GRAPH_TYPE.GROUP}>

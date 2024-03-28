@@ -1,0 +1,72 @@
+@import "src/styles/index.scss";
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
+}
+
+.tableCell {
+  @include table-cell;
+}
+
+.pullRequest {
+  @include flex-align-center;
+  @include table-link-cell;
+}
+
+.prTitle {
+  @include ellipsis;
+
+  width: 300px;
+}
+
+.linkIcon {
+  @include table-link-icon;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-xs;
+  row-gap: $spacing-sm;
+}
+
+.tag {
+  @include ellipsis;
+
+  background-color: $app-ternary-background-color;
+  font-size: $font-size-md;
+  height: fit-content;
+  max-width: 110px;
+}
+
+.commentIcon {
+  margin-left: $spacing-xxl;
+}
+
+.currentVotesList {
+  @include flex-align-center;
+
+  gap: $spacing-xs;
+}
+
+.votesTimeLine {
+  @include flex-align-center;
+
+  gap: $spacing-xs;
+}
+
+.active {
+  @include chip-active;
+}
+
+.completed {
+  @include chip-completed;
+}
+
+.abandoned {
+  @include chip-abandoned;
+}

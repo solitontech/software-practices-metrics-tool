@@ -12,7 +12,7 @@ module.exports = {
     "prettier",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "package.json", "package-lock.json"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -49,14 +49,20 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "import/no-unresolved": [
+      "error",
+      {
+        ignore: ["^msw/.+"],
+      },
+    ],
   },
   settings: {
     react: {
       version: "detect",
     },
     "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      typescript: {
+        alwaysTryTypes: true,
       },
     },
   },
