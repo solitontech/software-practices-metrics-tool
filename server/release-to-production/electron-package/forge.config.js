@@ -9,6 +9,7 @@ const iconPath = join(currentDir, 'src/assets/media/tech-force-logo.ico');
 export const packagerConfig = {
   asar: true,
   icon: iconPath,
+  extraResource: [iconPath],
 };
 
 // `rebuildConfig` is for `electron-rebuild`, which rebuilds native Node.js modules for Electron's Node.js version. An empty object means default configuration is used.
