@@ -14,7 +14,7 @@
     "build": "set NODE_ENVIRONMENT=production&& node ./src/scripts/build.js"
   },
   "keywords": [],
-  "author": "TechOps",
+  "author": "Soliton Technologies",
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^7.3.0",
