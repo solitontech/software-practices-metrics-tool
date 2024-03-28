@@ -2,8 +2,6 @@
 
 This repository contains the backend code for API's related to Software
 Practices Metrics tool.
-This repository contains the backend code for API's related to Software
-Practices Metrics tool.
 
 ## Getting Started
 
@@ -102,14 +100,14 @@ This file contains the necessary settings for authentication and repository conn
 Below is an example of the `server-config.json` file:
 
 ```json
-   {
+{
    "targetBranch": "main",
    "organization": "Soliton",
    "projectName": "my_project",
    "repositoryId": "my_repository",
    "authToken": "my_auth_token",
    "squads": []
-   }
+}
 ```
 
 ## Steps to Create Azure Devops Token

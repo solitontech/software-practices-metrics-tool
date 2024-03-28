@@ -50,7 +50,6 @@ git clone https://github.com/solitontech/software-practices-metrics-tool.git
 
 Before proceeding, make sure you have Node.js and npm installed on your system.
 We recommend using Node.js version used [here](./server/.nvmrc) for compatibility.
-We recommend using Node.js version used [here](./server/.nvmrc) for compatibility.
 You can download and install it from the [official Node.js website](https://nodejs.org/).
 
 Additionally, we recommend to use Visual Studio Code for this codebase. If you

@@ -52,7 +52,6 @@ Inside the starter code's base directory, run the following command in
 
 ```bash
 npm run coverage
-npm run coverage
 ```
 
 ## Linting & Formatting
