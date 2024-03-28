@@ -1,10 +1,12 @@
-# Prerequisites
+# Setup Guide
 
-1. Make sure you are aware of your Azure organization, project, repository,
- & target branch and add these details in the server-config.json file.
+## Prerequisites
 
-2. Ensure you possess a valid Azure token, otherwise create one by
- following the steps below.
+1. Make sure you are aware of your Azure organization, project, repository, &
+   target branch and add these details in the server-config.json file.
+
+2. Ensure you possess a valid Azure token, otherwise create one by following
+   the steps below.
 
 ## Steps to create Azure devops Token
 
@@ -30,19 +32,18 @@
 
 1. Update the server-config.json file with relevant details.
 
-2. Create a folder named `SoftwarePracticesMetricsTool` in
-below mentioned path.
+2. Create a folder named `SoftwarePracticesMetricsTool` in below mentioned path.
 
    ```shell
    C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool
    ```
 
-3. If you can't find `AppData` under your directory it might be hidden,
-you can view it by checking Hidden items checkbox under View tab of your
-file explorer top panel.
+3. If you can't find `AppData` under your directory it might be hidden, you can
+   view it by checking Hidden items checkbox under View tab of your file explorer
+   top panel.
 
-4. Copy the configured `server-config.json` file to the newly created `SoftwarePracticesMetricsTool`
-folder.
+4. Copy the configured `server-config.json` file to the newly created
+   `SoftwarePracticesMetricsTool` folder.
 
    ```shell
    C:\Users\your_user_name\AppData\Local\SoftwarePracticesMetricsTool\server-config.json
@@ -53,29 +54,31 @@ folder.
 ## Using squads in server-config.json file
 
 1. Please refer [Steps to get developer uuid](#steps-to-get-developer-uuid) &
- [Steps to get reviewer uuid](#steps-to-get-reviewer-uuid)
-to know how to get the uuids using our tool before starting with below steps.
+   [Steps to get reviewer uuid](#steps-to-get-reviewer-uuid) to know how to get
+   the uuids using our tool before starting
+   with below steps.
 
-2. Update squads in `server-config.json` with relevant details
- for filtering in the application. Refer below format.
+2. Update squads in `server-config.json` with relevant details for filtering in
+   the application. Refer below format.
 
-    ```JSON
+   ```JSON
    squads:[
-      {
-         "squadName": "Squad_name",
-         "developers": {
-            "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-         },
-         "reviewers": {
-            "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
-         }
-      }
-   ] 
+     {
+        "squadName": "Squad_name",
+        "developers": {
+           "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+        },
+        "reviewers": {
+           "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
+        }
+     }
+   ]
    ```
 
 3. Ensure entering unique squad name to avoid confusion. And enter the details
-of developers and reviewers as array of key value pairs specified in the below
-format.
+   of developers and reviewers as array of key value pairs specified in the below
+   format.
+
    - `developer_uuid (or) reviewer_uuid : developer_name (or) reviewer_name`
 
 4. After configuring filters in the `server-config.json` file. Re run the application.
@@ -87,8 +90,8 @@ format.
 2. And use browser dev tools to inspect on code review table.
 
 3. Using the select in dev tools, click on the author name in the code review
- table and go to inspect tab to get developer name and uuid
-  from the title tag of the html element.
+   table and go to inspect tab to get developer name and uuid from the title tag
+   of the html element.
 
 4. Also you can get uuid from data-uuid tag of html element.
 
@@ -102,9 +105,9 @@ format.
 
 3. And use browser dev tools to inspect on timeline table.
 
-4. Using the select in dev tools, click on the reviewer name in the timeline
- table and go to inspect tab to get reviewer name and uuid from
-  the title tag of the html element.
+4. Using the select in dev tools, click on the reviewer name in the timeline table
+   and go to inspect tab to get reviewer name and uuid from the title tag of the
+   html element.
 
 5. Also you can get uuid from data-uuid tag of html element.
 
@@ -112,31 +115,30 @@ format.
 
 ### Note
 
-1. Squads are useful when you are working
- on large repository with a high volume of pull requests or you are
- finding it difficult to search your team pull requests.
+1. Squads are useful when you are working on large repository with a high volume
+   of pull requests or you are finding it difficult to search your team pull requests.
 
 2. Squads are optional configuration.
 
 3. In a squad, reviewers are not required fields, while at least one developer
- is mandatory. Refer below format.
+   is mandatory. Refer below format.
 
-    ```JSON
+   ```JSON
    squads:[
-      {
-         "squadName": "Squad_name",
-         "developers": {
-            "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-         }
-      }
-   ] 
+     {
+        "squadName": "Squad_name",
+        "developers": {
+           "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+        }
+     }
+   ]
    ```
 
-4. If you set reviewers for squads and select them in the application,
- only pull requests containing those reviewers will be filtered.
+4. If you set reviewers for squads and select them in the application, only pull
+   requests containing those reviewers will be filtered.
 
-5. A reviewer is recognized as such for a pull request only if they've given
- any vote on it.
+5. A reviewer is recognized as such for a pull request only if they've given any
+   vote on it.
 
-6. Ensure you enter same name for developers & reviewers section in the
- `server-config.json` which will be displayed in the dashboard to avoid confusion.
+6. Ensure you enter same name for developers & reviewers section in the `server-config.json`
+   which will be displayed in the dashboard to avoid confusion.
