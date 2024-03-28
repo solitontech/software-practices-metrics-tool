@@ -1,5 +1,12 @@
-@import "../../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .graphs {
-  @include graphs-container;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  height: calc(100% - 90px);
+  justify-content: center;
+  margin-top: $spacing-xs;
+  overflow: auto;
+  width: 100%;
 }

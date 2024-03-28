@@ -1,19 +1,31 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .container {
-  overflow-x: scroll;
+  background-color: $app-secondary-background-color;
   height: 100%;
+  overflow-x: auto;
+  padding: 0 $spacing-xl;
   width: 100%;
-  background-color: $secondary-background-color;
-  padding-left: $padding-small;
 }
 
-header {
-  @include flex-center;
-  height: 75px;
+.header {
+  @include flex-align-center;
+
+  height: 65px;
+  justify-content: space-between;
 }
 
-main {
-  height: calc(100% - 75px);
+.title {
+  color: $app-ternary-text-color;
+  font-size: $font-size-lg;
+  font-weight: $medium-font-weight;
+}
+
+.main {
+  height: calc(100% - 65px);
   overflow-x: hidden;
+}
+
+.actions {
+  @include flex-row;
 }

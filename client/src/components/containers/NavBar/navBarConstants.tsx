@@ -1,20 +1,19 @@
 import CodeOutlinedIcon from "@mui/icons-material/CodeOutlined";
 
-import { Route } from "./NavBar";
-import trunkBased from "../../../assets/images/trunkBased.svg";
-import { pathToCodeReviewMetrics, pathToTrunkBasedMetrics } from "../../../constants/routeConstants";
+import trunkBased from "src/assets/images/trunkBased.svg";
+import { routePaths } from "src/constants/constants";
 
-export const routes: Route[] = [
+export const routes = [
   {
     name: "Code review Metrics",
     label: "Code review",
-    link: pathToCodeReviewMetrics,
-    iconPath: <CodeOutlinedIcon />,
+    link: routePaths.codeReviewMetrics,
+    icon: <CodeOutlinedIcon />,
   },
   {
     name: "Trunk Based Metrics",
     label: "Trunk Based",
-    link: pathToTrunkBasedMetrics,
-    iconPath: <img src={trunkBased} />,
+    link: routePaths.trunkBasedMetrics,
+    icon: <img src={trunkBased} />,
   },
 ];

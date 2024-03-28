@@ -1,31 +1,51 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.date {
-  border: 1px solid $border-color;
-  border-radius: 4px;
-  color: $primary-color;
-  height: 35px;
-  text-align: center;
-  font-size: $medium-font-size;
-  padding: 0px !important;
-  width: 90px !important;
+.container {
+  @include flex-column;
+
+  justify-content: space-between;
+}
+
+.label {
+  @include flex-align-center;
+
+  gap: $spacing-xs;
+  margin-top: $spacing-xs;
+}
+
+.title {
+  font-size: $font-size-xmd;
+  font-weight: $medium-font-weight;
 }
 
 .datePicker {
-  display: flex;
-  color: $primary-color;
-  align-items: center;
-  gap: 5px;
+  @include flex-align-center;
+
+  gap: $spacing-sm;
+  margin-top: $spacing-sm;
 }
 
-.popper {
-  z-index: 100 !important;
+.date {
+  border: 1px solid $app-secondary-border-color;
+  border-radius: $app-primary-border-radius;
+  color: $app-ternary-text-color;
+  font-size: $font-size-xmd;
+  height: 35px;
+  min-width: 90px;
+  padding: 0;
+  text-align: center;
+  width: 90px;
 }
 
-.tileContent {
-  @include tile-content;
+.date:hover {
+  border: 1px solid $app-primary-border-color;
 }
 
-.dateHeader {
-  @include date-header;
+.date:focus {
+  border: 1px solid $app-quaternary-background-color;
+  outline: none;
+}
+
+.dateSelector {
+  z-index: 10 !important;
 }

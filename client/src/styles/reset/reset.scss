@@ -13,10 +13,10 @@
 
 html,
 body {
-  font-family: "Roboto";
+  font-family: Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
   height: 100%;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
 }
 
 img,
@@ -51,7 +51,8 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $primary-color;
+  background-color: darken($app-ternary-background-color, 3%);
+  border-radius: $app-primary-border-radius;
 }
 
 ::-webkit-scrollbar-track {
@@ -59,5 +60,5 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: $primary-color;
+  background-color: darken($app-ternary-background-color, 3%);
 }

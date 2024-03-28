@@ -1,0 +1,26 @@
+@import "src/styles/index.scss";
+
+.headerContainer {
+  width: 100%;
+}
+
+.searchBox {
+  width: 380px;
+}
+
+.viewContainer {
+  display: flex;
+  gap: $spacing-xl;
+  height: calc(100% - 60px);
+  width: 100%;
+}
+
+.errorMessage {
+  border: 1px solid $app-primary-border-color;
+  color: $app-ternary-text-color;
+  font-weight: $medium-font-weight;
+  margin: $spacing-vlg 0;
+  padding: $spacing-xs;
+  text-align: center;
+  width: 100%;
+}

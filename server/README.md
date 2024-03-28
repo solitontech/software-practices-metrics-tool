@@ -1,6 +1,6 @@
 # Software Practices Metrics Tool
 
-This repository contains the backend code for API's related to Software Practices Metrics tool.
+This repository contains the backend code for API's related to software practices metrics tool.
 
 ## Dependencies Used
 
@@ -86,7 +86,7 @@ Make sure you have the following dependencies installed on your machine:
 ### 5. Access the Application
 
 1. Once the development server is running, open your web browser and go to the address
-   [http://localhost:3000](http://localhost:3000) and access the application.
+   [http://localhost:3498](http://localhost:3498) and access the application.
 
 ## Release to production
 
@@ -96,4 +96,4 @@ Make sure you have the following dependencies installed on your machine:
 
 1. Swagger Open API specification document can be accessed at the following URL:
 
-   1. <http://localhost:3000/open-api-spec-doc/>
+   1. <http://localhost:3498/open-api-spec-doc/>

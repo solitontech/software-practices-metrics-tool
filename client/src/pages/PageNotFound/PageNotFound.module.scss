@@ -1,4 +1,4 @@
-@import "../../styles/index.scss";
+@import "src/styles/index.scss";
 
 .pageNotFound {
   @include flex-column-center;
@@ -7,16 +7,16 @@
 }
 
 .pageNotFoundText {
-  margin: $primary-margin $no-margin $secondary-margin;
-  line-height: $secondary-line-height;
-  letter-spacing: $no-letter-spacing;
-  color: $secondary-color;
-  font-size: $ternary-font-size;
-  font-weight: $secondary-font-weight;
+  color: $app-quaternary-text-color;
+  font-size: $font-size-xxxl;
+  font-weight: $medium-font-weight;
+  margin: $spacing-lg 0 $spacing-lg;
 }
 
 .description {
-  @include description;
-
+  color: $app-ternary-text-color;
+  font-size: $font-size-xl;
+  font-weight: $regular-font-weight;
+  text-align: center;
   width: 570px;
 }

@@ -1,0 +1,17 @@
+@import "src/styles/index.scss";
+
+.pieChartContainer {
+  position: relative;
+}
+
+.infoIconContainer {
+  left: 580px;
+  position: absolute;
+  top: 38px;
+  z-index: 1;
+}
+
+.infoIcon {
+  color: $app-ternary-text-color;
+  font-size: $icon-size-lg;
+}

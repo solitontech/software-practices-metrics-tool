@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "prepare": "cd .. && husky install client/.husky",
+    "prepare": "cd .. && husky install",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "eslint . --ext ts,tsx --fix",
+    "lint:css": "stylelint **/*.scss",
+    "lint:css-fix": "stylelint **/*.scss --fix",
     "format": "prettier --write .",
     "format-check": "prettier . --check",
     "preview": "vite preview",
@@ -17,8 +19,12 @@
     "test-e2e": "set CLIENT_DEV_URL=http://localhost:5173&& npx playwright test"
   },
   "lint-staged": {
-    "**/*": [
+    "*.{ts,tsx}": [
       "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix",
       "prettier --write --ignore-unknown"
     ]
   },
@@ -30,6 +36,7 @@
     "@tanstack/react-query": "^5.14.6",
     "@tanstack/react-query-devtools": "^5.15.0",
     "axios": "^1.6.3",
+    "clsx": "^2.1.0",
     "humanize-duration": "^3.31.0",
     "immer": "^10.0.3",
     "luxon": "^3.4.4",
@@ -62,19 +69,26 @@
     "dotenv": "^16.4.5",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "husky": "^9.0.11",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "lint-staged": "^15.2.2",
-    "msw": "^2.2.2",
+    "msw": "^2.2.3",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
-    "typescript": "^5.0.2",
+    "stylelint": "^16.3.0",
+    "stylelint-config-css-modules": "^4.4.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-order": "^6.0.4",
+    "stylelint-scss": "^6.2.1",
+    "typescript": "^5.4.2",
     "vite": "^4.4.5",
+    "vite-tsconfig-paths": "^4.3.1",
     "vitest": "^0.34.6",
     "vitest-dom": "^0.1.1"
   }

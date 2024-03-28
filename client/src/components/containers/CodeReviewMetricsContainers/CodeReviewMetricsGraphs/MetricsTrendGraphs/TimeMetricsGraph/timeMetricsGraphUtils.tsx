@@ -1,27 +1,28 @@
-import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
-import { SECONDS_IN_ONE_HOUR } from "../../../../../../constants/timeConstants";
-import { IPullRequestList } from "../../../CodeReviewMetricsTable/interfaces";
-import { formatHoursToDays } from "../../../CodeReviewMetricsTiles/codeReviewMetricsTilesUtils";
 import {
-  MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
+  SECONDS_IN_ONE_HOUR,
   MAX_CHARACTERS_IN_LINE_IN_TOOLTIP,
+  MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP,
   MAX_PULL_REQUEST_ID_ROWS,
   TAB_SPACE,
   LINE_BREAKER,
   DOUBLE_SPACE,
-} from "../../metricsConstants";
+} from "src/constants/constants";
+import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
+import { getHoursToDays } from "src/utils/utils";
+
+import { IPullRequestsTimeMetrics } from "./timeMetricsGraphInterface";
 
 const MAX_LINE = MAX_PULL_REQUEST_IDS_IN_LINE_IN_TOOLTIP;
 const MAX_CHARACTERS = MAX_CHARACTERS_IN_LINE_IN_TOOLTIP;
 const MAX_ROWS = MAX_PULL_REQUEST_ID_ROWS;
 
 export class Graph {
-  static pullRequests: IPullRequestList[];
+  static pullRequests: IFetchedCodeReviewPullRequest[];
   static startDate: Date;
   static endDate: Date;
 
   static appendPullRequestId(
-    pullRequest: IPullRequestList,
+    pullRequest: IFetchedCodeReviewPullRequest,
     intervals: IPullRequestsTimeMetrics[],
     index: number,
   ): IPullRequestsTimeMetrics[] {
@@ -107,7 +108,7 @@ export class Graph {
   }
 
   static getTooltipText(pullRequestIds: number[], averageTimeInHours: number, header: string): string {
-    const formattedTime = formatHoursToDays(averageTimeInHours);
+    const formattedTime = getHoursToDays(averageTimeInHours);
     const tooltipHeader = `${header} ${formattedTime} (Total PR's: ${pullRequestIds.length})`;
 
     const groupPullRequestIds = this.groupPullRequestIds(pullRequestIds);

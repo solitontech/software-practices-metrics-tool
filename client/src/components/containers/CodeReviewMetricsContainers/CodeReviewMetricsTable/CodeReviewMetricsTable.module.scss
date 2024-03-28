@@ -1,181 +1,16 @@
-@import "../../../../styles/index.scss";
-
-.noDataMessage {
-  @include no-data-message;
-}
-
-.text {
-  @include text;
-  font-size: $medium-font-size;
-  letter-spacing: $primary-letter-spacing;
-  border-bottom: 1px solid $table-border;
-  padding: $primary-padding;
-}
-
-.pullRequestURL {
-  @include pull-request-url;
-}
-
-.linkIcon {
-  @include link-icon;
-}
-
-.navLink {
-  @include ellipsis;
-
-  font-size: $medium-font-size;
-}
-
-.dialogIcon {
-  display: flex;
-}
-
-.active {
-  @include capitalize;
-  background-color: $active-color;
-}
-
-.completed {
-  @include capitalize;
-  background-color: $completed-color;
-}
-
-.abandoned {
-  @include capitalize;
-  background-color: $abandoned-color;
-}
-
-.paper {
-  @include paper;
-  overflow: scroll;
-  border-radius: 4px;
-}
-
-.rowEven {
-  @include row-even;
-}
-
-.rowOdd {
-  @include row-odd;
-}
-
-.comments {
-  @include flex-center;
-  gap: 4px;
-  justify-content: center;
-  color: $primary-color;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  color: $icon-color;
-}
-
-@mixin votesList {
-  gap: 3px;
-  width: 120px;
-  height: 30px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.currentVotesList {
-  @include votesList;
-  width: 145px;
-}
-
-.votesTimeLine {
-  @include votesList;
-}
+@import "src/styles/index.scss";
 
 .header {
-  @include table-header;
+  color: $app-ternary-text-color;
+  font-size: $font-size-xmd;
+  font-weight: $semi-bold-font-weight;
+  margin-bottom: $spacing-xs;
 }
 
-.totalPRs {
-  @include total-count;
-}
+.tableContainer {
+  @include table-container;
 
-.buttonColor {
-  @include common-icon;
-  color: $primary-color;
-}
-
-.timelineIconColor {
-  @include common-icon;
-  color: $secondary-color;
-}
-
-.historyIcon {
-  height: 40px;
-}
-
-.tableHeader {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.sortingIcon {
-  display: flex;
-  flex-direction: column;
-  width: 40px;
-  height: 50px;
-  margin-top: $secondary-minimum-margin;
-}
-
-.time {
-  font-size: $medium-font-size;
-}
-
-.prTitle {
-  width: 300px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  display: block;
-}
-
-.startDate {
-  display: block;
-  width: 65px;
-}
-
-.closedDate {
-  display: block;
-  width: 75px;
-}
-
-.closedDateTitle[aria-label="Closed Date"] {
-  width: max-content;
-}
-
-.dialogHeader {
-  width: 22%;
-  font-size: $medium-font-size;
-}
-
-.prDetails {
-  width: 78%;
-}
-
-.tagsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  row-gap: 8px;
-}
-
-.tag {
-  background-color: $chip-background-color;
-  font-size: $minimum-font-size;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 110px;
-  height: fit-content;
+  max-height: 95%;
 }
 
 .table {
@@ -190,34 +25,6 @@
   @include table-body;
 }
 
-.tableCell {
-  @include table-cell;
-}
-
-.date {
-  min-width: 98px;
-}
-
-.tags {
-  min-width: 150px;
-}
-
-.author {
-  min-width: 150px;
-}
-
-.commentCount {
-  min-width: 130px;
-}
-
-.firstReviewTime {
-  min-width: 160px;
-}
-
-.approvalTime {
-  min-width: 135px;
-}
-
-.mergeTime {
-  min-width: 120px;
+.noDataMessage {
+  @include table-no-data-message;
 }

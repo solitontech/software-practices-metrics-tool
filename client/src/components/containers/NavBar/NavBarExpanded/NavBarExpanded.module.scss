@@ -1,0 +1,42 @@
+@import "src/styles/index.scss";
+
+.paper {
+  background: $app-quaternary-background-color;
+  color: $app-quaternary-anchor-color;
+  height: 100%;
+  padding-top: $spacing-sm;
+  position: relative;
+  width: 180px;
+}
+
+.toolbar {
+  @include flex-align-center;
+
+  height: 50px;
+  justify-content: space-around;
+}
+
+.arrow {
+  background-color: transparent;
+  border: none;
+  color: $app-secondary-text-color;
+  cursor: pointer;
+}
+
+.flexGrow {
+  flex-grow: 1;
+}
+
+.techForce {
+  align-self: center;
+  height: 70px;
+  width: 70px;
+}
+
+.logoText {
+  color: $app-quaternary-anchor-color;
+  font-size: $font-size-xmd;
+  font-weight: $semi-bold-font-weight;
+  margin: $spacing-lg 0;
+  text-align: center;
+}

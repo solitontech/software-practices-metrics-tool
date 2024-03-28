@@ -1,14 +1,13 @@
-@import "../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.checkboxContainer {
-  padding: $minimum-padding $ternary-padding;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  width: 100%;
+.container {
+  @include flex-align-center;
+
+  gap: $spacing-xs;
+  padding: $spacing-xs 0;
 }
 
 .checkbox {
-  height: $extra-large-icon-size;
-  width: 13px;
+  height: $icon-size-lg;
+  width: $icon-size-lg;
 }

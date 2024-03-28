@@ -1,0 +1,80 @@
+name: Docker Production Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      working-directory: server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Read node version
+        id: nvmrc
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./${{ env.working-directory }}/.nvmrc
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.nvmrc.outputs.content }}
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ${{ env.working-directory }}
+
+      - name: Run client build
+        run: npm run build:client
+        working-directory: ${{ env.working-directory }}
+
+      - name: Run docker build
+        run: npm run build:docker
+        working-directory: ${{ env.working-directory }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: software-practices-metrics-tool
+          path: ./${{ env.working-directory }}/software-practices-metrics-tool.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: software-practices-metrics-tool
+
+      - name: Read environment variables
+        id: dotenv
+        uses: falti/dotenv-action@v1
+        with:
+          path: server/src/configs/.env
+
+      - name: Rename artifact
+        run: mv software-practices-metrics-tool.zip docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+
+      - name: Delete existing release with version {${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}}
+        uses: cb80/delrel@latest
+        with:
+          tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
+          name: ${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}
+          artifacts: ./docker-package-software-practices-metrics-tool-v${{ steps.dotenv.outputs.PRODUCTION_DOCKER_IMAGE_VERSION }}.zip
+          token: ${{ secrets.GITHUB_TOKEN }}

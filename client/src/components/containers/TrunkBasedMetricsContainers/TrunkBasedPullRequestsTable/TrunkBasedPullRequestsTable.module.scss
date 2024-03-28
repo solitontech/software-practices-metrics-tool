@@ -1,99 +1,71 @@
-@import "../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.noDataMessage {
-  @include no-data-message;
+.tableContainer {
+  @include table-container;
+
+  height: fit-content;
+  max-height: 100%;
+  width: calc(100% - 250px);
 }
 
-.text {
-  @include text;
+.table {
+  @include table;
 }
 
-.branchName {
-  @include text;
-  max-width: 450px;
-  display: block;
+.tableHead {
+  @include table-head;
 }
 
-.tableHeader {
-  @include table-header;
-  height: 55px;
+.tableHeaderCell {
+  @include table-header-cell;
 }
 
-.totalCount {
-  @include total-count;
+.tableBody {
+  @include table-body;
 }
 
-.header {
-  @include table-header;
-  margin-top: $minimum-margin;
+.tableCell {
+  @include table-cell;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
+}
+
+.branchName,
+.pullRequest {
+  @include flex-align-center;
+  @include table-link-cell;
 }
 
 .title {
-  width: 250px;
-  display: block;
   @include ellipsis;
+
+  display: block;
+  max-width: 350px;
+  width: fit-content;
 }
 
 .linkIcon {
-  @include link-icon;
-}
-
-.pullRequestURL {
-  @include pull-request-url;
-}
-
-.date {
-  @include text;
-}
-
-.paper {
-  @include paper;
-  min-height: 440px;
-  height: 100%;
-  width: calc(100% - 300px);
-}
-
-.rowEven {
-  @include row-even;
-}
-
-.rowOdd {
-  @include row-odd;
-}
-
-.branchName {
-  color: $primary-color;
-  @include url;
-  @include flex-center;
-  gap: 4px;
-}
-
-.tiles {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 270px;
+  @include table-link-icon;
 }
 
 .active {
-  @include capitalize;
-  background-color: $active-color;
+  @include chip-active;
 }
 
 .completed {
-  @include capitalize;
-  background-color: $completed-color;
+  @include chip-completed;
 }
 
 .abandoned {
-  @include capitalize;
-  background-color: $abandoned-color;
+  @include chip-abandoned;
 }
 
-.tileContent {
-  @include tile-content;
-}
-
-.tableView {
-  @include table-view;
+.noDataMessage {
+  @include table-no-data-message;
 }

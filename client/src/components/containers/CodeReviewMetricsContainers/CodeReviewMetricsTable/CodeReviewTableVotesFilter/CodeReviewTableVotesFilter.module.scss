@@ -1,0 +1,73 @@
+@import "src/styles/index.scss";
+
+.filterIcon {
+  margin-top: $spacing-xs;
+}
+
+.container {
+  position: absolute;
+  width: 280px;
+}
+
+.filterContainer {
+  background-color: $app-primary-background-color;
+  border: 1px solid $app-secondary-border-color;
+  border-radius: $app-primary-border-radius;
+  padding: $spacing-xl $spacing-xl $spacing-sm $spacing-xl;
+}
+
+.title {
+  font-size: $font-size-xmd;
+  margin-bottom: $spacing-xs;
+}
+
+.checkboxContainer {
+  @include flex-align-center;
+
+  gap: $spacing-sm;
+  padding: $spacing-sm 0;
+}
+
+.checkbox {
+  height: $icon-size-lg;
+  width: $icon-size-lg;
+}
+
+.voteImageContainer {
+  @include flex-align-center;
+
+  gap: $spacing-sm;
+}
+
+.checkboxImage {
+  height: $icon-size-xxl;
+  width: $icon-size-xxl;
+}
+
+.voteLabel {
+  color: $app-ternary-text-color;
+  font-size: $font-size-xmd;
+  font-weight: $medium-font-weight;
+}
+
+.clearFilterContainer {
+  @include flex-align-center;
+
+  justify-content: center;
+  margin: $spacing-md 0 $spacing-md 0;
+}
+
+.clearFilterBtn {
+  @include flex-align-center;
+
+  background: $app-quaternary-background-color;
+  border: none;
+  border-radius: $app-primary-border-radius;
+  color: $app-secondary-text-color;
+  cursor: pointer;
+  font-size: $font-size-xmd;
+  height: 32px;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  width: 100px;
+}

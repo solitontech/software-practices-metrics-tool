@@ -1,17 +1,25 @@
-@import "../../../../styles/index.scss";
+@import "src/styles/index.scss";
 
-.green {
-  color: $completed-color;
+.minThreshold {
+  color: $app-chip-completed-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
-.red {
-  color: $abandoned-color;
+.insideThreshold {
+  color: $app-chip-active-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
-.yellow {
-  color: $active-color;
+.maxThreshold {
+  color: $app-chip-abandoned-color;
+  font-size: $font-size-mlg;
+  font-weight: $semi-bold-font-weight;
 }
 
 .tileContent {
-  @include tile-content;
+  @include flex-align-center;
+
+  gap: $spacing-sm;
 }

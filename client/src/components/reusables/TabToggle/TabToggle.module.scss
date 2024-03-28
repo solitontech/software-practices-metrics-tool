@@ -1,0 +1,16 @@
+@import "src/styles/index.scss";
+
+.toggleContainer {
+  display: flex;
+  height: 50px;
+}
+
+.toggle {
+  @include flex-align-center;
+
+  gap: $spacing-sm;
+}
+
+.icon {
+  margin-top: $spacing-xs;
+}

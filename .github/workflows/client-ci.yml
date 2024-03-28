@@ -1,0 +1,54 @@
+name: Client CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  client-ci:
+    runs-on: ubuntu-latest
+
+    env:
+      working-directory: client
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Read node version
+        id: nvmrc
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./server/.nvmrc
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.nvmrc.outputs.content }}
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ${{ env.working-directory }}
+
+      - name: Check format
+        run: npm run format-check
+        working-directory: ${{ env.working-directory }}
+
+      - name: Check lint
+        run: npm run lint
+        working-directory: ${{ env.working-directory }}
+
+      - name: Check css lint
+        run: npm run lint:css
+        working-directory: ${{ env.working-directory }}
+
+      - name: Check build
+        run: npm run build
+        working-directory: ${{ env.working-directory }}
+
+      - name: Run tests
+        run: npm run test
+        working-directory: ${{ env.working-directory }}

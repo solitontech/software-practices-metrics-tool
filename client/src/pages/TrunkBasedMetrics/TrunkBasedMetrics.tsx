@@ -1,99 +1,54 @@
 import { useState } from "react";
 
-import { DateTime } from "luxon";
+import { TrunkBasedMetricsTabs } from "src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTabs/TrunkBasedMetricsTabs";
+import { TrunkBasedMetricsTiles } from "src/components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/TrunkBasedMetricsTiles";
+import { CommonLayout } from "src/components/reusables/CommonLayout/CommonLayout";
+import { DateRangePicker } from "src/components/reusables/DateRangePicker/DateRangePicker";
+import { ErrorBoundary } from "src/components/reusables/ErrorBoundary/ErrorBoundary";
+import { TabToggle } from "src/components/reusables/TabToggle/TabToggle";
+import { dateRange } from "src/constants/constants";
 
 import styles from "./TrunkBasedMetrics.module.scss";
-import { TRUNK_BASED_METRICS_TABS, TRUNK_BASED_METRICS_TAB_VALUE } from "./trunkBasedMetricsConstants";
-import { TrunkBasedMetricsGraphs } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsGraphs/TrunkBasedMetricsGraphs";
-import { TrunkBasedMetricsTiles } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedMetricsTiles/TrunkBasedMetricsTiles";
-import { TrunkBasedPullRequestsTable } from "../../components/containers/TrunkBasedMetricsContainers/TrunkBasedPullRequestsTable/TrunkBasedPullRequestsTable";
-import { CommonLayout } from "../../components/reusables/CommonLayout/CommonLayout";
-import { DateRangePicker } from "../../components/reusables/DateRangePicker/DateRangePicker";
-import { IMetricsView } from "../../components/reusables/MetricsToggleTab/interfaces";
-import { MetricsToggleTab } from "../../components/reusables/MetricsToggleTab/MetricsToggleTab";
-import { ErrorBoundary } from "../../errorBoundary/ErrorBoundary";
-
-const today = DateTime.local();
-const sevenDaysAgoFromToday = today.minus({ days: 7 });
-const sixMonthsAgoFromToday = today.minus({ days: 190 });
-const metricsToggleTabs = TRUNK_BASED_METRICS_TABS as IMetricsView<TrunkBasedMetricsView>[];
-
-type TrunkBasedMetricsView = "table" | "graph";
+import { trunkBasedTabs } from "./trunkBasedMetricsConstants";
+import { ITrunkBasedMetricsTabValue } from "./trunkBasedMetricsTypes";
 
 export const TrunkBasedMetrics = () => {
-  const [selectedView, setSelectedView] = useState<TrunkBasedMetricsView>(
-    TRUNK_BASED_METRICS_TAB_VALUE.TABLE as TrunkBasedMetricsView,
-  );
-
+  const [selectedTab, setSelectedTab] = useState<ITrunkBasedMetricsTabValue>("table");
   const [dates, setDates] = useState({
-    startDate: sevenDaysAgoFromToday.toJSDate(),
-    endDate: today.toJSDate(),
+    startDate: dateRange.sevenDaysAgoFromToday,
+    endDate: dateRange.today,
   });
 
-  const handleViewChange = (newView: TrunkBasedMetricsView) => {
-    setSelectedView(newView);
-  };
-
-  const isTableView = () => {
-    return selectedView === (TRUNK_BASED_METRICS_TAB_VALUE.TABLE as TrunkBasedMetricsView);
-  };
-
-  const isGraphView = () => {
-    return selectedView === (TRUNK_BASED_METRICS_TAB_VALUE.GRAPH as TrunkBasedMetricsView);
-  };
-
-  const renderView = () => {
-    if (isTableView()) {
-      return (
-        <div className={styles.trunkBasedTable}>
-          <ErrorBoundary key="trunk-based-table">
-            <TrunkBasedPullRequestsTable startDate={dates.startDate} endDate={dates.endDate} />
-          </ErrorBoundary>
-        </div>
-      );
-    }
-
-    if (isGraphView()) {
-      return (
-        <ErrorBoundary key="trunk-based-graph">
-          <TrunkBasedMetricsGraphs startDate={dates.startDate} endDate={dates.endDate} />
-        </ErrorBoundary>
-      );
-    }
-  };
-
   const handleDateChange = (date: Date, dateType: "startDate" | "endDate") => {
-    setDates((prevDates) => ({
-      ...prevDates,
-      [dateType]: date || prevDates[dateType],
-    }));
+    setDates((prevDates) => {
+      return { ...prevDates, [dateType]: date ?? prevDates[dateType] };
+    });
+  };
+
+  const handleTabChange = (value: string) => {
+    setSelectedTab(value as ITrunkBasedMetricsTabValue);
   };
 
   return (
-    <CommonLayout pageHeader="Trunk Based Metrics">
-      <div className={styles.trunkBased}>
-        <div className={styles.tableDetails}>
-          <div className={styles.header}>
+    <ErrorBoundary key="trunk-based-metrics">
+      <CommonLayout title="Trunk Based Metrics">
+        <div className={styles.container}>
+          <div className={styles.headerContainer}>
             <DateRangePicker
               date={dates}
-              onStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
-              onEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
-              minDate={sixMonthsAgoFromToday.toJSDate()}
-              maxDate={today.toJSDate()}
+              handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
+              handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
+              minDate={dateRange.sixMonthsAgoFromToday}
+              maxDate={dateRange.today}
             />
-            <MetricsToggleTab
-              metricsViews={metricsToggleTabs}
-              selectedView={selectedView}
-              onViewChange={handleViewChange}
-            />
-            <div className={styles.tiles}>
+            <TabToggle tabs={trunkBasedTabs} selectedTab={selectedTab} handleTabChange={handleTabChange} />
+            <div className={styles.tilesContainer}>
               <TrunkBasedMetricsTiles />
             </div>
           </div>
+          <TrunkBasedMetricsTabs dates={dates} selectedTab={selectedTab} />
         </div>
-
-        {renderView()}
-      </div>
-    </CommonLayout>
+      </CommonLayout>
+    </ErrorBoundary>
   );
 };
