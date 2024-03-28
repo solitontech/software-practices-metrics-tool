@@ -49,7 +49,7 @@ git clone https://github.com/solitontech/software-practices-metrics-tool.git
 ### Set Up Your Environment
 
 Before proceeding, make sure you have Node.js and npm installed on your system.
-We recommend using Node.js version used [here](./server/nvmrc) for compatibility.
+We recommend using Node.js version used [here](./server/.nvmrc) for compatibility.
 You can download and install it from the [official Node.js website](https://nodejs.org/).
 
 Additionally, we recommend to use Visual Studio Code for this codebase. If you
@@ -92,7 +92,7 @@ npm install
 
 ### Run the Project
 
-Refer [Configure server configuration file](./server/README.md/configure-server-configuration-file)
+Refer [Configure server configuration file](./server/README.md/#configure-server-configuration-file)
 to configure server config file.
 
 Launch the server and client of the tool to start analyzing your project's
