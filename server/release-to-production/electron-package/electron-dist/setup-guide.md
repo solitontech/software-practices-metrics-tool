@@ -55,8 +55,7 @@
 
 1. Please refer [Steps to get developer uuid](#steps-to-get-developer-uuid) &
    [Steps to get reviewer uuid](#steps-to-get-reviewer-uuid) to know how to get
-   the uuids using our tool before starting
-   with below steps.
+   the uuids using the metrics tool before starting with below steps.
 
 2. Update squads in `server-config.json` with relevant details for filtering in
    the application. Refer below format.
@@ -66,7 +65,8 @@
      {
         "squadName": "Squad_name",
         "developers": {
-           "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+           "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name_1",
+           "9c1413b9-2b7c-8767-c252-e2eacfed5f43": "Developer_name_2"
         },
         "reviewers": {
            "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
@@ -76,42 +76,48 @@
    ```
 
 3. Ensure entering unique squad name to avoid confusion. And enter the details
-   of developers and reviewers as array of key value pairs specified in the below
+   of developers and reviewers as key value pairs specified in the below
    format.
 
    - `developer_uuid (or) reviewer_uuid : developer_name (or) reviewer_name`
 
-4. After configuring filters in the `server-config.json` file. Re run the application.
+4. After configuring filters in the `server-config.json` file. Re-run the application
+   for the changes to take effect.
 
 ### Steps to get developer uuid
 
 1. Open the application & got to code review page.
 
-2. And use browser dev tools to inspect on code review table.
+2. Go to the `Author` column of the code review metrics table.
 
-3. Using the select in dev tools, click on the author name in the code review
-   table and go to inspect tab to get developer name and uuid from the title tag
-   of the html element.
+3. Hover over the any one of the author name to see the author name and their uuid
 
-4. Also you can get uuid from data-uuid tag of html element.
+4. Right click on the author name and click `Inspect` from the menu list to open
+   Chrome devtools.
 
-5. Copy and paste the name & uuid in `server-config.json` in specified format.
+5. You can get uuid from `data-uuid` attribute or `title` attribute of html element
+   from the Chrome devtools.
+
+6. Copy and paste the name & uuid in `server-config.json` in specified format.
 
 ### Steps to get reviewer uuid
 
 1. Open the application & got to code review page.
 
-2. Check in votes history timeline or current votes timeline for reviewers.
+2. Check in votes history timeline or current votes timeline to open the dialog modal
+   for reviewers.
 
-3. And use browser dev tools to inspect on timeline table.
+3. Go to the `Reviewed By` column of the votes timeline table.
 
-4. Using the select in dev tools, click on the reviewer name in the timeline table
-   and go to inspect tab to get reviewer name and uuid from the title tag of the
-   html element.
+4. Hover over the any one of the reviewer name to see the name and their uuid.
 
-5. Also you can get uuid from data-uuid tag of html element.
+5. Right click on the reviewer name and click `Inspect` from the menu list to open
+   Chrome devtools.
 
-6. Copy and paste the name & uuid in `server-config.json` in specified format.
+6. You can get uuid from `data-uuid` attribute or `title` attribute of html element
+   from the Chrome devtools.
+
+7. Copy and paste the name & uuid in `server-config.json` in specified format.
 
 ### Note
 
