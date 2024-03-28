@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-1. If you are already using software practices metrics tool earlier version
+1. If you are already using `software practices metrics tool` earlier version
    delete the older docker container & the docker image.
 
 2. Make sure you are aware of your Azure organization, project, repository,
@@ -18,7 +18,7 @@
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).
 
-2. Find Personal access tokens in user settings (beside profile picture).
+2. Find Personal access tokens in `user settings` (beside profile picture).
 
 3. Click on `Personal access tokens`.
 
@@ -28,7 +28,8 @@
 
 6. Choose the `organization` where you want to use the token.
 
-7. Set the expiration, scopes as `Custom defined` and tick `Read` for Code.
+7. Set the expiration for token,select the scope as `Custom defined`
+   and tick(mark as selected) for `Read` under `Code` scope.
 
 8. Click on `Create`.
 
@@ -139,13 +140,9 @@
 
 3. Hover over the any one of the author name to see the author name and their uuid
 
-4. Right click on the author name and click `Inspect` from the menu list to open
-   Chrome devtools.
+4. Click on the author name to copy the author name and uuid to the clipboard.
 
-5. You can get uuid from `data-uuid` attribute or `title` attribute of html element
-   from the Chrome devtools.
-
-6. Copy and paste the name & uuid in `server-config.json` in specified format.
+5. Copy and paste the name & uuid in `server-config.json` in specified format.
 
 ### Steps to get reviewer uuid
 
@@ -158,13 +155,9 @@
 
 4. Hover over the any one of the reviewer name to see the name and their uuid.
 
-5. Right click on the reviewer name and click `Inspect` from the menu list to open
-   Chrome devtools.
+5. Click on the author name to copy the author name and uuid to the clipboard.
 
-6. You can get uuid from `data-uuid` attribute or `title` attribute of html element
-   from the Chrome devtools.
-
-7. Copy and paste the name & uuid in `server-config.json` in specified format.
+6. Copy and paste the name & uuid in `server-config.json` in specified format.
 
 ### Note
 
