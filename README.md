@@ -43,7 +43,7 @@ To get started, clone the project repository to your local machine. Open your te
 and execute the following command:
 
 ```bash
-git clone https://github.com/solitontech/Software-Practices-Metrics-tool.git
+git clone https://github.com/solitontech/software-practices-metrics-tool.git
 ```
 
 ### Set Up Your Environment
