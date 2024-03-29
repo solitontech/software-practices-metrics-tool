@@ -110,6 +110,10 @@ Below is an example of the `server-config.json` file:
 }
 ```
 
+In `server-config.json` file targetBranch, organization, projectName, repositoryId,
+authToken are mandatory field and squads are optional field. If you are not configuring
+squads leave it as empty (`"squads": []`), to configure squads refer [here](#optional-configurations-in-server-configjson-file).
+
 ## Steps to Find Out Azure Repo Details
 
 Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
