@@ -62,19 +62,20 @@
    the application. Refer below format.
 
    ```json
-   squads:[
-     {
-        "squadName": "Squad_name",
-        "developers": {
-           "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name_1",
-           "9c1413b9-2b7c-8767-c252-e2eacfed5f43": "Developer_name_2"
-        },
-        "reviewers": {
-           "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
-        }
-     }
-   ]
-   ```
+    {
+      "squads":[
+         {
+            "squadName": "Squad_name",
+            "developers": {
+               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+            },
+            "reviewers": {
+               "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
+            }
+         }
+      ]
+    }
+    ```
 
 3. Ensure entering unique squad name to avoid confusion. And enter the details
    of developers and reviewers as key value pairs specified in the below
@@ -123,14 +124,16 @@
    is mandatory. Refer below format.
 
    ```json
-   squads:[
-     {
-        "squadName": "Squad_name",
-        "developers": {
-           "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-        }
-     }
-   ]
+   {
+      "squads":[
+         {
+            "squadName": "Squad_name",
+            "developers": {
+               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+            }
+         }
+      ] 
+   }
    ```
 
 4. If you set reviewers for squads and select them in the application, only pull

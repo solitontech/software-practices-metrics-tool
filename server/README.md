@@ -152,13 +152,13 @@ to know how to get the uuids using our tool before starting with below steps.
     {
       "squads":[
          {
-               "squadName": "Squad_name",
-               "developers": {
-                  "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-               },
-               "reviewers": {
-                  "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
-               }
+            "squadName": "Squad_name",
+            "developers": {
+               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+            },
+            "reviewers": {
+               "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
+            }
          }
       ]
     }
@@ -210,15 +210,17 @@ finding it difficult to search your team pull requests.
 3. In a squad, reviewers are not required fields, while at least one developer
 is mandatory. Refer below format.
 
-    ```json
-   squads:[
-      {
-         "squadName": "Squad_name",
-         "developers": {
-            "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+   ```json
+   {
+      "squads":[
+         {
+            "squadName": "Squad_name",
+            "developers": {
+               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+            }
          }
-      }
-   ] 
+      ] 
+   }
    ```
 
 4. If you set reviewers for squads and select them in the application,
