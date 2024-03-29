@@ -9,7 +9,7 @@
 2. Ensure you possess a valid Azure token, otherwise create one by following
    the steps below.
 
-## Steps to Create Azure Devops Token
+## Steps to Create Azure Devops Auth Token
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).
 

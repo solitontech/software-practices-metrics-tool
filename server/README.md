@@ -149,17 +149,19 @@ to know how to get the uuids using our tool before starting with below steps.
  for filtering in the application. Refer below format.
 
     ```json
-    squads:[
-        {
-            "squadName": "Squad_name",
-            "developers": {
-                "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-            },
-            "reviewers": {
-                "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
-            }
-        }
-    ]
+    {
+      "squads":[
+         {
+               "squadName": "Squad_name",
+               "developers": {
+                  "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+               },
+               "reviewers": {
+                  "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
+               }
+         }
+      ]
+    }
     ```
 
 3. Ensure entering unique squad name to avoid confusion. And enter the details

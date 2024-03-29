@@ -15,7 +15,7 @@
 4. Make sure you have Git Bash installed; if not, you can download and install
    it from [git](https://git-scm.com/downloads).
 
-## Steps to Create Azure Devops Token
+## Steps to Create Azure Devops Auth Token
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).
 
