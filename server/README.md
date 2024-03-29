@@ -112,13 +112,12 @@ Below is an example of the `server-config.json` file:
 
 ## Steps to Find Our Azure Repo Details
 
-Go to [Azure](https://dev.azure.com/)
+Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
+`server-config.json` fields as shown below.
 
 ![Azdo repo details](./assets/media/azdo1.png)
 
 ![Azdo  repo details](./assets/media/azdo2.png)
-
-![Azdo  repo details](./assets/media/azdo3.png)
 
 ## Steps to Create Azure Devops Token
 
