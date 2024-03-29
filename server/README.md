@@ -110,6 +110,16 @@ Below is an example of the `server-config.json` file:
 }
 ```
 
+## Steps to Find Our Azure Repo Details
+
+Go to [Azure](https://dev.azure.com/)
+
+![Azdo repo details](./assets/media/azdo1.png)
+
+![Azdo  repo details](./assets/media/azdo2.png)
+
+![Azdo  repo details](./assets/media/azdo3.png)
+
 ## Steps to Create Azure Devops Token
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).

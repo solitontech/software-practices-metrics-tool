@@ -7,6 +7,8 @@
 
 2. Make sure you are aware of your Azure organization, project, repository,
    & target branch and add these details in the `server-config.json` file.
+   You can get [Steps to Find Azure Repo Details](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#steps-to-find-azure-repo-details)
+   here
 
 3. Ensure you possess a valid Azure token, otherwise create one by following the
    steps below.
