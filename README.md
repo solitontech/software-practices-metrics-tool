@@ -8,6 +8,8 @@ insights into industry recommended software practices like code review and
 trunk-based development, empowering teams to elevate the quality and efficiency
 of their projects. Presently, it supports projects housed in Azure DevOps repositories.
 
+![Software practices metrics tool features](/assets/media/tool-features.gif)
+
 ## Client README
 
 For more information about the client-side implementation, check out the
