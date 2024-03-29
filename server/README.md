@@ -146,40 +146,21 @@ Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
 
 ## Optional Configurations in server-config json File
 
-### Advantage of using squads optional field
+### Advantage of using squads
 
 1. Squads are useful when you are working
 on large repository with a high volume of pull requests or you are
 finding it difficult to search your team pull requests.
 
 2. Squads are optional configuration. Configuring `squads` will be active the
-   filter in code review metrics page(near to top search bar) which can be used
-   to filter only the needed data based on `authors` and `reviewers`.
+filter in code review metrics page(near to top search bar) which can be used
+to filter only the needed data based on `authors` and `reviewers`.
 
-3. In a squad, reviewers are not required fields, while at least one developer
-is mandatory. Refer below format.
-
-   ```json
-   {
-      "squads":[
-         {
-            "squadName": "Squad_name",
-            "developers": {
-               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-            }
-         }
-      ] 
-   }
-   ```
-
-4. If you set reviewers for squads and select them in the application,
+3. If you set reviewers for squads and select them in the application,
 only pull requests containing those reviewers will be filtered.
 
-5. A reviewer is recognized as such for a pull request only if they've given
+4. A reviewer is recognized as such for a pull request only if they've given
 any vote on it.
-
-6. Ensure you enter same name for developers & reviewers section in the
-`server-config.json` which will be displayed in the dashboard to avoid confusion.
 
 ### How to configure squads
 
@@ -210,6 +191,25 @@ for filtering in the application. Refer below format.
 of developers and reviewers as array of key value pairs specified in the below
 format.
    - `developer_uuid (or) reviewer_uuid : developer_name (or) reviewer_name`
+
+4. In a squad, reviewers are not required fields, while at least one developer
+is mandatory. Refer below format.
+
+   ```json
+   {
+      "squads":[
+         {
+            "squadName": "Squad_name",
+            "developers": {
+               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+            }
+         }
+      ] 
+   }
+   ```
+
+5. Ensure you enter same name for developers & reviewers section in the
+`server-config.json` which will be displayed in the application to avoid confusion.
 
 ### Steps to get developer uuid
 
