@@ -110,7 +110,7 @@ Below is an example of the `server-config.json` file:
 }
 ```
 
-## Steps to Find Our Azure Repo Details
+## Steps to Find Out Azure Repo Details
 
 Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
 `server-config.json` fields as shown below.
@@ -119,7 +119,7 @@ Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
 
 ![Azdo  repo details](./assets/media/azdo2.png)
 
-## Steps to Create Azure Devops Token
+## Steps to Create Azure Devops Auth Token
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).
 
@@ -148,7 +148,7 @@ to know how to get the uuids using our tool before starting with below steps.
 2. Update squads in `server-config.json` with relevant details
  for filtering in the application. Refer below format.
 
-    ```JSON
+    ```json
     squads:[
         {
             "squadName": "Squad_name",
@@ -208,7 +208,7 @@ finding it difficult to search your team pull requests.
 3. In a squad, reviewers are not required fields, while at least one developer
 is mandatory. Refer below format.
 
-    ```JSON
+    ```json
    squads:[
       {
          "squadName": "Squad_name",

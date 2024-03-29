@@ -7,7 +7,7 @@
 
 2. Make sure you are aware of your Azure organization, project, repository,
    & target branch and add these details in the `server-config.json` file.
-   You can get the `server-config.json` details as described [here](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#steps-to-find-azure-repo-details).
+   You can get the `server-config.json` details as described [here](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#steps-to-find-out-azure-repo-details).
 
 3. Ensure you possess a valid Azure token, otherwise create one by following the
    steps below.
@@ -15,7 +15,7 @@
 4. Make sure you have Git Bash installed; if not, you can download and install
    it from [git](https://git-scm.com/downloads).
 
-## Steps to create Azure devops Token
+## Steps to Create Azure Devops Token
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).
 
@@ -36,7 +36,7 @@
 
 9. Ensure to copy and save the token value as **it won't be recoverable if lost.**
 
-## Launching Metrics tool using Docker
+## Launching Metrics Tool Using Docker
 
 1. Check whether docker is installed (`$  docker --help`) & ensure docker daemon
    is running (`$ docker ps`).
@@ -95,7 +95,7 @@
       ✔ Container software-practices-metrics-tool  Started
       ```
 
-## Using squads in server-config.json file
+## Using Squads in server-config.json File
 
 1. Please refer [Steps to get developer uuid](#steps-to-get-developer-uuid) &
    [Steps to get reviewer uuid](#steps-to-get-reviewer-uuid) to know how to get
@@ -104,7 +104,7 @@
 2. Update squads in `server-config.json` with relevant details for filtering in
    the application. Refer below format.
 
-    ```JSON
+    ```json
     squads:[
       {
          "squadName": "Squad_name",
@@ -170,7 +170,7 @@
 3. In a squad, reviewers are not required fields, while at least one developer
    is mandatory. Refer below format.
 
-   ```JSON
+   ```json
    squads:[
      {
         "squadName": "Squad_name",
@@ -190,7 +190,7 @@
 6. Ensure you enter same name for developers & reviewers section in the
    `server-config.json` which will be displayed in the dashboard to avoid confusion.
 
-## Optional Docker commands reference
+## Optional Docker Commands Reference
 
 1. Listing docker containers
 
