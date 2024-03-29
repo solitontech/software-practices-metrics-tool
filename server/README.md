@@ -110,7 +110,16 @@ Below is an example of the `server-config.json` file:
 }
 ```
 
-## Steps to Create Azure Devops Token
+## Steps to Find Out Azure Repo Details
+
+Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
+`server-config.json` fields as shown below.
+
+![Azdo repo details](./assets/media/azdo1.png)
+
+![Azdo  repo details](./assets/media/azdo2.png)
+
+## Steps to Create Azure Devops Auth Token
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).
 
@@ -139,18 +148,20 @@ to know how to get the uuids using our tool before starting with below steps.
 2. Update squads in `server-config.json` with relevant details
  for filtering in the application. Refer below format.
 
-    ```JSON
-    squads:[
-        {
+    ```json
+    {
+      "squads":[
+         {
             "squadName": "Squad_name",
             "developers": {
-                "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
             },
             "reviewers": {
-                "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
+               "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
             }
-        }
-    ]
+         }
+      ]
+    }
     ```
 
 3. Ensure entering unique squad name to avoid confusion. And enter the details
@@ -199,15 +210,17 @@ finding it difficult to search your team pull requests.
 3. In a squad, reviewers are not required fields, while at least one developer
 is mandatory. Refer below format.
 
-    ```JSON
-   squads:[
-      {
-         "squadName": "Squad_name",
-         "developers": {
-            "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+   ```json
+   {
+      "squads":[
+         {
+            "squadName": "Squad_name",
+            "developers": {
+               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+            }
          }
-      }
-   ] 
+      ] 
+   }
    ```
 
 4. If you set reviewers for squads and select them in the application,
