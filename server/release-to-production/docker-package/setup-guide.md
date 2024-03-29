@@ -71,10 +71,10 @@
       ✔ Container software-practices-metrics-tool  Started
       ```
 
-## Optional Configuration in server-config.json File
+## Optional Configuration in server-config json File
 
-Please refer this [guide](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#optional-configurations-in-server-configjson-file)
-to know about how to configure optional squads field.
+Please refer this [guide](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#optional-configurations-in-server-config-json-file)
+to know about how to configure optional `squads` field.
 
 ### Note
 
