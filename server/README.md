@@ -118,7 +118,7 @@ to configure squads refer [here](#optional-configurations-in-server-config-json-
 ## Steps to Find Out Azure Repo Details
 
 Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
-`server-config.json` fields as shown below.
+`server-config.json` fields as fshown below.
 
 ![Azdo repo details](./assets/media/azdo1.png)
 
@@ -188,7 +188,7 @@ for filtering in the application. Refer below format.
     ```
 
 3. Ensure entering unique squad name to avoid confusion. And enter the details
-of developers and reviewers as array of key value pairs specified in the below
+of developers and reviewers as key value pairs specified in the below
 format.
    - `developer_uuid (or) reviewer_uuid : developer_name (or) reviewer_name`
 
