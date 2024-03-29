@@ -144,7 +144,7 @@ Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
 
 9. Ensure to copy and save the token value as **it won't be recoverable if lost.**
 
-## Optional Configurations Fields in server-config json File
+## Optional Configurations in server-config json File
 
 ### Advantage of using squads
 
