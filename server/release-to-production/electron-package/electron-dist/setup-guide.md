@@ -31,7 +31,7 @@ You can get the `server-config.json` details as described [here](https://github.
 
 ## Optional Configuration in server-config json File
 
-Please refer this [guide](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#optional-configurations-in-server-configjson-file)
+Please refer this [guide](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#optional-configurations-in-server-config-json-file)
 to know about how to configure optional `squads` field.
 
 ### Note
