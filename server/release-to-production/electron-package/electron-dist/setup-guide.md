@@ -2,14 +2,9 @@
 
 ## Prerequisites
 
-1. Make sure you are aware of your Azure organization, project, repository, &
-   target branch and add these details in the `server-config.json` file.
-   You can get the `server-config.json` details as described [here](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#steps-to-find-out-azure-repo-details).
-
-2. Ensure you possess a valid Azure token, otherwise create one by following
-   the steps below.
-
-## Steps to Create Azure Devops Auth Token
+Make sure you are aware of your Azure organization, project, repository, &
+target branch and add these details in the `server-config.json` file.
+You can get the `server-config.json` details as described [here](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#configure-server-configuration-file).
 
 1. Sign up to [Azure Devops](https://dev.azure.com/).
 
@@ -52,95 +47,11 @@
 
 5. Double click on the installer file to run the application.
 
-## Using Squads in server-config.json File
+## Optional Configuration in server-config.json File
 
-1. Please refer [Steps to get developer uuid](#steps-to-get-developer-uuid) &
-   [Steps to get reviewer uuid](#steps-to-get-reviewer-uuid) to know how to get
-   the uuids using the metrics tool before starting with below steps.
-
-2. Update squads in `server-config.json` with relevant details for filtering in
-   the application. Refer below format.
-
-   ```json
-    {
-      "squads":[
-         {
-            "squadName": "Squad_name",
-            "developers": {
-               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-            },
-            "reviewers": {
-               "4c56f2d9-f179-65fd-af3d-0650c183e580": "Reviewer_name"
-            }
-         }
-      ]
-    }
-    ```
-
-3. Ensure entering unique squad name to avoid confusion. And enter the details
-   of developers and reviewers as key value pairs specified in the below
-   format.
-
-   - `developer_uuid (or) reviewer_uuid : developer_name (or) reviewer_name`
-
-4. After configuring filters in the `server-config.json` file. Re-run the application
-   for the changes to take effect.
-
-### Steps to get developer uuid
-
-1. Open the application & got to code review page.
-
-2. Go to the `Author` column of the code review metrics table.
-
-3. Hover over the any one of the author name to see the author name and their uuid
-
-4. Click on the author name to copy the author name and uuid to the clipboard.
-
-5. Copy and paste the name & uuid in `server-config.json` in specified format.
-
-### Steps to get reviewer uuid
-
-1. Open the application & got to code review page.
-
-2. Check in votes history timeline or current votes timeline to open the dialog modal
-   for reviewers.
-
-3. Go to the `Reviewed By` column of the votes timeline table.
-
-4. Hover over the any one of the reviewer name to see the name and their uuid.
-
-5. Click on the reviewer name to copy the reviewer name and uuid to the clipboard.
-
-6. Copy and paste the name & uuid in `server-config.json` in specified format.
+Please refer this [guide](https://github.com/solitontech/software-practices-metrics-tool/blob/main/server/README.md/#optional-configurations-in-server-configjson-file)
+to know about how to configure optional squads field.
 
 ### Note
 
-1. Squads are useful when you are working on large repository with a high volume
-   of pull requests or you are finding it difficult to search your team pull requests.
-
-2. Squads are optional configuration.
-
-3. In a squad, reviewers are not required fields, while at least one developer
-   is mandatory. Refer below format.
-
-   ```json
-   {
-      "squads":[
-         {
-            "squadName": "Squad_name",
-            "developers": {
-               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-            }
-         }
-      ] 
-   }
-   ```
-
-4. If you set reviewers for squads and select them in the application, only pull
-   requests containing those reviewers will be filtered.
-
-5. A reviewer is recognized as such for a pull request only if they've given any
-   vote on it.
-
-6. Ensure you enter same name for developers & reviewers section in the `server-config.json`
-   which will be displayed in the dashboard to avoid confusion.
+After configuring optional configuration, rerun the application.

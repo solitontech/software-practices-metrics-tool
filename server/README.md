@@ -139,7 +139,42 @@ Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
 
 9. Ensure to copy and save the token value as **it won't be recoverable if lost.**
 
-## Using Squads in server-config.json File
+## Optional Configurations in server-config.json File
+
+### Benefits of using squads
+
+1. Squads are useful when you are working
+on large repository with a high volume of pull requests or you are
+finding it difficult to search your team pull requests.
+
+2. Squads are optional configuration.
+
+3. In a squad, reviewers are not required fields, while at least one developer
+is mandatory. Refer below format.
+
+   ```json
+   {
+      "squads":[
+         {
+            "squadName": "Squad_name",
+            "developers": {
+               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
+            }
+         }
+      ] 
+   }
+   ```
+
+4. If you set reviewers for squads and select them in the application,
+only pull requests containing those reviewers will be filtered.
+
+5. A reviewer is recognized as such for a pull request only if they've given
+any vote on it.
+
+6. Ensure you enter same name for developers & reviewers section in the
+`server-config.json` which will be displayed in the dashboard to avoid confusion.
+
+### How to configure squads
 
 1. Please refer [Steps to get developer uuid](#steps-to-get-developer-uuid) &
  [Steps to get reviewer uuid](#steps-to-get-reviewer-uuid)
@@ -198,39 +233,6 @@ the title tag of the html element.
 5. Also you can get uuid from data-uuid tag of html element.
 
 6. Copy and paste the name & uuid in `server-config.json` in specified format.
-
-### Note
-
-1. Squads are useful when you are working
-on large repository with a high volume of pull requests or you are
-finding it difficult to search your team pull requests.
-
-2. Squads are optional configuration.
-
-3. In a squad, reviewers are not required fields, while at least one developer
-is mandatory. Refer below format.
-
-   ```json
-   {
-      "squads":[
-         {
-            "squadName": "Squad_name",
-            "developers": {
-               "9e1413a9-2b7c-6556-b441-e1eabfed5d43": "Developer_name"
-            }
-         }
-      ] 
-   }
-   ```
-
-4. If you set reviewers for squads and select them in the application,
-only pull requests containing those reviewers will be filtered.
-
-5. A reviewer is recognized as such for a pull request only if they've given
-any vote on it.
-
-6. Ensure you enter same name for developers & reviewers section in the
-`server-config.json` which will be displayed in the dashboard to avoid confusion.
 
 ## Technologies Used
 
