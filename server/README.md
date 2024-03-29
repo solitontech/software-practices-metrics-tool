@@ -21,7 +21,7 @@ server-config.json in configs directory follow the steps
 [Configure Server Configuration File](#configure-server-configuration-file).
 
 2. After configuring you can start the application by
- running the following command in terminal:
+running the following command in terminal:
 
    ```bash
    npm run start:dev
@@ -34,7 +34,7 @@ used for starting the development server.
 ### 3. Access the Application
 
 Once the development server is running, open your web browser and go to the address
-   [http://localhost:3498](http://localhost:3498) and access the application.
+[http://localhost:3498](http://localhost:3498) and access the application.
 
 ## Test the Application
 
@@ -165,8 +165,8 @@ format.
 2. And use browser dev tools to inspect on code review table.
 
 3. Using the select in dev tools, click on the author name in the code review
- table and go to inspect tab to get developer name and uuid
-  from the title tag of the html element.
+table and go to inspect tab to get developer name and uuid
+from the title tag of the html element.
 
 4. Also you can get uuid from data-uuid tag of html element.
 
@@ -181,8 +181,8 @@ format.
 3. And use browser dev tools to inspect on timeline table.
 
 4. Using the select in dev tools, click on the reviewer name in the timeline
- table and go to inspect tab to get reviewer name and uuid from
-  the title tag of the html element.
+table and go to inspect tab to get reviewer name and uuid from
+the title tag of the html element.
 
 5. Also you can get uuid from data-uuid tag of html element.
 
@@ -191,13 +191,13 @@ format.
 ### Note
 
 1. Squads are useful when you are working
- on large repository with a high volume of pull requests or you are
- finding it difficult to search your team pull requests.
+on large repository with a high volume of pull requests or you are
+finding it difficult to search your team pull requests.
 
 2. Squads are optional configuration.
 
 3. In a squad, reviewers are not required fields, while at least one developer
- is mandatory. Refer below format.
+is mandatory. Refer below format.
 
     ```JSON
    squads:[
@@ -211,13 +211,28 @@ format.
    ```
 
 4. If you set reviewers for squads and select them in the application,
- only pull requests containing those reviewers will be filtered.
+only pull requests containing those reviewers will be filtered.
 
 5. A reviewer is recognized as such for a pull request only if they've given
- any vote on it.
+any vote on it.
 
 6. Ensure you enter same name for developers & reviewers section in the
- `server-config.json` which will be displayed in the dashboard to avoid confusion.
+`server-config.json` which will be displayed in the dashboard to avoid confusion.
+
+## Technologies Used
+
+1. The server side of the application is powered by [ExpressJS](https://expressjs.com/),
+a fast, and minimalist web framework for Node.js, providing robust and flexible
+routing and middleware capabilities.
+
+2. For testing the server, we used [Jest](https://jestjs.io/), a popular
+JavaScript testing framework known for its simplicity and versatility, allowing
+us to write and execute tests with ease.
+
+3. [Supertest](https://www.npmjs.com/package/supertest) was utilized alongside
+Jest for HTTP assertions and testing, enabling us to make HTTP requests to our
+Express application and assert the responses, ensuring reliable and
+comprehensive server-side testing coverage.
 
 ## API End Point
 

@@ -17,7 +17,7 @@ install dependencies.
 ### 2. Start the Application
 
 Once the dependencies are installed, you can start the application by running
-   the following command in terminal:
+the following command in terminal:
 
 ```bash
 npm run start:dev
@@ -29,8 +29,8 @@ the `package.json` file, typically used for starting the development server.
 ### 3. Access the Application
 
 Once the development server is running, open your web browser and go to the
-   address [http://localhost:5173](http://localhost:5173) and access the
-   application.
+address [http://localhost:5173](http://localhost:5173) and access the
+application.
 
 ## Test the Application
 
@@ -122,7 +122,7 @@ areas for improvement.
 ## Build the Application
 
 Once inside the code's base directory, run the following command in terminal
-   to build the application.
+to build the application.
 
 ```bash
 npm run build
@@ -130,3 +130,18 @@ npm run build
 
 The above command will perform tasks such as bundling and minifying Typescript
 code, processing stylesheets and optimizing assets.
+
+## Technologies Used
+
+1. The client application is built using [Vite](https://vitejs.dev/), a modern
+build tool known for its lightning-fast development and optimized production builds.
+
+2. We utilized [Vitest](https://vitest.dev/) for testing purposes, a testing
+ framework tailored for Vite projects, enabling comprehensive testing.
+
+3. [Playwright](https://playwright.dev/) was used specifically for end-to-end
+(E2E) testing, leveraging its cross-browser automation capabilities to validate
+the application's functionality across different environments.
+
+4. [MSW (Mock Service Worker)](https://mswjs.io/) was integrated into our testing
+setup to facilitate mocking HTTP requests, ensuring reliable and efficient testing.
