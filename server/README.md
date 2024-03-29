@@ -118,7 +118,7 @@ to configure squads refer [here](#optional-configurations-in-server-config-json-
 ## Steps to Find Out Azure Repo Details
 
 Go to your [Azure DevOps](https://dev.azure.com/) and get the details for
-`server-config.json` fields as fshown below.
+`server-config.json` fields as shown below.
 
 ![Azdo repo details](./assets/media/azdo1.png)
 
