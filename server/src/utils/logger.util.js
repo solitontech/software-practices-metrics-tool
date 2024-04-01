@@ -5,9 +5,13 @@ import { ServerConfiguration } from '##/configs/server.config.js';
 
 const logger = new Logger();
 
-const { DEVELOPMENT } = NODE_ENVIRONMENT_MODE;
+const { DEVELOPMENT, TEST_CI } = NODE_ENVIRONMENT_MODE;
 
 export const logError = (...args) => {
+  if (ServerConfiguration.environmentVariables.nodeEnvironment === TEST_CI) {
+    return;
+  }
+
   if (ServerConfiguration.environmentVariables.nodeEnvironment === DEVELOPMENT) {
     logger.error(...args);
 
