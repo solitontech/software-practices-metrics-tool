@@ -280,9 +280,6 @@ paths:
                         authorId:
                           type: string
                           description: Unique identifier of the author
-                        isRequiredReviewers:
-                          type: boolean
-                          description: Indicates if required reviewers are assigned for the pull request
                         creationDate:
                           type: string
                           format: date-time
