@@ -5,9 +5,7 @@ export class CommentMetrics {
     const reviewerComments = {};
 
     threads.forEach(({ comments }) => {
-      comments.forEach(({ authorId, authorName, isDeleted }) => {
-        if (isDeleted) return;
-
+      comments.forEach(({ authorId, authorName }) => {
         const isReviewer = reviewerComments[authorId];
 
         if (!isReviewer) {
@@ -36,11 +34,7 @@ export class CommentMetrics {
 
   static #getTotalComments(threads) {
     return threads.reduce((total, { comments }) => {
-      const totalComments = comments.reduce((total, { isDeleted }) => {
-        return isDeleted ? total : total + 1;
-      }, this.#INITIAL_VALUE);
-
-      return total + totalComments;
+      return total + comments.length;
     }, this.#INITIAL_VALUE);
   }
 
@@ -53,10 +47,10 @@ export class CommentMetrics {
   static #getCommentsForThread(comments, keyword) {
     const INCREMENT = 1;
 
-    return comments.reduce((total, { content, isDeleted }) => {
+    return comments.reduce((total, { content }) => {
       const isMatch = this.#isCommentStartsWith(content, keyword);
 
-      return isMatch && !isDeleted ? total + INCREMENT : total;
+      return isMatch ? total + INCREMENT : total;
     }, this.#INITIAL_VALUE);
   }
 
