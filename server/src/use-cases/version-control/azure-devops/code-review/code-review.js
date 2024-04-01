@@ -18,7 +18,6 @@ export class CodeReview {
         status: pullRequest.status,
         createdBy: pullRequest.createdBy,
         authorId: pullRequest.authorId,
-        isRequiredReviewers,
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate ?? null,
         votes: VoteMetrics.getPullRequestVotes(reviewers),
