@@ -16,6 +16,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-12T10:58:33.4719437Z',
       title: 'Active pull request with no reviewers.',
@@ -28,6 +30,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-12T10:58:33.4719437Z',
       closedDate: '2024-02-12T11:04:06.3046376Z',
@@ -41,6 +45,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-12T10:58:33.4719437Z',
       title: 'Active pull request with no vote from reviewers.',
@@ -60,6 +66,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-12T10:58:33.4719437Z',
       closedDate: '2024-02-12T11:04:06.3046376Z',
@@ -79,6 +87,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-14T10:58:33.4719437Z',
       title: 'Abandoned pull request with single reviewer votes timeline .',
@@ -137,6 +147,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-04T10:58:33.4719437Z',
       title: 'Only the reviewers team is required to vote & a member voted for approved.',
@@ -186,6 +198,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-04T10:58:33.4719437Z',
       title: 'Active pull request with first review response (no required reviewers).',
@@ -224,6 +238,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-04T10:58:33.4719437Z',
       closedDate: '2024-02-12T11:04:06.3046376Z',
@@ -263,6 +279,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-04T10:58:33.4719437Z',
       closedDate: '2024-02-12T11:04:06.3046376Z',
@@ -321,6 +339,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-14T10:58:33.4719437Z',
       closedDate: '2024-02-17T10:04:06.3046376Z',
@@ -382,6 +402,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-04T10:58:33.4719437Z',
       closedDate: '2024-02-14T11:04:06.3046376Z',
@@ -509,6 +531,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-04T10:58:33.4719437Z',
       closedDate: '2024-02-14T11:04:06.3046376Z',
@@ -656,6 +680,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-04T10:58:33.4719437Z',
       title: 'Active pull request to handle deleted threads (no reviewers)',
@@ -709,6 +735,8 @@ export const AZURE_PULL_REQUESTS_RESPONSE = {
       createdBy: {
         displayName: 'Developer',
         id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+        imageUrl:
+          'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       },
       creationDate: '2024-02-04T10:58:33.4719437Z',
       closedDate: '2024-02-12T11:04:06.3046376Z',
@@ -1322,6 +1350,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: null,
       comments: {
         numberOfMajorComments: 0,
@@ -1358,6 +1388,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 0,
@@ -1394,6 +1426,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: null,
       comments: {
         numberOfMajorComments: 0,
@@ -1437,6 +1471,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 0,
@@ -1480,6 +1516,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: 173039,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: null,
       comments: {
         numberOfMajorComments: 0,
@@ -1536,6 +1574,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: 432239,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: null,
       comments: {
         numberOfMajorComments: 0,
@@ -1598,6 +1638,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: null,
       comments: {
         numberOfMajorComments: 0,
@@ -1648,6 +1690,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 0,
@@ -1698,6 +1742,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: 691439,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 0,
@@ -1760,6 +1806,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: 173039,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: '2024-02-17T10:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 0,
@@ -1817,6 +1865,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: 816219,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: '2024-02-14T11:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 0,
@@ -1904,6 +1954,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: 816219,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: '2024-02-14T11:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 0,
@@ -1997,6 +2049,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: null,
       comments: {
         numberOfMajorComments: 0,
@@ -2033,6 +2087,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: 691439,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_apis/GraphProfile/MemberAvatars/aad.OWUxMzEzYTktMmI3Yy03NTU2LWI0NDEtZDFlYWJmZWQ1ZDQz',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 1,
@@ -2104,6 +2160,8 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
     {
       approvalTimeInSeconds: 239,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      authorAvatarUrl:
+        'https://dev.azure.com/Organization/_api/_common/identityImage?id=9e1313a9-2b7c-6556-b441-d1eabfed5d43',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       comments: {
         numberOfMajorComments: 1,
