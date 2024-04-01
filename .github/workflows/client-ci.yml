@@ -33,7 +33,7 @@ jobs:
         run: npm ci
         working-directory: ${{ env.working-directory }}
 
-      - name: Audit dependencies
+      - name: Audit npm dependencies
         run: npm audit
         working-directory: ${{ env.working-directory }}
 
