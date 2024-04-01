@@ -111,9 +111,13 @@ export class CodeReview {
         return;
       }
 
-      const comments = thread.comments.map(({ content, author: { displayName, id } }) => {
-        return { content: content ?? '', authorName: displayName, authorId: id };
-      });
+      const comments = thread.comments.reduce((acc, { content, author: { displayName, id }, isDeleted }) => {
+        if (!isDeleted) {
+          acc.push({ content: content ?? '', authorName: displayName, authorId: id, isDeleted });
+        }
+
+        return acc;
+      }, []);
 
       threads.push({ comments });
     });

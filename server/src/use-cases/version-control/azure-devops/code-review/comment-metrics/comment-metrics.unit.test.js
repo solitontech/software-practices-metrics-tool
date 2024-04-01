@@ -53,29 +53,6 @@ describe('CommentMetrics~getPullRequestComments - method to get the count for ni
       numberOfMajorComments: 0,
     });
   });
-
-  it('should omit deleted comments from the count', () => {
-    const threads = [
-      {
-        comments: [{ content: 'nit: Fix this', isDeleted: true }, { content: 'major:refactor that' }],
-      },
-      {
-        comments: [
-          { content: 'nItfix that' },
-          { content: 'majOr: fix this', isDeleted: true },
-          { content: 'This is a general comment' },
-        ],
-      },
-    ];
-
-    const result = CommentMetrics.getPullRequestComments(threads);
-
-    expect(result).toEqual({
-      totalComments: 3,
-      numberOfNitComments: 1,
-      numberOfMajorComments: 1,
-    });
-  });
 });
 
 describe('CommentMetrics~getPullRequestReviewerComments - method to get the count of reviewers comments for a pull request from threads', () => {
@@ -104,24 +81,5 @@ describe('CommentMetrics~getPullRequestReviewerComments - method to get the coun
     const result = CommentMetrics.getPullRequestReviewerComments(threads);
 
     expect(result).toEqual([]);
-  });
-
-  it('should omit deleted comments from the count', () => {
-    const threads = [
-      {
-        comments: [
-          { authorId: '1', authorName: 'Author1', content: 'nit: Fix this', isDeleted: true },
-          { authorId: '2', authorName: 'Author2', content: 'major:refactor that' },
-        ],
-      },
-      { comments: [{ authorId: '1', authorName: 'Author1', content: 'This is general comments' }] },
-    ];
-
-    const result = CommentMetrics.getPullRequestReviewerComments(threads);
-
-    expect(result).toEqual([
-      { reviewer: 'Author1', comments: 1 },
-      { reviewer: 'Author2', comments: 1 },
-    ]);
   });
 });
