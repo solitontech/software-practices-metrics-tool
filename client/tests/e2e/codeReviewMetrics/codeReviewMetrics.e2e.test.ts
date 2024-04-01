@@ -63,18 +63,18 @@ test.describe("Code Review Metrics page", () => {
 
   test("should display column headers in the code review table", async () => {
     const selectors = [
-      "startDate",
-      "endDate",
+      "creationDate",
+      "closedDate",
       "title",
       "tags",
-      "status",
+      "createdBy",
       "comments",
       "votesHistory",
       "votes",
       "firstReviewResponseTimeInSeconds",
       "approvalTimeInSeconds",
       "mergeTimeInSeconds",
-      "createdBy",
+      "status",
     ];
 
     for (const selector of selectors) {

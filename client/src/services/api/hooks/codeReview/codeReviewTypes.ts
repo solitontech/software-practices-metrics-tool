@@ -30,7 +30,6 @@ export interface IFetchedCodeReviewPullRequest {
   status: string;
   createdBy: string;
   authorId: string;
-  isRequiredReviewers: boolean;
   creationDate: string;
   closedDate: string | null;
   votes: IFetchedPullRequestVotes;
