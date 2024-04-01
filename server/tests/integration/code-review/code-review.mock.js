@@ -2037,7 +2037,7 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       comments: {
         numberOfMajorComments: 1,
         numberOfNitComments: 1,
-        totalComments: 3,
+        totalComments: 2,
       },
       createdBy: 'Developer',
       creationDate: '2024-02-04T10:58:33.4719437Z',
@@ -2049,10 +2049,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
         {
           comments: 2,
           reviewer: 'Reviewer 1',
-        },
-        {
-          comments: 1,
-          reviewer: 'Developer',
         },
       ],
       status: 'completed',
@@ -2108,7 +2104,7 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       comments: {
         numberOfMajorComments: 1,
         numberOfNitComments: 1,
-        totalComments: 5,
+        totalComments: 3,
       },
       createdBy: 'Developer',
       creationDate: '2024-02-12T10:58:33.4719437Z',
@@ -2122,7 +2118,7 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
           reviewer: 'Reviewer 1',
         },
         {
-          comments: 3,
+          comments: 1,
           reviewer: 'Developer',
         },
       ],
