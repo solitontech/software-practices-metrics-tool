@@ -111,8 +111,8 @@ export class CodeReview {
         return;
       }
 
-      const comments = thread.comments.map(({ content, author: { displayName, id } }) => {
-        return { content: content ?? '', authorName: displayName, authorId: id };
+      const comments = thread.comments.map(({ content, author: { displayName, id }, isDeleted }) => {
+        return { content: content ?? '', authorName: displayName, authorId: id, isDeleted };
       });
 
       threads.push({ comments });
