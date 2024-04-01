@@ -2,6 +2,7 @@ import { memo } from "react";
 
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Chip } from "@mui/material";
+import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 
 import { CodeReviewCommentIcon } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewCommentIcon/CodeReviewCommentIcon";
@@ -32,9 +33,11 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
       <td className={styles.tableCell}>
         <time title={getFormattedDateWithTime(row.creationDate)}>{getFormattedDateWithoutTime(row.creationDate)}</time>
       </td>
+
       <td className={styles.tableCell}>
         <time title={getFormattedDateWithTime(row.closedDate)}>{getFormattedDateWithoutTime(row.closedDate)}</time>
       </td>
+
       <td className={styles.tableCell}>
         <NavLink to={row.url} className={styles.pullRequest} target="_blank">
           <p className={styles.prTitle} title={row.title}>
@@ -54,7 +57,9 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
         </div>
       </td>
 
-      <td className={styles.tableCell}>
+      <td className={clsx(styles.tableCell, styles.authorCell)}>
+        <img src={row.authorAvatarUrl} alt="avatar" className={styles.avatar} />
+
         <span
           title={`Click to copy : ${row.createdBy}-${row.authorId}`}
           data-uuid={row.authorId}
@@ -63,6 +68,7 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
           {row.createdBy}
         </span>
       </td>
+
       <td className={styles.tableCell}>
         <CodeReviewCommentIcon
           className={styles.commentIcon}
@@ -72,6 +78,7 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
           reviewerComments={formattedReviewerComments}
         />
       </td>
+
       <td className={styles.tableCell}>
         <CodeReviewVotesIcons
           className={styles.votesTimeLine}
@@ -82,6 +89,7 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
           votesTimeLine={row.votesHistoryTimeline}
         />
       </td>
+
       <td className={styles.tableCell}>
         <CodeReviewVotesIcons
           className={styles.currentVotesList}
@@ -94,15 +102,19 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
           votesTimeLine={row.votesTimeline}
         />
       </td>
+
       <td className={styles.tableCell}>
         <CodeReviewDisplayHoursToDays timeInSeconds={row.firstReviewResponseTimeInSeconds} />
       </td>
+
       <td className={styles.tableCell}>
         <CodeReviewDisplayHoursToDays timeInSeconds={row.approvalTimeInSeconds} />
       </td>
+
       <td className={styles.tableCell}>
         <CodeReviewDisplayHoursToDays timeInSeconds={row.mergeTimeInSeconds} />
       </td>
+
       <td className={styles.tableCell}>
         <Chip className={styles[row.status]} label={row.status} />
       </td>

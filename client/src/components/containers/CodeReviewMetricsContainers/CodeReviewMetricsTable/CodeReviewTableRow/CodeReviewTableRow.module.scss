@@ -43,6 +43,17 @@
   max-width: 110px;
 }
 
+.authorCell {
+  @include flex-align-center;
+
+  gap: 5px;
+}
+
+.avatar {
+  height: $icon-size-xxl;
+  width: $icon-size-xxl;
+}
+
 .commentIcon {
   margin-left: $spacing-xxl;
 }

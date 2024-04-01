@@ -29,6 +29,7 @@ export interface IFetchedCodeReviewPullRequest {
   title: string;
   status: string;
   createdBy: string;
+  authorAvatarUrl: string;
   authorId: string;
   isRequiredReviewers: boolean;
   creationDate: string;
