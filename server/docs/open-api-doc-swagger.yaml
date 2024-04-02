@@ -4,7 +4,7 @@ info:
   description: Consists of API endpoints for software practices metrics tool which includes Code Review Metrics, Trunk Based Development, Client Filters Endpoints.
   version: 1.0.0
 servers:
-  - url: http://localhost:3498/api/v1
+- url: http://localhost:3498/api/v1
 paths:
   /metrics/trunk-based-development/commits/:
     get:
@@ -12,10 +12,10 @@ paths:
       description: Retrieve trunk branch commits for trunk-based development within a specific date range
       operationId: getCommitMetrics
       parameters:
-        - $ref: '#/components/parameters/StartDateParam'
-        - $ref: '#/components/parameters/EndDateParam'
-        - $ref: '#/components/parameters/PaginationSizeParam'
-        - $ref: '#/components/parameters/PaginationCursorParam'
+      - $ref: '#/components/parameters/StartDateParam'
+      - $ref: '#/components/parameters/EndDateParam'
+      - $ref: '#/components/parameters/PaginationSizeParam'
+      - $ref: '#/components/parameters/PaginationCursorParam'
       responses:
         '200':
           description: Successful response
@@ -63,17 +63,17 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerResponse'
       tags:
-        - Trunk Based Metrics
+      - Trunk Based Metrics
   /metrics/trunk-based-development/pullRequests/:
     get:
       summary: Get trunk branch pull requests
       description: Retrieve trunk branch pull requests for trunk-based development within a specific date range
       operationId: getPullRequestMetrics
       parameters:
-        - $ref: '#/components/parameters/StartDateParam'
-        - $ref: '#/components/parameters/EndDateParam'
-        - $ref: '#/components/parameters/PaginationSizeParam'
-        - $ref: '#/components/parameters/PaginationCursorParam'
+      - $ref: '#/components/parameters/StartDateParam'
+      - $ref: '#/components/parameters/EndDateParam'
+      - $ref: '#/components/parameters/PaginationSizeParam'
+      - $ref: '#/components/parameters/PaginationCursorParam'
       responses:
         '200':
           description: Successful response
@@ -126,7 +126,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerResponse'
       tags:
-        - Trunk Based Metrics
+      - Trunk Based Metrics
   /metrics/trunk-based-development/branches/:
     get:
       summary: Get branches
@@ -180,15 +180,15 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerResponse'
       tags:
-        - Trunk Based Metrics
+      - Trunk Based Metrics
   /metrics/trunk-based-development/activeBranches/:
     get:
       summary: Get trunk branch active branches
       description: Retrieve trunk branch active branches for trunk-based development
       operationId: getActiveBranchMetrics
       parameters:
-        - $ref: '#/components/parameters/PaginationSizeParam'
-        - $ref: '#/components/parameters/PaginationCursorParam'
+      - $ref: '#/components/parameters/PaginationSizeParam'
+      - $ref: '#/components/parameters/PaginationCursorParam'
       responses:
         '200':
           description: Successful response
@@ -237,18 +237,17 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerResponse'
       tags:
-        - Trunk Based Metrics
+      - Trunk Based Metrics
   /metrics/code-review/:
     get:
       summary: Get code review metrics
-      description: Retrieve code review metrics
-        based on specified criteria such as start date, end date, pagination cursor, and pagination size.
+      description: Retrieve code review metrics based on specified criteria such as start date, end date, pagination cursor, and pagination size.
       operationId: getCodeReviewMetrics
       parameters:
-        - $ref: '#/components/parameters/StartDateParam'
-        - $ref: '#/components/parameters/EndDateParam'
-        - $ref: '#/components/parameters/PaginationSizeParam'
-        - $ref: '#/components/parameters/PaginationCursorParam'
+      - $ref: '#/components/parameters/StartDateParam'
+      - $ref: '#/components/parameters/EndDateParam'
+      - $ref: '#/components/parameters/PaginationSizeParam'
+      - $ref: '#/components/parameters/PaginationCursorParam'
       responses:
         '200':
           description: Successful response with code review metrics
@@ -415,12 +414,11 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerResponse'
       tags:
-        - Code Review Metrics    
+      - Code Review Metrics
   /metrics/client-filters:
     get:
       summary: Get client filters
-      description: Retrieve client filters,
-        providing information about squads, developers, and reviewers.
+      description: Retrieve client filters, providing information about squads, developers, and reviewers.
       operationId: getClientFilters
       responses:
         '200':
@@ -444,18 +442,18 @@ paths:
                           additionalProperties:
                             type: string
                           examples:
-                            - "3e1413a9-2z7c-6556-b441-e1edbfed5d43": "Developer_name"
+                          - "3e1413a9-2z7c-6556-b441-e1edbfed5d43": "Developer_name"
                         reviewers:
                           type: object
                           description: Object containing reviewer IDs and names
                           additionalProperties:
                             type: string
                           examples:
-                            - "6c56f2d9-f139-65fd-af3d-0650s183e580": "Reviewer_name"
+                          - "6c56f2d9-f139-65fd-af3d-0650s183e580": "Reviewer_name"
         '500':
           $ref: '#/components/responses/InternalServerResponse'
       tags:
-        - Client Filters
+      - Client Filters
 components:
   parameters:
     StartDateParam:
@@ -466,6 +464,7 @@ components:
       schema:
         type: string
         format: date
+        default: '2023-12-31'
     EndDateParam:
       name: endDate
       in: query
@@ -474,6 +473,7 @@ components:
       schema:
         type: string
         format: date
+        default: '2024-01-31'
     PaginationSizeParam:
       name: paginationSize
       in: query
