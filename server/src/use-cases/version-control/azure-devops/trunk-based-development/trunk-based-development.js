@@ -27,8 +27,11 @@ export class TrunkBasedDevelopment {
       { branchesFollowingNamingStandard: [], branchesNotFollowingNamingStandard: [] }
     );
 
-    const percentageOfBranchesFollowingStandard =
-      ((branchesFollowingNamingStandard.length / totalNumberOfBranches) * MAX_PERCENTAGE).toFixed(2) + PERCENTAGE;
+    const zeroPercentage = 0 + PERCENTAGE;
+
+    const percentageOfBranchesFollowingStandard = !totalNumberOfBranches
+      ? zeroPercentage
+      : ((branchesFollowingNamingStandard.length / totalNumberOfBranches) * MAX_PERCENTAGE).toFixed(2) + PERCENTAGE;
 
     return {
       branchesURL: AzureDevopsURL.getBranchesURL(),
