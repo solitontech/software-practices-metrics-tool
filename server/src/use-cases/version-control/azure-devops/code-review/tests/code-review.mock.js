@@ -132,7 +132,7 @@ export const CODE_REVIEW_METRICS = {
       comments: {
         numberOfMajorComments: 1,
         numberOfNitComments: 1,
-        totalComments: 3,
+        totalComments: 2,
       },
       createdBy: 'Developer',
       creationDate: '2024-02-04T10:58:33.4719437Z',
@@ -143,10 +143,6 @@ export const CODE_REVIEW_METRICS = {
         {
           comments: 2,
           reviewer: 'Reviewer 1',
-        },
-        {
-          comments: 1,
-          reviewer: 'Developer',
         },
       ],
       status: 'completed',
@@ -437,7 +433,7 @@ export const CODE_REVIEW_METRICS_THREADS = {
       comments: {
         numberOfMajorComments: 1,
         numberOfNitComments: 1,
-        totalComments: 3,
+        totalComments: 2,
       },
       createdBy: 'Developer',
       creationDate: '2024-02-04T10:58:33.4719437Z',
@@ -448,10 +444,6 @@ export const CODE_REVIEW_METRICS_THREADS = {
         {
           comments: 2,
           reviewer: 'Reviewer 1',
-        },
-        {
-          comments: 1,
-          reviewer: 'Developer',
         },
       ],
       status: 'completed',
