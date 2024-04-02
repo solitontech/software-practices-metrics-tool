@@ -1,6 +1,12 @@
 import { describe, it, expect } from '@jest/globals';
-
 import { getGmtISOString, getNextDayGmtISOString } from './date.helpers.js';
+
+// Mock the global Date object
+global.Date = class extends Date {
+  constructor() {
+    super('2022-01-01T00:00:00+05:30');
+  }
+};
 
 describe('getGmtISOString - method to return GMT date string from IST date', () => {
   it('should return the GMT ISO string for a date', () => {
