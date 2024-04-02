@@ -111,9 +111,11 @@ export class CodeReview {
       }
 
       const comments = thread.comments.reduce((acc, { content, author: { displayName, id }, isDeleted }) => {
-        if (!isDeleted) {
-          acc.push({ content: content ?? '', authorName: displayName, authorId: id, isDeleted });
+        if (isDeleted) {
+          return acc;
         }
+
+        acc.push({ content: content ?? '', authorName: displayName, authorId: id });
 
         return acc;
       }, []);

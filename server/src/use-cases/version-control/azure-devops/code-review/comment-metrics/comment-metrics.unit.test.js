@@ -38,7 +38,7 @@ describe('CommentMetrics~getPullRequestComments - method to get the count for ni
     });
   });
 
-  it('should return all zeros if there are no nit or major comments', () => {
+  it('should return nit & major comments as zero', () => {
     const threads = [
       {
         comments: [{ content: 'This is a general comment' }],
