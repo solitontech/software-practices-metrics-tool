@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { getGmtISOString, getNextDayGmtISOString } from './date.helpers.js';
 
-// Mock the global Date object
+// Mock the global Date object to maintain same time zone in testing environment for all time zone users.
 global.Date = class extends Date {
   constructor() {
     super('2022-01-01T00:00:00+05:30');
