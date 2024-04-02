@@ -33,7 +33,7 @@ export class TimeMetrics {
   static #isRequiredReviewersApproved(reviewers) {
     const requiredReviewers = reviewers.filter(({ isRequired }) => isRequired);
 
-    return requiredReviewers.some((reviewer) => this.#isReviewerApproved(reviewer));
+    return requiredReviewers.every((reviewer) => this.#isReviewerApproved(reviewer));
   }
 
   static #getLatestReviewerApprovalTime(votesHistoryTimeline, reviewers) {
