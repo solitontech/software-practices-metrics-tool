@@ -27,10 +27,8 @@ export class TrunkBasedDevelopment {
       { branchesFollowingNamingStandard: [], branchesNotFollowingNamingStandard: [] }
     );
 
-    const zeroPercentage = 0 + PERCENTAGE;
-
     const percentageOfBranchesFollowingStandard = !totalNumberOfBranches
-      ? zeroPercentage
+      ? `0${PERCENTAGE}`
       : ((branchesFollowingNamingStandard.length / totalNumberOfBranches) * MAX_PERCENTAGE).toFixed(2) + PERCENTAGE;
 
     return {
