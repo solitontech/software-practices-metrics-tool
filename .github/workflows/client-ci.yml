@@ -33,6 +33,10 @@ jobs:
         run: npm ci
         working-directory: ${{ env.working-directory }}
 
+      - name: Audit npm dependencies
+        run: npm audit
+        working-directory: ${{ env.working-directory }}
+
       - name: Check format
         run: npm run format-check
         working-directory: ${{ env.working-directory }}
