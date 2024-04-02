@@ -37,6 +37,22 @@ describe('CommentMetrics~getPullRequestComments - method to get the count for ni
       numberOfMajorComments: 0,
     });
   });
+
+  it('should return nit & major comments as zero', () => {
+    const threads = [
+      {
+        comments: [{ content: 'This is a general comment' }],
+      },
+    ];
+
+    const result = CommentMetrics.getPullRequestComments(threads);
+
+    expect(result).toEqual({
+      totalComments: 1,
+      numberOfNitComments: 0,
+      numberOfMajorComments: 0,
+    });
+  });
 });
 
 describe('CommentMetrics~getPullRequestReviewerComments - method to get the count of reviewers comments for a pull request from threads', () => {
