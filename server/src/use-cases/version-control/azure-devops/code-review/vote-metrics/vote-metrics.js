@@ -1,22 +1,6 @@
 import { VOTE } from '../constants/constants.js';
 
 export class VoteMetrics {
-  static getPullRequestVotes(reviewers) {
-    const votesResults = {
-      [VOTE.APPROVED]: 0,
-      [VOTE.APPROVED_WITH_SUGGESTIONS]: 0,
-      [VOTE.WAIT_FOR_AUTHOR]: 0,
-      [VOTE.REJECTED]: 0,
-      [VOTE.NO_VOTE]: 0,
-    };
-
-    reviewers.forEach(({ vote }) => {
-      votesResults[vote]++;
-    });
-
-    return votesResults;
-  }
-
   static getPullRequestVotesHistory(votesCycle) {
     const votesResults = {
       [VOTE.APPROVED]: 0,

@@ -20,7 +20,6 @@ export class CodeReview {
         authorId: pullRequest.authorId,
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate ?? null,
-        votes: VoteMetrics.getPullRequestVotes(reviewers),
         votesTimeline: VoteMetrics.getPullRequestVotesTimeline(pullRequest.reviewers, pullRequest.votesHistoryTimeline),
         votesHistory: VoteMetrics.getPullRequestVotesHistory(pullRequest.votesHistoryTimeline),
         votesHistoryTimeline: pullRequest.votesHistoryTimeline,

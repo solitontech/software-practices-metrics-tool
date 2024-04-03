@@ -287,24 +287,6 @@ paths:
                           type: string
                           format: date-time
                           description: Date and time when the pull request was closed
-                        votes:
-                          type: object
-                          properties:
-                            approved:
-                              type: integer
-                              description: Total number of approved votes
-                            approvedWithSuggestions:
-                              type: integer
-                              description: Total number of approved votes with suggestions
-                            noVote:
-                              type: integer
-                              description: Total number of votes with no decision
-                            waitForAuthor:
-                              type: integer
-                              description: Total number of votes waiting for author
-                            rejected:
-                              type: integer
-                              description: Total number of rejected votes
                         votesTimeline:
                           type: array
                           items:

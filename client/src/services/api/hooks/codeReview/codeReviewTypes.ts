@@ -24,6 +24,26 @@ export interface IFetchedPullRequestVotesTimeline {
   timeOfVote: string | null;
 }
 
+export interface IFetchedRawCodeReviewPullRequest {
+  id: number;
+  title: string;
+  status: string;
+  createdBy: string;
+  authorId: string;
+  creationDate: string;
+  closedDate: string | null;
+  votesTimeline: IFetchedPullRequestVotesTimeline[];
+  votesHistory: Omit<IFetchedPullRequestVotes, "noVote">; //TODO: Omit<IPullRequestVotes, "noVote">
+  votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
+  comments: IFetchedPullRequestComments;
+  reviewerComments: IFetchedPullRequestReviewerComments[];
+  tags: string[];
+  firstReviewResponseTimeInSeconds: number | null;
+  approvalTimeInSeconds: number | null;
+  mergeTimeInSeconds: number | null;
+  url: string;
+}
+
 export interface IFetchedCodeReviewPullRequest {
   id: number;
   title: string;
@@ -34,7 +54,7 @@ export interface IFetchedCodeReviewPullRequest {
   closedDate: string | null;
   votes: IFetchedPullRequestVotes;
   votesTimeline: IFetchedPullRequestVotesTimeline[];
-  votesHistory: IFetchedPullRequestVotes; //TODO: Omit<IPullRequestVotes, "noVote">
+  votesHistory: Omit<IFetchedPullRequestVotes, "noVote">; //TODO: Omit<IPullRequestVotes, "noVote">
   votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
   comments: IFetchedPullRequestComments;
   reviewerComments: IFetchedPullRequestReviewerComments[];
@@ -47,7 +67,7 @@ export interface IFetchedCodeReviewPullRequest {
 
 export interface IFetchedCodeReviewResponse {
   count: number;
-  pullRequests: IFetchedCodeReviewPullRequest[];
+  pullRequests: IFetchedRawCodeReviewPullRequest[];
   errorCount: number;
   filteredCount: number;
 }

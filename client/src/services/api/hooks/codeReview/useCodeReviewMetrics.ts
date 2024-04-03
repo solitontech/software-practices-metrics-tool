@@ -40,10 +40,12 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
 
   const pullRequests = CodeReviewMetricsUtils.getFilteredPullRequests(data, filters);
 
+  const transformedPullRequests = CodeReviewMetricsUtils.transformPullRequests(pullRequests, filters);
+
   return {
     isPending,
     isError,
-    data: pullRequests ?? { pullRequests: [], errorCount: 0 },
+    data: transformedPullRequests ?? { pullRequests: [], errorCount: 0 },
     error,
   };
 };

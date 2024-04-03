@@ -2,43 +2,6 @@ import { describe, it, expect } from '@jest/globals';
 
 import { VoteMetrics } from '##/use-cases/version-control/azure-devops/code-review/vote-metrics/vote-metrics.js';
 
-describe('VoteMetrics~getPullRequestVotes - method to get pull request votes from reviewers', () => {
-  it('should return pull request votes for pull request reviewers', () => {
-    const reviewers = [
-      { author: 'Author1', isRequired: true, vote: 'approved' },
-      { author: 'Author2', isRequired: false, vote: 'approvedWithSuggestions' },
-      { author: 'Author3', isRequired: true, vote: 'rejected' },
-      { author: 'Author4', isRequired: false, vote: 'approved' },
-      { author: 'Author5', isRequired: false, vote: 'noVote' },
-      { author: 'Author6', isRequired: false, vote: 'waitForAuthor' },
-    ];
-
-    const result = VoteMetrics.getPullRequestVotes(reviewers);
-
-    expect(result).toEqual({
-      approved: 2,
-      approvedWithSuggestions: 1,
-      noVote: 1,
-      waitForAuthor: 1,
-      rejected: 1,
-    });
-  });
-
-  it('should return all zeros if there are no reviewers', () => {
-    const reviewers = [];
-
-    const result = VoteMetrics.getPullRequestVotes(reviewers);
-
-    expect(result).toEqual({
-      approved: 0,
-      approvedWithSuggestions: 0,
-      noVote: 0,
-      waitForAuthor: 0,
-      rejected: 0,
-    });
-  });
-});
-
 describe('VoteMetrics~getPullRequestVotesTimeline - method to get pull request votes timeline from reviewers, votes history timeline.', () => {
   it('should return the timeline of pull request votes from reviewers, votes history timeline.', () => {
     const reviewers = {
