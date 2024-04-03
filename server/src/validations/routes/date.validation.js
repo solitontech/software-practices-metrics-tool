@@ -8,7 +8,15 @@ const joi = joiBase.extend(joiDate);
 export class DateValidation {
   static #validation;
 
-  static {
+  static getValidationError(startDate, endDate) {
+    this.#initializeValidation();
+
+    const { error } = this.#validation.getValidationResult({ startDate, endDate });
+
+    return this.#validation.getUserErrorMessage(error);
+  }
+
+  static #initializeValidation() {
     const errorMessage = 'Date validation error ';
 
     const validationSchema = joi
@@ -19,11 +27,5 @@ export class DateValidation {
       .options({ abortEarly: false });
 
     this.#validation = new Validation(errorMessage, validationSchema);
-  }
-
-  static getValidationError(startDate, endDate) {
-    const { error } = this.#validation.getValidationResult({ startDate, endDate });
-
-    return this.#validation.getUserErrorMessage(error);
   }
 }
