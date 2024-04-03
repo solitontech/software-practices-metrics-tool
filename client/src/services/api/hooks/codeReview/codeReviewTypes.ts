@@ -33,7 +33,7 @@ export interface IFetchedRawCodeReviewPullRequest {
   creationDate: string;
   closedDate: string | null;
   votesTimeline: IFetchedPullRequestVotesTimeline[];
-  votesHistory: Omit<IFetchedPullRequestVotes, "noVote">; //TODO: Omit<IPullRequestVotes, "noVote">
+  votesHistory: IFetchedPullRequestVotes; //TODO: Omit<IPullRequestVotes, "noVote">
   votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
   comments: IFetchedPullRequestComments;
   reviewerComments: IFetchedPullRequestReviewerComments[];
@@ -54,7 +54,7 @@ export interface IFetchedCodeReviewPullRequest {
   closedDate: string | null;
   votes: IFetchedPullRequestVotes;
   votesTimeline: IFetchedPullRequestVotesTimeline[];
-  votesHistory: Omit<IFetchedPullRequestVotes, "noVote">; //TODO: Omit<IPullRequestVotes, "noVote">
+  votesHistory: IFetchedPullRequestVotes; //TODO: Omit<IPullRequestVotes, "noVote">
   votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
   comments: IFetchedPullRequestComments;
   reviewerComments: IFetchedPullRequestReviewerComments[];
@@ -70,4 +70,9 @@ export interface IFetchedCodeReviewResponse {
   pullRequests: IFetchedRawCodeReviewPullRequest[];
   errorCount: number;
   filteredCount: number;
+}
+
+export interface ITransformedCodeReviewResponse {
+  pullRequests: IFetchedCodeReviewPullRequest[];
+  errorCount: number;
 }

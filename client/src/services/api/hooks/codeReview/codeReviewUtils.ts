@@ -1,7 +1,11 @@
 import { IContextClientFilterSquad } from "src/context/context";
 
 import { VOTE } from "./codeReviewConstants";
-import { IFetchedCodeReviewResponse, IFetchedPullRequestVotesTimeline } from "./codeReviewTypes";
+import {
+  IFetchedCodeReviewResponse,
+  IFetchedPullRequestVotesTimeline,
+  ITransformedCodeReviewResponse,
+} from "./codeReviewTypes";
 
 export class CodeReviewMetricsUtils {
   static #getSquadsUserIdsMap(squads: IContextClientFilterSquad[]) {
@@ -51,9 +55,9 @@ export class CodeReviewMetricsUtils {
   static transformPullRequests(
     data: Omit<IFetchedCodeReviewResponse, "count" | "filteredCount"> | undefined,
     filters: IContextClientFilterSquad[],
-  ) {
-    if (!data || !filters.length) {
-      return data;
+  ): ITransformedCodeReviewResponse | undefined {
+    if (!data) {
+      return;
     }
 
     const { reviewersMap } = this.#getSquadsUserIdsMap(filters);
