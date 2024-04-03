@@ -4,7 +4,7 @@ import { TimeMetrics } from './time-metrics.js';
 import { PULL_REQUEST_STATUS, VOTE } from '../constants/constants.js';
 
 describe('TimeMetrics~getFirstReviewResponseTime - method to get the first review response time of pull request', () => {
-  it('should return the difference in time between the creation date and the first review vote', () => {
+  it('should return the time difference between the creation date and the first review vote', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const votesHistoryTimeline = [
@@ -18,7 +18,7 @@ describe('TimeMetrics~getFirstReviewResponseTime - method to get the first revie
     expect(result).toBe(expectedFirstReviewResponseTime);
   });
 
-  it('should return the difference in time between the creation date and the first review vote (more than 3 days difference)', () => {
+  it('should return the time difference between the creation date and the first review vote (more than 3 days difference)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const votesHistoryTimeline = [
@@ -43,7 +43,7 @@ describe('TimeMetrics~getFirstReviewResponseTime - method to get the first revie
 });
 
 describe('TimeMetrics~getPullRequestMergeTime - method to get merge time of the pull request', () => {
-  it('should return the difference in time between the creation date and the closed date', () => {
+  it('should return the time difference between the creation date and the closed date', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
     const closedDate = new Date('2022-01-01T12:00:00Z');
 
@@ -58,7 +58,7 @@ describe('TimeMetrics~getPullRequestMergeTime - method to get merge time of the 
     expect(result).toBe(expectedMergeTime);
   });
 
-  it('should return the difference in time between the creation date and the closed date (more than 3 days difference)', () => {
+  it('should return the time difference between the creation date and the closed date (more than 3 days difference)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
     const closedDate = new Date('2022-01-05T00:00:00Z');
 
@@ -73,9 +73,19 @@ describe('TimeMetrics~getPullRequestMergeTime - method to get merge time of the 
     expect(result).toBe(expectedMergeTime);
   });
 
-  it('should return null if status is not COMPLETED', () => {
+  it('should return null if status is not COMPLETED (active)', () => {
     const result = TimeMetrics.getPullRequestMergeTime({
       status: PULL_REQUEST_STATUS.ACTIVE,
+      creationDate: new Date(),
+      closedDate: new Date(),
+    });
+
+    expect(result).toBeNull();
+  });
+
+  it('should return null if status is not COMPLETED  (abandoned)', () => {
+    const result = TimeMetrics.getPullRequestMergeTime({
+      status: PULL_REQUEST_STATUS.ABANDONED,
       creationDate: new Date(),
       closedDate: new Date(),
     });
@@ -167,7 +177,7 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     };
 
     const votesHistoryTimeline = [
-      { id: 1, author: 'author2', timeOfVote: new Date('2022-01-01T01:00:00Z'), vote: VOTE.WAIT_FOR_AUTHOR },
+      { id: 1, author: 'author1', timeOfVote: new Date('2022-01-01T01:00:00Z'), vote: VOTE.WAIT_FOR_AUTHOR },
       { id: 2, author: 'author2', timeOfVote: new Date('2022-01-01T02:00:00Z'), vote: VOTE.APPROVED },
     ];
 
@@ -187,7 +197,7 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     };
 
     const votesHistoryTimeline = [
-      { id: 1, author: 'author2', timeOfVote: new Date('2022-01-01T01:00:00Z'), vote: VOTE.WAIT_FOR_AUTHOR },
+      { id: 1, author: 'author1', timeOfVote: new Date('2022-01-01T01:00:00Z'), vote: VOTE.WAIT_FOR_AUTHOR },
       { id: 2, author: 'author2', timeOfVote: new Date('2022-01-01T02:00:00Z'), vote: VOTE.APPROVED_WITH_SUGGESTIONS },
     ];
 
@@ -254,7 +264,7 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBeNull();
   });
 
-  it('should return the difference in time between the creation date and the latest reviewer approval time (no non required reviewers)', () => {
+  it('should return the time difference between the creation date and the latest reviewer approval time (no non required reviewers)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const reviewers = {
@@ -273,7 +283,26 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it('should return the difference in time between the creation date and the latest reviewer approval time (with non required reviewers)', () => {
+  it('should return the time difference between the creation date and the latest reviewer approval time (approved with suggestions) (no non required reviewers)', () => {
+    const creationDate = new Date('2022-01-01T00:00:00Z');
+
+    const reviewers = {
+      1: { author: 'author1', isRequired: true, vote: VOTE.APPROVED_WITH_SUGGESTIONS },
+      2: { author: 'author2', isRequired: true, vote: VOTE.APPROVED_WITH_SUGGESTIONS },
+    };
+
+    const votesHistoryTimeline = [
+      { id: 1, author: 'author1', timeOfVote: new Date('2022-01-01T01:00:00Z'), vote: VOTE.APPROVED_WITH_SUGGESTIONS },
+      { id: 2, author: 'author2', timeOfVote: new Date('2022-01-01T02:00:00Z'), vote: VOTE.APPROVED_WITH_SUGGESTIONS },
+    ];
+
+    const result = TimeMetrics.getPullRequestApprovalTime({ creationDate, reviewers, votesHistoryTimeline });
+    const expectedApprovalTime = 2 * 60 * 60;
+
+    expect(result).toBe(expectedApprovalTime);
+  });
+
+  it('should return the time difference between the creation date and the latest reviewer approval time (with non required reviewers)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const reviewers = {
@@ -292,7 +321,26 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it('should return the difference in time between the creation date and the latest required reviewer approval time (approved with suggestions)', () => {
+  it('should return the time difference between the creation date and the latest reviewer approval time (approved with suggestions) (with non required reviewers)', () => {
+    const creationDate = new Date('2022-01-01T00:00:00Z');
+
+    const reviewers = {
+      1: { author: 'author1', isRequired: true, vote: VOTE.APPROVED_WITH_SUGGESTIONS },
+      2: { author: 'author2', isRequired: false, vote: VOTE.APPROVED_WITH_SUGGESTIONS },
+    };
+
+    const votesHistoryTimeline = [
+      { id: 1, author: 'author1', timeOfVote: new Date('2022-01-01T01:00:00Z'), vote: VOTE.APPROVED_WITH_SUGGESTIONS },
+      { id: 2, author: 'author2', timeOfVote: new Date('2022-01-01T02:00:00Z'), vote: VOTE.APPROVED_WITH_SUGGESTIONS },
+    ];
+
+    const result = TimeMetrics.getPullRequestApprovalTime({ creationDate, reviewers, votesHistoryTimeline });
+    const expectedApprovalTime = 1 * 60 * 60;
+
+    expect(result).toBe(expectedApprovalTime);
+  });
+
+  it('should return the time difference between the creation date and the latest required reviewer approval time (approved with suggestions)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const reviewers = {
@@ -311,7 +359,7 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it('should return the difference in time between the creation date and the latest required reviewer approval time (repeated approval vote of a reviewer)', () => {
+  it('should return the time difference between the creation date and the latest required reviewer approval time (repeated approval vote of a reviewer)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const reviewers = {
@@ -331,7 +379,7 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it('should return the difference in time between the creation date and the latest required reviewer approval time (more than 3 days difference)', () => {
+  it('should return the time difference between the creation date and the latest required reviewer approval time (more than 3 days difference)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const reviewers = {
@@ -350,7 +398,7 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it('should return the difference in time between the creation date and the latest non-required reviewer when required reviewer is not available in votes history timeline', () => {
+  it('should return the time difference between the creation date and the latest non-required reviewer when required reviewer is not available in votes history timeline', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const reviewers = {
@@ -372,7 +420,7 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it('should return the difference in time between the creation date and the latest non-required reviewer when required reviewer is not available in votes history timeline (approved with suggestions)', () => {
+  it('should return the time difference between the creation date and the latest non-required reviewer when required reviewer is not available in votes history timeline (approved with suggestions)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const reviewers = {
@@ -394,7 +442,7 @@ describe('TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it('should return the difference in time between the creation date and the latest non-required reviewer when required reviewer (approved) is not available in votes history timeline (approved with suggestions)', () => {
+  it('should return the time difference between the creation date and the latest non-required reviewer when required reviewer (approved) is not available in votes history timeline (approved with suggestions)', () => {
     const creationDate = new Date('2022-01-01T00:00:00Z');
 
     const reviewers = {
