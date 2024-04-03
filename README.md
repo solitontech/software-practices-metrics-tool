@@ -8,7 +8,19 @@ insights into industry recommended software practices like code review and
 trunk-based development, empowering teams to elevate the quality and efficiency
 of their projects. Presently, it supports projects housed in Azure DevOps repositories.
 
-![Software practices metrics tool features](/assets/media/tool-features.gif)
+![Code review table view](/assets/media/code-review-table.png)
+
+![Code review votes timeline](/assets/media/votes-timeline.png)
+
+![Code review graphical view](/assets/media/code-review-graphical.png)
+
+![Code review trend view](/assets/media/code-review-trend-analysis.png)
+
+![Trunk based table](/assets/media/trunk-based-table.png)
+
+![Trunk based pull requests table](/assets/media/trunk-based-pull-requests-table.png)
+
+![Trunk based commits](/assets/media/trunk-based-commits.png)
 
 ## Client README
 
