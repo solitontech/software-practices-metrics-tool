@@ -1338,12 +1338,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2620 - Active pull request with no reviewers.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2620`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [],
       votesTimeline: [],
     },
@@ -1366,12 +1360,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2640 - Merged pull request with no reviewers & merged.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2640`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [],
       votesTimeline: [],
     },
@@ -1394,12 +1382,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2621 - Active pull request with no vote from reviewers.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2621`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [],
       votesTimeline: [
         {
@@ -1429,12 +1411,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2641 - Merged pull request with no vote from non required reviewers.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2641`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [],
       votesTimeline: [
         {
@@ -1464,12 +1440,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2622 - Abandoned pull request with single reviewer votes timeline .',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2622`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 1,
-        rejected: 0,
-        waitForAuthor: 1,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -1512,12 +1482,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2623 - Only the reviewers team is required to vote & a member voted for approved.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2623`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -1566,12 +1530,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2623 - Active pull request with first review response (no required reviewers).',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2623`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 1,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -1608,12 +1566,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2630 - Completed pull request with first review response, approval, merge (no required reviewers).',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2630`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -1650,12 +1602,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: ['Documentation'],
       title: '2624 - Completed pull request - Handle labels, direct approved vote.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2624`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -1705,12 +1651,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       title:
         '2625 - Completed pull request - Handle first review response, approval, merge times (1 required reviewer).',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2625`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 1,
-        rejected: 0,
-        waitForAuthor: 1,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -1754,12 +1694,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       title:
         '2635 - Completed pull request - Multiple reviewers with 1 non required reviewer wait for author response.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2635`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 1,
-        rejected: 1,
-        waitForAuthor: 2,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -1833,12 +1767,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       title:
         '2635 - Completed pull request - Multiple reviewers with 1 non required reviewer with approved vote after merging',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2635`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 2,
-        rejected: 1,
-        waitForAuthor: 2,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -1917,12 +1845,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: [],
       title: '2629 - Active pull request to handle deleted threads (no reviewers)',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2629`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [],
       votesTimeline: [],
     },
@@ -1950,12 +1872,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: ['Documentation'],
       title: '2626 - Filtered azure completed pull request data with threads data (handled comments, labels)',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2626`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -2013,12 +1929,6 @@ export const SERVER_PULL_REQUESTS_RESPONSE = {
       tags: ['Documentation', 'code', 'Coding Documentation'],
       title: '2627 - Original azure completed pull requests data with threads',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2627`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',

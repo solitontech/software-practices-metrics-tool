@@ -6,7 +6,7 @@ import axios from "axios";
 import { ClientFilterContext } from "src/context/context";
 import { QUERY_KEY, ApiEndPoint, ApiHelpers } from "src/services/api/api";
 
-import { IFetchedCodeReviewResponse } from "./codeReviewTypes";
+import { IFetchedRawCodeReviewResponse } from "./codeReviewTypes";
 import { CodeReviewMetricsUtils } from "./codeReviewUtils";
 
 async function fetchCodeReviewMetrics(url: URL, paginationCursor: number) {
@@ -14,7 +14,7 @@ async function fetchCodeReviewMetrics(url: URL, paginationCursor: number) {
 
   const {
     data: { pullRequests, count, errorCount, filteredCount },
-  } = await axios.get<IFetchedCodeReviewResponse>(url.href);
+  } = await axios.get<IFetchedRawCodeReviewResponse>(url.href);
 
   return {
     data: pullRequests,
@@ -40,7 +40,10 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
 
   const pullRequests = CodeReviewMetricsUtils.getFilteredPullRequests(data, filters);
 
-  const transformedPullRequests = CodeReviewMetricsUtils.transformPullRequests(pullRequests, filters);
+  console.time("transformPullRequests");
+
+  const transformedPullRequests = CodeReviewMetricsUtils.getTransformedPullRequests(pullRequests, filters);
+  console.timeEnd("transformPullRequests");
 
   return {
     isPending,

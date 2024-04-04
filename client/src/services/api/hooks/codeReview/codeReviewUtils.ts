@@ -2,9 +2,9 @@ import { IContextClientFilterSquad } from "src/context/context";
 
 import { VOTE } from "./codeReviewConstants";
 import {
-  IFetchedCodeReviewResponse,
+  IFetchedRawCodeReviewResponse,
   IFetchedPullRequestVotesTimeline,
-  ITransformedCodeReviewResponse,
+  IFetchedCodeReviewResponse,
 } from "./codeReviewTypes";
 
 export class CodeReviewMetricsUtils {
@@ -30,7 +30,7 @@ export class CodeReviewMetricsUtils {
   }
 
   static getFilteredPullRequests(
-    data: Omit<IFetchedCodeReviewResponse, "filteredCount" | "count"> | undefined,
+    data: Omit<IFetchedRawCodeReviewResponse, "filteredCount" | "count"> | undefined,
     filters: IContextClientFilterSquad[],
   ) {
     if (!data || !filters.length) {
@@ -52,10 +52,10 @@ export class CodeReviewMetricsUtils {
     };
   }
 
-  static transformPullRequests(
-    data: Omit<IFetchedCodeReviewResponse, "count" | "filteredCount"> | undefined,
+  static getTransformedPullRequests(
+    data: Omit<IFetchedRawCodeReviewResponse, "count" | "filteredCount"> | undefined,
     filters: IContextClientFilterSquad[],
-  ): ITransformedCodeReviewResponse | undefined {
+  ): IFetchedCodeReviewResponse | undefined {
     if (!data) {
       return;
     }
@@ -63,15 +63,21 @@ export class CodeReviewMetricsUtils {
     const { reviewersMap } = this.#getSquadsUserIdsMap(filters);
 
     const pullRequests = data.pullRequests.map((pullRequest) => {
-      const { votesTimeline } = pullRequest;
+      const filteredVotesTimeline = this.#filterVotesTimelineByReviewers(pullRequest.votesTimeline, reviewersMap);
+      const votes = this.#getPullRequestVotes(filteredVotesTimeline);
 
-      const filteredVotesTimeline = this.#filterVotesTimelineByReviewers(votesTimeline, reviewersMap);
-      const votes = this.#getPullRequestVotesHistory(filteredVotesTimeline);
+      const filteredVotesHistoryTimeline = this.#filterVotesTimelineByReviewers(
+        pullRequest.votesHistoryTimeline,
+        reviewersMap,
+      );
+      const votesHistory = this.#getPullRequestVotesHistory(filteredVotesHistoryTimeline);
 
       return {
         ...pullRequest,
         votes,
+        votesHistory,
         votesTimeline: filteredVotesTimeline,
+        votesHistoryTimeline: filteredVotesHistoryTimeline,
       };
     });
 
@@ -90,6 +96,22 @@ export class CodeReviewMetricsUtils {
     }
 
     return votesTimeline.filter(({ id }) => reviewersMap.has(id));
+  }
+
+  static #getPullRequestVotes(votesCycle: IFetchedPullRequestVotesTimeline[]) {
+    const votesResults = {
+      [VOTE.APPROVED]: 0,
+      [VOTE.APPROVED_WITH_SUGGESTIONS]: 0,
+      [VOTE.WAIT_FOR_AUTHOR]: 0,
+      [VOTE.REJECTED]: 0,
+      [VOTE.NO_VOTE]: 0,
+    };
+
+    votesCycle.forEach(({ vote }) => {
+      votesResults[vote]++;
+    });
+
+    return votesResults;
   }
 
   static #getPullRequestVotesHistory(votesCycle: IFetchedPullRequestVotesTimeline[]) {

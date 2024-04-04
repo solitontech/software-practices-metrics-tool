@@ -149,12 +149,6 @@ export const CODE_REVIEW_METRICS = {
       tags: ['Documentation'],
       title: '2626 - Filtered azure completed pull request data with threads data (handled comments, labels)',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2626`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -224,12 +218,6 @@ export const CODE_REVIEW_WITHOUT_CLOSED_DATE = {
       tags: [],
       title: '2620 - Active pull request with no reviewers.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2620`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [],
       votesTimeline: [],
     },
@@ -274,12 +262,6 @@ export const CODE_REVIEW_NO_VOTE_THREADS = {
       tags: [],
       title: '2620 - Completed pull request with no reviewers & threads.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2620`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [],
       votesTimeline: [],
     },
@@ -429,12 +411,6 @@ export const CODE_REVIEW_METRICS_THREADS = {
       tags: ['Documentation'],
       title: '2626 - Filtered azure completed pull request data with threads data (handled comments, labels)',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2626`,
-      votesHistory: {
-        approved: 1,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
@@ -504,12 +480,6 @@ export const CODE_REVIEW_WITHOUT_TAGS = {
       tags: [],
       title: '2620 - Active pull request with no reviewers.',
       url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2620`,
-      votesHistory: {
-        approved: 0,
-        approvedWithSuggestions: 0,
-        rejected: 0,
-        waitForAuthor: 0,
-      },
       votesHistoryTimeline: [],
       votesTimeline: [],
     },
