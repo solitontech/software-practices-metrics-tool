@@ -1,6 +1,5 @@
 import { TimeMetrics } from './time-metrics/time-metrics.js';
 import { VoteMetrics } from './vote-metrics/vote-metrics.js';
-import { CommentMetrics } from './comment-metrics/comment-metrics.js';
 
 import { AzureDevopsURL } from '../helpers/helpers.js';
 
@@ -22,8 +21,7 @@ export class CodeReview {
         closedDate: pullRequest.closedDate ?? null,
         votesTimeline: VoteMetrics.getPullRequestVotesTimeline(pullRequest.reviewers, pullRequest.votesHistoryTimeline),
         votesHistoryTimeline: pullRequest.votesHistoryTimeline,
-        comments: CommentMetrics.getPullRequestComments(pullRequest.threads),
-        reviewerComments: CommentMetrics.getPullRequestReviewerComments(pullRequest.threads),
+        threads: pullRequest.threads,
         tags: pullRequest.tags,
         firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(pullRequest),
         approvalTimeInSeconds: isRequiredReviewers ? TimeMetrics.getPullRequestApprovalTime(pullRequest) : null,

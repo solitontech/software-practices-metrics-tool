@@ -24,6 +24,16 @@ export interface IFetchedPullRequestVotesTimeline {
   timeOfVote: string | null;
 }
 
+export interface IFetchedRawPullRequestThreads {
+  comments: IFetchedRawPullRequestComments[];
+}
+
+export interface IFetchedRawPullRequestComments {
+  content: string;
+  authorName: string;
+  authorId: string;
+}
+
 interface IFetchedRawCodeReviewPullRequest {
   id: number;
   title: string;
@@ -34,8 +44,7 @@ interface IFetchedRawCodeReviewPullRequest {
   closedDate: string | null;
   votesTimeline: IFetchedPullRequestVotesTimeline[];
   votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
-  comments: IFetchedPullRequestComments;
-  reviewerComments: IFetchedPullRequestReviewerComments[];
+  threads: IFetchedRawPullRequestThreads[];
   tags: string[];
   firstReviewResponseTimeInSeconds: number | null;
   approvalTimeInSeconds: number | null;

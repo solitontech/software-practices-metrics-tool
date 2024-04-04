@@ -323,29 +323,29 @@ paths:
                               vote:
                                 type: string
                                 description: The vote given by the author
-                        comments:
-                          type: object
-                          properties:
-                            totalComments:
-                              type: integer
-                              description: Total number of comments
-                            numberOfNitComments:
-                              type: integer
-                              description: Total number of nit comments
-                            numberOfMajorComments:
-                              type: integer
-                              description: Total number of major comments
-                        reviewerComments:
+                        threads:
                           type: array
+                          description: 'Array of thread objects'
                           items:
                             type: object
+                            description: 'Thread object'
                             properties:
-                              reviewer:
-                                type: string
-                                description: Name of the reviewer
                               comments:
-                                type: integer
-                                description: Total number of comments given by the reviewer
+                                type: array
+                                description: 'Array of comment objects in a thread'
+                                items:
+                                  type: object
+                                  description: 'Comment object'
+                                  properties:
+                                    content:
+                                      type: string
+                                      description: 'Content of the comment'
+                                    authorName:
+                                      type: string
+                                      description: 'Name of the author of the comment'
+                                    authorId:
+                                      type: string
+                                      description: 'ID of the author of the comment'
                         tags:
                           type: array
                           items:

@@ -5,7 +5,9 @@ import {
   IFetchedRawCodeReviewResponse,
   IFetchedPullRequestVotesTimeline,
   IFetchedCodeReviewResponse,
+  IFetchedRawPullRequestThreads,
 } from "./codeReviewTypes";
+import { CommentMetrics } from "./commentMetricsUtils";
 
 export class CodeReviewMetricsUtils {
   static #getSquadsUserIdsMap(squads: IContextClientFilterSquad[]) {
@@ -70,7 +72,9 @@ export class CodeReviewMetricsUtils {
         pullRequest.votesHistoryTimeline,
         reviewersMap,
       );
-      const votesHistory = this.#getPullRequestVotesHistory(filteredVotesHistoryTimeline);
+      const votesHistory = this.#getPullRequestVotes(filteredVotesHistoryTimeline);
+
+      const filteredThreads = this.#getFilteredThreads(pullRequest.threads, reviewersMap, pullRequest.authorId);
 
       return {
         ...pullRequest,
@@ -78,6 +82,8 @@ export class CodeReviewMetricsUtils {
         votesHistory,
         votesTimeline: filteredVotesTimeline,
         votesHistoryTimeline: filteredVotesHistoryTimeline,
+        comments: CommentMetrics.getPullRequestComments(filteredThreads),
+        reviewerComments: CommentMetrics.getPullRequestReviewerComments(filteredThreads),
       };
     });
 
@@ -85,6 +91,28 @@ export class CodeReviewMetricsUtils {
       pullRequests,
       errorCount: data.errorCount,
     };
+  }
+
+  static #getFilteredThreads(
+    threads: IFetchedRawPullRequestThreads[],
+    reviewersMap: Map<string, boolean>,
+    authorId: string,
+  ) {
+    if (!reviewersMap.size) {
+      return threads;
+    }
+
+    const filteredThreads = threads.map((thread) => {
+      const comments = thread.comments.filter(
+        ({ authorId: reviewerId }) => reviewersMap.has(reviewerId) || authorId === reviewerId,
+      );
+
+      return {
+        comments,
+      };
+    });
+
+    return filteredThreads;
   }
 
   static #filterVotesTimelineByReviewers(
@@ -99,22 +127,6 @@ export class CodeReviewMetricsUtils {
   }
 
   static #getPullRequestVotes(votesCycle: IFetchedPullRequestVotesTimeline[]) {
-    const votesResults = {
-      [VOTES.APPROVED]: 0,
-      [VOTES.APPROVED_WITH_SUGGESTIONS]: 0,
-      [VOTES.WAIT_FOR_AUTHOR]: 0,
-      [VOTES.REJECTED]: 0,
-      [VOTES.NO_VOTE]: 0,
-    };
-
-    votesCycle.forEach(({ vote }) => {
-      votesResults[vote]++;
-    });
-
-    return votesResults;
-  }
-
-  static #getPullRequestVotesHistory(votesCycle: IFetchedPullRequestVotesTimeline[]) {
     const votesResults = {
       [VOTES.APPROVED]: 0,
       [VOTES.APPROVED_WITH_SUGGESTIONS]: 0,
