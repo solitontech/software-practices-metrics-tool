@@ -19,6 +19,10 @@ export class ServerConfiguration {
   static {
     this.#loadServerConfigs();
     this.#loadEnvironmentVariables();
+
+    if (this.#environmentVariables.nodeEnvironment === NODE_ENVIRONMENT_MODE.DEVELOPMENT) {
+      console.log('Server Configuration file path: ', this.#serverConfigPath);
+    }
   }
 
   static get clientFilters() {
