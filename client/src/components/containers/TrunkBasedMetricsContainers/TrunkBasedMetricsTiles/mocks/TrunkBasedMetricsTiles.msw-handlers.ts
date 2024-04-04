@@ -18,7 +18,7 @@ export const getActiveBranchesHandler = (
   activeBranches: IFetchedTrunkBasedActiveBranchesResponse,
   delayTime: number = 0,
 ) => {
-  return http.get(ApiEndPoint.trunkBasedActiveBranches().href, async () => {
+  return http.get(ApiEndPoint.trunkBasedActiveBranchesUrlWithoutParameters().href, async () => {
     await delay(delayTime);
 
     return HttpResponse.json(activeBranches);
