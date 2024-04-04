@@ -40,9 +40,9 @@ export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTablePr
                 <tr key={row.author} className={styles.tableRow} data-testid="code-review-metrics-timeline-table">
                   <td
                     data-uuid={row.id}
-                    title={`Click to copy : ${row.author}-${row.id}`}
+                    title={`Click to copy : "${row.id}": "${row.author}"`}
                     className={styles.tableCell}
-                    onClick={() => handleCopyToClipboard(`${row.author}-${row.id}`)}
+                    onClick={() => handleCopyToClipboard(`"${row.id}": "${row.author}"`)}
                   >
                     {row.author}
                   </td>
