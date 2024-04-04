@@ -305,21 +305,6 @@ paths:
                               vote:
                                 type: string
                                 description: The vote given by the author
-                        votesHistory:
-                          type: object
-                          properties:
-                            approved:
-                              type: integer
-                              description: Total number of approved votes
-                            approvedWithSuggestions:
-                              type: integer
-                              description: Total number of approved votes with suggestions
-                            waitForAuthor:
-                              type: integer
-                              description: Total number of votes waiting for author
-                            rejected:
-                              type: integer
-                              description: Total number of rejected votes
                         votesHistoryTimeline:
                           type: array
                           items:
