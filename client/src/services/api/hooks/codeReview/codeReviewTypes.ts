@@ -24,7 +24,7 @@ export interface IFetchedPullRequestVotesTimeline {
   timeOfVote: string | null;
 }
 
-export interface IFetchedRawCodeReviewPullRequest {
+interface IFetchedRawCodeReviewPullRequest {
   id: number;
   title: string;
   status: string;

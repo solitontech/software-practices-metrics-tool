@@ -40,10 +40,7 @@ export const useCodeReviewMetrics = (startDate: Date, endDate: Date) => {
 
   const pullRequests = CodeReviewMetricsUtils.getFilteredPullRequests(data, filters);
 
-  console.time("transformPullRequests");
-
-  const transformedPullRequests = CodeReviewMetricsUtils.getTransformedPullRequests(pullRequests, filters);
-  console.timeEnd("transformPullRequests");
+  const transformedPullRequests = CodeReviewMetricsUtils.getFilteredPullRequestsByReviewers(pullRequests, filters);
 
   return {
     isPending,

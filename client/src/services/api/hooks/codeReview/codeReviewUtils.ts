@@ -1,6 +1,6 @@
+import { VOTES } from "src/constants/constants";
 import { IContextClientFilterSquad } from "src/context/context";
 
-import { VOTE } from "./codeReviewConstants";
 import {
   IFetchedRawCodeReviewResponse,
   IFetchedPullRequestVotesTimeline,
@@ -52,7 +52,7 @@ export class CodeReviewMetricsUtils {
     };
   }
 
-  static getTransformedPullRequests(
+  static getFilteredPullRequestsByReviewers(
     data: Omit<IFetchedRawCodeReviewResponse, "count" | "filteredCount"> | undefined,
     filters: IContextClientFilterSquad[],
   ): IFetchedCodeReviewResponse | undefined {
@@ -100,11 +100,11 @@ export class CodeReviewMetricsUtils {
 
   static #getPullRequestVotes(votesCycle: IFetchedPullRequestVotesTimeline[]) {
     const votesResults = {
-      [VOTE.APPROVED]: 0,
-      [VOTE.APPROVED_WITH_SUGGESTIONS]: 0,
-      [VOTE.WAIT_FOR_AUTHOR]: 0,
-      [VOTE.REJECTED]: 0,
-      [VOTE.NO_VOTE]: 0,
+      [VOTES.APPROVED]: 0,
+      [VOTES.APPROVED_WITH_SUGGESTIONS]: 0,
+      [VOTES.WAIT_FOR_AUTHOR]: 0,
+      [VOTES.REJECTED]: 0,
+      [VOTES.NO_VOTE]: 0,
     };
 
     votesCycle.forEach(({ vote }) => {
@@ -116,11 +116,11 @@ export class CodeReviewMetricsUtils {
 
   static #getPullRequestVotesHistory(votesCycle: IFetchedPullRequestVotesTimeline[]) {
     const votesResults = {
-      [VOTE.APPROVED]: 0,
-      [VOTE.APPROVED_WITH_SUGGESTIONS]: 0,
-      [VOTE.WAIT_FOR_AUTHOR]: 0,
-      [VOTE.REJECTED]: 0,
-      [VOTE.NO_VOTE]: 0,
+      [VOTES.APPROVED]: 0,
+      [VOTES.APPROVED_WITH_SUGGESTIONS]: 0,
+      [VOTES.WAIT_FOR_AUTHOR]: 0,
+      [VOTES.REJECTED]: 0,
+      [VOTES.NO_VOTE]: 0,
     };
 
     votesCycle.forEach(({ vote }) => {
