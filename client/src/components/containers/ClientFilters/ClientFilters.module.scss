@@ -54,10 +54,11 @@
 
 .categoryContainer {
   display: flex;
+  justify-content: space-between;
 }
 
 .memberContainer {
-  width: 50%;
+  width: 45%;
 }
 
 .squadCategory {
@@ -70,6 +71,7 @@
 
 .userContainer {
   padding: 0 $spacing-lg;
+  padding-right: 0;
 }
 
 .userLabel {
