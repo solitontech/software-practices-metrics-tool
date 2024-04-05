@@ -42,11 +42,9 @@ export class CodeReviewMetricsUtils {
 
     const { developersMap, reviewersMap } = this.#getSquadsUserIdsMap(filters);
 
-    const pullRequests = data.pullRequests.filter(({ authorId, votesHistoryTimeline, votesTimeline }) => {
+    const pullRequests = data.pullRequests.filter(({ authorId, votesHistoryTimeline }) => {
       const isAuthorMatch = developersMap.has(authorId);
-      const isReviewerMatch =
-        votesHistoryTimeline.some(({ id }) => reviewersMap.has(id)) ||
-        votesTimeline.some(({ id }) => reviewersMap.has(id));
+      const isReviewerMatch = votesHistoryTimeline.some(({ id }) => reviewersMap.has(id));
 
       return reviewersMap.size ? isAuthorMatch && isReviewerMatch : isAuthorMatch;
     });
