@@ -21,7 +21,14 @@ export class TimeMetrics {
     creationDate: string,
     reviewers: IFetchedPullRequestVotesTimeline[],
     votesHistoryTimeline: IFetchedPullRequestVotesTimeline[],
+    selectedReviewers: Map<string, boolean>,
   ) {
+    const isReviewersSelected = selectedReviewers.size > 0;
+
+    if (isReviewersSelected) {
+      return this.#getApprovalTimeForSelectedReviewers(creationDate, votesHistoryTimeline);
+    }
+
     if (!this.#isRequiredReviewersAssigned(reviewers)) {
       return null;
     }
@@ -33,6 +40,21 @@ export class TimeMetrics {
     const approvalTime = this.#getLatestReviewerApprovalTime(votesHistoryTimeline);
 
     return approvalTime ? this.#getTimeInSeconds(approvalTime, creationDate) : null;
+  }
+
+  static #getApprovalTimeForSelectedReviewers(
+    creationDate: string,
+    votesHistoryTimeline: IFetchedPullRequestVotesTimeline[],
+  ) {
+    const reversedTimeline = votesHistoryTimeline.slice().reverse();
+
+    const latestApprovedReviewer = reversedTimeline.find((reviewer) => {
+      return this.#isReviewerApproved(reviewer);
+    });
+
+    return latestApprovedReviewer?.timeOfVote
+      ? this.#getTimeInSeconds(latestApprovedReviewer.timeOfVote, creationDate)
+      : null;
   }
 
   static #isRequiredReviewersAssigned(reviewers: IFetchedPullRequestVotesTimeline[]) {

@@ -42,9 +42,11 @@ export class CodeReviewMetricsUtils {
 
     const { developersMap, reviewersMap } = this.#getSquadsUserIdsMap(filters);
 
-    const pullRequests = data.pullRequests.filter(({ authorId, votesHistoryTimeline }) => {
+    const pullRequests = data.pullRequests.filter(({ authorId, votesHistoryTimeline, votesTimeline }) => {
       const isAuthorMatch = developersMap.has(authorId);
-      const isReviewerMatch = votesHistoryTimeline.some(({ id }) => reviewersMap.has(id));
+      const isReviewerMatch =
+        votesHistoryTimeline.some(({ id }) => reviewersMap.has(id)) ||
+        votesTimeline.some(({ id }) => reviewersMap.has(id));
 
       return reviewersMap.size ? isAuthorMatch && isReviewerMatch : isAuthorMatch;
     });
@@ -93,6 +95,7 @@ export class CodeReviewMetricsUtils {
           pullRequest.creationDate,
           filteredVotesTimeline,
           filteredVotesHistoryTimeline,
+          reviewersMap,
         ),
       };
     });
