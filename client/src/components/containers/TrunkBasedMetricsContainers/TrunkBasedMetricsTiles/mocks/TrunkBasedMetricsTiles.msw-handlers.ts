@@ -18,10 +18,19 @@ export const getActiveBranchesHandler = (
   activeBranches: IFetchedTrunkBasedActiveBranchesResponse,
   delayTime: number = 0,
 ) => {
-  return http.get(ApiEndPoint.trunkBasedActiveBranchesUrlWithoutParameters().href, async () => {
+  return http.get(ApiEndPoint.trunkBasedActiveBranchesUrlWithoutParameters().href, async ({ request }) => {
     await delay(delayTime);
 
-    return HttpResponse.json(activeBranches);
+    const url = new URL(request.url);
+
+    const paginationCursor = url.searchParams.get("paginationCursor");
+    const paginationSize = url.searchParams.get("paginationSize");
+
+    if (paginationCursor && paginationSize) {
+      return HttpResponse.json(activeBranches);
+    }
+
+    return new HttpResponse("Not Found", { status: 404 });
   });
 };
 
