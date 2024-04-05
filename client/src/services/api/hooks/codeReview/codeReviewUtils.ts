@@ -8,6 +8,7 @@ import {
   IFetchedRawPullRequestThreads,
 } from "./codeReviewTypes";
 import { CommentMetrics } from "./commentMetricsUtils";
+import { TimeMetrics } from "./timeMetricsUtils";
 
 export class CodeReviewMetricsUtils {
   static #getSquadsUserIdsMap(squads: IContextClientFilterSquad[]) {
@@ -84,6 +85,15 @@ export class CodeReviewMetricsUtils {
         votesHistoryTimeline: filteredVotesHistoryTimeline,
         comments: CommentMetrics.getPullRequestComments(filteredThreads),
         reviewerComments: CommentMetrics.getPullRequestReviewerComments(filteredThreads),
+        firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(
+          pullRequest.creationDate,
+          filteredVotesHistoryTimeline,
+        ),
+        approvalTimeInSeconds: TimeMetrics.getPullRequestApprovalTime(
+          pullRequest.creationDate,
+          filteredVotesTimeline,
+          filteredVotesHistoryTimeline,
+        ),
       };
     });
 

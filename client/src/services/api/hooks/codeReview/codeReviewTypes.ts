@@ -22,6 +22,7 @@ export interface IFetchedPullRequestVotesTimeline {
   author: string;
   vote: keyof IFetchedPullRequestVotes;
   timeOfVote: string | null;
+  isRequired: boolean;
 }
 
 export interface IFetchedRawPullRequestThreads {
@@ -46,8 +47,6 @@ interface IFetchedRawCodeReviewPullRequest {
   votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
   threads: IFetchedRawPullRequestThreads[];
   tags: string[];
-  firstReviewResponseTimeInSeconds: number | null;
-  approvalTimeInSeconds: number | null;
   mergeTimeInSeconds: number | null;
   url: string;
 }

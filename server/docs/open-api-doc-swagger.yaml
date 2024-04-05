@@ -305,6 +305,9 @@ paths:
                               vote:
                                 type: string
                                 description: The vote given by the author
+                              isRequired:
+                                type: boolean
+                                description: Indicates if the voted reviewer is required
                         votesHistoryTimeline:
                           type: array
                           items:
@@ -323,6 +326,9 @@ paths:
                               vote:
                                 type: string
                                 description: The vote given by the author
+                              isRequired:
+                                type: boolean
+                                description: Indicates if the voted reviewer is required
                         threads:
                           type: array
                           description: 'Array of thread objects'
@@ -351,12 +357,6 @@ paths:
                           items:
                             type: string
                             description: Tags associated with the pull request
-                        firstReviewResponseTimeInSeconds:
-                          type: integer
-                          description: Time taken for the first review response in seconds
-                        approvalTimeInSeconds:
-                          type: integer
-                          description: Time taken for the pull request approval in seconds
                         mergeTimeInSeconds:
                           type: integer
                           description: Time taken for the pull request merge in seconds

@@ -126,12 +126,10 @@ export const CODE_REVIEW_METRICS = {
   count: 1,
   pullRequests: [
     {
-      approvalTimeInSeconds: 691439,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       createdBy: 'Developer',
       creationDate: '2024-02-04T10:58:33.4719437Z',
-      firstReviewResponseTimeInSeconds: 691439,
       id: 2626,
       mergeTimeInSeconds: 691533,
       threads: [
@@ -159,6 +157,7 @@ export const CODE_REVIEW_METRICS = {
           author: 'Reviewer 1',
           id: '6f96f2d9-f079-65fd-ae3d-0650c193e580',
           timeOfVote: '2024-02-12T11:02:32.32Z',
+          isRequired: true,
           vote: 'approved',
         },
       ],
@@ -167,18 +166,21 @@ export const CODE_REVIEW_METRICS = {
           author: 'Reviewer 1',
           id: '6f96f2d9-f079-65fd-ae3d-0650c193e580',
           timeOfVote: '2024-02-12T11:02:32.32Z',
+          isRequired: true,
           vote: 'approved',
         },
         {
           author: 'Reviewer 2',
           id: '2655af18-ea47-64fa-a782-3c3ccb174079',
           timeOfVote: null,
+          isRequired: false,
           vote: 'noVote',
         },
         {
           author: 'Reviewer 3',
           id: '561b83f4-afcd-6b4a-a398-4a4f5a88d431',
           timeOfVote: null,
+          isRequired: false,
           vote: 'noVote',
         },
       ],
@@ -205,12 +207,10 @@ export const CODE_REVIEW_WITHOUT_CLOSED_DATE = {
   count: 1,
   pullRequests: [
     {
-      approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
       closedDate: null,
       createdBy: 'Developer',
       creationDate: '2024-02-12T10:58:33.4719437Z',
-      firstReviewResponseTimeInSeconds: null,
       id: 2620,
       mergeTimeInSeconds: null,
       threads: [],
@@ -244,12 +244,10 @@ export const CODE_REVIEW_NO_VOTE_THREADS = {
   count: 1,
   pullRequests: [
     {
-      approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       createdBy: 'Developer',
       creationDate: '2024-02-12T10:58:33.4719437Z',
-      firstReviewResponseTimeInSeconds: null,
       id: 2620,
       mergeTimeInSeconds: 333,
       threads: [],
@@ -383,12 +381,10 @@ export const CODE_REVIEW_METRICS_THREADS = {
   count: 1,
   pullRequests: [
     {
-      approvalTimeInSeconds: 691439,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
       closedDate: '2024-02-12T11:04:06.3046376Z',
       createdBy: 'Developer',
       creationDate: '2024-02-04T10:58:33.4719437Z',
-      firstReviewResponseTimeInSeconds: 691439,
       id: 2626,
       mergeTimeInSeconds: 691533,
       threads: [
@@ -416,6 +412,7 @@ export const CODE_REVIEW_METRICS_THREADS = {
           author: 'Reviewer 1',
           id: '6f96f2d9-f079-65fd-ae3d-0650c193e580',
           timeOfVote: '2024-02-12T11:02:32.32Z',
+          isRequired: true,
           vote: 'approved',
         },
       ],
@@ -424,18 +421,21 @@ export const CODE_REVIEW_METRICS_THREADS = {
           author: 'Reviewer 1',
           id: '6f96f2d9-f079-65fd-ae3d-0650c193e580',
           timeOfVote: '2024-02-12T11:02:32.32Z',
+          isRequired: true,
           vote: 'approved',
         },
         {
           author: 'Reviewer 2',
           id: '2655af18-ea47-64fa-a782-3c3ccb174079',
           timeOfVote: null,
+          isRequired: false,
           vote: 'noVote',
         },
         {
           author: 'Reviewer 3',
           id: '561b83f4-afcd-6b4a-a398-4a4f5a88d431',
           timeOfVote: null,
+          isRequired: false,
           vote: 'noVote',
         },
       ],
@@ -462,12 +462,10 @@ export const CODE_REVIEW_WITHOUT_TAGS = {
   count: 1,
   pullRequests: [
     {
-      approvalTimeInSeconds: null,
       authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
       closedDate: null,
       createdBy: 'Developer',
       creationDate: '2024-02-12T10:58:33.4719437Z',
-      firstReviewResponseTimeInSeconds: null,
       id: 2620,
       mergeTimeInSeconds: null,
       threads: [],

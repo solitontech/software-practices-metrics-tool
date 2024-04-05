@@ -8,9 +8,6 @@ import { CODE_TO_VOTE } from './constants/constants.js';
 export class CodeReview {
   static getCodeReviewMetrics(rawPullRequests) {
     const pullRequests = this.#parsePullRequests(rawPullRequests).map((pullRequest) => {
-      const reviewers = Object.values(pullRequest.reviewers);
-      const isRequiredReviewers = this.#isRequiredReviewersAssigned(reviewers);
-
       return {
         id: pullRequest.id,
         title: `${pullRequest.id} - ${pullRequest.title}`,
@@ -23,8 +20,6 @@ export class CodeReview {
         votesHistoryTimeline: pullRequest.votesHistoryTimeline,
         threads: pullRequest.threads,
         tags: pullRequest.tags,
-        firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(pullRequest),
-        approvalTimeInSeconds: isRequiredReviewers ? TimeMetrics.getPullRequestApprovalTime(pullRequest) : null,
         mergeTimeInSeconds: TimeMetrics.getPullRequestMergeTime(pullRequest),
         url: AzureDevopsURL.getPullRequestURL(pullRequest.id),
       };
@@ -38,6 +33,8 @@ export class CodeReview {
 
   static #parsePullRequests(pullRequests) {
     return pullRequests.map((pullRequest) => {
+      const reviewers = this.#parseReviewers(pullRequest.reviewers);
+
       return {
         id: pullRequest.pullRequestId,
         title: pullRequest.title,
@@ -46,8 +43,8 @@ export class CodeReview {
         authorId: pullRequest.createdBy.id,
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate,
-        reviewers: this.#parseReviewers(pullRequest.reviewers),
-        votesHistoryTimeline: this.#parseVotesTimeline(pullRequest.threads),
+        reviewers,
+        votesHistoryTimeline: this.#parseVotesTimeline(pullRequest.threads, reviewers),
         threads: this.#parseThreads(pullRequest.threads),
         tags: this.#parseTags(pullRequest),
       };
@@ -68,7 +65,7 @@ export class CodeReview {
     return reviewers;
   }
 
-  static #parseVotesTimeline(pullRequestThreads) {
+  static #parseVotesTimeline(pullRequestThreads, reviewers) {
     const voteResult = 'CodeReviewVoteResult';
     const votes = [];
 
@@ -87,6 +84,7 @@ export class CodeReview {
           id: firstComment.author.id,
           timeOfVote: thread.publishedDate,
           vote: CODE_TO_VOTE.get(voteValue),
+          isRequired: reviewers[firstComment.author.id].isRequired,
         });
       }
     });
@@ -128,9 +126,5 @@ export class CodeReview {
     }
 
     return pullRequest.labels.map(({ name }) => name);
-  }
-
-  static #isRequiredReviewersAssigned(reviewers) {
-    return reviewers.some((reviewer) => reviewer.isRequired);
   }
 }

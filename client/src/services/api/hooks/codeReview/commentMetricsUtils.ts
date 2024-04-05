@@ -31,8 +31,6 @@ export class CommentMetrics {
       major: "major",
     };
 
-    console.log(threads);
-
     return {
       totalComments: this.#getTotalComments(threads),
       numberOfNitComments: this.#getKeyWordComments(threads, commentType.nit),
