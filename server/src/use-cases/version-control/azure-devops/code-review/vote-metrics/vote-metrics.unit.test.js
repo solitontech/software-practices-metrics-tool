@@ -10,15 +10,15 @@ describe('VoteMetrics~getPullRequestVotesTimeline - method to get pull request v
     };
 
     const votesHistoryTimeline = [
-      { id: '1', author: 'Author1', vote: 'approved', timeOfVote: '2022-01-01T00:00:00Z' },
-      { id: '2', author: 'Author2', vote: 'rejected', timeOfVote: '2022-01-02T00:00:00Z' },
+      { id: '1', author: 'Author1', isRequired: true, vote: 'approved', timeOfVote: '2022-01-01T00:00:00Z' },
+      { id: '2', author: 'Author2', isRequired: true, vote: 'rejected', timeOfVote: '2022-01-02T00:00:00Z' },
     ];
 
     const result = VoteMetrics.getPullRequestVotesTimeline(reviewers, votesHistoryTimeline);
 
     expect(result).toEqual([
-      { id: '1', author: 'Author1', timeOfVote: '2022-01-01T00:00:00Z', vote: 'approved' },
-      { id: '2', author: 'Author2', timeOfVote: '2022-01-02T00:00:00Z', vote: 'rejected' },
+      { id: '1', author: 'Author1', isRequired: true, timeOfVote: '2022-01-01T00:00:00Z', vote: 'approved' },
+      { id: '2', author: 'Author2', isRequired: true, timeOfVote: '2022-01-02T00:00:00Z', vote: 'rejected' },
     ]);
   });
 
@@ -33,8 +33,8 @@ describe('VoteMetrics~getPullRequestVotesTimeline - method to get pull request v
     const result = VoteMetrics.getPullRequestVotesTimeline(reviewers, votesHistoryTimeline);
 
     expect(result).toEqual([
-      { id: '1', author: 'Author1', timeOfVote: '2022-01-01T00:00:00Z', vote: 'approved' },
-      { id: '3', author: 'Author3', timeOfVote: null, vote: 'approved' },
+      { id: '1', author: 'Author1', isRequired: true, timeOfVote: '2022-01-01T00:00:00Z', vote: 'approved' },
+      { id: '3', author: 'Author3', isRequired: true, timeOfVote: null, vote: 'approved' },
     ]);
   });
 
@@ -63,12 +63,14 @@ describe('VoteMetrics~getPullRequestVotesTimeline - method to get pull request v
         author: 'Author1',
         id: '1',
         timeOfVote: null,
+        isRequired: true,
         vote: 'noVote',
       },
       {
         author: 'Author2',
         id: '2',
         timeOfVote: null,
+        isRequired: true,
         vote: 'noVote',
       },
     ]);
