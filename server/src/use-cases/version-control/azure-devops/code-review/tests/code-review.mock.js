@@ -159,6 +159,7 @@ export const CODE_REVIEW_METRICS = {
           timeOfVote: '2024-02-12T11:02:32.32Z',
           isRequired: true,
           vote: 'approved',
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
         },
       ],
       votesTimeline: [
@@ -168,6 +169,7 @@ export const CODE_REVIEW_METRICS = {
           timeOfVote: '2024-02-12T11:02:32.32Z',
           isRequired: true,
           vote: 'approved',
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
         },
         {
           author: 'Reviewer 2',
@@ -175,6 +177,7 @@ export const CODE_REVIEW_METRICS = {
           timeOfVote: null,
           isRequired: false,
           vote: 'noVote',
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
         },
         {
           author: 'Reviewer 3',
@@ -182,6 +185,7 @@ export const CODE_REVIEW_METRICS = {
           timeOfVote: null,
           isRequired: false,
           vote: 'noVote',
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
         },
       ],
     },
@@ -414,6 +418,7 @@ export const CODE_REVIEW_METRICS_THREADS = {
           timeOfVote: '2024-02-12T11:02:32.32Z',
           isRequired: true,
           vote: 'approved',
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
         },
       ],
       votesTimeline: [
@@ -423,6 +428,7 @@ export const CODE_REVIEW_METRICS_THREADS = {
           timeOfVote: '2024-02-12T11:02:32.32Z',
           isRequired: true,
           vote: 'approved',
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
         },
         {
           author: 'Reviewer 2',
@@ -430,6 +436,7 @@ export const CODE_REVIEW_METRICS_THREADS = {
           timeOfVote: null,
           isRequired: false,
           vote: 'noVote',
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
         },
         {
           author: 'Reviewer 3',
@@ -437,6 +444,7 @@ export const CODE_REVIEW_METRICS_THREADS = {
           timeOfVote: null,
           isRequired: false,
           vote: 'noVote',
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
         },
       ],
     },

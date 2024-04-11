@@ -33,7 +33,7 @@ export class CodeReview {
 
   static #parsePullRequests(pullRequests) {
     return pullRequests.map((pullRequest) => {
-      const reviewers = this.#parseReviewers(pullRequest.reviewers);
+      const reviewers = this.#parseReviewers(pullRequest.threads, pullRequest.reviewers, pullRequest.creationDate);
 
       return {
         id: pullRequest.pullRequestId,
@@ -44,28 +44,61 @@ export class CodeReview {
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate,
         reviewers,
-        votesHistoryTimeline: this.#parseVotesTimeline(pullRequest.threads, reviewers),
+        votesHistoryTimeline: this.#parseVotesTimeline(pullRequest.threads, reviewers, pullRequest.creationDate),
         threads: this.#parseThreads(pullRequest.threads),
         tags: this.#parseTags(pullRequest),
       };
     });
   }
 
-  static #parseReviewers(rawReviewers) {
+  static #parseReviewers(pullRequestThreads, rawReviewers, pullRequestCreationDate) {
     const reviewers = {};
+
+    const reviewersAddedTime = this.#parseReviewersAddedTime(pullRequestThreads);
 
     rawReviewers.forEach(({ id, displayName, vote, isRequired }) => {
       reviewers[id] = {
         author: displayName,
         vote: CODE_TO_VOTE.get(vote),
         isRequired: isRequired ?? false,
+        reviewerAddedTime: reviewersAddedTime[id] ?? pullRequestCreationDate,
       };
     });
 
     return reviewers;
   }
 
-  static #parseVotesTimeline(pullRequestThreads, reviewers) {
+  static #parseReviewersAddedTime(pullRequestThreads) {
+    const reviewersAddedTime = {};
+
+    pullRequestThreads.forEach((thread) => {
+      if (!thread.properties || !thread.identities) {
+        return;
+      }
+
+      const policyAddedReviewers = thread.properties['CodeReviewRequiredReviewerExampleReviewerIdentities'];
+      const addedReviewer = thread.properties['CodeReviewReviewersUpdatedAddedIdentity'];
+
+      if (addedReviewer) {
+        const identityIndex = addedReviewer.$value;
+        const reviewerIdentity = thread.identities[identityIndex];
+
+        reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
+      }
+
+      if (policyAddedReviewers) {
+        policyAddedReviewers.$value.match(/\d+/g).forEach((identityIndex) => {
+          const reviewerIdentity = thread.identities[identityIndex];
+
+          reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
+        });
+      }
+    });
+
+    return reviewersAddedTime;
+  }
+
+  static #parseVotesTimeline(pullRequestThreads, reviewers, pullRequestCreationDate) {
     const voteResult = 'CodeReviewVoteResult';
     const votes = [];
 
@@ -84,7 +117,8 @@ export class CodeReview {
           id: firstComment.author.id,
           timeOfVote: thread.publishedDate,
           vote: CODE_TO_VOTE.get(voteValue),
-          isRequired: reviewers[firstComment.author.id].isRequired,
+          isRequired: reviewers[firstComment.author.id]?.isRequired ?? false,
+          reviewerAddedTime: reviewers[firstComment.author.id]?.reviewerAddedTime ?? pullRequestCreationDate,
         });
       }
     });

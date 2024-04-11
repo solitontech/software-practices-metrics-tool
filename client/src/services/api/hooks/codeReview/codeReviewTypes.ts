@@ -23,6 +23,7 @@ export interface IFetchedPullRequestVotesTimeline {
   vote: keyof IFetchedPullRequestVotes;
   timeOfVote: string | null;
   isRequired: boolean;
+  reviewerAddedTime: string | null;
 }
 
 export interface IFetchedRawPullRequestThreads {

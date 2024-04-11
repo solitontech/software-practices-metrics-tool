@@ -3,18 +3,15 @@ import { VOTES } from "src/constants/codeReviewMetrics.constants";
 import { IFetchedPullRequestVotesTimeline } from "./codeReviewTypes";
 
 export class TimeMetrics {
-  static getFirstReviewResponseTime(
-    creationDate: string,
-    votesHistoryTimeline: IFetchedPullRequestVotesTimeline[],
-  ): number | null {
+  static getFirstReviewResponseTime(votesHistoryTimeline: IFetchedPullRequestVotesTimeline[]): number | null {
     if (!votesHistoryTimeline.length) {
       return null;
     }
 
     const [firstVote] = votesHistoryTimeline;
-    const { timeOfVote } = firstVote;
+    const { timeOfVote, reviewerAddedTime } = firstVote;
 
-    return timeOfVote ? this.#getTimeInSeconds(timeOfVote, creationDate) : null;
+    return timeOfVote && reviewerAddedTime ? this.#getTimeInSeconds(timeOfVote, reviewerAddedTime) : null;
   }
 
   static getPullRequestApprovalTime(

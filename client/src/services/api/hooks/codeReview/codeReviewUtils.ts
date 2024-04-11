@@ -85,10 +85,7 @@ export class CodeReviewMetricsUtils {
         votesHistoryTimeline: filteredVotesHistoryTimeline,
         comments: CommentMetrics.getPullRequestComments(filteredThreads),
         reviewerComments: CommentMetrics.getPullRequestReviewerComments(filteredThreads),
-        firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(
-          pullRequest.creationDate,
-          filteredVotesHistoryTimeline,
-        ),
+        firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(filteredVotesHistoryTimeline),
         approvalTimeInSeconds: TimeMetrics.getPullRequestApprovalTime(
           pullRequest.creationDate,
           filteredVotesTimeline,

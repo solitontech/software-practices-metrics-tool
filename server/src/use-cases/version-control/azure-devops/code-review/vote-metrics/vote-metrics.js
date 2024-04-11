@@ -1,7 +1,7 @@
 export class VoteMetrics {
   static getPullRequestVotesTimeline(reviewers, votesTimeline) {
     return Object.keys(reviewers).map((id) => {
-      const { author, vote, isRequired } = reviewers[id];
+      const { author, vote, isRequired, reviewerAddedTime } = reviewers[id];
       const timeOfVote = this.#getLastTimeOfVote(id, votesTimeline);
 
       return {
@@ -10,6 +10,7 @@ export class VoteMetrics {
         vote,
         timeOfVote,
         isRequired,
+        reviewerAddedTime,
       };
     });
   }
