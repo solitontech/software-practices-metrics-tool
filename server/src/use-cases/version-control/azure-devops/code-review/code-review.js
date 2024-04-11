@@ -83,14 +83,18 @@ export class CodeReview {
         const identityIndex = addedReviewer.$value;
         const reviewerIdentity = thread.identities[identityIndex];
 
-        reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
+        if (!reviewersAddedTime[reviewerIdentity.id]) {
+          reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
+        }
       }
 
       if (policyAddedReviewers) {
         policyAddedReviewers.$value.match(/\d+/g).forEach((identityIndex) => {
           const reviewerIdentity = thread.identities[identityIndex];
 
-          reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
+          if (!reviewersAddedTime[reviewerIdentity.id]) {
+            reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
+          }
         });
       }
     });
