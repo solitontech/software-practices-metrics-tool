@@ -101,7 +101,7 @@ describe("TimeMetrics~getFirstReviewResponseTime - method to get the first revie
     ];
 
     const result = TimeMetrics.getFirstReviewResponseTime(votesHistoryTimeline);
-    const expectedFirstReviewResponseTime = 4 * 24 * 60 * 60;
+    const expectedFirstReviewResponseTime = 3 * 24 * 60 * 60;
 
     expect(result).toBe(expectedFirstReviewResponseTime);
   });
@@ -1451,7 +1451,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
       selectedReviewers,
     );
 
-    const expectedApprovalTime = 4 * 24 * 60 * 60;
+    const expectedApprovalTime = 3 * 24 * 60 * 60;
 
     expect(result).toBe(expectedApprovalTime);
   });

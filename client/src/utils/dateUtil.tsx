@@ -1,5 +1,5 @@
 import durationFormat from "humanize-duration";
-import { DateTime } from "luxon";
+import { DateTime, Interval } from "luxon";
 
 import {
   NOT_AVAILABLE,
@@ -56,12 +56,56 @@ export const getTimeInSeconds = (endDate: string | null, startDate: string | nul
     return null;
   }
 
-  const differenceInMilliseconds = new Date(endDate).getTime() - new Date(startDate).getTime();
-  const milliSecondsInSecond = 1000;
+  const oneSecondInMilliseconds = 1000;
 
-  const timeInSeconds = differenceInMilliseconds / milliSecondsInSecond;
+  let start = DateTime.fromISO(startDate);
+  let end = DateTime.fromISO(endDate);
+  let differenceInMilliseconds = getStartEndDateFloorDifference(start, end);
+
+  // reset start date to the next day and end date to the previous day
+  start = start.plus({ days: 1 }).startOf("day");
+  end = end.minus({ days: 1 }).endOf("day");
+
+  differenceInMilliseconds += getDifferenceFromStartToEndDate(start, end);
+
+  const timeInSeconds = differenceInMilliseconds / oneSecondInMilliseconds;
 
   return Math.round(timeInSeconds);
+};
+
+const getStartEndDateFloorDifference = (start: DateTime, end: DateTime) => {
+  let differenceInMilliseconds = 0;
+
+  if (start.hasSame(end, "day")) {
+    differenceInMilliseconds += Interval.fromDateTimes(start, end).length("milliseconds");
+  } else {
+    differenceInMilliseconds += Interval.fromDateTimes(start, start.endOf("day")).length("milliseconds");
+    differenceInMilliseconds += Interval.fromDateTimes(end.startOf("day"), end).length("milliseconds");
+  }
+
+  return differenceInMilliseconds;
+};
+
+const getDifferenceFromStartToEndDate = (start: DateTime, end: DateTime) => {
+  let differenceInMilliseconds = 0;
+
+  while (start < end) {
+    if (isBusinessDay(start)) {
+      differenceInMilliseconds += Interval.fromDateTimes(start, start.endOf("day")).length("milliseconds");
+    }
+    start = start.plus({ days: 1 }).startOf("day");
+  }
+
+  return differenceInMilliseconds;
+};
+
+const isBusinessDay = (date: DateTime) => {
+  const saturday = 6;
+  const sunday = 7;
+
+  const day = date.weekday;
+
+  return day !== saturday && day !== sunday;
 };
 
 export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | null) => {

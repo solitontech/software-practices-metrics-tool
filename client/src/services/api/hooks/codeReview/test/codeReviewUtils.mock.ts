@@ -1441,7 +1441,7 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
       errorCount: 1,
       pullRequests: [
         {
-          approvalTimeInSeconds: 816219,
+          approvalTimeInSeconds: 643419,
           authorId: "9e1313a9-2b7c-6556-b441-d1eabfed5d43",
           closedDate: "2024-02-14T11:04:06.3046376Z",
           comments: {
@@ -1451,7 +1451,7 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
           },
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
-          firstReviewResponseTimeInSeconds: 691439,
+          firstReviewResponseTimeInSeconds: 518639,
           id: 2635,
           mergeTimeInSeconds: 864333,
           reviewerComments: [
@@ -1736,7 +1736,7 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
       errorCount: 1,
       pullRequests: [
         {
-          approvalTimeInSeconds: 816219,
+          approvalTimeInSeconds: 643419,
           authorId: "9e1313a9-2b7c-6556-b441-d1eabfed5d43",
           closedDate: "2024-02-14T11:04:06.3046376Z",
           comments: {
@@ -1746,7 +1746,7 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
           },
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
-          firstReviewResponseTimeInSeconds: 691439,
+          firstReviewResponseTimeInSeconds: 518639,
           id: 2635,
           mergeTimeInSeconds: 864333,
           reviewerComments: [
