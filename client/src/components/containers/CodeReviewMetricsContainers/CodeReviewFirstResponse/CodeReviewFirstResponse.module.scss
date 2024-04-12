@@ -1,0 +1,18 @@
+@import "src/styles/index.scss";
+
+.firstReviewResponseTimeContainer {
+  @include flex-align-center;
+  @include flex-justify-space-between;
+
+  width: 100%;
+}
+
+.firstReviewResponseTime {
+  width: 90%;
+}
+
+.timelineIconColor {
+  color: $app-quaternary-text-color;
+  cursor: pointer;
+  font-size: $icon-size-xl;
+}

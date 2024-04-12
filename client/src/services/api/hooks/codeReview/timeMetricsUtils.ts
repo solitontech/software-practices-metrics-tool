@@ -1,4 +1,5 @@
 import { VOTES } from "src/constants/codeReviewMetrics.constants";
+import { getTimeInSeconds } from "src/utils/dateUtil";
 
 import { IFetchedPullRequestVotesTimeline } from "./codeReviewTypes";
 
@@ -11,7 +12,7 @@ export class TimeMetrics {
     const [firstVote] = votesHistoryTimeline;
     const { timeOfVote, reviewerAddedTime } = firstVote;
 
-    return timeOfVote && reviewerAddedTime ? this.#getTimeInSeconds(timeOfVote, reviewerAddedTime) : null;
+    return timeOfVote && reviewerAddedTime ? getTimeInSeconds(timeOfVote, reviewerAddedTime) : null;
   }
 
   static getPullRequestApprovalTime(
@@ -36,7 +37,7 @@ export class TimeMetrics {
 
     const approvalTime = this.#getLatestReviewerApprovalTime(votesHistoryTimeline);
 
-    return approvalTime ? this.#getTimeInSeconds(approvalTime, creationDate) : null;
+    return approvalTime ? getTimeInSeconds(approvalTime, creationDate) : null;
   }
 
   static #getApprovalTimeForSelectedReviewers(
@@ -50,7 +51,7 @@ export class TimeMetrics {
     });
 
     return latestApprovedReviewer?.timeOfVote
-      ? this.#getTimeInSeconds(latestApprovedReviewer.timeOfVote, creationDate)
+      ? getTimeInSeconds(latestApprovedReviewer.timeOfVote, creationDate)
       : null;
   }
 
@@ -82,15 +83,6 @@ export class TimeMetrics {
     });
 
     return reviewer ? reviewer.timeOfVote : null;
-  }
-
-  static #getTimeInSeconds(endDate: string, startDate: string): number | null {
-    const differenceInMilliseconds = new Date(endDate).getTime() - new Date(startDate).getTime();
-    const milliSecondsInSecond = 1000;
-
-    const timeInSeconds = differenceInMilliseconds / milliSecondsInSecond;
-
-    return Math.round(timeInSeconds);
   }
 
   static #isReviewerApproved({ vote }: IFetchedPullRequestVotesTimeline) {

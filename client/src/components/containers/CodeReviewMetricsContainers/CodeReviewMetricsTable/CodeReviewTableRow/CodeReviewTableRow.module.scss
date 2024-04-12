@@ -59,23 +59,6 @@
   gap: $spacing-xs;
 }
 
-.firstReviewResponseTimeContainer {
-  @include flex-align-center;
-  @include flex-justify-space-between;
-
-  width: 100%;
-}
-
-.firstReviewResponseTime {
-  width: 90%;
-}
-
-.timelineIconColor {
-  color: $app-quaternary-text-color;
-  cursor: pointer;
-  font-size: $icon-size-xl;
-}
-
 .active {
   @include chip-active;
 }
@@ -86,26 +69,4 @@
 
 .abandoned {
   @include chip-abandoned;
-}
-
-.tableContainer {
-  @include table-container;
-}
-
-.table {
-  @include table;
-}
-
-.tableHead {
-  @include table-head;
-}
-
-.tableHeaderCell {
-  @include table-header-cell;
-
-  text-align: left;
-}
-
-.noDataMessage {
-  @include table-no-data-message;
 }

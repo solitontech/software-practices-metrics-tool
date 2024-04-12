@@ -308,6 +308,10 @@ paths:
                               isRequired:
                                 type: boolean
                                 description: Indicates if the voted reviewer is required
+                              reviewerAddedTime:
+                                type: string
+                                format: date-time
+                                description: Date and time when the reviewer was added
                         votesHistoryTimeline:
                           type: array
                           items:
@@ -329,6 +333,10 @@ paths:
                               isRequired:
                                 type: boolean
                                 description: Indicates if the voted reviewer is required
+                              reviewerAddedTime:
+                                type: string
+                                format: date-time
+                                description: Date and time when the reviewer was added
                         threads:
                           type: array
                           description: 'Array of thread objects'

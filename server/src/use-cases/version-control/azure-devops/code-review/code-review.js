@@ -69,6 +69,8 @@ export class CodeReview {
   }
 
   static #parseReviewersAddedTime(pullRequestThreads) {
+    const policyAddedReviewersProperty = 'CodeReviewRequiredReviewerExampleReviewerIdentities';
+    const reviewerAddedProperty = 'CodeReviewReviewersUpdatedAddedIdentity';
     const reviewersAddedTime = {};
 
     pullRequestThreads.forEach((thread) => {
@@ -76,11 +78,11 @@ export class CodeReview {
         return;
       }
 
-      const policyAddedReviewers = thread.properties['CodeReviewRequiredReviewerExampleReviewerIdentities'];
-      const addedReviewer = thread.properties['CodeReviewReviewersUpdatedAddedIdentity'];
+      const policyAddedReviewers = thread.properties[policyAddedReviewersProperty];
+      const reviewer = thread.properties[reviewerAddedProperty];
 
-      if (addedReviewer) {
-        const identityIndex = addedReviewer.$value;
+      if (reviewer) {
+        const identityIndex = reviewer.$value;
         const reviewerIdentity = thread.identities[identityIndex];
 
         if (!reviewersAddedTime[reviewerIdentity.id]) {
@@ -89,7 +91,9 @@ export class CodeReview {
       }
 
       if (policyAddedReviewers) {
-        policyAddedReviewers.$value.match(/\d+/g).forEach((identityIndex) => {
+        const reviewers = policyAddedReviewers.$value.match(/\d+/g);
+
+        reviewers.forEach((identityIndex) => {
           const reviewerIdentity = thread.identities[identityIndex];
 
           if (!reviewersAddedTime[reviewerIdentity.id]) {
