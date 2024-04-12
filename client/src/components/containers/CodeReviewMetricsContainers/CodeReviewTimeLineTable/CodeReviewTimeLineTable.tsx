@@ -38,7 +38,7 @@ export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTablePr
             timeLine.map((row) => {
               return (
                 <tr
-                  key={`${row.author} ${row.timeOfVote}`}
+                  key={`${row.author}-${row.timeOfVote}`}
                   className={styles.tableRow}
                   data-testid="code-review-metrics-timeline-table"
                 >

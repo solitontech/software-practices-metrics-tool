@@ -51,7 +51,11 @@ export const getHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
   return `${hours} hours`;
 });
 
-export const getTimeInSeconds = (endDate: string, startDate: string) => {
+export const getTimeInSeconds = (endDate: string | null, startDate: string | null) => {
+  if (!endDate || !startDate) {
+    return null;
+  }
+
   const differenceInMilliseconds = new Date(endDate).getTime() - new Date(startDate).getTime();
   const milliSecondsInSecond = 1000;
 
@@ -75,7 +79,11 @@ export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | 
   });
 });
 
-export const getTimeInDays = (timeInSeconds: number, time: string) => {
+export const getTimeInDays = (timeInSeconds: number | null, time: string) => {
+  if (!timeInSeconds) {
+    return NOT_AVAILABLE;
+  }
+
   const hours = timeInSeconds / SECONDS_IN_ONE_HOUR;
 
   if (hours > HOURS_IN_A_DAY) {

@@ -21,9 +21,7 @@ export class TimeMetrics {
     votesHistoryTimeline: IFetchedPullRequestVotesTimeline[],
     selectedReviewers: Map<string, boolean>,
   ) {
-    const isReviewersSelected = selectedReviewers.size > 0;
-
-    if (isReviewersSelected) {
+    if (selectedReviewers.size) {
       return this.#getApprovalTimeForSelectedReviewers(creationDate, votesHistoryTimeline);
     }
 

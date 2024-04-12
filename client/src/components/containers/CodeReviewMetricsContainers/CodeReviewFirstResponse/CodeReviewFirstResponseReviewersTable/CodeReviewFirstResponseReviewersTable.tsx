@@ -1,4 +1,3 @@
-import { NOT_AVAILABLE } from "src/constants/constants";
 import { IFetchedPullRequestVotesTimeline } from "src/services/api/api";
 import { getFormattedDateWithTime, getTimeFromSeconds, getTimeInDays, getTimeInSeconds } from "src/utils/utils";
 
@@ -10,15 +9,15 @@ interface ICodeReviewFirstResponseTable {
 }
 
 export const CodeReviewFirstResponseReviewersTable = ({ votesHistoryTimeline }: ICodeReviewFirstResponseTable) => {
-  const reviewersFirstVotesArray = votesHistoryTimeline.reduce(
-    (acc: IFetchedPullRequestVotesTimeline[], vote: IFetchedPullRequestVotesTimeline) => {
-      if (!acc.find((v) => v.id === vote.id)) {
-        acc.push(vote);
-      }
-      return acc;
-    },
-    [],
-  );
+  const initialVoteTimeline: IFetchedPullRequestVotesTimeline[] = [];
+
+  const reviewersFirstVotesArray = votesHistoryTimeline.reduce((acc, vote) => {
+    if (!acc.find((accVote) => accVote.id === vote.id)) {
+      acc.push(vote);
+    }
+
+    return acc;
+  }, initialVoteTimeline);
 
   return (
     <div className={styles.tableContainer}>
@@ -42,15 +41,9 @@ export const CodeReviewFirstResponseReviewersTable = ({ votesHistoryTimeline }: 
         <tbody className={styles.tableBody}>
           {reviewersFirstVotesArray.length ? (
             reviewersFirstVotesArray.map((row) => {
-              const reviewerResponseTimeInSeconds =
-                row.timeOfVote && row.reviewerAddedTime
-                  ? getTimeInSeconds(row.timeOfVote, row.reviewerAddedTime)
-                  : null;
-
+              const reviewerResponseTimeInSeconds = getTimeInSeconds(row.timeOfVote, row.reviewerAddedTime);
               const time = getTimeFromSeconds(reviewerResponseTimeInSeconds);
-              const timeInDays = reviewerResponseTimeInSeconds
-                ? getTimeInDays(reviewerResponseTimeInSeconds, time)
-                : NOT_AVAILABLE;
+              const timeInDays = getTimeInDays(reviewerResponseTimeInSeconds, time);
 
               return (
                 <tr key={row.author} className={styles.tableRow}>

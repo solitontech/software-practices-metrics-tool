@@ -19,10 +19,6 @@ export const CodeReviewFirstResponse = ({
 }: ICodeReviewFirstResponse) => {
   const [isVotesTimeLineOpen, setIsVotesTimeLineOpen] = useState(false);
 
-  const showTimeLineTable = () => {
-    setIsVotesTimeLineOpen(true);
-  };
-
   return (
     <React.Fragment>
       <div className={styles.firstReviewResponseTimeContainer}>
@@ -30,7 +26,13 @@ export const CodeReviewFirstResponse = ({
           <CodeReviewDisplayHoursToDays timeInSeconds={firstReviewResponseTimeInSeconds} />
         </div>
 
-        <img src={dataInfoAlert} className={styles.timelineIconColor} onClick={showTimeLineTable} />
+        <img
+          src={dataInfoAlert}
+          className={styles.timelineIconColor}
+          onClick={() => {
+            setIsVotesTimeLineOpen(true);
+          }}
+        />
       </div>
 
       <DialogBox

@@ -78,14 +78,7 @@ export class CodeReviewMetricsUtils {
       const filteredThreads = this.#getFilteredThreads(pullRequest.threads, reviewersMap, pullRequest.authorId);
 
       return {
-        id: pullRequest.id,
-        title: pullRequest.title,
-        status: pullRequest.status,
-        createdBy: pullRequest.createdBy,
-        authorId: pullRequest.authorId,
-        creationDate: pullRequest.creationDate,
-        closedDate: pullRequest.closedDate,
-        tags: pullRequest.tags,
+        ...pullRequest,
         votes,
         votesHistory,
         votesTimeline: filteredVotesTimeline,
@@ -99,8 +92,6 @@ export class CodeReviewMetricsUtils {
           filteredVotesHistoryTimeline,
           reviewersMap,
         ),
-        mergeTimeInSeconds: pullRequest.mergeTimeInSeconds,
-        url: pullRequest.url,
       };
     });
 
