@@ -77,8 +77,11 @@ export class CodeReviewMetricsUtils {
 
       const filteredThreads = this.#getFilteredThreads(pullRequest.threads, reviewersMap, pullRequest.authorId);
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { threads, ...rest } = pullRequest;
+
       return {
-        ...pullRequest,
+        ...rest,
         votes,
         votesHistory,
         votesTimeline: filteredVotesTimeline,
