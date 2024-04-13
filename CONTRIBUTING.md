@@ -36,13 +36,13 @@ involved. The community looks forward to your contributions. 🎉
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the
-[Software Practices Metrics Tool Code of Conduct](blob/main/CODE_OF_CONDUCT.md).
+[Software Practices Metrics Tool Code of Conduct](CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable
 behavior to <sathish.thangavel@solitontech.com>.
 
 ## I Have a Question
 
-Before you ask a question, it is best to search for existing [Issues](/issues)
+Before you ask a question, it is best to search for existing [Issues](https://github.com/solitontech/software-practices-metrics-tool/issues)
 that might help you. In case you have found a suitable issue and still need
 clarification, you can write your question in this issue.
 It is also advisable to search the internet for answers first.
@@ -50,7 +50,7 @@ It is also advisable to search the internet for answers first.
 If you then still feel the need to ask a question and need clarification, we
 recommend the following:
 
-- Open an [Issue](/issues/new).
+- Open an [Issue](https://github.com/solitontech/software-practices-metrics-tool/issues/new).
 - Provide as much context as you can about what you're running into.
 - Provide project and platform versions (nodejs, npm, etc), depending on what seems
   relevant.
@@ -82,7 +82,7 @@ to help us fix any potential bug as fast as possible.
   incompatible environment components/versions or configs.
 - To see if other users have experienced (and potentially already solved) the
   same issue you are having, check if there is not already a bug report existing
-  for your bug or error in the [bug tracker](issues?q=label%3Abug).
+  for your bug or error in the [bug tracker](https://github.com/solitontech/software-practices-metrics-tool/issues?q=label%3Abug).
 - Also make sure to search the internet (including Stack Overflow) to see if
   users outside of the GitHub community have discussed the issue.
 - Collect information about the bug:
@@ -104,7 +104,7 @@ to help us fix any potential bug as fast as possible.
 We use GitHub issues to track bugs and errors. If you run into an issue with the
 project:
 
-- Open an [Issue](/issues/new). (Since we can't be sure at this point whether it
+- Open an [Issue](https://github.com/solitontech/software-practices-metrics-tool/issues/new). (Since we can't be sure at this point whether it
   is a bug or not, we ask you not to talk about a bug yet and not to label the issue.)
 - Explain the behavior you would expect and the actual behavior.
 - Please provide as much context as possible and describe the _reproduction steps_
@@ -137,7 +137,7 @@ your suggestion and find related suggestions.
 #### Before Submitting an Enhancement
 
 - Make sure that you are using the latest version.
-- Perform a [search](/issues) to see if the enhancement has already been suggested.
+- Perform a [search](https://github.com/solitontech/software-practices-metrics-tool/issues) to see if the enhancement has already been suggested.
   If it has, add a comment to the existing issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's
   up to you to make a strong case to convince the project's developers of the
@@ -149,7 +149,7 @@ your suggestion and find related suggestions.
 
 #### How Do I Submit a Good Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [GitHub issues](/issues).
+Enhancement suggestions are tracked as [GitHub issues](https://github.com/solitontech/software-practices-metrics-tool/issues).
 
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many
@@ -174,13 +174,13 @@ aboard! Here's how you can get started:
 
 1. **Setup Your Development Environment:**
 
-   - Refer to the [README](blob/main/README.md) file to set up the project
+   - Refer to the [README](README.md) file to set up the project
      on your local machine. It contains detailed instructions on installing
      dependencies and running the project locally.
 
 2. **Select an Issue or Enhancement:**
 
-   - Browse through the [GitHub issues](/issues) to find tasks, issues, or
+   - Browse through the [GitHub issues](https://github.com/solitontech/software-practices-metrics-tool/issues) to find tasks, issues, or
      enhancements that interest you. Feel free to filter by labels such as
      "good first issue" or "help wanted" if you're looking for beginner-friendly
      tasks.
