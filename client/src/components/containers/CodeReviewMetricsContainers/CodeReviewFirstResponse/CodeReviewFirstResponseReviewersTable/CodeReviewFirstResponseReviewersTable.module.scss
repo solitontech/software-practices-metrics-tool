@@ -1,0 +1,35 @@
+@import "src/styles/index.scss";
+
+.tableContainer {
+  @include table-container;
+}
+
+.table {
+  @include table;
+}
+
+.tableHead {
+  @include table-head;
+}
+
+.tableHeaderCell {
+  @include table-header-cell;
+
+  text-align: left;
+}
+
+.tableRow:nth-child(odd) {
+  @include table-row-odd;
+}
+
+.tableRow:nth-child(even) {
+  @include table-row-even;
+}
+
+.tableCell {
+  @include table-cell;
+}
+
+.noDataMessage {
+  @include table-no-data-message;
+}

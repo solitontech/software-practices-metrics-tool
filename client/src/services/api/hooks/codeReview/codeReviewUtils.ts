@@ -1,11 +1,19 @@
+import { VOTES } from "src/constants/constants";
 import { IContextClientFilterSquad } from "src/context/context";
 
-import { IFetchedCodeReviewResponse } from "./codeReviewTypes";
+import {
+  IFetchedRawCodeReviewResponse,
+  IFetchedPullRequestVotesTimeline,
+  IFetchedCodeReviewResponse,
+  IFetchedRawPullRequestThreads,
+} from "./codeReviewTypes";
+import { CommentMetrics } from "./commentMetricsUtils";
+import { TimeMetrics } from "./timeMetricsUtils";
 
 export class CodeReviewMetricsUtils {
   static #getSquadsUserIdsMap(squads: IContextClientFilterSquad[]) {
     const developersMap = new Map();
-    const reviewersMap = new Map();
+    const reviewersMap = new Map<string, boolean>();
 
     squads.forEach(({ developers, reviewers }) => {
       developers.forEach(({ id, isSelected }) => {
@@ -24,10 +32,10 @@ export class CodeReviewMetricsUtils {
     return { developersMap, reviewersMap };
   }
 
-  static getFilteredPullRequests = (
-    data: Omit<IFetchedCodeReviewResponse, "filteredCount" | "count"> | undefined,
+  static getFilteredPullRequests(
+    data: Omit<IFetchedRawCodeReviewResponse, "filteredCount" | "count"> | undefined,
     filters: IContextClientFilterSquad[],
-  ) => {
+  ) {
     if (!data || !filters.length) {
       return data;
     }
@@ -45,5 +53,108 @@ export class CodeReviewMetricsUtils {
       pullRequests,
       errorCount: data.errorCount,
     };
-  };
+  }
+
+  static getFilteredPullRequestsByReviewers(
+    data: Omit<IFetchedRawCodeReviewResponse, "count" | "filteredCount"> | undefined,
+    filters: IContextClientFilterSquad[],
+  ): IFetchedCodeReviewResponse | undefined {
+    if (!data) {
+      return;
+    }
+
+    const { reviewersMap } = this.#getSquadsUserIdsMap(filters);
+
+    const pullRequests = data.pullRequests.map((pullRequest) => {
+      const filteredVotesTimeline = this.#filterVotesTimelineByReviewers(pullRequest.votesTimeline, reviewersMap);
+      const votes = this.#getPullRequestVotes(filteredVotesTimeline);
+
+      const filteredVotesHistoryTimeline = this.#filterVotesTimelineByReviewers(
+        pullRequest.votesHistoryTimeline,
+        reviewersMap,
+      );
+      const votesHistory = this.#getPullRequestVotes(filteredVotesHistoryTimeline);
+
+      const filteredThreads = this.#getFilteredThreads(pullRequest.threads, reviewersMap, pullRequest.authorId);
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { threads, ...rest } = pullRequest;
+
+      return {
+        ...rest,
+        votes,
+        votesHistory,
+        votesTimeline: filteredVotesTimeline,
+        votesHistoryTimeline: filteredVotesHistoryTimeline,
+        comments: CommentMetrics.getPullRequestComments(filteredThreads),
+        reviewerComments: CommentMetrics.getPullRequestReviewerComments(filteredThreads),
+        firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(filteredVotesHistoryTimeline),
+        approvalTimeInSeconds: TimeMetrics.getPullRequestApprovalTime(
+          pullRequest.creationDate,
+          filteredVotesTimeline,
+          filteredVotesHistoryTimeline,
+          reviewersMap,
+        ),
+        mergeTimeInSeconds: TimeMetrics.getPullRequestMergeTime(
+          pullRequest.status,
+          pullRequest.creationDate,
+          pullRequest.closedDate,
+        ),
+      };
+    });
+
+    return {
+      pullRequests,
+      errorCount: data.errorCount,
+    };
+  }
+
+  static #getFilteredThreads(
+    threads: IFetchedRawPullRequestThreads[],
+    reviewersMap: Map<string, boolean>,
+    authorId: string,
+  ) {
+    if (!reviewersMap.size) {
+      return threads;
+    }
+
+    const filteredThreads = threads.map((thread) => {
+      const comments = thread.comments.filter(
+        ({ authorId: reviewerId }) => reviewersMap.has(reviewerId) || authorId === reviewerId,
+      );
+
+      return {
+        comments,
+      };
+    });
+
+    return filteredThreads;
+  }
+
+  static #filterVotesTimelineByReviewers(
+    votesTimeline: IFetchedPullRequestVotesTimeline[],
+    reviewersMap: Map<string, boolean>,
+  ) {
+    if (!reviewersMap.size) {
+      return votesTimeline;
+    }
+
+    return votesTimeline.filter(({ id }) => reviewersMap.has(id));
+  }
+
+  static #getPullRequestVotes(votesCycle: IFetchedPullRequestVotesTimeline[]) {
+    const votesResults = {
+      [VOTES.APPROVED]: 0,
+      [VOTES.APPROVED_WITH_SUGGESTIONS]: 0,
+      [VOTES.WAIT_FOR_AUTHOR]: 0,
+      [VOTES.REJECTED]: 0,
+      [VOTES.NO_VOTE]: 0,
+    };
+
+    votesCycle.forEach(({ vote }) => {
+      votesResults[vote]++;
+    });
+
+    return votesResults;
+  }
 }

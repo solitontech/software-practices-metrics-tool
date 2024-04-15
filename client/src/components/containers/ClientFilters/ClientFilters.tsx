@@ -74,7 +74,9 @@ const MemberFilters = () => {
             </h4>
             <div className={styles.categoryContainer}>
               {category.map(({ key, label, members }) => {
-                const hasAllMembersSelected = Object.values(members).every(({ isSelected }) => isSelected);
+                const hasAllMembersSelected = members.length
+                  ? Object.values(members).every(({ isSelected }) => isSelected)
+                  : false;
 
                 return (
                   <div key={label} className={styles.memberContainer}>

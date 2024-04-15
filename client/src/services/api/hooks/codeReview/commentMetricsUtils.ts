@@ -1,8 +1,14 @@
+import {
+  IFetchedPullRequestReviewerComments,
+  IFetchedRawPullRequestComments,
+  IFetchedRawPullRequestThreads,
+} from "./codeReviewTypes";
+
 export class CommentMetrics {
   static #INITIAL_VALUE = 0;
 
-  static getPullRequestReviewerComments(threads) {
-    const reviewerComments = {};
+  static getPullRequestReviewerComments(threads: IFetchedRawPullRequestThreads[]) {
+    const reviewerComments: Record<string, IFetchedPullRequestReviewerComments> = {};
 
     threads.forEach(({ comments }) => {
       comments.forEach(({ authorId, authorName }) => {
@@ -19,10 +25,10 @@ export class CommentMetrics {
     return Object.values(reviewerComments);
   }
 
-  static getPullRequestComments(threads) {
+  static getPullRequestComments(threads: IFetchedRawPullRequestThreads[]) {
     const commentType = {
-      nit: 'nit',
-      major: 'major',
+      nit: "nit",
+      major: "major",
     };
 
     return {
@@ -32,19 +38,19 @@ export class CommentMetrics {
     };
   }
 
-  static #getTotalComments(threads) {
+  static #getTotalComments(threads: IFetchedRawPullRequestThreads[]) {
     return threads.reduce((total, { comments }) => {
       return total + comments.length;
     }, this.#INITIAL_VALUE);
   }
 
-  static #getKeyWordComments(threads, keyword) {
+  static #getKeyWordComments(threads: IFetchedRawPullRequestThreads[], keyword: string) {
     return threads.reduce((total, { comments }) => {
       return total + this.#getCommentsForThread(comments, keyword);
     }, this.#INITIAL_VALUE);
   }
 
-  static #getCommentsForThread(comments, keyword) {
+  static #getCommentsForThread(comments: IFetchedRawPullRequestComments[], keyword: string) {
     const INCREMENT = 1;
 
     return comments.reduce((total, { content }) => {
@@ -54,7 +60,7 @@ export class CommentMetrics {
     }, this.#INITIAL_VALUE);
   }
 
-  static #isCommentStartsWith(content, keyword) {
+  static #isCommentStartsWith(content: string, keyword: string) {
     return content.toLowerCase().startsWith(keyword.toLowerCase());
   }
 }

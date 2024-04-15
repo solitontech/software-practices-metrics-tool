@@ -1,6 +1,4 @@
-import { TimeMetrics } from './time-metrics/time-metrics.js';
 import { VoteMetrics } from './vote-metrics/vote-metrics.js';
-import { CommentMetrics } from './comment-metrics/comment-metrics.js';
 
 import { AzureDevopsURL } from '../helpers/helpers.js';
 
@@ -9,9 +7,6 @@ import { CODE_TO_VOTE } from './constants/constants.js';
 export class CodeReview {
   static getCodeReviewMetrics(rawPullRequests) {
     const pullRequests = this.#parsePullRequests(rawPullRequests).map((pullRequest) => {
-      const reviewers = Object.values(pullRequest.reviewers);
-      const isRequiredReviewers = this.#isRequiredReviewersAssigned(reviewers);
-
       return {
         id: pullRequest.id,
         title: `${pullRequest.id} - ${pullRequest.title}`,
@@ -20,16 +15,10 @@ export class CodeReview {
         authorId: pullRequest.authorId,
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate ?? null,
-        votes: VoteMetrics.getPullRequestVotes(reviewers),
         votesTimeline: VoteMetrics.getPullRequestVotesTimeline(pullRequest.reviewers, pullRequest.votesHistoryTimeline),
-        votesHistory: VoteMetrics.getPullRequestVotesHistory(pullRequest.votesHistoryTimeline),
         votesHistoryTimeline: pullRequest.votesHistoryTimeline,
-        comments: CommentMetrics.getPullRequestComments(pullRequest.threads),
-        reviewerComments: CommentMetrics.getPullRequestReviewerComments(pullRequest.threads),
+        threads: pullRequest.threads,
         tags: pullRequest.tags,
-        firstReviewResponseTimeInSeconds: TimeMetrics.getFirstReviewResponseTime(pullRequest),
-        approvalTimeInSeconds: isRequiredReviewers ? TimeMetrics.getPullRequestApprovalTime(pullRequest) : null,
-        mergeTimeInSeconds: TimeMetrics.getPullRequestMergeTime(pullRequest),
         url: AzureDevopsURL.getPullRequestURL(pullRequest.id),
       };
     });
@@ -42,6 +31,8 @@ export class CodeReview {
 
   static #parsePullRequests(pullRequests) {
     return pullRequests.map((pullRequest) => {
+      const reviewers = this.#parseReviewers(pullRequest.threads, pullRequest.reviewers, pullRequest.creationDate);
+
       return {
         id: pullRequest.pullRequestId,
         title: pullRequest.title,
@@ -50,29 +41,70 @@ export class CodeReview {
         authorId: pullRequest.createdBy.id,
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate,
-        reviewers: this.#parseReviewers(pullRequest.reviewers),
-        votesHistoryTimeline: this.#parseVotesTimeline(pullRequest.threads),
+        reviewers,
+        votesHistoryTimeline: this.#parseVotesTimeline(pullRequest.threads, reviewers, pullRequest.creationDate),
         threads: this.#parseThreads(pullRequest.threads),
         tags: this.#parseTags(pullRequest),
       };
     });
   }
 
-  static #parseReviewers(rawReviewers) {
+  static #parseReviewers(pullRequestThreads, rawReviewers, pullRequestCreationDate) {
     const reviewers = {};
+
+    const reviewersAddedTime = this.#parseReviewersAddedTime(pullRequestThreads);
 
     rawReviewers.forEach(({ id, displayName, vote, isRequired }) => {
       reviewers[id] = {
         author: displayName,
         vote: CODE_TO_VOTE.get(vote),
         isRequired: isRequired ?? false,
+        reviewerAddedTime: reviewersAddedTime[id] ?? pullRequestCreationDate,
       };
     });
 
     return reviewers;
   }
 
-  static #parseVotesTimeline(pullRequestThreads) {
+  static #parseReviewersAddedTime(pullRequestThreads) {
+    const policyAddedReviewersProperty = 'CodeReviewRequiredReviewerExampleReviewerIdentities';
+    const reviewerAddedProperty = 'CodeReviewReviewersUpdatedAddedIdentity';
+    const reviewersAddedTime = {};
+
+    pullRequestThreads.forEach((thread) => {
+      if (!thread.properties || !thread.identities) {
+        return;
+      }
+
+      const policyAddedReviewers = thread.properties[policyAddedReviewersProperty];
+      const reviewer = thread.properties[reviewerAddedProperty];
+
+      if (reviewer) {
+        const identityIndex = reviewer.$value;
+        const reviewerIdentity = thread.identities[identityIndex];
+
+        if (!reviewersAddedTime[reviewerIdentity.id]) {
+          reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
+        }
+      }
+
+      if (policyAddedReviewers) {
+        const reviewers = policyAddedReviewers.$value.match(/\d+/g);
+
+        reviewers.forEach((identityIndex) => {
+          const reviewerIdentity = thread.identities[identityIndex];
+
+          if (!reviewersAddedTime[reviewerIdentity.id]) {
+            reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
+          }
+        });
+      }
+    });
+
+    return reviewersAddedTime;
+  }
+
+  static #parseVotesTimeline(pullRequestThreads, reviewers, pullRequestCreationDate) {
     const voteResult = 'CodeReviewVoteResult';
     const votes = [];
 
@@ -91,6 +123,8 @@ export class CodeReview {
           id: firstComment.author.id,
           timeOfVote: thread.publishedDate,
           vote: CODE_TO_VOTE.get(voteValue),
+          isRequired: reviewers[firstComment.author.id]?.isRequired ?? false,
+          reviewerAddedTime: reviewers[firstComment.author.id]?.reviewerAddedTime ?? pullRequestCreationDate,
         });
       }
     });
@@ -132,9 +166,5 @@ export class CodeReview {
     }
 
     return pullRequest.labels.map(({ name }) => name);
-  }
-
-  static #isRequiredReviewersAssigned(reviewers) {
-    return reviewers.some((reviewer) => reviewer.isRequired);
   }
 }

@@ -1,9 +1,9 @@
 import { memo } from "react";
 
 import { NOT_AVAILABLE } from "src/constants/constants";
+import { getHoursMinutesFromSeconds, getDaysFromSeconds } from "src/utils/utils";
 
 import styles from "./CodeReviewDisplayHoursToDays.module.scss";
-import { CodeReviewDisplayHoursToDaysUtil } from "./codeReviewDisplayHoursToDaysUtils";
 
 interface ICodeReviewDisplayHoursToDaysProps {
   timeInSeconds: number | null;
@@ -14,8 +14,8 @@ export const CodeReviewDisplayHoursToDays = memo(({ timeInSeconds }: ICodeReview
     return <p>{NOT_AVAILABLE}</p>;
   }
 
-  const time = CodeReviewDisplayHoursToDaysUtil.getTimeFromSeconds(timeInSeconds);
-  const timeInDays = CodeReviewDisplayHoursToDaysUtil.getTimeInDays(timeInSeconds, time);
+  const time = getHoursMinutesFromSeconds(timeInSeconds);
+  const timeInDays = getDaysFromSeconds(timeInSeconds, time);
 
   return (
     <time className={styles.time} title={timeInDays}>

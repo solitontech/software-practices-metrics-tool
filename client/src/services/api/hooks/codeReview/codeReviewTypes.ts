@@ -1,3 +1,5 @@
+export type IFetchedPullRequestStatus = "active" | "completed" | "abandoned";
+
 export interface IFetchedPullRequestReviewerComments {
   reviewer: string;
   comments: number;
@@ -22,12 +24,39 @@ export interface IFetchedPullRequestVotesTimeline {
   author: string;
   vote: keyof IFetchedPullRequestVotes;
   timeOfVote: string | null;
+  isRequired: boolean;
+  reviewerAddedTime: string | null;
+}
+
+export interface IFetchedRawPullRequestThreads {
+  comments: IFetchedRawPullRequestComments[];
+}
+
+export interface IFetchedRawPullRequestComments {
+  content: string;
+  authorName: string;
+  authorId: string;
+}
+
+interface IFetchedRawCodeReviewPullRequest {
+  id: number;
+  title: string;
+  status: IFetchedPullRequestStatus;
+  createdBy: string;
+  authorId: string;
+  creationDate: string;
+  closedDate: string | null;
+  votesTimeline: IFetchedPullRequestVotesTimeline[];
+  votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
+  threads: IFetchedRawPullRequestThreads[];
+  tags: string[];
+  url: string;
 }
 
 export interface IFetchedCodeReviewPullRequest {
   id: number;
   title: string;
-  status: string;
+  status: IFetchedPullRequestStatus;
   createdBy: string;
   authorId: string;
   creationDate: string;
@@ -45,9 +74,14 @@ export interface IFetchedCodeReviewPullRequest {
   url: string;
 }
 
-export interface IFetchedCodeReviewResponse {
+export interface IFetchedRawCodeReviewResponse {
   count: number;
-  pullRequests: IFetchedCodeReviewPullRequest[];
+  pullRequests: IFetchedRawCodeReviewPullRequest[];
   errorCount: number;
   filteredCount: number;
+}
+
+export interface IFetchedCodeReviewResponse {
+  pullRequests: IFetchedCodeReviewPullRequest[];
+  errorCount: number;
 }
