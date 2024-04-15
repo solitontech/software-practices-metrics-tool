@@ -1,4 +1,4 @@
-import { NOT_AVAILABLE } from "src/constants/common.constants";
+import { NOT_AVAILABLE, SENTENCE_JOINER } from "src/constants/constants";
 import {
   IFetchedPullRequestComments,
   IFetchedPullRequestVotesTimeline,
@@ -17,10 +17,8 @@ export class CodeReviewCSVDownloaderUtils {
     }
 
     return votesTimeline
-      .map((vote) => {
-        return `${vote.author} (${vote.vote} - ${getFormattedDateWithTime(vote.timeOfVote)})`;
-      })
-      .join(", ");
+      .map((vote) => `${vote.author} (${vote.vote} - ${getFormattedDateWithTime(vote.timeOfVote)})`)
+      .join(SENTENCE_JOINER);
   }
 
   static getFormattedReviewerComments(reviewerComments: IFetchedPullRequestReviewerComments[]) {
@@ -28,6 +26,6 @@ export class CodeReviewCSVDownloaderUtils {
       return NOT_AVAILABLE;
     }
 
-    return reviewerComments.map((comment) => `${comment.reviewer}: ${comment.comments}`).join(", ");
+    return reviewerComments.map((comment) => `${comment.reviewer}: ${comment.comments}`).join(SENTENCE_JOINER);
   }
 }

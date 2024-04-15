@@ -3,7 +3,7 @@
 .headerContainer {
   @include flex-justify-space-between;
 
-  padding-bottom: 4px;
+  padding-bottom: $spacing-xs;
 }
 
 .header {

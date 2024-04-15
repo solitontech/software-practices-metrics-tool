@@ -1,5 +1,6 @@
 import { useCSVDownloader } from "react-papaparse";
 
+import { SENTENCE_JOINER } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 import { getFormattedDateWithTime } from "src/utils/utils";
 
@@ -25,7 +26,7 @@ export const CSVDownloader = ({ pullRequests }: ICodeReviewMetricsTableProps) =>
       "End Date": getFormattedDateWithTime(pullRequest.closedDate),
       Title: pullRequest.title,
       Url: pullRequest.url,
-      Tags: pullRequest.tags.join(", "),
+      Tags: pullRequest.tags.join(SENTENCE_JOINER),
       Author: pullRequest.createdBy,
       "Total Comments": pullRequest.comments.totalComments,
       "General Comments": CodeReviewCSVDownloaderUtils.getGeneralComments(pullRequest.comments),
