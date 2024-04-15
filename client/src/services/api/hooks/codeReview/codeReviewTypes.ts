@@ -3,7 +3,7 @@ export interface IFetchedPullRequestReviewerComments {
   comments: number;
 }
 
-interface IFetchedPullRequestComments {
+export interface IFetchedPullRequestComments {
   totalComments: number;
   numberOfNitComments: number;
   numberOfMajorComments: number;

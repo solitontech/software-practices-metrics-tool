@@ -4,42 +4,34 @@ import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
 import { getFormattedDateWithTime } from "src/utils/utils";
 
 import styles from "./CodeReviewCSVDownloader.module.scss";
+import { CodeReviewCSVDownloaderUtils } from "./CodeReviewCSVDownloaderUtils";
 import { CodeReviewDisplayHoursToDaysUtil } from "../../CodeReviewDisplayHoursToDays/codeReviewDisplayHoursToDaysUtils";
+
 interface ICodeReviewMetricsTableProps {
   pullRequests: IFetchedCodeReviewPullRequest[];
 }
 
 export const CSVDownloader = ({ pullRequests }: ICodeReviewMetricsTableProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { CSVDownloader, Type } = useCSVDownloader();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const { CSVDownloader } = useCSVDownloader();
 
   const csvData = pullRequests.map((pullRequest) => {
     return {
       "Start Date": getFormattedDateWithTime(pullRequest.creationDate),
       "End Date": getFormattedDateWithTime(pullRequest.closedDate),
       Title: pullRequest.title,
+      Url: pullRequest.url,
       Tags: pullRequest.tags.join(", "),
       Author: pullRequest.createdBy,
       "Total Comments": pullRequest.comments.totalComments,
-      "General Comments":
-        pullRequest.comments.totalComments -
-        pullRequest.comments.numberOfMajorComments -
-        pullRequest.comments.numberOfNitComments,
+      "General Comments": CodeReviewCSVDownloaderUtils.getGeneralComments(pullRequest.comments),
       "Major Comments": pullRequest.comments.numberOfMajorComments,
       "Nit Comments": pullRequest.comments.numberOfNitComments,
-      "Reviewer Comments": pullRequest.reviewerComments
-        .map((comment) => comment.reviewer + ": " + comment.comments)
-        .join(", "),
-      "Votes History Timeline": pullRequest.votesHistoryTimeline
-        .map((vote) => {
-          return `${vote.author} (${vote.vote} - ${getFormattedDateWithTime(vote.timeOfVote)})`;
-        })
-        .join(", "),
-      "Votes Timeline": pullRequest.votesTimeline
-        .map((vote) => {
-          return `${vote.author} (${vote.vote} ${getFormattedDateWithTime(vote.timeOfVote)})`;
-        })
-        .join(", "),
+      "Reviewer Comments": CodeReviewCSVDownloaderUtils.getFormattedReviewerComments(pullRequest.reviewerComments),
+      "Votes History Timeline": CodeReviewCSVDownloaderUtils.getFormattedVotesTimeline(
+        pullRequest.votesHistoryTimeline,
+      ),
+      "Votes Timeline": CodeReviewCSVDownloaderUtils.getFormattedVotesTimeline(pullRequest.votesTimeline),
       "First Review Response Time": CodeReviewDisplayHoursToDaysUtil.getTimeFromSeconds(
         pullRequest.firstReviewResponseTimeInSeconds,
       ),
@@ -51,7 +43,7 @@ export const CSVDownloader = ({ pullRequests }: ICodeReviewMetricsTableProps) =>
 
   return (
     <CSVDownloader
-      type={Type.Button}
+      type="button"
       filename={"code-review-metrics"}
       bom={true}
       className={styles.downloadButton}

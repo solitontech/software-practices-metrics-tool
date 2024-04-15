@@ -54,4 +54,5 @@ export type {
   IFetchedPullRequestVotesTimeline,
   IFetchedPullRequestVotes,
   IFetchedPullRequestReviewerComments,
+  IFetchedPullRequestComments,
 } from "./codeReviewTypes";
