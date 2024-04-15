@@ -41,10 +41,16 @@ export class ApiEndPoint {
   }
 
   static trunkBasedActiveBranches() {
-    const url = new URL(`${this.#trunkBasedDevelopmentURL}/activeBranches`);
+    const url = new URL(this.trunkBasedActiveBranchesUrlWithoutParameters());
 
     url.searchParams.append("paginationCursor", String(START_PAGINATION_CURSOR));
     url.searchParams.append("paginationSize", String(PAGINATION_LIMIT));
+
+    return url;
+  }
+
+  static trunkBasedActiveBranchesUrlWithoutParameters() {
+    const url = new URL(`${this.#trunkBasedDevelopmentURL}/activeBranches`);
 
     return url;
   }
