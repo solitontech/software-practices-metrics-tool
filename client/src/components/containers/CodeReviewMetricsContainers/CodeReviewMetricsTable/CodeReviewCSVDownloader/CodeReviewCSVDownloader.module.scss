@@ -3,10 +3,9 @@
 .downloadButton {
   background-color: $app-quaternary-background-color;
   border: 0;
-  border-radius: 2px;
+  border-radius: $spacing-xs;
   color: $app-secondary-text-color;
   cursor: pointer;
-  font-size: $font-size-xmd;
-  padding: $spacing-xs;
-  width: 100px;
+  font-size: $font-size-md;
+  padding: $spacing-xs $spacing-sm;
 }
