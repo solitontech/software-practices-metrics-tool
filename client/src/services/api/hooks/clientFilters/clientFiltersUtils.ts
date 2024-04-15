@@ -1,7 +1,12 @@
 import { IFetchedClientFilterResponse, IFetchedClientFilterSquadMember } from "./clientFiltersTypes";
 
 export class ClientFiltersUtils {
-  static #getUsers(usersRecord: Record<string, string>, isSelected: boolean): IFetchedClientFilterSquadMember[] {
+  static #getUsers(
+    usersRecord: Record<string, string> | undefined,
+    isSelected: boolean,
+  ): IFetchedClientFilterSquadMember[] {
+    if (!usersRecord) return [];
+
     return Object.entries(usersRecord).map(([id, name]) => {
       return {
         id,
