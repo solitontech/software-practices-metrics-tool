@@ -1,7 +1,6 @@
 import { DateTime } from "luxon";
 
 export const NOT_AVAILABLE = "-";
-export const SENTENCE_JOINER = ", ";
 export const BUG_REPORT_LINK = "https://github.com/solitontech/software-practices-metrics-tool/issues/new";
 
 export const HOURS_IN_A_DAY = 24;
