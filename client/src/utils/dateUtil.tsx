@@ -51,52 +51,35 @@ export const getHoursToDays = cacheWrapperForUnaryFunction((hours: number) => {
   return `${hours} hours`;
 });
 
-export const getTimeInSeconds = (endDate: string | null, startDate: string | null) => {
+export const getWorkingDaysTimeDifference = (endDate: string | null, startDate: string | null) => {
   if (!endDate || !startDate) {
     return null;
   }
 
-  const oneSecondInMilliseconds = 1000;
+  const start = DateTime.fromISO(startDate);
+  const end = DateTime.fromISO(endDate);
 
-  let start = DateTime.fromISO(startDate);
-  let end = DateTime.fromISO(endDate);
-  let differenceInMilliseconds = getStartEndDateFloorDifference(start, end);
+  const differenceInSeconds = getTimeDifferenceInSeconds(start, end);
+  const nonWorkingDays = getNumberOfNonWorkingDaysBetween(start, end);
 
-  // reset start date to the next day and end date to the previous day
-  start = start.plus({ days: 1 }).startOf("day");
-  end = end.minus({ days: 1 }).endOf("day");
+  const workingDaysTimeDifference = differenceInSeconds - nonWorkingDays * SECONDS_IN_ONE_HOUR * HOURS_IN_A_DAY;
 
-  differenceInMilliseconds += getDifferenceFromStartToEndDate(start, end);
-
-  const timeInSeconds = differenceInMilliseconds / oneSecondInMilliseconds;
-
-  return Math.round(timeInSeconds);
+  return Math.round(workingDaysTimeDifference);
 };
 
-const getStartEndDateFloorDifference = (start: DateTime, end: DateTime) => {
-  let differenceInMilliseconds = 0;
-
-  if (start.hasSame(end, "day")) {
-    differenceInMilliseconds += Interval.fromDateTimes(start, end).length("milliseconds");
-  } else {
-    differenceInMilliseconds += Interval.fromDateTimes(start, start.endOf("day")).length("milliseconds");
-    differenceInMilliseconds += Interval.fromDateTimes(end.startOf("day"), end).length("milliseconds");
-  }
-
-  return differenceInMilliseconds;
+const getTimeDifferenceInSeconds = (start: DateTime, end: DateTime) => {
+  return Interval.fromDateTimes(start, end).length("seconds");
 };
 
-const getDifferenceFromStartToEndDate = (start: DateTime, end: DateTime) => {
-  let differenceInMilliseconds = 0;
+const getNumberOfNonWorkingDaysBetween = (start: DateTime, end: DateTime) => {
+  let count = 0;
 
-  while (start < end) {
-    if (isBusinessDay(start)) {
-      differenceInMilliseconds += Interval.fromDateTimes(start, start.endOf("day")).length("milliseconds");
+  for (let i = start.plus({ days: 1 }); i < end; i = i.plus({ days: 1 })) {
+    if (!isBusinessDay(i)) {
+      count++;
     }
-    start = start.plus({ days: 1 }).startOf("day");
   }
-
-  return differenceInMilliseconds;
+  return count;
 };
 
 const isBusinessDay = (date: DateTime) => {

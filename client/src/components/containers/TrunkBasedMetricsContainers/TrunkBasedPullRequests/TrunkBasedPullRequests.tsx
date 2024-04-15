@@ -5,6 +5,7 @@ import { TrunkBasedPullRequestsTiles } from "src/components/containers/TrunkBase
 import { ErrorBoundary } from "src/components/reusables/ErrorBoundary/ErrorBoundary";
 import { LoadingSpinner } from "src/components/reusables/LoadingSpinner/LoadingSpinner";
 import { SearchBox } from "src/components/reusables/SearchBox/SearchBox";
+import { PULL_REQUEST_STATUS } from "src/constants/constants";
 import { usePullRequestsMergedToTrunk } from "src/services/api/api";
 
 import styles from "./TrunkBasedPullRequests.module.scss";
@@ -36,7 +37,7 @@ export const TrunkBasedPullRequests = ({ startDate, endDate }: ITrunkBasedPullRe
   }
 
   const filteredPullRequests = filterPullRequests(searchTerm, data.pullRequests);
-  const mergedPullRequests = data.pullRequests.filter(({ status }) => status === "completed");
+  const mergedPullRequests = data.pullRequests.filter(({ status }) => status === PULL_REQUEST_STATUS.COMPLETED);
 
   return (
     <ErrorBoundary>

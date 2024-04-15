@@ -1,7 +1,9 @@
-import { VOTES } from "src/constants/codeReviewMetrics.constants";
-import { getTimeInSeconds } from "src/utils/dateUtil";
+import { PULL_REQUEST_STATUS, VOTES } from "src/constants/constants";
+import { getWorkingDaysTimeDifference } from "src/utils/dateUtil";
 
 import { IFetchedPullRequestStatus, IFetchedPullRequestVotesTimeline } from "./codeReviewTypes";
+
+const { COMPLETED } = PULL_REQUEST_STATUS;
 
 export class TimeMetrics {
   static getFirstReviewResponseTime(votesHistoryTimeline: IFetchedPullRequestVotesTimeline[]): number | null {
@@ -12,7 +14,7 @@ export class TimeMetrics {
     const [firstVote] = votesHistoryTimeline;
     const { timeOfVote, reviewerAddedTime } = firstVote;
 
-    return timeOfVote && reviewerAddedTime ? getTimeInSeconds(timeOfVote, reviewerAddedTime) : null;
+    return timeOfVote && reviewerAddedTime ? getWorkingDaysTimeDifference(timeOfVote, reviewerAddedTime) : null;
   }
 
   static getPullRequestApprovalTime(
@@ -35,7 +37,7 @@ export class TimeMetrics {
 
     const approvalTime = this.#getLatestReviewerApprovalTime(votesHistoryTimeline);
 
-    return approvalTime ? getTimeInSeconds(approvalTime, creationDate) : null;
+    return approvalTime ? getWorkingDaysTimeDifference(approvalTime, creationDate) : null;
   }
 
   static getPullRequestMergeTime(
@@ -43,13 +45,11 @@ export class TimeMetrics {
     creationDate: string | null,
     closedDate: string | null,
   ) {
-    const completedStatus = "completed";
-
-    if (status !== completedStatus) {
+    if (status !== COMPLETED) {
       return null;
     }
 
-    return getTimeInSeconds(closedDate, creationDate);
+    return getWorkingDaysTimeDifference(closedDate, creationDate);
   }
 
   static #getApprovalTimeForSelectedReviewers(
@@ -63,7 +63,7 @@ export class TimeMetrics {
     });
 
     return latestApprovedReviewer?.timeOfVote
-      ? getTimeInSeconds(latestApprovedReviewer.timeOfVote, creationDate)
+      ? getWorkingDaysTimeDifference(latestApprovedReviewer.timeOfVote, creationDate)
       : null;
   }
 

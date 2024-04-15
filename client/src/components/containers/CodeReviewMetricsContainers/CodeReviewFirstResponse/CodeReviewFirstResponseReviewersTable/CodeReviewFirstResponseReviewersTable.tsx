@@ -3,7 +3,7 @@ import {
   getFormattedDateWithTime,
   getHoursMinutesFromSeconds,
   getDaysFromSeconds,
-  getTimeInSeconds,
+  getWorkingDaysTimeDifference,
 } from "src/utils/utils";
 
 import styles from "./CodeReviewFirstResponseReviewersTable.module.scss";
@@ -46,7 +46,7 @@ export const CodeReviewFirstResponseReviewersTable = ({ votesHistoryTimeline }: 
         <tbody className={styles.tableBody}>
           {reviewersFirstVotesArray.length ? (
             reviewersFirstVotesArray.map((row) => {
-              const reviewerResponseTimeInSeconds = getTimeInSeconds(row.timeOfVote, row.reviewerAddedTime);
+              const reviewerResponseTimeInSeconds = getWorkingDaysTimeDifference(row.timeOfVote, row.reviewerAddedTime);
               const time = getHoursMinutesFromSeconds(reviewerResponseTimeInSeconds);
               const timeInDays = getDaysFromSeconds(reviewerResponseTimeInSeconds, time);
 

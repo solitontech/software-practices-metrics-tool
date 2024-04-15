@@ -1,4 +1,4 @@
-import { VOTES } from "src/constants/codeReviewMetrics.constants";
+import { PULL_REQUEST_STATUS, VOTES } from "src/constants/constants";
 
 import { IFetchedPullRequestVotesTimeline } from "./codeReviewTypes";
 import { TimeMetrics } from "./timeMetricsUtils";
@@ -1506,11 +1506,13 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
 });
 
 describe("TimeMetrics~getPullRequestMergeTime - method to get merge time of the pull request", () => {
+  const { COMPLETED, ACTIVE, ABANDONED } = PULL_REQUEST_STATUS;
+
   it("should return the time difference between the creation time and the closed time", () => {
     const creationDate = "2022-01-01T00:00:00Z";
     const closedDate = "2022-01-01T12:00:00Z";
 
-    const result = TimeMetrics.getPullRequestMergeTime("completed", creationDate, closedDate);
+    const result = TimeMetrics.getPullRequestMergeTime(COMPLETED, creationDate, closedDate);
 
     const expectedMergeTime = 12 * 60 * 60;
 
@@ -1521,7 +1523,7 @@ describe("TimeMetrics~getPullRequestMergeTime - method to get merge time of the 
     const creationDate = "2022-01-01T00:00:00Z";
     const closedDate = "2022-01-05T00:00:00Z";
 
-    const result = TimeMetrics.getPullRequestMergeTime("completed", creationDate, closedDate);
+    const result = TimeMetrics.getPullRequestMergeTime(COMPLETED, creationDate, closedDate);
 
     const expectedMergeTime = 3 * 24 * 60 * 60;
 
@@ -1530,7 +1532,7 @@ describe("TimeMetrics~getPullRequestMergeTime - method to get merge time of the 
 
   it("should return null if status is not completed (active)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
-    const result = TimeMetrics.getPullRequestMergeTime("active", creationDate, null);
+    const result = TimeMetrics.getPullRequestMergeTime(ACTIVE, creationDate, null);
 
     expect(result).toBeNull();
   });
@@ -1539,7 +1541,7 @@ describe("TimeMetrics~getPullRequestMergeTime - method to get merge time of the 
     const creationDate = "2022-01-01T00:00:00Z";
     const closedDate = "2022-01-01T12:00:00Z";
 
-    const result = TimeMetrics.getPullRequestMergeTime("abandoned", creationDate, closedDate);
+    const result = TimeMetrics.getPullRequestMergeTime(ABANDONED, creationDate, closedDate);
 
     expect(result).toBeNull();
   });
