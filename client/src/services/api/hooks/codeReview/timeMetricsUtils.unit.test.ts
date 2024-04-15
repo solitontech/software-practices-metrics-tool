@@ -526,7 +526,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBeNull();
   });
 
-  it("should return the time difference between the creation date and the latest reviewer approval time (only required reviewers)", () => {
+  it("should return the time difference between the creation time and the latest reviewer approval time (only required reviewers)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -574,7 +574,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest reviewer approval time (reviewer voted - approved with suggestions) (only required reviewers)", () => {
+  it("should return the time difference between the creation time and the latest reviewer approval time (reviewer voted - approved with suggestions) (only required reviewers)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -622,7 +622,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest reviewer approval time (with non required reviewers)", () => {
+  it("should return the time difference between the creation time and the latest reviewer approval time (with non required reviewers)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -670,7 +670,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest reviewer approval time (reviewer voted - approved with suggestions) (with non required reviewers)", () => {
+  it("should return the time difference between the creation time and the latest reviewer approval time (reviewer voted - approved with suggestions) (with non required reviewers)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -718,7 +718,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest required reviewer approval time (reviewer voted - approved with suggestions)", () => {
+  it("should return the time difference between the creation time and the latest required reviewer approval time (reviewer voted - approved with suggestions)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -766,7 +766,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest required reviewer approval time (repeated approval vote of a reviewer)", () => {
+  it("should return the time difference between the creation time and the latest required reviewer approval time (repeated approval vote of a reviewer)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -822,7 +822,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest required reviewer approval time (more than 3 days difference)", () => {
+  it("should return the time difference between the creation time and the latest required reviewer approval time (more than 3 days difference)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -870,7 +870,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest non-required reviewer when required reviewer is not available in votes history timeline", () => {
+  it("should return the time difference between the creation time and the latest non-required reviewer when required reviewer is not available in votes history timeline", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -942,7 +942,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest non-required reviewer when required reviewer is not available in votes history timeline (reviewer voted - approved with suggestions)", () => {
+  it("should return the time difference between the creation time and the latest non-required reviewer when required reviewer is not available in votes history timeline (reviewer voted - approved with suggestions)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -1014,7 +1014,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest non-required reviewer when required reviewer (reviewer voted - approved) is not available in votes history timeline (latest approved vote in timeline - approved with suggestions)", () => {
+  it("should return the time difference between the creation time and the latest non-required reviewer when required reviewer (reviewer voted - approved) is not available in votes history timeline (latest approved vote in timeline - approved with suggestions)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -1171,7 +1171,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBeNull();
   });
 
-  it("should return time difference between creation date and latest reviewer approval time (reviewer voted -  approved with suggestions) even other selected reviewer not approved (with non required reviewers)", () => {
+  it("should return time difference between creation time and latest reviewer approval time (reviewer voted -  approved with suggestions) even other selected reviewer not approved (with non required reviewers)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
       {
@@ -1228,7 +1228,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return time difference between creation date and latest reviewer approval time both selected reviewers are approved (with non required reviewers)", () => {
+  it("should return time difference between creation time and latest reviewer approval time both selected reviewers are approved (with non required reviewers)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
       {
@@ -1285,7 +1285,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return time difference between creation date and latest reviewer approval time (reviewer voted -  approved with suggestions) even other selected reviewer not approved (only required reviewers)", () => {
+  it("should return time difference between creation time and latest reviewer approval time (reviewer voted -  approved with suggestions) even other selected reviewer not approved (only required reviewers)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
       {
@@ -1342,7 +1342,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return time difference between creation date and latest reviewer approval time both selected reviewers are approved (only required reviewers)", () => {
+  it("should return time difference between creation time and latest reviewer approval time both selected reviewers are approved (only required reviewers)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
       {
@@ -1399,7 +1399,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return time difference between creation date and latest reviewer approval time (time difference more than 3 days)", () => {
+  it("should return time difference between creation time and latest reviewer approval time (time difference more than 3 days)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
       {
@@ -1456,7 +1456,7 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     expect(result).toBe(expectedApprovalTime);
   });
 
-  it("should return the time difference between the creation date and the latest required reviewer approval time (no selected reviewers, so all required reviewers should approve)", () => {
+  it("should return the time difference between the creation time and the latest required reviewer approval time (no selected reviewers, so all required reviewers should approve)", () => {
     const creationDate = "2022-01-01T00:00:00Z";
 
     const reviewers: IFetchedPullRequestVotesTimeline[] = [
@@ -1502,5 +1502,45 @@ describe("TimeMetrics~getPullRequestApprovalTime - method to get approval time o
     const expectedApprovalTime = 2 * 60 * 60;
 
     expect(result).toBe(expectedApprovalTime);
+  });
+});
+
+describe("TimeMetrics~getPullRequestMergeTime - method to get merge time of the pull request", () => {
+  it("should return the time difference between the creation time and the closed time", () => {
+    const creationDate = "2022-01-01T00:00:00Z";
+    const closedDate = "2022-01-01T12:00:00Z";
+
+    const result = TimeMetrics.getPullRequestMergeTime("completed", creationDate, closedDate);
+
+    const expectedMergeTime = 12 * 60 * 60;
+
+    expect(result).toBe(expectedMergeTime);
+  });
+
+  it("should return the time difference between the creation time and the closed time (more than 3 days difference)", () => {
+    const creationDate = "2022-01-01T00:00:00Z";
+    const closedDate = "2022-01-05T00:00:00Z";
+
+    const result = TimeMetrics.getPullRequestMergeTime("completed", creationDate, closedDate);
+
+    const expectedMergeTime = 3 * 24 * 60 * 60;
+
+    expect(result).toBe(expectedMergeTime);
+  });
+
+  it("should return null if status is not completed (active)", () => {
+    const creationDate = "2022-01-01T00:00:00Z";
+    const result = TimeMetrics.getPullRequestMergeTime("active", creationDate, null);
+
+    expect(result).toBeNull();
+  });
+
+  it("should return null if status is not completed (abandoned)", () => {
+    const creationDate = "2022-01-01T00:00:00Z";
+    const closedDate = "2022-01-01T12:00:00Z";
+
+    const result = TimeMetrics.getPullRequestMergeTime("abandoned", creationDate, closedDate);
+
+    expect(result).toBeNull();
   });
 });

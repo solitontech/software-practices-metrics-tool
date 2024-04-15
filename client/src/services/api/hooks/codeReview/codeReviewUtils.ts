@@ -95,6 +95,11 @@ export class CodeReviewMetricsUtils {
           filteredVotesHistoryTimeline,
           reviewersMap,
         ),
+        mergeTimeInSeconds: TimeMetrics.getPullRequestMergeTime(
+          pullRequest.status,
+          pullRequest.creationDate,
+          pullRequest.closedDate,
+        ),
       };
     });
 

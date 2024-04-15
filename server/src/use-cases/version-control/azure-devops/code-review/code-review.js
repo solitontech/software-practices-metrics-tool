@@ -1,4 +1,3 @@
-import { TimeMetrics } from './time-metrics/time-metrics.js';
 import { VoteMetrics } from './vote-metrics/vote-metrics.js';
 
 import { AzureDevopsURL } from '../helpers/helpers.js';
@@ -20,7 +19,6 @@ export class CodeReview {
         votesHistoryTimeline: pullRequest.votesHistoryTimeline,
         threads: pullRequest.threads,
         tags: pullRequest.tags,
-        mergeTimeInSeconds: TimeMetrics.getPullRequestMergeTime(pullRequest),
         url: AzureDevopsURL.getPullRequestURL(pullRequest.id),
       };
     });

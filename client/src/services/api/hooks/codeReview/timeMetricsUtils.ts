@@ -1,7 +1,7 @@
 import { VOTES } from "src/constants/codeReviewMetrics.constants";
 import { getTimeInSeconds } from "src/utils/dateUtil";
 
-import { IFetchedPullRequestVotesTimeline } from "./codeReviewTypes";
+import { IFetchedPullRequestStatus, IFetchedPullRequestVotesTimeline } from "./codeReviewTypes";
 
 export class TimeMetrics {
   static getFirstReviewResponseTime(votesHistoryTimeline: IFetchedPullRequestVotesTimeline[]): number | null {
@@ -36,6 +36,20 @@ export class TimeMetrics {
     const approvalTime = this.#getLatestReviewerApprovalTime(votesHistoryTimeline);
 
     return approvalTime ? getTimeInSeconds(approvalTime, creationDate) : null;
+  }
+
+  static getPullRequestMergeTime(
+    status: IFetchedPullRequestStatus,
+    creationDate: string | null,
+    closedDate: string | null,
+  ) {
+    const completedStatus = "completed";
+
+    if (status !== completedStatus) {
+      return null;
+    }
+
+    return getTimeInSeconds(closedDate, creationDate);
   }
 
   static #getApprovalTimeForSelectedReviewers(

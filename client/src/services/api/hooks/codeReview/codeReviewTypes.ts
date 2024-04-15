@@ -1,3 +1,5 @@
+export type IFetchedPullRequestStatus = "active" | "completed" | "abandoned";
+
 export interface IFetchedPullRequestReviewerComments {
   reviewer: string;
   comments: number;
@@ -39,7 +41,7 @@ export interface IFetchedRawPullRequestComments {
 interface IFetchedRawCodeReviewPullRequest {
   id: number;
   title: string;
-  status: string;
+  status: IFetchedPullRequestStatus;
   createdBy: string;
   authorId: string;
   creationDate: string;
@@ -48,14 +50,13 @@ interface IFetchedRawCodeReviewPullRequest {
   votesHistoryTimeline: IFetchedPullRequestVotesTimeline[];
   threads: IFetchedRawPullRequestThreads[];
   tags: string[];
-  mergeTimeInSeconds: number | null;
   url: string;
 }
 
 export interface IFetchedCodeReviewPullRequest {
   id: number;
   title: string;
-  status: string;
+  status: IFetchedPullRequestStatus;
   createdBy: string;
   authorId: string;
   creationDate: string;

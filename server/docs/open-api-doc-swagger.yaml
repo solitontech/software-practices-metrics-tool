@@ -365,9 +365,6 @@ paths:
                           items:
                             type: string
                             description: Tags associated with the pull request
-                        mergeTimeInSeconds:
-                          type: integer
-                          description: Time taken for the pull request merge in seconds
                         url:
                           type: string
                           format: url

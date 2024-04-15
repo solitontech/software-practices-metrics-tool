@@ -40,7 +40,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -92,7 +91,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -149,7 +147,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           status: "completed",
           tags: [],
           threads: [
@@ -201,7 +198,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           status: "completed",
           tags: [],
           threads: [
@@ -289,7 +285,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -341,7 +336,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -398,7 +392,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           status: "completed",
           tags: [],
           threads: [
@@ -486,7 +479,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -538,7 +530,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -595,7 +586,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           status: "completed",
           tags: [],
           threads: [
@@ -683,7 +673,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -735,7 +724,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -827,7 +815,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -879,7 +866,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -936,7 +922,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           status: "completed",
           tags: [],
           threads: [
@@ -1024,7 +1009,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -1076,7 +1060,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -1168,7 +1151,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -1220,7 +1202,6 @@ export const FILTERED_PULL_REQUESTS_MOCK = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -1315,7 +1296,6 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -1449,11 +1429,11 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
             numberOfNitComments: 1,
             totalComments: 6,
           },
+          mergeTimeInSeconds: 691533,
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           firstReviewResponseTimeInSeconds: 518639,
           id: 2635,
-          mergeTimeInSeconds: 864333,
           reviewerComments: [
             {
               comments: 2,
@@ -1610,7 +1590,6 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -1748,7 +1727,7 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
           creationDate: "2024-02-04T10:58:33.4719437Z",
           firstReviewResponseTimeInSeconds: 518639,
           id: 2635,
-          mergeTimeInSeconds: 864333,
+          mergeTimeInSeconds: 691533,
           reviewerComments: [
             {
               comments: 2,
@@ -1877,7 +1856,6 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
           createdBy: "Developer",
           creationDate: "2024-02-04T10:58:33.4719437Z",
           id: 2635,
-          mergeTimeInSeconds: 864333,
           threads: [
             {
               comments: [
@@ -1952,7 +1930,7 @@ export const FILTER_BY_REVIEWERS_MOCKS = {
           creationDate: "2024-02-04T10:58:33.4719437Z",
           firstReviewResponseTimeInSeconds: null,
           id: 2635,
-          mergeTimeInSeconds: 864333,
+          mergeTimeInSeconds: 691533,
           reviewerComments: [
             {
               comments: 1,

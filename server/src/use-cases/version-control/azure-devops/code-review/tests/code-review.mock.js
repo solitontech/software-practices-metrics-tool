@@ -131,7 +131,6 @@ export const CODE_REVIEW_METRICS = {
       createdBy: 'Developer',
       creationDate: '2024-02-04T10:58:33.4719437Z',
       id: 2626,
-      mergeTimeInSeconds: 691533,
       threads: [
         {
           comments: [
@@ -216,7 +215,6 @@ export const CODE_REVIEW_WITHOUT_CLOSED_DATE = {
       createdBy: 'Developer',
       creationDate: '2024-02-12T10:58:33.4719437Z',
       id: 2620,
-      mergeTimeInSeconds: null,
       threads: [],
       status: 'active',
       tags: [],
@@ -253,7 +251,6 @@ export const CODE_REVIEW_NO_VOTE_THREADS = {
       createdBy: 'Developer',
       creationDate: '2024-02-12T10:58:33.4719437Z',
       id: 2620,
-      mergeTimeInSeconds: 333,
       threads: [],
       status: 'completed',
       tags: [],
@@ -390,7 +387,6 @@ export const CODE_REVIEW_METRICS_THREADS = {
       createdBy: 'Developer',
       creationDate: '2024-02-04T10:58:33.4719437Z',
       id: 2626,
-      mergeTimeInSeconds: 691533,
       threads: [
         {
           comments: [
@@ -475,7 +471,6 @@ export const CODE_REVIEW_WITHOUT_TAGS = {
       createdBy: 'Developer',
       creationDate: '2024-02-12T10:58:33.4719437Z',
       id: 2620,
-      mergeTimeInSeconds: null,
       threads: [],
       status: 'active',
       tags: [],

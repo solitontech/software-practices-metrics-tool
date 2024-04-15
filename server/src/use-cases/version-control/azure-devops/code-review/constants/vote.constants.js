@@ -1,4 +1,4 @@
-export const VOTE = Object.freeze({
+const VOTE = Object.freeze({
   APPROVED: 'approved',
   APPROVED_WITH_SUGGESTIONS: 'approvedWithSuggestions',
   NO_VOTE: 'noVote',
