@@ -15,6 +15,10 @@ export const CSVDownloader = ({ pullRequests }: ICodeReviewMetricsTableProps) =>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const { CSVDownloader } = useCSVDownloader();
 
+  const buttonType = "button";
+  const fileName = "code-review-metrics";
+  const delimiter = ",";
+
   const csvData = pullRequests.map((pullRequest) => {
     return {
       "Start Date": getFormattedDateWithTime(pullRequest.creationDate),
@@ -43,12 +47,12 @@ export const CSVDownloader = ({ pullRequests }: ICodeReviewMetricsTableProps) =>
 
   return (
     <CSVDownloader
-      type="button"
-      filename={"code-review-metrics"}
+      type={buttonType}
+      filename={fileName}
       bom={true}
       className={styles.downloadButton}
       config={{
-        delimiter: ",",
+        delimiter,
       }}
       data={csvData}
     >
