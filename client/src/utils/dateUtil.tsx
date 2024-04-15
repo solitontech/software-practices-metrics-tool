@@ -108,7 +108,7 @@ const isBusinessDay = (date: DateTime) => {
   return day !== saturday && day !== sunday;
 };
 
-export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | null) => {
+export const getHoursMinutesFromSeconds = cacheWrapperForUnaryFunction((value: number | null) => {
   if (!value) {
     return NOT_AVAILABLE;
   }
@@ -123,7 +123,7 @@ export const getTimeFromSeconds = cacheWrapperForUnaryFunction((value: number | 
   });
 });
 
-export const getTimeInDays = (timeInSeconds: number | null, time: string) => {
+export const getDaysFromSeconds = (timeInSeconds: number | null, time: string) => {
   if (!timeInSeconds) {
     return NOT_AVAILABLE;
   }

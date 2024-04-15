@@ -26,13 +26,7 @@ export const CodeReviewFirstResponse = ({
           <CodeReviewDisplayHoursToDays timeInSeconds={firstReviewResponseTimeInSeconds} />
         </div>
 
-        <img
-          src={dataInfoAlert}
-          className={styles.timelineIconColor}
-          onClick={() => {
-            setIsVotesTimeLineOpen(true);
-          }}
-        />
+        <img src={dataInfoAlert} className={styles.timelineIconColor} onClick={() => setIsVotesTimeLineOpen(true)} />
       </div>
 
       <DialogBox

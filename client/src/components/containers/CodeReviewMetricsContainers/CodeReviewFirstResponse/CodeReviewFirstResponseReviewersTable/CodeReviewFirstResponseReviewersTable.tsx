@@ -1,5 +1,10 @@
 import { IFetchedPullRequestVotesTimeline } from "src/services/api/api";
-import { getFormattedDateWithTime, getTimeFromSeconds, getTimeInDays, getTimeInSeconds } from "src/utils/utils";
+import {
+  getFormattedDateWithTime,
+  getHoursMinutesFromSeconds,
+  getDaysFromSeconds,
+  getTimeInSeconds,
+} from "src/utils/utils";
 
 import styles from "./CodeReviewFirstResponseReviewersTable.module.scss";
 import { columns } from "./codeReviewFirstResponseReviewersTableConstants";
@@ -42,8 +47,8 @@ export const CodeReviewFirstResponseReviewersTable = ({ votesHistoryTimeline }: 
           {reviewersFirstVotesArray.length ? (
             reviewersFirstVotesArray.map((row) => {
               const reviewerResponseTimeInSeconds = getTimeInSeconds(row.timeOfVote, row.reviewerAddedTime);
-              const time = getTimeFromSeconds(reviewerResponseTimeInSeconds);
-              const timeInDays = getTimeInDays(reviewerResponseTimeInSeconds, time);
+              const time = getHoursMinutesFromSeconds(reviewerResponseTimeInSeconds);
+              const timeInDays = getDaysFromSeconds(reviewerResponseTimeInSeconds, time);
 
               return (
                 <tr key={row.author} className={styles.tableRow}>
