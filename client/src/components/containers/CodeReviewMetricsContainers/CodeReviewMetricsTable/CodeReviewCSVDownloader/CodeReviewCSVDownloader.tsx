@@ -12,7 +12,7 @@ interface ICodeReviewMetricsTableProps {
 }
 
 export const CSVDownloader = ({ pullRequests }: ICodeReviewMetricsTableProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { CSVDownloader } = useCSVDownloader();
 
   const buttonType = "button";
