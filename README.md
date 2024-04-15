@@ -139,7 +139,7 @@ for instructions on how to get involved.
 ## License
 
 The Software Practices Metrics Tool is distributed under the
-[GNU General Public License (GPL) version 3.0](LICENSE). Feel free to use, modify,
+[GNU General Public License (GPL) version 3.0](LICENSE.md). Feel free to use, modify,
 and distribute the tool in accordance with the terms of this license.
 
 ## Contact
