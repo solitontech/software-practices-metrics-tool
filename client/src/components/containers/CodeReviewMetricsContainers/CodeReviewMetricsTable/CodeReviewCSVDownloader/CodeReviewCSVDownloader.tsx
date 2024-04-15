@@ -2,11 +2,10 @@ import { useCSVDownloader } from "react-papaparse";
 
 import { SENTENCE_JOINER } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
-import { getFormattedDateWithTime } from "src/utils/utils";
+import { getFormattedDateWithTime, getHoursMinutesFromSeconds } from "src/utils/utils";
 
 import styles from "./CodeReviewCSVDownloader.module.scss";
 import { CodeReviewCSVDownloaderUtils } from "./CodeReviewCSVDownloaderUtils";
-import { CodeReviewDisplayHoursToDaysUtil } from "../../CodeReviewDisplayHoursToDays/codeReviewDisplayHoursToDaysUtils";
 
 interface ICodeReviewMetricsTableProps {
   pullRequests: IFetchedCodeReviewPullRequest[];
@@ -37,11 +36,9 @@ export const CSVDownloader = ({ pullRequests }: ICodeReviewMetricsTableProps) =>
         pullRequest.votesHistoryTimeline,
       ),
       "Votes Timeline": CodeReviewCSVDownloaderUtils.getFormattedVotesTimeline(pullRequest.votesTimeline),
-      "First Review Response Time": CodeReviewDisplayHoursToDaysUtil.getTimeFromSeconds(
-        pullRequest.firstReviewResponseTimeInSeconds,
-      ),
-      "Approval Time": CodeReviewDisplayHoursToDaysUtil.getTimeFromSeconds(pullRequest.approvalTimeInSeconds),
-      "Merge Time": CodeReviewDisplayHoursToDaysUtil.getTimeFromSeconds(pullRequest.mergeTimeInSeconds),
+      "First Review Response Time": getHoursMinutesFromSeconds(pullRequest.firstReviewResponseTimeInSeconds),
+      "Approval Time": getHoursMinutesFromSeconds(pullRequest.approvalTimeInSeconds),
+      "Merge Time": getHoursMinutesFromSeconds(pullRequest.mergeTimeInSeconds),
       Status: pullRequest.status,
     };
   });
