@@ -56,7 +56,7 @@ export const CSVDownloader = ({ pullRequests }: ICodeReviewMetricsTableProps) =>
       }}
       data={csvData}
     >
-      Export as CSV
+      Export CSV
     </CSVDownloader>
   );
 };
