@@ -46,6 +46,7 @@
     "react": "^18.2.0",
     "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
+    "react-papaparse": "^4.4.0",
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^6.21.1",
     "styled-components": "^6.1.6"

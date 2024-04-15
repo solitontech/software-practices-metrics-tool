@@ -2,6 +2,7 @@ import React, { useState, memo } from "react";
 
 import { IFetchedCodeReviewPullRequest, IFetchedPullRequestVotes } from "src/services/api/api";
 
+import { CSVDownloader } from "./CodeReviewCSVDownloader/CodeReviewCSVDownloader";
 import styles from "./CodeReviewMetricsTable.module.scss";
 import { columns, DEFAULT_SORT_STATE, DEFAULT_FILTER_STATE } from "./codeReviewMetricsTableConstants";
 import { ICodeReviewTableVotesFilterColumn } from "./codeReviewMetricsTableTypes";
@@ -50,9 +51,14 @@ export const CodeReviewMetricsTable = memo(({ pullRequests }: ICodeReviewMetrics
 
   return (
     <React.Fragment>
-      <h4 className={styles.header}>
-        Total PR&apos;s: {filteredPullRequests.length} | Total Comments: {totalComments}
-      </h4>
+      <div className={styles.headerContainer}>
+        <h4 className={styles.header}>
+          Total PR&apos;s: {filteredPullRequests.length} | Total Comments: {totalComments}
+        </h4>
+
+        <CSVDownloader pullRequests={filteredPullRequests} />
+      </div>
+
       <div className={styles.tableContainer}>
         <table className={styles.table}>
           <thead className={styles.tableHead}>

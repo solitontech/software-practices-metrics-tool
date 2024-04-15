@@ -1,0 +1,11 @@
+@import "src/styles/index.scss";
+
+.downloadButton {
+  background-color: $app-quaternary-background-color;
+  border: 0;
+  border-radius: $app-primary-border-radius;
+  color: $app-secondary-text-color;
+  cursor: pointer;
+  font-size: $font-size-md;
+  padding: $spacing-xs $spacing-sm;
+}

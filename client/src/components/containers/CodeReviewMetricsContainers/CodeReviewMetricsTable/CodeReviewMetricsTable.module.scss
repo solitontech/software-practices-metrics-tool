@@ -1,5 +1,11 @@
 @import "src/styles/index.scss";
 
+.headerContainer {
+  @include flex-justify-space-between;
+
+  padding-bottom: $spacing-xs;
+}
+
 .header {
   color: $app-ternary-text-color;
   font-size: $font-size-xmd;
