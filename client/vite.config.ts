@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   test: {
-    include: ["**/*.test.tsx"],
+    include: ["**/*.test.tsx", "**/*.unit.test.ts"],
     globals: true,
     environment: "jsdom",
     css: true,

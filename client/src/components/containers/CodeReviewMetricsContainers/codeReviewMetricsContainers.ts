@@ -9,3 +9,4 @@ export * from "./CodeReviewVotesIcons/CodeReviewVotesIcons";
 export * from "./CodeReviewMetricsTiles/CodeReviewMetricsTiles";
 export * from "./CodeReviewMetricsTable/CodeReviewMetricsTable";
 export * from "./CodeReviewMetricsGraphs/MetricsTrendGraphs/MetricsTrendGraphs";
+export * from "./CodeReviewFirstResponse/CodeReviewFirstResponse";

@@ -287,24 +287,6 @@ paths:
                           type: string
                           format: date-time
                           description: Date and time when the pull request was closed
-                        votes:
-                          type: object
-                          properties:
-                            approved:
-                              type: integer
-                              description: Total number of approved votes
-                            approvedWithSuggestions:
-                              type: integer
-                              description: Total number of approved votes with suggestions
-                            noVote:
-                              type: integer
-                              description: Total number of votes with no decision
-                            waitForAuthor:
-                              type: integer
-                              description: Total number of votes waiting for author
-                            rejected:
-                              type: integer
-                              description: Total number of rejected votes
                         votesTimeline:
                           type: array
                           items:
@@ -323,21 +305,13 @@ paths:
                               vote:
                                 type: string
                                 description: The vote given by the author
-                        votesHistory:
-                          type: object
-                          properties:
-                            approved:
-                              type: integer
-                              description: Total number of approved votes
-                            approvedWithSuggestions:
-                              type: integer
-                              description: Total number of approved votes with suggestions
-                            waitForAuthor:
-                              type: integer
-                              description: Total number of votes waiting for author
-                            rejected:
-                              type: integer
-                              description: Total number of rejected votes
+                              isRequired:
+                                type: boolean
+                                description: Indicates if the voted reviewer is required
+                              reviewerAddedTime:
+                                type: string
+                                format: date-time
+                                description: Date and time when the reviewer was added
                         votesHistoryTimeline:
                           type: array
                           items:
@@ -356,43 +330,41 @@ paths:
                               vote:
                                 type: string
                                 description: The vote given by the author
-                        comments:
-                          type: object
-                          properties:
-                            totalComments:
-                              type: integer
-                              description: Total number of comments
-                            numberOfNitComments:
-                              type: integer
-                              description: Total number of nit comments
-                            numberOfMajorComments:
-                              type: integer
-                              description: Total number of major comments
-                        reviewerComments:
+                              isRequired:
+                                type: boolean
+                                description: Indicates if the voted reviewer is required
+                              reviewerAddedTime:
+                                type: string
+                                format: date-time
+                                description: Date and time when the reviewer was added
+                        threads:
                           type: array
+                          description: 'Array of thread objects'
                           items:
                             type: object
+                            description: 'Thread object'
                             properties:
-                              reviewer:
-                                type: string
-                                description: Name of the reviewer
                               comments:
-                                type: integer
-                                description: Total number of comments given by the reviewer
+                                type: array
+                                description: 'Array of comment objects in a thread'
+                                items:
+                                  type: object
+                                  description: 'Comment object'
+                                  properties:
+                                    content:
+                                      type: string
+                                      description: 'Content of the comment'
+                                    authorName:
+                                      type: string
+                                      description: 'Name of the author of the comment'
+                                    authorId:
+                                      type: string
+                                      description: 'ID of the author of the comment'
                         tags:
                           type: array
                           items:
                             type: string
                             description: Tags associated with the pull request
-                        firstReviewResponseTimeInSeconds:
-                          type: integer
-                          description: Time taken for the first review response in seconds
-                        approvalTimeInSeconds:
-                          type: integer
-                          description: Time taken for the pull request approval in seconds
-                        mergeTimeInSeconds:
-                          type: integer
-                          description: Time taken for the pull request merge in seconds
                         url:
                           type: string
                           format: url

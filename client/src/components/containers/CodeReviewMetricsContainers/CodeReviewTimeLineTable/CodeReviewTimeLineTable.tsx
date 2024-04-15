@@ -37,7 +37,11 @@ export const CodeReviewTimeLineTable = ({ timeLine }: ICodeReviewTimeLineTablePr
           {timeLine.length ? (
             timeLine.map((row) => {
               return (
-                <tr key={row.author} className={styles.tableRow} data-testid="code-review-metrics-timeline-table">
+                <tr
+                  key={`${row.author}-${row.timeOfVote}`}
+                  className={styles.tableRow}
+                  data-testid="code-review-metrics-timeline-table"
+                >
                   <td
                     data-uuid={row.id}
                     title={`Click to copy : "${row.id}": "${row.author}"`}

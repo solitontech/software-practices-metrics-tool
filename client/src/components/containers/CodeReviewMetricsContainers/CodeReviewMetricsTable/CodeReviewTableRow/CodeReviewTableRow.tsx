@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 
 import { CodeReviewCommentIcon } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewCommentIcon/CodeReviewCommentIcon";
 import { CodeReviewDisplayHoursToDays } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewDisplayHoursToDays/CodeReviewDisplayHoursToDays";
+import { CodeReviewFirstResponse } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewFirstResponse/CodeReviewFirstResponse";
 import { CodeReviewVotesIcons } from "src/components/containers/CodeReviewMetricsContainers/CodeReviewVotesIcons/CodeReviewVotesIcons";
 import { NOT_AVAILABLE } from "src/constants/constants";
 import { IFetchedCodeReviewPullRequest } from "src/services/api/api";
@@ -95,7 +96,10 @@ export const CodeReviewTableRow = memo(({ row }: ICodeReviewTableRowProps) => {
         />
       </td>
       <td className={styles.tableCell}>
-        <CodeReviewDisplayHoursToDays timeInSeconds={row.firstReviewResponseTimeInSeconds} />
+        <CodeReviewFirstResponse
+          firstReviewResponseTimeInSeconds={row.firstReviewResponseTimeInSeconds}
+          votesHistoryTimeline={row.votesHistoryTimeline}
+        />
       </td>
       <td className={styles.tableCell}>
         <CodeReviewDisplayHoursToDays timeInSeconds={row.approvalTimeInSeconds} />
