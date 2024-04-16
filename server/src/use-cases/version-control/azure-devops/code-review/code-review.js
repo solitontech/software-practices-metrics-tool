@@ -5,6 +5,8 @@ import { AzureDevopsURL } from '../helpers/helpers.js';
 import { CODE_TO_VOTE } from './constants/constants.js';
 
 export class CodeReview {
+  static voteResult = 'CodeReviewVoteResult';
+
   static getCodeReviewMetrics(rawPullRequests) {
     const pullRequests = this.#parsePullRequests(rawPullRequests).map((pullRequest) => {
       return {
@@ -69,11 +71,21 @@ export class CodeReview {
   static #parseReviewersAddedTime(pullRequestThreads) {
     const policyAddedReviewersProperty = 'CodeReviewRequiredReviewerExampleReviewerIdentities';
     const reviewerAddedProperty = 'CodeReviewReviewersUpdatedAddedIdentity';
+
     const reviewersAddedTime = {};
+    const isReviewerVoted = {};
 
     pullRequestThreads.forEach((thread) => {
       if (!thread.properties || !thread.identities) {
         return;
+      }
+
+      const vote = thread.properties[this.voteResult];
+
+      if (vote) {
+        const [firstComment] = thread.comments;
+
+        isReviewerVoted[firstComment.author.id] = true;
       }
 
       const policyAddedReviewers = thread.properties[policyAddedReviewersProperty];
@@ -83,7 +95,7 @@ export class CodeReview {
         const identityIndex = reviewer.$value;
         const reviewerIdentity = thread.identities[identityIndex];
 
-        if (!reviewersAddedTime[reviewerIdentity.id]) {
+        if (!isReviewerVoted[reviewerIdentity.id]) {
           reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
         }
       }
@@ -94,7 +106,7 @@ export class CodeReview {
         reviewers.forEach((identityIndex) => {
           const reviewerIdentity = thread.identities[identityIndex];
 
-          if (!reviewersAddedTime[reviewerIdentity.id]) {
+          if (!isReviewerVoted[reviewerIdentity.id]) {
             reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
           }
         });
@@ -105,7 +117,6 @@ export class CodeReview {
   }
 
   static #parseVotesTimeline(pullRequestThreads, reviewers, pullRequestCreationDate) {
-    const voteResult = 'CodeReviewVoteResult';
     const votes = [];
 
     pullRequestThreads.forEach((thread) => {
@@ -113,7 +124,7 @@ export class CodeReview {
         return;
       }
 
-      const vote = thread.properties[voteResult];
+      const vote = thread.properties[this.voteResult];
       const [firstComment] = thread.comments;
       const voteValue = parseInt(vote?.$value);
 
