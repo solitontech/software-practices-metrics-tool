@@ -2,11 +2,12 @@ import { VoteMetrics } from './vote-metrics/vote-metrics.js';
 
 import { AzureDevopsURL } from '../helpers/helpers.js';
 
-import { CODE_TO_VOTE } from './constants/constants.js';
+import { CODE_TO_VOTE, AZURE_PROPERTIES } from './constants/constants.js';
+import { PullRequestReviewersParser } from './pull-request-reviewer-parser/pull-request-reviewers-parser.js';
+
+const { VOTE_RESULT } = AZURE_PROPERTIES;
 
 export class CodeReview {
-  static #voteResult = 'CodeReviewVoteResult';
-
   static getCodeReviewMetrics(rawPullRequests) {
     const pullRequests = this.#parsePullRequests(rawPullRequests).map((pullRequest) => {
       return {
@@ -54,7 +55,7 @@ export class CodeReview {
   static #parseReviewers(pullRequestThreads, rawReviewers, pullRequestCreationDate) {
     const reviewers = {};
 
-    const reviewersAddedTime = this.#parseReviewersAddedTime(pullRequestThreads);
+    const reviewersAddedTime = PullRequestReviewersParser.parseReviewersAddedTime(pullRequestThreads);
 
     rawReviewers.forEach(({ id, displayName, vote, isRequired }) => {
       reviewers[id] = {
@@ -68,54 +69,6 @@ export class CodeReview {
     return reviewers;
   }
 
-  static #parseReviewersAddedTime(pullRequestThreads) {
-    const policyAddedReviewersProperty = 'CodeReviewRequiredReviewerExampleReviewerIdentities';
-    const reviewerAddedProperty = 'CodeReviewReviewersUpdatedAddedIdentity';
-
-    const reviewersAddedTime = {};
-    const isReviewerVoted = {};
-
-    pullRequestThreads.forEach((thread) => {
-      if (!thread.properties || !thread.identities) {
-        return;
-      }
-
-      const vote = thread.properties[this.#voteResult];
-
-      if (vote) {
-        const [firstComment] = thread.comments;
-
-        isReviewerVoted[firstComment.author.id] = true;
-      }
-
-      const policyAddedReviewers = thread.properties[policyAddedReviewersProperty];
-      const reviewer = thread.properties[reviewerAddedProperty];
-
-      if (reviewer) {
-        const identityIndex = reviewer.$value;
-        const reviewerIdentity = thread.identities[identityIndex];
-
-        if (!isReviewerVoted[reviewerIdentity.id]) {
-          reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
-        }
-      }
-
-      if (policyAddedReviewers) {
-        const reviewers = policyAddedReviewers.$value.match(/\d+/g);
-
-        reviewers.forEach((identityIndex) => {
-          const reviewerIdentity = thread.identities[identityIndex];
-
-          if (!isReviewerVoted[reviewerIdentity.id]) {
-            reviewersAddedTime[reviewerIdentity.id] = thread.publishedDate;
-          }
-        });
-      }
-    });
-
-    return reviewersAddedTime;
-  }
-
   static #parseVotesTimeline(pullRequestThreads, reviewers, pullRequestCreationDate) {
     const votes = [];
 
@@ -124,7 +77,7 @@ export class CodeReview {
         return;
       }
 
-      const vote = thread.properties[this.#voteResult];
+      const vote = thread.properties[VOTE_RESULT];
       const [firstComment] = thread.comments;
       const voteValue = parseInt(vote?.$value);
 
