@@ -34,7 +34,9 @@ export class CodeReview {
 
   static #parsePullRequests(pullRequests) {
     return pullRequests.map((pullRequest) => {
-      const reviewers = this.#parseReviewers(pullRequest.threads, pullRequest.reviewers, pullRequest.creationDate);
+      const reviewersAddedTime = PullRequestReviewersParser.parseReviewersAddedTime(pullRequest.threads);
+
+      const reviewers = this.#parseReviewers(reviewersAddedTime, pullRequest.reviewers, pullRequest.creationDate);
 
       return {
         id: pullRequest.pullRequestId,
@@ -45,17 +47,20 @@ export class CodeReview {
         creationDate: pullRequest.creationDate,
         closedDate: pullRequest.closedDate,
         reviewers,
-        votesHistoryTimeline: this.#parseVotesTimeline(pullRequest.threads, reviewers, pullRequest.creationDate),
+        votesHistoryTimeline: this.#parseVotesTimeline(
+          pullRequest.threads,
+          reviewers,
+          reviewersAddedTime,
+          pullRequest.creationDate
+        ),
         threads: this.#parseThreads(pullRequest.threads),
         tags: this.#parseTags(pullRequest),
       };
     });
   }
 
-  static #parseReviewers(pullRequestThreads, rawReviewers, pullRequestCreationDate) {
+  static #parseReviewers(reviewersAddedTime, rawReviewers, pullRequestCreationDate) {
     const reviewers = {};
-
-    const reviewersAddedTime = PullRequestReviewersParser.parseReviewersAddedTime(pullRequestThreads);
 
     rawReviewers.forEach(({ id, displayName, vote, isRequired }) => {
       reviewers[id] = {
@@ -69,7 +74,7 @@ export class CodeReview {
     return reviewers;
   }
 
-  static #parseVotesTimeline(pullRequestThreads, reviewers, pullRequestCreationDate) {
+  static #parseVotesTimeline(pullRequestThreads, reviewers, reviewersAddedTime, pullRequestCreationDate) {
     const votes = [];
 
     pullRequestThreads.forEach((thread) => {
@@ -88,7 +93,7 @@ export class CodeReview {
           timeOfVote: thread.publishedDate,
           vote: CODE_TO_VOTE.get(voteValue),
           isRequired: reviewers[firstComment.author.id]?.isRequired ?? false,
-          reviewerAddedTime: reviewers[firstComment.author.id]?.reviewerAddedTime ?? pullRequestCreationDate,
+          reviewerAddedTime: reviewersAddedTime[firstComment.author.id] ?? pullRequestCreationDate,
         });
       }
     });

@@ -33,4 +33,10 @@ describe('CodeReview~getCodeReviewMetrics', () => {
 
     expect(result).toEqual(mock.CODE_REVIEW_WITHOUT_TAGS);
   });
+
+  it('should return pull requests with reviewers latest added time before voted even the reviewer left the pull request', () => {
+    const result = CodeReview.getCodeReviewMetrics(mock.RAW_CODE_REVIEW_METRICS_LEFT_REVIEWER);
+
+    expect(result).toEqual(mock.CODE_REVIEW_METRICS_LEFT_REVIEWER);
+  });
 });
