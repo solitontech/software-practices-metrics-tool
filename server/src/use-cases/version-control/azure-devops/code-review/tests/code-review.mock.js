@@ -590,7 +590,7 @@ export const CODE_REVIEW_METRICS_LEFT_REVIEWER = {
       tags: ['Documentation'],
       threads: [],
       title: '2626 - Filtered azure completed pull request data with threads data (handled comments, labels)',
-      url: 'https://dev.azure.com/Soliton/SolitonCommunity/_git/playground-software-metrics-tool/pullrequest/2626',
+      url: `https://dev.azure.com/${ORGANIZATION}/${PROJECT}/_git/${REPOSITORY_ID}/pullrequest/2626`,
       votesHistoryTimeline: [
         {
           author: 'Reviewer 1',
