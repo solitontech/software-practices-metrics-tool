@@ -36,6 +36,13 @@ export class Application {
     Menu.setApplicationMenu(Menu.buildFromTemplate(this.#menuTemplate));
     window.loadURL(`${this.#hostDomain}:${port}`);
 
+    window.webContents.setWindowOpenHandler((details) => {
+      details.url.startsWith(this.#hostDomain) ? window.loadURL(details.url) : electron.shell.openExternal(details.url);
+
+      // prevent electron from opening new window
+      return { action: 'deny' };
+    });
+
     window.maximize();
 
     // delete window object when window closed to avoid memory leaks
