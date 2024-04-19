@@ -12,7 +12,7 @@ export class PullRequestReviewersParser {
         return;
       }
 
-      this.#getVoteResult(thread, isReviewerVoted);
+      this.#handleReviewerVote(thread, isReviewerVoted);
       this.#handleAddedReviewer(thread, reviewersAddedTime, isReviewerVoted);
       this.#handlePolicyAddedReviewers(thread, reviewersAddedTime, isReviewerVoted);
     });
@@ -20,7 +20,7 @@ export class PullRequestReviewersParser {
     return reviewersAddedTime;
   }
 
-  static #getVoteResult(thread, isReviewerVoted) {
+  static #handleReviewerVote(thread, isReviewerVoted) {
     const vote = thread.properties[VOTE_RESULT];
 
     if (vote) {
