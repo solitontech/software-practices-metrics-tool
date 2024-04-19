@@ -481,3 +481,144 @@ export const CODE_REVIEW_WITHOUT_TAGS = {
     },
   ],
 };
+
+export const RAW_CODE_REVIEW_METRICS_LEFT_REVIEWER = [
+  {
+    pullRequestId: 2626,
+    status: 'completed',
+    createdBy: {
+      displayName: 'Developer',
+      id: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+    },
+    creationDate: '2024-02-04T10:58:33.4719437Z',
+    closedDate: '2024-02-12T11:04:06.3046376Z',
+    title: 'Filtered azure completed pull request data with threads data (handled comments, labels)',
+    reviewers: [
+      {
+        vote: 10,
+        isRequired: true,
+        displayName: 'Reviewer 1',
+        id: '6f96f2d9-f079-65fd-ae3d-0650c193e580',
+      },
+    ],
+    labels: [
+      {
+        id: 'f886f8f7-5d76-4498-9aa0-944f0f1b9557',
+        name: 'Documentation',
+        active: true,
+      },
+    ],
+    threads: [
+      {
+        comments: [
+          {
+            author: {
+              displayName: 'Reviewer 2',
+              id: '6f96f2d9-f079-65fd-ae3d-0650c193e471',
+            },
+            content: 'Reviewer 2 joined as reviewer',
+            commentType: 'system',
+          },
+        ],
+        properties: {
+          CodeReviewReviewersUpdatedAddedIdentity: {
+            $value: '1',
+          },
+        },
+        identities: {
+          1: {
+            id: '6f96f2d9-f079-65fd-ae3d-0650c193e471',
+            displayName: 'Reviewer 2',
+          },
+        },
+        publishedDate: '2024-02-05T11:02:32.32Z',
+      },
+      {
+        publishedDate: '2024-02-07T11:02:32.32Z',
+        comments: [
+          {
+            author: {
+              displayName: 'Reviewer 1',
+              id: '6f96f2d9-f079-65fd-ae3d-0650c193e580',
+            },
+            content: 'Reviewer 1 voted 10',
+            commentType: 'system',
+          },
+        ],
+        properties: {
+          CodeReviewVoteResult: {
+            $type: 'System.String',
+            $value: '10',
+          },
+        },
+        isDeleted: false,
+      },
+      {
+        publishedDate: '2024-02-08T11:02:32.32Z',
+        comments: [
+          {
+            author: {
+              displayName: 'Reviewer 2',
+              id: '6f96f2d9-f079-65fd-ae3d-0650c193e471',
+            },
+            content: 'Reviewer 2 voted 10',
+            commentType: 'system',
+          },
+        ],
+        properties: {
+          CodeReviewVoteResult: {
+            $type: 'System.String',
+            $value: '10',
+          },
+        },
+        isDeleted: false,
+      },
+    ],
+  },
+];
+
+export const CODE_REVIEW_METRICS_LEFT_REVIEWER = {
+  count: 1,
+  pullRequests: [
+    {
+      authorId: '9e1313a9-2b7c-6556-b441-d1eabfed5d43',
+      closedDate: '2024-02-12T11:04:06.3046376Z',
+      createdBy: 'Developer',
+      creationDate: '2024-02-04T10:58:33.4719437Z',
+      id: 2626,
+      status: 'completed',
+      tags: ['Documentation'],
+      threads: [],
+      title: '2626 - Filtered azure completed pull request data with threads data (handled comments, labels)',
+      url: 'https://dev.azure.com/Soliton/SolitonCommunity/_git/playground-software-metrics-tool/pullrequest/2626',
+      votesHistoryTimeline: [
+        {
+          author: 'Reviewer 1',
+          id: '6f96f2d9-f079-65fd-ae3d-0650c193e580',
+          isRequired: true,
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
+          timeOfVote: '2024-02-07T11:02:32.32Z',
+          vote: 'approved',
+        },
+        {
+          author: 'Reviewer 2',
+          id: '6f96f2d9-f079-65fd-ae3d-0650c193e471',
+          isRequired: false,
+          reviewerAddedTime: '2024-02-05T11:02:32.32Z',
+          timeOfVote: '2024-02-08T11:02:32.32Z',
+          vote: 'approved',
+        },
+      ],
+      votesTimeline: [
+        {
+          author: 'Reviewer 1',
+          id: '6f96f2d9-f079-65fd-ae3d-0650c193e580',
+          isRequired: true,
+          reviewerAddedTime: '2024-02-04T10:58:33.4719437Z',
+          timeOfVote: '2024-02-07T11:02:32.32Z',
+          vote: 'approved',
+        },
+      ],
+    },
+  ],
+};
