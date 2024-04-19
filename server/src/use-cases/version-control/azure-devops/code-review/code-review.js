@@ -5,7 +5,7 @@ import { AzureDevopsURL } from '../helpers/helpers.js';
 import { CODE_TO_VOTE } from './constants/constants.js';
 
 export class CodeReview {
-  static voteResult = 'CodeReviewVoteResult';
+  static #voteResult = 'CodeReviewVoteResult';
 
   static getCodeReviewMetrics(rawPullRequests) {
     const pullRequests = this.#parsePullRequests(rawPullRequests).map((pullRequest) => {
@@ -80,7 +80,7 @@ export class CodeReview {
         return;
       }
 
-      const vote = thread.properties[this.voteResult];
+      const vote = thread.properties[this.#voteResult];
 
       if (vote) {
         const [firstComment] = thread.comments;
@@ -124,7 +124,7 @@ export class CodeReview {
         return;
       }
 
-      const vote = thread.properties[this.voteResult];
+      const vote = thread.properties[this.#voteResult];
       const [firstComment] = thread.comments;
       const voteValue = parseInt(vote?.$value);
 
