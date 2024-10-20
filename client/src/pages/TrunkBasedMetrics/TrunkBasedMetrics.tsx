@@ -38,7 +38,7 @@ export const TrunkBasedMetrics = () => {
               date={dates}
               handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
               handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}
-              minDate={dateRange.sixMonthsAgoFromToday}
+              minDate={dateRange.sixMonthsAgoFrom(dates.endDate)}
               maxDate={dateRange.today}
             />
             <TabToggle tabs={trunkBasedTabs} selectedTab={selectedTab} handleTabChange={handleTabChange} />
