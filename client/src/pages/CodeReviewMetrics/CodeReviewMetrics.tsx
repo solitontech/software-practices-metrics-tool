@@ -119,7 +119,7 @@ export const CodeReviewMetrics = () => {
           <div className={styles.headerContainer}>
             <DateRangePicker
               minDate={dateRange.sixMonthsAgoFrom(dates.endDate)}
-              maxDate={dateRange.today}
+              maxDate={dateRange.futureDateFrom(dates.startDate)}
               date={dates}
               handleStartDateChange={(date: Date) => handleDateChange(date, "startDate")}
               handleEndDateChange={(date: Date) => handleDateChange(date, "endDate")}

@@ -14,4 +14,8 @@ export const dateRange = {
   sevenDaysAgoFromToday: DateTime.local().minus({ days: 7 }).toJSDate(),
   sixMonthsAgoFromToday: DateTime.local().minus({ days: 190 }).toJSDate(),
   sixMonthsAgoFrom: (date: Date) => DateTime.fromJSDate(date).minus({ days: 190 }).toJSDate(),
+  futureDateFrom: (date: Date) => {
+    const futureDate = DateTime.fromJSDate(date).plus({ days: 190 }).toJSDate();
+    return futureDate > dateRange.today ? dateRange.today : futureDate;
+  },
 };
